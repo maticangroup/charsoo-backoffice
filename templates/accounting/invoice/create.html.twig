@@ -1,0 +1,263 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Invoice | Create{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <form action="{{ path('accounting_invoice_accounting_invoice_save') }}" method="post">
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-10">
+                                <h1>welcome section</h1>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque eum libero
+                                    numquam
+                                    obcaecati perspiciatis quas quisquam soluta unde voluptates.
+                                </p>
+
+                            </div>
+                            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                                <input type="submit" class="btn btn-block rounded btn-dark fa fa-save">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="row">
+                            <div class="col-12">
+
+                                <div class="panel">
+                                    <div class="panel-content">
+                                        <div class="invoice">
+                                            <div class="invoice--order">
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Item</th>
+                                                        <th>Quantity</th>
+                                                        <th>Unit Price</th>
+                                                        <th>Discount Price</th>
+                                                        <th>Total</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>20 Inch Philips LCD Black Color Monitor</td>
+                                                        <td>12</td>
+                                                        <td>75.00</td>
+                                                        <td>60.00</td>
+                                                        <td>900.00</td>
+                                                        <td><a href="" class="fa fa-times"></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>20 Inch Philips LCD Black Color Monitor</td>
+                                                        <td>12</td>
+                                                        <td>75.00</td>
+                                                        <td>60.00</td>
+                                                        <td>900.00</td>
+                                                        <td><a href="" class="fa fa-times"></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>20 Inch Philips LCD Black Color Monitor</td>
+                                                        <td>12</td>
+                                                        <td>75.00</td>
+                                                        <td>60.00</td>
+                                                        <td>900.00</td>
+                                                        <td><a href="" class="fa fa-times"></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input type="text" name="text"
+                                                                   placeholder=""
+                                                                   class="form-control">
+                                                        </td>
+                                                        <td><input type="text" name="text"
+                                                                   placeholder=""
+                                                                   class="form-control"></td>
+                                                        <td><input type="text" name="text"
+                                                                   placeholder=""
+                                                                   class="form-control"></td>
+                                                        <td><input type="text" name="text"
+                                                                   placeholder=""
+                                                                   class="form-control"></td>
+                                                        <td>
+                                                            <a href="#"
+                                                               class="btn btn-rounded fa fa-plus btn-success"></a>
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="5"><strong>VAT</strong></td>
+                                                        <td>50.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="5"><strong>Total</strong></td>
+                                                        <td><strong>1800.00</strong></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 ">
+                                <div class="panel">
+                                    <div class="panel-content">
+                                        <div class="form-group row">
+                                            <span class="label-text col-md-12">Description</span>
+
+                                            <div class="col-md-12">
+                                                    <textarea name="textarea" class="form-control"
+                                                              placeholder="Text input area"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-12 ">
+                                <div class="panel">
+                                    <div class="panel-content">
+                                        <div class="form-group row">
+                                            <span class="label-text col-md-12 col-form-label ">Date</span>
+
+                                            <div class="col-md-12">
+                                                <input type="text" name="text"
+                                                       placeholder="Today or any other dates"
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <span class="label-text col-md-12 col-form-label ">Amount</span>
+                                            <div class="col-md-12">
+                                                <input type="text" name="text"
+                                                       placeholder="135,000,000"
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <span class="label-text col-md-12 col-form-label ">Invoice Group</span>
+                                            <div class="col-md-12">
+                                                <select name="select" class="form-control">
+                                                    <option value="1">Invoice Group 1</option>
+                                                    <option value="1">Invoice Group 2</option>
+                                                    <option value="1">Invoice Group 3</option>
+                                                    <option value="1">Invoice Group 4</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+
+                                            <div class="col-md-10 form-inline">
+                                                <label class="form-radio mr-3">
+                                                    <input type="radio" name="radio02" value="1"
+                                                           class="form-radio-input" checked>
+                                                    <span class="form-radio-label"><span
+                                                                class="fa fa-arrow-left text-green"></span> Income
+                                                         </span>
+
+                                                </label>
+
+                                                <label class="form-radio">
+                                                    <input type="radio" name="radio02" value="2"
+                                                           class="form-radio-input">
+                                                    <span class="form-radio-label"><span
+                                                                class="fa fa-arrow-right text-red"></span> Outgo</span>
+
+
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <span class="label-text col-md-12 col-form-label ">Interest & Coupon</span>
+                                            <div class="col-md-6">
+                                                <input type="text" name="text"
+                                                       placeholder="Interest"
+                                                       class="form-control">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" name="text"
+                                                       placeholder="Coupon"
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 ">
+                                <div class="panel">
+                                    <div class="panel-content">
+
+                                        <div class="form-group row">
+                                            <span class="label-text col-md-12 col-form-label ">From Person</span>
+
+                                            <div class="col-md-12">
+                                                <select name="select" class="form-control">
+                                                    <option value="1">Person 1</option>
+                                                    <option value="1">Person 2</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <span class="label-text col-md-12 col-form-label ">To Person</span>
+
+                                            <div class="col-md-12">
+                                                <select name="select" class="form-control">
+                                                    <option value="1">Person 1</option>
+                                                    <option value="1">Person 2</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 ">
+                                <div class="panel">
+                                    <div class="panel-content">
+                                        <div class="form-group row">
+                                            <span class="label-text col-md-12 col-form-label ">From Company</span>
+                                            <div class="col-md-12">
+                                                <select name="select" class="form-control">
+                                                    <option value="1">Company 1</option>
+                                                    <option value="1">Company 2</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <span class="label-text col-md-12 col-form-label ">To Company</span>
+
+                                            <div class="col-md-12">
+                                                <select name="select" class="form-control">
+                                                    <option value="1">Company 1</option>
+                                                    <option value="1">Company 2</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

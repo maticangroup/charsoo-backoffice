@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inventory Deed | Create{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1>welcome section</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores eligendi
+                                est,
+                                exercitationem nihil perspiciatis reprehenderit sit voluptas. Fugiat, placeat,
+                                tenetur!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <form class="row" action="{{ path('inventory_deed_inventory_deed_create') }}" method="post">
+                        <div class="col-3">
+                            <span class="label-text col-form-label">From</span>
+                            <select name="deedFrom" class="form-control">
+                                <option value="none">None</option>
+
+                                <option disabled>Inventories</option>
+
+                                {% for inventory in inventories %}
+                                    <option value="inventory_{{ inventory.inventoryId }}"
+                                            {{ (inventory.inventoryMachineName == 'confirmed_orders_products') ? 'disabled' : '' }}>{{ inventory.inventoryName }}</option>
+                                {% endfor %}
+
+                                <option disabled>Shelves</option>
+
+                                {% for shelve in shelves %}
+                                    <option value="shelve_{{ shelve.shelveId }}">{{ shelve.shelveName }}</option>
+                                {% endfor %}
+
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <span class="label-text col-form-label">To</span>
+                            <select name="deedTo" class="form-control">
+                                <option disabled>Inventories</option>
+
+                                {% for inventory in inventories %}
+                                    <option value="inventory_{{ inventory.inventoryId }}"
+                                            {{ (inventory.inventoryMachineName == 'confirmed_orders_products') ? 'disabled' : '' }}>{{ inventory.inventoryName }}</option>
+                                {% endfor %}
+
+                                <option disabled>Shelves</option>
+
+                                {% for shelve in shelves %}
+                                    <option value="shelve_{{ shelve.shelveId }}">{{ shelve.shelveName }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <span class="label-text col-form-label">Deed Name</span>
+                            <input type="text" value="{{ deedModel.inventoryDeedName }}" name="inventoryDeedName"
+                                   class="form-control" placeholder="Deed Name">
+                        </div>
+                        <div class="col-2">
+                            <button type="submit"
+                                    class="btn btn-block btn-dark rounded fa fa-save mt-5"></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,215 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gift Card Group | Edit{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-10">
+                            <h1>welcome section</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque eum libero
+                                numquam
+                                obcaecati perspiciatis quas quisquam soluta unde voluptates.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form action="{{ path('accounting_gift_card_group_accounting_gift_card_group_update') }}" method="post">
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-2 ">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">Gift card name</span>
+
+                                    <div class="col-md-12">
+                                        <input type="text" name="text" placeholder="name" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 ">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">Prefix</span>
+
+                                    <div class="col-md-12">
+                                        <input type="text" name="text" placeholder="prefix" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 ">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">Expiry date</span>
+
+                                    <div class="col-md-12">
+                                        <input type="date" name="text" placeholder="" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 ">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">Gift card count</span>
+
+                                    <div class="col-md-12">
+                                        <input type="text" name="text" placeholder="Gift card count"
+                                               class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 ">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">Gift card amount</span>
+
+                                    <div class="col-md-12">
+                                        <input type="text" name="text" placeholder="Gift card amount"
+                                               class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                                <input type="submit" class="btn btn-block btn-info fa fa-save rounded">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="col-8">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">gift_ADD41561</h3>
+                </div>
+
+                <div class="feeds-panel">
+                    <ul class="nav">
+                        <li>
+                            <span class="time">100,000</span>
+                            <i class="fa fa-money-bill-alt text-white bg-green"></i>
+                            <span class="text">Amount</span>
+                        </li>
+                        <li>
+                            <span class="time">1398/12/12</span>
+                            <i class="fa fa-hourglass text-white bg-red"></i>
+                            <span class="text">Expiry Date</span>
+                        </li>
+                        <li>
+                            <span class="time">20</span>
+                            <i class="fa fa-bars text-white bg-orange"></i>
+                            <span class="text">Count</span>
+                        </li>
+                        <li>
+                            <span class="time">10</span>
+                            <i class="fa fa-shopping-cart text-white bg-blue"></i>
+                            <span class="text">Left</span>
+                        </li>
+                        <li>
+                            <span class="time">Person</span>
+                            <i class="fa fa-user text-white bg-dark"></i>
+                            <span class="text">Confirmir</span>
+                        </li>
+                        <li>
+                            <span class="time">1398/12/12</span>
+                            <i class="fa fa-hourglass-start text-white bg-secondary"></i>
+                            <span class="text">Confirm Date</span>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="panel">
+                <div class="weather--panel text-white bg-darker">
+                    <div class="weather--title">
+                        <i class="fa fa-exclamation"></i>
+                        <span>Availability</span>
+                    </div>
+
+                    <div class="weather--info">
+                        <a href="" class="fa fa-play text-green"></a>
+                        <a href="" class="fa fa-ban text-red"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="panel">
+                <div class="weather--panel text-white bg-darker">
+                    <div class="weather--title">
+                        <i class="fa fa-exclamation"></i>
+                        <span>Confirm</span>
+                    </div>
+
+                    <div class="weather--info">
+                        <a href="" class="fa fa-check text-green"></a>
+                        <a href="" class="fa fa-times text-red"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="form-group row">
+                        <div class="col-4"></div>
+                        <div class="col-md-4">
+                            <input type="text" placeholder="Search" name="text"
+                                   class="form-control">
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="ProvincesList">
+                            <thead>
+                            <tr>
+                                <th scope="col">Gift Card</th>
+                                <th scope="col">Use Status</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Used By</th>
+                                <th scope="col">Used Date</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    GIFT_GHDS15612
+                                </td>
+                                <td>
+                                    <span class="label label-green rounded">Used</span>
+                                    <span class="label label-red rounded">Not Used</span>
+                                </td>
+                                <td>
+                                    <span class="label label-green rounded">Active</span>
+                                    <span class="label label-red rounded">Deactive</span>
+                                </td>
+                                <td>
+                                    Username
+                                </td>
+                                <td>
+                                    1398/12/12
+                                </td>
+                                <td>
+                                    <a href="" class="fa fa-play text-green"></a>
+                                    <a href="" class="fa fa-ban text-red"></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Records List End -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Person | Create{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+
+                        <div class="col-12">
+                            <h1>Welcome</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa
+                                delectus
+                                eos, minus nemo neque obcaecati placeat quam quisquam ullam?
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <form class="row" action="{{ path('repository_person_repository_person_create') }}" method="post">
+                        <div class="col-3">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Name</span>
+
+                                <div class="col-md-12">
+                                    <input type="text" name="person_name"
+                                           placeholder="First Name"
+                                           value="{{ person.humanName }}"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Family</span>
+                                <div class="col-md-12">
+                                    <input type="text" name="person_family"
+                                           placeholder="Last Name"
+                                           value="{{ person.humanFamily }}"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Email</span>
+
+                                <div class="col-md-12">
+                                    <input type="text" name="person_email"
+                                           placeholder="info@site.com"
+                                           value="{{ person.email }}"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">BirthDate</span>
+
+                                <div class="col-md-4">
+                                    <select name="person_birth_date_year" class="form-control">
+                                        {% for year in years %}
+                                            <option value="{{ year }}" {{ (person.birthDateYear == year) ? 'selected' : '' }}>{{ year }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select name="person_birth_date_month" class="form-control">
+                                        {% for month in months %}
+                                            <option value="{{ month }}" {{ (person.birthDateMonth == month) ? 'selected' : '' }}>{{ month }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select name="person_birth_date_day" class="form-control">
+                                        {% for day in days %}
+                                            <option value="{{ day }}" {{ (person.birthDateDay == day) ? 'selected' : '' }}>{{ day }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">National Code</span>
+
+                                <div class="col-md-12">
+                                    <input type="text" name="person_national_code"
+                                           placeholder="0019455465"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Mobile</span>
+
+                                <div class="col-md-12">
+                                    <input type="text" name="person_mobile"
+                                           placeholder="0912-1254477788"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">SMS</span>
+
+                                <label class="form-check">
+                                    <input type="checkbox" name="send_sms" class="form-check-input">
+                                    <span class="form-check-label">Do You want to send SMS to user?</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <button type="submit" class="btn btn-block btn-dark rounded mt-4"><i class="fa fa-save"></i>
+                            </button>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group row">
+                                {% for message in app.flashes('add_person_success') %}
+                                    <div class="col-md-12 mt-3 text-green"><span
+                                                class="fa fa-info text-green"></span> {{ message }}</div>
+                                {% endfor %}
+                                {% for message in app.flashes('add_person_failed') %}
+                                    <div class="col-md-12 mt-3 text-red"><span
+                                                class="fa fa-info text-red"></span> {{ message }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

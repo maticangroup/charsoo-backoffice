@@ -1,0 +1,72 @@
+<div class="col-4">
+    <div class="panel">
+        <div class="panel-heading">
+            Add New Person
+        </div>
+        <div class="panel-content">
+            <form class="row" action="{{ path('repository_person_repository_person_quick_save') }}" method="post">
+                <div class="col-12">
+                    <div class="form-group row">
+                        <span class="label-text col-md-12 col-form-label ">Name</span>
+
+                        <div class="col-md-12">
+                            <input type="text" name="person_name"
+                                   placeholder="First Name"
+                                   class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group row">
+                        <span class="label-text col-md-12 col-form-label ">Family</span>
+
+                        <div class="col-md-12">
+                            <input type="text" name="person_family"
+                                   placeholder="Last Name"
+                                   class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group row">
+                        <span class="label-text col-md-12 col-form-label ">Mobile</span>
+
+                        <div class="col-md-12">
+                            <input type="text" name="person_mobile"
+                                   placeholder="+989125555555"
+                                   class="form-control mb-3" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group pb-3 row">
+                        <div class="col-md-12">
+                            <label class="form-check">
+                                <input type="checkbox" name="send_sms" class="form-check-input">
+                                <span class="form-check-label">Do You want to send SMS to user?</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-dark btn-block rounded"><i class="fa fa-save"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group row">
+                        {% for message in app.flashes('add_person_quick_success') %}
+                            <div class="col-md-12 mt-3 text-green"><span class="fa fa-info text-green"></span> {{ message }}</div>
+                        {% endfor %}
+                        {% for message in app.flashes('add_person_quick_failed') %}
+                            <div class="col-md-12 mt-3 text-red"><span class="fa fa-info text-red"></span> {{ message }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

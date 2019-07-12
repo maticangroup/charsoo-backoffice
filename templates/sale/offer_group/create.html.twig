@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Offer Group | Create{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <form class="row" action="{{ path('sale_offer_group_sale_offer_group_create') }}" method="post">
+                        <div class="col-10">
+                            <h1>Welcome</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa
+                                delectus
+                                eos, minus nemo neque obcaecati placeat quam quisquam ullam?
+                            </p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <input type="text" value="{{ offerGroupModel.offerGroupName }}" name="offerGroupName"
+                                   class="form-control mb-3"
+                                   placeholder="Group name">
+                            <button type="submit" class="btn btn-block btn-dark fa fa-save rounded"></button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="form-group row">
+                        <div class="col-4"></div>
+                        <div class="col-md-4">
+                            <input type="text" placeholder="Search" name="text"
+                                   class="form-control">
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="usersRoleList">
+                            <thead>
+                            <tr>
+                                <th scope="col">Global token</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Number of products</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for offerGroup in offerGroups %}
+                                <tr>
+                                    <td>
+                                        {{ offerGroup.offerGroupSerial }}
+                                    </td>
+                                    <td>
+                                        {{ offerGroup.offerGroupName }}
+                                    </td>
+                                    <td>
+                                        {{ offerGroup.offerGroupProductsCount }}
+                                    </td>
+                                    <td>
+                                        {% if offerGroup.offerGroupStatus %}
+                                            <span class="label rounded"
+                                                  style="background-color: {{ offerGroup.offerGroupStatus.offerGroupStatusColor }};">
+                                                {{ offerGroup.offerGroupStatus.offerGroupStatusName }}
+                                        </span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('sale_offer_group_sale_offer_group_status' , {offer_group_id:offerGroup.offerGroupId , machine_name:offerGroup.offerGroupStatus.offerGroupStatusMachineName}) }}"
+                                           class="{{ (offerGroup.offerGroupStatus.offerGroupStatusMachineName == 'active') ? 'fa fa-ban text-red' : 'fa fa-play text-green' }}"></a>
+                                        <a href="{{ path('sale_offer_group_sale_offer_group_read' , {id:offerGroup.offerGroupId}) }}"
+                                           class="fa fa-eye"></a>
+                                        <a href="{{ path('sale_offer_group_sale_offer_group_edit' , {id:offerGroup.offerGroupId}) }}"
+                                           class="fa fa-edit"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Records List End -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

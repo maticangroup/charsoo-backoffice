@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Brand | Edit{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-10">
+                            <h3>Want to add a new Brand?</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores facilis,
+                                laudantium odit quibusdam quis vel?
+                            </p>
+                        </div>
+                        <div class="col-2">
+                            <form class="row"
+                                  action="{{ path('repository_brand_repository_brand_edit', {'id': brand.brandID}) }}" method="post">
+                                <div class="col-12">
+                                    <input type="text" name="brandName" value="{{ brand.brandName }}"
+                                           class="form-control mb-3">
+                                    <label class="custom-file mb-3">
+                                        <input type="file" value="{{ brand.brandImageUrl }}" name="brandImageUrl"
+                                               class="custom-file-input">
+                                        <span class="custom-file-label">Choose File</span>
+                                    </label>
+                                    <button type="submit" class="btn btn-block rounded btn-info fa fa-save"></button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <strong>Suppliers</strong>
+                </div>
+                <div class="panel-content">
+                    <form class="row"
+                          action="{{ path('repository_brand_repository_brand_add_supplier' , {brand_id:brand.brandID}) }}"
+                          method="post">
+                        <div class="col-3"></div>
+                        <div class="col-md-3">
+                            <select name="companyId"
+                                    class="form-control">
+                                {% for company in allCompanies %}
+                                    <option value="{{ company.companyID }}">{{ company.companyName }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <button type="submit" class="btn btn-block btn-dark rounded"><i class="fa fa-save"></i>
+                            </button>
+                        </div>
+                        <div class="col-3"></div>
+                    </form>
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="usersRoleList">
+                            <thead>
+                            <tr>
+                                <th>Global token</th>
+                                <th>Company name</th>
+                                <th>Telephone</th>
+                                <th>Address</th>
+                                <th>Contact Person</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for supplier in suppliers %}
+                                <tr>
+                                    <td>{{ supplier.companyID }}</td>
+                                    <td>
+                                        {{ supplier.companyName }}
+                                    </td>
+                                    <td>
+                                        {{ supplier.companyMainPhone }}
+                                    </td>
+                                    <td>
+                                        {{ supplier.companyAddresses }}
+                                    </td>
+                                    <td>
+                                        <a href="">{{ supplier.companyMainAddressContactPersonName }}</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('repository_brand_repository_brand_remove_supplier' , {brand_id:brand.brandID , supplier_id:supplier.companyID}) }}"
+                                           class=" fa fa-trash"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Records List End -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

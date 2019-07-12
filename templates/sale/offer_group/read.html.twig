@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Offer Group | Read{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-8">
+            <div class="panel">
+                <div class="panel-content">
+                    <h1>Welcome</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa
+                        delectus
+                        eos, minus nemo neque obcaecati placeat quam quisquam ullam?
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="panel">
+                <div class="weather--panel text-white bg-info">
+                    <div class="weather--title">
+                        <i class="fa fa-exclamation"></i>
+                        <span>Group Name</span>
+                    </div>
+
+                    <div class="weather--info">
+                        <h3>{{ offerGroupModel.offerGroupName }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="panel">
+                <div class="weather--panel text-white bg-darker">
+                    <div class="weather--title">
+                        <i class="fa fa-exclamation"></i>
+                        <span>Availability</span>
+                    </div>
+                    <div class="weather--info">
+                        <span class="label rounded"
+                              style="background-color: {{ offerGroupModel.offerGroupStatus.offerGroupStatusColor }};">
+                            {{ offerGroupModel.offerGroupStatus.offerGroupStatusName }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-heading"><strong>
+                        Stock
+                    </strong></div>
+                <div class="panel-content">
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="ProvincesList">
+                            <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Guarantee</th>
+                                <th>Color</th>
+                                <th>Supplier</th>
+                                <th>Current Price</th>
+                                <th>Discount Price</th>
+                                <th>Serial / Quantity</th>
+                                <th>Last Pricing Deed</th>
+                                <th>Expiry last pricing deed date</th>
+                                <th>Current Place</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for selectedProduct in selectedProducts %}
+                                <tr>
+                                    <td>{{ selectedProduct.productItemName }}</td>
+                                    <td>{{ selectedProduct.productGuaranteeName }}</td>
+                                    <td>{{ selectedProduct.productColorName }}
+                                        <span class="label rounded"
+                                              style="background-color: {{ selectedProduct.productColorHex }}">  </span>
+                                    </td>
+                                    <td>{{ selectedProduct.productSupplierName }}</td>
+                                    <td>{{ selectedProduct.productCurrentPrice }}</td>
+                                    <td>{{ selectedProduct.productDiscountPrice }}</td>
+                                    <td>{{ selectedProduct.productSerial }}
+                                        / {{ selectedProduct.productQuantity }}</td>
+                                    <td>{{ selectedProduct.productPricingDeedId }}</td>
+                                    <td>{{ selectedProduct.productPricingDeedExpiryDate }}</td>
+                                    <td>{{ selectedProduct.productCurrentPlace }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Records List End -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Shelve | Create{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-12">
+                            <h3>Want to add a new user?</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aspernatur
+                                culpa doloribus laborum necessitatibus rem temporibus. Beatae ipsa officiis
+                                quam.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <form class="row" action="{{ path('inventory_shelve_inventory_shelve_create') }}" method="post">
+                        <div class="col-3">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Shelve Name</span>
+
+                                <div class="col-md-12">
+                                    <input type="text" value="{{ shelveModel.shelveName }}"
+                                           name="shelveName"
+                                           placeholder="Shelve Name"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Shelve Keeper</span>
+
+                                <div class="col-md-12">
+                                    <select name="shelveKeeperId" class="form-control">
+                                        {% for person in persons %}
+                                            <option value="{{ person.id }}" {{ (shelveModel.shelveKeeperId == person.id)?'selected':'' }}>{{ person.humanName }} {{ person.humanFamily }}
+                                                | {{ person.mobile }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 mt-5">
+                            <div class="form-group row">
+                                <button type="submit" class="btn btn-block rounded btn-dark fa fa-save"></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

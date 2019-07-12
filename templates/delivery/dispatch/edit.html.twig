@@ -1,0 +1,209 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dispatch | Read{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="invoice">
+                    <div class="invoice--header">
+                        <div class="invoice--logo">
+                            <img src="../../images/invoice/logo.png" alt="">
+                        </div>
+
+                        <div class="invoice--address">
+                            <h5 class="h5">Arad Mobile</h5>
+                            <p>
+                                Arad Mobile Address comes here, Lorem ipsum dolor sit amet.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="invoice--billing">
+                        <div class="invoice--address">
+                            <h5 class="h5">Company/Customer</h5>
+
+                            <p><strong>Address : </strong>Company/customer address comes here</p>
+                            <p><strong>Phone : </strong>021-1645612</p>
+                        </div>
+                        <div class="invoice--info">
+                            <h5 class="h5"><span>Invoice:</span> #9048392</h5>
+                            <p>Invoice Date: <strong>12-12-12</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="invoice--order">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>20 Inch Philips LCD Black Color Monitor</td>
+                                <td>12</td>
+                                <td>75.00</td>
+                                <td>900.00</td>
+                            </tr>
+                            <tr>
+                                <td>20 Inch Philips LCD Black Color Monitor</td>
+                                <td>12</td>
+                                <td>75.00</td>
+                                <td>900.00</td>
+                            </tr>
+                            <tr>
+                                <td>20 Inch Philips LCD Black Color Monitor</td>
+                                <td>12</td>
+                                <td>75.00</td>
+                                <td>900.00</td>
+                            </tr>
+                            <tr>
+                                <td>20 Inch Philips LCD Black Color Monitor</td>
+                                <td>12</td>
+                                <td>75.00</td>
+                                <td>900.00</td>
+                            </tr>
+                            <tr>
+                                <td>20 Inch Philips LCD Black Color Monitor</td>
+                                <td>12</td>
+                                <td>75.00</td>
+                                <td>900.00</td>
+                            </tr>
+                            <tr>
+                                <td>20 Inch Philips LCD Black Color Monitor</td>
+                                <td>12</td>
+                                <td>75.00</td>
+                                <td>900.00</td>
+                            </tr>
+                            <tr>
+                                <td>Shipping</td>
+                                <td>1</td>
+                                <td>69.00</td>
+                                <td>69.00</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"><strong>VAT</strong></td>
+                                <td>50.00</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"><strong>Total</strong></td>
+                                <td><strong>1800.00</strong></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="invoice--footer">
+                        <ul class="list-unstyled">
+                            <li class="mb-3"><strong>Description</strong>
+                                <ul class="list-unstyled">
+                                    <li>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
+                                        consectetur dolores error libero nesciunt rem, vel
+                                        voluptatum. Culpa, laudantium, velit?
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <strong>Dispatch information</strong>
+                </div>
+                <div class="panel-content">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Dispatch Token</th>
+                            <th>Dispatched Date</th>
+                            <th>Delivery Person</th>
+                            <th>Dispatch Price</th>
+                            <th>Delivery Cost</th>
+                            <th>Delivery Due Date</th>
+                            <th>Delivery Method</th>
+                            <th>Delivery Queue</th>
+                            <th>Size</th>
+                            <th>Owner</th>
+                            <th>Dispatch Status</th>
+                            <th>Dispatch Price Status</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                #265615
+                            </td>
+                            <td>
+                                1398/12/12
+                            </td>
+                            <td>
+                                Delivery Person
+                            </td>
+                            <td>1,200,000</td>
+                            <td>10,000</td>
+                            <td>1398/12/14</td>
+                            <td>Delivery Method</td>
+                            <td>Delivery Queue</td>
+                            <td>Small</td>
+                            <td>Username</td>
+                            <td>
+                                <div class="form-group">
+                                    <select name="select" class="form-control">
+                                        <option value="1">Status 1</option>
+                                        <option value="2">Status 2</option>
+                                        <option value="3">Status 3</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <select name="select" class="form-control">
+                                        <option value="1">Price 1</option>
+                                        <option value="2">Price 2</option>
+                                        <option value="3">Price 3</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="#" class="btn rounded btn-block btn-info fa fa-save"></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="panel">
+                <div class="panel-heading">
+                    <strong>Total Price</strong>
+                </div>
+                <div class="panel-content">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Total Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                1,210,000
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

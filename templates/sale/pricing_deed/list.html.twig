@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pricing Deed | List{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-10">
+                            <h1>Welcome</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa
+                                delectus
+                                eos, minus nemo neque obcaecati placeat quam quisquam ullam?
+                            </p>
+                        </div>
+                        <div class="col-2 d-flex justify-content-center align-items-center">
+                            <a href="{{ path('sale_pricing_deed_sale_pricing_deed_create') }}"
+                               class="btn btn-block btn-success fa fa-plus rounded"></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="form-group row">
+                        <div class="col-4"></div>
+                        <div class="col-md-4">
+                            <input type="text" placeholder="Search" name="text"
+                                   class="form-control">
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="usersRoleList">
+                            <thead>
+                            <tr>
+                                <th>Deed Name</th>
+                                <th>Amount Product</th>
+                                <th>Creator</th>
+                                <th>Create Date</th>
+                                <th>Confirmor</th>
+                                <th>Confirm Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for pricingDeed in pricingDeeds %}
+                                <tr>
+                                    <td>
+                                        {{ pricingDeed.pricingDeedName }}
+                                    </td>
+                                    <td>
+                                        {{ pricingDeed.pricingDeedProductsCount }}
+                                    </td>
+                                    <td>
+                                        {{ pricingDeed.pricingDeedCreatePerson }}
+                                    </td>
+                                    <td>
+                                        {{ pricingDeed.pricingDeedCreateDate }}
+                                    </td>
+                                    <td>
+                                        {{ pricingDeed.pricingDeedConfirmPerson }}
+                                    </td>
+                                    <td>
+                                        {{ pricingDeed.pricingDeedConfirmDate }}
+                                    </td>
+                                    <td>
+                                        <span class="label rounded"
+                                              style="background-color: {{ pricingDeed.pricingDeedStatus.pricingDeedStatusColor }}">
+                                            {{ pricingDeed.pricingDeedStatus.pricingDeedStatusName }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('sale_pricing_deed_sale_pricing_deed_edit' , {id:pricingDeed.pricingDeedId}) }}"
+                                           class="fa fa-edit"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Records List End -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

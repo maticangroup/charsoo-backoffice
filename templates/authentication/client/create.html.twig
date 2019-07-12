@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Client | Create{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <form action="{{ path('authentication_client_authentication_client_save') }}" method="post">
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-10">
+                                <h3>Welcome content</h3>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cumque, in ipsam
+                                    molestias
+                                    nostrum quidem repudiandae sequi suscipit ullam voluptatem.
+                                </p>
+                            </div>
+                            <div class="col-2">
+                                <input type="text" name="text" class="form-control mb-3"
+                                       value="Username" disabled>
+                                <select name="select" class="form-control mb-3">
+                                    <option value="1">Role</option>
+                                    <option value="2">Role</option>
+                                    <option value="3">Role</option>
+                                    <option value="4">Role</option>
+                                </select>
+                                <input type="submit" class="btn rounded btn-block btn-dark fa fa-save">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="form-group row">
+                        <div class="col-4"></div>
+                        <div class="col-md-4">
+                            <input type="text" placeholder="Search" name="text"
+                                   class="form-control">
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="usersRoleList">
+                            <thead>
+                            <tr>
+                                <th>Client global token</th>
+                                <th>Username</th>
+                                <th>Public Key</th>
+                                <th>Secret Key</th>
+                                <th>Role</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <a href="#" class="btn-link">#315321</a>
+                                </td>
+                                <td>
+                                    Username
+                                </td>
+                                <td>
+                                    M8W8Qspu2S^uW9%s
+                                </td>
+                                <td>
+                                    M8W8Qspu2S^uW9%s
+                                </td>
+                                <td>
+                                    Role name
+                                </td>
+                                <td>
+                                    <a href="#" class="fa fa-edit"></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="#" class="btn-link">#315321</a>
+                                </td>
+                                <td>
+                                    Username
+                                </td>
+                                <td>
+                                    M8W8Qspu2S^uW9%s
+                                </td>
+                                <td>
+                                    M8W8Qspu2S^uW9%s
+                                </td>
+                                <td>
+                                    Role name
+                                </td>
+                                <td>
+                                    <a href="#" class="fa fa-edit"></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="#" class="btn-link">#315321</a>
+                                </td>
+                                <td>
+                                    Username
+                                </td>
+                                <td>
+                                    M8W8Qspu2S^uW9%s
+                                </td>
+                                <td>
+                                    M8W8Qspu2S^uW9%s
+                                </td>
+                                <td>
+                                    Role name
+                                </td>
+                                <td>
+                                    <a href="#" class="fa fa-edit"></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="#" class="btn-link">#315321</a>
+                                </td>
+                                <td>
+                                    Username
+                                </td>
+                                <td>
+                                    M8W8Qspu2S^uW9%s
+                                </td>
+                                <td>
+                                    M8W8Qspu2S^uW9%s
+                                </td>
+                                <td>
+                                    Role name
+                                </td>
+                                <td>
+                                    <a href="#" class="fa fa-edit"></a>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Records List End -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

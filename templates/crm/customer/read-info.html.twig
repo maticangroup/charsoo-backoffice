@@ -1,0 +1,338 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Customer | Info{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    Customer Name
+                </div>
+                <div class="panel-content">
+                    {% include 'crm/customer/tab.html.twig' %}
+                    <!-- Tab Content Start -->
+                    <div class="tab-content">
+                        <!-- Tab Pane Start Personal Information -->
+                        <div class="tab-pane fade show active">
+                            <div class="row">
+                                <div class="col-9">
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            Personal Information
+                                        </div>
+                                        <div class="panel-content">
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Name</span>
+
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="Company name"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Family</span>
+
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="123335664789"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Phone</span>
+
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="123335664789"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Email</span>
+
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="123335664789"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Address</span>
+
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="021-1254477788"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Address</span>
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="Address"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="panel">
+                                        <div class="weather--panel text-white bg-green">
+                                            <div class="weather--title">
+                                                <i class="fa fa-money-bill-alt"></i>
+                                                <span>Credit</span>
+                                            </div>
+                                            <div class="weather--info">
+                                                <span>100,000,000</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            Address
+                                        </div>
+                                        <div class="panel-content">
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Country</span>
+
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="Company name"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Province</span>
+
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="123335664789"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">City</span>
+
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="123335664789"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Districts</span>
+
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="123335664789"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Postal Code</span>
+
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="021-1254477788"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Address</span>
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="Address"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Person</span>
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="Person"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Phone number</span>
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="Phone number"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Google Map</span>
+                                                        <div class="col-md-12">
+                                                            <img src="../../images/matican_images/map.png"
+                                                                 alt="" class="rounded">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="panel-content">
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Country</span>
+
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="Company name"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Province</span>
+
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="123335664789"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">City</span>
+
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="123335664789"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Districts</span>
+
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="123335664789"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Postal Code</span>
+
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="021-1254477788"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Address</span>
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="Address"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Person</span>
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="Person"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Phone number</span>
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text"
+                                                                   placeholder="Phone number"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Google Map</span>
+                                                        <div class="col-md-12">
+                                                            <img src="../../images/matican_images/map.png"
+                                                                 alt="" class="rounded">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="panel-content">
+                                            <div class="row">
+                                                <div class="col-4"></div>
+                                                <div class="col-4">
+                                                    <a href="#"
+                                                       class="btn btn-block btn-success fa fa-plus rounded"></a>
+                                                </div>
+                                                <div class="col-4"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4"></div>
+                                <div class="col-4">
+                                    <a href="#" class="btn rounded btn-block btn-dark fa fa-save"></a>
+                                </div>
+                                <div class="col-4"></div>
+                            </div>
+                        </div>
+                        <!-- Tab Pane End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

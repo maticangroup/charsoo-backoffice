@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Person | List{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+
+                        <div class="col-12">
+                            <h1>Welcome</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa
+                                delectus
+                                eos, minus nemo neque obcaecati placeat quam quisquam ullam?
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="form-group row">
+                        <div class="col-4"></div>
+                        <div class="col-md-4">
+                            <input type="text" placeholder="Search" name="text"
+                                   class="form-control">
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="usersRoleList">
+                            <thead>
+                            <tr>
+                                <th>Global Token</th>
+                                <th>Name</th>
+                                <th>Mobile</th>
+                                <th>Email</th>
+                                <th>Address</th>
+                                <th>Birth Date</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for person in persons %}
+                            <tr>
+                                <td>
+                                   {{ person.id }}
+                                </td>
+                                <td>
+                                    {{ person.humanName }} {{ person.humanFamily }}
+                                </td>
+                                <td>
+                                    <a href="tel:{{ person.mobile }}" class="btn-link" target="_blank">{{ person.mobile }}</a>
+                                </td>
+                                <td>
+                                    <a href="mailto:{{ person.email }}" class="btn-link" target="_blank">{{ person.email }}</a>
+                                </td>
+                                <td>{{ person.mainAddressString }}</td>
+                                <td>{{ person.birthDateYear }}-{{ person.birthDateMonth }}-{{ person.birthDateDay }}</td>
+                                <td>
+                                    <a href="{{ path('repository_person_repository_person_edit',{id:person.id}) }}" class="fa fa-edit"></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Records List End -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

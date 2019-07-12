@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" class="no-outlines">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- ==== Document Title ==== -->
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- ==== Document Meta ==== -->
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- ==== Favicon ==== -->
+    <link rel="icon" href="favicon.png" type="image/png">
+
+    <!-- ==== Google Font ==== -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CMontserrat:400,500">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}">
+    {% block stylesheets %}{% endblock %}
+
+    <!-- Page Level Stylesheets -->
+</head>
+
+<body>
+
+<!-- Wrapper Start -->
+<div class="wrapper">
+    <!-- Navbar Start -->
+    <header class="navbar navbar-fixed">
+        <!-- Navbar Header Start -->
+        <div class="navbar--header">
+            <!-- Logo Start -->
+            <a href="#" class="logo">
+                <img src="{{ asset('assets/images/matican_images/arad_mobile_logo.png') }}" alt="" width="100%">
+            </a>
+            <!-- Logo End -->
+
+            <!-- Sidebar Toggle Button Start -->
+            <a href="#" class="navbar--btn" data-toggle="sidebar" title="Toggle Sidebar">
+                <i class="fa fa-bars"></i>
+            </a>
+            <!-- Sidebar Toggle Button End -->
+        </div>
+        <!-- Navbar Header End -->
+
+        <!-- Sidebar Toggle Button Start -->
+        <a href="#" class="navbar--btn" data-toggle="sidebar" title="Toggle Sidebar">
+            <i class="fa fa-bars"></i>
+        </a>
+        <!-- Sidebar Toggle Button End -->
+
+
+        <div class="navbar--nav ml-auto">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fa fa-bell"></i>
+                        <span class="badge text-white bg-blue">7</span>
+                    </a>
+                </li>
+
+                <!-- Nav User Start -->
+                <li class="nav-item dropdown nav--user">
+                    <a href="#" class="nav-link" data-toggle="dropdown">
+                        <!--<img src="../../images/avatars/01_80x80.png" alt="" class="rounded-circle">-->
+                        <span>Mohsen Roshani</span>
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="profile.html"><i class="far fa-user"></i>Profile</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a href="#"><i class="fa fa-power-off"></i>Logout</a></li>
+                    </ul>
+                </li>
+                <!-- Nav User End -->
+            </ul>
+        </div>
+    </header>
+    <!-- Navbar End -->
+
+    <!-- Sidebar Start -->
+    <aside class="sidebar" data-trigger="scrollbar">
+        <!-- Sidebar Profile Start -->
+
+        <!-- Sidebar Profile End -->
+
+        <!-- Sidebar Navigation Start -->
+        <div class="sidebar--nav">
+            <ul id="sidebar-menu">
+
+
+            </ul>
+        </div>
+        <!-- Sidebar Navigation End -->
+    </aside>
+    <!-- Sidebar End -->
+
+    <!-- Main Container Start -->
+    <main class="main--container">
+        <section class="page--header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!-- Page Title Start -->
+                        <!--<h2 class="page&#45;&#45;title h5">Blank Page</h2>-->
+                        <!-- Page Title End -->
+
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                            <li class="breadcrumb-item"><span>Page Layouts</span></li>
+                            <li class="breadcrumb-item active"><span>Blank Page</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Main Content Start -->
+        <section class="main--content">
+            {% block body %}{% endblock %}
+        </section>
+        <!-- Main Content End -->
+        <!-- Main Footer Start -->
+        <footer class="main--footer main--footer-transparent">
+            <p>All rights are reserved to Arad Mobile, Engineered by <a href="#">Matican Group</a></p>
+        </footer>
+        <!-- Main Footer End -->
+    </main>
+    <!-- Main Container End -->
+</div>
+<!-- Wrapper End -->
+
+<!-- Scripts -->
+<script src="{{ asset('assets/script/all.js') }}"></script>
+{% block javascripts %}
+{% endblock %}
+<!-- Page Level Scripts -->
+
+<div class="message">
+    <ul>
+        {% for message in app.flashes('success') %}
+            <li class="message-success">
+                {{ message }}
+            </li>
+        {% endfor %}
+
+        {% for message in app.flashes('failed') %}
+            <li class="message-failed">
+                {{ message }}
+            </li>
+        {% endfor %}
+
+        {% for message in app.flashes('warning') %}
+            <li class="message-warning">
+                {{ message }}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+</body>
+</html>

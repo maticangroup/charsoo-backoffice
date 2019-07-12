@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Customer | Invitation{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    Customer Name
+                </div>
+                <div class="panel-content">
+                    {% include 'crm/customer/tab.html.twig' %}
+                    <!-- Tab Content Start -->
+                    <div class="tab-content">
+                        <!-- Tab Pane Start Invitation -->
+                        <div class="tab-pane fade show active">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="panel">
+                                        <div class="panel-content">
+                                            <div class="row">
+                                                <div class="col-3 ">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Name</span>
+
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text" placeholder="Name"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3 ">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Family</span>
+
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="text" placeholder="Family"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3 ">
+                                                    <div class="form-group row">
+                                                        <span class="label-text col-md-12 col-form-label ">Mobile</span>
+                                                        <div class="col-md-12">
+                                                            <input type="tel" name="text" placeholder="Mobile"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1 "></div>
+                                                <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                                                    <a href="#"
+                                                       class="btn btn-block btn-dark fa fa-save rounded"></a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="panel">
+                                        <div class="panel-content">
+                                            <div class="form-group row">
+                                                <div class="col-4"></div>
+                                                <div class="col-md-4">
+                                                    <input type="text" placeholder="Search" name="text"
+                                                           class="form-control">
+                                                </div>
+                                                <div class="col-4"></div>
+                                            </div>
+                                            <!-- Records List Start -->
+                                            <div class="records--list">
+                                                <table id="usersRoleList">
+                                                    <thead>
+                                                    <tr role="row">
+                                                        <th>User Global Token</th>
+                                                        <th>User Name</th>
+                                                        <th>Invitation Date</th>
+                                                        <th>Invitation Discount Code</th>
+                                                        <th>Expiry Code Date</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>#315321</td>
+                                                        <td>User Name</td>
+                                                        <td>1397/12/12</td>
+                                                        <td>ds158Ef</td>
+                                                        <td>1397/12/12</td>
+                                                        <td>
+                                                            <span class="label label-gray rounded">Used</span>
+                                                            <span class="label label-red rounded">Expired</span>
+                                                            <span class="label label-blue rounded">Not Accept</span>
+                                                            <span class="label label-green rounded">Active</span>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- Records List End -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Tab Pane End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

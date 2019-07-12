@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Guarantee Provider | Create{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-10">
+                            <h3>Want to add a new guarantee provider?</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores facilis,
+                                laudantium odit quibusdam quis vel?
+                            </p>
+                        </div>
+                        <div class="col-2">
+                            <form class="row"
+                                  action="{{ path('repository_guarantee_provider_repository_guarantee_provider_create') }}"
+                                  method="post">
+                                <div class="col-12">
+                                    <input type="text" placeholder="Guarantee Provider Name"
+                                           value="{{ guaranteeProviderModel.guaranteeProviderName }}"
+                                           name="guaranteeProviderName"
+                                           class="form-control mb-3">
+                                    <button type="submit" class="btn btn-block rounded btn-dark fa fa-save"></button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="form-group row">
+                        <div class="col-4"></div>
+                        <div class="col-md-4">
+                            <input type="text" placeholder="Search" name="text"
+                                   class="form-control">
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="usersRoleList">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for guaranteeProvider in guaranteeProviders %}
+                                <tr>
+                                    <td>
+                                        {{ guaranteeProvider.guaranteeProviderID }}
+                                    </td>
+                                    <td>
+                                        {{ guaranteeProvider.guaranteeProviderName }}
+                                    </td>
+                                    <td>
+                                        <span class="label rounded"
+                                              style="background-color: {{ guaranteeProvider.guaranteeProviderStatus.guaranteeProviderStatusColor }}">
+                                            {{ guaranteeProvider.guaranteeProviderStatus.guaranteeProviderStatusName }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('repository_guarantee_provider_repository_guarantee_provider_edit' , {id:guaranteeProvider.guaranteeProviderID}) }}"
+                                           class="fa fa-edit"></a>
+                                        <a href="{{ path('repository_guarantee_provider_repository_guarantee_provider_status' , {guarantee_provider_id:guaranteeProvider.guaranteeProviderID , machine_name:guaranteeProvider.guaranteeProviderStatus.guaranteeProviderStatusMachineName }) }}"
+                                           class="{{ (guaranteeProvider.guaranteeProviderStatus.guaranteeProviderStatusMachineName == 'active') ? 'fa fa-ban text-red' : 'fa fa-play text-green' }}"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Records List End -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,149 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Offer Group | Edit{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <form class="row"
+                          action="{{ path('sale_offer_group_sale_offer_group_edit' , {id:offerGroupModel.offerGroupId}) }}" method="post">
+                        <div class="col-10">
+                            <h1>Welcome</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa
+                                delectus
+                                eos, minus nemo neque obcaecati placeat quam quisquam ullam?
+                            </p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <input type="text" value="{{ offerGroupModel.offerGroupName }}" name="offerGroupName"
+                                   class="form-control mb-3"
+                                   placeholder="Group name">
+                            <button type="submit" class="btn btn-block btn-info fa fa-save rounded"></button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-6">
+                            <div class="input-group">
+                                <input type="text" name="text" class="form-control" value="iPhone"
+                                       placeholder="Search for products inside this shelve">
+                            </div>
+                        </div>
+                        <div class="col-3"></div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Guarantee</th>
+                                    <th>Color</th>
+                                    <th>Supplier</th>
+                                    <th>Current Price</th>
+                                    <th>Discount Price</th>
+                                    <th>Serial / Quantity</th>
+                                    <th>Last Pricing Deed</th>
+                                    <th>Expiry last pricing deed date</th>
+                                    <th>Current Place</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for shelvesProduct in shelvesProducts %}
+                                    <tr>
+                                        <td>{{ shelvesProduct.productItemName }}</td>
+                                        <td>{{ shelvesProduct.productGuaranteeName }}</td>
+                                        <td>{{ shelvesProduct.productColorName }}
+                                            <span class="label rounded"
+                                                  style="background-color: {{ shelvesProduct.productColorHex }}">  </span>
+                                        </td>
+                                        <td>{{ shelvesProduct.productSupplierName }}</td>
+                                        <td>{{ shelvesProduct.productCurrentPrice }}</td>
+                                        <td>{{ shelvesProduct.productDiscountPrice }}</td>
+                                        <td>{{ shelvesProduct.productSerial }}
+                                            / {{ shelvesProduct.productQuantity }}</td>
+                                        <td>{{ shelvesProduct.productPricingDeedId }}</td>
+                                        <td>{{ shelvesProduct.productPricingDeedExpiryDate }}</td>
+                                        <td>{{ shelvesProduct.productCurrentPlace }}</td>
+                                        <td>
+                                            {% if shelvesProduct.productIsDisabled == false %}
+                                            <a href="{{ path('sale_offer_group_sale_offer_group_add_product' , {offer_group_id:offerGroupModel.offerGroupId , product_id:shelvesProduct.productId}) }}"
+                                               class="fa fa-plus"></a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-heading"><strong>
+                        Stock
+                    </strong></div>
+                <div class="panel-content">
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="ProvincesList">
+                            <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Guarantee</th>
+                                <th>Color</th>
+                                <th>Supplier</th>
+                                <th>Current Price</th>
+                                <th>Discount Price</th>
+                                <th>Serial / Quantity</th>
+                                <th>Last Pricing Deed</th>
+                                <th>Expiry last pricing deed date</th>
+                                <th>Current Place</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for selectedProduct in selectedProducts %}
+                                <tr>
+                                    <td>{{ selectedProduct.productItemName }}</td>
+                                    <td>{{ selectedProduct.productGuaranteeName }}</td>
+                                    <td>{{ selectedProduct.productColorName }}
+                                        <span class="label rounded"
+                                              style="background-color: {{ selectedProduct.productColorHex }}">  </span>
+                                    </td>
+                                    <td>{{ selectedProduct.productSupplierName }}</td>
+                                    <td>{{ selectedProduct.productCurrentPrice }}</td>
+                                    <td>{{ selectedProduct.productDiscountPrice }}</td>
+                                    <td>{{ selectedProduct.productSerial }}
+                                        / {{ selectedProduct.productQuantity }}</td>
+                                    <td>{{ selectedProduct.productPricingDeedId }}</td>
+                                    <td>{{ selectedProduct.productPricingDeedExpiryDate }}</td>
+                                    <td>{{ selectedProduct.productCurrentPlace }}</td>
+                                    <td>
+                                        <a href="{{ path('sale_offer_group_sale_offer_group_remove_product' , {offer_group_id:offerGroupModel.offerGroupId , product_id:selectedProduct.productId}) }}"
+                                           class="fa fa-times"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Records List End -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

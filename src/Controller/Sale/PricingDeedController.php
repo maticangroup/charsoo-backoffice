@@ -1,0 +1,547 @@
+<?php
+
+namespace App\Controller\Sale;
+
+use App\FormModels\Inventory\ShelveModel;
+use App\FormModels\ModelSerializer;
+use App\FormModels\Repository\ProductModel;
+use App\FormModels\Sale\OfferGroupModel;
+use App\FormModels\Sale\PricingDeedConfirmStatusModel;
+use App\FormModels\Sale\PricingDeedModel;
+use App\FormModels\Sale\PricingDeedStatusModel;
+use Matican\Core\Entities\Inventory;
+use Matican\Core\Entities\Sale;
+use Matican\Core\Servers;
+use Matican\Core\Transaction\ResponseStatus;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Matican\Core\Transaction\Request as Req;
+
+/**
+ * @Route("/sale/pricing-deed", name="sale_pricing_deed")
+ */
+class PricingDeedController extends AbstractController
+{
+    /**
+     * @Route("/list", name="_sale_pricing_deed_list")
+     */
+    public function fetchAll()
+    {
+        $allPricingDeedsRequest = new Req(Servers::Sale, Sale::PricingDeed, 'all');
+        $allPricingDeedsResponse = $allPricingDeedsRequest->send();
+
+        /**
+         * @var $pricingDeeds PricingDeedModel[]
+         */
+        $pricingDeeds = [];
+        foreach ($allPricingDeedsResponse->getContent() as $pricingDeed) {
+            $pricingDeeds[] = ModelSerializer::parse($pricingDeed, PricingDeedModel::class);
+        }
+
+        return $this->render('sale/pricing_deed/list.html.twig', [
+            'controller_name' => 'PricingDeedController',
+            'pricingDeeds' => $pricingDeeds,
+        ]);
+    }
+
+    /**
+     * @Route("/create", name="_sale_pricing_deed_create")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \ReflectionException
+     */
+    public function create(Request $request)
+    {
+        $inputs = $request->request->all();
+        /**
+         * @var $pricingDeedModel PricingDeedModel
+         */
+        $pricingDeedModel = ModelSerializer::parse($inputs, PricingDeedModel::class);
+
+        if (!empty($inputs)) {
+            $request = new Req(Servers::Sale, Sale::PricingDeed, 'new');
+            $request->add_instance($pricingDeedModel);
+            $response = $request->send();
+//            dd($response);
+            if ($response->getStatus() == ResponseStatus::successful) {
+                /**
+                 * @var $pricingDeedModel PricingDeedModel
+                 */
+                $pricingDeedModel = ModelSerializer::parse($response->getContent(), PricingDeedModel::class);
+                $this->addFlash('s', $response->getMessage());
+                return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricingDeedModel->getPricingDeedId()]));
+            } else {
+                $this->addFlash('s', $response->getMessage());
+            }
+        }
+
+        $years = [];
+        for ($i = 1950; $i <= 2019; $i++) {
+            $years[] = $i;
+        }
+
+        $months = [];
+        for ($j = 1; $j <= 12; $j++) {
+            $months[] = $j;
+        }
+
+        $days = [];
+        for ($k = 1; $k <= 31; $k++) {
+            $days[] = $k;
+        }
+
+        return $this->render('sale/pricing_deed/create.html.twig', [
+            'controller_name' => 'PricingDeedController',
+            'years' => $years,
+            'months' => $months,
+            'days' => $days,
+            'pricingDeedModel' => $pricingDeedModel,
+
+        ]);
+    }
+
+    /**
+     * @Route("/edit/{id}", name="_sale_pricing_deed_edit")
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \ReflectionException
+     */
+    public function edit($id, Request $request)
+    {
+        $inputs = $request->request->all();
+
+        /**
+         * @var $pricingDeedModel PricingDeedModel
+         */
+        $pricingDeedModel = ModelSerializer::parse($inputs, PricingDeedModel::class);
+        $pricingDeedModel->setPricingDeedId($id);
+        $request = new Req(Servers::Sale, Sale::PricingDeed, 'fetch');
+        $request->add_instance($pricingDeedModel);
+        $response = $request->send();
+//        dd($response);
+        $pricingDeedModel = ModelSerializer::parse($response->getContent(), PricingDeedModel::class);
+
+        if (!empty($inputs)) {
+            /**
+             * @var $pricingDeedModel PricingDeedModel
+             */
+            $pricingDeedModel = ModelSerializer::parse($inputs, PricingDeedModel::class);
+            $pricingDeedModel->setPricingDeedId($id);
+            $request = new Req(Servers::Sale, Sale::PricingDeed, 'update');
+            $request->add_instance($pricingDeedModel);
+            $response = $request->send();
+            if ($response->getStatus() == ResponseStatus::successful) {
+                /**
+                 * @var $pricingDeedModel PricingDeedModel
+                 */
+                $pricingDeedModel = ModelSerializer::parse($response->getContent(), PricingDeedModel::class);
+                $this->addFlash('s', $response->getMessage());
+                return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricingDeedModel->getPricingDeedId()]));
+            } else {
+                $this->addFlash('s', $response->getMessage());
+            }
+        }
+
+
+        $allShelvesProductsRequest = new Req(Servers::Inventory, Inventory::Shelve, 'get_shelves_products');
+        $allShelvesProductsResponse = $allShelvesProductsRequest->send();
+
+        /**
+         * @var $shelvesProducts ProductModel[]
+         */
+        $shelvesProducts = [];
+        if ($allShelvesProductsResponse->getContent()) {
+            foreach ($allShelvesProductsResponse->getContent() as $product) {
+                $shelvesProducts[] = ModelSerializer::parse($product, ProductModel::class);
+            }
+        }
+
+
+        $allOfferGroupsRequest = new Req(Servers::Sale, Sale::OfferGroup, 'all');
+        $allOfferGroupResponse = $allOfferGroupsRequest->send();
+
+        /**
+         * @var $offerGroups OfferGroupModel[]
+         */
+        $offerGroups = [];
+        foreach ($allOfferGroupResponse->getContent() as $offerGroup) {
+            $offerGroups[] = ModelSerializer::parse($offerGroup, OfferGroupModel::class);
+        }
+
+        $allShelvesRequest = new Req(Servers::Inventory, Inventory::Shelve, 'all');
+        $allShelvesResponse = $allShelvesRequest->send();
+
+        /**
+         * @var $shelves ShelveModel[]
+         */
+        $shelves = [];
+        if ($allShelvesResponse->getContent()) {
+            foreach ($allShelvesResponse->getContent() as $shelve) {
+                $shelves[] = ModelSerializer::parse($shelve, ShelveModel::class);
+            }
+        }
+
+        $allPricingDeedsRequest = new Req(Servers::Sale, Sale::PricingDeed, 'all');
+        $allPricingDeedsResponse = $allPricingDeedsRequest->send();
+
+        /**
+         * @var $pricingDeeds PricingDeedModel[]
+         */
+        $pricingDeeds = [];
+        foreach ($allPricingDeedsResponse->getContent() as $pricingDeed) {
+            $pricingDeeds[] = ModelSerializer::parse($pricingDeed, PricingDeedModel::class);
+        }
+
+
+        /**
+         * @var $selectedProducts ProductModel[]
+         */
+        $selectedProducts = [];
+        if ($pricingDeedModel->getPricingDeedProducts()) {
+            foreach ($pricingDeedModel->getPricingDeedProducts() as $product) {
+                $selectedProducts[] = ModelSerializer::parse($product, ProductModel::class);
+            }
+        }
+
+        $selectedProductsIds = [];
+        foreach ($selectedProducts as $product) {
+            $selectedProductsIds[] = $product->getProductId();
+        }
+
+        foreach ($shelvesProducts as $product) {
+            if (in_array($product->getProductId(), $selectedProductsIds)) {
+                $product->setProductIsDisabled(true);
+            }
+        }
+
+
+        $years = [];
+        for ($i = 1950; $i <= 2019; $i++) {
+            $years[] = $i;
+        }
+
+        $months = [];
+        for ($j = 1; $j <= 12; $j++) {
+            $months[] = $j;
+        }
+
+        $days = [];
+        for ($k = 1; $k <= 31; $k++) {
+            $days[] = $k;
+        }
+
+
+        return $this->render('sale/pricing_deed/edit.html.twig', [
+            'controller_name' => 'PricingDeedController',
+            'years' => $years,
+            'months' => $months,
+            'days' => $days,
+            'pricingDeedModel' => $pricingDeedModel,
+            'shelvesProducts' => $shelvesProducts,
+            'offerGroups' => $offerGroups,
+            'shelves' => $shelves,
+            'selectedProducts' => $selectedProducts,
+            'pricingDeeds' => $pricingDeeds,
+        ]);
+    }
+
+    /**
+     * @Route("/read/{id}", name="_sale_pricing_deed_read")
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \ReflectionException
+     */
+    public function read($id, Request $request)
+    {
+        $inputs = $request->request->all();
+
+        /**
+         * @var $pricingDeedModel PricingDeedModel
+         */
+        $pricingDeedModel = ModelSerializer::parse($inputs, PricingDeedModel::class);
+        $pricingDeedModel->setPricingDeedId($id);
+        $request = new Req(Servers::Sale, Sale::PricingDeed, 'fetch_confirmed');
+        $request->add_instance($pricingDeedModel);
+        $response = $request->send();
+        $pricingDeedModel = ModelSerializer::parse($response->getContent(), PricingDeedModel::class);
+
+        /**
+         * @var $selectedProducts ProductModel[]
+         */
+        $selectedProducts = [];
+        foreach ($pricingDeedModel->getPricingDeedProducts() as $product) {
+            $selectedProducts[] = ModelSerializer::parse($product, ProductModel::class);
+        }
+
+
+        return $this->render('sale/pricing_deed/read.html.twig', [
+            'controller_name' => 'PricingDeedController',
+            'pricingDeedModel' => $pricingDeedModel,
+            'selectedProducts' => $selectedProducts,
+        ]);
+    }
+
+    /**
+     * @Route("/confirm/{pricing_deed_id}", name="_sale_pricing_deed_confirm")
+     * @param $pricing_deed_id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
+     */
+    public function pricingDeedConfirm($pricing_deed_id)
+    {
+        $pricingDeedModel = new PricingDeedModel();
+        $pricingDeedModel->setPricingDeedId($pricing_deed_id);
+        $request = new Req(Servers::Sale, Sale::PricingDeed, 'apply_pricing_deed');
+        $request->add_instance($pricingDeedModel);
+        $response = $request->send();
+//        dd($response);
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+            return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_read', ['id' => $pricing_deed_id]));
+        } else {
+            $this->addFlash('s', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));
+    }
+
+    /**
+     * @Route("/add-product/{pricing_deed_id}/{product_id}", name="_sale_pricing_deed_add_product")
+     * @param $pricing_deed_id
+     * @param $product_id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
+     */
+    public function addProduct($pricing_deed_id, $product_id, Request $request)
+    {
+        $inputs = $request->request->all();
+
+        /**
+         * @var $productModel ProductModel
+         */
+        $productModel = ModelSerializer::parse($inputs, ProductModel::class);
+        $productModel->setProductDeedId($pricing_deed_id);
+        $productModel->setProductId($product_id);
+//        dd($productModel);
+        $request = new Req(Servers::Sale, Sale::PricingDeed, 'add_product');
+        $request->add_instance($productModel);
+        $response = $request->send();
+//        dd($response);
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('f', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));
+    }
+
+
+    /**
+     * @Route("/remove-product/{pricing_deed_id}/{deed_item_id}", name="_sale_pricing_deed_remove_product")
+     * @param $pricing_deed_id
+     * @param $deed_item_id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
+     */
+    public function removeProduct($pricing_deed_id, $deed_item_id)
+    {
+        $productModel = new ProductModel();
+        $productModel->setProductDeedId($pricing_deed_id);
+        $productModel->setProductPricingDeedItemId($deed_item_id);
+        $request = new Req(Servers::Sale, Sale::PricingDeed, 'remove_product');
+        $request->add_instance($productModel);
+        $response = $request->send();
+//        dd($response);
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('f', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));
+    }
+
+    /**
+     * @Route("/add-offer-group/{pricing_deed_id}/{offer_group_id}", name="_sale_pricing_deed_add_offer_group")
+     * @param $pricing_deed_id
+     * @param $offer_group_id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
+     */
+    public function addOfferGroup($pricing_deed_id, $offer_group_id)
+    {
+
+        $pricingDeedModel = new PricingDeedModel();
+        $pricingDeedModel->setPricingDeedId($pricing_deed_id);
+        $pricingDeedModel->setPricingDeedOfferGroupId($offer_group_id);
+        $request = new Req(Servers::Sale, Sale::PricingDeed, 'add_offer_group_products');
+        $request->add_instance($pricingDeedModel);
+        $response = $request->send();
+//        dd($response);
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('f', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));
+    }
+
+    /**
+     * @Route("/add-shelve/{pricing_deed_id}/{shelve_id}", name="_sale_pricing_deed_add_shelve")
+     * @param $pricing_deed_id
+     * @param $shelve_id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
+     */
+    public function addShelve($pricing_deed_id, $shelve_id)
+    {
+
+        $pricingDeedModel = new PricingDeedModel();
+        $pricingDeedModel->setPricingDeedId($pricing_deed_id);
+        $pricingDeedModel->setPricingDeedShelveId($shelve_id);
+        $request = new Req(Servers::Sale, Sale::PricingDeed, 'add_shelve_products');
+        $request->add_instance($pricingDeedModel);
+        $response = $request->send();
+//        dd($response);
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('f', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));
+    }
+
+
+    /**
+     * @Route("/add-price/{pricing_deed_id}", name="_sale_pricing_deed_add_price")
+     * @param $pricing_deed_id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \ReflectionException
+     */
+    public function acceptPricingDeed($pricing_deed_id, Request $request)
+    {
+
+        $inputs = $request->request->all();
+
+        /**
+         * @var $pricingDeedModel PricingDeedModel
+         */
+        $pricingDeedModel = ModelSerializer::parse($inputs, PricingDeedModel::class);
+        $pricingDeedModel->setPricingDeedId($pricing_deed_id);
+        $request = new Req(Servers::Sale, Sale::PricingDeed, 'accept_pricing_list');
+        $request->add_instance($pricingDeedModel);
+        $response = $request->send();
+        return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));
+    }
+
+    /**
+     * @Route("/back-selection/{pricing_deed_id}", name="_sale_pricing_deed_back_selection")
+     * @param $pricing_deed_id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \ReflectionException
+     */
+    public function backToSelection($pricing_deed_id, Request $request)
+    {
+
+        $inputs = $request->request->all();
+
+        /**
+         * @var $pricingDeedModel PricingDeedModel
+         */
+        $pricingDeedModel = ModelSerializer::parse($inputs, PricingDeedModel::class);
+        $pricingDeedModel->setPricingDeedId($pricing_deed_id);
+        $request = new Req(Servers::Sale, Sale::PricingDeed, 'ignore_pricing_list');
+        $request->add_instance($pricingDeedModel);
+        $response = $request->send();
+        return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));
+    }
+
+    /**
+     * @Route("/save-pricing/{pricing_deed_id}", name="_sale_pricing_deed_save_pricing")
+     * @param $pricing_deed_id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \ReflectionException
+     */
+    public function savePricingList($pricing_deed_id, Request $request)
+    {
+
+        $inputs = $request->request->all();
+
+//        dd($inputs);
+
+        $deedItemArray = [];
+        $products = $inputs['productId'];
+        $newCurrentPrice = $inputs['productCurrentPrice'];
+        $newDiscountPrice = $inputs['productDiscountPrice'];
+        foreach ($products as $key => $product) {
+            $deedItemArray[] = [
+                'productId' => $product,
+                'productCurrentPrice' => $newCurrentPrice[$key],
+                'productDiscountPrice' => $newDiscountPrice[$key]
+            ];
+        }
+
+        $pricingDeedModel = new PricingDeedModel();
+
+        /**
+         * @var $productModelArray ProductModel[]
+         */
+        $productModelArray = [];
+        foreach ($deedItemArray as $item) {
+            $productModel = [];
+            $productModel['productId'] = $item['productId'];
+            $productModel['productNewCurrentPrice'] = $item['productCurrentPrice'];
+            $productModel['productNewDiscountPrice'] = $item['productDiscountPrice'];
+            $productModelArray[] = $productModel;
+        }
+//        dd(json_encode($productModelArray);
+        $pricingDeedModel->setPricingDeedProducts(json_encode($productModelArray));
+        $pricingDeedModel->setPricingDeedId($pricing_deed_id);
+
+//        dd($pricingDeedModel);
+
+        $request = new Req(Servers::Sale, Sale::PricingDeed, 'save_pricing_list');
+        $request->add_instance($pricingDeedModel);
+        $response = $request->send();
+//        dd($response);
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('s', $response->getMessage());
+        }
+
+        return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));
+    }
+
+
+    /**
+     * @Route("/add-pricing-deed/{pricing_deed_id}/{import_pricing_deed_id}", name="_sale_pricing_deed_add_pricing_deed")
+     * @param $pricing_deed_id
+     * @param $import_pricing_deed_id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
+     */
+    public function addPricingDeed($pricing_deed_id, $import_pricing_deed_id)
+    {
+
+        $pricingDeedModel = new PricingDeedModel();
+        $pricingDeedModel->setPricingDeedId($pricing_deed_id);
+        $pricingDeedModel->setPricingDeedImportDeedId($import_pricing_deed_id);
+        $request = new Req(Servers::Sale, Sale::PricingDeed, 'add_pricing_deed_products');
+        $request->add_instance($pricingDeedModel);
+        $response = $request->send();
+//        dd($response);
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('f', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));
+    }
+}
+

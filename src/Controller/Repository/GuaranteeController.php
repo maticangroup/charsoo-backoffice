@@ -1,0 +1,201 @@
+<?php
+
+namespace App\Controller\Repository;
+
+use App\FormModels\ModelSerializer;
+use App\FormModels\Repository\GuaranteeDurationModel;
+use App\FormModels\Repository\GuaranteeModel;
+use App\FormModels\Repository\GuaranteeProviderModel;
+use App\FormModels\Repository\GuaranteeStatusModel;
+use Matican\Core\Entities\Repository;
+use Matican\Core\Servers;
+use Matican\Core\Transaction\ResponseStatus;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Matican\Core\Transaction\Request as Req;
+
+/**
+ * @Route("/repository/guarantee", name="repository_guarantee")
+ */
+class GuaranteeController extends AbstractController
+{
+    /**
+     * @Route("/create", name="_repository_guarantee_create")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \ReflectionException
+     */
+    public function create(Request $request)
+    {
+        $inputs = $request->request->all();
+
+        /**
+         * @var $guaranteeModel GuaranteeModel
+         */
+        $guaranteeModel = ModelSerializer::parse($inputs, GuaranteeModel::class);
+        if (!empty($inputs)) {
+            $request = new Req(Servers::Repository, Repository::Guarantee, 'new');
+            $request->add_instance($guaranteeModel);
+            $response = $request->send();
+//            dd($response);
+            if ($response->getStatus() == ResponseStatus::successful) {
+                $this->addFlash('s', $response->getMessage());
+            } else {
+                $this->addFlash('f', $response->getMessage());
+            }
+        }
+
+        $allGuaranteeProviderRequest = new Req(Servers::Repository, Repository::Guarantee, 'get_providers');
+        $guaranteeProviderResponse = $allGuaranteeProviderRequest->send();
+
+        /**
+         * @var $guaranteeProviders GuaranteeProviderModel[]
+         */
+        $guaranteeProviders = [];
+        foreach ($guaranteeProviderResponse->getContent() as $guaranteeProvider) {
+            $guaranteeProviders[] = ModelSerializer::parse($guaranteeProvider, GuaranteeProviderModel::class);
+        }
+//        dd($guaranteeProviderResponse);
+
+
+        $guaranteeDurationRequest = new Req(Servers::Repository, Repository::Guarantee, 'get_durations');
+        $guaranteeDurationResponse = $guaranteeDurationRequest->send();
+
+        /**
+         * @var $guaranteeDurations GuaranteeDurationModel[]
+         */
+        $guaranteeDurations = [];
+        foreach ($guaranteeDurationResponse->getContent() as $guaranteeDuration) {
+            $guaranteeDurations[] = ModelSerializer::parse($guaranteeDuration, GuaranteeDurationModel::class);
+        }
+
+        $guaranteeRequest = new Req(Servers::Repository, Repository::Guarantee, 'all');
+        $guaranteeResponse = $guaranteeRequest->send();
+
+        /**
+         * @var $guarantees GuaranteeModel[]
+         */
+        $guarantees = [];
+        foreach ($guaranteeResponse->getContent() as $guarantee) {
+            $guarantees[] = ModelSerializer::parse($guarantee, GuaranteeModel::class);
+        }
+
+
+        return $this->render('repository/guarantee/create.html.twig', [
+            'controller_name' => 'GuaranteeController',
+            'guaranteeModel' => $guaranteeModel,
+            'guaranteeProviders' => $guaranteeProviders,
+            'guaranteeDurations' => $guaranteeDurations,
+            'guarantees' => $guarantees
+        ]);
+    }
+
+
+    /**
+     * @Route("/edit/{id}", name="_repository_guarantee_edit")
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \ReflectionException
+     */
+    public function edit($id, Request $request)
+    {
+        $inputs = $request->request->all();
+        /**
+         * @var $guaranteeModel GuaranteeModel
+         */
+        $guaranteeModel = ModelSerializer::parse($inputs, GuaranteeModel::class);
+        $guaranteeModel->setGuaranteeID($id);
+        $request = new Req(Servers::Repository, Repository::Guarantee, 'fetch');
+        $request->add_instance($guaranteeModel);
+        $response = $request->send();
+        $guaranteeModel = ModelSerializer::parse($response->getContent(), GuaranteeModel::class);
+
+        if (!empty($inputs)) {
+            $guaranteeModel = ModelSerializer::parse($inputs, GuaranteeModel::class);
+            $guaranteeModel->setGuaranteeID($id);
+            $request = new Req(Servers::Repository, Repository::Guarantee, 'update');
+            $request->add_instance($guaranteeModel);
+            $response = $request->send();
+            if ($response->getStatus() == ResponseStatus::successful) {
+                $this->addFlash('s', '');
+                return $this->redirect($this->generateUrl('repository_guarantee_repository_guarantee_create'));
+            } else {
+                $this->addFlash('f', '');
+            }
+        }
+
+        $guaranteeProviderRequest = new Req(Servers::Repository, Repository::Guarantee, 'get_providers');
+        $guaranteeProviderResponse = $guaranteeProviderRequest->send();
+
+        /**
+         * @var $guaranteeProviders GuaranteeProviderModel[]
+         */
+        $guaranteeProviders = [];
+        foreach ($guaranteeProviderResponse->getContent() as $guaranteeProvider) {
+            $guaranteeProviders[] = ModelSerializer::parse($guaranteeProvider, GuaranteeProviderModel::class);
+        }
+
+        $guaranteeDurationRequest = new Req(Servers::Repository, Repository::Guarantee, 'get_durations');
+        $guaranteeDurationResponse = $guaranteeDurationRequest->send();
+
+        /**
+         * @var $guaranteeDurations GuaranteeDurationModel[]
+         */
+        $guaranteeDurations = [];
+        foreach ($guaranteeDurationResponse->getContent() as $guaranteeDuration) {
+            $guaranteeDurations[] = ModelSerializer::parse($guaranteeDuration, GuaranteeDurationModel::class);
+        }
+
+        $guaranteeRequest = new Req(Servers::Repository, Repository::Guarantee, 'all');
+        $guaranteeResponse = $guaranteeRequest->send();
+
+        /**
+         * @var $guarantees GuaranteeModel[]
+         */
+        $guarantees = [];
+        foreach ($guaranteeResponse->getContent() as $guarantee) {
+            $guarantees[] = ModelSerializer::parse($guarantee, GuaranteeModel::class);
+        }
+
+        return $this->render('repository/guarantee/edit.html.twig', [
+            'controller_name' => 'GuaranteeController',
+            'guaranteeModel' => $guaranteeModel,
+            'guaranteeProviders' => $guaranteeProviders,
+            'guaranteeDurations' => $guaranteeDurations,
+            'guarantees' => $guarantees
+        ]);
+    }
+
+
+    /**
+     * @Route("/status/{guarantee_id}/{machine_name}", name="_repository_guarantee_status")
+     * @param $guarantee_id
+     * @param $machine_name
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
+     */
+    public function changeGuaranteeAvailability($guarantee_id, $machine_name)
+    {
+        $guaranteeStatusModel = new GuaranteeStatusModel();
+        if ($machine_name == 'active') {
+            $guaranteeStatusModel->setGuaranteeId($guarantee_id);
+            $guaranteeStatusModel->setGuaranteeStatusMachineName('deactive');
+        } else {
+            $guaranteeStatusModel->setGuaranteeId($guarantee_id);
+            $guaranteeStatusModel->setGuaranteeStatusMachineName('active');
+        }
+
+        $request = new Req(Servers::Repository, Repository::Guarantee, 'change_guarantee_status');
+        $request->add_instance($guaranteeStatusModel);
+        $response = $request->send();
+//        dd($response);
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('f', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('repository_guarantee_repository_guarantee_create'));
+    }
+}

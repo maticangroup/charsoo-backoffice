@@ -1,0 +1,106 @@
+<?php
+
+namespace App\Controller\Repository;
+
+use App\FormModels\ModelSerializer;
+use App\FormModels\Repository\OffDayModel;
+use Matican\Core\Entities\Repository;
+use Matican\Core\Servers;
+use Matican\Core\Transaction\ResponseStatus;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Matican\Core\Transaction\Request as Req;
+
+/**
+ * @Route("/repository/off-day", name="repository_off_day")
+ */
+class OffDayController extends AbstractController
+{
+
+    /**
+     * @Route("/create", name="_repository_off_day_create")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \ReflectionException
+     */
+    public function create(Request $request)
+    {
+        $inputs = $request->request->all();
+        /**
+         * @var $offDayModel OffDayModel
+         */
+        $offDayModel = ModelSerializer::parse($inputs, OffDayModel::class);
+
+        if (!empty($inputs)) {
+//            dd($offDayModel);
+            $request = new Req(Servers::Repository, Repository::OffDays, 'new');
+            $request->add_instance($offDayModel);
+            $response = $request->send();
+//            dd($response);
+            if ($response->getStatus() == ResponseStatus::successful) {
+                $this->addFlash('success', $response->getMessage());
+            }
+            $this->addFlash('failed', $response->getMessage());
+        }
+
+        $years = [];
+        for ($i = 1950; $i <= 2019; $i++) {
+            $years[] = $i;
+        }
+
+        $months = [];
+        for ($j = 1; $j <= 12; $j++) {
+            $months[] = $j;
+        }
+
+        $days = [];
+        for ($k = 1; $k <= 31; $k++) {
+            $days[] = $k;
+        }
+
+        $offDaysRequest = new Req(Servers::Repository, Repository::OffDays, 'all');
+        $offDaysResponse = $offDaysRequest->send();
+
+
+        /**
+         * @var $offDays OffDayModel[]
+         */
+        $offDays = [];
+        if ($offDaysResponse->getContent()) {
+            foreach ($offDaysResponse->getContent() as $offDay) {
+                $offDays[] = ModelSerializer::parse($offDay, OffDayModel::class);
+            }
+        }
+
+        return $this->render('repository/off_day/create.html.twig', [
+            'controller_name' => 'OffDayController',
+            'offDayModel' => $offDayModel,
+            'offDays' => $offDays,
+            'years' => $years,
+            'months' => $months,
+            'days' => $days,
+        ]);
+    }
+
+    /**
+     * @Route("/remove/{id}", name="_repository_off_day_remove")
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
+     */
+    public function removeDayOff($id)
+    {
+        $offDayModel = new OffDayModel();
+        $offDayModel->setOffDayID($id);
+        $request = new Req(Servers::Repository, Repository::OffDays, 'delete');
+        $request->add_instance($offDayModel);
+        $response = $request->send();
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('s', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('repository_off_day_repository_off_day_create'));
+    }
+}

@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Delivery Method | List{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-10">
+                            <h1>Welcome</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa
+                                delectus
+                                eos, minus nemo neque obcaecati placeat quam quisquam ullam?
+                            </p>
+                        </div>
+                        <div class="col-2 d-flex justify-content-center align-items-center">
+                            <a href="#" class="btn btn-block btn-success fa fa-plus rounded"></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="form-group row">
+                        <div class="col-4"></div>
+                        <div class="col-md-4">
+                            <input type="text" placeholder="Search" name="text"
+                                   class="form-control">
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="usersRoleList">
+                            <thead>
+                            <tr>
+                                <th>Global token</th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Cost</th>
+                                <th>Accepted size</th>
+                                <th>Can Receive Money</th>
+                                <th>Delivery Persons</th>
+                                <th>Dispatches</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <a href="#" class="btn-link">#315321</a>
+                                </td>
+                                <td>
+                                    <img src="https://via.placeholder.com/50x50" alt="" class="rounded-circle">
+                                </td>
+                                <td>
+                                    Delivery Name
+                                </td>
+                                <td>Fixed Price</td>
+                                <td>20000</td>
+                                <td>Small</td>
+                                <td>
+                                    <span href="#" class="fa fa-times text-red"></span>
+                                    <span href="#" class="fa fa-check text-green"></span>
+                                </td>
+                                <td>6</td>
+                                <td>6</td>
+                                <td>
+                                    <span class="fa fa-play text-green"></span>
+                                    <span class="fa fa-ban text-red"></span>
+                                    <a href="#" class="fa fa-eye"></a>
+                                    <a href="#" class="fa fa-edit"></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Records List End -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

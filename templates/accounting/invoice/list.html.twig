@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Invoice | List{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-10">
+                            <h1>welcome section</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque eum libero
+                                numquam
+                                obcaecati perspiciatis quas quisquam soluta unde voluptates.
+                            </p>
+
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <a href="#" class="btn btn-block rounded btn-success fa fa-plus"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="form-group row">
+                        <div class="col-4"></div>
+                        <div class="col-md-4">
+                            <input type="text" placeholder="Search" name="text"
+                                   class="form-control">
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="usersRoleList">
+                            <thead>
+                            <tr>
+                                <th>Global token</th>
+                                <th>From Company</th>
+                                <th>To Company</th>
+                                <th>From Person</th>
+                                <th>To Person</th>
+                                <th>Total Price</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Create date</th>
+                                <th>Creator</th>
+                                <th>Invoice Group</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>123456789</td>
+                                <td>
+                                    <a href="#">
+                                        Company
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#">
+                                        Company
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#">
+                                        Person
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#">
+                                        Person
+                                    </a>
+                                </td>
+                                <td>
+                                    123,000,000
+                                </td>
+                                <td>
+                                    <span class="label label-green rounded">Income</span>
+                                    <span class="label label-red rounded ">Outgo</span>
+                                </td>
+                                <td>
+                                    <span class="label label-gray rounded">Paid</span>
+                                    <span class="label label-primary rounded ">Open</span>
+                                </td>
+                                <td>
+                                    1397/12/05
+                                </td>
+                                <td>
+                                    <a href="#">Organization employee</a>
+                                </td>
+                                <td>
+                                    Invoice Group
+                                </td>
+                                <td>
+                                    <a href="{{ path('accounting_invoice_accounting_invoice_edit') }}" class=" fa fa-eye"></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Records List End -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

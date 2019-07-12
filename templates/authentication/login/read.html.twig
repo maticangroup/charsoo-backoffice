@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" class="no-outlines">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- ==== Document Title ==== -->
+    <title>Arad Mobile | Login</title>
+
+    <!-- ==== Document Meta ==== -->
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- ==== Favicon ==== -->
+    <link rel="icon" href="favicon.png" type="image/png">
+
+    <!-- ==== Google Font ==== -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CMontserrat:400,500">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}">
+
+    <!-- Page Level Stylesheets -->
+
+</head>
+<body>
+
+<!-- Wrapper Start -->
+<div class="wrapper">
+    <!-- Login Page Start -->
+    <div class="m-account-w"
+         data-bg-img="http://kesvat.maticangroup.com/wp-content/uploads/2019/06/login-page-image.png">
+
+        <div class="m-account">
+            <div class="row no-gutters">
+                <div class="col-md-6">
+                    <!-- Login Content Start -->
+                    <div class="m-account--content-w  bg-transparent text-white">
+                        <div class="m-account--content">
+                            <h2 class="h2">Welcome to Arad Mobile</h2>
+                            <p>
+                                Please submit your phone number, disposable password will be sent to you.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Login Content End -->
+                </div>
+
+                <div class="col-md-6">
+                    <!-- Login Form Start -->
+                    <div class="m-account--form-w bg-light">
+                        <div class="m-account--form">
+                            <!-- Logo Start -->
+                            <div class="logo">
+                                <img src="{{ asset('assets/images/matican_images/sample-logo.png') }}" alt="">
+                            </div>
+                            <!-- Logo End -->
+
+                            <form action="#" method="post">
+                                <label class="m-account--title">Mobile number</label>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <i class="fas fa-mobile"></i>
+                                        </div>
+                                        <input type="text" name="mobile-phone" placeholder="+989 xx xxx xx xx"
+                                               class="form-control"
+                                               autocomplete="off" required>
+                                    </div>
+                                </div>
+                                <div class="m-account--actions">
+                                    <button type="submit" class="btn btn-rounded btn-info">Send Password</button>
+                                </div>
+                            </form>
+                            <hr class="bg-white">
+                            <form action="#" class="mt-3">
+                                <label class="m-account--title">
+                                    Verification code
+                                </label>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <i class="fas fa-key"></i>
+                                        </div>
+                                        <input type="password" name="password" placeholder="Password"
+                                               class="form-control" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="m-account--actions">
+                                    <a href="{{ path('accounting_gift_card_group_accounting_gift_card_group_create') }}" class="btn btn-rounded btn-info">Login</a>
+                                </div>
+                                <div class="m-account--footer">
+                                    <p>&copy; 2018 Arad Mobile</p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Login Form End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login Page End -->
+</div>
+<!-- Wrapper End -->
+
+<!-- Scripts -->
+<script src="{{ asset('assets/script/all.js') }}"></script>
+
+<!-- Page Level Scripts -->
+
+</body>
+</html>

@@ -1,0 +1,241 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inventory Deed | Create{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-10">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-5">
+                            <h1>welcome section</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores eligendi
+                                est,
+                                exercitationem nihil perspiciatis reprehenderit sit voluptas. Fugiat, placeat,
+                                tenetur!
+                            </p>
+                        </div>
+                        <div class="col-7">
+                            <div class="row">
+                                <div class="col-3">
+                                    <span class="label-text col-form-label">From</span>
+                                    <h4>{{ deedModel.inventoryDeedFromInventoryName }} {{ deedModel.inventoryDeedFromShelveName }} {{ deedModel.inventoryDeedFromQueueName }}</h4>
+                                </div>
+                                <div class="col-3">
+                                    <span class="label-text col-form-label">To</span>
+                                    <h4>{{ deedModel.inventoryDeedToInventoryName }} {{ deedModel.inventoryDeedToShelveName }} {{ deedModel.inventoryDeedToQueueName }}</h4>
+                                </div>
+                                <div class="col-3">
+                                    <span class="label-text col-form-label">Deed Name</span>
+                                    <h4>{{ deedModel.inventoryDeedName }}</h4>
+                                </div>
+                                <div class="col-3">
+                                    <span class="label-text col-form-label">Deed Serial</span>
+                                    <h4>{{ deedModel.inventoryDeedSerial }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div class="panel">
+                <div class="weather--panel text-white bg-darker">
+                    <div class="weather--title">
+                        <i class="fa fa-info"></i>
+                        <span>Confirmation</span>
+                    </div>
+
+                    <div class="weather--info">
+                        <a href="{{ path('inventory_deed_inventory_deed_confirm' , {deed_id:deedModel.inventoryDeedId}) }}"
+                           class="fa fa-check text-green"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if deedModel.inventoryDeedToInventoryMachineName != 'confirmed_orders_products' %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-heading"><strong>
+                            Search & Add Item
+                        </strong></div>
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <input type="text" name="text" class="form-control" value="iPhone"
+                                           placeholder="Search for products inside this shelve">
+                                </div>
+                            </div>
+                            <div class="col-3"></div>
+
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Guarantee</th>
+                                        <th>Color</th>
+                                        <th>Supplier</th>
+                                        <th>Current Price</th>
+                                        <th>Discount Price</th>
+                                        <th>Serial / Quantity</th>
+                                        <th>Last Pricing Deed</th>
+                                        <th>Expiry last pricing deed date</th>
+                                        <th>Inventory</th>
+                                        <th>Shelve</th>
+                                        <th>Queue</th>
+                                        <th>Add</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for product in products %}
+                                        <tr>
+                                            <td>{{ product.productItemName }}</td>
+                                            <td>{{ product.productGuaranteeName }}</td>
+                                            <td>{{ product.productColorName }} <span class="label rounded"
+                                                                                     style="background-color: {{ product.productColorHex }}">  </span>
+                                            </td>
+                                            <td>{{ product.productSupplierName }}</td>
+                                            <td>{{ product.productCurrentPrice }}</td>
+                                            <td>{{ product.productDiscountPrice }}</td>
+                                            <td>{{ product.productSerial }} / {{ product.productQuantity }}</td>
+                                            <td>{{ product.productPricingDeedId }}</td>
+                                            <td>{{ product.productPricingDeedExpiryDate }}</td>
+                                            <td>{{ product.productCurrentInventoryName }}</td>
+                                            <td>{{ product.productCurrentShelveName }}</td>
+                                            <td>{{ product.productCurrentQueueName }}</td>
+                                            <td>
+                                                {% if product.productIsDisabled == false %}
+                                                    <a href="{{ path('inventory_deed_inventory_deed_create_add_product_transfer' , {deed_id:deedModel.inventoryDeedId , product_id:product.productId}) }}"
+                                                       class="fa fa-plus"></a>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <strong>Products To Import</strong>
+                </div>
+                <div class="panel-content">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col">Supplier</th>
+                            <th scope="col">Guarantee</th>
+                            <th scope="col">Color</th>
+                            <th></th>
+                            <th scope="col">Quantity / Serial</th>
+                            <th scope="col">Base price</th>
+                            <th scope="col">Current price</th>
+                            <th scope="col">Total price</th>
+                            <th scope="col">remove</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for product in selectedProducts %}
+                            <tr>
+                                <td>
+                                    {{ product.productItemName }}
+                                </td>
+                                <td>
+                                    {{ product.productSupplierName }}
+                                </td>
+                                <td>
+                                    {{ product.productGuaranteeName }}
+                                </td>
+                                <td>
+                                    {{ product.productColorName }}
+                                </td>
+                                <td>
+                                <span class="label rounded"
+                                      style="background-color: {{ product.productColorHex }}">  </span>
+                                </td>
+                                <td>
+                                    {{ product.productQuantity }} / {{ product.productSerial }}
+                                </td>
+                                <td>
+                                    {{ product.productBasePrice }}
+                                </td>
+                                <td>
+                                    {{ product.productCurrentPrice }}
+                                </td>
+                                <td>
+                                    {{ product.productTotalPrice }}
+                                </td>
+                                <td>
+                                    {% if deedModel.inventoryDeedToInventoryMachineName != 'confirmed_orders_products' %}
+                                        <a href="{{ path('inventory_deed_inventory_deed_create_remove_product' , {product_id:product.productId , deed_id:deedModel.inventoryDeedId , is_transfer:1}) }}"
+                                           class="btn fa fa-times"></a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><strong>Total Count</strong></td>
+                            <td>{{ deedModel.inventoryDeedTotalCount }}</td>
+                            <td></td>
+                            <td><strong>Total Price</strong></td>
+                            <td>{{ deedModel.inventoryDeedTotalPrice }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="form-group">
+                                        <span class="label-text col-form-label text-md-right">Description</span>
+                                        <textarea name="textarea" class="form-control"
+                                                  placeholder="Text input area"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="row">
+                                        <div class="col-3"></div>
+                                        <div class="col-3"></div>
+                                        <div class="col-3">
+                                            <button type="submit"
+                                                    class="btn btn-dark fa fa-save rounded btn-block mt-5"></button>
+                                        </div>
+                                        <div class="col-3"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

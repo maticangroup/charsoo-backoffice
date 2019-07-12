@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Spec Group | Edit{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-10">
+                            <h3>Welcome section</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus dolores
+                                ducimus fuga
+                                maiores maxime mollitia obcaecati odit perspiciatis sequi tenetur.
+                            </p>
+                        </div>
+                        <div class="col-2">
+                            <div class="row">
+                                <form class="col-12"
+                                      action="{{ path('repository_spec_group_repository_spec_group_edit' , {id:specGroupModel.specGroupID}) }}"
+                                      method="post">
+                                    <input type="text" value="{{ specGroupModel.specGroupName }}"
+                                           class="form-control mb-3"
+                                           name="specGroupName"
+                                           placeholder="Group name">
+                                    <input type="number" value="{{ specGroupModel.specGroupDisplayOrder }}"
+                                           class="form-control mb-3"
+                                           name="specGroupDisplayOrder"
+                                           placeholder="Display order">
+                                    <button type="submit" class="btn btn-block rounded btn-info fa fa-save"></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        {% for specGroup in specGroups %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <span>{{ specGroup.specGroupName }}</span>
+                    </div>
+                    <div class="panel-content">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Default value</th>
+                                <th scope="col">Is special</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for specKey in specGroup.specGroupSpecKeys %}
+                                <tr>
+                                    <td>{{ specKey.specKeyName }}</td>
+                                    <td>{{ specKey.specKeyDefaultValue }}</td>
+                                    <td>
+                                        {% if specKey.specKeyIsSpecial %}
+                                            <span class="fa fa-check text-green"></span>
+                                        {% else %}
+                                            <span class="fa fa-times text-red"></span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+
+    </div>
+{% endblock %}

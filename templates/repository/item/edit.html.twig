@@ -1,0 +1,426 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Item | Edit{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1>Want to add a new item?</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt eum fuga in
+                                neque
+                                quia. Aperiam at facere itaque odit quasi!
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <div class="col-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            Barcodes
+                        </div>
+                        <div class="panel-content">
+                            <div class="row">
+                                {% for barcode in itemModel.itemBarcodes %}
+                                    <form class="col-6 mb-3 mt-3"
+                                          action="{{ path('repository_item_repository_item_remove_barcode' , {barcode_id:barcode.barcodeId , item_id:itemModel.itemID}) }}"
+                                          method="post">
+                                        <h4>{{ barcode.barcodeName }}</h4>
+                                        <button type="submit" class="btn btn-block btn-danger rounded"><i
+                                                    class="fa fa-trash"></i></button>
+                                    </form>
+                                {% endfor %}
+
+                                <form class="col-6 mb-3 mt-3"
+                                      action="{{ path('repository_item_repository_item_add_barcode' , {item_id:itemModel.itemID}) }}"
+                                      method="post">
+                                    <input type="text" name="barcodeName" class="form-control mb-3"
+                                           placeholder="Add New Barcode...">
+                                    <button type="submit" class="btn btn-block btn-dark rounded"><i
+                                                class="fa fa-save"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            Colors
+                        </div>
+                        <div class="panel-content">
+                            <div class="row">
+                                {% for itemColor in itemModel.itemColors %}
+                                    <form class="col-6 mb-3 mt-3"
+                                          action="{{ path('repository_item_repository_item_remove_color' , {color_id:itemColor.itemColorID , item_id:itemModel.itemID}) }}"
+                                          method="post">
+                                        <h4>{{ itemColor.itemColorName }}</h4>
+                                        <button type="submit" class="btn btn-block btn-danger rounded"><i
+                                                    class="fa fa-trash"></i></button>
+                                    </form>
+                                {% endfor %}
+                                <form class="col-6 mb-3 mt-3"
+                                      action="{{ path('repository_item_repository_item_add_color' , {item_id:itemModel.itemID}) }}"
+                                      method="post">
+                                    <select name="itemColorID" class="form-control mb-3">
+                                        {% for color in colors %}
+                                            <option value="{{ color.itemColorID }}">{{ color.itemColorName }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <button type="submit" class="btn btn-block btn-dark rounded"><i
+                                                class="fa fa-save"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            Guarantees
+                        </div>
+                        <div class="panel-content">
+                            <div class="row">
+                                {% for itemGuarantee in itemModel.itemGuarantees %}
+                                    <form class="col-6 mb-3 mt-3"
+                                          action="{{ path('repository_item_repository_item_remove_guarantee' , {guarantee_id:itemGuarantee.guaranteeID , item_id:itemModel.itemID}) }}"
+                                          method="post">
+                                        <h4>{{ itemGuarantee.guaranteeName }}</h4>
+                                        <button type="submit" class="btn btn-block btn-danger rounded"><i
+                                                    class="fa fa-trash"></i></button>
+                                    </form>
+                                {% endfor %}
+
+                                <form class="col-6 mb-3 mt-3"
+                                      action="{{ path('repository_item_repository_item_add_guarantee' , {item_id:itemModel.itemID}) }}"
+                                      method="post">
+                                    <select name="guaranteeID" class="form-control mb-3">
+                                        {% for guarantee in guarantees %}
+                                            <option value="{{ guarantee.guaranteeID }}">{{ guarantee.guaranteeName }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <button type="submit" class="btn btn-block btn-dark rounded"><i
+                                                class="fa fa-save"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            Suppliers
+                        </div>
+                        <div class="panel-content">
+                            <div class="row">
+                                {% for itemSupplier in itemModel.itemSuppliers %}
+                                    <form class="col-6 mb-3 mt-3"
+                                          action="{{ path('repository_item_repository_item_remove_supplier' , {supplier_id:itemSupplier.companyID , item_id:itemModel.itemID}) }}"
+                                          method="post">
+                                        <h4>{{ itemSupplier.companyName }}</h4>
+                                        <button type="submit" class="btn btn-block btn-danger rounded"><i
+                                                    class="fa fa-trash"></i></button>
+                                    </form>
+                                {% endfor %}
+                                <form class="col-6 mb-3 mt-3"
+                                      action="{{ path('repository_item_repository_item_add_supplier' , {item_id:itemModel.itemID}) }}"
+                                      method="post">
+                                    <select name="companyID" class="form-control mb-3">
+                                        {% for supplier in suppliers %}
+                                            <option value="{{ supplier.companyID }}">{{ supplier.companyName }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <button type="submit" class="btn btn-block btn-dark rounded"><i
+                                                class="fa fa-save"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            Images
+                        </div>
+                        <div class="panel-content">
+                            <div class="row">
+                                <form class="col-6 mb-3 mt-3 text-center" action="" method="post">
+                                    <img src="https://via.placeholder.com/400x400" class="mb-3" alt="">
+                                    <button type="submit" class="btn btn-block btn-danger rounded"><i
+                                                class="fa fa-trash"></i></button>
+                                </form>
+                                <form class="col-6 mb-3 mt-3 text-center" action="" method="post">
+                                    <img src="https://via.placeholder.com/400x400" class="mb-3" alt="">
+                                    <button type="submit" class="btn btn-block btn-danger rounded"><i
+                                                class="fa fa-trash"></i></button>
+                                </form>
+                                <form class="col-6 mb-3 mt-3" action="" method="post">
+                                    <input type="file" class="custom-file-input mb-3">
+                                    <span class="custom-file-label">Choose File</span>
+                                    <button type="submit" class="btn btn-block btn-dark rounded"><i
+                                                class="fa fa-save"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <div class="col-12">
+                    <form class="panel"
+                          action="{{ path('repository_item_repository_item_edit' , {id:itemModel.itemID}) }}"
+                          method="post">
+                        <div class="panel-heading">
+                            Basic information
+                        </div>
+                        <div class="panel-content">
+                            <div class="form-group row">
+                                <span class="label-text col-md-2 col-form-label text-md-right">Name</span>
+                                <div class="col-md-10">
+                                    <input type="text" name="itemName" class="form-control"
+                                           value="{{ itemModel.itemName }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-content">
+                            <div class="form-group row">
+                                <span class="label-text col-md-2 col-form-label text-md-right">Brand</span>
+                                <div class="col-md-10">
+                                    <select name="itemBrandId" class="form-control mb-3">
+                                        {% for brand in brands %}
+                                            <option value="{{ brand.brandID }}" {{ (itemModel.itemBrandId == brand.brandID) ? 'selected' : '' }}>{{ brand.brandName }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-content">
+                            <div class="form-group row">
+                                <span class="label-text col-md-2 col-form-label text-md-right">Type</span>
+                                <div class="col-md-10">
+                                    <h4 class="mt-1">{{ itemModel.itemTypeName }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-content">
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-8">
+                                    <button type="submit" class="btn btn-info btn-block rounded fa fa-save"></button>
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-12">
+                    <form class="panel"
+                          action="{{ path('repository_item_repository_item_update_categories' , {item_id:itemModel.itemID}) }}"
+                          method="post">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-6 text-left">Item categories</div>
+                                <div class="col-6 text-right">
+                                    <button type="submit" class="btn btn-info fa fa-save rounded"></button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="panel-content">
+                            <ul class="mtc-categories">
+                                {% for itemCategory in itemCategories %}
+                                    <li class="shadow list-group-item">
+                                        <div class="category-header">
+                                            <p class="category-name">
+                                                {{ itemCategory.itemCategoryName }}
+                                            </p>
+                                            <div class="form-group pt-1 pb-1">
+                                                <label class="form-check">
+                                                    <input type="checkbox" name="itemCategoriesIds[]"
+                                                           value="{{ itemCategory.itemCategoryID }}"
+                                                            {{ (itemCategory.itemCategoryIsChecked)?'checked':'' }}
+                                                           class="form-check-input">
+                                                    <span class="form-check-label"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <strong>
+                        Spec Groups
+                    </strong>
+                </div>
+                <div class="panel-content">
+                    <div class="row">
+                        {#{{ dump(specGroupKeys) }}#}
+                        {% for key , specGroup in specGroupKeys %}
+                            <div class="col-4">
+                                <div class="panel shadow">
+                                    <div class="panel-heading">{{ key }}</div>
+                                    <div class="panel-content">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Value</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for specKey in specGroup %}
+                                            <tr>
+                                                <td>{{ specKey.specKeyName }}</td>
+                                                <td>
+                                                    <input type="text" name="text" class="form-control" value="{{ specKey.specKeyDefaultValue }}">
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-4">
+                            <button class="btn btn-info btn-block rounded fa fa-save"></button>
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        {% if false %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        Flexible content
+                    </div>
+                    <div class="panel-content flexible-content">
+
+
+                        <div class="flex-row">
+                            <div class="flex-box flex-box-filled">
+                        <textarea name="mail_message" class="form-control"
+                                  data-trigger="summernote">
+
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aperiam consectetur
+                            doloremque earum nisi quaerat veritatis voluptate? Ab, fuga soluta?
+                        </textarea>
+                            </div>
+                            <div class="flex-box">
+                                <div class="btn-block btn-success flex-add">
+                                    <div class="flex-column-option flex-add-text fa fa-paragraph"></div>
+                                    <div class="flex-column-option flex-add-video fa fa-video"></div>
+                                    <div class="flex-column-option flex-add-image fa fa-image"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-row">
+                            <div class="flex-box flex-box-filled">
+                                <div class="row">
+                                    <div class="col-2"></div>
+                                    <div class="col-10 form-inline">
+                                        <label class="form-radio mr-3">
+                                            <input type="radio" name="radio02" value="1" class="form-radio-input"
+                                                   checked="">
+                                            <span class="form-radio-label">Local</span>
+                                        </label>
+
+                                        <label class="form-radio">
+                                            <input type="radio" name="radio02" value="2" class="form-radio-input">
+                                            <span class="form-radio-label">Aparat</span>
+                                        </label>
+                                        <label class="form-radio">
+                                            <input type="radio" name="radio02" value="2" class="form-radio-input">
+                                            <span class="form-radio-label">Youtube</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-1"></div>
+                                    <div class="col-10">
+                                        <label class="custom-file">
+                                            <input type="file" class="custom-file-input">
+                                            <span class="custom-file-label">Choose File</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-box flex-box-filled">
+                                <div class="flex-images">
+                                    <div class="flex-image">
+                                        <img src="../../images/invoice/logo.png" alt="">
+                                        <div class="options">
+                                            <a href="#" class="btn btn-danger btn-rounded fa fa-trash"></a>
+                                        </div>
+                                    </div>
+                                    <div class="flex-image">
+                                        <img src="../../images/invoice/logo.png" alt="">
+                                        <div class="options">
+                                            <a href="#" class="btn btn-danger btn-rounded fa fa-trash"></a>
+                                        </div>
+                                    </div>
+                                    <div class="flex-image">
+                                        <img src="../../images/invoice/logo.png" alt="">
+                                        <div class="options">
+                                            <a href="#" class="btn btn-danger btn-rounded  fa fa-trash"></a>
+                                        </div>
+                                    </div>
+                                    <div class="flex-image">
+                                        <img src="../../images/invoice/logo.png" alt="">
+                                        <div class="options">
+                                            <a href="#" class="btn btn-danger btn-rounded fa fa-trash"></a>
+                                        </div>
+                                    </div>
+                                    <div class="flex-image">
+                                        <div class="btn-block btn-success fa fa-plus flex-add"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="flex-box">
+                                <div class="btn-block btn-success flex-add">
+                                    <div class="flex-column-option flex-add-text fa fa-paragraph"></div>
+                                    <div class="flex-column-option flex-add-video fa fa-video"></div>
+                                    <div class="flex-column-option flex-add-image fa fa-image"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-row">
+                            <div class="flex-box">
+                                <div class="btn-block btn-success fa fa-plus flex-add"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

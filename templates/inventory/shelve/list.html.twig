@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Shelve | List{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-10">
+                            <h3>Want to add a new user?</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aspernatur
+                                culpa doloribus laborum necessitatibus rem temporibus. Beatae ipsa officiis
+                                quam.
+                            </p>
+                        </div>
+                        <div class="col-2">
+                            <a href="{{ path('inventory_inventory_create') }}"
+                               class="btn btn-block btn-success fa fa-plus rounded"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="form-group row">
+                        <div class="col-4"></div>
+                        <div class="col-md-4">
+                            <input type="text" placeholder="Search" name="text"
+                                   class="form-control">
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="usersRoleList">
+                            <thead>
+                            <tr>
+                                <th>Shelve Name</th>
+                                <th>Shelve Address</th>
+                                <th>Shelve Phone</th>
+                                <th>Shelve Keeper</th>
+                                <th>Shelve Keeper Phone</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for shelve in shelves %}
+                                <tr>
+                                    <td>{{ shelve.shelveName }}</td>
+                                    <td>{{ shelve.shelveAddress }}</td>
+                                    <td><a href="tel:{{ shelve.shelveMainPhone }}"
+                                           class="btn-link">{{ shelve.shelveMainPhone }}</a></td>
+                                    <td>{{ shelve.shelveKeeperName }}</td>
+                                    <td><a href="tel:{{ shelve.shelveKeeperPhone }}"
+                                           class="btn-link">{{ shelve.shelveKeeperPhone }}</a></td>
+                                    <td>
+
+                                        <span class="label rounded"
+                                              style="background-color: {{ shelve.shelveStatus.shelveStatusColor }}">
+                                            {{ shelve.shelveStatus.shelveStatusName }}
+                                        </span>
+
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('inventory_shelve_shelve_status' , {shelve_id:shelve.shelveId , machine_name:shelve.shelveStatus.shelveStatusMachineName}) }}"
+                                           class="{{ (shelve.shelveStatus.shelveStatusMachineName == 'active')?'fa fa-ban text-red':'fa fa-play text-green' }}"></a>
+
+                                        <a href="{{ path('inventory_shelve_inventory_shelve_edit' , {id:shelve.shelveId}) }}"
+                                           class="fa fa-edit"></a>
+
+                                        <a href="{{ path('inventory_shelve_shelve_read' , {id:shelve.shelveId}) }}"
+                                           class="fa fa-eye"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Records List End -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

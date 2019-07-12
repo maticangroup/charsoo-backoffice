@@ -1,0 +1,351 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Invoice | Edit , Read{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="invoice">
+                    <div class="invoice--header">
+                        <div class="invoice--logo">
+                            <img src="../../images/invoice/logo.png" alt="">
+                        </div>
+
+                        <div class="invoice--address">
+                            <h5 class="h5">Arad Mobile</h5>
+                            <p>
+                                Arad Mobile Address comes here, Lorem ipsum dolor sit amet.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="invoice--billing">
+                        <div class="invoice--address">
+                            <h5 class="h5">Company/Customer name </h5>
+
+                            <p><strong>Address : </strong>Company/customer address comes here</p>
+                            <p><strong>Phone : </strong>021-56152561</p>
+                        </div>
+
+                        <div class="invoice--info">
+                            <h5 class="h5"><span>Invoice:</span> #9048392</h5>
+                            <p>Invoice Date: <strong>12-12-12</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="invoice--order">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Discount Price</th>
+                                <th>Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>20 Inch Philips LCD Black Color Monitor</td>
+                                <td>12</td>
+                                <td>75.00</td>
+                                <td>60.00</td>
+                                <td>900.00</td>
+                            </tr>
+                            <tr>
+                                <td>20 Inch Philips LCD Black Color Monitor</td>
+                                <td>12</td>
+                                <td>75.00</td>
+                                <td>60.00</td>
+                                <td>900.00</td>
+                            </tr>
+                            <tr>
+                                <td>20 Inch Philips LCD Black Color Monitor</td>
+                                <td>12</td>
+                                <td>75.00</td>
+                                <td>60.00</td>
+                                <td>900.00</td>
+                            </tr>
+                            <tr>
+                                <td>20 Inch Philips LCD Black Color Monitor</td>
+                                <td>12</td>
+                                <td>75.00</td>
+                                <td>60.00</td>
+                                <td>900.00</td>
+                            </tr>
+                            <tr>
+                                <td>20 Inch Philips LCD Black Color Monitor</td>
+                                <td>12</td>
+                                <td>75.00</td>
+                                <td>60.00</td>
+                                <td>900.00</td>
+                            </tr>
+                            <tr>
+                                <td>20 Inch Philips LCD Black Color Monitor</td>
+                                <td>12</td>
+                                <td>75.00</td>
+                                <td>60.00</td>
+                                <td>900.00</td>
+                            </tr>
+                            <tr>
+                                <td>Shipping</td>
+                                <td>1</td>
+                                <td>69.00</td>
+                                <td></td>
+                                <td>69.00</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><strong>VAT</strong></td>
+                                <td>50.00</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><strong>Interest</strong></td>
+                                <td>50.00</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><strong>Total</strong></td>
+                                <td><strong>1800.00</strong></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-9">
+                            <div class="invoice--footer">
+                                <ul class="list-unstyled">
+                                    <li class="mb-3"><strong>Description</strong>
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
+                                                consectetur dolores error libero nesciunt rem, vel
+                                                voluptatum. Culpa, laudantium, velit?
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="invoice--footer">
+                                <ul class="list-unstyled">
+                                    <li class="mb-3"><strong>Use Coupon</strong>
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                cpn_26456AD5485
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-9">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    Payments
+                                </div>
+                                <div class="panel-content">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <form action="{{ path('accounting_invoice_accounting_invoice_update') }}">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">Date times</th>
+                                                        <th scope="col">Amount</th>
+                                                        <th scope="col">Payment method</th>
+                                                        <th scope="col">From Bank</th>
+                                                        <th scope="col">To Bank</th>
+                                                        <th scope="col">Follow token</th>
+                                                        <th scope="col">Type</th>
+                                                        <th scope="col">Status</th>
+                                                        <th scope="col">Action</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <ul class="list-unstyled">
+                                                                <li class="mb-3"><strong>Due Date</strong>
+                                                                    <ul class="list-unstyled">
+                                                                        <li>1396/05/04 12:32</li>
+                                                                    </ul>
+                                                                </li>
+                                                                <li class="mb-3"><strong>Created at</strong>
+                                                                    <ul class="list-unstyled">
+                                                                        <li>1396/05/04</li>
+                                                                    </ul>
+                                                                </li>
+                                                                <li class="mb-3"><strong>Paid at</strong>
+                                                                    <ul class="list-unstyled">
+                                                                        <li>1396/05/04 12:32</li>
+                                                                    </ul>
+                                                                </li>
+                                                            </ul>
+                                                        </td>
+                                                        <td>
+                                                            1,000,000
+                                                        </td>
+
+                                                        <td>
+                                                            <span class="label label-info rounded">Cash</span>
+                                                            <span class="label label-info rounded">Card to Card</span>
+                                                            <span class="label label-info rounded">Cheque</span>
+                                                            <span class="label label-info rounded">Account balance</span>
+                                                        </td>
+                                                        <td>
+                                                            Pasargad
+                                                        </td>
+                                                        <td>
+                                                            Pasargad
+                                                        </td>
+                                                        <td>
+                                                            1223654799998
+                                                        </td>
+
+                                                        <td>
+                                                            <span class="fa fa-arrow-left text-green"></span>
+                                                            <span class="fa fa-arrow-right text-red"></span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="label label-info rounded">Requested</span>
+                                                            <span class="label label-danger rounded">Rejected</span>
+                                                            <span class="label label-green rounded">Transferred</span>
+                                                        </td>
+                                                        <td>
+                                                            <a href="" class="fa fa-check text-green"></a>
+                                                            <a href="" class="fa fa-ban text-red"></a>
+                                                            <a href="" class="fa fa-times"></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type="date" placeholder="Due date"
+                                                                   class="form-control"></td>
+                                                        <td><input type="text" placeholder="Amount"
+                                                                   class="form-control"></td>
+                                                        <td><select name="select" class="form-control">
+                                                                <option value="1">Payment method</option>
+                                                                <option value="1">Payment method</option>
+                                                                <option value="1">Payment method</option>
+                                                                <option value="1">Payment method</option>
+                                                            </select></td>
+                                                        <td><input type="text" placeholder="From Account"
+                                                                   class="form-control"></td>
+                                                        <td><input type="text" placeholder="To Account"
+                                                                   class="form-control"></td>
+                                                        <td><input type="text"
+                                                                   placeholder="Follow token"
+                                                                   class="form-control"></td>
+                                                        <td colspan="2"><select name="select" class="form-control">
+                                                                <option value="1">Income</option>
+                                                                <option value="2">Outgo</option>
+                                                            </select></td>
+                                                        <td><input type="submit"
+                                                               class="btn btn-block btn-success rounded fa fa-plus">
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="row">
+                        <div class="col-12 ">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    Payment info
+                                </div>
+                                <div class="panel-content">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>Cleared amount</th>
+                                            <th>Total price</th>
+                                            <th>Paying count</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                3,000,000
+                                            </td>
+                                            <td>
+                                                6,000,000
+                                            </td>
+                                            <td>
+                                                4
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 ">
+                            <div class="panel">
+                                <div class="panel-content">
+                                    <ul class="list-unstyled">
+                                        <li class="mb-3"><strong>Description</strong>
+                                            <ul class="list-unstyled">
+                                                <li>
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
+                                                    consectetur dolores error libero nesciunt rem, vel
+                                                    voluptatum. Culpa, laudantium, velit?
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="panel bg-info text-white ">
+                                <div class="panel-content text-center">
+                                    <span>Requested</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="panel bg-warning text-white ">
+                                <div class="panel-content text-center">
+                                    <span>Waiting for transfer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="panel bg-danger text-white ">
+                                <div class="panel-content text-center">
+                                    <span>Rejected</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="panel bg-success text-white ">
+                                <div class="panel-content text-center">
+                                    <span>Transferred</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

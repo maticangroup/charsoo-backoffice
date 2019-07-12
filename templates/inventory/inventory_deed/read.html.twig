@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inventory Deed | Read{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-10">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-5">
+
+                            <h1>welcome section</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores eligendi
+                                est,
+                                exercitationem nihil perspiciatis reprehenderit sit voluptas. Fugiat, placeat,
+                                tenetur!
+                            </p>
+                        </div>
+
+                        <div class="col-7">
+                            <div class="row">
+                                <div class="col-3">
+                                    <span class="label-text col-form-label">From</span>
+                                    <h4>{{ deedModel.inventoryDeedFromInventoryName }} {{ deedModel.inventoryDeedFromShelveName }} {{ deedModel.inventoryDeedFromQueueName }}</h4>
+                                </div>
+                                <div class="col-3">
+                                    <span class="label-text col-form-label">To</span>
+                                    <h4>{{ deedModel.inventoryDeedToInventoryName }} {{ deedModel.inventoryDeedToShelveName }} {{ deedModel.inventoryDeedToQueueName }}</h4>
+                                </div>
+                                <div class="col-3">
+                                    <span class="label-text col-form-label">Deed Name</span>
+                                    <h4>{{ deedModel.inventoryDeedName }}</h4>
+                                </div>
+                                <div class="col-3">
+                                    <span class="label-text col-form-label">Deed Serial</span>
+                                    <h4>{{ deedModel.inventoryDeedSerial }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="panel">
+                <div class="weather--panel text-white bg-darker">
+                    <div class="weather--title">
+                        <i class="fa fa-info"></i>
+                        <span>Confirmation</span>
+                    </div>
+
+                    <div class="weather--info">
+                        <span class="label label-green rounded">{{ deedStatusModel.inventoryDeedStatusName }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <strong>Products To Import</strong>
+                </div>
+                <div class="panel-content">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Guarantee</th>
+                            <th>Color</th>
+                            <th>Supplier</th>
+                            <th>Current Price</th>
+                            <th>Discount Price</th>
+                            <th>Serial / Quantity</th>
+                            <th>Last Pricing Deed</th>
+                            <th>Expiry last pricing deed date</th>
+                            <th>Inventory</th>
+                            <th>Shelve</th>
+                            <th>Queue</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for product in products %}
+                            <tr>
+                                <td>{{ product.productItemName }}</td>
+                                <td>{{ product.productGuaranteeName }}</td>
+                                <td>{{ product.productColorName }}</td>
+                                <td>{{ product.productSupplierName }}</td>
+                                <td>{{ product.productCurrentPrice }}</td>
+                                <td>{{ product.productDiscountPrice }}</td>
+                                <td>{{ product.productSerial }} / {{ product.productQuantity }}</td>
+                                <td>{{ product.productPricingDeedId }}</td>
+                                <td>{{ product.productPricingDeedExpiryDate }}</td>
+                                <td>{{ product.productCurrentInventoryName }}</td>
+                                <td>{{ product.productCurrentShelveName }}</td>
+                                <td>{{ product.productCurrentQueueName }}</td>
+                            </tr>
+                        {% endfor %}
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <strong>Total Price</strong>
+                            </td>
+                            <td>{{ deedModel.inventoryDeedTotalPrice }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

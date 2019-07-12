@@ -1,0 +1,112 @@
+<div class="panel-content">
+    <form class="row" action="" method="post">
+        <div class="col-3">
+            <div class="form-group row">
+                <span class="label-text col-md-12 col-form-label ">Country</span>
+
+                <div class="col-md-12">
+                    <select name="country" class="form-control">
+                            <option value="1">Iran</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-group row">
+                <span class="label-text col-md-12 col-form-label ">Province</span>
+                <div class="col-md-12">
+                    <select name="province" class="form-control">
+                        <option value="1">Tehran</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-group row">
+                <span class="label-text col-md-12 col-form-label ">City</span>
+                <div class="col-md-12">
+                    <select name="city" class="form-control">
+                        <option value="1">Tehran</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-group row">
+                <span class="label-text col-md-12 col-form-label ">Districts</span>
+                <div class="col-md-12">
+                    <select name="district" class="form-control">
+                        <option value="1">2</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-group row">
+                <span class="label-text col-md-12 col-form-label ">Postal Code</span>
+
+                <div class="col-md-12">
+                    <input type="text" name="postal_code"
+                           placeholder="254477788"
+                           class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group row">
+                <span class="label-text col-md-12 col-form-label ">Address</span>
+                <div class="col-md-12">
+                    <input type="text" name="address"
+                           placeholder="Address"
+                           class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-group row">
+                <span class="label-text col-md-12 col-form-label ">Person</span>
+                <div class="col-md-12">
+                    <select name="contact_person" class="form-control">
+                        <option value="" disabled>Name | Family | Mobile</option>
+                        <option value="">Amirhossein | Doulabi | 09122930611</option>
+                        <option value="">Amirhossein | Doulabi | 09122930611</option>
+                        <option value="">Amirhossein | Doulabi | 09122930611</option>
+                        <option value="">Amirhossein | Doulabi | 09122930611</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group row">
+                <span class="label-text col-md-12 col-form-label ">Google Map</span>
+                <div class="col-md-12">
+                    <img src="../../images/matican_images/map.png" alt="" class="rounded">
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-4">
+                    <input type="hidden" name="owner_person"
+                           class="form-control">
+                </div>
+                <div class="col-4">
+                    <button type="submit" class="btn btn-block btn-dark rounded"><i class="fa fa-save"></i></button>
+                </div>
+                <div class="col-4"></div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group row">
+                {% for message in app.flashes('add_address_success') %}
+                    <div class="col-md-12 mt-3 text-green"><span
+                                class="fa fa-info text-green"></span> {{ message }}</div>
+                {% endfor %}
+                {% for message in app.flashes('add_address_failed') %}
+                    <div class="col-md-12 mt-3 text-red"><span
+                                class="fa fa-info text-red"></span> {{ message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </form>
+</div>

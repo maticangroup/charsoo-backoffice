@@ -1,0 +1,164 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pricing Deed | Read{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-10">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-6">
+                            <h1>welcome section</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores eligendi
+                                est,
+                                exercitationem nihil perspiciatis reprehenderit sit voluptas. Fugiat, placeat,
+                                tenetur!
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <ul class="list-unstyled">
+                                        <li class="mb-3"><strong>Deed name</strong>
+                                            <ul class="list-unstyled">
+                                                <li>{{ pricingDeedModel.pricingDeedName }}</li>
+                                            </ul>
+                                        </li>
+                                        <li class="mb-3"><strong>Creator</strong>
+                                            <ul class="list-unstyled">
+                                                <li>{{ pricingDeedModel.pricingDeedCreatePerson }}</li>
+                                            </ul>
+                                        </li>
+                                        <li class="mb-3"><strong>Confirmor</strong>
+                                            <ul class="list-unstyled">
+                                                <li>{{ pricingDeedModel.pricingDeedConfirmPerson }}</li>
+                                            </ul>
+                                        </li>
+                                        <li class="mb-3"><strong>Description</strong>
+                                            <ul class="list-unstyled">
+                                                <li>
+                                                    {{ pricingDeedModel.pricingDeedDescription }}
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-6">
+                                    <ul class="list-unstyled">
+                                        <li class="mb-3"><strong>Expiry date</strong>
+                                            <ul class="list-unstyled">
+                                                <li>{{ pricingDeedModel.pricingDeedDateYear }}
+                                                    /{{ pricingDeedModel.pricingDeedDateMonth }}
+                                                    /{{ pricingDeedModel.pricingDeedDateDay }}</li>
+                                            </ul>
+                                        </li>
+                                        <li class="mb-3"><strong>Create Date</strong>
+                                            <ul class="list-unstyled">
+                                                <li>{{ pricingDeedModel.pricingDeedCreateDate }}</li>
+                                            </ul>
+                                        </li>
+                                        <li class="mb-3"><strong>Confirm Date</strong>
+                                            <ul class="list-unstyled">
+                                                <li>{{ pricingDeedModel.pricingDeedConfirmDate }}</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="col-4"></div>-->
+
+                        <!--<div class="col-4">-->
+                        <!--&lt;!&ndash;<a href="#" class="btn btn-block btn-success rounded">Save</a>&ndash;&gt;-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div class="panel">
+                <div class="weather--panel text-white bg-darker">
+                    <div class="weather--title">
+                        <i class="fa fa-exclamation"></i>
+                        <span>Confirm Status</span>
+                    </div>
+
+                    <div class="weather--info">
+                        <span class="label label-green rounded">Accepted</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="form-group row">
+                        <div class="col-4"></div>
+                        <div class="col-md-4">
+                            <input type="text" placeholder="Search" name="text"
+                                   class="form-control">
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="usersRoleList">
+                            <thead>
+                            <tr>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Guarantee</th>
+                                <th scope="col">Color</th>
+                                <th scope="col">Supplier</th>
+                                <th scope="col">Serial / Quantity</th>
+                                <th scope="col">Old Current price</th>
+                                <th scope="col">Old Discount price</th>
+                                <th scope="col">New Current price</th>
+                                <th scope="col">New Discount price</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for selectedProduct in selectedProducts %}
+                                <tr>
+                                    <td>
+                                        <input type="hidden" name="productId[]"
+                                               value="{{ selectedProduct.productId }}">
+                                        {{ selectedProduct.productItemName }}
+                                    </td>
+                                    <td>{{ selectedProduct.productGuaranteeName }}</td>
+                                    <td>{{ selectedProduct.productColorName }}
+                                        <span class="label rounded"
+                                              style="background-color: {{ selectedProduct.productColorHex }}">  </span>
+                                    </td>
+                                    <td>
+                                        {{ selectedProduct.productSupplierName }}
+                                    </td>
+                                    <td>
+                                        {{ selectedProduct.productSerial }} / {{ selectedProduct.productQuantity }}
+                                    </td>
+                                    <td>
+                                        {{ selectedProduct.productCurrentPrice }}
+                                    </td>
+                                    <td>
+                                        {{ selectedProduct.productDiscountPrice }}
+                                    </td>
+                                    <td>
+                                        {{ selectedProduct.productNewCurrentPrice }}
+                                    </td>
+                                    <td>
+                                        {{ selectedProduct.productNewDiscountPrice }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Records List End -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

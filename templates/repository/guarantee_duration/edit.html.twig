@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Guarantee Duration | Edit{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-10">
+                            <h3>Want to add a new guarantee duration?</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores facilis,
+                                laudantium odit quibusdam quis vel?
+                            </p>
+                        </div>
+                        <div class="col-2">
+                            <form class="row"
+                                  action="{{ path('repository_guarantee_duration_repository_guarantee_duration_edit', {id:guaranteeDurationModel.guaranteeDurationID}) }}"
+                                  method="post">
+                                <div class="col-12">
+                                    <input type="text" placeholder="Guarantee Duration Name"
+                                           value="{{ guaranteeDurationModel.guaranteeDurationName }}"
+                                           name="guaranteeDurationName"
+                                           class="form-control mb-3">
+                                    <button type="submit" class="btn btn-block rounded btn-info fa fa-save"></button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="form-group row">
+                        <div class="col-4"></div>
+                        <div class="col-md-4">
+                            <input type="text" placeholder="Search" name="text"
+                                   class="form-control">
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="usersRoleList">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for guaranteeDuration in guaranteeDurations %}
+                                <tr>
+                                    <td>
+                                        {{ guaranteeDuration.guaranteeDurationID }}
+                                    </td>
+                                    <td>
+                                        {{ guaranteeDuration.guaranteeDurationName }}
+                                    </td>
+                                    <td>
+                                        <span class="label rounded"
+                                              style="background-color: {{ guaranteeDuration.guaranteeDurationStatus.guaranteeDurationStatusColor }}">
+                                            {{ guaranteeDuration.guaranteeDurationStatus.guaranteeDurationStatusName }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('repository_guarantee_duration_repository_guarantee_duration_edit' , {id:guaranteeDuration.guaranteeDurationID}) }}"
+                                           class="fa fa-edit"></a>
+                                        <a href="{{ path('repository_guarantee_duration_repository_guarantee_duration_status' , {guarantee_duration_id:guaranteeDuration.guaranteeDurationID , machine_name:guaranteeDuration.guaranteeDurationStatus.guaranteeDurationStatusMachineName}) }}"
+                                           class="{{ (guaranteeDuration.guaranteeDurationStatus.guaranteeDurationStatusMachineName == 'active') ? 'fa fa-ban text-red' : 'fa fa-play text-green' }}"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Records List End -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

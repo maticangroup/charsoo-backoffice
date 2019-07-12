@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inventory Item Products | Read{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title mr-3">{{ itemModel.itemName }}</h3>
+                </div>
+
+                <div class="panel-content panel-about">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th><i class="fas fa-info"></i>Brand</th>
+                            <td>{{ itemModel.itemBrandName }}</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-barcode"></i>Barcodes</th>
+                            <td>
+                                {% for barcode in itemModel.itemBarcodes %}
+                                    15616556, 1654564654, 456456561
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-code-branch"></i>Categories</th>
+                            <td>
+                                <ul>
+                                    <li>Category</li>
+                                    <li>Category
+                                        <ul>
+                                            <li>Category</li>
+                                            <li>Category
+                                                <ul>
+                                                    <li>Category</li>
+                                                    <li>Category</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-heading"><strong>
+                        Stock
+                    </strong></div>
+                <div class="panel-content">
+                    <div class="form-group row">
+                        <div class="col-4"></div>
+                        <div class="col-md-4">
+                            <input type="text" placeholder="Search" name="text"
+                                   class="form-control">
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="ProvincesList">
+                            <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Guarantee</th>
+                                <th>Color</th>
+                                <th>Supplier</th>
+                                <th>Current Price</th>
+                                <th>Discount Price</th>
+                                <th>Serial / Quantity</th>
+                                <th>Last Pricing Deed</th>
+                                <th>Expiry last pricing deed date</th>
+                                <th>Inventory</th>
+                                <th>Shelve</th>
+                                <th>Queue</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for product in products %}
+                                <tr>
+                                    <td>{{ product.productItemName }}</td>
+                                    <td>{{ product.productGuaranteeName }}</td>
+                                    <td>{{ product.productColorName }} <span class="label rounded"
+                                                                             style="background-color: {{ product.productColorHex }}">  </span>
+                                    </td>
+                                    <td>{{ product.productSupplierName }}</td>
+                                    <td>{{ product.productCurrentPrice }}</td>
+                                    <td>{{ product.productDiscountPrice }}</td>
+                                    <td>{{ product.productSerial }} / {{ product.productQuantity }}</td>
+                                    <td>{{ product.productPricingDeedId }}</td>
+                                    <td>{{ product.productPricingDeedExpiryDate }}</td>
+                                    <td>{{ product.productCurrentInventoryName }}</td>
+                                    <td>{{ product.productCurrentShelveName }}</td>
+                                    <td>{{ product.productCurrentQueueName }}</td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Records List End -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Spec Group | Edit{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    Add new specification
+                </div>
+                <div class="panel-content">
+                    <form class="row"
+                          action="{{ path('repository_spec_group_repository_spec_group_key_edit' , {key_id:specKeyModel.specKeyID , group_id:specKeyModel.specKeySpecGroupID}) }}"
+                          method="post">
+                        <div class="col-4 mb-3">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Specification name</span>
+                                <div class="col-md-12">
+                                    <input type="text" value="{{ specKeyModel.specKeyName }}" class="form-control"
+                                           name="specKeyName"
+                                           placeholder="Specification name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 mb-3">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Default Value</span>
+                                <div class="col-md-12">
+                                    <input type="text" value="{{ specKeyModel.specKeyDefaultValue }}"
+                                           class="form-control"
+                                           name="specKeyDefaultValue"
+                                           placeholder="Default Value">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 mb-3">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Group name</span>
+                                <div class="col-md-12">
+                                    <select name="specKeySpecGroupID" class="form-control">
+                                        {% for specGroup in specGroups %}
+                                            <option value="{{ specGroup.specGroupID }}" {{ (specGroup.specGroupID == specKeyModel.specKeySpecGroupID )?'selected':'' }}>{{ specGroup.specGroupName }}</option>
+                                        {% endfor %}
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 mb-3">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Display order</span>
+                                <div class="col-md-12">
+                                    <input type="number" value="{{ specKeyModel.specKeyDisplayOrder }}"
+                                           class="form-control"
+                                           name="specKeyDisplayOrder"
+                                           placeholder="Display order">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 mb-3">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Is special</span>
+                                <div class="col-md-12">
+                                    <label class="form-check">
+                                        <input type="checkbox" name="specKeyIsSpecial"
+                                               value="1" {{ (specKeyModel.specKeyIsSpecial)?'checked':'' }}
+                                               class="form-check-input">
+                                        <span class="form-check-label">Is Special</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-block rounded btn-info fa fa-save"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {% for specGroup in specGroups %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <span>{{ specGroup.specGroupName }}</span>
+                        <a href="{{ path('repository_spec_group_repository_spec_group_edit' , {id:specGroup.specGroupID}) }}"
+                           class="fa fa-edit"></a>
+                    </div>
+                    <div class="panel-content">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Default value</th>
+                                <th scope="col">Is special</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for specKey in specGroup.specGroupSpecKeys %}
+                                <tr>
+                                    <td>{{ specKey.specKeyName }}</td>
+                                    <td>{{ specKey.specKeyDefaultValue }}</td>
+                                    <td>
+                                        {% if specKey.specKeyIsSpecial %}
+                                            <span class="fa fa-check text-green"></span>
+                                        {% else %}
+                                            <span class="fa fa-times text-red"></span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('repository_spec_group_repository_spec_group_key_edit' , {key_id:specKey.specKeyID , group_id:specGroup.specGroupID }) }}"
+                                           class="fa fa-edit btn-rounded"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+
+    </div>
+{% endblock %}

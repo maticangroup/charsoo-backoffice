@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inventory | List{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-10">
+                            <h3>Want to add a new user?</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aspernatur
+                                culpa doloribus laborum necessitatibus rem temporibus. Beatae ipsa officiis
+                                quam.
+                            </p>
+                        </div>
+                        <div class="col-2">
+                            <a href="{{ path('inventory_inventory_create') }}"
+                               class="btn btn-block btn-success fa fa-plus rounded"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="form-group row">
+                        <div class="col-4"></div>
+                        <div class="col-md-4">
+                            <input type="text" placeholder="Search" name="text"
+                                   class="form-control">
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="usersRoleList">
+                            <thead>
+                            <tr>
+                                <th>Inventory Name</th>
+                                <th>Inventory Address</th>
+                                <th>Inventory Phone</th>
+                                <th>Inventory Keeper</th>
+                                <th>Inventory Keeper Phone</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for inventory in inventories %}
+                                <tr>
+                                    <td>{{ inventory.inventoryName }}</td>
+                                    <td>{{ inventory.inventoryAddress }}</td>
+                                    <td><a href="tel:{{ inventory.inventoryMainPhone }}"
+                                           class="btn-link">{{ inventory.inventoryMainPhone }}</a></td>
+                                    <td>{{ inventory.inventoryKeeperName }}</td>
+                                    <td><a href="tel:{{ inventory.inventoryKeeperPhone }}"
+                                           class="btn-link">{{ inventory.inventoryKeeperPhone }}</a></td>
+                                    <td>
+
+                                        <span class="label rounded"
+                                              style="background-color: {{ inventory.inventoryStatus.inventoryStatusColor }}">
+                                            {{ inventory.inventoryStatus.inventoryStatusName }}
+                                        </span>
+
+                                    </td>
+                                    <td>
+                                        {% if inventory.inventoryMachineName != 'confirmed_orders_products' %}
+                                            <a href="{{ path('inventory_inventory_status' , {inventory_id:inventory.inventoryId , machine_name:inventory.inventoryStatus.inventoryStatusMachineName}) }}"
+                                               class="{{ (inventory.inventoryStatus.inventoryStatusMachineName == 'active')?'fa fa-ban text-red':'fa fa-play text-green' }}"></a>
+
+                                            <a href="{{ path('inventory_inventory_edit' , {id:inventory.inventoryId}) }}"
+                                               class="fa fa-edit"></a>
+                                        {% endif %}
+
+                                        <a href="{{ path('inventory_inventory_read' , {id:inventory.inventoryId}) }}"
+                                           class="fa fa-eye"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Records List End -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

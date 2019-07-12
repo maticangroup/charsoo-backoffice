@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inventory Stock | List{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <h3>Want to add a new user?</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci
+                        aspernatur
+                        culpa doloribus laborum necessitatibus rem temporibus. Beatae ipsa
+                        officiis
+                        quam.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-heading"><strong>
+                        Stock
+                    </strong></div>
+                <div class="panel-content">
+                    <div class="form-group row">
+                        <div class="col-4"></div>
+                        <div class="col-md-4">
+                            <input type="text" placeholder="Search" name="text"
+                                   class="form-control">
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="table10">
+                            <thead>
+                            <tr>
+                                <th>Brand</th>
+                                <th>Item Name</th>
+                                <th>Color</th>
+                                <th>Price</th>
+                                <th>Count</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for itemProduct in itemProducts %}
+                                <tr>
+                                    <td>{{ itemProduct.itemModel.itemBrandName }}</td>
+                                    <td>{{ itemProduct.itemModel.itemName }}</td>
+                                    <td>
+                                        {% for color in itemProduct.itemProductsItemColors %}
+                                            {{ color.itemColorName }} <span class="label rounded"
+                                                                            style="background-color: {{ color.itemColorHex }}">  </span>
+                                        {% endfor %}
+                                    </td>
+                                    <td>{{ itemProduct.itemProductsMinProductPrice }}
+                                        - {{ itemProduct.itemProductsMaxProductPrice }}</td>
+                                    <td>{{ itemProduct.itemProductsProductsCount }}</td>
+                                    <td>
+                                        <a href="{{ path('inventory_stock_read' , {item_id:itemProduct.itemModel.itemID}) }}"
+                                           class="fa fa-eye"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Records List End -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

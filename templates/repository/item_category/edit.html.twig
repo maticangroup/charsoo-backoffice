@@ -1,0 +1,248 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Item Category | Edit{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1>Want to add a new category?</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt eum fuga in
+                                neque
+                                quia. Aperiam at facere itaque odit quasi!
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+
+                <div class="col-4">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            Categories
+                        </div>
+                        <div class="panel-content">
+                            <ul class="mtc-categories">
+                                {% for itemCategory in itemCategories %}
+                                    <li class="shadow list-group-item">
+                                        <div class="category-header">
+                                            {{ itemCategory.itemCategoryName }}
+                                            <div class="list-inline">
+                                                <a href="{{ path('repository_item_category_repository_item_category_edit' , {id:itemCategory.itemCategoryID}) }}"
+                                                   class="fa fa-edit"></a>
+                                            </div>
+                                        </div>
+                                        {% if itemCategory.itemCategoryID == itemCategory.itemCategoryParentId %}
+                                            <ul class=" list-group">
+                                                {% for category in itemCategory %}
+                                                    <li class="shadow list-group-item">
+                                                        <div class="category-header">
+                                                            {{ category.itemCategoryName }}
+                                                            <div class="list-inline">
+                                                                <a href="{{ path('repository_item_category_repository_item_category_edit' , {id:category.itemCategoryID}) }}"
+                                                                   class="fa fa-edit"></a>
+                                                            </div>
+                                                        </div>
+                                                        {% if category.itemCategoryID == category.itemCategoryParentId %}
+                                                            <ul class=" list-group">
+                                                                {% for cat in category %}
+                                                                    <li class="shadow list-group-item">
+                                                                        <div class="category-header">
+                                                                            {{ cat.itemCategoryName }}
+                                                                            <div class="list-inline">
+                                                                                <a href="{{ path('repository_item_category_repository_item_category_edit' , {id:cat.itemCategoryID}) }}"
+                                                                                   class="fa fa-edit"></a>
+                                                                            </div>
+                                                                        </div>
+                                                                        {% if cat.itemCategoryID == cat.itemCategoryParentId %}
+                                                                            <ul class=" list-group">
+                                                                                {% for ca in cat %}
+                                                                                    <li class="shadow list-group-item">
+                                                                                        <div class="category-header">
+                                                                                            {{ ca.itemCategoryName }}
+                                                                                            <div class="list-inline">
+                                                                                                <a href="{{ path('repository_item_category_repository_item_category_edit' , {id:ca.itemCategoryID}) }}"
+                                                                                                   class="fa fa-edit"></a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                {% endfor %}
+                                                                            </ul>
+                                                                        {% endif %}
+                                                                    </li>
+                                                                {% endfor %}
+                                                            </ul>
+                                                        {% endif %}
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-8">
+                    <div class="row">
+                        <form class="col-12"
+                              action="{{ path('repository_item_category_repository_item_category_edit' , {id:itemCategoryModel.itemCategoryID}) }}"
+                              method="post">
+                            <div class="panel">
+                                <div class="panel-heading">Basic Information</div>
+                                <div class="panel-content">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group row">
+                                                <span class="label-text col-md-4 col-form-label text-md-right">Category name</span>
+                                                <div class="col-md-8">
+                                                    <input type="text" value="{{ itemCategoryModel.itemCategoryName }}"
+                                                           name="itemCategoryName" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group row">
+                                                <span class="label-text col-md-4 col-form-label text-md-right">Thumbnail</span>
+                                                <div class="col-md-8">
+                                                    <label class="custom-file">
+                                                        <input type="file"
+                                                               value="{{ itemCategoryModel.itemCategoryImageUrl }}"
+                                                               name="itemCategoryImageUrl" class="custom-file-input">
+                                                        <span class="custom-file-label">Choose File</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group row">
+                                                <span class="label-text col-md-4 col-form-label text-md-right">Is child of</span>
+                                                <div class="col-md-8">
+                                                    <select name="itemCategoryParentId" class="form-control">
+                                                        <option>None</option>
+                                                        {% for itemCategory in itemCategories %}
+                                                            <option value="{{ itemCategory.itemCategoryID }}" {{ (itemCategoryModel.itemCategoryParentId == itemCategory.itemCategoryID)?'selected':'' }}>{{ itemCategory.itemCategoryName }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group row">
+                                                <span class="label-text col-md-4 col-form-label text-md-right">Size</span>
+
+                                                <div class="col-md-8">
+                                                    <select name="itemCategorySizeId" class="form-control">
+                                                        {% for size in sizes %}
+                                                            <option value="{{ size.sizeID }}" {{ (itemCategoryModel.itemCategorySizeId == size.sizeID)?'selected':'' }}>{{ size.sizeName }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-10">
+
+                                            <div class="form-group row">
+                                                <span class="label-text col-md-2 col-form-label text-md-right">Category description</span>
+                                                <div class="col-md-10">
+                                    <textarea name="itemCategoryDescription" class="form-control"
+                                              placeholder="Text input area">{{ itemCategoryModel.itemCategoryDescription }}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-2 d-flex justify-content-center align-items-center">
+                                            <button type="submit"
+                                                    class="btn btn-block btn-info fa fa-save rounded"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <form class="col-12"
+                              action="{{ path('repository_item_category_repository_item_category_include' , {category_id: itemCategoryModel.itemCategoryID}) }}"
+                              method="post">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-6 text-left">Spec Keys</div>
+                                        <div class="col-6 text-right">
+                                            <button type="submit" class="btn btn-info rounded fa fa-save"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-content">
+                                    <div class="row">
+                                        {% for specGroup in specGroups %}
+                                            {% if specGroup.specGroupSpecKeys %}
+                                                <div class="col-12">
+                                                    <div class="panel shadow-lg">
+                                                        <div class="panel-heading">{{ specGroup.specGroupName }}</div>
+                                                        <div class="panel-content">
+                                                            <table class="table">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th scope="col">Name</th>
+                                                                    <th scope="col">Default value</th>
+                                                                    <th scope="col">Is special</th>
+                                                                    <th scope="col">Include</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                {% for specKey in specGroup.specGroupSpecKeys %}
+                                                                    <tr>
+                                                                        <td>{{ specKey.specKeyName }}</td>
+                                                                        <td>{{ specKey.specKeyDefaultValue }}</td>
+                                                                        <td>
+                                                                            {% if specKey.specKeyIsSpecial %}
+                                                                                <span class="fa fa-check text-green"></span>
+                                                                            {% else %}
+                                                                                <span class="fa fa-times text-red"></span>
+                                                                            {% endif %}
+                                                                        </td>
+                                                                        <td>
+                                                                            <label class="form-check">
+                                                                                <input type="checkbox"
+                                                                                        {{ (specKey.specKeyIsChecked)?'checked':'' }}
+                                                                                       name="specKeysIds[]"
+                                                                                       value="{{ specKey.specKeyID }}"
+                                                                                       class="form-check-input">
+                                                                                <span class="form-check-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                    </tr>
+                                                                {% endfor %}
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

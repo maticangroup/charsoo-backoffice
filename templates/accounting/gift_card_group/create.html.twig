@@ -1,0 +1,146 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gift Card Group | Add , List{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-10">
+                            <h1>welcome section</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque eum libero
+                                numquam
+                                obcaecati perspiciatis quas quisquam soluta unde voluptates.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form action="{{ path('accounting_gift_card_group_accounting_gift_card_group_save') }}" method="post">
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-2 ">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">Gift card name</span>
+
+                                    <div class="col-md-12">
+                                        <input type="text" name="text" placeholder="name" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 ">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">Prefix</span>
+
+                                    <div class="col-md-12">
+                                        <input type="text" name="text" placeholder="prefix" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 ">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">Expiry date</span>
+
+                                    <div class="col-md-12">
+                                        <input type="date" name="text" placeholder="" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 ">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">Gift card count</span>
+
+                                    <div class="col-md-12">
+                                        <input type="text" name="text" placeholder="Gift card count"
+                                               class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 ">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">Gift card amount</span>
+
+                                    <div class="col-md-12">
+                                        <input type="text" name="text" placeholder="Gift card amount"
+                                               class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                                <input type="submit" class="btn btn-block btn-dark fa fa-save rounded">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="form-group row">
+                        <div class="col-4"></div>
+                        <div class="col-md-4">
+                            <input type="text" placeholder="Search" name="text"
+                                   class="form-control">
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="usersRoleList">
+                            <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Count</th>
+                                <th scope="col">Left</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Expiry date</th>
+                                <th scope="col">Creator</th>
+                                <th scope="col">Create Date</th>
+                                <th scope="col">Confirmir</th>
+                                <th scope="col">Confirm Date</th>
+                                <th scope="col">Confirm Status</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Gift card series name</td>
+                                <td>150</td>
+                                <td>49</td>
+                                <td>120,000</td>
+                                <td>12-12-12</td>
+                                <td>Person One</td>
+                                <td>1398/12/12</td>
+                                <td>Person One</td>
+                                <td>1398/12/12</td>
+                                <td>
+                                    <span class="label label-danger rounded">Rejected</span>
+                                    <span class="label label-green rounded">Accepted</span>
+                                    <span class="label label-orange rounded">Waiting</span>
+                                </td>
+                                <td>
+                                    <span class="label label-danger rounded">Deactive</span>
+                                    <span class="label label-green rounded">Active</span>
+                                </td>
+                                <td>
+                                    <a href="{{ path('accounting_gift_card_group_accounting_gift_card_group_read') }}" class="fa fa-eye"></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Records List End -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

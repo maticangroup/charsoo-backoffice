@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Customer | Invoice{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    Customer Name
+                </div>
+                <div class="panel-content">
+                    {% include 'crm/customer/tab.html.twig' %}
+                    <!-- Tab Content Start -->
+                    <div class="tab-content">
+                        <!-- Tab Pane Start Invoice -->
+                        <div class="tab-pane fade show active">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="panel">
+                                        <div class="panel-content">
+                                            <div class="form-group row">
+                                                <div class="col-4"></div>
+                                                <div class="col-md-4">
+                                                    <input type="text" placeholder="Search" name="text"
+                                                           class="form-control">
+                                                </div>
+                                                <div class="col-4"></div>
+                                            </div>
+                                            <!-- Records List Start -->
+                                            <div class="records--list">
+                                                <table id="table4">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Global token</th>
+                                                        <th>From Company</th>
+                                                        <th>To Company</th>
+                                                        <th>From Person</th>
+                                                        <th>To Person</th>
+                                                        <th>Total Price</th>
+                                                        <th>Type</th>
+                                                        <th>Status</th>
+                                                        <th>Create date</th>
+                                                        <th>Creator</th>
+                                                        <th>Invoice Group</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>123456789</td>
+                                                        <td>
+                                                            <a href="#">
+                                                                Company
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a href="#">
+                                                                Company
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a href="#">
+                                                                Person
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a href="#">
+                                                                Person
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            123,000,000
+                                                        </td>
+                                                        <td>
+                                                            <span class="label label-green rounded">Income</span>
+                                                            <span class="label label-red rounded ">Outgo</span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="label label-gray rounded">Paid</span>
+                                                            <span class="label label-primary rounded ">Open</span>
+                                                        </td>
+                                                        <td>
+                                                            1397/12/05
+                                                        </td>
+                                                        <td>
+                                                            <a href="#">Organization employee</a>
+                                                        </td>
+                                                        <td>
+                                                            Invoice Group
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- Records List End -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Tab Pane End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -35,10 +35,10 @@
                                 </div>
                                 <div class="col-6">
                                     <span class="label-text col-form-label">Delivery Method Type</span>
-                                    <select name="deliveryMethodTypeId" class="form-control">
+                                    <select name="deliveryMethodTypeMachineName" class="form-control">
                                         {% for deliveryMethodType in deliveryMethodTypes %}
-                                            <option value="{{ deliveryMethodType.deliveryMethodTypeId }}"
-                                                    {{ (deliveryMethodType.deliveryMethodTypeId == deliveryMethodModel.deliveryMethodTypeId) ? 'selected' : '' }}>
+                                            <option value="{{ deliveryMethodType.deliveryMethodTypeMachineName }}"
+                                                    {{ (deliveryMethodType.deliveryMethodTypeMachineName == deliveryMethodModel.deliveryMethodTypeMachineName) ? 'selected' : '' }}>
                                                 {{ deliveryMethodType.deliveryMethodTypeName }}
                                             </option>
                                         {% endfor %}
@@ -57,7 +57,8 @@
                                     <span class="label-text col-form-label">Delivery Method Receive Money</span>
                                     <label class="form-check">
                                         <input type="checkbox" name="deliveryMethodReceiveMoney"
-                                               class="form-check-input">
+                                               class="form-check-input"
+                                               value="true" {{ (deliveryMethodModel.deliveryMethodReceiveMoney == 'true') ? 'checked' : '' }}>
                                         <span class="form-check-label">Can Receive Money?</span>
                                     </label>
                                 </div>
@@ -73,7 +74,7 @@
                                 </div>
                                 <div class="col-4"></div>
                                 <div class="col-4 mt-4">
-                                    <button class="btn btn-dark btn-block rounded fa fa-save"></button>
+                                    <button type="submit" class="btn btn-dark btn-block rounded fa fa-save"></button>
                                 </div>
                                 <div class="col-4"></div>
                             </div>

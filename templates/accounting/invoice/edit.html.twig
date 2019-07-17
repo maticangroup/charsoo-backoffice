@@ -4,348 +4,703 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-12">
-            <div class="panel">
-                <div class="invoice">
-                    <div class="invoice--header">
-                        <div class="invoice--logo">
-                            <img src="../../images/invoice/logo.png" alt="">
+
+        {#if invoice is initialized#}
+        {% if invoiceModel.invoiceStatusMachineName == 'initialized' %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="invoice">
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="invoice--address">
+                                    <div class="panel-heading">
+                                        TO
+                                    </div>
+                                    <h5 class="h5">{{ invoiceModel.invoiceToCompanyName }}</h5>
+                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceToCompanyPhone }}</p>
+                                </div>
+                                <div class="invoice--address">
+                                    <h5 class="h5">{{ invoiceModel.invoiceToPersonFirstName }} {{ invoiceModel.invoiceToPersonLastName }}</h5>
+                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceToPersonPhone }}</p>
+                                </div>
+                            </div>
+                            <div class="col-4"></div>
+                            <div class="col-4 text-right">
+                                <div class="invoice--address">
+                                    <div class="panel-heading">
+                                        FROM
+                                    </div>
+                                    <h5 class="h5">{{ invoiceModel.invoiceFromCompanyName }}</h5>
+                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceFromCompanyPhone }}</p>
+                                </div>
+                                <div class="invoice--address">
+                                    <h5 class="h5">{{ invoiceModel.invoiceFromPersonFirstName }} {{ invoiceModel.invoiceFromPersonLastName }}</h5>
+                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceFromPersonPhone }}</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="invoice--address">
-                            <h5 class="h5">Arad Mobile</h5>
-                            <p>
-                                Arad Mobile Address comes here, Lorem ipsum dolor sit amet.
-                            </p>
+
+                        <div class="invoice--billing">
+                            <div class="invoice--info">
+                                <h5 class="h5"><span>Invoice:</span> {{ invoiceModel.invoiceSerial }}</h5>
+                                <p>Invoice Date: <strong>{{ invoiceModel.invoiceCreateDate }}</strong></p>
+                                <p>Invoice Type: <strong>{{ invoiceModel.invoiceTypeName }}</strong></p>
+                                <p>Invoice Status: <span class="label rounded"
+                                                         style="background-color: {{ invoiceModel.invoiceStatusColor }};">
+                                        {{ invoiceModel.invoiceStatusName }}
+                                    </span></p>
+                            </div>
+                        </div>
+
+
+                        <div class="invoice--order">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Quantity</th>
+                                    <th>Unit Price</th>
+                                    <th>Discount Price</th>
+                                    <th>Total</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for invoiceItem in invoiceItems %}
+                                    <tr>
+                                        <td>{{ invoiceItem.invoiceItemName }}</td>
+                                        <td>{{ invoiceItem.invoiceItemQuantity }}</td>
+                                        <td>{{ invoiceItem.invoiceItemCurrentPrice }}</td>
+                                        <td>{{ invoiceItem.invoiceItemDiscountPrice }}</td>
+                                        <td>{{ invoiceItem.invoiceItemTotalPrice }}</td>
+                                        <td>
+                                            <a href="{{ path('accounting_invoice_remove_invoice_item' , {invoice_id:invoiceModel.invoiceId , invoice_item_id:invoiceItem.invoiceId}) }}"
+                                               class="fa fa-times"></a></td>
+                                    </tr>
+                                {% endfor %}
+
+                                <tr>
+                                    <form action="{{ path('accounting_invoice_add_invoice_item' , {invoice_id:invoiceModel.invoiceId}) }}"
+                                          method="post">
+                                        <td>
+                                            <input type="text" name="invoiceItemName"
+                                                   placeholder=""
+                                                   class="form-control">
+                                        </td>
+                                        <td><input type="text" name="invoiceItemQuantity"
+                                                   placeholder=""
+                                                   class="form-control"></td>
+                                        <td><input type="text" name="invoiceItemCurrentPrice"
+                                                   placeholder=""
+                                                   class="form-control"></td>
+                                        <td><input type="text" name="invoiceItemDiscountPrice"
+                                                   placeholder=""
+                                                   class="form-control"></td>
+                                        <td></td>
+                                        <td>
+                                            <button type="submit"
+                                                    class="btn btn-rounded fa fa-save btn-dark"></button>
+                                        </td>
+                                    </form>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><strong>VAT</strong></td>
+                                    <td>{{ invoiceModel.invoiceVat }}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><strong>Interest</strong></td>
+                                    <td>{{ invoiceModel.invoiceInterest }}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><strong>Total</strong></td>
+                                    <td><strong>{{ invoiceModel.invoiceTotalPrice }}</strong></td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="invoice--footer">
+                                    <ul class="list-unstyled">
+                                        <li class="mb-3"><strong>Description</strong>
+                                            <ul class="list-unstyled">
+                                                <li>{{ invoiceModel.invoiceDescription }}</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            {% if invoiceModel.invoiceItems %}
+                                <div class="col-3 mt-4">
+                                    <div class="panel">
+                                        <div class="weather--panel text-white bg-darker">
+                                            <div class="weather--title">
+                                                <i class="fa fa-exclamation"></i>
+                                                <span>Final Confirm</span>
+                                            </div>
+
+                                            <div class="weather--info">
+                                                <a href="{{ path('accounting_invoice_confirm_invoice' , {invoice_id:invoiceModel.invoiceId}) }}"
+                                                   class="fa fa-check text-green"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {#if invoice is initialized#}
+
+        {#if invoice is accepted#}
+        {% if invoiceModel.invoiceStatusMachineName == 'finalized' %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="invoice">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="invoice--address">
+                                    <h5 class="h5">{{ invoiceModel.invoiceToCompanyName }}</h5>
+                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceToCompanyPhone }}</p>
+                                </div>
+                                <div class="invoice--address">
+                                    <h5 class="h5">{{ invoiceModel.invoiceToPersonFirstName }} {{ invoiceModel.invoiceToPersonLastName }}</h5>
+                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceToPersonPhone }}</p>
+                                </div>
+                            </div>
+                            <div class="col-4"></div>
+                            <div class="col-4 text-right">
+                                <div class="invoice--address">
+                                    <h5 class="h5">{{ invoiceModel.invoiceFromCompanyName }}</h5>
+                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceFromCompanyPhone }}</p>
+                                </div>
+                                <div class="invoice--address">
+                                    <h5 class="h5">{{ invoiceModel.invoiceFromPersonFirstName }} {{ invoiceModel.invoiceFromPersonLastName }}</h5>
+                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceFromPersonPhone }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="invoice--billing">
+                            <div class="invoice--info">
+                                <h5 class="h5"><span>Invoice:</span> {{ invoiceModel.invoiceSerial }}</h5>
+                                <p>Invoice Date: <strong>{{ invoiceModel.invoiceCreateDate }}</strong></p>
+                                <p>Invoice Type: <strong>{{ invoiceModel.invoiceTypeName }}</strong></p>
+                                <p>Invoice Status: <span class="label rounded"
+                                                         style="background-color: {{ invoiceModel.invoiceStatusColor }};">
+                                        {{ invoiceModel.invoiceStatusName }}
+                                    </span></p>
+                            </div>
+                        </div>
+
+                        <div class="invoice--order">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Quantity</th>
+                                    <th>Unit Price</th>
+                                    <th>Discount Price</th>
+                                    <th>Total</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for invoiceItem in invoiceItems %}
+                                    <tr>
+                                        <td>{{ invoiceItem.invoiceItemName }}</td>
+                                        <td>{{ invoiceItem.invoiceItemQuantity }}</td>
+                                        <td>{{ invoiceItem.invoiceItemCurrentPrice }}</td>
+                                        <td>{{ invoiceItem.invoiceItemDiscountPrice }}</td>
+                                        <td>{{ invoiceItem.invoiceItemTotalPrice }}</td>
+                                    </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td colspan="4"><strong>VAT</strong></td>
+                                    <td>{{ invoiceModel.invoiceVat }}</td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><strong>Interest</strong></td>
+                                    <td>{{ invoiceModel.invoiceInterest }}</td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><strong>Total</strong></td>
+                                    <td><strong>{{ invoiceModel.invoiceTotalPrice }}</strong></td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="invoice--footer">
+                                    <ul class="list-unstyled">
+                                        <li class="mb-3"><strong>Description</strong>
+                                            <ul class="list-unstyled">
+                                                <li>{{ invoiceModel.invoiceDescription }}</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            {% if paymentRequestModel.paymentRequestStatus.paymentRequestStatusMachineName == 'requested' %}
+                                <div class="col-3 mt-4">
+                                    <div class="panel">
+                                        <div class="weather--panel text-white bg-darker">
+                                            <div class="weather--title">
+                                                <i class="fa fa-exclamation"></i>
+                                                <span>Back To Invoice</span>
+                                            </div>
+
+                                            <div class="weather--info">
+                                                <a href="{{ path('accounting_invoice_reject_invoice' , {invoice_id:invoiceModel.invoiceId}) }}"
+                                                   class="fa fa-times text-red"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
-                    <div class="invoice--billing">
-                        <div class="invoice--address">
-                            <h5 class="h5">Company/Customer name </h5>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        Payments
+                    </div>
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Date times</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Payment method</th>
+                                        <th scope="col">From Bank</th>
+                                        <th scope="col">To Bank</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Follow token</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for payment in payments %}
+                                        <tr>
+                                            <td>
+                                                <ul class="list-unstyled">
+                                                    <li class="mb-3"><strong>Due Date</strong>
+                                                        <ul class="list-unstyled">
+                                                            <li>{{ payment.paymentDueDate }}</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="mb-3"><strong>Created at</strong>
+                                                        <ul class="list-unstyled">
+                                                            <li>{{ payment.paymentCreateDate }}</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="mb-3"><strong>Paid at</strong>
+                                                        <ul class="list-unstyled">
+                                                            <li>{{ payment.paymentPaidDate }}</li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                {{ payment.paymentAmount }}
+                                            </td>
 
-                            <p><strong>Address : </strong>Company/customer address comes here</p>
-                            <p><strong>Phone : </strong>021-56152561</p>
-                        </div>
-
-                        <div class="invoice--info">
-                            <h5 class="h5"><span>Invoice:</span> #9048392</h5>
-                            <p>Invoice Date: <strong>12-12-12</strong></p>
+                                            <td>
+                                                <span class="label label-info rounded">{{ payment.paymentMethodName }}</span>
+                                            </td>
+                                            <td>
+                                                {{ payment.invoiceFromCompanyName }}
+                                                {{ payment.invoiceFromPersonFirstName }} {{ payment.invoiceFromPersonLastName }}
+                                            </td>
+                                            <td>
+                                                {{ payment.invoiceToCompanyName }}
+                                                {{ payment.invoiceToPersonFirstName }} {{ payment.invoiceToPersonLastName }}
+                                            </td>
+                                            <td>
+                                                {% if payment.paymentType.paymentTypeMachineName == 'income' %}
+                                                    <span class="fa fa-arrow-left text-green"></span>
+                                                {% else %}
+                                                    <span class="fa fa-arrow-right text-red"></span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if payment.paymentStatus.paymentStatusMachineName == 'requested' %}
+                                                    <input type="text" placeholder="Follow Token"
+                                                           class="form-control" name="paymentFollowToken">
+                                                {% else %}
+                                                    {{ payment.paymentFollowToken }}
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <span class="label rounded"
+                                                      style="background-color: {{ payment.paymentStatus.paymentStatusColor }}">
+                                                    {{ payment.paymentStatus.paymentStatusName }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                {% if payment.paymentStatus.paymentStatusMachineName == 'requested' %}
+                                                    <a href="{{ path('accounting_invoice_confirm_payment' , {invoice_id:invoiceModel.invoiceId , payment_id:payment.paymentId}) }}"
+                                                       class="fa fa-check text-green"></a>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% if paymentRequestModel.paymentRequestStatus.paymentRequestStatusMachineName == 'requested' %}
+                                        <tr>
+                                            <form action="{{ path('accounting_invoice_add_payment' ,{invoice_id:invoiceModel.invoiceId , payment_request_id:paymentRequestModel.paymentRequestId}) }}"
+                                                  method="post">
+                                                {#<input type="hidden" name="payment_request_id"#}
+                                                {#value="{{ paymentRequestModel.paymentRequestId }}">#}
+                                                <td>
+                                                    <input type="date" placeholder="Due date"
+                                                           class="form-control" name="paymentDueDate">
+                                                </td>
+                                                <td>
+                                                    <input type="text" placeholder="Amount"
+                                                           class="form-control" name="paymentAmount">
+                                                </td>
+                                                <td>
+                                                    <select name="paymentMethodMachineName" class="form-control">
+                                                        {% for paymentMethod in paymentMethods %}
+                                                            <option value="{{ paymentMethod.paymentMethodMachineName }}">{{ paymentMethod.paymentMethodName }}</option>
+                                                        {% endfor %}
+                                                        {#<option value="cash"></option>#}
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select name="from" class="form-control">
+                                                        <option disabled>Person</option>
+                                                        <option value="person_{{ invoiceModel.invoiceFromPersonId }}">
+                                                            FROM
+                                                            - {{ invoiceModel.invoiceFromPersonFirstName }} {{ invoiceModel.invoiceFromPersonLastName }}</option>
+                                                        <option value="person_{{ invoiceModel.invoiceToPersonId }}">TO
+                                                            - {{ invoiceModel.invoiceToPersonFirstName }} {{ invoiceModel.invoiceToPersonLastName }}</option>
+                                                        <option disabled>Company</option>
+                                                        <option value="company_{{ invoiceModel.invoiceFromCompanyId }}">
+                                                            FROM
+                                                            - {{ invoiceModel.invoiceFromCompanyName }}</option>
+                                                        <option value="company_{{ invoiceModel.invoiceToCompanyId }}">TO
+                                                            - {{ invoiceModel.invoiceToCompanyName }}</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select name="to" class="form-control">
+                                                        <option disabled>Person</option>
+                                                        <option value="person_{{ invoiceModel.invoiceFromPersonId }}">
+                                                            FROM
+                                                            - {{ invoiceModel.invoiceFromPersonFirstName }} {{ invoiceModel.invoiceFromPersonLastName }}</option>
+                                                        <option value="person_{{ invoiceModel.invoiceToPersonId }}">TO
+                                                            - {{ invoiceModel.invoiceToPersonFirstName }} {{ invoiceModel.invoiceToPersonLastName }}</option>
+                                                        <option disabled>Company</option>
+                                                        <option value="company_{{ invoiceModel.invoiceFromCompanyId }}">
+                                                            FROM
+                                                            - {{ invoiceModel.invoiceFromCompanyName }}</option>
+                                                        <option value="company_{{ invoiceModel.invoiceToCompanyId }}">TO
+                                                            - {{ invoiceModel.invoiceToCompanyName }}</option>
+                                                    </select>
+                                                </td>
+                                                <td colspan="2">
+                                                    <select name="paymentType" class="form-control">
+                                                        <option value="income">Income</option>
+                                                        <option value="outgo">Outgo</option>
+                                                    </select>
+                                                </td>
+                                                <td></td>
+                                                <td>
+                                                    <button type="submit"
+                                                            class="btn btn-block btn-success rounded fa fa-plus"></button>
+                                                </td>
+                                            </form>
+                                        </tr>
+                                    {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="invoice--order">
-                        <table class="table">
+                </div>
+            </div>
+            <div class="col-4 ">
+                <div class="panel">
+                    <div class="panel-heading">
+                        Payment info
+                    </div>
+                    <div class="panel-content">
+                        <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>Item</th>
-                                <th>Quantity</th>
-                                <th>Unit Price</th>
-                                <th>Discount Price</th>
-                                <th>Total</th>
+                                <th>Cleared amount</th>
+                                <th>Total price</th>
+                                <th>Paying count</th>
+                                <th>Left Amount</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td>20 Inch Philips LCD Black Color Monitor</td>
-                                <td>12</td>
-                                <td>75.00</td>
-                                <td>60.00</td>
-                                <td>900.00</td>
-                            </tr>
-                            <tr>
-                                <td>20 Inch Philips LCD Black Color Monitor</td>
-                                <td>12</td>
-                                <td>75.00</td>
-                                <td>60.00</td>
-                                <td>900.00</td>
-                            </tr>
-                            <tr>
-                                <td>20 Inch Philips LCD Black Color Monitor</td>
-                                <td>12</td>
-                                <td>75.00</td>
-                                <td>60.00</td>
-                                <td>900.00</td>
-                            </tr>
-                            <tr>
-                                <td>20 Inch Philips LCD Black Color Monitor</td>
-                                <td>12</td>
-                                <td>75.00</td>
-                                <td>60.00</td>
-                                <td>900.00</td>
-                            </tr>
-                            <tr>
-                                <td>20 Inch Philips LCD Black Color Monitor</td>
-                                <td>12</td>
-                                <td>75.00</td>
-                                <td>60.00</td>
-                                <td>900.00</td>
-                            </tr>
-                            <tr>
-                                <td>20 Inch Philips LCD Black Color Monitor</td>
-                                <td>12</td>
-                                <td>75.00</td>
-                                <td>60.00</td>
-                                <td>900.00</td>
-                            </tr>
-                            <tr>
-                                <td>Shipping</td>
-                                <td>1</td>
-                                <td>69.00</td>
-                                <td></td>
-                                <td>69.00</td>
-                            </tr>
-                            <tr>
-                                <td colspan="4"><strong>VAT</strong></td>
-                                <td>50.00</td>
-                            </tr>
-                            <tr>
-                                <td colspan="4"><strong>Interest</strong></td>
-                                <td>50.00</td>
-                            </tr>
-                            <tr>
-                                <td colspan="4"><strong>Total</strong></td>
-                                <td><strong>1800.00</strong></td>
+                                <td>
+                                    {{ paymentRequestModel.paymentRequestClearedAmount }}
+                                </td>
+                                <td>
+                                    {{ paymentRequestModel.paymentRequestTotalPrice }}
+                                </td>
+                                <td>
+                                    {{ paymentRequestModel.paymentRequestPayingCount }}
+                                </td>
+                                <td>{{ paymentRequestModel.paymentRequestTotalPrice - paymentRequestModel.paymentRequestClearedAmount }}</td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="invoice--footer">
-                                <ul class="list-unstyled">
-                                    <li class="mb-3"><strong>Description</strong>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
-                                                consectetur dolores error libero nesciunt rem, vel
-                                                voluptatum. Culpa, laudantium, velit?
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="invoice--footer">
-                                <ul class="list-unstyled">
-                                    <li class="mb-3"><strong>Use Coupon</strong>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                cpn_26456AD5485
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-
                 </div>
             </div>
-        </div>
-        <div class="col-12">
-            <div class="row">
-                <div class="col-9">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="panel">
-                                <div class="panel-heading">
-                                    Payments
-                                </div>
-                                <div class="panel-content">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <form action="{{ path('accounting_invoice_accounting_invoice_update') }}">
-                                                <table class="table table-striped">
-                                                    <thead>
-                                                    <tr>
-                                                        <th scope="col">Date times</th>
-                                                        <th scope="col">Amount</th>
-                                                        <th scope="col">Payment method</th>
-                                                        <th scope="col">From Bank</th>
-                                                        <th scope="col">To Bank</th>
-                                                        <th scope="col">Follow token</th>
-                                                        <th scope="col">Type</th>
-                                                        <th scope="col">Status</th>
-                                                        <th scope="col">Action</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <ul class="list-unstyled">
-                                                                <li class="mb-3"><strong>Due Date</strong>
-                                                                    <ul class="list-unstyled">
-                                                                        <li>1396/05/04 12:32</li>
-                                                                    </ul>
-                                                                </li>
-                                                                <li class="mb-3"><strong>Created at</strong>
-                                                                    <ul class="list-unstyled">
-                                                                        <li>1396/05/04</li>
-                                                                    </ul>
-                                                                </li>
-                                                                <li class="mb-3"><strong>Paid at</strong>
-                                                                    <ul class="list-unstyled">
-                                                                        <li>1396/05/04 12:32</li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                        <td>
-                                                            1,000,000
-                                                        </td>
-
-                                                        <td>
-                                                            <span class="label label-info rounded">Cash</span>
-                                                            <span class="label label-info rounded">Card to Card</span>
-                                                            <span class="label label-info rounded">Cheque</span>
-                                                            <span class="label label-info rounded">Account balance</span>
-                                                        </td>
-                                                        <td>
-                                                            Pasargad
-                                                        </td>
-                                                        <td>
-                                                            Pasargad
-                                                        </td>
-                                                        <td>
-                                                            1223654799998
-                                                        </td>
-
-                                                        <td>
-                                                            <span class="fa fa-arrow-left text-green"></span>
-                                                            <span class="fa fa-arrow-right text-red"></span>
-                                                        </td>
-                                                        <td>
-                                                            <span class="label label-info rounded">Requested</span>
-                                                            <span class="label label-danger rounded">Rejected</span>
-                                                            <span class="label label-green rounded">Transferred</span>
-                                                        </td>
-                                                        <td>
-                                                            <a href="" class="fa fa-check text-green"></a>
-                                                            <a href="" class="fa fa-ban text-red"></a>
-                                                            <a href="" class="fa fa-times"></a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="date" placeholder="Due date"
-                                                                   class="form-control"></td>
-                                                        <td><input type="text" placeholder="Amount"
-                                                                   class="form-control"></td>
-                                                        <td><select name="select" class="form-control">
-                                                                <option value="1">Payment method</option>
-                                                                <option value="1">Payment method</option>
-                                                                <option value="1">Payment method</option>
-                                                                <option value="1">Payment method</option>
-                                                            </select></td>
-                                                        <td><input type="text" placeholder="From Account"
-                                                                   class="form-control"></td>
-                                                        <td><input type="text" placeholder="To Account"
-                                                                   class="form-control"></td>
-                                                        <td><input type="text"
-                                                                   placeholder="Follow token"
-                                                                   class="form-control"></td>
-                                                        <td colspan="2"><select name="select" class="form-control">
-                                                                <option value="1">Income</option>
-                                                                <option value="2">Outgo</option>
-                                                            </select></td>
-                                                        <td><input type="submit"
-                                                               class="btn btn-block btn-success rounded fa fa-plus">
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <div class="col-4">
+                <div class="panel bg-info text-white ">
+                    <div class="panel-content text-center">
+                        <span>Requested</span>
                     </div>
                 </div>
+            </div>
+        {% endif %}
+        {#if invoice is accepted#}
 
-                <div class="col-3">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="panel">
-                                <div class="panel-heading">
-                                    Payment info
+        {% if invoiceModel.invoiceStatusMachineName == 'paid' %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="invoice">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="invoice--address">
+                                    <h5 class="h5">{{ invoiceModel.invoiceToCompanyName }}</h5>
+                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceToCompanyPhone }}</p>
                                 </div>
-                                <div class="panel-content">
-                                    <table class="table table-striped">
-                                        <thead>
-                                        <tr>
-                                            <th>Cleared amount</th>
-                                            <th>Total price</th>
-                                            <th>Paying count</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                3,000,000
-                                            </td>
-                                            <td>
-                                                6,000,000
-                                            </td>
-                                            <td>
-                                                4
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="invoice--address">
+                                    <h5 class="h5">{{ invoiceModel.invoiceToPersonFirstName }} {{ invoiceModel.invoiceToPersonLastName }}</h5>
+                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceToPersonPhone }}</p>
+                                </div>
+                            </div>
+                            <div class="col-4"></div>
+                            <div class="col-4 text-right">
+                                <div class="invoice--address">
+                                    <h5 class="h5">{{ invoiceModel.invoiceFromCompanyName }}</h5>
+                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceFromCompanyPhone }}</p>
+                                </div>
+                                <div class="invoice--address">
+                                    <h5 class="h5">{{ invoiceModel.invoiceFromPersonFirstName }} {{ invoiceModel.invoiceFromPersonLastName }}</h5>
+                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceFromPersonPhone }}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 ">
-                            <div class="panel">
-                                <div class="panel-content">
+
+
+                        <div class="invoice--billing">
+                            <div class="invoice--info">
+                                <h5 class="h5"><span>Invoice:</span> {{ invoiceModel.invoiceSerial }}</h5>
+                                <p>Invoice Date: <strong>{{ invoiceModel.invoiceCreateDate }}</strong></p>
+                                <p>Invoice Type: <strong>{{ invoiceModel.invoiceTypeName }}</strong></p>
+                                <p>Invoice Status: <span class="label rounded"
+                                                         style="background-color: {{ invoiceModel.invoiceStatusColor }};">
+                                        {{ invoiceModel.invoiceStatusName }}
+                                    </span></p>
+                            </div>
+                        </div>
+
+                        <div class="invoice--order">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Quantity</th>
+                                    <th>Unit Price</th>
+                                    <th>Discount Price</th>
+                                    <th>Total</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for invoiceItem in invoiceItems %}
+                                    <tr>
+                                        <td>{{ invoiceItem.invoiceItemName }}</td>
+                                        <td>{{ invoiceItem.invoiceItemQuantity }}</td>
+                                        <td>{{ invoiceItem.invoiceItemCurrentPrice }}</td>
+                                        <td>{{ invoiceItem.invoiceItemDiscountPrice }}</td>
+                                        <td>{{ invoiceItem.invoiceItemTotalPrice }}</td>
+                                    </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td colspan="4"><strong>VAT</strong></td>
+                                    <td>{{ invoiceModel.invoiceVat }}</td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><strong>Interest</strong></td>
+                                    <td>{{ invoiceModel.invoiceInterest }}</td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><strong>Total</strong></td>
+                                    <td><strong>{{ invoiceModel.invoiceTotalPrice }}</strong></td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="invoice--footer">
                                     <ul class="list-unstyled">
                                         <li class="mb-3"><strong>Description</strong>
                                             <ul class="list-unstyled">
-                                                <li>
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
-                                                    consectetur dolores error libero nesciunt rem, vel
-                                                    voluptatum. Culpa, laudantium, velit?
-                                                </li>
+                                                <li>{{ invoiceModel.invoiceDescription }}</li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="panel bg-info text-white ">
-                                <div class="panel-content text-center">
-                                    <span>Requested</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="panel bg-warning text-white ">
-                                <div class="panel-content text-center">
-                                    <span>Waiting for transfer</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="panel bg-danger text-white ">
-                                <div class="panel-content text-center">
-                                    <span>Rejected</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="panel bg-success text-white ">
-                                <div class="panel-content text-center">
-                                    <span>Transferred</span>
-                                </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        Payments
+                    </div>
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Date times</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Payment method</th>
+                                        <th scope="col">From Bank</th>
+                                        <th scope="col">To Bank</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Follow token</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for payment in payments %}
+                                        <tr>
+                                            <td>
+                                                <ul class="list-unstyled">
+                                                    <li class="mb-3"><strong>Due Date</strong>
+                                                        <ul class="list-unstyled">
+                                                            <li>{{ payment.paymentDueDate }}</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="mb-3"><strong>Created at</strong>
+                                                        <ul class="list-unstyled">
+                                                            <li>{{ payment.paymentCreateDate }}</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="mb-3"><strong>Paid at</strong>
+                                                        <ul class="list-unstyled">
+                                                            <li>{{ payment.paymentPaidDate }}</li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                {{ payment.paymentAmount }}
+                                            </td>
+
+                                            <td>
+                                                <span class="label label-info rounded">{{ payment.paymentMethodName }}</span>
+                                            </td>
+                                            <td>
+                                                {{ payment.invoiceFromCompanyName }}
+                                                {{ payment.invoiceFromPersonFirstName }} {{ payment.invoiceFromPersonLastName }}
+                                            </td>
+                                            <td>
+                                                {{ payment.invoiceToCompanyName }}
+                                                {{ payment.invoiceToPersonFirstName }} {{ payment.invoiceToPersonLastName }}
+                                            </td>
+                                            <td>
+                                                {% if payment.paymentType.paymentTypeMachineName == 'income' %}
+                                                    <span class="fa fa-arrow-left text-green"></span>
+                                                {% else %}
+                                                    <span class="fa fa-arrow-right text-red"></span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {{ payment.paymentFollowToken }}
+                                            </td>
+                                            <td>
+                                                <span class="label rounded"
+                                                      style="background-color: {{ payment.paymentStatus.paymentStatusColor }}">
+                                                    {{ payment.paymentStatus.paymentStatusName }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="col-4 ">
+                <div class="panel">
+                    <div class="panel-heading">
+                        Payment info
+                    </div>
+                    <div class="panel-content">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Cleared amount</th>
+                                <th>Total price</th>
+                                <th>Paying count</th>
+                                <th>Left Amount</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    {{ paymentRequestModel.paymentRequestClearedAmount }}
+                                </td>
+                                <td>
+                                    {{ paymentRequestModel.paymentRequestTotalPrice }}
+                                </td>
+                                <td>
+                                    {{ paymentRequestModel.paymentRequestPayingCount }}
+                                </td>
+                                <td>{{ paymentRequestModel.paymentRequestTotalPrice - paymentRequestModel.paymentRequestClearedAmount }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="panel bg-success text-white ">
+                    <div class="panel-content text-center">
+                        <span>Transferred</span>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
 
-        </div>
     </div>
 {% endblock %}

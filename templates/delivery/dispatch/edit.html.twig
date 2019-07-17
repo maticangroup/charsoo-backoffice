@@ -4,206 +4,424 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-12">
-            <div class="panel">
-                <div class="invoice">
-                    <div class="invoice--header">
-                        <div class="invoice--logo">
-                            <img src="../../images/invoice/logo.png" alt="">
+        {% if dispatchModel.dispatchOrder %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="invoice">
+                        <div class="invoice--header">
+                            <div class="invoice--logo">
+                                <img src="../../images/invoice/logo.png" alt="">
+                            </div>
+
+                            <div class="invoice--address">
+                                <h5 class="h5">Arad Mobile</h5>
+                                <p>
+                                    Arad Mobile Address comes here, Lorem ipsum dolor sit amet.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="invoice--billing">
+                            <div class="invoice--address">
+                                <h5 class="h5">{{ dispatchModel.dispatchOrder.orderOwnerName }}</h5>
+
+                                <p><strong>Serial : </strong>{{ dispatchModel.dispatchOrder.orderSerial }}</p>
+                                <p><strong>Order Name : </strong>{{ dispatchModel.dispatchOrder.orderName }}</p>
+                                <p><strong>Phone : </strong>{{ dispatchModel.dispatchOrder.orderOwnerPhone }}</p>
+                            </div>
+                            <div class="invoice--info">
+                                <h5 class="h5">
+                                    <span>Invoice:</span> {{ dispatchModel.dispatchOrder.orderInvoiceSerial }}</h5>
+                                <p>Invoice Date:
+                                    <strong>{{ dispatchModel.dispatchOrder.orderInvoiceCreateDate }}</strong></p>
+                            </div>
                         </div>
 
-                        <div class="invoice--address">
-                            <h5 class="h5">Arad Mobile</h5>
-                            <p>
-                                Arad Mobile Address comes here, Lorem ipsum dolor sit amet.
-                            </p>
+                        <div class="invoice--order">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Guarantee</th>
+                                    <th scope="col">Color</th>
+                                    <th scope="col">Supplier</th>
+                                    <th scope="col">Serial / Quantity</th>
+                                    <th scope="col">Current price</th>
+                                    <th scope="col">Discount price</th>
+                                    <th scope="col">Total Price</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% if dispatchModel.dispatchOrder.orderProducts %}
+                                    {% for product in dispatchModel.dispatchOrder.orderProducts %}
+                                        <tr>
+                                            <td>{{ product.productItemName }}</td>
+                                            <td>{{ product.productGuaranteeName }}</td>
+                                            <td>
+                                                {{ product.productColorName }}
+                                                <span class="label rounded"
+                                                      style="background-color: {{ product.productColorHex }};">  </span>
+                                            </td>
+                                            <td>{{ product.productSupplierName }}</td>
+                                            <td>{{ product.productSerial }}
+                                                / {{ product.productQuantity }}</td>
+                                            <td>{{ product.productCurrentPrice }}</td>
+                                            <td>{{ product.productDiscountPrice }}</td>
+                                            <td>{{ product.productTotalPrice }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
+                                <tr>
+                                    <td colspan="7"><strong>VAT</strong></td>
+                                    <td>{{ dispatchModel.dispatchOrder.orderVatPrice }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7"><strong>Total</strong></td>
+                                    <td><strong>{{ dispatchModel.dispatchOrder.orderTotalPrice }}</strong></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
+                        <div class="invoice--footer">
+                            <ul class="list-unstyled">
+                                <li class="mb-3"><strong>Description</strong>
+                                    <ul class="list-unstyled">
+                                        <li>{{ dispatchModel.dispatchOrder.orderDescription }}</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
                     </div>
-                    <div class="invoice--billing">
-                        <div class="invoice--address">
-                            <h5 class="h5">Company/Customer</h5>
+                </div>
+            </div>
+        {% endif %}
 
-                            <p><strong>Address : </strong>Company/customer address comes here</p>
-                            <p><strong>Phone : </strong>021-1645612</p>
-                        </div>
-                        <div class="invoice--info">
-                            <h5 class="h5"><span>Invoice:</span> #9048392</h5>
-                            <p>Invoice Date: <strong>12-12-12</strong></p>
-                        </div>
+        {% if dispatchModel.dispatchStatus.dispatchStatusMachineName != 'waiting_for_delivery_person' %}
+            <div class="col-3">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <strong>Select Delivery Method</strong>
                     </div>
+                    <div class="panel-content">
+                        <form class="row"
+                              action="{{ path('delivery_dispatch_add_delivery_method' , { dispatch_id:dispatchModel.dispatchId }) }}"
+                              method="post">
+                            <div class="col-12">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <span class="label-text col-form-label">Delivery Method Size</span>
+                                        <select name="deliveryMethodId" class="form-control">
+                                            {% for deliveryMethod in deliveryMethods %}
+                                                <option value="{{ deliveryMethod.deliveryMethodId }}" {{ (deliveryMethod.deliveryMethodId == dispatchModel.dispatchDeliveryMethodId) ? 'selected' : '' }}>
+                                                    {{ deliveryMethod.deliveryMethodName }}
+                                                    | {{ deliveryMethod.deliveryMethodCost }}
+                                                    | {{ deliveryMethod.deliveryMethodTypeName }}
+                                                </option>
+                                            {% endfor %}
 
-                    <div class="invoice--order">
-                        <table class="table">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <button type="submit"
+                                            class="btn btn-block rounded btn-dark fa fa-save"></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-4 text-left">
+                                <strong>Dispatch Owner Addresses</strong>
+                            </div>
+                            <div class="col-4"></div>
+                            <div class="col-4 text-right">
+                                <strong>{{ dispatchModel.dispatchDeliveryCost }}</strong>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="panel-content">
+                        <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>Item</th>
-                                <th>Quantity</th>
-                                <th>Unit Price</th>
-                                <th>Total</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Postal Code</th>
+                                <th scope="col">Contact Person</th>
+                                <th scope="col">Contact Person Mobile</th>
+                                <th scope="col">Add Address</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>20 Inch Philips LCD Black Color Monitor</td>
-                                <td>12</td>
-                                <td>75.00</td>
-                                <td>900.00</td>
-                            </tr>
-                            <tr>
-                                <td>20 Inch Philips LCD Black Color Monitor</td>
-                                <td>12</td>
-                                <td>75.00</td>
-                                <td>900.00</td>
-                            </tr>
-                            <tr>
-                                <td>20 Inch Philips LCD Black Color Monitor</td>
-                                <td>12</td>
-                                <td>75.00</td>
-                                <td>900.00</td>
-                            </tr>
-                            <tr>
-                                <td>20 Inch Philips LCD Black Color Monitor</td>
-                                <td>12</td>
-                                <td>75.00</td>
-                                <td>900.00</td>
-                            </tr>
-                            <tr>
-                                <td>20 Inch Philips LCD Black Color Monitor</td>
-                                <td>12</td>
-                                <td>75.00</td>
-                                <td>900.00</td>
-                            </tr>
-                            <tr>
-                                <td>20 Inch Philips LCD Black Color Monitor</td>
-                                <td>12</td>
-                                <td>75.00</td>
-                                <td>900.00</td>
-                            </tr>
-                            <tr>
-                                <td>Shipping</td>
-                                <td>1</td>
-                                <td>69.00</td>
-                                <td>69.00</td>
-                            </tr>
-                            <tr>
-                                <td colspan="3"><strong>VAT</strong></td>
-                                <td>50.00</td>
-                            </tr>
-                            <tr>
-                                <td colspan="3"><strong>Total</strong></td>
-                                <td><strong>1800.00</strong></td>
-                            </tr>
+                            {% for ownerLocation in ownerLocations %}
+                                <tr {{ (ownerLocation.locationId == dispatchModel.dispatchToLocationId) ? 'bg-success' : '' }}>
+                                    <td>{{ ownerLocation.address }}</td>
+                                    <td>{{ ownerLocation.postalCode }}</td>
+                                    <td>{{ ownerLocation.locationContactPersonLastName }}</td>
+                                    <td>{{ ownerLocation.locationContactPersonMobile }}</td>
+                                    <td>
+                                        {% if ownerLocation.locationId != dispatchModel.dispatchToLocationId %}
+                                            <a href="{{ path('delivery_dispatch_add_location_to_dispatch' , {dispatch_id:dispatchModel.dispatchId , location_id:ownerLocation.locationId }) }}"
+                                               class="fa fa-plus"></a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
-                    <div class="invoice--footer">
-                        <ul class="list-unstyled">
-                            <li class="mb-3"><strong>Description</strong>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
-                                        consectetur dolores error libero nesciunt rem, vel
-                                        voluptatum. Culpa, laudantium, velit?
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+                </div>
+            </div>
 
-                </div>
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="panel">
-                <div class="panel-heading">
-                    <strong>Dispatch information</strong>
-                </div>
-                <div class="panel-content">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Dispatch Token</th>
-                            <th>Dispatched Date</th>
-                            <th>Delivery Person</th>
-                            <th>Dispatch Price</th>
-                            <th>Delivery Cost</th>
-                            <th>Delivery Due Date</th>
-                            <th>Delivery Method</th>
-                            <th>Delivery Queue</th>
-                            <th>Size</th>
-                            <th>Owner</th>
-                            <th>Dispatch Status</th>
-                            <th>Dispatch Price Status</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>
-                                #265615
-                            </td>
-                            <td>
-                                1398/12/12
-                            </td>
-                            <td>
-                                Delivery Person
-                            </td>
-                            <td>1,200,000</td>
-                            <td>10,000</td>
-                            <td>1398/12/14</td>
-                            <td>Delivery Method</td>
-                            <td>Delivery Queue</td>
-                            <td>Small</td>
-                            <td>Username</td>
-                            <td>
-                                <div class="form-group">
-                                    <select name="select" class="form-control">
-                                        <option value="1">Status 1</option>
-                                        <option value="2">Status 2</option>
-                                        <option value="3">Status 3</option>
-                                    </select>
+            {% if availableQueues %}
+                <form action="{{ path('delivery_dispatch_add_queue' , {dispatch_id:dispatchModel.dispatchId}) }}"
+                      class="col-12" method="post">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <strong>Available Days</strong>
+                        </div>
+                        <div class="panel-content">
+                            <div class="row">
+                                {% for day in availableQueues %}
+                                    <div class="col-6">
+                                        <div class="panel shadow">
+                                            <div class="panel-heading">
+                                                <strong>{{ day.weekDayName }} | {{ day.weekDayDate }}</strong></div>
+                                            <input type="hidden" name="queueDueDate" value="{{ day.weekDayDate }}">
+                                            <div class="panel-content">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">From time</th>
+                                                        <th scope="col">To time</th>
+                                                        <th scope="col">Capacity</th>
+                                                        <th scope="col">Dispatches</th>
+                                                        <th scope="col">Action</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    {% for queue in day.weekDayQueues %}
+                                                        <tr>
+                                                            <td>{{ queue.queueFrom }}</td>
+                                                            <td>{{ queue.queueTo }}</td>
+                                                            <td>{{ queue.queueCapacity }}</td>
+                                                            <td>{{ queue.dispatchesCount }}</td>
+                                                            <td>
+                                                                <label class="form-radio">
+                                                                    <input type="radio" name="queueId"
+                                                                           value="{{ queue.queueId }}" {{ (dispatchModel.dispatchDeliveryQueueId == queue.queueId) ? 'checked' : '' }}
+                                                                           class="form-radio-input">
+                                                                    <span class="form-radio-label"></span>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-4"></div>
+                                        <div class="col-4 mt-5">
+                                            <button type="submit"
+                                                    class="fa fa-save btn btn-dark btn-block rounded"></button>
+                                        </div>
+                                        <div class="col-4"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4"></div>
+                                        <div class="col-4 mt-5">
+                                            <div class="panel">
+                                                <div class="weather--panel text-white bg-darker">
+                                                    <div class="weather--title">
+                                                        <i class="fa fa-exclamation"></i>
+                                                        <span>Confirm Queue</span>
+                                                    </div>
+                                                    <div class="weather--info">
+                                                        <a href="{{ path('delivery_dispatch_confirm_queue' , {dispatch_id:dispatchModel.dispatchId }) }}"
+                                                           class="fa fa-check text-green"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4"></div>
+                                    </div>
                                 </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    <select name="select" class="form-control">
-                                        <option value="1">Price 1</option>
-                                        <option value="2">Price 2</option>
-                                        <option value="3">Price 3</option>
-                                    </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            {% endif %}
+        {% endif %}
+
+        {% if dispatchModel.dispatchStatus.dispatchStatusMachineName == 'waiting_for_delivery_person' %}
+            <div class="col-2">
+                <a href="{{ path('delivery_dispatch_rethink_confirm_queue', {dispatch_id:dispatchModel.dispatchId}) }}"
+                   class="btn btn-block rounded" style="background-color: white"> Back To Selection </a>
+            </div>
+            <div class="col-2">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <strong>Delivery Method Name</strong>
+                    </div>
+                    <div class="panel-content">
+                        <div class="col-12">
+                            <div class="form-group row">
+                                <div class="col-md-12 text-center">
+                                    <h4>{{ dispatchModel.dispatchDeliveryMethodName }}</h4>
                                 </div>
-                            </td>
-                            <td>
-                                <a href="#" class="btn rounded btn-block btn-info fa fa-save"></a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-2">
-            <div class="panel">
-                <div class="panel-heading">
-                    <strong>Total Price</strong>
-                </div>
-                <div class="panel-content">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Total Price</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>
-                                1,210,000
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+            <div class="col-3">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <strong>Queue</strong>
+                    </div>
+                    <div class="panel-content">
+                        <div class="col-12">
+                            <div class="form-group row">
+                                <div class="col-md-12 text-center">
+                                    <h4>{{ dispatchModel.dispatchDeliveryQueueName }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="col-5">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <strong>Address</strong>
+                    </div>
+                    <div class="panel-content">
+                        <div class="col-12">
+                            <div class="form-group row">
+                                <div class="col-md-12 text-center">
+                                    <h4>{{ dispatchModel.dispatchAddress }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <strong>
+                            Delivery Persons
+                        </strong>
+                    </div>
+                    <div class="panel-content">
+                        <div class="form-group row">
+                            <div class="col-4"></div>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Search" name="text"
+                                       class="form-control">
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                        <!-- Records List Start -->
+                        <div class="records--list">
+                            <table id="table10">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Mobile</th>
+                                    <th>Dispatch Count</th>
+                                    <th>Add Delivery Person</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {#{{ dump(dispatchModel) }}#}
+                                {% for deliveryPerson in deliveryPersons %}
+                                    <tr>
+                                        <td>{{ deliveryPerson.deliveryPersonId }}</td>
+                                        <td>{{ deliveryPerson.deliveryPersonFirstName }} {{ deliveryPerson.deliveryPersonLastName }}</td>
+                                        <td>{{ deliveryPerson.deliveryPersonMobile }}</td>
+                                        <td>{{ deliveryPerson.deliveryPersonDispatchCount }}</td>
+                                        <td>
+                                            {% if dispatchModel.dispatchDeliveryPersonId != deliveryPerson.deliveryPersonId %}
+                                                <a href="{{ path('delivery_dispatch_add_delivery_person_to_dispatch' , {dispatch_id:dispatchModel.dispatchId , delivery_person_id:deliveryPerson.deliveryPersonId}) }}"
+                                                   class="fa fa-plus"></a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Records List End -->
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+
+        {#<div class="col-12">#}
+            {#<div class="panel">#}
+                {#<div class="panel-heading">#}
+                    {#<strong>Dispatch information</strong>#}
+                {#</div>#}
+                {#<div class="panel-content">#}
+                    {#<table class="table table-striped">#}
+                        {#<thead>#}
+                        {#<tr>#}
+                            {#<th>Dispatch Serial</th>#}
+                            {#<th>Dispatched Date</th>#}
+                            {#<th>Delivery Person</th>#}
+                            {#<th>Dispatch Price</th>#}
+                            {#<th>Delivery Cost</th>#}
+                            {#<th>Delivery Due Date</th>#}
+                            {#<th>Delivery Method</th>#}
+                            {#<th>Delivery Queue</th>#}
+                            {#<th>Size</th>#}
+                            {#<th>Owner</th>#}
+                            {#<th>Delivery Status</th>#}
+                            {#<th>Price Status</th>#}
+                        {#</tr>#}
+                        {#</thead>#}
+                        {#<tbody>#}
+                        {#<tr>#}
+                            {#<td>{{ dispatchModel.dispatchSerial }}</td>#}
+                            {#<td>{{ dispatchModel.dispatchCreateDate }}</td>#}
+                            {#<td>{{ dispatchModel.dispatchDeliveryPersonName }}</td>#}
+                            {#<td>{{ dispatchModel.dispatchTotalPrice }}</td>#}
+                            {#<td>{{ dispatchModel.dispatchDeliveryCost }}</td>#}
+                            {#<td>deadline</td>#}
+                            {#<td>{{ dispatchModel.dispatchDeliveryMethodName }}</td>#}
+                            {#<td>{{ dispatchModel.dispatchDeliveryQueueName }}</td>#}
+                            {#<td>Small</td>#}
+                            {#<td>owner name</td>#}
+                            {#<td>#}
+                                {#<span class="label rounded"#}
+                                      {#style="background-color: {{ dispatchModel.dispatchDeliveryStatus.dispatchDeliveryStatusColor }}">{{ dispatchModel.dispatchDeliveryStatus.dispatchDeliveryStatusName }}</span>#}
+                            {#</td>#}
+                            {#<td>#}
+                                {#<span class="label rounded"#}
+                                      {#style="background-color: {{ dispatchModel.dispatchPriceStatus.dispatchPriceColor }}">{{ dispatchModel.dispatchPriceStatus.dispatchPriceName }}</span>#}
+                            {#</td>#}
+                        {#</tr>#}
+                        {#</tbody>#}
+                    {#</table>#}
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
+
+
     </div>
 {% endblock %}

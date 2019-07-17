@@ -12,7 +12,7 @@ class GiftCardGroupController extends AbstractController
 {
 
     /**
-     * @Route("/create", name="_accounting_gift_card_group_create")
+     * @Route("/create", name="_create")
      */
     public function create()
     {
@@ -22,17 +22,7 @@ class GiftCardGroupController extends AbstractController
     }
 
     /**
-     * @Route("/save", name="_accounting_gift_card_group_save")
-     */
-    public function save()
-    {
-        return $this->render('accounting/gift_card_group/create.html.twig', [
-            'controller_name' => 'GiftCardGroupController',
-        ]);
-    }
-
-    /**
-     * @Route("/read", name="_accounting_gift_card_group_read")
+     * @Route("/read", name="_read")
      */
     public function read()
     {
@@ -42,19 +32,9 @@ class GiftCardGroupController extends AbstractController
     }
 
     /**
-     * @Route("/edit", name="_accounting_gift_card_group_edit")
+     * @Route("/edit", name="_edit")
      */
     public function edit()
-    {
-        return $this->render('accounting/gift_card_group/edit.html.twig', [
-            'controller_name' => 'GiftCardGroupController',
-        ]);
-    }
-
-    /**
-     * @Route("/update", name="_accounting_gift_card_group_update")
-     */
-    public function update()
     {
         return $this->render('accounting/gift_card_group/edit.html.twig', [
             'controller_name' => 'GiftCardGroupController',

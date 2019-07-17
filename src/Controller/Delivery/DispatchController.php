@@ -2,8 +2,25 @@
 
 namespace App\Controller\Delivery;
 
+use App\FormModels\Delivery\AvailableQueuesModel;
+use App\FormModels\Delivery\DeliveryMethodModel;
+use App\FormModels\Delivery\DeliveryPersonModel;
+use App\FormModels\Delivery\DispatchModel;
+use App\FormModels\Delivery\QueueModel;
+use App\FormModels\Delivery\WeekDayModel;
+use App\FormModels\ModelSerializer;
+use App\FormModels\Repository\LocationModel;
+use App\FormModels\Repository\PersonModel;
+use App\FormModels\Sale\OrderModel;
+use Matican\Core\Entities\Delivery;
+use Matican\Core\Entities\Repository;
+use Matican\Core\Entities\Sale;
+use Matican\Core\Servers;
+use Matican\Core\Transaction\ResponseStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Matican\Core\Transaction\Request as Req;
 
 /**
  * @Route("/delivery/dispatch", name="delivery_dispatch")
@@ -11,32 +28,363 @@ use Symfony\Component\Routing\Annotation\Route;
 class DispatchController extends AbstractController
 {
     /**
-     * @Route("/list", name="_delivery_dispatch_list")
+     * @Route("/list", name="_list")
      */
     public function fetchAll()
     {
+
+        $request = new Req(Servers::Delivery, Delivery::Dispatch, 'all');
+        $response = $request->send();
+
+        /**
+         * @var $dispatches DispatchModel[]
+         */
+        $dispatches = [];
+        if ($response->getContent()) {
+            foreach ($response->getContent() as $dispatch) {
+                $dispatches[] = ModelSerializer::parse($dispatch, DispatchModel::class);
+            }
+        }
+
         return $this->render('delivery/dispatch/list.html.twig', [
             'controller_name' => 'DispatchController',
+            'dispatches' => $dispatches,
         ]);
     }
 
     /**
-     * @Route("/edit", name="_delivery_dispatch_edit")
+     * @Route("/create", name="_create")
      */
-    public function edit()
+    public function create()
     {
-        return $this->render('delivery/dispatch/edit.html.twig', [
+
+        $ordersRequest = new Req(Servers::Sale, Sale::Order, 'all');
+        $orderResponse = $ordersRequest->send();
+
+        /**
+         * @var $orders OrderModel[]
+         */
+        $orders = [];
+        if ($orderResponse->getContent()) {
+            foreach ($orderResponse->getContent() as $order) {
+                if ($order->orderStatus->orderStatusMachineName == 'confirmed') {
+                    $orders[] = ModelSerializer::parse($order, OrderModel::class);
+                }
+            }
+        }
+
+
+        return $this->render('delivery/dispatch/create.html.twig', [
             'controller_name' => 'DispatchController',
+            'orders' => $orders,
         ]);
     }
 
     /**
-     * @Route("/update", name="_delivery_dispatch_update")
+     * @Route("/add-dispatch/{order_id}", name="_add_dispatch")
+     * @param Request $request
+     * @param $order_id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
      */
-    public function update()
+    public function createDispatch(Request $request, $order_id)
     {
+        $inputs = $request->request->all();
+        /**
+         * @var $dispatchModel DispatchModel
+         */
+        $dispatchModel = ModelSerializer::parse($inputs, DispatchModel::class);
+        $dispatchModel->setDispatchOrderId($order_id);
+
+        $request = new Req(Servers::Delivery, Delivery::Dispatch, 'new');
+        $request->add_instance($dispatchModel);
+        $response = $request->send();
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+            /**
+             * @var $dispatchModel DispatchModel
+             */
+            $dispatchModel = ModelSerializer::parse($response->getContent(), DispatchModel::class);
+            return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatchModel->getDispatchId()]));
+        } else {
+            $this->addFlash('s', $response->getMessage());
+            return $this->redirect($this->generateUrl('delivery_dispatch_create'));
+        }
+    }
+
+    /**
+     * @Route("/edit/{id}", name="_edit")
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \ReflectionException
+     */
+    public function edit($id, Request $request)
+    {
+
+        $inputs = $request->request->all();
+        /**
+         * @var $dispatchModel DispatchModel
+         */
+        $dispatchModel = ModelSerializer::parse($inputs, DispatchModel::class);
+        $dispatchModel->setDispatchId($id);
+        $request = new Req(Servers::Delivery, Delivery::Dispatch, 'fetch');
+        $request->add_instance($dispatchModel);
+        $response = $request->send();
+//        dd($response);
+        $dispatchModel = ModelSerializer::parse($response->getContent(), DispatchModel::class);
+//        dd($dispatchModel);
+        /**
+         * @var $dispatchModel DispatchModel
+         */
+        $tempDispatchModel = new DispatchModel();
+        $tempDispatchModel->setDispatchOrderId($dispatchModel->getDispatchOrderId());
+//       dd($tempDispatchModel);
+        $deliveryMethodsRequest = new Req(Servers::Delivery, Delivery::DeliveryMethod, 'get_allowed_delivery_methods');
+        $deliveryMethodsRequest->add_instance($tempDispatchModel);
+        $deliveryMethodsResponse = $deliveryMethodsRequest->send();
+
+//        dd($deliveryMethodsResponse);
+
+        /**
+         * @var $deliveryMethods DeliveryMethodModel[]
+         */
+        $deliveryMethods = [];
+        if ($deliveryMethodsResponse->getContent()) {
+            foreach ($deliveryMethodsResponse->getContent() as $deliveryMethod) {
+                $deliveryMethods[] = ModelSerializer::parse($deliveryMethod, DeliveryMethodModel::class);
+            }
+        }
+
+//        dd($deliveryMethods);
+
+        $availableQueuesModel = new AvailableQueuesModel();
+        $availableQueuesModel->setTodayDateTime();
+        $availableQueuesModel->setDeliveryMethodId($dispatchModel->getDispatchDeliveryMethodId());
+        $availableQueuesModel->setDispatchId($dispatchModel->getDispatchId());
+        $availableQueuesModel->setDaysRange(7);
+//        dd($availableQueuesModel);
+        /**
+         * @var $availableQueues WeekDayModel[]
+         */
+        $availableQueues = [];
+        if ($dispatchModel->getDispatchDeliveryMethodId()) {
+            $availableQueuesRequest = new Req(Servers::Delivery, Delivery::DeliveryMethod, 'get_available_queues');
+            $availableQueuesRequest->add_instance($availableQueuesModel);
+            $availableQueuesResponse = $availableQueuesRequest->send();
+
+//            dd($availableQueuesResponse);
+            if ($availableQueuesResponse->getContent()) {
+
+                /**
+                 * @var $availableQueuesModel AvailableQueuesModel
+                 */
+                $availableQueuesModel = ModelSerializer::parse($availableQueuesResponse->getContent(), AvailableQueuesModel::class);
+//dd($availableQueuesModel->getWeekDays());
+                foreach ($availableQueuesModel->getWeekDays() as $day) {
+                    $availableQueues[] = ModelSerializer::parse($day, WeekDayModel::class);
+                }
+            }
+        }
+
+        /**
+         * @var $ownerLocations LocationModel[]
+         */
+        $ownerLocations = [];
+        /**
+         * @var $orderModel OrderModel
+         */
+        $orderModel = ModelSerializer::parse($dispatchModel->getDispatchOrder(), OrderModel::class);
+        $personModel = new PersonModel();
+//        dd('here');
+        $personModel->setId($orderModel->getOrderOwnerId());
+        $ownerLocationsRequest = new Req(Servers::Repository, Repository::Person, 'get_all_addresses');
+        $ownerLocationsRequest->add_instance($personModel);
+        $ownerLocationsResponse = $ownerLocationsRequest->send();
+
+        if ($ownerLocationsResponse->getContent()) {
+            foreach ($ownerLocationsResponse->getContent() as $location) {
+                $ownerLocations[] = ModelSerializer::parse($location, LocationModel::class);
+            }
+        }
+
+        /**
+         * @var $deliveryPersons DeliveryPersonModel[]
+         */
+        $deliveryPersons = [];
+        if ($dispatchModel->getDispatchDeliveryMethodId()) {
+            $deliveryMethodModel = new DeliveryMethodModel();
+            $deliveryMethodModel->setDeliveryMethodId($dispatchModel->getDispatchDeliveryMethodId());
+            $deliveryMethodModel->setDispatchId($dispatchModel->getDispatchId());
+//            dd($deliveryMethodModel);
+            $deliveryPersonsRequest = new Req(Servers::Delivery, Delivery::DeliveryPerson, 'get_delivery_method_people');
+            $deliveryPersonsRequest->add_instance($deliveryMethodModel);
+            $deliveryPersonsResponse = $deliveryPersonsRequest->send();
+            if ($deliveryPersonsResponse->getContent()) {
+                foreach ($deliveryPersonsResponse->getContent() as $deliveryPerson) {
+                    $deliveryPersons[] = ModelSerializer::parse($deliveryPerson, DeliveryPersonModel::class);
+                }
+            }
+        }
+
+
         return $this->render('delivery/dispatch/edit.html.twig', [
             'controller_name' => 'DispatchController',
+            'dispatchModel' => $dispatchModel,
+            'deliveryMethods' => $deliveryMethods,
+            'availableQueues' => $availableQueues,
+            'ownerLocations' => $ownerLocations,
+            'deliveryPersons' => $deliveryPersons,
         ]);
     }
+
+    /**
+     * @Route("/add-delivery-method/{dispatch_id}", name="_add_delivery_method")
+     * @param $dispatch_id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
+     */
+    public function addDeliveryMethod($dispatch_id, Request $request)
+    {
+        $inputs = $request->request->all();
+        /**
+         * @var $deliveryMethodModel DeliveryMethodModel
+         */
+        $deliveryMethodModel = ModelSerializer::parse($inputs, DeliveryMethodModel::class);
+        $deliveryMethodModel->setDispatchId($dispatch_id);
+        $request = new Req(Servers::Delivery, Delivery::Dispatch, 'set_delivery_method');
+        $request->add_instance($deliveryMethodModel);
+        $response = $request->send();
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('f', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatch_id]));
+    }
+
+    /**
+     * @Route("/add-queue/{dispatch_id}", name="_add_queue")
+     * @param $dispatch_id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
+     */
+    public function addQueue($dispatch_id, Request $request)
+    {
+        $inputs = $request->request->all();
+        /**
+         * @var $queueModel QueueModel
+         */
+        $queueModel = ModelSerializer::parse($inputs, QueueModel::class);
+        $queueModel->setDispatchId($dispatch_id);
+//        dd($queueModel);
+        $request = new Req(Servers::Delivery, Delivery::Dispatch, 'set_dispatch_queue');
+        $request->add_instance($queueModel);
+        $response = $request->send();
+//        dd($response);
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('f', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatch_id]));
+    }
+
+
+    /**
+     * @Route("/confirm-queue/{dispatch_id}", name="_confirm_queue")
+     * @param $dispatch_id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
+     */
+    public function confirmQueue($dispatch_id)
+    {
+        $dispatchModel = new DispatchModel();
+        $dispatchModel->setDispatchId($dispatch_id);
+        $request = new Req(Servers::Delivery, Delivery::Dispatch, 'finalize_dispatch');
+        $request->add_instance($dispatchModel);
+        $response = $request->send();
+//        dd($response);
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('s', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatch_id]));
+    }
+
+    /**
+     * @Route("/rethink-confirm-queue/{dispatch_id}", name="_rethink_confirm_queue")
+     * @param $dispatch_id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
+     */
+    public function rethinkConfirmQueue($dispatch_id)
+    {
+        $dispatchModel = new DispatchModel();
+        $dispatchModel->setDispatchId($dispatch_id);
+        $request = new Req(Servers::Delivery, Delivery::Dispatch, 'rethink_dispatch');
+        $request->add_instance($dispatchModel);
+        $response = $request->send();
+//        dd($response);
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('s', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatch_id]));
+    }
+
+
+    /**
+     * @Route("/add-location-to-dispatch/{dispatch_id}/{location_id}", name="_add_location_to_dispatch")
+     * @param $dispatch_id
+     * @param $location_id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
+     */
+    public function addLocationToDispatch($dispatch_id, $location_id)
+    {
+        $locationModel = new LocationModel();
+        $locationModel->setLocationId($location_id);
+        $locationModel->setDispatchId($dispatch_id);
+        $request = new Req(Servers::Delivery, Delivery::Dispatch, 'set_dispatch_location');
+        $request->add_instance($locationModel);
+        $response = $request->send();
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('s', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatch_id]));
+    }
+
+
+    /**
+     * @Route("/add-delivery-person-to-dispatch/{dispatch_id}/{delivery_person_id}", name="_add_delivery_person_to_dispatch")
+     * @param $dispatch_id
+     * @param $delivery_person_id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
+     */
+    public function addDeliveryPersonToDispatch($dispatch_id, $delivery_person_id)
+    {
+        $deliveryPersonModel = new DeliveryPersonModel();
+        $deliveryPersonModel->setDeliveryPersonId($delivery_person_id);
+        $deliveryPersonModel->setDispatchId($dispatch_id);
+//        dd($deliveryPersonModel);
+        $request = new Req(Servers::Delivery, Delivery::Dispatch, 'set_delivery_person');
+        $request->add_instance($deliveryPersonModel);
+        $response = $request->send();
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('s', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatch_id]));
+    }
+
+
 }

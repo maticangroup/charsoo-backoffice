@@ -16,7 +16,7 @@
     <meta name="keywords" content="">
 
     <!-- ==== Favicon ==== -->
-    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/png">
 
     <!-- ==== Google Font ==== -->
     <link rel="stylesheet"
@@ -140,6 +140,27 @@
 
 <!-- Scripts -->
 <script src="{{ asset('assets/script/all.js') }}"></script>
+<script>
+    jQuery(document).ready(function ($) {
+
+        $('table.search-tr tbody tr').each(function () {
+            $(this).attr('data-search-term', $(this).text().toLowerCase());
+            // console.log($('table.search-tr tbody tr').length);
+        });
+        $('.live-search-box').on('keyup', function () {
+            var searchTerm = $(this).val().toLowerCase();
+            $('table.search-tr tbody tr').each(function () {
+                if ($(this).filter('[data-search-term *= ' + searchTerm + ']').length > 0 || searchTerm.length < 1) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+
+        });
+
+    });
+</script>
 {% block javascripts %}
 {% endblock %}
 <!-- Page Level Scripts -->

@@ -5,6 +5,7 @@ namespace App\Controller\Repository;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\LocationModel;
 use App\FormModels\Repository\PersonModel;
+use App\FormModels\Repository\ProvinceModel;
 use Matican\Actions\Repository\PersonActions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
@@ -183,120 +184,148 @@ class PersonController extends AbstractController
         }
 
         /**
-         * @todo check action all addresses request
+         * @todo create person edit function
          */
-        $request = new Req(Servers::Repository, Repository::Person, 'get_all_addresses');
-        $personModel = new PersonModel();
+
+        /**
+         * @var $personModel PersonModel
+         */
+        $personModel = ModelSerializer::parse($inputs, PersonModel::class);
         $personModel->setId($id);
+        $request = new Req(Servers::Repository, Repository::Person, 'fetch');
         $request->add_instance($personModel);
         $response = $request->send();
-        $responseLocations = $response->getContent();
         /**
-         * @var $locationModels LocationModel[]
+         * @var $personModel PersonModel
          */
-        $locationModels = [];
-        foreach ($responseLocations as $location) {
-            $locationModels[] = ModelSerializer::parse($location, LocationModel::class);
-        }
+        $personModel = ModelSerializer::parse($response->getContent(), PersonModel::class);
 
-        if (empty($inputs)) {
-            $request = new Req(Servers::Repository, Repository::Person, PersonActions::fetch);
-            $request->add_query('id', $id);
-            $response = $request->send();
-            $responsePerson = $response->getContent();
+        $locationModel = new LocationModel();
 
-            $person = new PersonModel();
-            $person->setHumanName($responsePerson['humanName']);
-            $person->setHumanFamily($responsePerson['humanFamily']);
-            $person->setBirthDateYear($responsePerson['birthDateYear']);
-            $person->setBirthDateMonth($responsePerson['birthDateMonth']);
-            $person->setBirthDateDay($responsePerson['birthDateDay']);
-            $person->setMobile($responsePerson['mobile']);
-            $person->setNationalCode($responsePerson['nationalCode']);
-            $person->setEmail($responsePerson['email']);
+        if (!empty($inputs)) {
 
-
-            /**
-             * @todo create LocationActions
-             */
-//        $request = new Req(Servers::Repository, Repository::Location, LocationActions::get_person_addresses);
-//        $request->add_query('id', $id);
-//        $response = $request->send();
-//        $personAddresses = $response->getContent();
-
-//        dd($person);
-//        dd($personAddresses);
-            /**
-             * @todo create "year","month","day" classes
-             */
-
-            return $this->render('repository/person/edit.html.twig', [
-                'controller_name' => 'PersonController',
-                'person' => $person,
-                'years' => $years,
-                'months' => $months,
-                'days' => $days,
-                'personID' => $id,
-                'locations' =>  $locationModels
-//            'personAddresses' => $personAddresses
-            ]);
-
-        } else {
-            $person = new PersonModel();
-            $person->setId($inputs['person_id']);
-            $person->setHumanName($inputs['person_name']);
-            $person->setHumanFamily($inputs['person_family']);
-            $person->setEmail($inputs['person_email']);
-            $person->setBirthDateYear($inputs['person_birth_date_year']);
-            $person->setBirthDateMonth($inputs['person_birth_date_month']);
-            $person->setBirthDateDay($inputs['person_birth_date_day']);
-            $person->setNationalCode($inputs['person_national_code']);
-            $person->setMobile($inputs['person_mobile']);
-
-            $request = new Req(Servers::Repository, Repository::Person, PersonActions::update);
-            $request->setMethod(Method::POST);
-            $request->add_instance($person);
-            $response = $request->send();
-
-            if ($response->getStatus() == ResponseStatus::successful) {
+            if (isset($inputs['provinceName'])) {
                 /**
-                 * @todo ResponseStatus should be change to record_update_successfully
+                 * @var $locationModel LocationModel
                  */
-                $this->addFlash('update_person_success', $response->getMessage());
+                $locationModel = ModelSerializer::parse($inputs, LocationModel::class);
+                $locationModel->setPersonId($id);
+                $latLang = str_replace(' ', '', $locationModel->getLocationGeoPoints());
+                $latLang = explode(',', $latLang);
+                if (count($latLang) != 2) {
+                    $this->addFlash('add_address_success', 'geo points are not formatted correctly');
+                    return $this->redirect($this->generateUrl('repository_person_repository_person_edit', ['id' => $locationModel->getPersonId()]));
+                }
+                $locationModel->setLocationLat($latLang[0]);
+                $locationModel->setLocationLng($latLang[1]);
+//        dd($locationModel);
+                $request = new Req(Servers::Repository, Repository::Location, 'new');
+                $request->add_instance($locationModel);
+                $response = $request->send();
+//                dd($response);
+                if ($response->getStatus() == ResponseStatus::successful) {
+                    $this->addFlash('add_address_success', $response->getMessage());
+                } else {
+                    $this->addFlash('add_address_failed', $response->getMessage());
+                }
 
+
+                return $this->redirect($this->generateUrl('repository_person_repository_person_edit', ['id' => $locationModel->getPersonId()]));
             } else {
-                $this->addFlash('update_person_failed', $response->getMessage());
+                $personModel = ModelSerializer::parse($inputs, PersonModel::class);
+                $personModel->setId($id);
+                $request = new Req(Servers::Repository, Repository::Person, 'update');
+                $request->add_instance($personModel);
+                $response = $request->send();
+                if ($response->getContent() == ResponseStatus::successful) {
+                    $this->addFlash('s', $response->getMessage());
+                    /**
+                     * @var $personModel PersonModel
+                     */
+                    $personModel = ModelSerializer::parse($response->getContent(), PersonModel::class);
+                    return $this->redirect($this->generateUrl('repository_person_repository_person_edit', ['id' => $personModel->getId()]));
+                } else {
+                    $this->addFlash('s', $response->getMessage());
+                }
             }
-
-            return $this->render('repository/person/edit.html.twig', [
-                'controller_name' => 'PersonController',
-                'person' => $person,
-                'years' => $years,
-                'months' => $months,
-                'days' => $days,
-                'personID' => $id,
-                'locations' => $locationModels
-//            'personAddresses' => $personAddresses
-            ]);
         }
+
+        /**
+         * @var $locations LocationModel[]
+         */
+        $locations = [];
+        if ($personModel->getLocations()) {
+            foreach ($personModel->getLocations() as $location) {
+                $locations[] = ModelSerializer::parse($location, LocationModel::class);
+            }
+        }
+
+        $provincesRequest = new Req(Servers::Repository, Repository::Location, 'get_provinces');
+        $provincesResponse = $provincesRequest->send();
+
+        /**
+         * @var $provinces ProvinceModel[]
+         */
+        $provinces = [];
+        if ($provincesResponse->getContent()) {
+            foreach ($provincesResponse->getContent() as $province) {
+                $provinces[] = ModelSerializer::parse($province, ProvinceModel::class);
+            }
+        }
+
+        $personsRequest = new Req(Servers::Repository, Repository::Person, 'all');
+        $personsResponse = $personsRequest->send();
+
+        /**
+         * @var $persons PersonModel[]
+         */
+        $persons = [];
+        if ($personsResponse->getContent()) {
+            foreach ($personsResponse->getContent() as $person) {
+                $persons[] = ModelSerializer::parse($person, PersonModel::class);
+            }
+        }
+
+
+        return $this->render('repository/person/edit.html.twig', [
+            'controller_name' => 'PersonController',
+            'years' => $years,
+            'months' => $months,
+            'days' => $days,
+            'personModel' => $personModel,
+            'locations' => $locations,
+            'provinces' => $provinces,
+            'persons' => $persons,
+            'locationModel' => $locationModel,
+        ]);
 
     }
 
     /**
-     * @Route("/save-address", name="_repository_person_save_address")
+     * @Route("/save-address/{person_id}", name="_repository_person_save_address")
+     * @param $person_id
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \ReflectionException
      */
-    public function addAddress(Request $request)
+    public function addAddress($person_id, Request $request)
     {
-        $inputs = $request->request->all();
-        /**
-         * @var $locationModel LocationModel
-         */
-        $locationModel = ModelSerializer::parse($inputs, LocationModel::class);
-        $request = new Req(Servers::Repository, Repository::Person, PersonActions::add_address);
-        $request->setMethod(Method::POST);
+
+    }
+
+    /**
+     * @Route("/remove-address/{location_id}/{person_id}", name="_repository_person_remove_address")
+     * @param $location_id
+     * @param $person_id
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \ReflectionException
+     */
+    public function removeAddress($location_id, $person_id)
+    {
+        $locationModel = new LocationModel();
+        $locationModel->setLocationId($location_id);
+        $locationModel->setPersonId($person_id);
+        $request = new Req(Servers::Repository, Repository::Location, 'remove');
         $request->add_instance($locationModel);
         $response = $request->send();
 
@@ -308,38 +337,6 @@ class PersonController extends AbstractController
         }
 
 
-        return $this->redirect($this->generateUrl('repository_person_repository_person_edit', ['id' => $locationModel->getPersonId()]));
-    }
-
-    /**
-     * @Route("/update-address", name="_repository_person_update_address")
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \ReflectionException
-     */
-    public function updateAddress(Request $request)
-    {
-        $inputs = $request->request->all();
-        /**
-         * @var $locationModel LocationModel
-         */
-        $locationModel = ModelSerializer::parse($inputs, LocationModel::class);
-        /**
-         * @todo check action
-         */
-        $request = new Req(Servers::Repository, Repository::Person, 'update_address');
-        $request->setMethod(Method::POST);
-        $request->add_instance($locationModel);
-        $response = $request->send();
-
-
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('add_address_success', $response->getMessage());
-        } else {
-            $this->addFlash('add_address_failed', $response->getMessage());
-        }
-
-
-        return $this->redirect($this->generateUrl('repository_person_repository_person_edit', ['id' => $locationModel->getPersonId()]));
+        return $this->redirect($this->generateUrl('repository_person_repository_person_edit', ['id' => $person_id]));
     }
 }

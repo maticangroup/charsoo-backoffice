@@ -37,109 +37,48 @@
                         <table id="usersRoleList">
                             <thead>
                             <tr>
-                                <th>Global Token</th>
+                                <th>ID</th>
                                 <th>Name</th>
+                                <th>Mobile</th>
                                 <th>Delivery method</th>
+                                <th>Dispatch Count</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
+                            {% for deliveryPerson in deliveryPersons %}
+                                <tr>
+                                    <td>{{ deliveryPerson.deliveryPersonId }}</td>
+                                    <td>{{ deliveryPerson.deliveryPersonFirstName }} {{ deliveryPerson.deliveryPersonLastName }}</td>
+                                    <td>{{ deliveryPerson.deliveryPersonMobile }}</td>
+                                    <td>
+                                        {% for deliveryMethod in deliveryPerson.deliveryPersonDeliveryMethods %}
+                                            {{ deliveryMethod.deliveryMethodName }},
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        {{ deliveryPerson.deliveryPersonDispatchCount }}
+                                    </td>
+                                    <td>
+                                        <span class="label rounded"
+                                              style="background-color: {{ deliveryPerson.deliveryPersonStatus.deliveryPersonStatusColor }}">
+                                            {{ deliveryPerson.deliveryPersonStatus.deliveryPersonStatusName }}
+                                        </span>
+                                    </td>
 
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#55623</a>
-                                </td>
-                                <td>
-                                    Username
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">Delivery method</a>,
-                                    <a href="#" class="btn-link">Delivery method</a>,
-                                    <a href="#" class="btn-link">Delivery method</a>
-                                </td>
-                                <td>
-                                    <span class="label label-green rounded">Idle</span>
-                                    <span class="label label-warning rounded">Working</span>
-                                    <span class="label label-danger rounded">Banned</span>
-                                </td>
-                                <td>
-                                    <span class="fa fa-play text-green"></span>
-                                    <span class="fa fa-ban text-red"></span>
-                                    <a href="#" class="fa fa-eye"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#55623</a>
-                                </td>
-                                <td>
-                                    Username
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">Delivery method</a>,
-                                    <a href="#" class="btn-link">Delivery method</a>,
-                                    <a href="#" class="btn-link">Delivery method</a>
-                                </td>
-                                <td>
-                                    <span class="label label-green rounded">Idle</span>
-                                    <span class="label label-warning rounded">Working</span>
-                                    <span class="label label-danger rounded">Banned</span>
-                                </td>
-                                <td>
-                                    <span class="fa fa-play text-green"></span>
-                                    <span class="fa fa-ban text-red"></span>
-                                    <a href="#" class="fa fa-eye"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#55623</a>
-                                </td>
-                                <td>
-                                    Username
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">Delivery method</a>,
-                                    <a href="#" class="btn-link">Delivery method</a>,
-                                    <a href="#" class="btn-link">Delivery method</a>
-                                </td>
-                                <td>
-                                    <span class="label label-green rounded">Idle</span>
-                                    <span class="label label-warning rounded">Working</span>
-                                    <span class="label label-danger rounded">Banned</span>
-                                </td>
-                                <td>
-                                    <span class="fa fa-play text-green"></span>
-                                    <span class="fa fa-ban text-red"></span>
-                                    <a href="#" class="fa fa-eye"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#55623</a>
-                                </td>
-                                <td>
-                                    Username
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">Delivery method</a>,
-                                    <a href="#" class="btn-link">Delivery method</a>,
-                                    <a href="#" class="btn-link">Delivery method</a>
-                                </td>
-                                <td>
-                                    <span class="label label-green rounded">Idle</span>
-                                    <span class="label label-warning rounded">Working</span>
-                                    <span class="label label-danger rounded">Banned</span>
-                                </td>
-                                <td>
-                                    <span class="fa fa-play text-green"></span>
-                                    <span class="fa fa-ban text-red"></span>
-                                    <a href="#" class="fa fa-eye"></a>
-                                </td>
-                            </tr>
-
-
+                                    <td>
+                                        {% if deliveryPerson.deliveryPersonDispatchCount == 0 %}
+                                            <a href="{{ path('delivery_person_status' , {delivery_person_id:deliveryPerson.deliveryPersonId , machine_name:deliveryPerson.deliveryPersonStatus.deliveryPersonStatusMachineName}) }}"
+                                               class="{{ (deliveryPerson.deliveryPersonStatus.deliveryPersonStatusMachineName == 'active') ? 'fa fa-ban text-red' : 'fa fa-play text-green' }}"></a>
+                                        {% endif %}
+                                        <a href="{{ path('delivery_person_read' , {id:deliveryPerson.deliveryPersonId}) }}"
+                                           class="fa fa-eye"></a>
+                                        <a href="{{ path('delivery_person_edit' , {id:deliveryPerson.deliveryPersonId}) }}"
+                                           class="fa fa-edit"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>

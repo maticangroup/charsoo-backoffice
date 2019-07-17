@@ -4,290 +4,114 @@
 
 {% block body %}
     <div class="row">
-        <form action="{{ path('accounting_coupon_group_accounting_coupon_group_save') }}" method="post">
-            <div class="col-12">
-                <div class="panel">
-                    <div class="panel-content">
-                        <div class="row">
-                            <div class="col-10">
-                                <h1>welcome section</h1>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque eum libero
-                                    numquam
-                                    obcaecati perspiciatis quas quisquam soluta unde voluptates.
-                                </p>
-                            </div>
-                            <div class="col-2">
-                                <input type="submit" class="btn btn-block btn-dark fa fa-save rounded">
-                            </div>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1>welcome section</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque eum libero
+                                numquam
+                                obcaecati perspiciatis quas quisquam soluta unde voluptates.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12">
-                <div class="panel">
-                    <div class="panel-content">
-                        <div class="row">
-                            <div class="col-2 ">
-                                <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Name</span>
+        </div>
+        <form action="" class="col-12" method="post">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-2 ">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Name</span>
 
-                                    <div class="col-md-12">
-                                        <input type="text" name="cg_name" placeholder="Coupon Group Name"
-                                               class="form-control">
-                                    </div>
+                                <div class="col-md-12">
+                                    <input type="text" name="cg_name" placeholder="Coupon Group Name"
+                                           class="form-control">
                                 </div>
                             </div>
-                            <div class="col-2 ">
-                                <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Prefix</span>
+                        </div>
+                        <div class="col-2 ">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Prefix</span>
 
-                                    <div class="col-md-12">
-                                        <input type="text" name="cg_prefix" placeholder="cpn_" class="form-control">
-                                    </div>
+                                <div class="col-md-12">
+                                    <input type="text" name="cg_prefix" placeholder="cpn_" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-2 ">
-                                <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Expiry date</span>
-                                    <div class="col-md-12">
-                                        <input type="date" name="cg_expiry_date" placeholder="" class="form-control">
-                                    </div>
+                        </div>
+                        <div class="col-2 ">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Expiry date</span>
+                                <div class="col-md-12">
+                                    <input type="date" name="cg_expiry_date" placeholder="" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-2 ">
-                                <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Discount type</span>
-                                    <select name="cg_discount_type" class="form-control">
-                                        <option value="1">Percentage</option>
-                                        <option value="2">Fixed amount</option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="col-2 ">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Discount type</span>
+                                <select name="cg_discount_type" class="form-control">
+                                    <option value="1">Percentage</option>
+                                    <option value="2">Fixed amount</option>
+                                </select>
                             </div>
+                        </div>
 
-                            <div class="col-2 ">
-                                <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Effect</span>
-                                    <div class="col-md-12">
-                                        <input type="text" name="cg_effect" placeholder="Percentage or fixed amount"
-                                               class="form-control">
-                                    </div>
+                        <div class="col-2 ">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Effect</span>
+                                <div class="col-md-12">
+                                    <input type="text" name="cg_effect" placeholder="Percentage or fixed amount"
+                                           class="form-control">
                                 </div>
                             </div>
-                            <div class="col-2 ">
-                                <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Minimum Invoice price</span>
+                        </div>
+                        <div class="col-2 ">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Minimum Invoice price</span>
 
-                                    <div class="col-md-12">
-                                        <input type="text" name="cg_minimum_invoice_price" placeholder="Invoice Price"
-                                               class="form-control">
-                                    </div>
+                                <div class="col-md-12">
+                                    <input type="text" name="cg_minimum_invoice_price" placeholder="Invoice Price"
+                                           class="form-control">
                                 </div>
                             </div>
-                            <div class="col-1">
-                                <div class="form-group ">
-                                    <span class="label-text col-md-12 col-form-label ">Type</span>
-                                    <label class="form-radio col-form-label">
-                                        <input type="checkbox" name="cg_type" value="2"
-                                               class="form-radio-input">
-                                        <span class="form-radio-label">Private</span>
-                                    </label>
-                                </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="form-group ">
+                                <span class="label-text col-md-12 col-form-label ">Type</span>
+                                <label class="form-check">
+                                    <input type="checkbox" name="checkbox" value="true" class="form-check-input">
+                                    <span class="form-check-label">Private</span>
+                                </label>
                             </div>
+                        </div>
 
-                            <div class="col-2 ">
-                                <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Usage times</span>
-                                    <div class="col-md-12">
-                                        <input type="number" name="cg_usage_times" placeholder="" class="form-control">
-                                    </div>
+                        <div class="col-2 ">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Usage times</span>
+                                <div class="col-md-12">
+                                    <input type="number" name="cg_usage_times" placeholder="" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-6 ">
-                                <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Description</span>
-                                    <div class="col-md-12">
-                                        <textarea name="cg_description" placeholder="" class="form-control"></textarea>
-                                    </div>
+                        </div>
+                        <div class="col-6 ">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Description</span>
+                                <div class="col-md-12">
+                                    <textarea name="cg_description" placeholder="" class="form-control"></textarea>
                                 </div>
                             </div>
-
+                        </div>
+                        <div class="col-2 mt-5">
+                            <button type="submit" class="btn btn-block btn-dark fa fa-save rounded"></button>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
-            <div class="col-12">
-                <div class="panel">
-                    <div class="panel-content">
-                        <div class="form-group row">
-                            <div class="col-3"></div>
-                            <div class="col-md-4">
-                                <input type="text" placeholder="Add Person (Global Token)" name="search"
-                                       class="form-control">
-                            </div>
-                            <div class="col-md-2">
-                                <a href="#" class="btn rounded btn-block btn-success fa fa-plus"></a>
-                            </div>
-                            <div class="col-3"></div>
-                        </div>
-                        <!---->
-                        <div class="records--list">
-                            <table id="countriesList">
-                                <thead>
-                                <tr>
-                                    <th>Global Token</th>
-                                    <th>Name</th>
-                                    <th>Mobile</th>
-                                    <th>Phone</th>
-                                    <th>Groups</th>
-                                    <th>Company</th>
-                                    <th>Actions</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <a href="#" class="btn-link">#315321</a>
-                                    </td>
-                                    <td>
-                                        Customer Name
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn-link">+989125966246</a>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn-link">02196385274</a>
-                                    </td>
-                                    <td>
-                                        <span class="label label-info rounded">GP1</span>
-                                        <span class="label label-info rounded">GP1</span>
-                                        <span class="label label-info rounded">GP1</span>
-                                    </td>
-                                    <td>
-                                        <span class="label label-info rounded">Company</span>
-                                        <span class="label label-info rounded">Company</span>
-                                        <span class="label label-info rounded">Company</span>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="fa fa-trash"></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" class="btn-link">#315321</a>
-                                    </td>
-                                    <td>
-                                        Customer Name
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn-link">+989125966246</a>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn-link">02196385274</a>
-                                    </td>
-                                    <td>
-                                        <span class="label label-info rounded">GP1</span>
-                                        <span class="label label-info rounded">GP1</span>
-                                        <span class="label label-info rounded">GP1</span>
-                                    </td>
-                                    <td>
-                                        <span class="label label-info rounded">Company</span>
-                                        <span class="label label-info rounded">Company</span>
-                                        <span class="label label-info rounded">Company</span>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="fa fa-trash"></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" class="btn-link">#315321</a>
-                                    </td>
-                                    <td>
-                                        Customer Name
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn-link">+989125966246</a>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn-link">02196385274</a>
-                                    </td>
-                                    <td>
-                                        <span class="label label-info rounded">GP1</span>
-                                        <span class="label label-info rounded">GP1</span>
-                                        <span class="label label-info rounded">GP1</span>
-                                    </td>
-                                    <td>
-                                        <span class="label label-info rounded">Company</span>
-                                        <span class="label label-info rounded">Company</span>
-                                        <span class="label label-info rounded">Company</span>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="fa fa-trash"></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" class="btn-link">#315321</a>
-                                    </td>
-                                    <td>
-                                        Customer Name
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn-link">+989125966246</a>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn-link">02196385274</a>
-                                    </td>
-                                    <td>
-                                        <span class="label label-info rounded">GP1</span>
-                                        <span class="label label-info rounded">GP1</span>
-                                        <span class="label label-info rounded">GP1</span>
-                                    </td>
-                                    <td>
-                                        <span class="label label-info rounded">Company</span>
-                                        <span class="label label-info rounded">Company</span>
-                                        <span class="label label-info rounded">Company</span>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="fa fa-trash"></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#" class="btn-link">#315321</a>
-                                    </td>
-                                    <td>
-                                        Customer Name
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn-link">+989125966246</a>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn-link">02196385274</a>
-                                    </td>
-                                    <td>
-                                        <span class="label label-info rounded">GP1</span>
-                                        <span class="label label-info rounded">GP1</span>
-                                        <span class="label label-info rounded">GP1</span>
-                                    </td>
-                                    <td>
-                                        <span class="label label-info rounded">Company</span>
-                                        <span class="label label-info rounded">Company</span>
-                                        <span class="label label-info rounded">Company</span>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="fa fa-trash"></a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <!-- Records List End -->
-                    </div>
-                </div>
-            </div>
     </div>
 {% endblock %}

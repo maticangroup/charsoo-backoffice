@@ -39,470 +39,20 @@
                                 <table id="usersRoleList">
                                     <thead>
                                     <tr>
-                                        <th>Country</th>
                                         <th>Province</th>
                                         <th>City</th>
                                         <th>Districts</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            Iran
-                                        </td>
-                                        <td>
-                                            Tehran
-                                        </td>
-                                        <td>
-                                            Tehran
-                                        </td>
-                                        <td>12</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Iran
-                                        </td>
-                                        <td>
-                                            Tehran
-                                        </td>
-                                        <td>
-                                            Tehran
-                                        </td>
-                                        <td>12</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Iran
-                                        </td>
-                                        <td>
-                                            Tehran
-                                        </td>
-                                        <td>
-                                            Tehran
-                                        </td>
-                                        <td>12</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Iran
-                                        </td>
-                                        <td>
-                                            Tehran
-                                        </td>
-                                        <td>
-                                            Tehran
-                                        </td>
-                                        <td>12</td>
-                                    </tr>
+                                    {% for allowedDistrict in allowedDistricts %}
+                                        <tr>
+                                            <td>{{ allowedDistrict.provinceName }}</td>
+                                            <td>{{ allowedDistrict.cityName }}</td>
+                                            <td>{{ allowedDistrict.districtName }}</td>
+                                        </tr>
+                                    {% endfor %}
 
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- Records List End -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <strong>
-                                Delivery Methods
-                            </strong>
-                        </div>
-                        <div class="panel-content">
-                            <div class="form-group row">
-                                <div class="col-4"></div>
-                                <div class="col-md-4">
-                                    <input type="text" placeholder="Search" name="text"
-                                           class="form-control">
-                                </div>
-                                <div class="col-4"></div>
-                            </div>
-                            <!-- Records List Start -->
-                            <div class="records--list">
-                                <table id="table10">
-                                    <thead>
-                                    <tr>
-                                        <th>Global token</th>
-                                        <th>Image</th>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Accepted size</th>
-                                        <th>Cost</th>
-                                        <th>Can Receive Money</th>
-                                        <th>Actions</th>
-
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <a href="#" class="btn-link">#315321</a>
-                                        </td>
-                                        <td>
-                                            <img src="https://via.placeholder.com/50x50" alt="" class="rounded-circle">
-                                        </td>
-                                        <td>
-                                            Delivery Name
-                                        </td>
-                                        <td>Fixed Price</td>
-                                        <td>Small</td>
-                                        <td>20000</td>
-                                        <td>
-                                            <span href="#" class="fa fa-times text-red"></span>
-                                            <span href="#" class="fa fa-check text-green"></span>
-                                        </td>
-                                        <td>
-                                            <a href="#" class="fa fa-eye"></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="#" class="btn-link">#315321</a>
-                                        </td>
-                                        <td>
-                                            <img src="https://via.placeholder.com/50x50" alt="" class="rounded-circle">
-                                        </td>
-                                        <td>
-                                            Delivery Name
-                                        </td>
-                                        <td>Fixed Price</td>
-                                        <td>Small</td>
-                                        <td>20000</td>
-                                        <td>
-                                            <span href="#" class="fa fa-times text-red"></span>
-                                            <span href="#" class="fa fa-check text-green"></span>
-                                        </td>
-                                        <td>
-                                            <a href="#" class="fa fa-eye"></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="#" class="btn-link">#315321</a>
-                                        </td>
-                                        <td>
-                                            <img src="https://via.placeholder.com/50x50" alt="" class="rounded-circle">
-                                        </td>
-                                        <td>
-                                            Delivery Name
-                                        </td>
-                                        <td>Fixed Price</td>
-                                        <td>Small</td>
-                                        <td>20000</td>
-                                        <td>
-                                            <span href="#" class="fa fa-times text-red"></span>
-                                            <span href="#" class="fa fa-check text-green"></span>
-                                        </td>
-                                        <td>
-                                            <a href="#" class="fa fa-eye"></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="#" class="btn-link">#315321</a>
-                                        </td>
-                                        <td>
-                                            <img src="https://via.placeholder.com/50x50" alt="" class="rounded-circle">
-                                        </td>
-                                        <td>
-                                            Delivery Name
-                                        </td>
-                                        <td>Fixed Price</td>
-                                        <td>Small</td>
-                                        <td>20000</td>
-                                        <td>
-                                            <span href="#" class="fa fa-times text-red"></span>
-                                            <span href="#" class="fa fa-check text-green"></span>
-                                        </td>
-                                        <td>
-                                            <a href="#" class="fa fa-eye"></a>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- Records List End -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="panel">
-                        <div class="panel-heading"><strong>
-                                Dispatch Delivery
-                            </strong></div>
-                        <div class="panel-content">
-                            <div class="form-group row">
-                                <div class="col-4"></div>
-                                <div class="col-md-4">
-                                    <input type="text" placeholder="Search" name="text"
-                                           class="form-control">
-                                </div>
-                                <div class="col-4"></div>
-                            </div>
-                            <!-- Records List Start -->
-                            <div class="records--list">
-                                <table id="actionsOverview">
-                                    <thead>
-                                    <tr>
-
-                                        <th>From Date time</th>
-                                        <th>To Date time</th>
-                                        <th>Address</th>
-                                        <th>Status</th>
-                                        <th>Delivery Method</th>
-                                        <th>Delivery Queue</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    <tr>
-
-                                        <td>
-                                            1397/12/12 - 13:45
-                                        </td>
-                                        <td>
-                                            1397/12/12 - 13:45
-                                        </td>
-                                        <td>Energistically create leveraged architectures before
-                                            high-quality
-                                            ideas
-                                        </td>
-                                        <td>
-                                            <span class="label label-success rounded">Delivered On Time</span>
-                                            <span class="label label-info rounded">Delivered With Delay</span>
-                                            <span class="label label-danger rounded">Rejected</span>
-                                            <span class="label label-gray rounded">On The Way</span>
-                                            <span class="label label-warning rounded">Delayed</span>
-                                            <span class="label label-default rounded">Canceled</span>
-                                        </td>
-                                        <td><a href="#" class="btn-link">Delivery Method</a></td>
-                                        <td>Sunday (10:00 - 12:00)</td>
-                                    </tr>
-                                    <tr>
-
-                                        <td>
-                                            1397/12/12 - 13:45
-                                        </td>
-                                        <td>
-                                            1397/12/12 - 13:45
-                                        </td>
-                                        <td>Energistically create leveraged architectures before
-                                            high-quality
-                                            ideas
-                                        </td>
-                                        <td>
-                                            <span class="label label-success rounded">Delivered On Time</span>
-                                            <span class="label label-info rounded">Delivered With Delay</span>
-                                            <span class="label label-danger rounded">Rejected</span>
-                                            <span class="label label-gray rounded">On The Way</span>
-                                            <span class="label label-warning rounded">Delayed</span>
-                                            <span class="label label-default rounded">Canceled</span>
-                                        </td>
-                                        <td><a href="#" class="btn-link">Delivery Method</a></td>
-                                        <td>Sunday (10:00 - 12:00)</td>
-                                    </tr>
-                                    <tr>
-
-                                        <td>
-                                            1397/12/12 - 13:45
-                                        </td>
-                                        <td>
-                                            1397/12/12 - 13:45
-                                        </td>
-                                        <td>Energistically create leveraged architectures before
-                                            high-quality
-                                            ideas
-                                        </td>
-                                        <td>
-                                            <span class="label label-success rounded">Delivered On Time</span>
-                                            <span class="label label-info rounded">Delivered With Delay</span>
-                                            <span class="label label-danger rounded">Rejected</span>
-                                            <span class="label label-gray rounded">On The Way</span>
-                                            <span class="label label-warning rounded">Delayed</span>
-                                            <span class="label label-default rounded">Canceled</span>
-                                        </td>
-                                        <td><a href="#" class="btn-link">Delivery Method</a></td>
-                                        <td>Sunday (10:00 - 12:00)</td>
-                                    </tr>
-                                    <tr>
-
-                                        <td>
-                                            1397/12/12 - 13:45
-                                        </td>
-                                        <td>
-                                            1397/12/12 - 13:45
-                                        </td>
-                                        <td>Energistically create leveraged architectures before
-                                            high-quality
-                                            ideas
-                                        </td>
-                                        <td>
-                                            <span class="label label-success rounded">Delivered On Time</span>
-                                            <span class="label label-info rounded">Delivered With Delay</span>
-                                            <span class="label label-danger rounded">Rejected</span>
-                                            <span class="label label-gray rounded">On The Way</span>
-                                            <span class="label label-warning rounded">Delayed</span>
-                                            <span class="label label-default rounded">Canceled</span>
-                                        </td>
-                                        <td><a href="#" class="btn-link">Delivery Method</a></td>
-                                        <td>Sunday (10:00 - 12:00)</td>
-                                    </tr>
-                                    <tr>
-
-                                        <td>
-                                            1397/12/12 - 13:45
-                                        </td>
-                                        <td>
-                                            1397/12/12 - 13:45
-                                        </td>
-                                        <td>Energistically create leveraged architectures before
-                                            high-quality
-                                            ideas
-                                        </td>
-                                        <td>
-                                            <span class="label label-success rounded">Delivered On Time</span>
-                                            <span class="label label-info rounded">Delivered With Delay</span>
-                                            <span class="label label-danger rounded">Rejected</span>
-                                            <span class="label label-gray rounded">On The Way</span>
-                                            <span class="label label-warning rounded">Delayed</span>
-                                            <span class="label label-default rounded">Canceled</span>
-                                        </td>
-                                        <td><a href="#" class="btn-link">Delivery Method</a></td>
-                                        <td>Sunday (10:00 - 12:00)</td>
-                                    </tr>
-                                    <tr>
-
-                                        <td>
-                                            1397/12/12 - 13:45
-                                        </td>
-                                        <td>
-                                            1397/12/12 - 13:45
-                                        </td>
-                                        <td>Energistically create leveraged architectures before
-                                            high-quality
-                                            ideas
-                                        </td>
-                                        <td>
-                                            <span class="label label-success rounded">Delivered On Time</span>
-                                            <span class="label label-info rounded">Delivered With Delay</span>
-                                            <span class="label label-danger rounded">Rejected</span>
-                                            <span class="label label-gray rounded">On The Way</span>
-                                            <span class="label label-warning rounded">Delayed</span>
-                                            <span class="label label-default rounded">Canceled</span>
-                                        </td>
-                                        <td><a href="#" class="btn-link">Delivery Method</a></td>
-                                        <td>Sunday (10:00 - 12:00)</td>
-                                    </tr>
-                                    <tr>
-
-                                        <td>
-                                            1397/12/12 - 13:45
-                                        </td>
-                                        <td>
-                                            1397/12/12 - 13:45
-                                        </td>
-                                        <td>Energistically create leveraged architectures before
-                                            high-quality
-                                            ideas
-                                        </td>
-                                        <td>
-                                            <span class="label label-success rounded">Delivered On Time</span>
-                                            <span class="label label-info rounded">Delivered With Delay</span>
-                                            <span class="label label-danger rounded">Rejected</span>
-                                            <span class="label label-gray rounded">On The Way</span>
-                                            <span class="label label-warning rounded">Delayed</span>
-                                            <span class="label label-default rounded">Canceled</span>
-                                        </td>
-                                        <td><a href="#" class="btn-link">Delivery Method</a></td>
-                                        <td>Sunday (10:00 - 12:00)</td>
-                                    </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- Records List End -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="panel">
-                        <div class="panel-heading"><strong>
-                                Dispatch Payments
-                            </strong></div>
-                        <div class="panel-content">
-                            <div class="form-group row">
-                                <div class="col-4"></div>
-                                <div class="col-md-4">
-                                    <input type="text" placeholder="Search" name="text"
-                                           class="form-control">
-                                </div>
-                                <div class="col-4"></div>
-                            </div>
-                            <!-- Records List Start -->
-                            <div class="records--list">
-                                <table id="ProvincesList">
-                                    <thead>
-                                    <tr>
-                                        <th>Order token</th>
-                                        <th>Payment request token</th>
-                                        <th>Amount</th>
-                                        <th>Status</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <a href="">#16412356</a>
-                                        </td>
-                                        <td>
-                                            <a href="">#16434356</a>
-                                        </td>
-                                        <td>125,000</td>
-                                        <td>
-                                            <span class="label label-success rounded">Cleared</span>
-                                            <span class="label label-danger rounded">Not paid</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="">#16412356</a>
-                                        </td>
-                                        <td>
-                                            <a href="">#16434356</a>
-                                        </td>
-                                        <td>125,000</td>
-                                        <td>
-                                            <span class="label label-success rounded">Cleared</span>
-                                            <span class="label label-danger rounded">Not paid</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="">#16412356</a>
-                                        </td>
-                                        <td>
-                                            <a href="">#16434356</a>
-                                        </td>
-                                        <td>125,000</td>
-                                        <td>
-                                            <span class="label label-success rounded">Cleared</span>
-                                            <span class="label label-danger rounded">Not paid</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="">#16412356</a>
-                                        </td>
-                                        <td>
-                                            <a href="">#16434356</a>
-                                        </td>
-                                        <td>125,000</td>
-                                        <td>
-                                            <span class="label label-success rounded">Cleared</span>
-                                            <span class="label label-danger rounded">Not paid</span>
-                                        </td>
-                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -521,12 +71,11 @@
                         <div class="miniStats--panel">
                             <div class="miniStats--body">
                                 <i class="miniStats--icon fa fa-user text-blue"></i>
-                                <h3 class="miniStats--title h4">Delivery person name</h3>
-                                <p class="miniStats--caption text-blue">+98912034273</p>
-                                <p class="miniStats--caption text-blue">Delivered dispatches</p>
-
+                                <h3 class="miniStats--title h4">{{ deliveryPersonModel.deliveryPersonFirstName }} {{ deliveryPersonModel.deliveryPersonLastName }}</h3>
+                                <p class="miniStats--caption text-blue">{{ deliveryPersonModel.deliveryPersonMobile }}</p>
+                                <p class="miniStats--caption text-blue">Dispatches</p>
                                 <p class="miniStats--num text-blue">
-                                    13,450
+                                    {{ deliveryPersonModel.deliveryPersonDispatchCount }}
                                 </p>
                             </div>
                         </div>
@@ -542,25 +91,136 @@
                             </div>
 
                             <div class="weather--info">
-                                <span>25,000,000</span>
+                                <span>{{ deliveryPersonModel.deliveryPersonClearAmount }}</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12">
-                    <div class="panel">
-                        <div class="weather--panel text-white bg-darker">
-                            <div class="weather--title">
-                                <i class="fa fa-exclamation"></i>
-                                <span>Availability</span>
-                            </div>
-
-                            <div class="weather--info">
-                                <span class="label label-green rounded">Active</span>
-                                <span class="label label-red rounded">Deactive</span>
-                            </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <strong>
+                        Delivery Methods
+                    </strong>
+                </div>
+                <div class="panel-content">
+                    <div class="form-group row">
+                        <div class="col-4"></div>
+                        <div class="col-md-4">
+                            <input type="text" placeholder="Search" name="text"
+                                   class="form-control">
                         </div>
+                        <div class="col-4"></div>
                     </div>
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="table10">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Cost</th>
+                                <th>Accepted size</th>
+                                <th>Can Receive Money</th>
+                                <th>Delivery Persons</th>
+                                <th>Dispatches</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for deliveryMethod in deliveryMethods %}
+                                <tr>
+                                    <td>{{ deliveryMethod.deliveryMethodId }}</td>
+                                    <td>
+                                        <img src="https://via.placeholder.com/50x50" alt=""
+                                             class="rounded-circle">
+                                    </td>
+                                    <td>{{ deliveryMethod.deliveryMethodName }}</td>
+                                    <td>{{ deliveryMethod.deliveryMethodTypeName }}</td>
+                                    <td>{{ deliveryMethod.deliveryMethodCost }}</td>
+                                    <td>
+                                        {% for size in deliveryMethod.deliveryMethodSizes %}
+                                            {{ size }},
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        <span class="{{ (deliveryMethod.deliveryMethodReceiveMoney) ? 'fa fa-check text-green' : 'fa fa-times text-red' }}"></span>
+                                    </td>
+                                    <td>{{ deliveryMethod.deliveryMethodDeliveryPersonsCount }}</td>
+                                    <td>{{ deliveryMethod.deliveryMethodDispatchesCount }}</td>
+                                    <td>
+                                        <span class="label rounded"
+                                              style="background-color: {{ deliveryMethod.deliveryMethodStatus.deliveryMethodStatusColor }}">
+                                            {{ deliveryMethod.deliveryMethodStatus.deliveryMethodStatusName }}
+                                        </span>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Records List End -->
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-heading"><strong>
+                        Dispatch Delivery
+                    </strong></div>
+                <div class="panel-content">
+                    <div class="form-group row">
+                        <div class="col-4"></div>
+                        <div class="col-md-4">
+                            <input type="text" placeholder="Search" name="text"
+                                   class="form-control">
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="actionsOverview">
+                            <thead>
+                            <tr>
+
+                                <th>Create Date</th>
+                                <th>Delivery Method</th>
+                                <th>Queue</th>
+                                <th>Address</th>
+                                <th>Dispatch Total Price</th>
+                                <th>Delivery Status</th>
+                                <th>Price Paid Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for dispatch in dispatches %}
+                                <tr>
+                                    {#{{ dump(dispatch) }}#}
+                                    <td>{{ dispatch.dispatchCreateDate }}</td>
+                                    <td>{{ dispatch.dispatchDeliveryMethodName }}</td>
+                                    <td>{{ dispatch.dispatchDeliveryQueueName }}</td>
+                                    <td>{{ dispatch.dispatchAddress }}</td>
+                                    <td>{{ dispatch.dispatchTotalPrice }}</td>
+                                    <td>
+                                        <span class="label rounded"
+                                              style="background-color: {{ dispatch.dispatchDeliveryStatus.dispatchDeliveryStatusColor }}">{{ dispatch.dispatchDeliveryStatus.dispatchDeliveryStatusName }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="label rounded"
+                                              style="background-color: {{ dispatch.dispatchPriceStatus.dispatchPriceColor }}">{{ dispatch.dispatchPriceStatus.dispatchPriceName }}</span>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Records List End -->
                 </div>
             </div>
         </div>

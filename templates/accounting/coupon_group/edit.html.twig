@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="row">
-        <form action="{{ path('accounting_coupon_group_accounting_coupon_group_update') }}" method="post">
+
         <div class="col-12">
             <div class="row">
                 <div class="col-6">
@@ -19,9 +19,6 @@
                                         obcaecati perspiciatis quas quisquam soluta unde voluptates.
                                     </p>
 
-                                </div>
-                                <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-                                    <input type="submit" class="btn btn-block btn-info fa fa-save rounded">
                                 </div>
                             </div>
                         </div>
@@ -76,7 +73,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12">
+        <form action="" class="col-12" method="post">
             <div class="panel">
                 <div class="panel-content">
                     <div class="row">
@@ -139,10 +136,9 @@
                         <div class="col-1">
                             <div class="form-group ">
                                 <span class="label-text col-md-12 col-form-label ">Type</span>
-                                <label class="form-radio col-form-label">
-                                    <input type="checkbox" name="cg_type" value="2"
-                                           class="form-radio-input">
-                                    <span class="form-radio-label">Private</span>
+                                <label class="form-check">
+                                    <input type="checkbox" name="checkbox" value="true" class="form-check-input">
+                                    <span class="form-check-label">Private</span>
                                 </label>
                             </div>
                         </div>
@@ -163,12 +159,14 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="col-2 mt-5">
+                            <button type="submit" class="btn btn-block btn-info fa fa-save rounded"></button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </form>
+
         <div class="col-12">
             <div class="panel">
                 <div class="panel-content">
@@ -219,11 +217,13 @@
                     <div class="form-group row">
                         <div class="col-3"></div>
                         <div class="col-md-4">
-                            <input type="text" placeholder="Search" name="text"
-                                   class="form-control">
+                            <select name="cg_discount_type" class="form-control">
+                                <option value="1">Percentage</option>
+                                <option value="2">Fixed amount</option>
+                            </select>
                         </div>
                         <div class="col-md-2">
-                            <a href="#" class="btn rounded btn-block btn-success fa fa-plus"></a>
+                            <button type="submit" class="btn rounded btn-block btn-dark fa fa-save"></button>
                         </div>
                         <div class="col-3"></div>
                     </div>

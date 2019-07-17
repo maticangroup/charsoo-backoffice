@@ -36,10 +36,10 @@
                                 </div>
                                 <div class="col-6">
                                     <span class="label-text col-form-label">Delivery Method Type</span>
-                                    <select name="deliveryMethodTypeId" class="form-control">
+                                    <select name="deliveryMethodTypeMachineName" class="form-control">
                                         {% for deliveryMethodType in deliveryMethodTypes %}
-                                            <option value="{{ deliveryMethodType.deliveryMethodTypeId }}"
-                                                    {{ (deliveryMethodType.deliveryMethodTypeId == deliveryMethodModel.deliveryMethodTypeId) ? 'selected' : '' }}>
+                                            <option value="{{ deliveryMethodType.deliveryMethodTypeMachineName }}"
+                                                    {{ (deliveryMethodType.deliveryMethodTypeMachineName == deliveryMethodModel.deliveryMethodTypeMachineName) ? 'selected' : '' }}>
                                                 {{ deliveryMethodType.deliveryMethodTypeName }}
                                             </option>
                                         {% endfor %}
@@ -58,7 +58,8 @@
                                     <span class="label-text col-form-label">Delivery Method Receive Money</span>
                                     <label class="form-check">
                                         <input type="checkbox" name="deliveryMethodReceiveMoney"
-                                               class="form-check-input">
+                                               class="form-check-input"
+                                               value="true" {{ (deliveryMethodModel.deliveryMethodReceiveMoney == 'true') ? 'checked' : '' }}>
                                         <span class="form-check-label">Can Receive Money?</span>
                                     </label>
                                 </div>
@@ -158,10 +159,11 @@
                 </div>
                 <div class="panel-content">
                     <form class="form-group row"
-                          action="{{ path('delivery_method_add_delivery_person' , {delivery_method_id:deliveryMethodModel.deliveryMethodId}) }}">
+                          action="{{ path('delivery_method_add_delivery_person' , {delivery_method_id:deliveryMethodModel.deliveryMethodId}) }}"
+                          method="post">
                         <div class="col-3"></div>
                         <div class="col-md-4">
-                            <select name="deliveryPersonId" class="form-control">
+                            <select name="personId" class="form-control">
                                 {% for person in persons %}
                                     <option value="{{ person.id }}">{{ person.humanName }} {{ person.humanFamily }}
                                         | {{ person.mobile }}</option>
@@ -202,10 +204,12 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="#" class="fa fa-play text-green"></a>
-                                        <a href="#" class="fa fa-ban text-red"></a>
-                                        <a href="#" class="fa fa-eye"></a>
-                                        <a href="#" class="fa fa-edit"></a>
+                                        <a href="{{ path('delivery_person_read' , {id:deliveryPerson.deliveryPersonId}) }}"
+                                           class="fa fa-eye"></a>
+                                        <a href="{{ path('delivery_person_edit' , {id:deliveryPerson.deliveryPersonId}) }}"
+                                           class="fa fa-edit"></a>
+                                        <a href="{{ path('delivery_method_remove_delivery_person' , {delivery_method_id:deliveryMethodModel.deliveryMethodId , delivery_person_id:deliveryPerson.deliveryPersonId}) }}"
+                                           class="fa fa-trash"></a>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -230,6 +234,7 @@
                                     <th scope="col">From time</th>
                                     <th scope="col">To time</th>
                                     <th scope="col">Capacity</th>
+                                    <th scope="col">Dispatches</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -241,17 +246,20 @@
                                         <td>{{ queue.queueFrom }}</td>
                                         <td>{{ queue.queueTo }}</td>
                                         <td>{{ queue.queueCapacity }}</td>
+                                        <td>{{ queue.dispatchesCount }}</td>
                                         <td>
                                             <span class="label rounded"
-                                                  style="background-color: {{ queue.queueStatus.queueStatusName }}">
+                                                  style="background-color: {{ queue.queueStatus.queueStatusColor }}">
                                                 {{ queue.queueStatus.queueStatusName }}
                                             </span>
                                         </td>
                                         <td>
-                                            <a href="{{ path('') }}"
-                                               class="{{ (queue.queueStatus.queueStatusMachineName == 'active') ? 'fa fa-ban text-red' : 'fa fa-play text-green' }}"></a>
-                                            <a href="{{ path('delivery_method_remove_queue' , {delivery_method_id:deliveryMethodModel.deliveryMethodId , week_day_id:day.weekDayId , queue_id:queue.queueId}) }}"
-                                               class="fa fa-trash"></a>
+                                            {% if queue.dispatchesCount == 0 %}
+                                                <a href="{{ path('delivery_method_queue_status' , {queue_id:queue.queueId , machine_name:queue.queueStatus.queueStatusMachineName , delivery_method_id:deliveryMethodModel.deliveryMethodId }) }}"
+                                                   class="{{ (queue.queueStatus.queueStatusMachineName == 'active') ? 'fa fa-ban text-red' : 'fa fa-play text-green' }}"></a>
+                                                <a href="{{ path('delivery_method_remove_queue' , {delivery_method_id:deliveryMethodModel.deliveryMethodId , week_day_id:day.weekDayId , queue_id:queue.queueId}) }}"
+                                                   class="fa fa-trash"></a>
+                                            {% endif %}
                                         </td>
                                     </tr>
                                 {% endfor %}

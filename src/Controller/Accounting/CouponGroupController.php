@@ -13,74 +13,45 @@ use Symfony\Component\Routing\Annotation\Route;
 class CouponGroupController extends AbstractController
 {
     /**
-     * @Route("/list", name="_accounting_coupon_group_list")
+     * @Route("/list", name="_list")
      */
     public function fetchAll()
     {
-        $request = new Request('Accounting','CouponGroup','all');
-        $response = $request->send();
-        $couponGroups = $response->getContent();
+//        $request = new Request('Accounting','CouponGroup','all');
+//        $response = $request->send();
+//        $couponGroups = $response->getContent();
         return $this->render('accounting/coupon_group/list.html.twig', [
             'controller_name' => 'CouponGroupController',
-            'couponGroups' => $couponGroups
+//            'couponGroups' => $couponGroups
         ]);
     }
 
     /**
-     * @Route("/create", name="_accounting_coupon_group_create")
+     * @Route("/create", name="_create")
      */
     public function create()
     {
-        $request = new Request('Accounting', 'CouponGroup','add');
-        $request->add_query('','');
-        $response = $request->send();
-        $addCouponGroup = $response->getMessage();
-        $this->addFlash('success', "This is a success");
+
         return $this->render('accounting/coupon_group/create.html.twig', [
             'controller_name' => 'CouponGroupController',
-            'addCouponGroupMessage' => $addCouponGroup
         ]);
     }
 
     /**
-     * @Route("/read", name="_accounting_coupon_group_read")
+     * @Route("/read", name="_read")
      */
-    public function read($couponGroupId)
+    public function read()
     {
-        $request = new Request('Accounting', 'CouponGroup','read');
-        $request->add_query('couponGroupId', $couponGroupId);
-        $response = $request->send();
-        $couponGroup = $response->getContent();
+
         return $this->render('accounting/coupon_group/read.html.twig', [
             'controller_name' => 'CouponGroupController',
-            'couponGroup' => $couponGroup
         ]);
     }
 
     /**
-     * @Route("/edit", name="_accounting_coupon_group_edit")
+     * @Route("/edit", name="_edit")
      */
     public function edit()
-    {
-        return $this->render('accounting/coupon_group/edit.html.twig', [
-            'controller_name' => 'CouponGroupController',
-        ]);
-    }
-
-    /**
-     * @Route("/save", name="_accounting_coupon_group_save")
-     */
-    public function save()
-    {
-        return $this->render('accounting/coupon_group/edit.html.twig', [
-            'controller_name' => 'CouponGroupController',
-        ]);
-    }
-
-    /**
-     * @Route("/update", name="_accounting_coupon_group_update")
-     */
-    public function update()
     {
         return $this->render('accounting/coupon_group/edit.html.twig', [
             'controller_name' => 'CouponGroupController',

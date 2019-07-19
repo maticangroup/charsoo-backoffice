@@ -35,27 +35,26 @@
                                                 <table id="table8">
                                                     <thead>
                                                     <tr>
-                                                        <th scope="col">Name</th>
-                                                        <th scope="col">Amount</th>
-                                                        <th scope="col">Use date</th>
-                                                        <th scope="col">Expiry date</th>
+                                                        <th scope="col">Gift Card</th>
+                                                        <th scope="col">Status</th>
+                                                        <th scope="col">Used By</th>
+                                                        <th scope="col">Used Date</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            Gift card series name
-                                                        </td>
-                                                        <td>
-                                                            120,000
-                                                        </td>
-                                                        <td>
-                                                            12-12-12
-                                                        </td>
-                                                        <td>
-                                                            12-12-12
-                                                        </td>
-                                                    </tr>
+                                                    {% for giftCard in giftCards %}
+                                                        <tr>
+                                                            <td>{{ giftCard.giftCardSerial }}</td>
+                                                            <td>
+                                        <span class="label rounded"
+                                              style="background-color: {{ giftCard.giftCardStatus.giftCardStatusColor }}">
+                                            {{ giftCard.giftCardStatus.giftCardStatusName }}
+                                        </span>
+                                                            </td>
+                                                            <td>{{ giftCard.giftCardUsedPersonFirstName }} {{ giftCard.giftCardUsedPersonLastName }}</td>
+                                                            <td>{{ giftCard.giftCardUsedDate }}</td>
+                                                        </tr>
+                                                    {% endfor %}
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -95,32 +94,18 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            Coupon series name
-                                                        </td>
-                                                        <td>
-                                                            Percentage/Fixed
-                                                        </td>
-                                                        <td>
-                                                            20% / 10,000
-                                                        </td>
-                                                        <td>
-                                                            120,000
-                                                        </td>
-                                                        <td>
-                                                            <a href="" class="btn-link">#261561</a>
-                                                        </td>
-                                                        <td>
-                                                            1,000,000
-                                                        </td>
-                                                        <td>
-                                                            1397/02/12
-                                                        </td>
-                                                        <td>
-                                                            1397/02/12
-                                                        </td>
-                                                    </tr>
+                                                    {% for coupon in coupons %}
+                                                        <tr>
+                                                            <td>{{ coupon.customerCouponSerial }}</td>
+                                                            <td>{{ coupon.customerCouponDiscountType }}</td>
+                                                            <td>{{ coupon.customerCouponDiscountEffect }}</td>
+                                                            <td>{{ coupon.customerCouponMinimumInvoicePrice }}</td>
+                                                            <td>{{ coupon.customerCouponOrderSerial }}</td>
+                                                            <td>{{ coupon.customerCouponOrderTotalPrice }}</td>
+                                                            <td>{{ coupon.customerCouponUsedDate }}</td>
+                                                            <td>{{ coupon.customerCouponExpiryDate }}</td>
+                                                        </tr>
+                                                    {% endfor %}
                                                     </tbody>
                                                 </table>
                                             </div>

@@ -4,76 +4,63 @@
 
 {% block body %}
     <div class="row">
+        <div class="col-6">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-10">
+                            <h1>welcome section</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque eum libero
+                                numquam
+                                obcaecati perspiciatis quas quisquam soluta unde voluptates.
+                            </p>
 
-        <div class="col-12">
-            <div class="row">
-                <div class="col-6">
-                    <div class="panel">
-                        <div class="panel-content">
-                            <div class="row">
-                                <div class="col-10">
-                                    <h1>welcome section</h1>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque eum libero
-                                        numquam
-                                        obcaecati perspiciatis quas quisquam soluta unde voluptates.
-                                    </p>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">cpn_ADD41561</h3>
-                        </div>
-
-                        <div class="feeds-panel">
-                            <ul class="nav">
-                                <li>
-                                    <span class="time">1</span>
-                                    <i class="fa fa-shopping-cart text-white bg-blue"></i>
-                                    <span class="text">Left</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="panel">
-                        <div class="weather--panel text-white bg-darker">
-                            <div class="weather--title">
-                                <i class="fa fa-exclamation"></i>
-                                <span>Availability</span>
-                            </div>
-
-                            <div class="weather--info">
-                                <a href="#" class="fa fa-play text-green"></a>
-                                <a href="#" class="fa fa-ban text-red"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="panel">
-                        <div class="weather--panel text-white bg-darker">
-                            <div class="weather--title">
-                                <i class="fa fa-exclamation"></i>
-                                <span>Confirm</span>
-                            </div>
-
-                            <div class="weather--info">
-                                <a href="#" class="fa fa-check text-green"></a>
-                                <a href="#" class="fa fa-times text-red"></a>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <form action="" class="col-12" method="post">
+        <div class="col-4">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ couponGroupModel.couponGroupSerial }}</h3>
+                </div>
+
+                <div class="feeds-panel">
+                    <ul class="nav">
+                        <li>
+                            <span class="time">{{ couponGroupModel.couponGroupLeftUsageTimes }}</span>
+                            <i class="fa fa-shopping-cart text-white bg-blue"></i>
+                            <span class="text">Left</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="panel">
+                <div class="weather--panel text-white bg-darker">
+                    <div class="weather--title">
+                        <i class="fa fa-exclamation"></i>
+                        <span>Confirm</span>
+                    </div>
+                    <div class="weather--info">
+                        {% if couponGroupModel.couponGroupStatus.couponGroupStatusMachineName == 'requested' %}
+                            <a href="{{ path('accounting_coupon_group_confirm_coupon_group' , {coupon_group_id:couponGroupModel.couponGroupId}) }}"
+                               class="fa fa-check text-green"></a>
+                        {% elseif couponGroupModel.couponGroupStatus.couponGroupStatusMachineName == 'deactive' %}
+                            <a href="{{ path('accounting_coupon_group_confirm_coupon_group' , {coupon_group_id:couponGroupModel.couponGroupId}) }}"
+                               class="fa fa-check text-green"></a>
+                        {% else %}
+                            <a href="{{ path('accounting_coupon_group_reject_coupon_group' , {coupon_group_id:couponGroupModel.couponGroupId}) }}"
+                               class="fa fa-ban text-red"></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
             <div class="panel">
                 <div class="panel-content">
                     <div class="row">
@@ -82,17 +69,15 @@
                                 <span class="label-text col-md-12 col-form-label ">Name</span>
 
                                 <div class="col-md-12">
-                                    <input type="text" name="cg_name" placeholder="Coupon Group Name"
-                                           class="form-control">
+                                    {{ couponGroupModel.couponGroupName }}
                                 </div>
                             </div>
                         </div>
                         <div class="col-2 ">
                             <div class="form-group row">
                                 <span class="label-text col-md-12 col-form-label ">Prefix</span>
-
                                 <div class="col-md-12">
-                                    <input type="text" name="cg_prefix" placeholder="cpn_" class="form-control">
+                                    {{ couponGroupModel.couponGroupPrefix }}
                                 </div>
                             </div>
                         </div>
@@ -100,46 +85,40 @@
                             <div class="form-group row">
                                 <span class="label-text col-md-12 col-form-label ">Expiry date</span>
                                 <div class="col-md-12">
-                                    <input type="date" name="cg_expiry_date" placeholder="" class="form-control">
+                                    {{ couponGroupModel.couponGroupExpiryDate }}
                                 </div>
                             </div>
                         </div>
                         <div class="col-2 ">
                             <div class="form-group row">
                                 <span class="label-text col-md-12 col-form-label ">Discount type</span>
-                                <select name="cg_discount_type" class="form-control">
-                                    <option value="1">Percentage</option>
-                                    <option value="2">Fixed amount</option>
-                                </select>
+                                {{ couponGroupModel.couponGroupDiscountType.couponGroupDiscountTypeName }}
                             </div>
                         </div>
 
                         <div class="col-2 ">
                             <div class="form-group row">
                                 <span class="label-text col-md-12 col-form-label ">Effect</span>
+
                                 <div class="col-md-12">
-                                    <input type="text" name="cg_effect" placeholder="Percentage or fixed amount"
-                                           class="form-control">
+                                    {{ couponGroupModel.couponGroupDiscountEffect }}
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-2 ">
                             <div class="form-group row">
                                 <span class="label-text col-md-12 col-form-label ">Minimum Invoice price</span>
 
                                 <div class="col-md-12">
-                                    <input type="text" name="cg_minimum_invoice_price" placeholder="Invoice Price"
-                                           class="form-control">
+                                    {{ couponGroupModel.couponGroupMinimumInvoicePrice }}
                                 </div>
                             </div>
                         </div>
                         <div class="col-1">
-                            <div class="form-group ">
+                            <div class="form-group">
                                 <span class="label-text col-md-12 col-form-label ">Type</span>
-                                <label class="form-check">
-                                    <input type="checkbox" name="checkbox" value="true" class="form-check-input">
-                                    <span class="form-check-label">Private</span>
-                                </label>
+                                {{ (couponGroupModel.couponGroupIsPrivate == 'true') ? 'Private' : 'Public' }}
                             </div>
                         </div>
 
@@ -147,243 +126,142 @@
                             <div class="form-group row">
                                 <span class="label-text col-md-12 col-form-label ">Usage times</span>
                                 <div class="col-md-12">
-                                    <input type="number" name="cg_usage_times" placeholder="" class="form-control">
+                                    {{ couponGroupModel.couponGroupUsageTimes }}
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 ">
+                        <div class="col-2 ">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Confirmor</span>
+                                <div class="col-md-12">
+                                    {{ couponGroupModel.couponGroupConfirmPerson }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2 ">
+                            <div class="form-group row">
+                                <span class="label-text col-md-12 col-form-label ">Confirm Date</span>
+                                <div class="col-md-12">
+                                    {{ couponGroupModel.couponGroupConfirmDate }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 ">
                             <div class="form-group row">
                                 <span class="label-text col-md-12 col-form-label ">Description</span>
-                                <div class="col-md-12">
-                                    <textarea name="cg_description" placeholder="" class="form-control"></textarea>
-                                </div>
+                                <div class="col-md-12">{{ couponGroupModel.couponGroupUsageDescription }}</div>
                             </div>
                         </div>
-                        <div class="col-2 mt-5">
-                            <button type="submit" class="btn btn-block btn-info fa fa-save rounded"></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
 
-        <div class="col-12">
-            <div class="panel">
-                <div class="panel-content">
-                    <div class="form-group row">
-                        <div class="col-4"></div>
-                        <div class="col-md-4">
-                            <input type="text" placeholder="Search" name="text"
-                                   class="form-control">
-                        </div>
-                        <div class="col-4"></div>
                     </div>
-                    <!-- Records List Start -->
-                    <div class="records--list">
-                        <table id="usersRoleList">
-                            <thead>
-                            <tr>
-                                <th scope="col">Owner</th>
-                                <th scope="col">Use Date</th>
-                                <th scope="col">Order</th>
-                                <th scope="col">Order Price</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    Username
-                                </td>
-                                <td>
-                                    1398/12/23
-                                </td>
-                                <td>
-                                    <a href="">#1648615</a>
-                                </td>
-                                <td>
-                                    2,000,000
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- Records List End -->
                 </div>
             </div>
         </div>
-        <div class="col-12">
-            <div class="panel">
-                <div class="panel-content">
-                    <div class="form-group row">
-                        <div class="col-3"></div>
-                        <div class="col-md-4">
-                            <select name="cg_discount_type" class="form-control">
-                                <option value="1">Percentage</option>
-                                <option value="2">Fixed amount</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <button type="submit" class="btn rounded btn-block btn-dark fa fa-save"></button>
-                        </div>
-                        <div class="col-3"></div>
-                    </div>
-                    <!---->
-                    <div class="records--list">
-                        <table id="countriesList">
-                            <thead>
-                            <tr>
-                                <th>Global Token</th>
-                                <th>Name</th>
-                                <th>Mobile</th>
-                                <th>Phone</th>
-                                <th>Groups</th>
-                                <th>Company</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Customer Name
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">+989125966246</a>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">02196385274</a>
-                                </td>
-                                <td>
-                                    <span class="label label-info rounded">GP1</span>
-                                    <span class="label label-info rounded">GP1</span>
-                                    <span class="label label-info rounded">GP1</span>
-                                </td>
-                                <td>
-                                    <span class="label label-info rounded">Company</span>
-                                    <span class="label label-info rounded">Company</span>
-                                    <span class="label label-info rounded">Company</span>
-                                </td>
-                                <td>
-                                    <a href="#" class="fa fa-trash"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Customer Name
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">+989125966246</a>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">02196385274</a>
-                                </td>
-                                <td>
-                                    <span class="label label-info rounded">GP1</span>
-                                    <span class="label label-info rounded">GP1</span>
-                                    <span class="label label-info rounded">GP1</span>
-                                </td>
-                                <td>
-                                    <span class="label label-info rounded">Company</span>
-                                    <span class="label label-info rounded">Company</span>
-                                    <span class="label label-info rounded">Company</span>
-                                </td>
-                                <td>
-                                    <a href="#" class="fa fa-trash"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Customer Name
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">+989125966246</a>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">02196385274</a>
-                                </td>
-                                <td>
-                                    <span class="label label-info rounded">GP1</span>
-                                    <span class="label label-info rounded">GP1</span>
-                                    <span class="label label-info rounded">GP1</span>
-                                </td>
-                                <td>
-                                    <span class="label label-info rounded">Company</span>
-                                    <span class="label label-info rounded">Company</span>
-                                    <span class="label label-info rounded">Company</span>
-                                </td>
-                                <td>
-                                    <a href="#" class="fa fa-trash"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Customer Name
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">+989125966246</a>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">02196385274</a>
-                                </td>
-                                <td>
-                                    <span class="label label-info rounded">GP1</span>
-                                    <span class="label label-info rounded">GP1</span>
-                                    <span class="label label-info rounded">GP1</span>
-                                </td>
-                                <td>
-                                    <span class="label label-info rounded">Company</span>
-                                    <span class="label label-info rounded">Company</span>
-                                    <span class="label label-info rounded">Company</span>
-                                </td>
-                                <td>
-                                    <a href="#" class="fa fa-trash"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Customer Name
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">+989125966246</a>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">02196385274</a>
-                                </td>
-                                <td>
-                                    <span class="label label-info rounded">GP1</span>
-                                    <span class="label label-info rounded">GP1</span>
-                                    <span class="label label-info rounded">GP1</span>
-                                </td>
-                                <td>
-                                    <span class="label label-info rounded">Company</span>
-                                    <span class="label label-info rounded">Company</span>
-                                    <span class="label label-info rounded">Company</span>
-                                </td>
-                                <td>
-                                    <a href="#" class="fa fa-trash"></a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
 
-                    <!-- Records List End -->
+
+        {% if couponGroupModel.couponGroupStatus.couponGroupStatusMachineName == 'active' %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-content">
+                        <div class="form-group row">
+                            <div class="col-4"></div>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Search" name="text"
+                                       class="form-control">
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                        <!-- Records List Start -->
+                        <div class="records--list">
+                            <table id="usersRoleList">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Owner</th>
+                                    <th scope="col">Use Date</th>
+                                    <th scope="col">Order</th>
+                                    <th scope="col">Order Price</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for usedCoupon in usedPeopleCoupons %}
+                                    <tr>
+                                        <td>{{ usedCoupon.usedCouponOwnerFirstName }} {{ usedCoupon.usedCouponOwnerLastName }}</td>
+                                        <td>{{ usedCoupon.usedCouponDate }}</td>
+                                        <td>{{ usedCoupon.usedCouponOrderSerial }}</td>
+                                        <td>{{ usedCoupon.usedCouponOrderPrice }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Records List End -->
+                    </div>
                 </div>
             </div>
-        </div>
+            {% if couponGroupModel.couponGroupIsPrivate == 'true' %}
+                <div class="col-12">
+                    <div class="panel">
+                        <div class="panel-content">
+                            <form action="{{ path('accounting_coupon_group_add_person' , {coupon_group_id:couponGroupModel.couponGroupId }) }}"
+                                  class="form-group row" method="post">
+                                <div class="col-3"></div>
+                                <div class="col-md-4">
+                                    <select name="id" class="form-control">
+                                        {% for person in persons %}
+                                            <option value="{{ person.id }}">{{ person.humanName }} {{ person.humanFamily }}
+                                                | {{ person.mobile }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn rounded btn-block btn-dark fa fa-save"></button>
+                                </div>
+                                <div class="col-3"></div>
+                            </form>
+                            <!---->
+                            <div class="records--list">
+                                <table id="countriesList">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Mobile</th>
+                                        <th>Groups</th>
+                                        <th>Company</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for selectedPerson in selectedPersons %}
+                                        <tr>
+                                            <td>{{ selectedPerson.id }}</td>
+                                            <td>{{ selectedPerson.humanName }} {{ selectedPerson.humanFamily }}</td>
+                                            <td>{{ selectedPerson.mobile }}</td>
+                                            <td>
+                                                {% for group in selectedPerson.groups %}
+                                                    <span class="label label-info rounded">{{ group }}</span>
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for company in selectedPerson.companies %}
+                                                    <span class="label label-info rounded">{{ company }}</span>
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                <a href="{{ path('accounting_coupon_group_remove_person' , {person_id:selectedPerson.id , coupon_group_id:couponGroupModel.couponGroupId }) }}"
+                                                   class="fa fa-trash"></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Records List End -->
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
     </div>
 {% endblock %}

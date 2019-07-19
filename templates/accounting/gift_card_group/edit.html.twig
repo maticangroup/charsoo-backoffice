@@ -20,126 +20,68 @@
                 </div>
             </div>
         </div>
-        <form action="" method="post">
-            <div class="col-12">
-                <div class="panel">
-                    <div class="panel-content">
-                        <div class="row">
-                            <div class="col-2 ">
-                                <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Gift card name</span>
-
-                                    <div class="col-md-12">
-                                        <input type="text" name="text" placeholder="name" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2 ">
-                                <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Prefix</span>
-
-                                    <div class="col-md-12">
-                                        <input type="text" name="text" placeholder="prefix" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2 ">
-                                <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Expiry date</span>
-
-                                    <div class="col-md-12">
-                                        <input type="date" name="text" placeholder="" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2 ">
-                                <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Gift card count</span>
-
-                                    <div class="col-md-12">
-                                        <input type="text" name="text" placeholder="Gift card count"
-                                               class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2 ">
-                                <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Gift card amount</span>
-
-                                    <div class="col-md-12">
-                                        <input type="text" name="text" placeholder="Gift card amount"
-                                               class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-                                <input type="submit" class="btn btn-block btn-info fa fa-save rounded">
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-
         <div class="col-8">
             <div class="panel">
                 <div class="panel-heading">
-                    <h3 class="panel-title">gift_ADD41561</h3>
+                    <h3 class="panel-title">Gift Card Group Info</h3>
                 </div>
-
                 <div class="feeds-panel">
                     <ul class="nav">
                         <li>
-                            <span class="time">100,000</span>
+                            <span class="time">{{ giftCardGroupModel.giftCardGroupName }}</span>
+                            <i class="fa fa-money-bill-alt text-white bg-green"></i>
+                            <span class="text">Name</span>
+                        </li>
+                        <li>
+                            <span class="time">{{ giftCardGroupModel.giftCardGroupPrefix }}</span>
+                            <i class="fa fa-money-bill-alt text-white bg-green"></i>
+                            <span class="text">Prefix</span>
+                        </li>
+                        <li>
+                            <span class="time">{{ giftCardGroupModel.giftCardGroupAmount }}</span>
                             <i class="fa fa-money-bill-alt text-white bg-green"></i>
                             <span class="text">Amount</span>
                         </li>
                         <li>
-                            <span class="time">1398/12/12</span>
+                            <span class="time">{{ giftCardGroupModel.giftCardGroupExpiryDate }}</span>
                             <i class="fa fa-hourglass text-white bg-red"></i>
                             <span class="text">Expiry Date</span>
                         </li>
                         <li>
-                            <span class="time">20</span>
+                            <span class="time">{{ giftCardGroupModel.giftCardGroupCount }}</span>
                             <i class="fa fa-bars text-white bg-orange"></i>
                             <span class="text">Count</span>
                         </li>
                         <li>
-                            <span class="time">10</span>
+                            <span class="time">{{ giftCardGroupModel.giftCardGroupLeftCount }}</span>
                             <i class="fa fa-shopping-cart text-white bg-blue"></i>
                             <span class="text">Left</span>
                         </li>
                         <li>
-                            <span class="time">Person</span>
+                            <span class="time">{{ giftCardGroupModel.giftCardGroupCreatePerson }}</span>
+                            <i class="fa fa-user text-white bg-dark"></i>
+                            <span class="text">Create Person</span>
+                        </li>
+                        <li>
+                            <span class="time">{{ giftCardGroupModel.giftCardGroupCreateDate }}</span>
+                            <i class="fa fa-hourglass-start text-white bg-secondary"></i>
+                            <span class="text">Create Date</span>
+                        </li>
+                        <li>
+                            <span class="time">{{ giftCardGroupModel.giftCardGroupConfirmPerson }}</span>
                             <i class="fa fa-user text-white bg-dark"></i>
                             <span class="text">Confirmir</span>
                         </li>
                         <li>
-                            <span class="time">1398/12/12</span>
+                            <span class="time">{{ giftCardGroupModel.giftCardGroupConfirmDate }}</span>
                             <i class="fa fa-hourglass-start text-white bg-secondary"></i>
                             <span class="text">Confirm Date</span>
                         </li>
-
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="col-2">
-            <div class="panel">
-                <div class="weather--panel text-white bg-darker">
-                    <div class="weather--title">
-                        <i class="fa fa-exclamation"></i>
-                        <span>Availability</span>
-                    </div>
-
-                    <div class="weather--info">
-                        <a href="" class="fa fa-play text-green"></a>
-                        <a href="" class="fa fa-ban text-red"></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="col-2"></div>
         <div class="col-2">
             <div class="panel">
                 <div class="weather--panel text-white bg-darker">
@@ -149,13 +91,20 @@
                     </div>
 
                     <div class="weather--info">
-                        <a href="" class="fa fa-check text-green"></a>
-                        <a href="" class="fa fa-times text-red"></a>
+                        {% if giftCardGroupModel.giftCardGroupStatus.giftCardGroupStatusMachineName == 'requested' %}
+                            <a href="{{ path('accounting_gift_card_group_confirm_gift_card_group' , {gift_card_group_id:giftCardGroupModel.giftCardGroupId}) }}"
+                               class="fa fa-check text-green"></a>
+                        {% elseif giftCardGroupModel.giftCardGroupStatus.giftCardGroupStatusMachineName == 'paused' %}
+                            <a href="{{ path('accounting_gift_card_group_confirm_gift_card_group' , {gift_card_group_id:giftCardGroupModel.giftCardGroupId}) }}"
+                               class="fa fa-play text-green"></a>
+                        {% else %}
+                            <a href="{{ path('accounting_gift_card_group_reject_gift_card_group' , {gift_card_group_id:giftCardGroupModel.giftCardGroupId}) }}"
+                               class="fa fa-pause text-red"></a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="col-12">
             <div class="panel">
                 <div class="panel-content">
@@ -173,7 +122,6 @@
                             <thead>
                             <tr>
                                 <th scope="col">Gift Card</th>
-                                <th scope="col">Use Status</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Used By</th>
                                 <th scope="col">Used Date</th>
@@ -181,29 +129,29 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    GIFT_GHDS15612
-                                </td>
-                                <td>
-                                    <span class="label label-green rounded">Used</span>
-                                    <span class="label label-red rounded">Not Used</span>
-                                </td>
-                                <td>
-                                    <span class="label label-green rounded">Active</span>
-                                    <span class="label label-red rounded">Deactive</span>
-                                </td>
-                                <td>
-                                    Username
-                                </td>
-                                <td>
-                                    1398/12/12
-                                </td>
-                                <td>
-                                    <a href="" class="fa fa-play text-green"></a>
-                                    <a href="" class="fa fa-ban text-red"></a>
-                                </td>
-                            </tr>
+                            {% for giftCard in giftCards %}
+                                <tr>
+                                    <td>{{ giftCard.giftCardSerial }}</td>
+                                    <td>
+                                        {% if giftCard.giftCardStatus.giftCardStatusMachineName != 'used' %}
+                                            <span class="label rounded"
+                                                  style="background-color: {{ giftCard.giftCardStatus.giftCardStatusColor }}">
+                                            {{ giftCard.giftCardStatus.giftCardStatusName }}
+                                        </span>
+                                        {% else %}
+                                            <span class="label rounded label-gray">Used</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ giftCard.giftCardUsedPersonFirstName }}{{ giftCard.giftCardUsedPersonLastName }}</td>
+                                    <td>{{ giftCard.giftCardUsedDate }}</td>
+                                    <td>
+                                        {% if giftCard.giftCardStatus.giftCardStatusMachineName != 'used' %}
+                                            <a href="{{ path('accounting_gift_card_group_gift_card_status' , {gift_card_id:giftCard.giftCardId , machine_name:giftCard.giftCardStatus.giftCardStatusMachineName , gift_card_group_id:giftCardGroupModel.giftCardGroupId}) }}"
+                                               class="{{ (giftCard.giftCardStatus.giftCardStatusMachineName == 'available') ? 'fa fa-ban text-red' : 'fa fa-play text-green' }}"></a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -211,5 +159,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 {% endblock %}

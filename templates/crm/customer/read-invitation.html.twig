@@ -19,14 +19,17 @@
                                 <div class="col-12">
                                     <div class="panel">
                                         <div class="panel-content">
-                                            <div class="row">
+                                            <form action="{{ path('crm_customer_invitation' , {id:personModel.id}) }}"
+                                                  method="post" class="row">
                                                 <div class="col-3 ">
                                                     <div class="form-group row">
                                                         <span class="label-text col-md-12 col-form-label ">Name</span>
 
                                                         <div class="col-md-12">
-                                                            <input type="text" name="text" placeholder="Name"
-                                                                   class="form-control">
+                                                            <input type="text"
+                                                                   value="{{ invitationModel.invitedPersonFirstName }}"
+                                                                   placeholder="Name"
+                                                                   class="form-control" name="invitedPersonFirstName">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -35,8 +38,10 @@
                                                         <span class="label-text col-md-12 col-form-label ">Family</span>
 
                                                         <div class="col-md-12">
-                                                            <input type="text" name="text" placeholder="Family"
-                                                                   class="form-control">
+                                                            <input type="text"
+                                                                   value="{{ invitationModel.invitedPersonLastName }}"
+                                                                   placeholder="Family"
+                                                                   class="form-control" name="invitedPersonLastName">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -44,18 +49,19 @@
                                                     <div class="form-group row">
                                                         <span class="label-text col-md-12 col-form-label ">Mobile</span>
                                                         <div class="col-md-12">
-                                                            <input type="tel" name="text" placeholder="Mobile"
-                                                                   class="form-control">
+                                                            <input type="tel"
+                                                                   value="{{ invitationModel.invitedPersonMobile }}"
+                                                                   placeholder="Mobile"
+                                                                   class="form-control" name="invitedPersonMobile">
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-1 "></div>
                                                 <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-                                                    <a href="#"
-                                                       class="btn btn-block btn-dark fa fa-save rounded"></a>
+                                                    <button type="submit"
+                                                            class="btn btn-block btn-dark fa fa-save rounded"></button>
                                                 </div>
-
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -84,19 +90,22 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
-                                                        <td>#315321</td>
-                                                        <td>User Name</td>
-                                                        <td>1397/12/12</td>
-                                                        <td>ds158Ef</td>
-                                                        <td>1397/12/12</td>
-                                                        <td>
-                                                            <span class="label label-gray rounded">Used</span>
-                                                            <span class="label label-red rounded">Expired</span>
-                                                            <span class="label label-blue rounded">Not Accept</span>
-                                                            <span class="label label-green rounded">Active</span>
-                                                        </td>
-                                                    </tr>
+                                                    {% for invitation in invitations %}
+                                                        <tr>
+                                                            <td>{{ invitation.invitationId }}</td>
+                                                            <td>{{ invitation.invitedPersonFirstName }} {{ invitation.invitedPersonLastName }}
+                                                                | {{ invitation.invitedPersonMobile }}</td>
+                                                            <td>{{ invitation.invitationDate }}</td>
+                                                            <td>{{ invitation.invitatorDiscountCodeSerial }}</td>
+                                                            <td>{{ invitation.invitatorDiscountCodeExpiryDate }}</td>
+                                                            <td>
+                                                                <span class="label rounded"
+                                                                      style="background-color: {{ invitation.invitatorDiscountCodeStatus.invitationStatusColor }}">
+                                                                    {{ invitation.invitatorDiscountCodeStatus.invitationStatusName }}
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
                                                     </tbody>
                                                 </table>
                                             </div>

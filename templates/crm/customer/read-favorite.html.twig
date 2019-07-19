@@ -32,38 +32,74 @@
                                                 <table id="countriesList">
                                                     <thead>
                                                     <tr role="row">
-                                                        <th>Product Global Token</th>
-                                                        <th>Product Name</th>
+                                                        <th>Barcode</th>
+                                                        <th>Name</th>
                                                         <th>Category</th>
-                                                        <th>Created Date</th>
+                                                        <th>Brand</th>
+                                                        <th>Color</th>
+                                                        <th>Guarantee</th>
+                                                        <th>Supplier</th>
+                                                        <th class="not-sortable">Actions</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <a href="#" class="btn-link">#315321</a>
-                                                        </td>
-                                                        <td>
-                                                            <a href="#" class="btn-link">Product Name</a>
-                                                        </td>
-                                                        <td>
-                                                            <ul>
-                                                                <li>Category</li>
-                                                                <li>Category
-                                                                    <ul>
-                                                                        <li>Category</li>
-                                                                        <li>Category
-                                                                            <ul>
-                                                                                <li>Category</li>
-                                                                                <li>Category</li>
-                                                                            </ul>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                        <td>1397/12/12</td>
-                                                    </tr>
+                                                    {% for item in favoriteItems %}
+                                                        <tr>
+                                                            <td>
+                                                                {% for barcode in item.itemBarcodes %}
+                                                                    {{ barcode.barcodeName }},
+                                                                {% endfor %}
+                                                            </td>
+                                                            <td>
+                                                                {{ item.itemName }}
+                                                            </td>
+                                                            <td>
+                                                                <ul class="">
+                                                                    <li><a href="#" class="btn-link">Category</a></li>
+                                                                    <li><a href="#" class="btn-link">Category</a></li>
+                                                                    <li>
+                                                                        <a href="#" class="btn-link">Category</a>
+                                                                        <ul>
+                                                                            <li><a href="#" class="btn-link">Category</a></li>
+                                                                            <li>
+                                                                                <a href="#" class="btn-link">Category</a>
+                                                                            <li><a href="#" class="btn-link">Category</a>
+                                                                                <ul>
+                                                                                    <li><a href="#" class="btn-link">Category</a></li>
+                                                                                    <li>
+                                                                                        <a href="#" class="btn-link">Category</a>
+                                                                                    <li><a href="#" class="btn-link">Category</a></li>
+
+
+                                                                                </ul>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+
+                                                            <td>{{ item.itemBrandName }}</td>
+                                                            <td>
+                                                                {% for color in item.itemColors %}
+                                                                    {{ color.itemColorName }},
+                                                                {% endfor %}
+                                                            </td>
+                                                            <td>
+                                                                {% for guarantee in item.itemGuarantees %}
+                                                                    {{ guarantee.guaranteeName }},
+                                                                {% endfor %}
+                                                            </td>
+                                                            <td>
+                                                                {% for supplier in item.itemSuppliers %}
+                                                                    {{ supplier.companyName }},
+                                                                {% endfor %}
+                                                            </td>
+                                                            <td>
+                                                                <a href="{{ path('repository_item_repository_item_edit' , {id:item.itemID}) }}"
+                                                                   class="fa fa-edit"></a>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
                                                     </tbody>
                                                 </table>
                                             </div>

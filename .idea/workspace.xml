@@ -2,475 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="888bc667-c4ce-45a1-ae9a-07fc984df454" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/dist/css/bootstrap-grid.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/dist/css/bootstrap-grid.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/dist/css/bootstrap-grid.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/dist/css/bootstrap-grid.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/dist/css/bootstrap-reboot.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/dist/css/bootstrap-reboot.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/dist/css/bootstrap-reboot.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/dist/css/bootstrap-reboot.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/dist/css/bootstrap.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/dist/css/bootstrap.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/dist/css/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/dist/css/bootstrap.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/dist/js/bootstrap.bundle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/dist/js/bootstrap.bundle.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/dist/js/bootstrap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/dist/js/bootstrap.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/dist/js/bootstrap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/dist/js/bootstrap.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/alert.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/alert.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/button.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/button.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/carousel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/carousel.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/collapse.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/collapse.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/dropdown.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/dropdown.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/index.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/modal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/modal.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/popover.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/popover.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/scrollspy.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/scrollspy.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/tab.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/tab.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/toast.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/toast.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/tooltip.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/tooltip.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/util.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/dist/util.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/src/alert.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/src/button.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/src/carousel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/src/collapse.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/src/dropdown.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/src/modal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/src/popover.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/src/scrollspy.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/src/tab.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/src/toast.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/src/tools/sanitizer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/src/tooltip.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/js/src/util.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_alert.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_badge.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_breadcrumb.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_button-group.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_buttons.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_card.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_carousel.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_close.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_code.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_custom-forms.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_dropdown.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_forms.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_functions.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_grid.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_images.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_input-group.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_jumbotron.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_list-group.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_media.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_mixins.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_modal.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_nav.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_navbar.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_pagination.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_popover.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_print.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_progress.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_reboot.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_root.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_spinners.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_tables.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_toasts.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_tooltip.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_transitions.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_type.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_utilities.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/_variables.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/bootstrap-grid.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/bootstrap-reboot.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/bootstrap.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_alert.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_background-variant.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_badge.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_border-radius.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_box-shadow.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_breakpoints.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_buttons.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_caret.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_clearfix.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_deprecate.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_float.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_forms.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_gradients.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_grid-framework.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_grid.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_hover.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_image.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_list-group.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_lists.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_nav-divider.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_pagination.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_reset-text.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_resize.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_screen-reader.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_size.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_table-row.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_text-emphasis.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_text-hide.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_text-truncate.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_transition.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_visibility.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/utilities/_align.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/utilities/_background.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/utilities/_borders.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/utilities/_clearfix.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/utilities/_display.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/utilities/_embed.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/utilities/_flex.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/utilities/_float.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/utilities/_overflow.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/utilities/_position.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/utilities/_screenreaders.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/utilities/_shadows.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/utilities/_sizing.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/utilities/_spacing.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/utilities/_stretched-link.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/utilities/_text.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/utilities/_visibility.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/bootstrap/scss/vendor/_rfs.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/AUTHORS.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/LICENSE.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/bower.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/dist/core.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/dist/jquery.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/dist/jquery.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/dist/jquery.min.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/dist/jquery.slim.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/dist/jquery.slim.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/dist/jquery.slim.min.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/external/sizzle/LICENSE.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/external/sizzle/dist/sizzle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/external/sizzle/dist/sizzle.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/external/sizzle/dist/sizzle.min.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/.eslintrc.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/ajax.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/ajax/jsonp.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/ajax/load.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/ajax/parseXML.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/ajax/script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/ajax/var/location.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/ajax/var/nonce.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/ajax/var/rquery.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/ajax/xhr.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/attributes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/attributes/attr.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/attributes/classes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/attributes/prop.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/attributes/support.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/attributes/val.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/callbacks.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/DOMEval.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/access.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/camelCase.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/init.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/isAttached.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/nodeName.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/parseHTML.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/ready-no-deferred.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/ready.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/readyException.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/stripAndCollapse.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/support.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/toType.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/var/rsingleTag.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/addGetHookIf.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/adjustCSS.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/curCSS.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/finalPropName.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/hiddenVisibleSelectors.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/showHide.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/support.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/var/cssExpand.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/var/getStyles.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/var/isHiddenWithinTree.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/var/rboxStyle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/var/rnumnonpx.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/var/swap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/data.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/data/Data.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/data/var/acceptData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/data/var/dataPriv.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/data/var/dataUser.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/deferred.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/deferred/exceptionHook.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/deprecated.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/dimensions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/effects.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/effects/Tween.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/effects/animatedSelector.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/event.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/event/ajax.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/event/alias.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/event/focusin.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/event/support.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/event/trigger.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/exports/amd.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/exports/global.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/jquery.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/manipulation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/_evalUrl.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/buildFragment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/getAll.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/setGlobalEval.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/support.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/var/rscriptType.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/var/rtagName.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/wrapMap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/offset.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/queue.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/queue/delay.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/selector-native.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/selector-sizzle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/selector.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/serialize.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/traversing.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/traversing/findFilter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/traversing/var/dir.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/traversing/var/rneedsContext.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/traversing/var/siblings.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/ObjectFunctionString.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/arr.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/class2type.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/concat.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/document.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/documentElement.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/fnToString.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/getProto.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/hasOwn.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/indexOf.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/isFunction.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/isWindow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/pnum.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/push.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/rcheckableType.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/rcssNum.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/rnothtmlwhite.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/slice.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/support.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/toString.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/wrap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/md.bootstrappersiandatetimepicker/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/md.bootstrappersiandatetimepicker/.jshintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/md.bootstrappersiandatetimepicker/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/md.bootstrappersiandatetimepicker/demo/Samples1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/md.bootstrappersiandatetimepicker/demo/SamplesModal.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/md.bootstrappersiandatetimepicker/demo/demo.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/md.bootstrappersiandatetimepicker/dist/jquery.md.bootstrap.datetimepicker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/md.bootstrappersiandatetimepicker/dist/jquery.md.bootstrap.datetimepicker.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/md.bootstrappersiandatetimepicker/dist/jquery.md.bootstrap.datetimepicker.style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/md.bootstrappersiandatetimepicker/dist/jquery.md.bootstrap.datetimepicker.style.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/md.bootstrappersiandatetimepicker/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/md.bootstrappersiandatetimepicker/src/MdPersianDateTimePicker.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/md.bootstrappersiandatetimepicker/src/jquery.md.bootstrap.datetimepicker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/md.bootstrappersiandatetimepicker/src/jquery.md.bootstrap.datetimepicker.style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/md.bootstrappersiandatetimepicker/webpack.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/esm/popper-utils.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/esm/popper-utils.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/esm/popper-utils.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/esm/popper-utils.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/esm/popper.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/esm/popper.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/esm/popper.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/esm/popper.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/popper-utils.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/popper-utils.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/popper-utils.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/popper-utils.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/popper.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/popper.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/popper.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/popper.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/umd/popper-utils.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/umd/popper-utils.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/umd/popper-utils.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/umd/popper-utils.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/umd/popper.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/umd/popper.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/umd/popper.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/umd/popper.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/dist/umd/poppper.js.flow" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/index.js.flow" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/popper.js/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/images/favicon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/fonts/en/IRANSansWeb_Medium.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/fonts/en/IRANSansWeb_Medium.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/fonts/en/fonts.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/fonts/fa/IRANSansWeb_Medium.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/fonts/fa/IRANSansWeb_Medium.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/fonts/fa/fonts.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/favicons/favicon-32x32.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-android.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-apple.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-area.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-bank.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-bookmark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-cafe.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-clear.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-close-2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-close.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-copy-light.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-copy.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-default-autocomplete.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-delete.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-disabled.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-distance.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-down-double.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-down.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-drugstore.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-edit.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-enabled.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-end-light.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-end.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-fullscreen-light.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-fullscreen.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-gas-station.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-geolocation-light.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-geolocation.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-get.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-hospital.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-hotel.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-info.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-inspect.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-layers-2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-layers-light.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-layers.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-library.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-locale.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-login.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-mall.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-map.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-marker-light.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-marker.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-menu-light.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-menu.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-metro.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-mosque.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-options.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-parking.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-placeholder-primary.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-placeholder.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-polygon-light.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-polygon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-polyline-light.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-polyline.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-print.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-restaurant.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-reverse-geocode-light.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-reverse-geocode.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-road.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-routing-2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-routing-light.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-routing.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-share-light.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-share.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-start-light.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-start.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-tag.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-ticket.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-toggle.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-university.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-up.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-zoom-in-light.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-zoom-in.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-zoom-out-light.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/icon-zoom-out.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/loader.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/map-logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/mapp-path-finder.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/marker-bank.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/marker-cafe.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/marker-circle-white.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/marker-default-blue.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/marker-default-green.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/marker-default-red.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/marker-drugstore.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/marker-end-route.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/marker-gas-station.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/marker-hospital.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/marker-hotel.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/marker-library.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/marker-mall.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/marker-metro.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/marker-mosque.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/marker-parking.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/marker-restaurant.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/marker-start-route.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/marker-university.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/placeholder-1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/placeholder-2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/sdk-logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/images/site-logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/languages/en.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/assets/languages/fa.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/css/en/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/css/fa/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/css/s.map.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/js/jquery-3.2.1.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/js/jquery.env.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/js/s.map.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/map-sdk/dist/js/s.map.styles.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/delivery/dispatch/create.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/accounting/gift_card_group/list.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Accounting/CouponGroupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Accounting/CouponGroupController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Accounting/GiftCardGroupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Accounting/GiftCardGroupController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Accounting/InvoiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Accounting/InvoiceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Delivery/DeliveryMethodController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Delivery/DeliveryMethodController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Delivery/DeliveryPersonController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Delivery/DeliveryPersonController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Delivery/DispatchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Delivery/DispatchController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Repository/PersonController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Repository/PersonController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Authentication/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Authentication/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Crm/CustomerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Crm/CustomerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Crm/CustomerGroupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Crm/CustomerGroupController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FormModels" beforeDir="false" afterPath="$PROJECT_DIR$/src/FormModels" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/accounting/coupon_group/create.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accounting/coupon_group/create.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/accounting/coupon_group/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accounting/coupon_group/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/accounting/coupon_group/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accounting/coupon_group/list.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/accounting/coupon_group/read.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accounting/coupon_group/read.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/accounting/gift_card_group/create.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accounting/gift_card_group/create.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/accounting/gift_card_group/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accounting/gift_card_group/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/accounting/invoice/create.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accounting/invoice/create.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/accounting/invoice/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accounting/invoice/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/accounting/invoice/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accounting/invoice/list.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/accounting/gift_card_group/read.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accounting/gift_card_group/read.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/authentication/login/read.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/authentication/login/read.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/delivery/delivery_method/create.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/delivery/delivery_method/create.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/delivery/delivery_method/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/delivery/delivery_method/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/delivery/delivery_method/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/delivery/delivery_method/list.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/delivery/delivery_method/read.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/delivery/delivery_method/read.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/delivery/delivery_person/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/delivery/delivery_person/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/delivery/delivery_person/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/delivery/delivery_person/list.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/delivery/delivery_person/read.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/delivery/delivery_person/read.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/delivery/dispatch/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/delivery/dispatch/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/delivery/dispatch/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/delivery/dispatch/list.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/repository/company/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/repository/company/list.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/repository/person/add-new-address.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/repository/person/add-new-address.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/crm/customer/read-company-group.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/crm/customer/read-company-group.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/crm/customer/read-favorite.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/crm/customer/read-favorite.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/crm/customer/read-gift-coupon.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/crm/customer/read-gift-coupon.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/crm/customer/read-info.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/crm/customer/read-info.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/crm/customer/read-invitation.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/crm/customer/read-invitation.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/crm/customer/read-invoice.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/crm/customer/read-invoice.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/crm/customer/read-order.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/crm/customer/read-order.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/crm/customer/read-payment-deed.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/crm/customer/read-payment-deed.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/crm/customer/read-sms.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/crm/customer/read-sms.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/crm/customer/tab.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/crm/customer/tab.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/crm/customer_group/create.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/crm/customer_group/create.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/crm/customer_group/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/crm/customer_group/edit.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/repository/person/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/repository/person/edit.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -488,21 +48,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GiftCardGroupController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Accounting/GiftCardGroupController.php">
+      <file leaf-file-name="PersonController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Repository/PersonController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="843">
-              <caret line="41" column="5" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="create.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/accounting/gift_card_group/create.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="-657">
+              <caret line="72" column="29" lean-forward="true" selection-start-line="72" selection-start-column="29" selection-end-line="72" selection-end-column="29" />
               <folding>
-                <element signature="e#12#26#0#Twig" expanded="true" />
+                <element signature="e#805#1454#0#PHP" />
+                <element signature="e#4729#5619#0#PHP" />
+                <element signature="e#11306#11375#0#PHP" />
               </folding>
             </state>
           </provider>
@@ -541,57 +95,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/delivery/delivery_method/create.html.twig" />
-        <option value="$PROJECT_DIR$/templates/delivery/delivery_method/edit.html.twig" />
-        <option value="$PROJECT_DIR$/templates/delivery/delivery_method/list.html.twig" />
-        <option value="$PROJECT_DIR$/templates/delivery/dispatch/create.html.twig" />
-        <option value="$PROJECT_DIR$/src/FormModels/Delivery/DeliveryMethodModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Delivery/WeekDayModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Delivery/AvailableQueuesModel.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Accounting/CouponGroupController.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Accounting/CouponGroupTypeModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Accounting/CouponGroupDiscountTypeModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Accounting/CouponGroupStatusModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Accounting/CouponGroupModel.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/Accounting/GiftCardGroupStatusModel.php" />
+        <option value="$PROJECT_DIR$/templates/accounting/gift_card_group/create.html.twig" />
+        <option value="$PROJECT_DIR$/src/FormModels/Accounting/GiftCardModel.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/Accounting/GiftCardGroupModel.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/Accounting/GiftCardGroupAvailabilityStatus.php" />
+        <option value="$PROJECT_DIR$/templates/accounting/gift_card_group/list.html.twig" />
+        <option value="$PROJECT_DIR$/src/FormModels/Accounting/UsedCouponModel.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/Accounting/CouponGroupConfirmStatusModel.php" />
+        <option value="$PROJECT_DIR$/templates/accounting/coupon_group/list.html.twig" />
+        <option value="$PROJECT_DIR$/src/FormModels/Accounting/GiftCardStatus.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/Accounting/GiftCardStatusModel.php" />
         <option value="$PROJECT_DIR$/src/Controller/Accounting/GiftCardGroupController.php" />
         <option value="$PROJECT_DIR$/templates/accounting/gift_card_group/edit.html.twig" />
-        <option value="$PROJECT_DIR$/src/FormModels/Accounting/GiftCardGroupStatusModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Accounting/GiftCardGroupModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Accounting/GiftCardModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Accounting/GiftCardStatus.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Delivery/DispatchStatusModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Delivery/QueueModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Sale/OrderModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Repository/LocationModel.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Delivery/DispatchController.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Delivery/DispatchModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Delivery/DispatchDeliveryStatusModel.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Delivery/DeliveryMethodController.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Delivery/DispatchPriceStatus.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Delivery/DispatchPriceStatusModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Delivery/DisoatchPaymentModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Delivery/DeliveryPersonModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Delivery/DispatchPaymentModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Delivery/DispatchPaymentStatusModel.php" />
-        <option value="$PROJECT_DIR$/templates/delivery/delivery_person/edit.html.twig" />
-        <option value="$PROJECT_DIR$/templates/delivery/delivery_person/list.html.twig" />
-        <option value="$PROJECT_DIR$/templates/delivery/delivery_person/read.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/Delivery/DeliveryPersonController.php" />
-        <option value="$PROJECT_DIR$/templates/delivery/dispatch/list.html.twig" />
-        <option value="$PROJECT_DIR$/templates/delivery/dispatch/edit.html.twig" />
-        <option value="$PROJECT_DIR$/src/FormModels/Accounting/InvoiceModel.php" />
-        <option value="$PROJECT_DIR$/templates/accounting/invoice/create.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/Accounting/PaymentRequestController.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Accounting/PaymentMethodModel.php" />
+        <option value="$PROJECT_DIR$/templates/accounting/coupon_group/create.html.twig" />
         <option value="$PROJECT_DIR$/vendor/maticangroup/core_client_api/app/Core/Entities/Accounting.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Accounting/PaymentModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Accounting/PaymentRequestModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Accounting/PaymentRequestStatusModel.php" />
-        <option value="$PROJECT_DIR$/templates/repository/company/list.html.twig" />
+        <option value="$PROJECT_DIR$/src/FormModels/Accounting/CouponGroupModel.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Accounting/CouponGroupController.php" />
+        <option value="$PROJECT_DIR$/templates/accounting/coupon_group/edit.html.twig" />
+        <option value="$PROJECT_DIR$/src/FormModels/Authentication/UserModel.php" />
+        <option value="$PROJECT_DIR$/vendor/maticangroup/core_client_api/app/Core/Transaction/Response.php" />
+        <option value="$PROJECT_DIR$/templates/authentication/login/read.html.twig" />
         <option value="$PROJECT_DIR$/templates/base.html.twig" />
-        <option value="$PROJECT_DIR$/templates/accounting/invoice/list.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/Accounting/InvoiceController.php" />
-        <option value="$PROJECT_DIR$/templates/accounting/invoice/edit.html.twig" />
+        <option value="$PROJECT_DIR$/vendor/maticangroup/core_client_api/app/Core/Entities/Authentication.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Authentication/LoginController.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/CRM/CustomerGroupStatusModel.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/CRM/CustomerGroupModel.php" />
+        <option value="$PROJECT_DIR$/templates/crm/customer_group/create.html.twig" />
+        <option value="$PROJECT_DIR$/templates/crm/customer_group/edit.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/Crm/CustomerGroupController.php" />
+        <option value="$PROJECT_DIR$/templates/repository/person/edit.html.twig" />
+        <option value="$PROJECT_DIR$/src/FormModels/Notification/SMSLogModel.php" />
+        <option value="$PROJECT_DIR$/vendor/maticangroup/core_client_api/app/Core/Entities/Notification.php" />
+        <option value="$PROJECT_DIR$/templates/crm/customer/read-sms.html.twig" />
+        <option value="$PROJECT_DIR$/templates/crm/customer/read-info.html.twig" />
+        <option value="$PROJECT_DIR$/templates/crm/customer/read-order.html.twig" />
+        <option value="$PROJECT_DIR$/templates/crm/customer/read-favorite.html.twig" />
+        <option value="$PROJECT_DIR$/templates/accounting/gift_card_group/read.html.twig" />
+        <option value="$PROJECT_DIR$/templates/accounting/coupon_group/read.html.twig" />
+        <option value="$PROJECT_DIR$/src/FormModels/CRM/CustomerCouponModel.php" />
+        <option value="$PROJECT_DIR$/templates/crm/customer/read-gift-coupon.html.twig" />
+        <option value="$PROJECT_DIR$/templates/crm/customer/read-company-group.html.twig" />
+        <option value="$PROJECT_DIR$/templates/crm/customer/read-payment-deed.html.twig" />
+        <option value="$PROJECT_DIR$/templates/crm/customer/read-invoice.html.twig" />
+        <option value="$PROJECT_DIR$/src/FormModels/CRM/InvitationStatusModel.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/CRM/InvitationModel.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/Repository/PersonModel.php" />
+        <option value="$PROJECT_DIR$/vendor/maticangroup/core_client_api/app/Core/Entities/CRM.php" />
+        <option value="$PROJECT_DIR$/templates/crm/customer/read-invitation.html.twig" />
+        <option value="$PROJECT_DIR$/templates/crm/customer/tab.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/Crm/CustomerController.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/Ticketing/CommentModel.php" />
       </list>
     </option>
   </component>
@@ -724,7 +278,7 @@
       <path value="$PROJECT_DIR$/vendor/maticangroup/core_client_api" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
@@ -735,7 +289,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -764,14 +317,14 @@
               <item name="backoffice" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Controller" type="462c0819:PsiDirectoryNode" />
-              <item name="Accounting" type="462c0819:PsiDirectoryNode" />
+              <item name="Repository" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
               <item name="backoffice" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Controller" type="462c0819:PsiDirectoryNode" />
-              <item name="Sale" type="462c0819:PsiDirectoryNode" />
+              <item name="Ticketing" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
@@ -784,7 +337,7 @@
               <item name="backoffice" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="FormModels" type="462c0819:PsiDirectoryNode" />
-              <item name="Accounting" type="462c0819:PsiDirectoryNode" />
+              <item name="CRM" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
@@ -802,43 +355,71 @@
               <item name="backoffice" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="accounting" type="462c0819:PsiDirectoryNode" />
-              <item name="gift_card_group" type="462c0819:PsiDirectoryNode" />
+              <item name="invoice" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
               <item name="backoffice" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="delivery" type="462c0819:PsiDirectoryNode" />
+              <item name="crm" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
               <item name="backoffice" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="delivery" type="462c0819:PsiDirectoryNode" />
-              <item name="delivery_person" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="repository" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="repository" type="462c0819:PsiDirectoryNode" />
-              <item name="company" type="462c0819:PsiDirectoryNode" />
+              <item name="crm" type="462c0819:PsiDirectoryNode" />
+              <item name="customer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
               <item name="backoffice" type="462c0819:PsiDirectoryNode" />
               <item name="vendor" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="maticangroup" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="maticangroup" type="462c0819:PsiDirectoryNode" />
+              <item name="core_client_api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="maticangroup" type="462c0819:PsiDirectoryNode" />
+              <item name="core_client_api" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="maticangroup" type="462c0819:PsiDirectoryNode" />
+              <item name="core_client_api" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="maticangroup" type="462c0819:PsiDirectoryNode" />
+              <item name="core_client_api" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Core" type="462c0819:PsiDirectoryNode" />
+              <item name="Entities" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -923,17 +504,20 @@
       <workItem from="1563213285907" duration="6548000" />
       <workItem from="1563252892730" duration="26836000" />
       <workItem from="1563338318878" duration="15491000" />
-      <workItem from="1563365759531" duration="240000" />
+      <workItem from="1563365759531" duration="13152000" />
+      <workItem from="1563426426392" duration="26819000" />
+      <workItem from="1563523770655" duration="7817000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="549684000" />
+    <option name="totallyTimeSpent" value="597232000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49784482" visible="true" weight="0.18976545" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49784482" visible="true" weight="0.19402985" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.3297414" />
@@ -942,7 +526,7 @@
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="12" visible="true" weight="0.3609914" />
+      <window_info anchor="bottom" id="Terminal" order="12" weight="0.37715518" />
       <window_info id="Favorites" order="2" sideWeight="0.5021552" side_tool="true" weight="0.1705757" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -967,362 +551,464 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/Controller/Accounting/GiftCardGroupController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="221" column="54" selection-start-line="221" selection-start-column="54" selection-end-line="221" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Accounting/UsedCouponModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/FormModels/Accounting/CouponGroupStatusModel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="97" column="5" selection-start-line="97" selection-start-column="5" selection-end-line="97" selection-end-column="5" />
+        <state relative-caret-position="300">
+          <caret line="15" column="41" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Accounting/CouponGroupDiscountTypeModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="14" column="40" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FormModels/Accounting/CouponGroupModel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="640">
-          <caret line="318" column="5" selection-start-line="318" selection-start-column="5" selection-end-line="318" selection-end-column="5" />
+          <caret line="377" column="5" selection-start-line="377" selection-start-column="5" selection-end-line="377" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="188" column="40" selection-start-line="188" selection-start-column="40" selection-end-line="188" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/accounting/coupon_group/create.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="19" selection-start-column="19" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/maticangroup/core_client_api/app/Core/Entities/Authentication.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Authentication/LoginController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="48" column="89" selection-start-line="48" selection-start-column="89" selection-end-line="48" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Authentication/UserModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="670">
+          <caret line="114" column="5" selection-start-line="114" selection-start-column="5" selection-end-line="114" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/maticangroup/core_client_api/app/Core/Transaction/Response.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="626">
+          <caret line="40" column="27" lean-forward="true" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/authentication/login/read.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="115" column="20" selection-start-line="115" selection-start-column="20" selection-end-line="115" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/CRM/CustomerGroupStatusModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="15" column="43" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/accounting/coupon_group/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="536">
+          <caret line="262" column="22" lean-forward="true" selection-start-line="201" selection-start-column="16" selection-end-line="262" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/CRM/CustomerGroupModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="670">
+          <caret line="131" column="5" selection-start-line="131" selection-start-column="5" selection-end-line="131" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/crm/customer_group/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="34" column="27" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Crm/CustomerGroupController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="15" selection-start-line="15" selection-end-line="15" selection-end-column="44" />
+          <folding>
+            <element signature="e#739#1717#0#PHP" />
+            <element signature="e#2570#4866#0#PHP" />
+            <element signature="e#4476#4501#0#PHP" expanded="true" />
+            <element signature="e#5120#5961#0#PHP" />
+            <element signature="e#5532#5557#0#PHP" expanded="true" />
+            <element signature="e#6318#6377#0#PHP" />
+            <element signature="e#6968#6993#0#PHP" expanded="true" />
+            <element signature="e#2907#3950#0#PHP" />
+            <element signature="e#7631#7658#1#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Accounting/CouponGroupController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
+        <state relative-caret-position="505">
+          <caret line="326" column="111" selection-start-line="315" selection-start-column="8" selection-end-line="326" selection-end-column="111" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Accounting/GiftCardGroupStatusModel.php">
+    <entry file="file://$PROJECT_DIR$/templates/repository/person/add-new-address.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="97" column="5" selection-start-line="97" selection-start-column="5" selection-end-line="97" selection-end-column="5" />
+        <state relative-caret-position="60">
+          <caret line="2" column="27" lean-forward="true" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Accounting/GiftCardGroupModel.php">
+    <entry file="file://$PROJECT_DIR$/templates/repository/person/edit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1560">
-          <caret line="57" column="5" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
+        <state relative-caret-position="168">
+          <caret line="28" column="27" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Accounting/GiftCardModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3270">
-          <caret line="114" column="5" selection-start-line="114" selection-start-column="5" selection-end-line="114" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/accounting/gift_card_group/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-150">
-          <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Accounting/GiftCardStatus.php">
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Notification/SMSLogModel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2760">
           <caret line="97" column="5" selection-start-line="97" selection-start-column="5" selection-end-line="97" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Delivery/DispatchStatusModel.php">
+    <entry file="file://$PROJECT_DIR$/vendor/maticangroup/core_client_api/app/Core/Entities/Notification.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="64" column="40" selection-start-line="64" selection-start-column="15" selection-end-line="64" selection-end-column="40" />
+        <state relative-caret-position="240">
+          <caret line="13" column="28" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Delivery/QueueModel.php">
+    <entry file="file://$PROJECT_DIR$/templates/crm/customer/read-sms.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5790">
-          <caret line="198" column="27" selection-start-line="198" selection-start-column="15" selection-end-line="198" selection-end-column="27" />
+        <state relative-caret-position="1380">
+          <caret line="46" column="88" selection-start-line="46" selection-start-column="88" selection-end-line="46" selection-end-column="88" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/sale/sale_order/edit.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/crm/customer/read-info.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7350">
-          <caret line="245" column="38" selection-start-line="242" selection-start-column="32" selection-end-line="245" selection-end-column="38" />
+        <state relative-caret-position="570">
+          <caret line="19" column="46" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FormModels/Sale/OrderModel.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/sale/sale_order/list.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4650">
-          <caret line="160" column="5" selection-start-line="160" selection-start-column="5" selection-end-line="160" selection-end-column="5" />
+        <state relative-caret-position="422">
+          <caret line="59" column="40" selection-start-line="42" selection-start-column="28" selection-end-line="59" selection-end-column="40" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+            <element signature="n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Repository/LocationModel.php">
+    <entry file="file://$PROJECT_DIR$/templates/crm/customer/read-order.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12000">
-          <caret line="406" column="5" selection-start-line="406" selection-start-column="5" selection-end-line="406" selection-end-column="5" />
+        <state relative-caret-position="-50">
+          <caret line="44" column="59" selection-start-line="44" selection-start-column="59" selection-end-line="44" selection-end-column="59" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Delivery/DeliveryMethodController.php">
+    <entry file="file://$PROJECT_DIR$/templates/repository/item/list.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="202" selection-start-line="202" selection-end-line="202" />
+        <state relative-caret-position="543">
+          <caret line="113" column="40" selection-start-line="55" selection-start-column="28" selection-end-line="113" selection-end-column="40" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+            <element signature="n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/delivery/delivery_method/read.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/crm/customer/read-favorite.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="51" column="30" selection-start-line="51" selection-start-column="30" selection-end-line="51" selection-end-column="30" />
+        <state relative-caret-position="250">
+          <caret line="45" column="80" selection-start-line="45" selection-start-column="80" selection-end-line="45" selection-end-column="80" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/delivery/delivery_method/edit.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Accounting/GiftCardModel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="89" column="20" selection-start-line="89" selection-start-column="20" selection-end-line="89" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1487" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Delivery/DispatchDeliveryStatusModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="16" column="40" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Delivery/DispatchPaymentModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="131" column="5" selection-start-line="131" selection-start-column="5" selection-end-line="131" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Delivery/DispatchModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="27" column="32" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Delivery/DispatchPaymentStatusModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="97" column="5" selection-start-line="97" selection-start-column="5" selection-end-line="97" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Delivery/DispatchPriceStatusModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="37" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Repository/PersonController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="209" column="19" selection-start-line="209" selection-start-column="19" selection-end-line="209" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Delivery/DistrictModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
+        <state relative-caret-position="120">
           <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/delivery/delivery_person/list.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/accounting/gift_card_group/read.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="70" column="90" selection-start-line="70" selection-start-column="90" selection-end-line="70" selection-end-column="90" />
+        <state relative-caret-position="340">
+          <caret line="113" column="37" lean-forward="true" selection-start-line="108" selection-start-column="32" selection-end-line="113" selection-end-column="37" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/delivery/delivery_person/read.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1497">
-          <caret line="216" column="41" selection-start-line="216" selection-start-column="41" selection-end-line="216" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Delivery/DeliveryPersonController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="200" column="40" selection-start-line="200" selection-start-column="40" selection-end-line="200" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Delivery/DeliveryPersonModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="250" column="5" selection-start-line="250" selection-start-column="5" selection-end-line="250" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/delivery/dispatch/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="313" column="65" selection-start-line="313" selection-start-column="65" selection-end-line="313" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/delivery/dispatch/list.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="119" selection-start-line="119" selection-end-line="119" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Delivery/DispatchController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10563">
-          <caret line="375" column="58" selection-start-line="375" selection-start-column="58" selection-end-line="375" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Accounting/InvoiceItemModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="17" column="37" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Sale/SaleOrderController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="610">
-          <caret line="441" column="91" selection-start-line="429" selection-start-column="8" selection-end-line="441" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/delivery/delivery_person/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="79" column="59" lean-forward="true" selection-start-line="73" selection-start-column="48" selection-end-line="79" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/accounting/invoice/create.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="77" column="60" selection-start-line="77" selection-start-column="60" selection-end-line="77" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Accounting/InvoiceModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="730">
-          <caret line="38" column="35" lean-forward="true" selection-start-line="25" selection-start-column="4" selection-end-line="38" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/maticangroup/core_client_api/app/Core/Entities/Accounting.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Accounting/PaymentMethodModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="97" column="5" selection-start-line="97" selection-start-column="5" selection-end-line="97" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Accounting/PaymentRequestController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="10" column="57" selection-start-line="10" selection-start-column="57" selection-end-line="10" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Accounting/PaymentTypeModel.php">
+    <entry file="file://$PROJECT_DIR$/templates/accounting/coupon_group/read.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
-          <caret line="15" column="35" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="35" />
+          <caret line="194" column="37" lean-forward="true" selection-start-line="189" selection-start-column="32" selection-end-line="194" selection-end-column="37" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Accounting/PaymentModel.php">
+    <entry file="file://$PROJECT_DIR$/src/FormModels/CRM/CustomerCouponModel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="161" column="40" selection-start-line="161" selection-start-column="22" selection-end-line="161" selection-end-column="40" />
+        <state relative-caret-position="180">
+          <caret line="101" column="5" selection-start-line="101" selection-start-column="5" selection-end-line="101" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Accounting/PaymentStatusModel.php">
+    <entry file="file://$PROJECT_DIR$/templates/crm/customer/read-gift-coupon.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="37" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="37" />
+        <state relative-caret-position="400">
+          <caret line="105" column="98" selection-start-line="105" selection-start-column="98" selection-end-line="105" selection-end-column="98" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+            <element signature="n#table#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/repository/company/list.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/crm/customer_group/create.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="34" column="54" selection-start-line="34" selection-start-column="54" selection-end-line="34" selection-end-column="54" />
+        <state relative-caret-position="540">
+          <caret line="71" column="41" lean-forward="true" selection-start-line="66" selection-start-column="36" selection-end-line="71" selection-end-column="41" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+            <element signature="e#3941#3966#0#Twig" expanded="true" />
+            <element signature="e#4353#4376#0#Twig" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/crm/customer/read-company-group.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="145" column="56" selection-start-line="145" selection-start-column="56" selection-end-line="145" selection-end-column="56" />
+        <state relative-caret-position="638">
+          <caret line="99" column="65" selection-start-line="99" selection-start-column="65" selection-end-line="99" selection-end-column="65" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/accounting/invoice/edit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="479" column="18" selection-start-line="479" selection-start-column="18" selection-end-line="479" selection-end-column="18" />
+        <state relative-caret-position="425">
+          <caret line="364" column="48" lean-forward="true" selection-start-line="300" selection-start-column="36" selection-end-line="364" selection-end-column="48" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+            <element signature="n#div#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#!!top" />
+            <element signature="n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#!!top" />
+            <element signature="n#form#0;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/crm/customer/read-payment-deed.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
+          <caret line="41" column="83" selection-start-line="41" selection-start-column="83" selection-end-line="41" selection-end-column="83" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+            <element signature="n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
+            <element signature="n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
+            <element signature="n#td#2;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
+            <element signature="n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
+            <element signature="n#td#4;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
+            <element signature="n#td#5;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/accounting/invoice/list.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="77" column="70" selection-start-line="77" selection-start-column="70" selection-end-line="77" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Accounting/PaymentRequestStatusModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="44" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Accounting/PaymentRequestModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="233" column="5" selection-start-line="233" selection-start-column="5" selection-end-line="233" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Accounting/InvoiceController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="154" selection-start-line="154" selection-end-line="154" />
+        <state relative-caret-position="400">
+          <caret line="95" column="40" selection-start-line="56" selection-start-column="28" selection-end-line="95" selection-end-column="40" />
           <folding>
-            <element signature="e#45#93#0#PHP" expanded="true" />
+            <element signature="e#12#26#0#Twig" expanded="true" />
+            <element signature="n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Accounting/GiftCardGroupController.php">
+    <entry file="file://$PROJECT_DIR$/templates/crm/customer/read-invoice.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="843">
-          <caret line="41" column="5" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
+        <state relative-caret-position="430">
+          <caret line="42" column="78" selection-start-line="42" selection-start-column="78" selection-end-line="42" selection-end-column="78" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/accounting/gift_card_group/create.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/FormModels/CRM/InvitationStatusModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="14" column="33" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/maticangroup/core_client_api/app/Core/Entities/CRM.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/crm/customer/read-invitation.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="31" column="116" selection-start-line="31" selection-start-column="94" selection-end-line="31" selection-end-column="116" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+            <element signature="e#903#926#0#Twig" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/CRM/InvitationModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="56" column="5" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Ticketing/CommentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-500">
+          <caret line="8" column="29" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/crm/customer/read-comment.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <folding>
             <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/crm/customer/tab.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="51" column="57" selection-start-line="51" selection-start-column="57" selection-end-line="51" selection-end-column="57" />
+          <folding>
+            <element signature="e#455#475#0#Twig" expanded="true" />
+            <element signature="e#599#617#0#Twig" expanded="true" />
+            <element signature="e#683#701#0#Twig" expanded="true" />
+            <element signature="e#823#844#0#Twig" expanded="true" />
+            <element signature="e#911#932#0#Twig" expanded="true" />
+            <element signature="e#1279#1303#0#Twig" expanded="true" />
+            <element signature="e#1441#1467#0#Twig" expanded="true" />
+            <element signature="e#1537#1563#0#Twig" expanded="true" />
+            <element signature="e#1719#1744#0#Twig" expanded="true" />
+            <element signature="e#1810#1835#0#Twig" expanded="true" />
+            <element signature="e#1972#1992#0#Twig" expanded="true" />
+            <element signature="e#2062#2082#0#Twig" expanded="true" />
+            <element signature="e#2351#2374#0#Twig" expanded="true" />
+            <element signature="e#2422#2445#0#Twig" expanded="true" />
+            <element signature="e#2590#2610#0#Twig" expanded="true" />
+            <element signature="e#2680#2700#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Repository/PersonModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="442" column="5" selection-start-line="442" selection-start-column="5" selection-end-line="442" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Crm/CustomerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="654" column="75" selection-start-line="654" selection-start-column="75" selection-end-line="654" selection-end-column="75" />
+          <folding>
+            <element signature="e#38#85#0#PHP" expanded="true" />
+            <element signature="e#1228#5975#0#PHP" />
+            <element signature="e#6227#6954#0#PHP" />
+            <element signature="e#7168#8391#0#PHP" />
+            <element signature="e#8178#8211#0#PHP" expanded="true" />
+            <element signature="e#9654#9838#0#PHP" />
+            <element signature="e#10172#10361#0#PHP" />
+            <element signature="e#10451#10644#0#PHP" />
+            <element signature="e#10732#10923#0#PHP" />
+            <element signature="e#18875#20023#0#PHP" />
+            <element signature="e#20719#20744#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Ticketing/CommentModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6330">
+          <caret line="216" column="5" selection-start-line="216" selection-start-column="5" selection-end-line="216" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Repository/PersonController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-657">
+          <caret line="72" column="29" lean-forward="true" selection-start-line="72" selection-start-column="29" selection-end-line="72" selection-end-column="29" />
+          <folding>
+            <element signature="e#805#1454#0#PHP" />
+            <element signature="e#4729#5619#0#PHP" />
+            <element signature="e#11306#11375#0#PHP" />
           </folding>
         </state>
       </provider>

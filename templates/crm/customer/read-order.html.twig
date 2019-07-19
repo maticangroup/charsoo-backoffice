@@ -32,40 +32,33 @@
                                                 <table id="actionsOverview">
                                                     <thead>
                                                     <tr role="row">
-                                                        <th>Order Global Token</th>
-                                                        <th>Order Number</th>
-                                                        <th>Order Price</th>
-                                                        <th>Created Date</th>
-                                                        <th>Order Status</th>
-                                                        <th>Delivery Status</th>
-                                                        <th>Action</th>
+                                                        <th>Serial</th>
+                                                        <th>Creator</th>
+                                                        <th>Invoice Serial</th>
+                                                        <th>Total price</th>
+                                                        <th>Status</th>
+                                                        <th class="not-sortable">View</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <a href="#" class="btn-link">#315321</a>
-                                                        </td>
-                                                        <td>
-                                                            <a href="#" class="btn-link">#315321</a>
-                                                        </td>
-                                                        <td>
-                                                            2400000
-                                                        </td>
-                                                        <td>1397/12/12</td>
-                                                        <td>
-                                                            <span class="label label-warning rounded">Processing</span>
-                                                            <span class="label label-info rounded">inventory</span>
-                                                            <span class="label bg-dark rounded">Shipping</span>
-                                                            <span class="label bg-secondary rounded">Done</span>
-                                                        </td>
-                                                        <td>
-                                                            <span class="label label-warning rounded">Processing</span>
-                                                            <span class="label label-success rounded">Delivered</span>
-                                                            <span class="label label-danger rounded">Rejected</span>
-                                                        </td>
-                                                        <td><a href="" class="fa fa-eye"></a></td>
-                                                    </tr>
+                                                    {% for order in orders %}
+                                                        <tr>
+                                                            <td>{{ order.orderSerial }}</td>
+                                                            <td>{{ order.orderOwnerName }}</td>
+                                                            <td>{{ order.orderInvoiceSerial }}</td>
+                                                            <td>{{ order.orderTotalPrice }}</td>
+                                                            <td>
+                                        <span class="label rounded"
+                                              style="background-color: {{ order.orderStatus.orderStatusColor }}">
+                                            {{ order.orderStatus.orderStatusName }}
+                                        </span>
+                                                            </td>
+                                                            <td>
+                                                                <a href="{{ path('sale_order_edit' , {id:order.orderId}) }}"
+                                                                   class="fa fa-edit"></a>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
                                                     </tbody>
                                                 </table>
                                             </div>

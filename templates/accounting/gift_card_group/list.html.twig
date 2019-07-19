@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Coupon Group | List{% endblock %}
+{% block title %}Gift Card Group | List{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -15,10 +15,6 @@
                                 numquam
                                 obcaecati perspiciatis quas quisquam soluta unde voluptates.
                             </p>
-
-                        </div>
-                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-                            <a href="" class="btn btn-block rounded btn-success fa fa-plus"></a>
                         </div>
                     </div>
                 </div>
@@ -41,15 +37,13 @@
                             <thead>
                             <tr>
                                 <th scope="col">Name</th>
+                                <th scope="col">Count</th>
+                                <th scope="col">Left</th>
+                                <th scope="col">Amount</th>
                                 <th scope="col">Expiry date</th>
-                                <th scope="col">Type</th>
-                                <th scope="col">Effect</th>
-                                <th scope="col">Minimum invoice price</th>
-                                <th scope="col">Is private</th>
-                                <th scope="col">Usage times</th>
                                 <th scope="col">Creator</th>
-                                <th scope="col">Created Date</th>
-                                <th scope="col">Confirmer</th>
+                                <th scope="col">Create Date</th>
+                                <th scope="col">Confirmir</th>
                                 <th scope="col">Confirm Date</th>
                                 <th scope="col">Confirm Status</th>
                                 <th scope="col">Status</th>
@@ -57,21 +51,19 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {% for coupon in couponGroups %}
+                            {% for giftCardGroup in giftCardGroups %}
                                 <tr>
-                                    <td>{{ coupon.couponGroupName }}</td>
-                                    <td>{{ coupon.couponGroupExpiryDate }}</td>
-                                    <td>{{ coupon.couponGroupDiscountType }}</td>
-                                    <td>{{ coupon.couponGroupDiscountEffect }}</td>
-                                    <td>{{ coupon.couponGroupMinimumInvoicePrice }}</td>
-                                    <td>{{ (coupon.couponGroupIsPrivate == 'true') ? 'Private' : 'Public' }}</td>
-                                    <td>{{ coupon.couponGroupUsageTimes }}</td>
-                                    <td>{{ coupon.couponGroupCreatePerson }}</td>
-                                    <td>{{ coupon.couponGroupCreateDate }}</td>
-                                    <td>{{ coupon.couponGroupConfirmPerson }}</td>
-                                    <td>{{ coupon.couponGroupConfirmDate }}</td>
+                                    <td>{{ giftCardGroup.giftCardGroupName }}</td>
+                                    <td>{{ giftCardGroup.giftCardGroupCount }}</td>
+                                    <td>{{ giftCardGroup.giftCardGroupLeftCount }}</td>
+                                    <td>{{ giftCardGroup.giftCardGroupAmount }}</td>
+                                    <td>{{ giftCardGroup.giftCardGroupExpiryDate }}</td>
+                                    <td>{{ giftCardGroup.giftCardGroupCreatePerson }}</td>
+                                    <td>{{ giftCardGroup.giftCardGroupCreateDate }}</td>
+                                    <td>{{ giftCardGroup.giftCardGroupConfirmPerson }}</td>
+                                    <td>{{ giftCardGroup.giftCardGroupConfirmDate }}</td>
                                     <td>
-                                        {% if coupon.couponGroupConfirmStatus.couponGroupConfirmStatusMachineName == 'initialized' %}
+                                        {% if giftCardGroup.giftCardGroupStatus.giftCardGroupStatusMachineName == 'initialized' %}
                                             <span class="label label-orange rounded">Waiting</span>
                                         {% else %}
                                             <span class="label label-green rounded">Accepted</span>
@@ -79,17 +71,17 @@
                                     </td>
                                     <td>
                                         <span class="label rounded"
-                                              style="background-color: {{ coupon.couponGroupStatus.couponGroupStatusColor }}">
-                                            {{ coupon.couponGroupStatus.couponGroupStatusName }}
+                                              style="background-color: {{ giftCardGroup.giftCardGroupAvailabilityStatus.giftCardGroupAvailabilityColor }}">
+                                            {{ giftCardGroup.giftCardGroupAvailabilityStatus.giftCardGroupAvailabilityName }}
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="{{ path('accounting_coupon_group_read' , {id:coupon.couponGroupId}) }}"
-                                           class="fa fa-eye"></a>
-                                        <a href="{{ path('accounting_coupon_group_edit' , {id:coupon.couponGroupId}) }}"
+                                        <a href="{{ path('accounting_gift_card_group_gift_card_group_status' , {gift_card_group_id:giftCardGroup.giftCardGroupId , machine_name:giftCardGroup.giftCardGroupAvailabilityStatus.giftCardGroupAvailabilityMachineName }) }}"
+                                           class="{{ (giftCardGroup.giftCardGroupAvailabilityStatus.giftCardGroupAvailabilityMachineName == 'active') ? 'fa fa-ban text-red' ? 'fa fa-play text-green' }}"></a>
+                                        <a href="{{ path('accounting_gift_card_group_edit' , {id:giftCardGroup.giftCardGroupId}) }}"
                                            class="fa fa-edit"></a>
-                                        <a href="{{ path('accounting_coupon_group_status' , {coupon_group_id:coupon.couponGroupId , machine_name:coupon.couponGroupStatus.couponGroupStatusMachineName}) }}"
-                                           class="{{ (coupon.couponGroupStatus.couponGroupStatusMachineName == 'active') ? 'fa fa-ban text-red' : 'fa fa-play text-green' }}"></a>
+                                        <a href="{{ path('accounting_gift_card_group_read' , {id:giftCardGroup.giftCardGroupId}) }}"
+                                           class="fa fa-eye"></a>
                                     </td>
                                 </tr>
                             {% endfor %}

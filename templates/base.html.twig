@@ -161,25 +161,32 @@
 
     });
 </script>
+<script>
+    function toggle(className, obj) {
+        var $input = $(obj);
+        if ($input.prop('checked')) $(className).hide();
+        else $(className).show();
+    }
+</script>
 {% block javascripts %}
 {% endblock %}
 <!-- Page Level Scripts -->
 
 <div class="message">
     <ul>
-        {% for message in app.flashes('success') %}
+        {% for message in app.flashes('s') %}
             <li class="message-success">
                 {{ message }}
             </li>
         {% endfor %}
 
-        {% for message in app.flashes('failed') %}
+        {% for message in app.flashes('f') %}
             <li class="message-failed">
                 {{ message }}
             </li>
         {% endfor %}
 
-        {% for message in app.flashes('warning') %}
+        {% for message in app.flashes('w') %}
             <li class="message-warning">
                 {{ message }}
             </li>

@@ -37,7 +37,7 @@
                                 <span class="label-text col-md-12 col-form-label ">Name</span>
 
                                 <div class="col-md-12">
-                                    <input type="text" name="person_name"
+                                    <input type="text" name="humanName"
                                            value="{{ personModel.humanName }}"
                                            class="form-control">
                                 </div>
@@ -47,7 +47,7 @@
                             <div class="form-group row">
                                 <span class="label-text col-md-12 col-form-label ">Family</span>
                                 <div class="col-md-12">
-                                    <input type="text" name="person_family"
+                                    <input type="text" name="humanFamily"
                                            value="{{ personModel.humanFamily }}"
                                            class="form-control">
                                 </div>
@@ -58,7 +58,7 @@
                                 <span class="label-text col-md-12 col-form-label ">Email</span>
 
                                 <div class="col-md-12">
-                                    <input type="text" name="person_email"
+                                    <input type="text" name="email"
                                            value="{{ personModel.email }}"
                                            class="form-control">
                                 </div>
@@ -69,21 +69,21 @@
                                 <span class="label-text col-md-12 col-form-label ">BirthDate</span>
 
                                 <div class="col-md-4">
-                                    <select name="person_birth_date_year" class="form-control">
+                                    <select name="birthDateYear" class="form-control">
                                         {% for year in years %}
                                             <option value="{{ year }}" {{ (year == personModel.birthDateYear) ? 'selected' : '' }}>{{ year }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <select name="person_birth_date_month" class="form-control">
+                                    <select name="birthDateMonth" class="form-control">
                                         {% for month in months %}
                                             <option value="{{ month }}" {{ (month == personModel.birthDateMonth) ? 'selected' : '' }}>{{ month }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <select name="person_birth_date_day" class="form-control">
+                                    <select name="birthDateDay" class="form-control">
                                         {% for day in days %}
                                             <option value="{{ day }}" {{ (day == personModel.birthDateDay) ? 'selected' : '' }}>{{ day }}</option>
                                         {% endfor %}
@@ -96,7 +96,7 @@
                                 <span class="label-text col-md-12 col-form-label ">National Code</span>
 
                                 <div class="col-md-12">
-                                    <input type="text" name="person_national_code"
+                                    <input type="text" name="nationalCode"
                                            value="{{ personModel.nationalCode }}"
                                            class="form-control">
                                 </div>
@@ -107,14 +107,14 @@
                                 <span class="label-text col-md-12 col-form-label ">Mobile</span>
 
                                 <div class="col-md-12">
-                                    <input type="text" name="person_mobile"
+                                    <input type="text" name="mobile"
                                            value="{{ personModel.mobile }}"
                                            class="form-control">
                                 </div>
                             </div>
                         </div>
                         <div class="col-3">
-                            <input type="hidden" name="person_id" value="{{ personModel.id }}" class="form-check-input">
+                            {#<input type="hidden" name="person_id" value="{{ personModel.id }}" class="form-check-input">#}
                             <button type="submit" class="btn btn-block btn-info rounded mt-4"><i class="fa fa-save"></i>
                             </button>
                         </div>

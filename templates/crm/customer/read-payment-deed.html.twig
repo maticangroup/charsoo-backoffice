@@ -32,40 +32,68 @@
                                                 <table id="ProvincesList">
                                                     <thead>
                                                     <tr>
-                                                        <th>Follow Token</th>
-                                                        <th>Amount</th>
-                                                        <th>Paid At</th>
-                                                        <th>Due Date</th>
-                                                        <th>Payment Method</th>
-                                                        <th>Status</th>
+                                                        <th scope="col">Date times</th>
+                                                        <th scope="col">Amount</th>
+                                                        <th scope="col">Payment method</th>
+                                                        <th scope="col">From</th>
+                                                        <th scope="col">To</th>
+                                                        <th scope="col">Type</th>
+                                                        <th scope="col">Follow token</th>
+                                                        <th scope="col">Status</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            #315321
-                                                        </td>
-                                                        <td>
-                                                            1200000
-                                                        </td>
-                                                        <td>
-                                                            1397/12/12
-                                                        </td>
-                                                        <td>
-                                                            1397/12/12
-                                                        </td>
-                                                        <td>
-                                                            <span class="label label-blue rounded">Cash</span>
-                                                            <span class="label label-blue rounded">Card to Card</span>
-                                                            <span class="label label-blue rounded">Cheque</span>
-                                                            <span class="label label-blue rounded">Account balance</span>
-                                                        </td>
-                                                        <td>
-                                                            <span class="label label-info rounded">Requested</span>
-                                                            <span class="label label-danger rounded">Rejected</span>
-                                                            <span class="label label-green rounded">Transferred</span>
-                                                        </td>
-                                                    </tr>
+                                                    {% for payment in payments %}
+                                                        <tr>
+                                                            <td>
+                                                                <ul class="list-unstyled">
+                                                                    <li class="mb-3"><strong>Due Date</strong>
+                                                                        <ul class="list-unstyled">
+                                                                            <li>{{ payment.paymentDueDate }}</li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li class="mb-3"><strong>Created at</strong>
+                                                                        <ul class="list-unstyled">
+                                                                            <li>{{ payment.paymentCreateDate }}</li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li class="mb-3"><strong>Paid at</strong>
+                                                                        <ul class="list-unstyled">
+                                                                            <li>{{ payment.paymentPaidDate }}</li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                            <td>
+                                                                {{ payment.paymentAmount }}
+                                                            </td>
+                                                            <td>
+                                                                <span class="label label-info rounded">{{ payment.paymentMethodName }}</span>
+                                                            </td>
+                                                            <td>
+                                                                {{ payment.invoiceFromCompanyName }}
+                                                                {{ payment.invoiceFromPersonFirstName }} {{ payment.invoiceFromPersonLastName }}
+                                                            </td>
+                                                            <td>
+                                                                {{ payment.invoiceToCompanyName }}
+                                                                {{ payment.invoiceToPersonFirstName }} {{ payment.invoiceToPersonLastName }}
+                                                            </td>
+                                                            <td>
+                                                                {% if payment.paymentType.paymentTypeMachineName == 'income' %}
+                                                                    <span class="fa fa-arrow-left text-green"></span>
+                                                                {% else %}
+                                                                    <span class="fa fa-arrow-right text-red"></span>
+                                                                {% endif %}
+                                                            </td>
+                                                            <td>{{ payment.paymentFollowToken }}</td>
+                                                            <td>
+                                                <span class="label rounded"
+                                                      style="background-color: {{ payment.paymentStatus.paymentStatusColor }}">
+                                                    {{ payment.paymentStatus.paymentStatusName }}
+                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
                                                     </tbody>
                                                 </table>
                                             </div>

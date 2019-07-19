@@ -37,67 +37,19 @@
                                                 <table id="table10">
                                                     <thead>
                                                     <tr role="row">
-                                                        <th>Company Global Token</th>
+                                                        <th>ID</th>
                                                         <th>Company Name</th>
-                                                        <th>Assigned Date</th>
-
+                                                        <th>Company Phone</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <a href="#" class="btn-link">#315321</a>
-                                                        </td>
-                                                        <td>
-                                                            Company Name
-                                                        </td>
-                                                        <td>1397/12/12</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <a href="#" class="btn-link">#315321</a>
-                                                        </td>
-                                                        <td>
-                                                            Company Name
-                                                        </td>
-                                                        <td>1397/12/12</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <a href="#" class="btn-link">#315321</a>
-                                                        </td>
-                                                        <td>
-                                                            Company Name
-                                                        </td>
-                                                        <td>1397/12/12</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <a href="#" class="btn-link">#315321</a>
-                                                        </td>
-                                                        <td>
-                                                            Company Name
-                                                        </td>
-                                                        <td>1397/12/12</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <a href="#" class="btn-link">#315321</a>
-                                                        </td>
-                                                        <td>
-                                                            Company Name
-                                                        </td>
-                                                        <td>1397/12/12</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <a href="#" class="btn-link">#315321</a>
-                                                        </td>
-                                                        <td>
-                                                            Company Name
-                                                        </td>
-                                                        <td>1397/12/12</td>
-                                                    </tr>
+                                                    {% for company in companies %}
+                                                        <tr>
+                                                            <td>{{ company.companyID }}</td>
+                                                            <td>{{ company.companyName }}</td>
+                                                            <td>{{ company.companyMainPhone }}</td>
+                                                        </tr>
+                                                    {% endfor %}
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -127,68 +79,27 @@
                                             <div class="records--list">
                                                 <table id="table5">
                                                     <thead>
-                                                    <tr role="row">
-                                                        <th>Company Global Token</th>
-                                                        <th>Company Name</th>
-                                                        <th>Assigned Date</th>
-
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Customer Group</th>
+                                                        <th>Description</th>
+                                                        <th>Status</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <a href="#" class="btn-link">#315321</a>
-                                                        </td>
-                                                        <td>
-                                                            Company Name
-                                                        </td>
-                                                        <td>1397/12/12</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <a href="#" class="btn-link">#315321</a>
-                                                        </td>
-                                                        <td>
-                                                            Company Name
-                                                        </td>
-                                                        <td>1397/12/12</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <a href="#" class="btn-link">#315321</a>
-                                                        </td>
-                                                        <td>
-                                                            Company Name
-                                                        </td>
-                                                        <td>1397/12/12</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <a href="#" class="btn-link">#315321</a>
-                                                        </td>
-                                                        <td>
-                                                            Company Name
-                                                        </td>
-                                                        <td>1397/12/12</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <a href="#" class="btn-link">#315321</a>
-                                                        </td>
-                                                        <td>
-                                                            Company Name
-                                                        </td>
-                                                        <td>1397/12/12</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <a href="#" class="btn-link">#315321</a>
-                                                        </td>
-                                                        <td>
-                                                            Company Name
-                                                        </td>
-                                                        <td>1397/12/12</td>
-                                                    </tr>
+                                                    {% for group in groups %}
+                                                        <tr>
+                                                            <td>{{ group.customerGroupId }}</td>
+                                                            <td>{{ group.customerGroupName }}</td>
+                                                            <td>{{ group.customerGroupDescription }}</td>
+                                                            <td>
+                                        <span class="label rounded"
+                                              style="background-color: {{ customerGroup.customerGroupStatus.customerGroupStatusColor }}">
+                                            {{ customerGroup.customerGroupStatus.customerGroupStatusName }}
+                                        </span>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
                                                     </tbody>
                                                 </table>
                                             </div>

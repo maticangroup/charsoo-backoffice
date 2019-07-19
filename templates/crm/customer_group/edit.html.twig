@@ -4,85 +4,95 @@
 
 {% block body %}
     <div class="row">
-        <form action="{{ path('crm_customer_group_crm_customer_group_update') }}">
-            <div class="col-md-12">
-                <div class="panel">
-                    <div class="panel-content">
-                        <div class="row">
-                            <div class="col-10">
-                                <h3>Want to add a new customer group?</h3>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores facilis,
-                                    laudantium odit quibusdam quis vel?
-                                </p>
-                            </div>
-                            <div class="col-2">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <input type="text" placeholder="Customer Group Name" name="text"
-                                               class="form-control mb-3">
-
-
-                                        <textarea name="textarea" class="form-control mb-3"
-                                                  placeholder="Text input area"></textarea>
-
-                                        <input type="submit" class="btn btn-block rounded btn-info fa fa-save">
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </form>
-
         <div class="col-12">
             <div class="panel">
                 <div class="panel-content">
-                    <div class="form-group row">
-                        <div class="col-4"></div>
-                        <div class="col-md-4">
-                            <input type="text" placeholder="Search" name="text"
-                                   class="form-control">
+                    <div class="row">
+                        <div class="col-9">
+                            <h3>Want to add a new customer group?</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores facilis,
+                                laudantium odit quibusdam quis vel?
+                            </p>
                         </div>
-                        <div class="col-4"></div>
+                        <form action="{{ path('crm_customer_group_edit' , {id:customerGroupModel.customerGroupId}) }}"
+                              class="col-3" method="post">
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="text" placeholder="Customer Group Name"
+                                           value="{{ customerGroupModel.customerGroupName }}"
+                                           class="form-control mb-3" name="customerGroupName">
+                                    <textarea name="customerGroupDescription" class="form-control mb-3"
+                                              placeholder="Text input area">{{ customerGroupModel.customerGroupDescription }}</textarea>
+                                    <button type="submit" class="btn btn-block rounded btn-info fa fa-save"></button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <!-- Records List Start -->
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <form action="{{ path('crm_customer_group_add_customer' , {customer_group_id:customerGroupModel.customerGroupId}) }}"
+                          class="form-group row" method="post">
+                        <div class="col-3"></div>
+                        <div class="col-md-4">
+                            <select name="id" class="form-control">
+                                {% for person in persons %}
+                                    <option value="{{ person.id }}">{{ person.humanName }} {{ person.humanFamily }}
+                                        | {{ person.mobile }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn rounded btn-block btn-dark fa fa-save"></button>
+                        </div>
+                        <div class="col-3"></div>
+                    </form>
+                    <!---->
                     <div class="records--list">
-                        <table id="usersRoleList">
+                        <table id="countriesList">
                             <thead>
                             <tr>
-                                <th>Global token</th>
-                                <th>Customer Group</th>
-                                <th>Description</th>
-                                <th>Creator</th>
-                                <th>Create Date</th>
-                                <th>Status</th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Mobile</th>
+                                <th>Groups</th>
+                                <th>Company</th>
+                                <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>123456789</td>
-                                <td>Customer Group Name</td>
-                                <td>Rapidiously evolve parallel relationships and adaptive alignments. Enthusiastically
-                                    leverage existing cutting
-                                </td>
-                                <td>Creator Person</td>
-                                <td>1398/12/12</td>
-                                <td>
-                                    <span class="label label-green rounded">Active</span>
-                                    <span class="label label-red rounded ">Deactive</span>
-                                </td>
-                            </tr>
+                            {% for selectedPerson in selectedPersons %}
+                                <tr>
+                                    <td>{{ selectedPerson.id }}</td>
+                                    <td>{{ selectedPerson.humanName }} {{ selectedPerson.humanFamily }}</td>
+                                    <td>{{ selectedPerson.mobile }}</td>
+                                    <td>
+                                        {% for group in selectedPerson.groups %}
+                                            <span class="label label-info rounded">{{ group }}</span>
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        {% for company in selectedPerson.companies %}
+                                            <span class="label label-info rounded">{{ company }}</span>
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('crm_customer_group_remove_customer' , {person_id:selectedPerson.id , customer_group_id:customerGroupModel.customerGroupId }) }}"
+                                           class="fa fa-trash"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
+
                     <!-- Records List End -->
                 </div>
             </div>
         </div>
-
     </div>
 {% endblock %}

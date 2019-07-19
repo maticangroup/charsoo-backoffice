@@ -41,15 +41,12 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            1398/12/12
-                                                        </td>
-                                                        <td>Authoritatively conceptualize extensive sources with
-                                                            professional markets. Uniquely evolve value-added
-                                                            testing procedures before accurate platforms.
-                                                        </td>
-                                                    </tr>
+                                                    {% for sms in smsLogs %}
+                                                        <tr>
+                                                            <td>{{ sms.smsLogSendDate }}</td>
+                                                            <td>{{ sms.smsLogDescription }}</td>
+                                                        </tr>
+                                                    {% endfor %}
                                                     </tbody>
                                                 </table>
                                             </div>

@@ -94,12 +94,12 @@
         <!-- Sidebar Profile End -->
 
         <!-- Sidebar Navigation Start -->
-        <div class="sidebar--nav">
-            <ul id="sidebar-menu">
+        {#<div class="sidebar--nav"><ul id="sidebar-menu"></ul></div>#}
 
+        {{ render(controller(
+            'App\\Controller\\General\\MenuController::sideMenu'
+        )) }}
 
-            </ul>
-        </div>
         <!-- Sidebar Navigation End -->
     </aside>
     <!-- Sidebar End -->

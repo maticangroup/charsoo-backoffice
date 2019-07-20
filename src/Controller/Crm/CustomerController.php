@@ -21,7 +21,9 @@ use App\FormModels\Ticketing\CommentModel;
 use Matican\Core\Entities\Accounting;
 use Matican\Core\Entities\Authentication;
 use Matican\Core\Entities\CRM;
+use Matican\Core\Entities\Notifications;
 use Matican\Core\Entities\Repository;
+use Matican\Core\Entities\Sale;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -215,7 +217,7 @@ class CustomerController extends AbstractController
          */
         $personModel = ModelSerializer::parse($inputs, PersonModel::class);
         $personModel->setId($id);
-        $request = new Req(Servers::Repository, Repository::Person, 'fetch');
+        $request = new Req(Servers::Notifications, Notifications::SMS, 'get_person_sms_logs');
         $request->add_instance($personModel);
         $response = $request->send();
         /**
@@ -260,7 +262,7 @@ class CustomerController extends AbstractController
          */
         $personModel = ModelSerializer::parse($inputs, PersonModel::class);
         $personModel->setId($id);
-        $request = new Req(Servers::Repository, Repository::Person, 'fetch');
+        $request = new Req(Servers::Sale, Sale::Order, 'get_person_orders');
         $request->add_instance($personModel);
         $response = $request->send();
         /**

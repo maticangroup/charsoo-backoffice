@@ -38,6 +38,10 @@
                                                     <tr>
                                                         <th>Date</th>
                                                         <th>Description</th>
+                                                        <th>From</th>
+                                                        <th>Length</th>
+                                                        <th>Mobile</th>
+                                                        <th>To</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -45,6 +49,10 @@
                                                         <tr>
                                                             <td>{{ sms.smsLogSendDate }}</td>
                                                             <td>{{ sms.smsLogDescription }}</td>
+                                                            <td>{{ sms.smsLogFrom }}</td>
+                                                            <td>{{ sms.smsLogLength }}</td>
+                                                            <td>{{ sms.smsLogTo }}</td>
+                                                            <td>{{ sms.smsLogToPersonName }}</td>
                                                         </tr>
                                                     {% endfor %}
                                                     </tbody>

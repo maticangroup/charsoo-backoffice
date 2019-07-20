@@ -4,223 +4,66 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-12">
             <div class="panel">
                 <div class="panel-content">
                     <div class="row">
-                        <div class="col-12">
-                            <h3>Welcome to role & permissions management</h3>
+                        <div class="col-10">
+                            <h3>Welcome content</h3>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cumque, in ipsam molestias
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cumque, in ipsam
+                                molestias
                                 nostrum quidem repudiandae sequi suscipit ullam voluptatem.
                             </p>
                         </div>
+                        <form action="{{ path('authentication_role_create') }}"
+                              method="post" class="col-2">
+                            <input type="text" class="form-control mb-3"
+                                   value="{{ roleModel.roleName }}" name="roleName">
+                            <button type="submit" class="btn rounded btn-block btn-dark fa fa-save"></button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+
+
         <div class="col-12">
             <div class="panel">
-                <div class="panel-heading">
-                    <strong>
-                        All Permissions
-                    </strong>
-                </div>
                 <div class="panel-content">
-                    <div class="row flex-nowrap mx-0">
-                        <!-- Tabs Nav Start -->
-                        <ul class="nav nav-tabs nav-tabs-line-left flex-column">
-                            <li class="nav-item">
-                                <a href="#tab4" data-toggle="tab" class="nav-link active">Notifications</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" data-toggle="tab" class="nav-link">Ticketing</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" data-toggle="tab" class="nav-link">Sale</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" data-toggle="tab" class="nav-link">Delivery</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" data-toggle="tab" class="nav-link">Inventory</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" data-toggle="tab" class="nav-link">Accounting</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" data-toggle="tab" class="nav-link">CRM</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" data-toggle="tab" class="nav-link">Media</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" data-toggle="tab" class="nav-link">Authentication</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" data-toggle="tab" class="nav-link">Repository</a>
-                            </li>
-                        </ul>
-                        <!-- Tabs Nav End -->
-                        <!---->
-                        <!-- Tab Content Start -->
-                        <div class="tab-content col">
-                            <!-- Tab Pane Start -->
-                            <div class="tab-pane fade show active" id="tab4">
-                                <div class="form-group row">
-                                    <div class="col-4"></div>
-                                    <div class="col-md-4">
-                                        <input type="text" placeholder="Search" name="text"
-                                               class="form-control">
-                                    </div>
-                                    <div class="col-4"></div>
-                                </div>
-                                <!---->
-                                <div class="records--list">
-                                    <table id="usersRoleList">
-                                        <thead>
-                                        <tr>
-                                            <th>Action ID</th>
-                                            <th>Action name</th>
-                                            <th>Copy Action Id</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                <a href="#" class="btn-link">#315321</a>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn-link">Example permission</a>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="fa fa-copy"></a>
-                                            </td>
-                                        </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <!-- Tab Pane End -->
+                    <div class="form-group row">
+                        <div class="col-4"></div>
+                        <div class="col-md-4">
+                            <input type="text" placeholder="Search" name="text"
+                                   class="form-control">
                         </div>
-                        <!-- Tab Content End -->
+                        <div class="col-4"></div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="panel">
-                <div class="panel-heading">
-                    <strong>
-                        Roles
-                    </strong>
-                </div>
-                <div class="panel-content">
-                    <div class="row flex-nowrap mx-0">
-
-                        <!-- Tabs Nav Start -->
-                        <ul class="nav nav-tabs nav-tabs-line-left flex-column">
-                            <li class="nav-item">
-                                <a href="#tab1" data-toggle="tab" class="nav-link active">Admin
-                                    <span class="badge text-white bg-info">7</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" data-toggle="tab" class="nav-link">Customer<span
-                                            class="badge text-white bg-info">7</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" data-toggle="tab" class="nav-link">Sale<span
-                                            class="badge text-white bg-info">7</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" data-toggle="tab" class="nav-link">Delivery<span
-                                            class="badge text-white bg-info">7</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#tab2" data-toggle="tab"
-                                   class="nav-link fa fa-plus btn btn-block"></a>
-                            </li>
-                        </ul>
-                        <!-- Tabs Nav End -->
-
-                        <!-- Tab Content Start -->
-                        <div class="tab-content col">
-                            <!-- Tab Pane Start -->
-                            <div class="tab-pane fade show active" id="tab1">
-                                <div class="form-group row">
-                                    <div class="col-3"></div>
-                                    <div class="col-md-4">
-                                        <input type="text" placeholder="Search" name="text"
-                                               class="form-control">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <a href="#" class="btn rounded btn-block btn-success fa fa-plus"></a>
-                                    </div>
-                                    <div class="col-3"></div>
-                                </div>
-                                <!---->
-                                <div class="records--list">
-                                    <table id="countriesList">
-                                        <thead>
-                                        <tr>
-                                            <th>Action ID</th>
-                                            <th>Action name</th>
-                                            <th>Section</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                <a href="#" class="btn-link">#315321</a>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn-link">Example permission</a>
-                                            </td>
-                                            <td>
-                                                <span class="label label-info rounded">Section</span>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="fa fa-trash"></a>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-                            <!-- Tab Pane End -->
-
-                            <!-- Tab Pane Start -->
-                            <div class="tab-pane fade" id="tab2">
-                                <div class="form-group row">
-                                    <div class="col-3"></div>
-
-                                    <div class="col-6">
-                                        <form action="{{ path('authentication_role_authentication_role_save') }}"
-                                              method="post">
-                                            <div class="row">
-                                                <div class="col-8">
-                                                    <input type="text" placeholder="Role name" name="text"
-                                                           class="form-control mb-3">
-                                                    <span class="form-text text-muted">Note: after adding a role, it is not possible to remove it.</span>
-                                                </div>
-                                                <div class="col-4">
-                                                    <a href="#"
-                                                       class="btn btn-block rounded btn-success fa fa-plus"></a>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    <div class="col-3"></div>
-                                </div>
-                            </div>
-                            <!-- Tab Pane End -->
-                        </div>
-                        <!-- Tab Content End -->
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="usersRoleList">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for role in roles %}
+                                <tr>
+                                    <td>{{ role.roleId }}</td>
+                                    <td>{{ role.roleName }}</td>
+                                    <td>
+                                        <a href="{{ path('authentication_role_edit' , {id:role.roleId}) }}"
+                                           class="fa fa-edit"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
+                    <!-- Records List End -->
                 </div>
             </div>
         </div>

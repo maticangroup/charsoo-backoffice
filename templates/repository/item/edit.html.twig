@@ -266,8 +266,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class="col-12">
             <div class="panel">
                 <div class="panel-heading">
@@ -279,6 +277,7 @@
                     <div class="row">
                         {#{{ dump(specGroupKeys) }}#}
                         {% for key , specGroup in specGroupKeys %}
+                            {#{{ dump(specGroup) }}#}
                             <div class="col-4">
                                 <div class="panel shadow">
                                     <div class="panel-heading">{{ key }}</div>
@@ -288,16 +287,47 @@
                                             <tr>
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Value</th>
+                                                {#<input type="hidden" name="specGroupId" value="{{ specGroup.specGroupID }}">#}
                                             </tr>
                                             </thead>
                                             <tbody>
                                             {% for specKey in specGroup %}
-                                            <tr>
-                                                <td>{{ specKey.specKeyName }}</td>
-                                                <td>
-                                                    <input type="text" name="text" class="form-control" value="{{ specKey.specKeyDefaultValue }}">
-                                                </td>
-                                            </tr>
+                                                {#{{ dump(specKey) }}#}
+                                                <tr>
+                                                    <td>{{ specKey.specKeyName }}</td>
+                                                    <td>
+                                                        {% for submittedValue in specKey.specKeySubmittedValues %}
+                                                            <div class="input-group">
+                                                                <h4>{{ submittedValue }}</h4>
+                                                                <div class="input-group-append">
+                                                                    <button type="submit"
+                                                                            class="btn btn-rounded btn-danger fa fa-trash"></button>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+
+                                                        <form action="{{ path('repository_item_submit_key_value') }}"
+                                                              method="post" class="input-group">
+                                                            <input type="hidden" name="itemId"
+                                                                   value="{{ itemModel.itemID }}">
+                                                            <input type="hidden" name="keyId"
+                                                                   value="{{ specKey.specKeyID }}">
+                                                            <input type="text" list="specKeyValues"
+                                                                   name="value" class="form-control"
+                                                                   placeholder="Spec Key Value"
+                                                                   value="{{ specKey.specKeyDefaultValue }}">
+                                                            <datalist id="specKeyValues">
+                                                                {% for suggestValue in specKey.specKeySuggestion %}
+                                                                <option value="{{ suggestValue }}">
+                                                                    {% endfor %}
+                                                            </datalist>
+                                                            <div class="input-group-append">
+                                                                <button type="submit"
+                                                                        class="btn btn-rounded btn-dark fa fa-plus"></button>
+                                                            </div>
+                                                        </form>
+                                                    </td>
+                                                </tr>
                                             {% endfor %}
                                             </tbody>
                                         </table>
@@ -305,13 +335,6 @@
                                 </div>
                             </div>
                         {% endfor %}
-                    </div>
-                    <div class="row">
-                        <div class="col-4"></div>
-                        <div class="col-4">
-                            <button class="btn btn-info btn-block rounded fa fa-save"></button>
-                        </div>
-                        <div class="col-4"></div>
                     </div>
                 </div>
             </div>

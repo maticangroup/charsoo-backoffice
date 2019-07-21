@@ -40,6 +40,7 @@
                                                         <th>ID</th>
                                                         <th>Company Name</th>
                                                         <th>Company Phone</th>
+                                                        <th>Company Email</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -48,6 +49,7 @@
                                                             <td>{{ company.companyID }}</td>
                                                             <td>{{ company.companyName }}</td>
                                                             <td>{{ company.companyMainPhone }}</td>
+                                                            <td>{{ company.companyEmail }}</td>
                                                         </tr>
                                                     {% endfor %}
                                                     </tbody>
@@ -94,8 +96,8 @@
                                                             <td>{{ group.customerGroupDescription }}</td>
                                                             <td>
                                         <span class="label rounded"
-                                              style="background-color: {{ customerGroup.customerGroupStatus.customerGroupStatusColor }}">
-                                            {{ customerGroup.customerGroupStatus.customerGroupStatusName }}
+                                              style="background-color: {{ group.customerGroupStatus.customerGroupStatusColor }}">
+                                            {{ group.customerGroupStatus.customerGroupStatusName }}
                                         </span>
                                                             </td>
                                                         </tr>

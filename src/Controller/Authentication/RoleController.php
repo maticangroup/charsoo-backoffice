@@ -2,6 +2,7 @@
 
 namespace App\Controller\Authentication;
 
+use App\FormModels\Authentication\PermissionModel;
 use App\FormModels\Authentication\RoleModel;
 use App\FormModels\Authentication\ServerPermissionModel;
 use App\FormModels\ModelSerializer;
@@ -100,22 +101,90 @@ class RoleController extends AbstractController
             }
         }
 
+        /**
+         * @var $selectedPermissions PermissionModel[]
+         */
+        $selectedPermissions = [];
+        if ($roleModel->getRolePermissions()) {
+            foreach ($roleModel->getRolePermissions() as $permission) {
+                $selectedPermissions[] = ModelSerializer::parse($permission, PermissionModel::class);
+            }
+        }
+
+        if (!empty($inputs)) {
+            /**
+             * @var $roleModel RoleModel
+             */
+            $roleModel = ModelSerializer::parse($inputs, RoleModel::class);
+            $roleModel->setRoleId($id);
+            $request = new Req(Servers::Authentication, Authentication::Role, 'update');
+            $request->add_instance($roleModel);
+            $response = $request->send();
+            if ($response->getStatus() == ResponseStatus::successful) {
+                $this->addFlash('s', $response->getMessage());
+                return $this->redirect($this->generateUrl('authentication_role_edit', ['id' => $id]));
+            } else {
+                $this->addFlash('s', $response->getMessage());
+            }
+        }
+
 
         return $this->render('authentication/role/edit.html.twig', [
             'controller_name' => 'RoleController',
             'roleModel' => $roleModel,
             'serverPermissions' => $serverPermissions,
+            'selectedPermissions' => $selectedPermissions,
         ]);
     }
 
 
-    public function addPermission()
+    /**
+     * @Route("/add-permission/{role_id}/{permission_id}", name="_add_permission")
+     * @param $role_id
+     * @param $permission_id
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \ReflectionException
+     */
+    public function addPermission($role_id, $permission_id)
     {
-
+        $permissionModel = new PermissionModel();
+        $permissionModel->setRoleId($role_id);
+        $permissionModel->setPermissionId($permission_id);
+//        dd($permissionModel);
+        $request = new Req(Servers::Authentication, Authentication::Role, 'grant_permission');
+        $request->add_instance($permissionModel);
+//        dd($request);
+        $response = $request->send();
+//        dd($response);
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('f', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('authentication_role_edit', ['id' => $role_id]));
     }
 
-    public function removePermission()
-    {
 
+    /**
+     * @Route("/remove-permission/{permission_id}/{role_id}", name="_remove_permission")
+     * @param $permission_id
+     * @param $role_id
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \ReflectionException
+     */
+    public function removePermission($permission_id, $role_id)
+    {
+        $permissionModel = new PermissionModel();
+        $permissionModel->setPermissionId($permission_id);
+        $permissionModel->setRoleId($role_id);
+        $request = new Req(Servers::Authentication, Authentication::Role, 'deny_permission');
+        $request->add_instance($permissionModel);
+        $response = $request->send();
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('f', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('authentication_role_edit', ['id' => $role_id]));
     }
 }

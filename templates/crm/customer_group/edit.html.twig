@@ -59,6 +59,7 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Mobile</th>
+                                <th>Email</th>
                                 <th>Groups</th>
                                 <th>Company</th>
                                 <th>Actions</th>
@@ -70,14 +71,15 @@
                                     <td>{{ selectedPerson.id }}</td>
                                     <td>{{ selectedPerson.humanName }} {{ selectedPerson.humanFamily }}</td>
                                     <td>{{ selectedPerson.mobile }}</td>
+                                    <td>{{ selectedPerson.email }}</td>
                                     <td>
                                         {% for group in selectedPerson.groups %}
-                                            <span class="label label-info rounded">{{ group }}</span>
+                                            <span class="label label-info rounded">{{ group.customerGroupName }}</span>
                                         {% endfor %}
                                     </td>
                                     <td>
                                         {% for company in selectedPerson.companies %}
-                                            <span class="label label-info rounded">{{ company }}</span>
+                                            <span class="label label-info rounded">{{ company.companyName }}</span>
                                         {% endfor %}
                                     </td>
                                     <td>

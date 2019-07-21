@@ -36,40 +36,47 @@
                         <table id="usersRoleList">
                             <thead>
                             <tr>
-                                <th>User global Token</th>
+                                <th>ID</th>
                                 <th>Username</th>
-                                <th>Current disposable password</th>
                                 <th>Last login date</th>
-                                <th>Role</th>
                                 <th>Is logged in</th>
-                                <th>Action</th>
+                                <th>Role</th>
+                                <th>Save Role</th>
+                                <th>Send Password</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Username
-                                </td>
-                                <td>
-                                    gvCXkY5NUBmqS&4k
-                                </td>
-                                <td>
-                                    1397/12/12
-                                </td>
-                                <td>
-                                    Role name
-                                </td>
-                                <td>
-                                    <span class="fa fa-times text-red"></span>
-                                    <span class="fa fa-check text-green"></span>
-                                </td>
-                                <td>
-                                    <a href="#" class="fa fa-paper-plane"></a>
-                                </td>
-                            </tr>
+                            {% for user in users %}
+                                <tr>
+                                    <form action="{{ path('authentication_user_set_role' , {user_id:user.userId}) }}"
+                                          method="post">
+                                        <td>{{ user.userId }}</td>
+                                        <td>{{ user.userName }} {{ user.userFamily }}</td>
+                                        <td>{{ user.userLoginDate }}</td>
+                                        <td>
+
+                                        <span class="label rounded"
+                                              style="background-color: {{ user.authenticationStatus.authenticationStatusColor }}">
+                                            {{ user.authenticationStatus.authenticationStatusName }}
+                                        </span>
+                                        </td>
+                                        <td>
+                                            <select name="roleId" class="form-control mb-3">
+                                                {% for role in roles %}
+                                                    <option value="{{ role.roleId }}" {{ (role.roleId == user.roleId) ? 'selected' : '' }}>{{ role.roleName }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button type="submit" class="btn btn-dark rounded fa fa-save"></button>
+                                        </td>
+                                    </form>
+                                    <td>
+                                        <a href="{{ path('authentication_user_send_password' , {user_id:user.userId}) }}"
+                                           class="fa fa-paper-plane"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>

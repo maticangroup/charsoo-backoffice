@@ -18,14 +18,18 @@
                         </div>
                         <form action="{{ path('authentication_client_create') }}" method="post" class="col-2">
                             <input type="text" name="clientUsername" class="form-control mb-3"
-                                   value="{{ clientModel.clientUsername }}">
-                            <select name="select" class="form-control mb-3">
-                                {% for role in roles %}
-                                    <option value="{{ role.roleId }}" {{ (role.roleId == clientModel.clientRoleId) ? 'selected' : '' }}>
-                                        {{ role.roleName }}
-                                    </option>
-                                {% endfor %}
-                            </select>
+                                   value="{{ clientModel.clientUsername }}" placeholder="Client Name">
+                            <input type="text" name="clientIP" class="form-control mb-3"
+                                   value="{{ clientModel.clientIP }}" placeholder="Client IP">
+                            <input type="text" name="clientDomain" class="form-control mb-3"
+                                   value="{{ clientModel.clientDomain }}" placeholder="Client Domain">
+                            {#<select name="clientRoleId" class="form-control mb-3">#}
+                                {#{% for role in roles %}#}
+                                    {#<option value="{{ role.roleId }}" {{ (role.roleId == clientModel.clientRoleId) ? 'selected' : '' }}>#}
+                                        {#{{ role.roleName }}#}
+                                    {#</option>#}
+                                {#{% endfor %}#}
+                            {#</select>#}
                             <button type="submit" class="btn rounded btn-block btn-dark fa fa-save"></button>
                         </form>
                     </div>
@@ -53,6 +57,7 @@
                                 <th>Public Key</th>
                                 <th>Secret Key</th>
                                 <th>Role</th>
+                                <th>IP</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -63,7 +68,8 @@
                                     <td>{{ client.clientUsername }}</td>
                                     <td>{{ client.clientPublicKey }}</td>
                                     <td>{{ client.clientSecretKey }}</td>
-                                    <td>{{ client.clientRole }}</td>
+                                    <td>{{ client.clientRoleName }}</td>
+                                    <td>{{ client.clientIP }}</td>
                                     <td>
                                         <a href="{{ path('authentication_client_edit' , {id:client.clientId}) }}"
                                            class="fa fa-edit"></a>

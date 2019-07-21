@@ -41,8 +41,21 @@ class CustomerController extends AbstractController
      */
     public function fetchAll()
     {
+        $request = new Req(Servers::Repository, Repository::Person, 'all');
+        $response = $request->send();
+
+        /**
+         * @var $customers PersonModel[]
+         */
+        $customers = [];
+        if ($response->getContent()) {
+            foreach ($response->getContent() as $customer) {
+                $customers[] = ModelSerializer::parse($customer, PersonModel::class);
+            }
+        }
         return $this->render('crm/customer/list.html.twig', [
             'controller_name' => 'CustomerController',
+            'customers' => $customers,
         ]);
     }
 
@@ -442,8 +455,8 @@ class CustomerController extends AbstractController
          * @var $groups CustomerGroupModel[]
          */
         $groups = [];
-        if ($personModel->getCoupons()) {
-            foreach ($personModel->getCoupons() as $group) {
+        if ($personModel->getGroups()) {
+            foreach ($personModel->getGroups() as $group) {
                 $groups[] = ModelSerializer::parse($group, CustomerGroupModel::class);
             }
         }

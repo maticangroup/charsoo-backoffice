@@ -37,6 +37,7 @@ class ClientController extends AbstractController
             $request = new Req(Servers::Authentication, Authentication::Client, 'new');
             $request->add_instance($clientModel);
             $response = $request->send();
+//            dd($response);
             if ($response->getStatus() == ResponseStatus::successful) {
                 $this->addFlash('s', $response->getMessage());
             } else {
@@ -56,24 +57,24 @@ class ClientController extends AbstractController
             }
         }
 
-        /**
-         * @var $roles RoleModel[]
-         */
-        $roles = [];
-        $allRolesRequest = new Req(Servers::Authentication, Authentication::Role, 'all');
-        $allRolesResponse = $allRolesRequest->send();
-        if ($allRolesResponse->getContent()) {
-            foreach ($allRolesResponse->getContent() as $role) {
-                $roles[] = ModelSerializer::parse($role, RoleModel::class);
-            }
-        }
+//        /**
+//         * @var $roles RoleModel[]
+//         */
+//        $roles = [];
+//        $allRolesRequest = new Req(Servers::Authentication, Authentication::Role, 'all');
+//        $allRolesResponse = $allRolesRequest->send();
+//        if ($allRolesResponse->getContent()) {
+//            foreach ($allRolesResponse->getContent() as $role) {
+//                $roles[] = ModelSerializer::parse($role, RoleModel::class);
+//            }
+//        }
 
 
         return $this->render('authentication/client/create.html.twig', [
             'controller_name' => 'ClientController',
             'clientModel' => $clientModel,
             'clients' => $clients,
-            'roles' => $roles,
+//            'roles' => $roles,
         ]);
     }
 
@@ -113,26 +114,30 @@ class ClientController extends AbstractController
             }
         }
 
-        /**
-         * @var $roles RoleModel[]
-         */
-        $roles = [];
-        $allRolesRequest = new Req(Servers::Authentication, Authentication::Role, 'all');
-        $allRolesResponse = $allRolesRequest->send();
-        if ($allRolesResponse->getContent()) {
-            foreach ($allRolesResponse->getContent() as $role) {
-                $roles[] = ModelSerializer::parse($role, RoleModel::class);
-            }
-        }
+//        /**
+//         * @var $roles RoleModel[]
+//         */
+//        $roles = [];
+//        $allRolesRequest = new Req(Servers::Authentication, Authentication::Role, 'all');
+//        $allRolesResponse = $allRolesRequest->send();
+//        if ($allRolesResponse->getContent()) {
+//            foreach ($allRolesResponse->getContent() as $role) {
+//                $roles[] = ModelSerializer::parse($role, RoleModel::class);
+//            }
+//        }
 
         if (!empty($inputs)) {
+            /**
+             * @var $clientModel ClientModel
+             */
+            $clientModel = ModelSerializer::parse($inputs, ClientModel::class);
             $clientModel->setClientId($id);
             $request = new Req(Servers::Authentication, Authentication::Client, 'update');
             $request->add_instance($clientModel);
             $response = $request->send();
             if ($response->getStatus() == ResponseStatus::successful) {
                 $this->addFlash('s', $response->getMessage());
-                return $this->redirect($this->generateUrl('authentication_client_create'));
+                return $this->redirect($this->generateUrl('authentication_client_edit', ['id' => $id]));
             } else {
                 $this->addFlash('s', $response->getMessage());
             }
@@ -143,7 +148,7 @@ class ClientController extends AbstractController
             'controller_name' => 'ClientController',
             'clientModel' => $clientModel,
             'clients' => $clients,
-            'roles' => $roles,
+            'roles' => [],
         ]);
     }
 }

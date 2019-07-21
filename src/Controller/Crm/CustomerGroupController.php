@@ -35,9 +35,11 @@ class CustomerGroupController extends AbstractController
          */
         $customerGroupModel = ModelSerializer::parse($inputs, CustomerGroupModel::class);
         if (!empty($inputs)) {
+//            dd($customerGroupModel);
             $request = new Req(Servers::CRM, CRM::CustomerGroup, 'new');
             $request->add_instance($customerGroupModel);
             $response = $request->send();
+//            dd($response);
             if ($response->getStatus() == ResponseStatus::successful) {
                 $this->addFlash('s', $response->getMessage());
             } else {
@@ -85,6 +87,7 @@ class CustomerGroupController extends AbstractController
         $request = new Req(Servers::CRM, CRM::CustomerGroup, 'fetch');
         $request->add_instance($customerGroupModel);
         $response = $request->send();
+//        dd($response);
         /**
          * @var $customerGroupModel CustomerGroupModel
          */
@@ -115,6 +118,10 @@ class CustomerGroupController extends AbstractController
 
 
         if (!empty($inputs)) {
+            /**
+             * @var $customerGroupModel CustomerGroupModel
+             */
+            $customerGroupModel = ModelSerializer::parse($inputs, CustomerGroupModel::class);
             $customerGroupModel->setCustomerGroupId($id);
             $request = new Req(Servers::CRM, CRM::CustomerGroup, 'update');
             $request->add_instance($customerGroupModel);
@@ -151,7 +158,8 @@ class CustomerGroupController extends AbstractController
          */
         $personModel = ModelSerializer::parse($inputs, PersonModel::class);
         $personModel->setCustomerGroupId($customer_group_id);
-        $request = new Req(Servers::CRM, CRM::CustomerGroup, 'add_allowed_customer');
+//        dd($personModel);
+        $request = new Req(Servers::CRM, CRM::CustomerGroup, 'add_person');
         $request->add_instance($personModel);
         $response = $request->send();
 //        dd($response);
@@ -175,7 +183,7 @@ class CustomerGroupController extends AbstractController
         $personModel = new PersonModel();
         $personModel->setId($person_id);
         $personModel->setCustomerGroupId($customer_group_id);
-        $request = new Req(Servers::CRM, CRM::CustomerGroup, 'remove_allowed_customer');
+        $request = new Req(Servers::CRM, CRM::CustomerGroup, 'remove_person');
         $request->add_instance($personModel);
         $response = $request->send();
         if ($response->getStatus() == ResponseStatus::successful) {
@@ -204,7 +212,8 @@ class CustomerGroupController extends AbstractController
             $customerGroupStatusModel->setCustomerGroupStatusMachineName('active');
         }
 
-        $request = new Req(Servers::CRM, CRM::CustomerGroup, 'change_status');
+//        dd($customerGroupStatusModel);
+        $request = new Req(Servers::CRM, CRM::CustomerGroup, 'set_status');
         $request->add_instance($customerGroupStatusModel);
         $response = $request->send();
         if ($response->getStatus() == ResponseStatus::successful) {

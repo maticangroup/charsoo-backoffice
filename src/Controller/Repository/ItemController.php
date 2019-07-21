@@ -10,9 +10,12 @@ use App\FormModels\Repository\CompanyModel;
 use App\FormModels\Repository\GuaranteeModel;
 use App\FormModels\Repository\ItemCategoriesModel;
 use App\FormModels\Repository\ItemCategoryModel;
+use App\FormModels\Repository\ItemCategorySpecKeyModel;
 use App\FormModels\Repository\ItemColorModel;
 use App\FormModels\Repository\ItemModel;
 use App\FormModels\Repository\ItemTypeModel;
+use App\FormModels\Repository\SpecKeyModel;
+use App\FormModels\Repository\SpecKeyValueModel;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;
@@ -512,4 +515,31 @@ class ItemController extends AbstractController
         return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
     }
 
+
+    /**
+     * @Route("/submit-key-value", name="_submit_key_value")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
+     */
+    public function submitKeyValue(Request $request)
+    {
+        $inputs = $request->request->all();
+//        dd($inputs);
+        /**
+         * @var $specKeyValueModel SpecKeyValueModel
+         */
+        $specKeyValueModel = ModelSerializer::parse($inputs, SpecKeyValueModel::class);
+//        $specKeyModel->setSpecKeySpecGroupName();
+        $request = new Req(Servers::Repository, Repository::SpecKey, 'submit_key_value');
+        $request->add_instance($specKeyValueModel);
+        $response = $request->send();
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('s', $response->getMessage());
+        }
+
+        return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $specKeyValueModel->getItemId()]));
+    }
 }

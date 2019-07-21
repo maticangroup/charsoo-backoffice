@@ -40,7 +40,7 @@
                             {% for server in serverPermissions %}
                                 <li class="nav-item">
                                     <a href="#tab{{ loop.index }}" data-toggle="tab"
-                                       class="nav-link active">{{ server.serverPermissionName }}</a>
+                                       class="nav-link {{ (loop.index == 1)? 'active' : '' }}">{{ server.serverPermissionName }}</a>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -50,40 +50,45 @@
                         <div class="tab-content col">
                             <!-- Tab Pane Start -->
                             {% for server in serverPermissions %}
-                                {% for permission in server.serverPermissions %}
-                                    <div class="tab-pane fade show active" id="tab{{ loop.index }}">
-                                        <div class="form-group row">
-                                            <div class="col-4"></div>
-                                            <div class="col-md-4">
-                                                <input type="text" placeholder="Search" name="text"
-                                                       class="form-control">
-                                            </div>
-                                            <div class="col-4"></div>
+                                <div class="tab-pane fade show {{ (loop.index == 1)? 'active' : '' }}"
+                                     id="tab{{ loop.index }}">
+                                    <div class="form-group row">
+                                        <div class="col-4"></div>
+                                        <div class="col-md-4">
+                                            <input type="text" placeholder="Search" name="text"
+                                                   class="form-control">
                                         </div>
-                                        <!---->
-                                        <div class="records--list">
-                                            <table id="usersRoleList">
-                                                <thead>
-                                                <tr>
-                                                    <th>Action ID</th>
-                                                    <th>Action name</th>
-                                                    <th>Copy Action Id</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
+                                        <div class="col-4"></div>
+                                    </div>
+                                    <!---->
+
+
+                                    <div class="records--list">
+                                        <table id="table{{ loop.index }}">
+                                            <thead>
+                                            <tr>
+                                                <th>Action ID</th>
+                                                <th>Action name</th>
+                                                <th>Add Permission</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for key , permission in server.serverPermissions %}
                                                 <tr>
                                                     <td>{{ permission.permissionId }}</td>
                                                     <td>{{ permission.permissionName }}</td>
                                                     <td>
-                                                        <a href="#" class="fa fa-copy"></a>
+                                                        <a href="{{ path('authentication_role_add_permission' , {role_id:roleModel.roleId , permission_id:permission.permissionId}) }}"
+                                                           class="fa fa-plus"></a>
                                                     </td>
                                                 </tr>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
                                     </div>
-                                {% endfor %}
+
+
+                                </div>
                             {% endfor %}
                             <!-- Tab Pane End -->
                         </div>
@@ -102,109 +107,38 @@
                     </strong>
                 </div>
                 <div class="panel-content">
-                    <div class="row flex-nowrap mx-0">
-
-                        <!-- Tabs Nav Start -->
-                        <ul class="nav nav-tabs nav-tabs-line-left flex-column">
-                            <li class="nav-item">
-                                <a href="#tab1" data-toggle="tab" class="nav-link active">Admin
-                                    <span class="badge text-white bg-info">7</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" data-toggle="tab" class="nav-link">Customer<span
-                                            class="badge text-white bg-info">7</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" data-toggle="tab" class="nav-link">Sale<span
-                                            class="badge text-white bg-info">7</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" data-toggle="tab" class="nav-link">Delivery<span
-                                            class="badge text-white bg-info">7</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#tab2" data-toggle="tab"
-                                   class="nav-link fa fa-plus btn btn-block"></a>
-                            </li>
-                        </ul>
-                        <!-- Tabs Nav End -->
-
-                        <!-- Tab Content Start -->
-                        <div class="tab-content col">
-                            <!-- Tab Pane Start -->
-                            <div class="tab-pane fade show active" id="tab1">
-                                <div class="form-group row">
-                                    <div class="col-3"></div>
-                                    <div class="col-md-4">
-                                        <input type="text" placeholder="Search" name="text"
-                                               class="form-control">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <a href="#" class="btn rounded btn-block btn-success fa fa-plus"></a>
-                                    </div>
-                                    <div class="col-3"></div>
-                                </div>
-                                <!---->
-                                <div class="records--list">
-                                    <table id="countriesList">
-                                        <thead>
-                                        <tr>
-                                            <th>Action ID</th>
-                                            <th>Action name</th>
-                                            <th>Section</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                <a href="#" class="btn-link">#315321</a>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn-link">Example permission</a>
-                                            </td>
-                                            <td>
-                                                <span class="label label-info rounded">Section</span>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="fa fa-trash"></a>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-                            <!-- Tab Pane End -->
-
-                            <!-- Tab Pane Start -->
-                            <div class="tab-pane fade" id="tab2">
-                                <div class="form-group row">
-                                    <div class="col-3"></div>
-
-                                    <div class="col-6">
-                                        <form action="{{ path('authentication_role_authentication_role_save') }}"
-                                              method="post">
-                                            <div class="row">
-                                                <div class="col-8">
-                                                    <input type="text" placeholder="Role name" name="text"
-                                                           class="form-control mb-3">
-                                                    <span class="form-text text-muted">Note: after adding a role, it is not possible to remove it.</span>
-                                                </div>
-                                                <div class="col-4">
-                                                    <a href="#"
-                                                       class="btn btn-block rounded btn-success fa fa-plus"></a>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    <div class="col-3"></div>
-                                </div>
-                            </div>
-                            <!-- Tab Pane End -->
+                    <div class="form-group row">
+                        <div class="col-4"></div>
+                        <div class="col-md-4">
+                            <input type="text" placeholder="Search" name="text"
+                                   class="form-control">
                         </div>
-                        <!-- Tab Content End -->
+                        <div class="col-4"></div>
+                    </div>
+                    <div class="records--list">
+                        <table id="countriesList">
+                            <thead>
+                            <tr>
+                                <th>Action ID</th>
+                                <th>Action name</th>
+                                <th>Section</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for selectedPermission in selectedPermissions %}
+                                <tr>
+                                    <td>{{ selectedPermission.permissionId }}</td>
+                                    <td>{{ selectedPermission.permissionName }}</td>
+                                    <td>{{ selectedPermission.permissionServerName }}</td>
+                                    <td>
+                                        <a href="{{ path('authentication_role_remove_permission' , {permission_id:selectedPermission.permissionId , role_id:roleModel.roleId}) }}"
+                                           class="fa fa-trash"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

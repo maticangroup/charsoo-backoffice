@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="888bc667-c4ce-45a1-ae9a-07fc984df454" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/General/AuthUser.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Params.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/script/all.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/script/all.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Authentication/ClientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Authentication/ClientController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Authentication/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Authentication/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Delivery/DeliveryMethodController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Delivery/DeliveryMethodController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,8 +39,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/Delivery/DeliveryMethodController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="39" selection-start-line="39" selection-end-line="39" />
+            <state relative-caret-position="374">
+              <caret line="43" column="11" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
               <folding>
                 <element signature="e#43#91#0#PHP" expanded="true" />
               </folding>
@@ -461,18 +451,18 @@
       <workItem from="1563549099591" duration="131000" />
       <workItem from="1563597420361" duration="18764000" />
       <workItem from="1563684773720" duration="25090000" />
-      <workItem from="1563777992871" duration="10551000" />
+      <workItem from="1563777992871" duration="11338000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="651768000" />
+    <option name="totallyTimeSpent" value="652555000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49784482" visible="true" weight="0.21029331" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49784482" visible="true" weight="0.21029331" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5021552" side_tool="true" weight="0.1705757" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -487,7 +477,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.3297414" />
-      <window_info anchor="bottom" id="Terminal" order="12" weight="0.14362851" />
+      <window_info anchor="bottom" id="Terminal" order="12" weight="0.32073435" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -1231,8 +1221,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Delivery/DeliveryMethodController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="39" selection-start-line="39" selection-end-line="39" />
+        <state relative-caret-position="374">
+          <caret line="43" column="11" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
           <folding>
             <element signature="e#43#91#0#PHP" expanded="true" />
           </folding>

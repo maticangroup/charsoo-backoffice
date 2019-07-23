@@ -13,12 +13,16 @@ use App\FormModels\Delivery\WeekDayModel;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\PersonModel;
 use App\FormModels\Repository\SizeModel;
+use App\General\AuthUser;
+use App\Params;
 use Matican\Core\Entities\Delivery;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;
+use PhpParser\Node\Param;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Matican\Core\Transaction\Request as Req;
 
@@ -29,9 +33,11 @@ class DeliveryMethodController extends AbstractController
 {
     /**
      * @Route("/list", name="_list")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function fetchAll()
     {
+
         $request = new Req(Servers::Delivery, Delivery::DeliveryMethod, 'all');
         $response = $request->send();
 
@@ -201,7 +207,6 @@ class DeliveryMethodController extends AbstractController
         }
 
 
-
         if (!empty($inputs)) {
             /**
              * @var $deliveryMethodModel DeliveryMethodModel
@@ -223,7 +228,6 @@ class DeliveryMethodController extends AbstractController
                 $this->addFlash('s', $response->getMessage());
             }
         }
-
 
 
         return $this->render('delivery/delivery_method/edit.html.twig', [

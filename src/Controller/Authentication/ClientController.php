@@ -61,7 +61,7 @@ class ClientController extends AbstractController
 //         * @var $roles RoleModel[]
 //         */
 //        $roles = [];
-//        $allRolesRequest = new Req(Servers::Authentication, Authentication::Role, 'all');
+//        $allRolesRequest = new Req(Servers::AuthUser, AuthUser::Role, 'all');
 //        $allRolesResponse = $allRolesRequest->send();
 //        if ($allRolesResponse->getContent()) {
 //            foreach ($allRolesResponse->getContent() as $role) {
@@ -118,7 +118,7 @@ class ClientController extends AbstractController
 //         * @var $roles RoleModel[]
 //         */
 //        $roles = [];
-//        $allRolesRequest = new Req(Servers::Authentication, Authentication::Role, 'all');
+//        $allRolesRequest = new Req(Servers::AuthUser, AuthUser::Role, 'all');
 //        $allRolesResponse = $allRolesRequest->send();
 //        if ($allRolesResponse->getContent()) {
 //            foreach ($allRolesResponse->getContent() as $role) {

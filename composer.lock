@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "31a33ac66862f0afb54341a481f0a4ba",
+    "content-hash": "71b0ada1b46dce3878e51a63c2628834",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1434,16 +1434,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "dc784032a3f6f4e7a4b882e272b771f6fe4c37cf"
+                "reference": "239400de7a173fe9901b9ac7c06497751f00727a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/dc784032a3f6f4e7a4b882e272b771f6fe4c37cf",
-                "reference": "dc784032a3f6f4e7a4b882e272b771f6fe4c37cf",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/239400de7a173fe9901b9ac7c06497751f00727a",
+                "reference": "239400de7a173fe9901b9ac7c06497751f00727a",
                 "shasum": ""
             },
             "require": {
@@ -1501,7 +1501,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2019-06-30T00:37:05+00:00"
+            "time": "2019-07-01T23:21:34+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -1555,16 +1555,16 @@
         },
         {
             "name": "maticangroup/core_client_api",
-            "version": "v7",
+            "version": "v10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maticangroup/core_client_api.git",
-                "reference": "a36f8e7dfc17bb7a44ac6889b82f1a02927e81ac"
+                "reference": "a2407996eb661a62580d7e5b338db0ffb53a5edf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maticangroup/core_client_api/zipball/a36f8e7dfc17bb7a44ac6889b82f1a02927e81ac",
-                "reference": "a36f8e7dfc17bb7a44ac6889b82f1a02927e81ac",
+                "url": "https://api.github.com/repos/maticangroup/core_client_api/zipball/a2407996eb661a62580d7e5b338db0ffb53a5edf",
+                "reference": "a2407996eb661a62580d7e5b338db0ffb53a5edf",
                 "shasum": ""
             },
             "require": {
@@ -1587,7 +1587,7 @@
                     "email": "maticangroup@gmail.com"
                 }
             ],
-            "time": "2019-07-01T06:51:51+00:00"
+            "time": "2019-07-22T05:59:33+00:00"
         },
         {
             "name": "monolog/monolog",

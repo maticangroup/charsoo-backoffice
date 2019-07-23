@@ -21,7 +21,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-12">
             <div class="panel">
                 <div class="panel-content">
@@ -38,7 +37,7 @@
                         <table id="usersRoleList">
                             <thead>
                             <tr>
-                                <th>Global Token</th>
+                                <th>ID</th>
                                 <th>Sender</th>
                                 <th>To</th>
                                 <th>Email</th>
@@ -47,106 +46,19 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    #315321
-                                </td>
-                                <td>
-                                    <a href="" class="btn-link">Sale</a>
-                                </td>
-                                <td>
-                                    <a href="" class="btn-link">User Name</a>
-                                </td>
-                                <td>
-                                    <a href="" class="btn-link">info@mydomain.com</a>
-                                </td>
-                                <td>
-                                    1397/12/12
-                                </td>
-                                <td>
-                                    <a href="#" class="fa fa-eye"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    #315321
-                                </td>
-                                <td>
-                                    <a href="" class="btn-link">Sale</a>
-                                </td>
-                                <td>
-                                    <a href="" class="btn-link">User Name</a>
-                                </td>
-                                <td>
-                                    <a href="" class="btn-link">info@mydomain.com</a>
-                                </td>
-                                <td>
-                                    1397/12/12
-                                </td>
-                                <td>
-                                    <a href="#" class="fa fa-eye"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    #315321
-                                </td>
-                                <td>
-                                    <a href="" class="btn-link">Sale</a>
-                                </td>
-                                <td>
-                                    <a href="" class="btn-link">User Name</a>
-                                </td>
-                                <td>
-                                    <a href="" class="btn-link">info@mydomain.com</a>
-                                </td>
-                                <td>
-                                    1397/12/12
-                                </td>
-                                <td>
-                                    <a href="#" class="fa fa-eye"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    #315321
-                                </td>
-                                <td>
-                                    <a href="" class="btn-link">Sale</a>
-                                </td>
-                                <td>
-                                    <a href="" class="btn-link">User Name</a>
-                                </td>
-                                <td>
-                                    <a href="" class="btn-link">info@mydomain.com</a>
-                                </td>
-                                <td>
-                                    1397/12/12
-                                </td>
-                                <td>
-                                    <a href="#" class="fa fa-eye"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    #315321
-                                </td>
-                                <td>
-                                    <a href="" class="btn-link">Sale</a>
-                                </td>
-                                <td>
-                                    <a href="" class="btn-link">User Name</a>
-                                </td>
-                                <td>
-                                    <a href="" class="btn-link">info@mydomain.com</a>
-                                </td>
-                                <td>
-                                    1397/12/12
-                                </td>
-                                <td>
-                                    <a href="#" class="fa fa-eye"></a>
-                                </td>
-                            </tr>
+                            {% for mailLog in mailLogs %}
+                                <tr>
+                                    <td>{{ mailLog.mailId }}</td>
+                                    <td>{{ mailLog.mailFrom }}</td>
+                                    <td>{{ mailLog.mailToPersonFirstName }} {{ mailLog.mailToPersonLastName }}</td>
+                                    <td>{{ mailLog.mailToPersonEmail }}</td>
+                                    <td>{{ mailLog.mailSendDate }}</td>
+                                    <td>
+                                        <a href="{{ path('notification_mail_log_read', {'id': 'mailLog.mailId'}) }}"
+                                           class="fa fa-eye"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>

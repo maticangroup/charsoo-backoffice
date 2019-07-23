@@ -38,7 +38,7 @@
                         <table id="usersRoleList">
                             <thead>
                             <tr>
-                                <th>Global Token</th>
+                                <th>ID</th>
                                 <th>Sender</th>
                                 <th>To</th>
                                 <th>Mobile</th>
@@ -47,26 +47,19 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    #315321
-                                </td>
-                                <td>
-                                    <a href="" class="btn-link">Sale</a>
-                                </td>
-                                <td>
-                                    <a href="" class="btn-link">User Name</a>
-                                </td>
-                                <td>
-                                    <a href="" class="btn-link">+989125465562</a>
-                                </td>
-                                <td>
-                                    1397/12/12
-                                </td>
-                                <td>
-                                    <a href="#" class="fa fa-eye"></a>
-                                </td>
-                            </tr>
+                            {% for smsLog in smsLogs %}
+                                <tr>
+                                    <td>{{ smsLog.smsLogId }}</td>
+                                    <td>{{ smsLog.smsLogFrom }}</td>
+                                    <td>{{ smsLog.smsLogToPersonFirstName }} {{ smsLog.smsLogToPersonLastName }}</td>
+                                    <td>{{ smsLog.smsLogToPersonPhone }}</td>
+                                    <td>{{ smsLog.smsLogSendDate }}</td>
+                                    <td>
+                                        <a href="{{ path('notification_sms_log_read', {'id': 'smsLog.smsLogId'}) }}"
+                                           class="fa fa-eye"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>

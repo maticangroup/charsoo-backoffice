@@ -120,7 +120,8 @@
                             <thead>
                             <tr>
                                 <th>Action ID</th>
-                                <th>Action name</th>
+                                <th>Action Name</th>
+                                <th>Machine Name</th>
                                 <th>Section</th>
                                 <th>Action</th>
                             </tr>
@@ -130,6 +131,7 @@
                                 <tr>
                                     <td>{{ selectedPermission.permissionId }}</td>
                                     <td>{{ selectedPermission.permissionName }}</td>
+                                    <td>{{ selectedPermission.permissionMachineName }}</td>
                                     <td>{{ selectedPermission.permissionServerName }}</td>
                                     <td>
                                         <a href="{{ path('authentication_role_remove_permission' , {permission_id:selectedPermission.permissionId , role_id:roleModel.roleId}) }}"

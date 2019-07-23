@@ -37,56 +37,22 @@
                         <table id="usersRoleList">
                             <thead>
                             <tr>
-                                <th>Global Token</th>
+                                <th>ID</th>
                                 <th>Title</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Buy Order
-                                </td>
-                                <td>
-                                    <a href="#" class="fa fa-eye"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Buy Order
-                                </td>
-                                <td>
-                                    <a href="#" class="fa fa-eye"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Buy Order
-                                </td>
-                                <td>
-                                    <a href="#" class="fa fa-eye"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Buy Order
-                                </td>
-                                <td>
-                                    <a href="#" class="fa fa-eye"></a>
-                                </td>
-                            </tr>
+                            {% for mailTemplate in mailTemplates %}
+                                <tr>
+                                    <td>{{ mailTemplate.mailTemplateId }}</td>
+                                    <td>{{ mailTemplate.mailTemplateTitle }}</td>
+                                    <td>
+                                        <a href="{{ path('notification_mail_template_edit', {'id': 'mailTemplate.mailTemplateId'}) }}"
+                                           class="fa fa-eye"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>

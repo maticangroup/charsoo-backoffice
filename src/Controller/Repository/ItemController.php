@@ -242,6 +242,7 @@ class ItemController extends AbstractController
         $specGroupsKeys = json_decode(json_encode($itemModel->getItemSpecGroupsKeys()), true);
 //        print_r($specGroupsKeys); die;
 
+
         return $this->render('repository/item/edit.html.twig', [
             'controller_name' => 'ItemController',
             'itemModel' => $itemModel,
@@ -541,5 +542,35 @@ class ItemController extends AbstractController
         }
 
         return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $specKeyValueModel->getItemId()]));
+    }
+
+    /**
+     * @Route("/remove-key-value/{item_id}/{key_id}/{value}", name="_remove_key_value")
+     * @param $item_id
+     * @param $key_id
+     * @param $value
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
+     */
+    public function removeKeyValue($item_id, $key_id, $value)
+    {
+        $keyValueModel = new SpecKeyValueModel();
+        $keyValueModel->setItemId($item_id);
+        $keyValueModel->setKeyId($key_id);
+        $keyValueModel->setValue($value);
+
+//        dd($keyValueModel);
+
+        $request = new Req(Servers::Repository, Repository::SpecKey, 'remove_key_value');
+        $request->add_instance($keyValueModel);
+        $response = $request->send();
+//        dd($response);
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('s', $response->getMessage());
+        }
+
+        return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
     }
 }

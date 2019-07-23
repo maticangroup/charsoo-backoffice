@@ -3,22 +3,31 @@
   <component name="ChangeListManager">
     <list default="true" id="888bc667-c4ce-45a1-ae9a-07fc984df454" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Authentication/ClientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Authentication/ClientController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Authentication/RoleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Authentication/RoleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Authentication/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Authentication/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Crm/CustomerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Crm/CustomerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Crm/CustomerGroupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Crm/CustomerGroupController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Notification/ClientMessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Notification/ClientMessageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Notification/MailLogController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Notification/MailLogController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Notification/MailTemplateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Notification/MailTemplateController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Notification/NotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Notification/NotificationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Notification/SMSLogController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Notification/SMSLogController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Notification/SMSTemplateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Notification/SMSTemplateController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Repository/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Repository/ItemController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/accounting/invoice/create.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accounting/invoice/create.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/authentication/client/create.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/authentication/client/create.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/authentication/client/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/authentication/client/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Ticketing/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Ticketing/CommentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FormModels" beforeDir="false" afterPath="$PROJECT_DIR$/src/FormModels" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/authentication/role/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/authentication/role/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/authentication/user/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/authentication/user/list.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/crm/customer/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/crm/customer/list.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/crm/customer/read-company-group.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/crm/customer/read-company-group.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/crm/customer_group/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/crm/customer_group/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/repository/company/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/repository/company/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/notification/client_message/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/notification/client_message/list.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/notification/client_message/read.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/notification/client_message/read.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/notification/mail_log/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/notification/mail_log/list.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/notification/mail_log/read.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/notification/mail_log/read.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/notification/mail_template/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/notification/mail_template/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/notification/mail_template/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/notification/mail_template/list.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/notification/notification/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/notification/notification/list.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/notification/sms_log/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/notification/sms_log/list.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/notification/sms_log/read.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/notification/sms_log/read.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/notification/sms_template/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/notification/sms_template/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/notification/sms_template/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/notification/sms_template/list.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/repository/item/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/repository/item/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/ticketing/comment/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/ticketing/comment/list.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/ticketing/comment/read.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/ticketing/comment/read.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,18 +44,63 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ItemController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CommentModel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FormModels/Ticketing/CommentModel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="7860">
+              <caret line="267" column="5" selection-start-line="267" selection-start-column="5" selection-end-line="267" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="read.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/ticketing/comment/read.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3000">
+              <caret line="100" column="64" selection-start-line="100" selection-start-column="64" selection-end-line="100" selection-end-column="64" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edit.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/authentication/role/edit.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="12" selection-start-column="12" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ItemController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/Repository/ItemController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="310">
-              <caret line="533" column="31" selection-start-line="533" selection-start-column="31" selection-end-line="533" selection-end-column="31" />
+              <caret line="562" selection-start-line="562" selection-end-line="562" />
               <folding>
-                <element signature="e#9502#10321#0#PHP" />
-                <element signature="e#10590#11287#0#PHP" />
-                <element signature="e#11539#12358#0#PHP" />
-                <element signature="e#12620#13315#0#PHP" />
-                <element signature="e#13575#14393#0#PHP" />
+                <element signature="e#2001#4073#0#PHP" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edit.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/repository/item/edit.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="306" column="56" selection-start-line="306" selection-start-column="56" selection-end-line="306" selection-end-column="56" />
+              <folding>
+                <element signature="n#style#0;n#h4#0;n#div#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#3;n#div#0;n#!!top" expanded="true" />
+                <element signature="e#17535#17567#0#Twig" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SpecKeyModel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FormModels/Repository/SpecKeyModel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="13" column="22" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -54,21 +108,26 @@
       <file leaf-file-name="SpecKeyValueModel.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FormModels/Repository/SpecKeyValueModel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="14" column="18" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="18" />
+            <state relative-caret-position="330">
+              <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edit.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/repository/item/edit.html.twig">
+      <file leaf-file-name="PermissionModel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FormModels/Authentication/PermissionModel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="318" column="87" selection-start-line="318" selection-start-column="87" selection-end-line="318" selection-end-column="87" />
-              <folding>
-                <element signature="e#12#26#0#Twig" expanded="true" />
-                <element signature="e#18033#18065#0#Twig" expanded="true" />
-              </folding>
+            <state relative-caret-position="3270">
+              <caret line="114" column="5" selection-start-line="114" selection-start-column="5" selection-end-line="114" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommentPointModel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FormModels/Ticketing/CommentPointModel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="15" column="30" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -107,57 +166,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/accounting/gift_card_group/read.html.twig" />
-        <option value="$PROJECT_DIR$/templates/accounting/coupon_group/read.html.twig" />
-        <option value="$PROJECT_DIR$/src/FormModels/CRM/CustomerCouponModel.php" />
-        <option value="$PROJECT_DIR$/templates/crm/customer/read-gift-coupon.html.twig" />
-        <option value="$PROJECT_DIR$/templates/crm/customer/read-payment-deed.html.twig" />
-        <option value="$PROJECT_DIR$/templates/crm/customer/read-invoice.html.twig" />
-        <option value="$PROJECT_DIR$/src/FormModels/CRM/InvitationStatusModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/CRM/InvitationModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Repository/PersonModel.php" />
-        <option value="$PROJECT_DIR$/vendor/maticangroup/core_client_api/app/Core/Entities/CRM.php" />
-        <option value="$PROJECT_DIR$/templates/crm/customer/read-invitation.html.twig" />
-        <option value="$PROJECT_DIR$/templates/crm/customer/tab.html.twig" />
-        <option value="$PROJECT_DIR$/src/FormModels/Ticketing/CommentModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Notification/SMSLogModel.php" />
-        <option value="$PROJECT_DIR$/vendor/maticangroup/core_client_api/app/Core/Entities/Notifications.php" />
-        <option value="$PROJECT_DIR$/templates/crm/customer/read-sms.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/Notification/MailLogController.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Notification/MailModel.php" />
-        <option value="$PROJECT_DIR$/src/General/AdminSideMenu.php" />
-        <option value="$PROJECT_DIR$/templates/general/menu/index.html.twig" />
-        <option value="$PROJECT_DIR$/templates/base.html.twig" />
-        <option value="$PROJECT_DIR$/templates/general/menu/side-menu.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/General/MenuController.php" />
-        <option value="$PROJECT_DIR$/templates/authentication/login/read.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/Authentication/LoginController.php" />
-        <option value="$PROJECT_DIR$/templates/authentication/role/create.html.twig" />
-        <option value="$PROJECT_DIR$/src/FormModels/Authentication/ClientModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Authentication/ServerPermissionModel.php" />
-        <option value="$PROJECT_DIR$/vendor/maticangroup/core_client_api/app/Core/Entities/Authentication.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Authentication/PermissionModel.php" />
-        <option value="$PROJECT_DIR$/templates/repository/company/edit.html.twig" />
-        <option value="$PROJECT_DIR$/templates/crm/customer_group/edit.html.twig" />
-        <option value="$PROJECT_DIR$/templates/crm/customer/read-company-group.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/Crm/CustomerGroupController.php" />
-        <option value="$PROJECT_DIR$/templates/authentication/client/create.html.twig" />
-        <option value="$PROJECT_DIR$/templates/authentication/client/edit.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/Authentication/ClientController.php" />
-        <option value="$PROJECT_DIR$/templates/authentication/role/edit.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/Authentication/RoleController.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Authentication/RoleModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Authentication/AuthenticationStatusModel.php" />
-        <option value="$PROJECT_DIR$/src/FormModels/Authentication/UserModel.php" />
-        <option value="$PROJECT_DIR$/templates/authentication/user/list.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/Authentication/UserController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Crm/CustomerController.php" />
         <option value="$PROJECT_DIR$/templates/crm/customer/list.html.twig" />
         <option value="$PROJECT_DIR$/templates/accounting/invoice/create.html.twig" />
         <option value="$PROJECT_DIR$/src/FormModels/Repository/SpecKeyModel.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/Notification/SMSLogModel.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/Notification/ClientMessageModel.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Notification/InternalNotificationModel.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/Notification/InternalNotificationModel.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/Notification/NewsletterModel.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/Notification/SubscriberModel.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/Notification/InternalNotificationStatus.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/Notification/InternalNotificationStatusModel.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/Notification/NewsletterStatusModel.php" />
+        <option value="$PROJECT_DIR$/templates/notification/client_message/read.html.twig" />
+        <option value="$PROJECT_DIR$/templates/notification/client_message/list.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/Notification/ClientMessageController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Notification/MailLogController.php" />
+        <option value="$PROJECT_DIR$/templates/notification/mail_log/list.html.twig" />
+        <option value="$PROJECT_DIR$/templates/notification/mail_log/read.html.twig" />
+        <option value="$PROJECT_DIR$/src/FormModels/Notification/TokenModel.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/Notification/MailModel.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/Notification/MailTemplateModel.php" />
+        <option value="$PROJECT_DIR$/templates/notification/mail_template/list.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/Notification/MailTemplateController.php" />
+        <option value="$PROJECT_DIR$/templates/notification/mail_template/edit.html.twig" />
+        <option value="$PROJECT_DIR$/vendor/maticangroup/core_client_api/app/Core/Entities/Notifications.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Notification/NotificationController.php" />
+        <option value="$PROJECT_DIR$/templates/notification/notification/list.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/Notification/SMSLogController.php" />
+        <option value="$PROJECT_DIR$/templates/notification/sms_log/list.html.twig" />
+        <option value="$PROJECT_DIR$/src/FormModels/Notification/SMSModel.php" />
+        <option value="$PROJECT_DIR$/templates/notification/sms_log/read.html.twig" />
+        <option value="$PROJECT_DIR$/src/FormModels/Notification/SMSTemplateModel.php" />
+        <option value="$PROJECT_DIR$/templates/notification/sms_template/list.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/Notification/SMSTemplateController.php" />
+        <option value="$PROJECT_DIR$/templates/notification/sms_template/edit.html.twig" />
+        <option value="$PROJECT_DIR$/vendor/maticangroup/core_client_api/app/Core/Entities/Ticketing.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/Repository/ItemModel.php" />
+        <option value="$PROJECT_DIR$/templates/ticketing/comment/list.html.twig" />
+        <option value="$PROJECT_DIR$/src/FormModels/Ticketing/CommentPointModel.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/Ticketing/ItemCommentsModel.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Ticketing/CommentController.php" />
+        <option value="$PROJECT_DIR$/src/FormModels/Ticketing/CommentModel.php" />
+        <option value="$PROJECT_DIR$/templates/ticketing/comment/read.html.twig" />
+        <option value="$PROJECT_DIR$/src/FormModels/Authentication/PermissionModel.php" />
+        <option value="$PROJECT_DIR$/templates/authentication/role/edit.html.twig" />
+        <option value="$PROJECT_DIR$/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/src/FormModels/Repository/SpecKeyValueModel.php" />
-        <option value="$PROJECT_DIR$/templates/repository/item/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/Repository/ItemController.php" />
+        <option value="$PROJECT_DIR$/templates/repository/item/edit.html.twig" />
       </list>
     </option>
   </component>
@@ -329,21 +388,7 @@
               <item name="backoffice" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Controller" type="462c0819:PsiDirectoryNode" />
-              <item name="Authentication" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-              <item name="Crm" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-              <item name="Delivery" type="462c0819:PsiDirectoryNode" />
+              <item name="Accounting" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
@@ -351,6 +396,13 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Controller" type="462c0819:PsiDirectoryNode" />
               <item name="Repository" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Controller" type="462c0819:PsiDirectoryNode" />
+              <item name="Ticketing" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
@@ -370,14 +422,14 @@
               <item name="backoffice" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="FormModels" type="462c0819:PsiDirectoryNode" />
-              <item name="CRM" type="462c0819:PsiDirectoryNode" />
+              <item name="Repository" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
               <item name="backoffice" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="FormModels" type="462c0819:PsiDirectoryNode" />
-              <item name="Repository" type="462c0819:PsiDirectoryNode" />
+              <item name="Ticketing" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
@@ -388,14 +440,27 @@
               <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
               <item name="backoffice" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="accounting" type="462c0819:PsiDirectoryNode" />
+              <item name="authentication" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
               <item name="backoffice" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="accounting" type="462c0819:PsiDirectoryNode" />
-              <item name="invoice" type="462c0819:PsiDirectoryNode" />
+              <item name="authentication" type="462c0819:PsiDirectoryNode" />
+              <item name="role" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="delivery" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="delivery" type="462c0819:PsiDirectoryNode" />
+              <item name="delivery_person" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
@@ -409,6 +474,24 @@
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="repository" type="462c0819:PsiDirectoryNode" />
               <item name="item" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="ticketing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="ticketing" type="462c0819:PsiDirectoryNode" />
+              <item name="comment" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -504,18 +587,21 @@
       <workItem from="1563523770655" duration="7817000" />
       <workItem from="1563549099591" duration="131000" />
       <workItem from="1563597420361" duration="18764000" />
-      <workItem from="1563684773720" duration="25090000" />
+      <workItem from="1563684773720" duration="25465000" />
+      <workItem from="1563772605560" duration="11062000" />
+      <workItem from="1563857482021" duration="5380000" />
+      <workItem from="1563862943385" duration="6910000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="641217000" />
+    <option name="totallyTimeSpent" value="664944000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49784482" visible="true" weight="0.20042644" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49784482" visible="true" weight="0.20682302" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.3297414" />
@@ -539,21 +625,21 @@
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49784482" visible="true" weight="0.20042644" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.3297414" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3286638" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.30603448" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3286638" />
-      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.3297414" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info id="Favorites" order="2" sideWeight="0.5021552" side_tool="true" weight="0.1705757" />
@@ -571,843 +657,10 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Controller/Repository/GuaranteeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="18" column="32" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="32" />
-          <folding>
-            <element signature="e#733#931#0#PHP" />
-            <element signature="e#936#3472#0#PHP" />
-            <element signature="e#1036#1098#0#PHP" />
-            <element signature="e#1189#1661#0#PHP" />
-            <element signature="e#1431#1651#0#PHP" />
-            <element signature="e#1568#1651#0#PHP" />
-            <element signature="e#1856#1932#0#PHP" />
-            <element signature="e#1975#2170#0#PHP" />
-            <element signature="e#2402#2478#0#PHP" />
-            <element signature="e#2521#2716#0#PHP" />
-            <element signature="e#2871#2931#0#PHP" />
-            <element signature="e#2966#3121#0#PHP" />
-            <element signature="e#3139#3465#0#PHP" />
-            <element signature="e#3194#3464#0#PHP" />
-            <element signature="e#3479#3696#0#PHP" />
-            <element signature="e#3701#6680#0#PHP" />
-            <element signature="e#3803#3865#0#PHP" />
-            <element signature="e#4269#4921#0#PHP" />
-            <element signature="e#4621#4911#0#PHP" />
-            <element signature="e#4849#4911#0#PHP" />
-            <element signature="e#5110#5186#0#PHP" />
-            <element signature="e#5229#5424#0#PHP" />
-            <element signature="e#5613#5689#0#PHP" />
-            <element signature="e#5732#5927#0#PHP" />
-            <element signature="e#6082#6142#0#PHP" />
-            <element signature="e#6177#6332#0#PHP" />
-            <element signature="e#6349#6673#0#PHP" />
-            <element signature="e#6402#6672#0#PHP" />
-            <element signature="e#6687#6948#0#PHP" />
-            <element signature="e#6953#7987#0#PHP" />
-            <element signature="e#7101#7446#0#PHP" />
-            <element signature="e#7288#7446#0#PHP" />
-            <element signature="e#7673#7877#0#PHP" />
-            <element signature="e#7802#7877#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Repository/GuaranteeDurationController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="18" column="60" selection-start-line="18" selection-start-column="60" selection-end-line="18" selection-end-column="60" />
-          <folding>
-            <element signature="e#510#599#0#PHP" />
-            <element signature="e#667#874#0#PHP" />
-            <element signature="e#879#2416#0#PHP" />
-            <element signature="e#978#1056#0#PHP" />
-            <element signature="e#1164#1610#0#PHP" />
-            <element signature="e#1394#1536#0#PHP" />
-            <element signature="e#1811#1887#0#PHP" />
-            <element signature="e#1930#2129#0#PHP" />
-            <element signature="e#2147#2409#0#PHP" />
-            <element signature="e#2211#2408#0#PHP" />
-            <element signature="e#2422#2648#0#PHP" />
-            <element signature="e#2653#4696#0#PHP" />
-            <element signature="e#2755#2833#0#PHP" />
-            <element signature="e#3302#3892#0#PHP" />
-            <element signature="e#3703#3881#0#PHP" />
-            <element signature="e#3819#3881#0#PHP" />
-            <element signature="e#4093#4169#0#PHP" />
-            <element signature="e#4212#4411#0#PHP" />
-            <element signature="e#4429#4689#0#PHP" />
-            <element signature="e#4491#4688#0#PHP" />
-            <element signature="e#4703#4989#0#PHP" />
-            <element signature="e#4994#6168#0#PHP" />
-            <element signature="e#5175#5602#0#PHP" />
-            <element signature="e#5403#5602#0#PHP" />
-            <element signature="e#5836#6040#0#PHP" />
-            <element signature="e#5965#6040#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Repository/ItemCategoryController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="20" column="36" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="36" />
-          <folding>
-            <element signature="e#819#1021#0#PHP" />
-            <element signature="e#1026#3206#0#PHP" />
-            <element signature="e#1126#1194#0#PHP" />
-            <element signature="e#1292#2092#0#PHP" />
-            <element signature="e#1511#2023#0#PHP" />
-            <element signature="e#1587#1669#0#PHP" />
-            <element signature="e#2273#2340#0#PHP" />
-            <element signature="e#2379#2555#0#PHP" />
-            <element signature="e#2701#2751#0#PHP" />
-            <element signature="e#2781#2915#0#PHP" />
-            <element signature="e#2933#3199#0#PHP" />
-            <element signature="e#2992#3198#0#PHP" />
-            <element signature="e#3213#3434#0#PHP" />
-            <element signature="e#3439#7288#0#PHP" />
-            <element signature="e#3541#3609#0#PHP" />
-            <element signature="e#4062#4704#0#PHP" />
-            <element signature="e#4499#4635#0#PHP" />
-            <element signature="e#4885#4952#0#PHP" />
-            <element signature="e#4991#5167#0#PHP" />
-            <element signature="e#5418#5478#0#PHP" />
-            <element signature="e#5513#6540#0#PHP" />
-            <element signature="e#5588#5658#0#PHP" />
-            <element signature="e#5760#6485#0#PHP" />
-            <element signature="e#5888#6409#0#PHP" />
-            <element signature="e#5946#6028#0#PHP" />
-            <element signature="e#6140#6300#0#PHP" />
-            <element signature="e#6714#6764#0#PHP" />
-            <element signature="e#6794#6928#0#PHP" />
-            <element signature="e#6977#7281#0#PHP" />
-            <element signature="e#7034#7280#0#PHP" />
-            <element signature="e#7295#7550#0#PHP" />
-            <element signature="e#7555#8425#0#PHP" />
-            <element signature="e#7678#7748#0#PHP" />
-            <element signature="e#8080#8284#0#PHP" />
-            <element signature="e#8209#8284#0#PHP" />
-            <element signature="e#8432#8508#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Repository/ItemColorController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="19" column="52" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="52" />
-          <folding>
-            <element signature="e#541#609#0#PHP" />
-            <element signature="e#669#868#0#PHP" />
-            <element signature="e#873#2134#0#PHP" />
-            <element signature="e#973#1031#0#PHP" />
-            <element signature="e#1119#1529#0#PHP" />
-            <element signature="e#1324#1460#0#PHP" />
-            <element signature="e#1680#1736#0#PHP" />
-            <element signature="e#1767#1910#0#PHP" />
-            <element signature="e#1928#2127#0#PHP" />
-            <element signature="e#1984#2126#0#PHP" />
-            <element signature="e#2140#2324#0#PHP" />
-            <element signature="e#2329#4252#0#PHP" />
-            <element signature="e#2431#2489#0#PHP" />
-            <element signature="e#2898#3649#0#PHP" />
-            <element signature="e#2933#2999#0#PHP" />
-            <element signature="e#3330#3580#0#PHP" />
-            <element signature="e#3801#3857#0#PHP" />
-            <element signature="e#3888#4031#0#PHP" />
-            <element signature="e#4049#4245#0#PHP" />
-            <element signature="e#4103#4244#0#PHP" />
-            <element signature="e#4259#4501#0#PHP" />
-            <element signature="e#4506#5464#0#PHP" />
-            <element signature="e#4636#4907#0#PHP" />
-            <element signature="e#4786#4907#0#PHP" />
-            <element signature="e#5148#5352#0#PHP" />
-            <element signature="e#5277#5352#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Repository/OffDayController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="15" column="30" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="30" />
-          <folding>
-            <element signature="e#564#760#0#PHP" />
-            <element signature="e#765#2546#0#PHP" />
-            <element signature="e#864#920#0#PHP" />
-            <element signature="e#1006#1491#0#PHP" />
-            <element signature="e#1275#1417#0#PHP" />
-            <element signature="e#1522#1594#0#PHP" />
-            <element signature="e#1626#1694#0#PHP" />
-            <element signature="e#1724#1790#0#PHP" />
-            <element signature="e#1938#1992#0#PHP" />
-            <element signature="e#2024#2233#0#PHP" />
-            <element signature="e#2074#2223#0#PHP" />
-            <element signature="e#2250#2539#0#PHP" />
-            <element signature="e#2303#2538#0#PHP" />
-            <element signature="e#2552#2748#0#PHP" />
-            <element signature="e#2753#3357#0#PHP" />
-            <element signature="e#3047#3251#0#PHP" />
-            <element signature="e#3176#3251#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Repository/SizeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="18" column="47" selection-start-line="18" selection-start-column="47" selection-end-line="18" selection-end-column="47" />
-          <folding>
-            <element signature="e#484#545#0#PHP" />
-            <element signature="e#600#844#0#PHP" />
-            <element signature="e#849#2152#0#PHP" />
-            <element signature="e#948#1000#0#PHP" />
-            <element signature="e#1081#1529#0#PHP" />
-            <element signature="e#1313#1455#0#PHP" />
-            <element signature="e#1667#1717#0#PHP" />
-            <element signature="e#1747#1944#0#PHP" />
-            <element signature="e#1795#1934#0#PHP" />
-            <element signature="e#1962#2145#0#PHP" />
-            <element signature="e#2012#2144#0#PHP" />
-            <element signature="e#2158#2370#0#PHP" />
-            <element signature="e#2375#4024#0#PHP" />
-            <element signature="e#2477#2529#0#PHP" />
-            <element signature="e#2893#3403#0#PHP" />
-            <element signature="e#3215#3393#0#PHP" />
-            <element signature="e#3331#3393#0#PHP" />
-            <element signature="e#3541#3591#0#PHP" />
-            <element signature="e#3621#3818#0#PHP" />
-            <element signature="e#3669#3808#0#PHP" />
-            <element signature="e#3836#4017#0#PHP" />
-            <element signature="e#3884#4016#0#PHP" />
-            <element signature="e#4030#4276#0#PHP" />
-            <element signature="e#4281#5220#0#PHP" />
-            <element signature="e#4409#4704#0#PHP" />
-            <element signature="e#4571#4704#0#PHP" />
-            <element signature="e#4916#5120#0#PHP" />
-            <element signature="e#5045#5120#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Repository/SpecGroupController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="16" column="33" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="33" />
-          <folding>
-            <element signature="e#619#818#0#PHP" />
-            <element signature="e#823#2345#0#PHP" />
-            <element signature="e#922#984#0#PHP" />
-            <element signature="e#1076#1134#0#PHP" />
-            <element signature="e#1222#1640#0#PHP" />
-            <element signature="e#1435#1571#0#PHP" />
-            <element signature="e#1807#1867#0#PHP" />
-            <element signature="e#1902#2061#0#PHP" />
-            <element signature="e#2079#2338#0#PHP" />
-            <element signature="e#2135#2337#0#PHP" />
-            <element signature="e#2351#2562#0#PHP" />
-            <element signature="e#2567#4231#0#PHP" />
-            <element signature="e#2670#2728#0#PHP" />
-            <element signature="e#2816#3373#0#PHP" />
-            <element signature="e#3054#3304#0#PHP" />
-            <element signature="e#3540#3600#0#PHP" />
-            <element signature="e#3635#3794#0#PHP" />
-            <element signature="e#3804#3866#0#PHP" />
-            <element signature="e#3966#4224#0#PHP" />
-            <element signature="e#4022#4223#0#PHP" />
-            <element signature="e#4237#4466#0#PHP" />
-            <element signature="e#4471#6416#0#PHP" />
-            <element signature="e#4583#4645#0#PHP" />
-            <element signature="e#5049#5746#0#PHP" />
-            <element signature="e#5401#5736#0#PHP" />
-            <element signature="e#5653#5736#0#PHP" />
-            <element signature="e#5913#5973#0#PHP" />
-            <element signature="e#6008#6167#0#PHP" />
-            <element signature="e#6185#6409#0#PHP" />
-            <element signature="e#6250#6408#0#PHP" />
-            <element signature="e#6423#6697#0#PHP" />
-            <element signature="e#6702#8691#0#PHP" />
-            <element signature="e#6827#6885#0#PHP" />
-            <element signature="e#7388#8027#0#PHP" />
-            <element signature="e#7822#7958#0#PHP" />
-            <element signature="e#8194#8254#0#PHP" />
-            <element signature="e#8289#8448#0#PHP" />
-            <element signature="e#8466#8684#0#PHP" />
-            <element signature="e#8529#8683#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Sale/OfferGroupController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="18" column="28" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Sale/PricingDeedController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="21" column="29" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Sale/SaleOrderController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="22" column="52" selection-start-line="22" selection-start-column="52" selection-end-line="22" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/General/MenuController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="970">
-          <caret line="448" column="13" selection-start-line="448" selection-start-column="13" selection-end-line="448" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Authentication/LoginController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="43" column="29" selection-start-line="43" selection-start-column="29" selection-end-line="43" selection-end-column="29" />
-          <folding>
-            <element signature="e#1448#2210#0#PHP" />
-            <element signature="e#1293#1942#0#PHP" />
-            <element signature="e#1952#2685#0#PHP" />
-            <element signature="e#2636#2658#1#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/authentication/login/read.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="57" column="47" selection-start-line="57" selection-start-column="47" selection-end-line="57" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Delivery/DeliveryMethodController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="22" selection-start-line="22" selection-end-line="22" selection-end-column="44" />
-          <folding>
-            <element signature="e#1091#1794#0#PHP" />
-            <element signature="e#1982#3978#0#PHP" />
-            <element signature="e#4185#9011#0#PHP" />
-            <element signature="e#9218#11355#0#PHP" />
-            <element signature="e#11610#12418#0#PHP" />
-            <element signature="e#12682#13390#0#PHP" />
-            <element signature="e#13668#14624#0#PHP" />
-            <element signature="e#14932#15810#0#PHP" />
-            <element signature="e#16109#17032#0#PHP" />
-            <element signature="e#17341#18114#0#PHP" />
-            <element signature="e#18425#19444#0#PHP" />
-            <element signature="e#19708#20785#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/maticangroup/core_client_api/app/Core/Entities/Authentication.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="17" column="44" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Authentication/ServerPermissionModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="30" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Authentication/ClientModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5310">
-          <caret line="182" column="5" selection-start-line="182" selection-start-column="5" selection-end-line="182" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Repository/CompanyController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="850">
-          <caret line="260" column="1" selection-start-line="260" selection-start-column="1" selection-end-line="260" selection-end-column="1" />
-          <folding>
-            <element signature="e#626#693#0#PHP" />
-            <element signature="e#751#818#0#PHP" />
-            <element signature="e#823#1413#0#PHP" />
-            <element signature="e#1026#1081#0#PHP" />
-            <element signature="e#1113#1237#0#PHP" />
-            <element signature="e#1253#1406#0#PHP" />
-            <element signature="e#1304#1405#0#PHP" />
-            <element signature="e#1419#1615#0#PHP" />
-            <element signature="e#1620#2784#0#PHP" />
-            <element signature="e#1719#1772#0#PHP" />
-            <element signature="e#1854#2608#0#PHP" />
-            <element signature="e#2058#2534#0#PHP" />
-            <element signature="e#2134#2206#0#PHP" />
-            <element signature="e#2624#2777#0#PHP" />
-            <element signature="e#2677#2776#0#PHP" />
-            <element signature="e#2790#3005#0#PHP" />
-            <element signature="e#3010#5442#0#PHP" />
-            <element signature="e#3112#3170#0#PHP" />
-            <element signature="e#3558#4086#0#PHP" />
-            <element signature="e#3898#4076#0#PHP" />
-            <element signature="e#4014#4076#0#PHP" />
-            <element signature="e#4095#4151#0#PHP" />
-            <element signature="e#4185#4412#0#PHP" />
-            <element signature="e#4241#4402#0#PHP" />
-            <element signature="e#4422#4474#0#PHP" />
-            <element signature="e#4505#4716#0#PHP" />
-            <element signature="e#4558#4706#0#PHP" />
-            <element signature="e#4926#4986#0#PHP" />
-            <element signature="e#5024#5149#0#PHP" />
-            <element signature="e#5166#5435#0#PHP" />
-            <element signature="e#5217#5434#0#PHP" />
-            <element signature="e#5448#5515#0#PHP" />
-            <element signature="e#5520#5688#0#PHP" />
-            <element signature="e#5564#5681#0#PHP" />
-            <element signature="e#5615#5680#0#PHP" />
-            <element signature="e#5694#5949#0#PHP" />
-            <element signature="e#5954#6820#0#PHP" />
-            <element signature="e#6071#6141#0#PHP" />
-            <element signature="e#6489#6693#0#PHP" />
-            <element signature="e#6618#6693#0#PHP" />
-            <element signature="e#6826#7097#0#PHP" />
-            <element signature="e#7102#7843#0#PHP" />
-            <element signature="e#7510#7716#0#PHP" />
-            <element signature="e#7640#7716#0#PHP" />
-            <element signature="e#7849#8098#0#PHP" />
-            <element signature="e#8103#8915#0#PHP" />
-            <element signature="e#8217#8287#0#PHP" />
-            <element signature="e#8584#8788#0#PHP" />
-            <element signature="e#8713#8788#0#PHP" />
-            <element signature="e#8921#9180#0#PHP" />
-            <element signature="e#9185#9880#0#PHP" />
-            <element signature="e#9547#9753#0#PHP" />
-            <element signature="e#9677#9753#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/repository/company/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="368" column="44" lean-forward="true" selection-start-line="368" selection-start-column="44" selection-end-line="368" selection-end-column="44" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Repository/PersonController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="316" column="43" selection-start-line="316" selection-start-column="32" selection-end-line="316" selection-end-column="43" />
-          <folding>
-            <element signature="e#612#677#0#PHP" />
-            <element signature="e#734#800#0#PHP" />
-            <element signature="e#805#1454#0#PHP" />
-            <element signature="e#1017#1071#0#PHP" />
-            <element signature="e#1103#1222#0#PHP" />
-            <element signature="e#1231#1282#0#PHP" />
-            <element signature="e#1298#1447#0#PHP" />
-            <element signature="e#1348#1446#0#PHP" />
-            <element signature="e#1460#1655#0#PHP" />
-            <element signature="e#1660#4507#0#PHP" />
-            <element signature="e#1781#1853#0#PHP" />
-            <element signature="e#1885#1953#0#PHP" />
-            <element signature="e#1983#2049#0#PHP" />
-            <element signature="e#2059#4501#0#PHP" />
-            <element signature="e#2142#2408#0#PHP" />
-            <element signature="e#2194#2407#0#PHP" />
-            <element signature="e#2420#4501#0#PHP" />
-            <element signature="e#3087#3243#0#PHP" />
-            <element signature="e#3132#3229#0#PHP" />
-            <element signature="e#3485#4390#0#PHP" />
-            <element signature="e#3641#3716#0#PHP" />
-            <element signature="e#3975#4390#0#PHP" />
-            <element signature="e#4084#4374#0#PHP" />
-            <element signature="e#4136#4373#0#PHP" />
-            <element signature="e#4403#4491#0#PHP" />
-            <element signature="e#4513#4724#0#PHP" />
-            <element signature="e#4729#5619#0#PHP" />
-            <element signature="e#5261#5525#0#PHP" />
-            <element signature="e#5428#5525#0#PHP" />
-            <element signature="e#5625#5839#0#PHP" />
-            <element signature="e#5844#11051#0#PHP" />
-            <element signature="e#5968#6040#0#PHP" />
-            <element signature="e#6072#6140#0#PHP" />
-            <element signature="e#6170#6236#0#PHP" />
-            <element signature="e#6246#6306#0#PHP" />
-            <element signature="e#6316#6372#0#PHP" />
-            <element signature="e#6653#6709#0#PHP" />
-            <element signature="e#6858#9381#0#PHP" />
-            <element signature="e#6894#9371#0#PHP" />
-            <element signature="e#6948#7024#0#PHP" />
-            <element signature="e#7319#7615#0#PHP" />
-            <element signature="e#8005#8276#0#PHP" />
-            <element signature="e#8168#8276#0#PHP" />
-            <element signature="e#8438#9371#0#PHP" />
-            <element signature="e#8774#9357#0#PHP" />
-            <element signature="e#8922#9002#0#PHP" />
-            <element signature="e#9266#9357#0#PHP" />
-            <element signature="e#9391#9449#0#PHP" />
-            <element signature="e#9483#9696#0#PHP" />
-            <element signature="e#9531#9686#0#PHP" />
-            <element signature="e#9860#9918#0#PHP" />
-            <element signature="e#9952#10173#0#PHP" />
-            <element signature="e#10004#10163#0#PHP" />
-            <element signature="e#10319#10373#0#PHP" />
-            <element signature="e#10405#10614#0#PHP" />
-            <element signature="e#10455#10604#0#PHP" />
-            <element signature="e#10632#11043#0#PHP" />
-            <element signature="e#10682#11042#0#PHP" />
-            <element signature="e#11057#11301#0#PHP" />
-            <element signature="e#11306#11375#0#PHP" />
-            <element signature="e#11644#12396#0#PHP" />
-            <element signature="e#12031#12270#0#PHP" />
-            <element signature="e#12178#12270#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/crm/customer_group/create.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="22" column="86" selection-start-line="22" selection-start-column="86" selection-end-line="22" selection-end-column="86" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/crm/customer/read-company-group.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1440">
-          <caret line="99" column="52" selection-start-line="99" selection-start-column="52" selection-end-line="99" selection-end-column="52" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/crm/customer_group/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
-          <caret line="81" column="94" selection-start-line="81" selection-start-column="94" selection-end-line="81" selection-end-column="94" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Crm/CustomerGroupController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="516">
-          <caret line="215" column="34" selection-start-line="215" selection-start-column="34" selection-end-line="215" selection-end-column="34" />
-          <folding>
-            <element signature="e#2638#5230#0#PHP" />
-            <element signature="e#5484#6343#0#PHP" />
-            <element signature="e#6608#7312#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/authentication/client/create.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="22" column="94" selection-start-line="22" selection-start-column="94" selection-end-line="22" selection-end-column="94" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-            <element signature="e#747#775#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Repository/ItemCategorySpecKeyModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Authentication/PermissionModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="13" column="26" lean-forward="true" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/authentication/client/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="70" column="64" selection-start-line="70" selection-start-column="64" selection-end-line="70" selection-end-column="64" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-            <element signature="e#745#771#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Authentication/ClientController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="132" column="57" selection-start-line="132" selection-start-column="57" selection-end-line="132" selection-end-column="57" />
-          <folding>
-            <element signature="e#49#95#0#PHP" expanded="true" />
-            <element signature="e#4887#4915#1#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/accounting/gift_card/list.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/accounting/coupon_group/list.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-990">
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/maticangroup/core_client_api/app/Core/Transaction/Request.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="73" column="20" selection-start-line="73" selection-start-column="20" selection-end-line="73" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/authentication/role/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2400">
-          <caret line="80" column="74" selection-start-line="80" selection-start-column="74" selection-end-line="80" selection-end-column="74" />
-          <folding>
-            <element signature="e#4247#4281#0#Twig" expanded="true" />
-            <element signature="e#6568#6605#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/authentication/role/create.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-630">
-          <caret line="21" column="78" selection-start-line="21" selection-start-column="78" selection-end-line="21" selection-end-column="78" />
-          <folding>
-            <element signature="e#745#771#0#Twig" expanded="true" />
-            <element signature="e#2496#2520#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Authentication/RoleController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="88" column="87" lean-forward="true" selection-start-line="83" selection-start-column="8" selection-end-line="88" selection-end-column="87" />
-          <folding>
-            <element signature="e#49#99#0#PHP" expanded="true" />
-            <element signature="e#813#2136#0#PHP" />
-            <element signature="e#4680#4706#1#PHP" expanded="true" />
-            <element signature="e#4452#5342#0#PHP" />
-            <element signature="e#5287#5313#0#PHP" expanded="true" />
-            <element signature="e#4335#4382#0#PHP" />
-            <element signature="e#6266#6292#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Authentication/RoleModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="97" column="5" selection-start-line="97" selection-start-column="5" selection-end-line="97" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Authentication/AuthenticationStatusModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="14" column="37" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Authentication/UserModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="20" column="19" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/authentication/user/list.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
-          <caret line="74" column="65" selection-start-line="74" selection-start-column="65" selection-end-line="74" selection-end-column="65" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-            <element signature="e#2015#2043#0#Twig" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Authentication/UserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="102" column="24" selection-start-line="102" selection-start-column="24" selection-end-line="102" selection-end-column="24" />
-          <folding>
-            <element signature="e#49#93#0#PHP" expanded="true" />
-            <element signature="e#2712#2738#1#PHP" expanded="true" />
-            <element signature="e#3460#3486#1#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/crm/customer/list.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="69" column="94" selection-start-line="69" selection-start-column="94" selection-end-line="69" selection-end-column="94" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-            <element signature="e#3337#3354#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Crm/CustomerController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="47" column="40" selection-start-line="47" selection-start-column="40" selection-end-line="47" selection-end-column="40" />
-          <folding>
-            <element signature="e#1337#1385#0#PHP" />
-            <element signature="e#1563#1768#0#PHP" />
-            <element signature="e#1773#6520#0#PHP" />
-            <element signature="e#1861#1933#0#PHP" />
-            <element signature="e#1965#2033#0#PHP" />
-            <element signature="e#2063#2129#0#PHP" />
-            <element signature="e#2183#2239#0#PHP" />
-            <element signature="e#2520#2576#0#PHP" />
-            <element signature="e#2725#5215#0#PHP" />
-            <element signature="e#2761#5205#0#PHP" />
-            <element signature="e#2815#2891#0#PHP" />
-            <element signature="e#3186#3459#0#PHP" />
-            <element signature="e#3849#4120#0#PHP" />
-            <element signature="e#4012#4120#0#PHP" />
-            <element signature="e#4259#5205#0#PHP" />
-            <element signature="e#4631#5191#0#PHP" />
-            <element signature="e#4779#4859#0#PHP" />
-            <element signature="e#5100#5191#0#PHP" />
-            <element signature="e#5225#5283#0#PHP" />
-            <element signature="e#5317#5530#0#PHP" />
-            <element signature="e#5365#5520#0#PHP" />
-            <element signature="e#5694#5752#0#PHP" />
-            <element signature="e#5786#6007#0#PHP" />
-            <element signature="e#5838#5997#0#PHP" />
-            <element signature="e#6108#6513#0#PHP" />
-            <element signature="e#6158#6512#0#PHP" />
-            <element signature="e#6527#6767#0#PHP" />
-            <element signature="e#6772#7499#0#PHP" />
-            <element signature="e#7159#7398#0#PHP" />
-            <element signature="e#7306#7398#0#PHP" />
-            <element signature="e#7506#7708#0#PHP" />
-            <element signature="e#7713#8953#0#PHP" />
-            <element signature="e#7825#7881#0#PHP" />
-            <element signature="e#8179#8235#0#PHP" />
-            <element signature="e#8337#8391#0#PHP" />
-            <element signature="e#8423#8624#0#PHP" />
-            <element signature="e#8469#8614#0#PHP" />
-            <element signature="e#8726#8946#0#PHP" />
-            <element signature="e#8775#8945#0#PHP" />
-            <element signature="e#8959#9157#0#PHP" />
-            <element signature="e#9162#10375#0#PHP" />
-            <element signature="e#9273#9329#0#PHP" />
-            <element signature="e#9609#9665#0#PHP" />
-            <element signature="e#9767#9819#0#PHP" />
-            <element signature="e#9850#10045#0#PHP" />
-            <element signature="e#9895#10035#0#PHP" />
-            <element signature="e#10147#10368#0#PHP" />
-            <element signature="e#10198#10367#0#PHP" />
-            <element signature="e#10381#10585#0#PHP" />
-            <element signature="e#10590#11872#0#PHP" />
-            <element signature="e#10704#10760#0#PHP" />
-            <element signature="e#11041#11097#0#PHP" />
-            <element signature="e#11199#11257#0#PHP" />
-            <element signature="e#11295#11524#0#PHP" />
-            <element signature="e#11347#11514#0#PHP" />
-            <element signature="e#11627#11865#0#PHP" />
-            <element signature="e#11681#11864#0#PHP" />
-            <element signature="e#11878#11926#0#PHP" />
-            <element signature="e#11931#12107#0#PHP" />
-            <element signature="e#11983#12100#0#PHP" />
-            <element signature="e#12033#12099#0#PHP" />
-            <element signature="e#12113#12323#0#PHP" />
-            <element signature="e#12328#13935#0#PHP" />
-            <element signature="e#12445#12501#0#PHP" />
-            <element signature="e#12782#12838#0#PHP" />
-            <element signature="e#12940#12998#0#PHP" />
-            <element signature="e#13032#13245#0#PHP" />
-            <element signature="e#13080#13235#0#PHP" />
-            <element signature="e#13255#13317#0#PHP" />
-            <element signature="e#13349#13558#0#PHP" />
-            <element signature="e#13395#13548#0#PHP" />
-            <element signature="e#13660#13928#0#PHP" />
-            <element signature="e#13717#13927#0#PHP" />
-            <element signature="e#13941#14155#0#PHP" />
-            <element signature="e#14160#15755#0#PHP" />
-            <element signature="e#14278#14334#0#PHP" />
-            <element signature="e#14615#14671#0#PHP" />
-            <element signature="e#14773#14830#0#PHP" />
-            <element signature="e#14864#15074#0#PHP" />
-            <element signature="e#14912#15064#0#PHP" />
-            <element signature="e#15084#15144#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Repository/CompanyModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="14" column="24" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/CRM/CustomerGroupModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="14" column="30" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Repository/PersonModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="30" column="22" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/accounting/invoice/create.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="39" column="36" lean-forward="true" selection-start-line="39" selection-start-column="36" selection-end-line="45" selection-end-column="47" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Repository/SpecKeyModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="13" column="22" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -1418,34 +671,349 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Repository/SpecKeyValueModel.php">
+    <entry file="file://$PROJECT_DIR$/src/Controller/Crm/CustomerController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="14" column="18" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="18" />
+        <state relative-caret-position="362">
+          <caret line="224" column="57" selection-start-line="224" selection-start-column="57" selection-end-line="224" selection-end-column="57" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/repository/item/edit.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/Controller/Notification/InternalNotificationModel.php" />
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Notification/InternalNotificationModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="670">
+          <caret line="131" column="5" selection-start-line="131" selection-start-column="5" selection-end-line="131" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Notification/NewsletterController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="63" column="27" selection-start-line="63" selection-start-column="16" selection-end-line="63" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Notification/NewsletterModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="670">
+          <caret line="131" column="5" selection-start-line="131" selection-start-column="5" selection-end-line="131" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Notification/SubscriberModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="670">
+          <caret line="80" column="5" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Notification/NewsletterStatusModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="670">
+          <caret line="97" column="5" selection-start-line="97" selection-start-column="5" selection-end-line="97" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Notification/ClientMessageModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="693">
+          <caret line="148" column="5" selection-start-line="148" selection-start-column="5" selection-end-line="148" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/notification/client_message/list.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/notification/client_message/read.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Notification/ClientMessageController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="49" column="46" lean-forward="true" selection-start-line="49" selection-start-column="25" selection-end-line="49" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Notification/MailModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="670">
+          <caret line="182" column="5" selection-start-line="182" selection-start-column="5" selection-end-line="182" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Notification/TokenModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="670">
+          <caret line="97" column="5" selection-start-line="97" selection-start-column="5" selection-end-line="97" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/notification/mail_template/list.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/notification/mail_template/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/notification/notification/list.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Notification/NotificationController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1110">
+          <caret line="37" column="26" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Notification/InternalNotificationStatusModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="15" column="50" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/maticangroup/core_client_api/app/Core/Entities/Notifications.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="18" column="54" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/notification/mail_log/list.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="44" column="48" lean-forward="true" selection-start-line="39" selection-start-column="32" selection-end-line="44" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/notification/mail_log/read.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="610">
+          <caret line="59" column="14" lean-forward="true" selection-start-line="23" selection-start-column="8" selection-end-line="59" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/notification/sms_log/list.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="53" column="109" selection-start-line="53" selection-start-column="109" selection-end-line="53" selection-end-column="109" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Notification/SMSModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="70" column="5" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/notification/sms_log/read.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Notification/SMSLogController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="700">
+          <caret line="68" column="24" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Notification/MailLogController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="550">
-          <caret line="318" column="87" selection-start-line="318" selection-start-column="87" selection-end-line="318" selection-end-column="87" />
+          <caret line="63" column="90" lean-forward="true" selection-start-line="51" selection-start-column="8" selection-end-line="63" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Notification/MailTemplateModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="13" column="2" lean-forward="true" selection-start-line="13" selection-start-column="2" selection-end-line="16" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Notification/SMSTemplateModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="670">
+          <caret line="80" column="5" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/notification/sms_template/list.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/notification/sms_template/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="67" column="14" selection-start-line="67" selection-start-column="14" selection-end-line="67" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Notification/SMSTemplateController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="97" column="29" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Notification/MailTemplateController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="94" column="9" lean-forward="true" selection-start-line="55" selection-start-column="8" selection-end-line="94" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Accounting/CouponGroupController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="39" column="9" lean-forward="true" selection-start-line="28" selection-start-column="8" selection-end-line="39" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/maticangroup/core_client_api/app/Core/Entities/Ticketing.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="13" column="28" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Repository/ItemModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/ticketing/comment/list.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="61" column="116" selection-start-line="61" selection-start-column="116" selection-end-line="61" selection-end-column="116" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Ticketing/ItemCommentsModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="670">
+          <caret line="165" column="5" selection-start-line="165" selection-start-column="5" selection-end-line="165" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Ticketing/CommentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2190">
+          <caret line="81" column="13" selection-start-line="81" selection-start-column="13" selection-end-line="81" selection-end-column="13" />
           <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-            <element signature="e#18033#18065#0#Twig" expanded="true" />
+            <element signature="e#44#79#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Ticketing/CommentModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7860">
+          <caret line="267" column="5" selection-start-line="267" selection-start-column="5" selection-end-line="267" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Ticketing/CommentPointModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="15" column="30" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/ticketing/comment/read.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3000">
+          <caret line="100" column="64" selection-start-line="100" selection-start-column="64" selection-end-line="100" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Authentication/PermissionModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3270">
+          <caret line="114" column="5" selection-start-line="114" selection-start-column="5" selection-end-line="114" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/delivery/delivery_person/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="70" column="59" selection-start-line="63" selection-start-column="48" selection-end-line="70" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="169" column="9" selection-start-line="169" selection-start-column="9" selection-end-line="169" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/authentication/role/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="12" selection-start-column="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Repository/SpecKeyValueModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Repository/SpecKeyModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="13" column="22" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Repository/ItemController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="310">
-          <caret line="533" column="31" selection-start-line="533" selection-start-column="31" selection-end-line="533" selection-end-column="31" />
+          <caret line="562" selection-start-line="562" selection-end-line="562" />
           <folding>
-            <element signature="e#9502#10321#0#PHP" />
-            <element signature="e#10590#11287#0#PHP" />
-            <element signature="e#11539#12358#0#PHP" />
-            <element signature="e#12620#13315#0#PHP" />
-            <element signature="e#13575#14393#0#PHP" />
+            <element signature="e#2001#4073#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/repository/item/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="306" column="56" selection-start-line="306" selection-start-column="56" selection-end-line="306" selection-end-column="56" />
+          <folding>
+            <element signature="n#style#0;n#h4#0;n#div#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#3;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#17535#17567#0#Twig" expanded="true" />
           </folding>
         </state>
       </provider>

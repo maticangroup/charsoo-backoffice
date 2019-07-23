@@ -10,7 +10,7 @@ use App\FormModels\CRM\CustomerCouponModel;
 use App\FormModels\CRM\CustomerGroupModel;
 use App\FormModels\CRM\InvitationModel;
 use App\FormModels\ModelSerializer;
-use App\FormModels\Notification\SMSLogModel;
+use App\FormModels\Notification\SMSModel;
 use App\FormModels\Repository\CompanyModel;
 use App\FormModels\Repository\ItemModel;
 use App\FormModels\Repository\LocationModel;
@@ -239,12 +239,12 @@ class CustomerController extends AbstractController
         $personModel = ModelSerializer::parse($response->getContent(), PersonModel::class);
 
         /**
-         * @var $smsLogs SMSLogModel[]
+         * @var $smsLogs SMSModel[]
          */
         $smsLogs = [];
         if ($personModel->getSmsLogs()) {
             foreach ($personModel->getSmsLogs() as $smsLog) {
-                $smsLogs[] = ModelSerializer::parse($smsLog, SMSLogModel::class);
+                $smsLogs[] = ModelSerializer::parse($smsLog, SMSModel::class);
             }
         }
 

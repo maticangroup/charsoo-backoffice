@@ -21,7 +21,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-12">
             <div class="panel">
                 <div class="panel-content">
@@ -38,7 +37,7 @@
                         <table id="usersRoleList">
                             <thead>
                             <tr>
-                                <th>Notification Global Token</th>
+                                <th>ID</th>
                                 <th>Message</th>
                                 <th>From</th>
                                 <th>To</th>
@@ -46,132 +45,22 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Efficiently architect user-centric infomediaries and user-centric models.
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">Inventory</a>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">User Name</a>
-                                </td>
-                                <td>
-                                    <span class="fa fa-check text-green"></span>
-                                    <span class="fa fa-check text-green"></span><span class="fa fa-check text-green"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Efficiently architect user-centric infomediaries and user-centric models.
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">Inventory</a>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">User Name</a>
-                                </td>
-                                <td>
-                                    <span class="fa fa-check text-green"></span>
-                                    <span class="fa fa-check text-green"></span><span class="fa fa-check text-green"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Efficiently architect user-centric infomediaries and user-centric models.
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">Inventory</a>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">User Name</a>
-                                </td>
-                                <td>
-                                    <span class="fa fa-check text-green"></span>
-                                    <span class="fa fa-check text-green"></span><span class="fa fa-check text-green"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Efficiently architect user-centric infomediaries and user-centric models.
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">Inventory</a>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">User Name</a>
-                                </td>
-                                <td>
-                                    <span class="fa fa-check text-green"></span>
-                                    <span class="fa fa-check text-green"></span><span class="fa fa-check text-green"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Efficiently architect user-centric infomediaries and user-centric models.
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">Inventory</a>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">User Name</a>
-                                </td>
-                                <td>
-                                    <span class="fa fa-check text-green"></span>
-                                    <span class="fa fa-check text-green"></span><span class="fa fa-check text-green"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Efficiently architect user-centric infomediaries and user-centric models.
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">Inventory</a>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">User Name</a>
-                                </td>
-                                <td>
-                                    <span class="fa fa-check text-green"></span>
-                                    <span class="fa fa-check text-green"></span><span class="fa fa-check text-green"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Efficiently architect user-centric infomediaries and user-centric models.
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">Inventory</a>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn-link">User Name</a>
-                                </td>
-                                <td>
-                                    <span class="fa fa-check text-green"></span>
-                                    <span class="fa fa-check text-green"></span><span class="fa fa-check text-green"></span>
-                                </td>
-                            </tr>
+                            {% for notification in notifications %}
+                                <tr>
+                                    <td>{{ notification.internalNotificationId }}</td>
+                                    <td>{{ notification.internalNotificationMessage }}</td>
+                                    <td>{{ notification.internalNotificationFromName }}</td>
+                                    <td>{{ notification.internalNotificationToName }}</td>
+                                    <td>
+                                        {% if notification.internalNotificationStatus.internalNotificationStatusMachineName != 'seen' %}
+                                            <span class="fa fa-check text-green"></span>
+                                        {% else %}
+                                            <span class="fa fa-check text-green"></span><span
+                                                class="fa fa-check text-green"></span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>

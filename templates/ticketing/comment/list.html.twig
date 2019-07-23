@@ -38,8 +38,8 @@
                         <table id="usersRoleList">
                             <thead>
                             <tr>
-                                <th>Product Global Token</th>
-                                <th>Product Name</th>
+                                <th>Item ID</th>
+                                <th>Item Name</th>
                                 <th>All Comments</th>
                                 <th>Approved Comments</th>
                                 <th>Spam Comments</th>
@@ -49,110 +49,21 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    <a href="" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Product Name
-                                </td>
-                                <td>
-                                    123
-                                </td>
-                                <td>
-                                    50
-                                </td>
-                                <td>
-                                    36
-                                </td>
-                                <td>
-                                    20
-                                </td>
-                                <td>
-                                    1397/12/12
-                                </td>
-                                <td>
-                                    <a href="#" class="fa fa-eye"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Product Name
-                                </td>
-                                <td>
-                                    123
-                                </td>
-                                <td>
-                                    50
-                                </td>
-                                <td>
-                                    36
-                                </td>
-                                <td>
-                                    20
-                                </td>
-                                <td>
-                                    1397/12/12
-                                </td>
-                                <td>
-                                    <a href="#" class="fa fa-eye"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Product Name
-                                </td>
-                                <td>
-                                    123
-                                </td>
-                                <td>
-                                    50
-                                </td>
-                                <td>
-                                    36
-                                </td>
-                                <td>
-                                    20
-                                </td>
-                                <td>
-                                    1397/12/12
-                                </td>
-                                <td>
-                                    <a href="#" class="fa fa-eye"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="" class="btn-link">#315321</a>
-                                </td>
-                                <td>
-                                    Product Name
-                                </td>
-                                <td>
-                                    123
-                                </td>
-                                <td>
-                                    50
-                                </td>
-                                <td>
-                                    36
-                                </td>
-                                <td>
-                                    20
-                                </td>
-                                <td>
-                                    1397/12/12
-                                </td>
-                                <td>
-                                    <a href="#" class="fa fa-eye"></a>
-                                </td>
-                            </tr>
+                            {% for itemComment in itemComments %}
+                                <tr>
+                                    <td>{{ itemComment.itemId }}</td>
+                                    <td>{{ itemComment.itemName }}</td>
+                                    <td>{{ itemComment.itemAllCommentsCount }}</td>
+                                    <td>{{ itemComment.itemAllApprovedCommentsCount }}</td>
+                                    <td>{{ itemComment.itemAllSpamCommentsCount }}</td>
+                                    <td>{{ itemComment.itemAllUnreadCommentsCount }}</td>
+                                    <td>{{ itemComment.itemLastCommentDate }}</td>
+                                    <td>
+                                        <a href="{{ path('ticketing_comment_read', {'id': 'itemComment.itemCommentId'}) }}"
+                                           class="fa fa-eye"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>

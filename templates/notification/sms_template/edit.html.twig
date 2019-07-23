@@ -8,7 +8,7 @@
             <div class="panel">
                 <div class="panel-content">
                     <div class="row">
-                        <div class="col-10">
+                        <div class="col-12">
                             <h3>Want to add a new user?</h3>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aspernatur
@@ -16,24 +16,25 @@
                                 quam.
                             </p>
                         </div>
-                        <div class="col-2">
-                            <a href="#" class="btn btn-block btn-info fa fa-save rounded"></a>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="col-12">
             <div class="panel">
                 <div class="panel-heading"><strong>
                         Edit SMS Template
                     </strong></div>
                 <div class="panel-content">
-                    <div class="row">
-                        <div class="col-8">
-                            <textarea name="mail_message" class="form-control"></textarea>
+                    <form action="{{ path('notification_sms_template_edit', {'id': 'smsTemplateModel.smsTemplateId'}) }}"
+                          class="row" method="post">
+                        <div class="col-6">
+                            <textarea name="smsTemplateContent"
+                                      class="form-control">{{ smsTemplateModel.smsTemplateContent }}</textarea>
                             (12/1)
+                        </div>
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-block btn-info fa fa-save rounded"></button>
                         </div>
                         <div class="col-4">
                             <div class="card">
@@ -49,22 +50,21 @@
                                     <div class="card-body">
                                         <table class="contact--view__extra">
                                             <tbody>
-                                            <tr>
-                                                <td><strong>Customer Name</strong></td>
-                                                <td>
-                                                    [[customer-name]]
-                                                </td>
-                                            </tr>
+                                            {% for smsToken in smsTokens %}
+                                                <tr>
+                                                    <td><strong>{{ smsToken.tokenKey }}</strong></td>
+                                                    <td>{{ smsToken.tokenValue }}</td>
+                                                </tr>
+                                            {% endfor %}
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
-
     </div>
 {% endblock %}

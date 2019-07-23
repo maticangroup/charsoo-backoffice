@@ -5,6 +5,8 @@ namespace App\Controller\Repository;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\GuaranteeDurationModel;
 use App\FormModels\Repository\GuaranteeDurationStatusModel;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;
@@ -26,6 +28,12 @@ class GuaranteeDurationController extends AbstractController
      */
     public function create(Request $request)
     {
+
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::repository_guarantee_add_duration);
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::repository_guarantee_get_durations);
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::repository_guarantee_fetch_duration);
+        $canChangeStatus = AuthUser::if_is_allowed(ServerPermissions::repository_guarantee_change_duration_status);
+
         $inputs = $request->request->all();
         /**
          * @var $guaranteeDurationModel GuaranteeDurationModel
@@ -33,24 +41,29 @@ class GuaranteeDurationController extends AbstractController
         $guaranteeDurationModel = ModelSerializer::parse($inputs, GuaranteeDurationModel::class);
 
         if (!empty($inputs)) {
-            $request = new Req(Servers::Repository, Repository::Guarantee, 'add_duration');
-            $request->add_instance($guaranteeDurationModel);
-            $response = $request->send();
-            if ($response->getStatus() == ResponseStatus::successful) {
-                $this->addFlash('success', $response->getMessage());
+            if ($canCreate) {
+                $request = new Req(Servers::Repository, Repository::Guarantee, 'add_duration');
+                $request->add_instance($guaranteeDurationModel);
+                $response = $request->send();
+                if ($response->getStatus() == ResponseStatus::successful) {
+                    $this->addFlash('s', $response->getMessage());
+                }
+                $this->addFlash('f', $response->getMessage());
             }
-            $this->addFlash('failed', $response->getMessage());
         }
-
-        $allGuaranteeDurationsRequest = new Req(Servers::Repository, Repository::Guarantee, 'get_durations');
-        $allGuaranteeDurationsResponse = $allGuaranteeDurationsRequest->send();
 
         /**
          * @var $guaranteeDurations GuaranteeDurationModel[]
          */
         $guaranteeDurations = [];
-        foreach ($allGuaranteeDurationsResponse->getContent() as $guaranteeDuration) {
-            $guaranteeDurations[] = ModelSerializer::parse($guaranteeDuration, GuaranteeDurationModel::class);
+        if ($canSeeAll) {
+            $allGuaranteeDurationsRequest = new Req(Servers::Repository, Repository::Guarantee, 'get_durations');
+            $allGuaranteeDurationsResponse = $allGuaranteeDurationsRequest->send();
+            if ($allGuaranteeDurationsResponse->getContent()) {
+                foreach ($allGuaranteeDurationsResponse->getContent() as $guaranteeDuration) {
+                    $guaranteeDurations[] = ModelSerializer::parse($guaranteeDuration, GuaranteeDurationModel::class);
+                }
+            }
         }
 
 
@@ -58,6 +71,10 @@ class GuaranteeDurationController extends AbstractController
             'controller_name' => 'GuaranteeDurationController',
             'guaranteeDurationModel' => $guaranteeDurationModel,
             'guaranteeDurations' => $guaranteeDurations,
+            'canCreate' => $canCreate,
+            'canSeeAll' => $canSeeAll,
+            'canEdit' => $canEdit,
+            'canChangeStatus' => $canChangeStatus,
         ]);
     }
 
@@ -70,48 +87,57 @@ class GuaranteeDurationController extends AbstractController
      */
     public function edit($id, Request $request)
     {
-        $inputs = $request->request->all();
-        /**
-         * @var $guaranteeDurationModel GuaranteeDurationModel
-         */
-        $guaranteeDurationModel = ModelSerializer::parse($inputs, GuaranteeDurationModel::class);
-        $guaranteeDurationModel->setGuaranteeDurationID($id);
-        $request = new Req(Servers::Repository, Repository::Guarantee, 'fetch_duration');
-        $request->add_instance($guaranteeDurationModel);
-        $response = $request->send();
-        $guaranteeDurationModel = ModelSerializer::parse($response->getContent(), GuaranteeDurationModel::class);
+        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::repository_guarantee_update_duration);
+        if ($canUpdate) {
+            $canChangeStatus = AuthUser::if_is_allowed(ServerPermissions::repository_guarantee_change_duration_status);
 
-        if (!empty($inputs)) {
+            $inputs = $request->request->all();
+            /**
+             * @var $guaranteeDurationModel GuaranteeDurationModel
+             */
             $guaranteeDurationModel = ModelSerializer::parse($inputs, GuaranteeDurationModel::class);
             $guaranteeDurationModel->setGuaranteeDurationID($id);
-            $request = new Req(Servers::Repository, Repository::Guarantee, 'update_duration');
+            $request = new Req(Servers::Repository, Repository::Guarantee, 'fetch_duration');
             $request->add_instance($guaranteeDurationModel);
             $response = $request->send();
-            if ($response->getStatus() == ResponseStatus::successful) {
-                $this->addFlash('s', '');
-            } else {
-                $this->addFlash('f', '');
+            $guaranteeDurationModel = ModelSerializer::parse($response->getContent(), GuaranteeDurationModel::class);
+
+            if (!empty($inputs)) {
+                $guaranteeDurationModel = ModelSerializer::parse($inputs, GuaranteeDurationModel::class);
+                $guaranteeDurationModel->setGuaranteeDurationID($id);
+                $request = new Req(Servers::Repository, Repository::Guarantee, 'update_duration');
+                $request->add_instance($guaranteeDurationModel);
+                $response = $request->send();
+                if ($response->getStatus() == ResponseStatus::successful) {
+                    $this->addFlash('s', '');
+                } else {
+                    $this->addFlash('f', '');
+                }
+
             }
 
+            $allGuaranteeDurationsRequest = new Req(Servers::Repository, Repository::Guarantee, 'get_durations');
+            $allGuaranteeDurationsResponse = $allGuaranteeDurationsRequest->send();
+
+            /**
+             * @var $guaranteeDurations GuaranteeDurationModel[]
+             */
+            $guaranteeDurations = [];
+            foreach ($allGuaranteeDurationsResponse->getContent() as $guaranteeDuration) {
+                $guaranteeDurations[] = ModelSerializer::parse($guaranteeDuration, GuaranteeDurationModel::class);
+            }
+
+
+            return $this->render('repository/guarantee_duration/edit.html.twig', [
+                'controller_name' => 'GuaranteeDurationController',
+                'guaranteeDurationModel' => $guaranteeDurationModel,
+                'guaranteeDurations' => $guaranteeDurations,
+                'canChangeStatus' => $canChangeStatus,
+            ]);
+        } else {
+            return $this->redirect($this->generateUrl('repository_guarantee_duration_repository_guarantee_duration_create'));
         }
 
-        $allGuaranteeDurationsRequest = new Req(Servers::Repository, Repository::Guarantee, 'get_durations');
-        $allGuaranteeDurationsResponse = $allGuaranteeDurationsRequest->send();
-
-        /**
-         * @var $guaranteeDurations GuaranteeDurationModel[]
-         */
-        $guaranteeDurations = [];
-        foreach ($allGuaranteeDurationsResponse->getContent() as $guaranteeDuration) {
-            $guaranteeDurations[] = ModelSerializer::parse($guaranteeDuration, GuaranteeDurationModel::class);
-        }
-
-
-        return $this->render('repository/guarantee_duration/edit.html.twig', [
-            'controller_name' => 'GuaranteeDurationController',
-            'guaranteeDurationModel' => $guaranteeDurationModel,
-            'guaranteeDurations' => $guaranteeDurations,
-        ]);
     }
 
 

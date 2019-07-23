@@ -6,6 +6,7 @@ use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\BrandModel;
 use App\FormModels\Repository\BrandSupplierModel;
 use App\FormModels\Repository\CompanyModel;
+use App\General\AuthUser;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;
@@ -27,38 +28,52 @@ class BrandController extends AbstractController
      */
     public function create(Request $request)
     {
+        $canCreate = AuthUser::if_is_allowed('repository_brand_new');
+        $canSeeAll = AuthUser::if_is_allowed('repository_brand_all');
+        $canEdit = AuthUser::if_is_allowed('repository_brand_fetch');
+
+
         $inputs = $request->request->all();
         /**
          * @var $brandModel BrandModel
          */
         $brandModel = ModelSerializer::parse($inputs, BrandModel::class);
 
-        if (!empty($inputs)) {
-            $request = new Req(Servers::Repository, Repository::Brand, 'new');
-            $request->add_instance($brandModel);
-            $response = $request->send();
-
-            if ($response->getStatus() == ResponseStatus::successful) {
-                /**
-                 * @var $newBrand BrandModel
-                 */
-                $newBrand = ModelSerializer::parse($response->getContent(), BrandModel::class);
-                $this->addFlash('success', $response->getMessage());
-                return $this->redirect($this->generateUrl('repository_brand_repository_brand_edit', ['id' => $newBrand->getBrandID()]));
+        if ($canCreate) {
+            if (!empty($inputs)) {
+                $request = new Req(Servers::Repository, Repository::Brand, 'new');
+                $request->add_instance($brandModel);
+                $response = $request->send();
+                if ($response->getStatus() == ResponseStatus::successful) {
+                    /**
+                     * @var $newBrand BrandModel
+                     */
+                    $newBrand = ModelSerializer::parse($response->getContent(), BrandModel::class);
+                    $this->addFlash('s', $response->getMessage());
+                    if ($canEdit) {
+                        return $this->redirect($this->generateUrl('repository_brand_repository_brand_edit', ['id' => $newBrand->getBrandID()]));
+                    } else {
+                        return $this->redirect($this->generateUrl('repository_brand_repository_brand_create'));
+                    }
+                } else {
+                    $this->addFlash('f', $response->getMessage());
+                }
             }
-            $this->addFlash('failed', $response->getMessage());
         }
 
-        $allBrandsRequest = new Req(Servers::Repository, Repository::Brand, 'all');
-        $allBrandsResponse = $allBrandsRequest->send();
-        $brands = $allBrandsResponse->getContent();
 
         /**
          * @var $results BrandModel[]
          */
         $results = [];
-        foreach ($brands as $brand) {
-            $results[] = ModelSerializer::parse($brand, BrandModel::class);
+        if ($canSeeAll) {
+            $allBrandsRequest = new Req(Servers::Repository, Repository::Brand, 'all');
+            $allBrandsResponse = $allBrandsRequest->send();
+            if ($allBrandsResponse->getContent()) {
+                foreach ($allBrandsResponse->getContent() as $brand) {
+                    $results[] = ModelSerializer::parse($brand, BrandModel::class);
+                }
+            }
         }
 
 
@@ -66,6 +81,9 @@ class BrandController extends AbstractController
             'controller_name' => 'BrandController',
             'brandModel' => $brandModel,
             'brands' => $results,
+            'canCreate' => $canCreate,
+            'canSeeAll' => $canSeeAll,
+            'canEdit' => $canEdit,
         ]);
     }
 
@@ -79,6 +97,10 @@ class BrandController extends AbstractController
      */
     public function edit($id, Request $request)
     {
+        $canUpdate = AuthUser::if_is_allowed('repository_brand_update');
+        $canAddSupplier = AuthUser::if_is_allowed('repository_brand_add_supplier');
+        $canRemoveSupplier = AuthUser::if_is_allowed('repository_brand_remove_supplier');
+
         $inputs = $request->request->all();
         /**
          * @var $brandModel BrandModel
@@ -89,38 +111,46 @@ class BrandController extends AbstractController
         $request->add_instance($brandModel);
         $response = $request->send();
         $brandModel = ModelSerializer::parse($response->getContent(), BrandModel::class);
+
+        if ($canUpdate) {
+            if (!empty($inputs)) {
+                $brandModel = ModelSerializer::parse($inputs, BrandModel::class);
+                $brandModel->setBrandID($id);
+                $request = new Req(Servers::Repository, Repository::Brand, 'update');
+                $request->add_instance($brandModel);
+                $response = $request->send();
+                if ($response->getStatus() == ResponseStatus::successful) {
+                    $this->addFlash('s', $response->getMessage());
+                } else {
+                    $this->addFlash('f', $response->getMessage());
+                }
+            }
+        }
+
+
         /**
          * @var $suppliers CompanyModel[]
          */
         $suppliers = [];
-        if ($brandModel->getBrandSuppliers()) {
-            foreach ($brandModel->getBrandSuppliers() as $supplier) {
-                $suppliers[] = ModelSerializer::parse($supplier, CompanyModel::class);
-            }
-        }
 
-        if (!empty($inputs)) {
-            $brandModel = ModelSerializer::parse($inputs, BrandModel::class);
-            $brandModel->setBrandID($id);
-            $request = new Req(Servers::Repository, Repository::Brand, 'update');
-            $request->add_instance($brandModel);
-            $response = $request->send();
-            if ($response->getStatus() == ResponseStatus::successful) {
-                $this->addFlash('s', '');
-            } else {
-                $this->addFlash('f', '');
-            }
-        }
-
-
-        $request = new Req(Servers::Repository, Repository::Company, 'all');
-        $response = $request->send();
         /**
          * @var $companies CompanyModel[]
          */
         $companies = [];
-        foreach ($response->getContent() as $company) {
-            $companies[] = ModelSerializer::parse($company, CompanyModel::class);
+        if ($canAddSupplier) {
+            $request = new Req(Servers::Repository, Repository::Company, 'all');
+            $response = $request->send();
+            if ($response->getContent()) {
+                foreach ($response->getContent() as $company) {
+                    $companies[] = ModelSerializer::parse($company, CompanyModel::class);
+                }
+            }
+
+            if ($brandModel->getBrandSuppliers()) {
+                foreach ($brandModel->getBrandSuppliers() as $supplier) {
+                    $suppliers[] = ModelSerializer::parse($supplier, CompanyModel::class);
+                }
+            }
         }
 
 
@@ -129,6 +159,9 @@ class BrandController extends AbstractController
             'brand' => $brandModel,
             'allCompanies' => $companies,
             'suppliers' => $suppliers,
+            'canUpdate' => $canUpdate,
+            'canAddSupplier' => $canAddSupplier,
+            'canRemoveSupplier' => $canRemoveSupplier,
         ]);
     }
 

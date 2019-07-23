@@ -5,6 +5,8 @@ namespace App\Controller\Repository;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\GuaranteeProviderModel;
 use App\FormModels\Repository\GuaranteeProviderStatusModel;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;
@@ -27,6 +29,11 @@ class GuaranteeProviderController extends AbstractController
      */
     public function create(Request $request)
     {
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::repository_guarantee_add_provider);
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::repository_guarantee_fetch_provider);
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::repository_guarantee_get_providers);
+        $canChangeStatus = AuthUser::if_is_allowed(ServerPermissions::repository_guarantee_change_provider_status);
+
         $inputs = $request->request->all();
         /**
          * @var $guaranteeProviderModel GuaranteeProviderModel
@@ -34,31 +41,42 @@ class GuaranteeProviderController extends AbstractController
         $guaranteeProviderModel = ModelSerializer::parse($inputs, GuaranteeProviderModel::class);
 
         if (!empty($inputs)) {
-            $request = new Req(Servers::Repository, Repository::Guarantee, 'add_provider');
-            $request->add_instance($guaranteeProviderModel);
-            $response = $request->send();
-            if ($response->getStatus() == ResponseStatus::successful) {
-                $this->addFlash('s', $response->getMessage());
-            } else {
-                $this->addFlash('f', $response->getMessage());
+            if ($canCreate) {
+                $request = new Req(Servers::Repository, Repository::Guarantee, 'add_provider');
+                $request->add_instance($guaranteeProviderModel);
+                $response = $request->send();
+                if ($response->getStatus() == ResponseStatus::successful) {
+                    $this->addFlash('s', $response->getMessage());
+                } else {
+                    $this->addFlash('f', $response->getMessage());
+                }
             }
         }
 
-        $allGuaranteeProviderRequest = new Req(Servers::Repository, Repository::Guarantee, 'get_providers');
-        $allGuaranteeProviderResponse = $allGuaranteeProviderRequest->send();
 
         /**
          * @var $guaranteeProviders GuaranteeProviderModel[]
          */
         $guaranteeProviders = [];
-        foreach ($allGuaranteeProviderResponse->getContent() as $guaranteeProvider) {
-            $guaranteeProviders[] = ModelSerializer::parse($guaranteeProvider, GuaranteeProviderModel::class);
+        if ($canSeeAll) {
+            $allGuaranteeProviderRequest = new Req(Servers::Repository, Repository::Guarantee, 'get_providers');
+            $allGuaranteeProviderResponse = $allGuaranteeProviderRequest->send();
+            if ($allGuaranteeProviderResponse->getContent()) {
+                foreach ($allGuaranteeProviderResponse->getContent() as $guaranteeProvider) {
+                    $guaranteeProviders[] = ModelSerializer::parse($guaranteeProvider, GuaranteeProviderModel::class);
+                }
+            }
         }
 
         return $this->render('repository/guarantee_provider/create.html.twig', [
             'controller_name' => 'GuaranteeProviderController',
             'guaranteeProviderModel' => $guaranteeProviderModel,
             'guaranteeProviders' => $guaranteeProviders,
+            'canCreate' => $canCreate,
+            'canEdit' => $canEdit,
+            'canSeeAll' => $canSeeAll,
+            'canChangeStatus' => $canChangeStatus,
+
         ]);
     }
 
@@ -72,49 +90,58 @@ class GuaranteeProviderController extends AbstractController
      */
     public function edit($id, Request $request)
     {
-        $inputs = $request->request->all();
+        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::repository_guarantee_update_provider);
+        if ($canUpdate) {
+            $canChangeStatus = AuthUser::if_is_allowed(ServerPermissions::repository_guarantee_change_provider_status);
 
-        /**
-         * @var $guaranteeProviderModel GuaranteeProviderModel
-         */
-        $guaranteeProviderModel = ModelSerializer::parse($inputs, GuaranteeProviderModel::class);
-        $guaranteeProviderModel->setGuaranteeProviderID($id);
-        $request = new Req(Servers::Repository, Repository::Guarantee, 'fetch_provider');
-        $request->add_instance($guaranteeProviderModel);
-        $response = $request->send();
-        $guaranteeProviderModel = ModelSerializer::parse($response->getContent(), GuaranteeProviderModel::class);
+            $inputs = $request->request->all();
 
-        if (!empty($inputs)) {
+            /**
+             * @var $guaranteeProviderModel GuaranteeProviderModel
+             */
             $guaranteeProviderModel = ModelSerializer::parse($inputs, GuaranteeProviderModel::class);
             $guaranteeProviderModel->setGuaranteeProviderID($id);
-            $request = new Req(Servers::Repository, Repository::Guarantee, 'update_provider');
+            $request = new Req(Servers::Repository, Repository::Guarantee, 'fetch_provider');
             $request->add_instance($guaranteeProviderModel);
             $response = $request->send();
-            if ($response->getStatus() == ResponseStatus::successful) {
-                $this->addFlash('s', $response->getMessage());
-            } else {
-                $this->addFlash('f', $response->getMessage());
+            $guaranteeProviderModel = ModelSerializer::parse($response->getContent(), GuaranteeProviderModel::class);
+
+            if (!empty($inputs)) {
+                $guaranteeProviderModel = ModelSerializer::parse($inputs, GuaranteeProviderModel::class);
+                $guaranteeProviderModel->setGuaranteeProviderID($id);
+                $request = new Req(Servers::Repository, Repository::Guarantee, 'update_provider');
+                $request->add_instance($guaranteeProviderModel);
+                $response = $request->send();
+                if ($response->getStatus() == ResponseStatus::successful) {
+                    $this->addFlash('s', $response->getMessage());
+                } else {
+                    $this->addFlash('f', $response->getMessage());
+                }
             }
+
+            $allGuaranteeProviderRequest = new Req(Servers::Repository, Repository::Guarantee, 'get_providers');
+            $allGuaranteeProviderResponse = $allGuaranteeProviderRequest->send();
+
+            /**
+             * @var $guaranteeProviders GuaranteeProviderModel[]
+             */
+            $guaranteeProviders = [];
+            foreach ($allGuaranteeProviderResponse->getContent() as $guaranteeProvider) {
+                $guaranteeProviders[] = ModelSerializer::parse($guaranteeProvider, GuaranteeProviderModel::class);
+            }
+
+
+            return $this->render('repository/guarantee_provider/edit.html.twig', [
+                'controller_name' => 'GuaranteeProviderController',
+                'guaranteeProviderModel' => $guaranteeProviderModel,
+                'guaranteeProviders' => $guaranteeProviders,
+                'canChangeStatus' => $canChangeStatus,
+
+            ]);
+        } else {
+            return $this->redirect($this->generateUrl('repository_guarantee_provider_repository_guarantee_provider_create'));
         }
 
-        $allGuaranteeProviderRequest = new Req(Servers::Repository, Repository::Guarantee, 'get_providers');
-        $allGuaranteeProviderResponse = $allGuaranteeProviderRequest->send();
-
-        /**
-         * @var $guaranteeProviders GuaranteeProviderModel[]
-         */
-        $guaranteeProviders = [];
-        foreach ($allGuaranteeProviderResponse->getContent() as $guaranteeProvider) {
-            $guaranteeProviders[] = ModelSerializer::parse($guaranteeProvider, GuaranteeProviderModel::class);
-        }
-
-
-        return $this->render('repository/guarantee_provider/edit.html.twig', [
-            'controller_name' => 'GuaranteeProviderController',
-            'guaranteeProviderModel' => $guaranteeProviderModel,
-            'guaranteeProviders' => $guaranteeProviders,
-
-        ]);
     }
 
 

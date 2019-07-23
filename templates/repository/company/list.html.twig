@@ -17,61 +17,70 @@
                                 eos, minus nemo neque obcaecati placeat quam quisquam ullam?
                             </p>
                         </div>
-                        <div class="col-2 d-flex justify-content-center align-items-center">
-                            <a href="{{ path('repository_company_repository_company_create') }}" class="btn btn-block btn-success fa fa-plus rounded"></a>
-                        </div>
+                        {% if canCreate %}
+                            <div class="col-2 d-flex justify-content-center align-items-center">
+                                <a href="{{ path('repository_company_repository_company_create') }}"
+                                   class="btn btn-block btn-success fa fa-plus rounded"></a>
+                            </div>
+                        {% endif %}
                     </div>
 
                 </div>
             </div>
         </div>
-        <div class="col-12">
-            <div class="panel">
-                <div class="panel-content">
-                    <div class="form-group row">
-                        <div class="col-4"></div>
-                        <div class="col-md-4">
-                            <input type="text" placeholder="Search" name="text"
-                                   class="form-control live-search-box">
+        {% if canSeeAll %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-content">
+                        <div class="form-group row">
+                            <div class="col-4"></div>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Search" name="text"
+                                       class="form-control live-search-box">
+                            </div>
+                            <div class="col-4"></div>
                         </div>
-                        <div class="col-4"></div>
-                    </div>
-                    <!-- Records List Start -->
-                    <div class="records--list">
-                        <table id="usersRoleList" class="search-tr">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Company name</th>
-                                <th>Telephone</th>
-                                <th>Address</th>
-                                <th>Contact Person</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for company in companies %}
+                        <!-- Records List Start -->
+                        <div class="records--list">
+                            <table id="usersRoleList" class="search-tr">
+                                <thead>
                                 <tr>
-                                    <td>{{ company.companyID }}</td>
-                                    <td>{{ company.companyName }}</td>
-                                    <td>{{ company.companyMainPhone }}</td>
-                                    <td>{{ company.companyMainAddress }}</td>
-                                    <td>
-                                        {#<a href="{{ path('repository_person_repository_person_edit',{id:company.companyMainAddressContactPersonID}) }}"></a>{{ company.companyMainAddressContactPersonName }}#}
-                                    </td>
-                                    <td>
-                                        <a href="{{ path('repository_company_repository_company_edit',{id:company.companyID}) }}"
-                                           class=" fa fa-edit"></a>
-                                    </td>
+                                    <th>ID</th>
+                                    <th>Company name</th>
+                                    <th>Telephone</th>
+                                    <th>Address</th>
+                                    <th>Contact Person</th>
+                                    {% if canEdit %}
+                                        <th>Actions</th>
+                                    {% endif %}
                                 </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                {% for company in companies %}
+                                    <tr>
+                                        <td>{{ company.companyID }}</td>
+                                        <td>{{ company.companyName }}</td>
+                                        <td>{{ company.companyMainPhone }}</td>
+                                        <td>{{ company.companyMainAddress }}</td>
+                                        <td>
+                                            {#<a href="{{ path('repository_person_repository_person_edit',{id:company.companyMainAddressContactPersonID}) }}"></a>{{ company.companyMainAddressContactPersonName }}#}
+                                        </td>
+                                        {% if canEdit %}
+                                            <td>
+                                                <a href="{{ path('repository_company_repository_company_edit',{id:company.companyID}) }}"
+                                                   class=" fa fa-edit"></a>
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Records List End -->
                     </div>
-                    <!-- Records List End -->
                 </div>
             </div>
-        </div>
+        {% endif %}
         <!--Address Panel-->
     </div>
 {% endblock %}

@@ -4,11 +4,14 @@ namespace App\Controller\Authentication;
 
 use App\FormModels\Authentication\UserModel;
 use App\FormModels\ModelSerializer;
+use App\General\AuthUser;
+use Grpc\Server;
 use Matican\Core\Entities\Authentication;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Matican\Core\Transaction\Request as Req;
 
@@ -52,15 +55,23 @@ class LoginController extends AbstractController
             $request = new Req(Servers::Authentication, Authentication::User, 'login');
             $request->add_instance($userModel);
             $response = $request->send();
-            dd($response);
             if ($response->getStatus() == ResponseStatus::successful) {
+
+
+                $userModel = ModelSerializer::parse($response->getContent(), UserModel::class);
+                $userModel->setUserPassword('');
+
+                $rolePermissionRequest = new Req(Servers::Authentication, Authentication::Role, 'get_roles_permissions');
+                $response = $rolePermissionRequest->send();
+                AuthUser::login($userModel);
+                AuthUser::cachePermissions($response->getContent());
+
                 $this->addFlash('s', $response->getMessage());
             } else {
                 $this->addFlash('f', $response->getMessage());
 //                return $this->redirect($this->generateUrl('authentication_login'));
             }
         }
-
 
 
         return $this->render('authentication/login/read.html.twig', [

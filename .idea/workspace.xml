@@ -2,26 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="888bc667-c4ce-45a1-ae9a-07fc984df454" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/General/AuthUser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Params.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/script/all.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/script/all.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Authentication/ClientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Authentication/ClientController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Authentication/RoleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Authentication/RoleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Authentication/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Authentication/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Crm/CustomerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Crm/CustomerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Crm/CustomerGroupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Crm/CustomerGroupController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Repository/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Repository/ItemController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/accounting/invoice/create.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accounting/invoice/create.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/authentication/client/create.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/authentication/client/create.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/authentication/client/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/authentication/client/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/authentication/role/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/authentication/role/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/authentication/user/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/authentication/user/list.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/crm/customer/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/crm/customer/list.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/crm/customer/read-company-group.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/crm/customer/read-company-group.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/crm/customer_group/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/crm/customer_group/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/repository/company/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/repository/company/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/repository/item/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/repository/item/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Authentication/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Authentication/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Delivery/DeliveryMethodController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Delivery/DeliveryMethodController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,40 +28,84 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ItemController.php" pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/Repository/ItemController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
+            <state relative-caret-position="1087">
               <caret line="533" column="31" selection-start-line="533" selection-start-column="31" selection-end-line="533" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Authentication/LoginController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="582">
+              <caret line="64" column="16" selection-start-line="64" selection-start-column="16" selection-end-line="64" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Delivery/DeliveryMethodController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="286">
+              <caret line="39" selection-start-line="39" selection-end-line="39" />
               <folding>
-                <element signature="e#9502#10321#0#PHP" />
-                <element signature="e#10590#11287#0#PHP" />
-                <element signature="e#11539#12358#0#PHP" />
-                <element signature="e#12620#13315#0#PHP" />
-                <element signature="e#13575#14393#0#PHP" />
+                <element signature="e#43#91#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SpecKeyValueModel.php" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Authentication/RoleController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="522">
+              <caret line="180" column="5" selection-start-line="180" selection-start-column="5" selection-end-line="180" selection-end-column="5" />
+              <folding>
+                <element signature="e#49#99#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/General/AuthUser.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="313">
+              <caret line="50" column="5" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
+              <folding>
+                <element signature="e#6#87#0#PHP" expanded="true" />
+                <element signature="e#114#158#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/composer.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1012">
+              <caret line="60" column="26" selection-start-line="60" selection-start-column="26" selection-end-line="60" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FormModels/Repository/SpecKeyValueModel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="14" column="18" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="18" />
+            <state relative-caret-position="220">
+              <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edit.html.twig" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/repository/item/edit.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
+            <state relative-caret-position="6996">
               <caret line="318" column="87" selection-start-line="318" selection-start-column="87" selection-end-line="318" selection-end-column="87" />
-              <folding>
-                <element signature="e#12#26#0#Twig" expanded="true" />
-                <element signature="e#18033#18065#0#Twig" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -107,12 +144,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/accounting/gift_card_group/read.html.twig" />
-        <option value="$PROJECT_DIR$/templates/accounting/coupon_group/read.html.twig" />
-        <option value="$PROJECT_DIR$/src/FormModels/CRM/CustomerCouponModel.php" />
-        <option value="$PROJECT_DIR$/templates/crm/customer/read-gift-coupon.html.twig" />
-        <option value="$PROJECT_DIR$/templates/crm/customer/read-payment-deed.html.twig" />
-        <option value="$PROJECT_DIR$/templates/crm/customer/read-invoice.html.twig" />
         <option value="$PROJECT_DIR$/src/FormModels/CRM/InvitationStatusModel.php" />
         <option value="$PROJECT_DIR$/src/FormModels/CRM/InvitationModel.php" />
         <option value="$PROJECT_DIR$/src/FormModels/Repository/PersonModel.php" />
@@ -131,7 +162,6 @@
         <option value="$PROJECT_DIR$/templates/general/menu/side-menu.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/General/MenuController.php" />
         <option value="$PROJECT_DIR$/templates/authentication/login/read.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/Authentication/LoginController.php" />
         <option value="$PROJECT_DIR$/templates/authentication/role/create.html.twig" />
         <option value="$PROJECT_DIR$/src/FormModels/Authentication/ClientModel.php" />
         <option value="$PROJECT_DIR$/src/FormModels/Authentication/ServerPermissionModel.php" />
@@ -145,7 +175,6 @@
         <option value="$PROJECT_DIR$/templates/authentication/client/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/Authentication/ClientController.php" />
         <option value="$PROJECT_DIR$/templates/authentication/role/edit.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/Authentication/RoleController.php" />
         <option value="$PROJECT_DIR$/src/FormModels/Authentication/RoleModel.php" />
         <option value="$PROJECT_DIR$/src/FormModels/Authentication/AuthenticationStatusModel.php" />
         <option value="$PROJECT_DIR$/src/FormModels/Authentication/UserModel.php" />
@@ -158,22 +187,16 @@
         <option value="$PROJECT_DIR$/src/FormModels/Repository/SpecKeyValueModel.php" />
         <option value="$PROJECT_DIR$/templates/repository/item/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/Repository/ItemController.php" />
+        <option value="$PROJECT_DIR$/src/General/Authentication.php" />
+        <option value="$PROJECT_DIR$/src/Params.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Authentication/RoleController.php" />
+        <option value="$PROJECT_DIR$/cache/Permissions/rolePermissions.txt" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/src/General/AuthUser.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Authentication/LoginController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Delivery/DeliveryMethodController.php" />
       </list>
     </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths>
-      <path value="$PROJECT_DIR$/node_modules/bootstrap/package.json" />
-      <path value="$PROJECT_DIR$/node_modules/jquery/package.json" />
-      <path value="$PROJECT_DIR$/node_modules/md.bootstrappersiandatetimepicker/package.json" />
-      <path value="$PROJECT_DIR$/node_modules/popper.js/package.json" />
-    </packageJsonPaths>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -291,137 +314,70 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1066" />
+    <option name="y" value="-2" />
+    <option name="width" value="1920" />
+    <option name="height" value="1082" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
+              <item name="backoffice.charsoo.maticangroup.com" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backoffice.charsoo.maticangroup.com" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="backoffice.charsoo.maticangroup.com" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backoffice.charsoo.maticangroup.com" type="462c0819:PsiDirectoryNode" />
+              <item name="cache" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
+              <item name="backoffice.charsoo.maticangroup.com" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backoffice.charsoo.maticangroup.com" type="462c0819:PsiDirectoryNode" />
+              <item name="cache" type="462c0819:PsiDirectoryNode" />
+              <item name="Permissions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="backoffice.charsoo.maticangroup.com" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backoffice.charsoo.maticangroup.com" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="backoffice.charsoo.maticangroup.com" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backoffice.charsoo.maticangroup.com" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-              <item name="Authentication" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
+              <item name="backoffice.charsoo.maticangroup.com" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backoffice.charsoo.maticangroup.com" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Controller" type="462c0819:PsiDirectoryNode" />
-              <item name="Crm" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
+              <item name="backoffice.charsoo.maticangroup.com" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backoffice.charsoo.maticangroup.com" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Controller" type="462c0819:PsiDirectoryNode" />
               <item name="Delivery" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-              <item name="Repository" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="FormModels" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="FormModels" type="462c0819:PsiDirectoryNode" />
-              <item name="Authentication" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="FormModels" type="462c0819:PsiDirectoryNode" />
-              <item name="CRM" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="FormModels" type="462c0819:PsiDirectoryNode" />
-              <item name="Repository" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="accounting" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="accounting" type="462c0819:PsiDirectoryNode" />
-              <item name="invoice" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="repository" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="backoffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="backoffice" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="repository" type="462c0819:PsiDirectoryNode" />
-              <item name="item" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Kesvat Work" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Modal" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
@@ -505,230 +461,65 @@
       <workItem from="1563549099591" duration="131000" />
       <workItem from="1563597420361" duration="18764000" />
       <workItem from="1563684773720" duration="25090000" />
+      <workItem from="1563777992871" duration="10551000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="641217000" />
+    <option name="totallyTimeSpent" value="651768000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <frame x="67" y="25" width="1853" height="1055" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49784482" visible="true" weight="0.20042644" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49784482" visible="true" weight="0.21029331" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" sideWeight="0.5021552" side_tool="true" weight="0.1705757" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32829374" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.3297414" />
-      <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="12" weight="0.30603448" />
-      <window_info id="Favorites" order="2" sideWeight="0.5021552" side_tool="true" weight="0.1705757" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.3297414" />
+      <window_info anchor="bottom" id="Terminal" order="12" weight="0.14362851" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.3297414" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3286638" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
     </layout>
     <layout-to-restore>
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49784482" visible="true" weight="0.20042644" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49784482" visible="true" weight="0.21029331" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.3297414" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Terminal" order="12" weight="0.30603448" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3286638" />
-      <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.3297414" />
-      <window_info anchor="bottom" id="Message" order="0" />
       <window_info id="Favorites" order="2" sideWeight="0.5021552" side_tool="true" weight="0.1705757" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32829374" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.3297414" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.3297414" />
+      <window_info anchor="bottom" id="Terminal" order="12" weight="0.14362851" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="3" />
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Controller/Repository/GuaranteeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="18" column="32" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="32" />
-          <folding>
-            <element signature="e#733#931#0#PHP" />
-            <element signature="e#936#3472#0#PHP" />
-            <element signature="e#1036#1098#0#PHP" />
-            <element signature="e#1189#1661#0#PHP" />
-            <element signature="e#1431#1651#0#PHP" />
-            <element signature="e#1568#1651#0#PHP" />
-            <element signature="e#1856#1932#0#PHP" />
-            <element signature="e#1975#2170#0#PHP" />
-            <element signature="e#2402#2478#0#PHP" />
-            <element signature="e#2521#2716#0#PHP" />
-            <element signature="e#2871#2931#0#PHP" />
-            <element signature="e#2966#3121#0#PHP" />
-            <element signature="e#3139#3465#0#PHP" />
-            <element signature="e#3194#3464#0#PHP" />
-            <element signature="e#3479#3696#0#PHP" />
-            <element signature="e#3701#6680#0#PHP" />
-            <element signature="e#3803#3865#0#PHP" />
-            <element signature="e#4269#4921#0#PHP" />
-            <element signature="e#4621#4911#0#PHP" />
-            <element signature="e#4849#4911#0#PHP" />
-            <element signature="e#5110#5186#0#PHP" />
-            <element signature="e#5229#5424#0#PHP" />
-            <element signature="e#5613#5689#0#PHP" />
-            <element signature="e#5732#5927#0#PHP" />
-            <element signature="e#6082#6142#0#PHP" />
-            <element signature="e#6177#6332#0#PHP" />
-            <element signature="e#6349#6673#0#PHP" />
-            <element signature="e#6402#6672#0#PHP" />
-            <element signature="e#6687#6948#0#PHP" />
-            <element signature="e#6953#7987#0#PHP" />
-            <element signature="e#7101#7446#0#PHP" />
-            <element signature="e#7288#7446#0#PHP" />
-            <element signature="e#7673#7877#0#PHP" />
-            <element signature="e#7802#7877#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Repository/GuaranteeDurationController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="18" column="60" selection-start-line="18" selection-start-column="60" selection-end-line="18" selection-end-column="60" />
-          <folding>
-            <element signature="e#510#599#0#PHP" />
-            <element signature="e#667#874#0#PHP" />
-            <element signature="e#879#2416#0#PHP" />
-            <element signature="e#978#1056#0#PHP" />
-            <element signature="e#1164#1610#0#PHP" />
-            <element signature="e#1394#1536#0#PHP" />
-            <element signature="e#1811#1887#0#PHP" />
-            <element signature="e#1930#2129#0#PHP" />
-            <element signature="e#2147#2409#0#PHP" />
-            <element signature="e#2211#2408#0#PHP" />
-            <element signature="e#2422#2648#0#PHP" />
-            <element signature="e#2653#4696#0#PHP" />
-            <element signature="e#2755#2833#0#PHP" />
-            <element signature="e#3302#3892#0#PHP" />
-            <element signature="e#3703#3881#0#PHP" />
-            <element signature="e#3819#3881#0#PHP" />
-            <element signature="e#4093#4169#0#PHP" />
-            <element signature="e#4212#4411#0#PHP" />
-            <element signature="e#4429#4689#0#PHP" />
-            <element signature="e#4491#4688#0#PHP" />
-            <element signature="e#4703#4989#0#PHP" />
-            <element signature="e#4994#6168#0#PHP" />
-            <element signature="e#5175#5602#0#PHP" />
-            <element signature="e#5403#5602#0#PHP" />
-            <element signature="e#5836#6040#0#PHP" />
-            <element signature="e#5965#6040#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Repository/ItemCategoryController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="20" column="36" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="36" />
-          <folding>
-            <element signature="e#819#1021#0#PHP" />
-            <element signature="e#1026#3206#0#PHP" />
-            <element signature="e#1126#1194#0#PHP" />
-            <element signature="e#1292#2092#0#PHP" />
-            <element signature="e#1511#2023#0#PHP" />
-            <element signature="e#1587#1669#0#PHP" />
-            <element signature="e#2273#2340#0#PHP" />
-            <element signature="e#2379#2555#0#PHP" />
-            <element signature="e#2701#2751#0#PHP" />
-            <element signature="e#2781#2915#0#PHP" />
-            <element signature="e#2933#3199#0#PHP" />
-            <element signature="e#2992#3198#0#PHP" />
-            <element signature="e#3213#3434#0#PHP" />
-            <element signature="e#3439#7288#0#PHP" />
-            <element signature="e#3541#3609#0#PHP" />
-            <element signature="e#4062#4704#0#PHP" />
-            <element signature="e#4499#4635#0#PHP" />
-            <element signature="e#4885#4952#0#PHP" />
-            <element signature="e#4991#5167#0#PHP" />
-            <element signature="e#5418#5478#0#PHP" />
-            <element signature="e#5513#6540#0#PHP" />
-            <element signature="e#5588#5658#0#PHP" />
-            <element signature="e#5760#6485#0#PHP" />
-            <element signature="e#5888#6409#0#PHP" />
-            <element signature="e#5946#6028#0#PHP" />
-            <element signature="e#6140#6300#0#PHP" />
-            <element signature="e#6714#6764#0#PHP" />
-            <element signature="e#6794#6928#0#PHP" />
-            <element signature="e#6977#7281#0#PHP" />
-            <element signature="e#7034#7280#0#PHP" />
-            <element signature="e#7295#7550#0#PHP" />
-            <element signature="e#7555#8425#0#PHP" />
-            <element signature="e#7678#7748#0#PHP" />
-            <element signature="e#8080#8284#0#PHP" />
-            <element signature="e#8209#8284#0#PHP" />
-            <element signature="e#8432#8508#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Repository/ItemColorController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="19" column="52" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="52" />
-          <folding>
-            <element signature="e#541#609#0#PHP" />
-            <element signature="e#669#868#0#PHP" />
-            <element signature="e#873#2134#0#PHP" />
-            <element signature="e#973#1031#0#PHP" />
-            <element signature="e#1119#1529#0#PHP" />
-            <element signature="e#1324#1460#0#PHP" />
-            <element signature="e#1680#1736#0#PHP" />
-            <element signature="e#1767#1910#0#PHP" />
-            <element signature="e#1928#2127#0#PHP" />
-            <element signature="e#1984#2126#0#PHP" />
-            <element signature="e#2140#2324#0#PHP" />
-            <element signature="e#2329#4252#0#PHP" />
-            <element signature="e#2431#2489#0#PHP" />
-            <element signature="e#2898#3649#0#PHP" />
-            <element signature="e#2933#2999#0#PHP" />
-            <element signature="e#3330#3580#0#PHP" />
-            <element signature="e#3801#3857#0#PHP" />
-            <element signature="e#3888#4031#0#PHP" />
-            <element signature="e#4049#4245#0#PHP" />
-            <element signature="e#4103#4244#0#PHP" />
-            <element signature="e#4259#4501#0#PHP" />
-            <element signature="e#4506#5464#0#PHP" />
-            <element signature="e#4636#4907#0#PHP" />
-            <element signature="e#4786#4907#0#PHP" />
-            <element signature="e#5148#5352#0#PHP" />
-            <element signature="e#5277#5352#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Repository/OffDayController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -868,44 +659,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Authentication/LoginController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="43" column="29" selection-start-line="43" selection-start-column="29" selection-end-line="43" selection-end-column="29" />
-          <folding>
-            <element signature="e#1448#2210#0#PHP" />
-            <element signature="e#1293#1942#0#PHP" />
-            <element signature="e#1952#2685#0#PHP" />
-            <element signature="e#2636#2658#1#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/authentication/login/read.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
           <caret line="57" column="47" selection-start-line="57" selection-start-column="47" selection-end-line="57" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Delivery/DeliveryMethodController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="22" selection-start-line="22" selection-end-line="22" selection-end-column="44" />
-          <folding>
-            <element signature="e#1091#1794#0#PHP" />
-            <element signature="e#1982#3978#0#PHP" />
-            <element signature="e#4185#9011#0#PHP" />
-            <element signature="e#9218#11355#0#PHP" />
-            <element signature="e#11610#12418#0#PHP" />
-            <element signature="e#12682#13390#0#PHP" />
-            <element signature="e#13668#14624#0#PHP" />
-            <element signature="e#14932#15810#0#PHP" />
-            <element signature="e#16109#17032#0#PHP" />
-            <element signature="e#17341#18114#0#PHP" />
-            <element signature="e#18425#19444#0#PHP" />
-            <element signature="e#19708#20785#0#PHP" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1211,22 +968,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Authentication/RoleController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="88" column="87" lean-forward="true" selection-start-line="83" selection-start-column="8" selection-end-line="88" selection-end-column="87" />
-          <folding>
-            <element signature="e#49#99#0#PHP" expanded="true" />
-            <element signature="e#813#2136#0#PHP" />
-            <element signature="e#4680#4706#1#PHP" expanded="true" />
-            <element signature="e#4452#5342#0#PHP" />
-            <element signature="e#5287#5313#0#PHP" expanded="true" />
-            <element signature="e#4335#4382#0#PHP" />
-            <element signature="e#6266#6292#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FormModels/Authentication/RoleModel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="670">
@@ -1418,34 +1159,82 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormModels/Repository/SpecKeyValueModel.php">
+    <entry file="file://$PROJECT_DIR$/src/Controller/Repository/ItemController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="14" column="18" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="18" />
+        <state relative-caret-position="1087">
+          <caret line="533" column="31" selection-start-line="533" selection-start-column="31" selection-end-line="533" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/repository/item/edit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
+        <state relative-caret-position="6996">
           <caret line="318" column="87" selection-start-line="318" selection-start-column="87" selection-end-line="318" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Params.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="29" column="1" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormModels/Repository/SpecKeyValueModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1012">
+          <caret line="60" column="26" selection-start-line="60" selection-start-column="26" selection-end-line="60" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cache/Permissions/rolePermissions.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="20" selection-start-column="7" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/General/AuthUser.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="50" column="5" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
           <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-            <element signature="e#18033#18065#0#Twig" expanded="true" />
+            <element signature="e#6#87#0#PHP" expanded="true" />
+            <element signature="e#114#158#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Repository/ItemController.php">
+    <entry file="file://$PROJECT_DIR$/src/Controller/Authentication/RoleController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="533" column="31" selection-start-line="533" selection-start-column="31" selection-end-line="533" selection-end-column="31" />
+        <state relative-caret-position="522">
+          <caret line="180" column="5" selection-start-line="180" selection-start-column="5" selection-end-line="180" selection-end-column="5" />
           <folding>
-            <element signature="e#9502#10321#0#PHP" />
-            <element signature="e#10590#11287#0#PHP" />
-            <element signature="e#11539#12358#0#PHP" />
-            <element signature="e#12620#13315#0#PHP" />
-            <element signature="e#13575#14393#0#PHP" />
+            <element signature="e#49#99#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Authentication/LoginController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="582">
+          <caret line="64" column="16" selection-start-line="64" selection-start-column="16" selection-end-line="64" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Delivery/DeliveryMethodController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
+          <folding>
+            <element signature="e#43#91#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -897,7 +897,7 @@ $(document).ready(
             },
 
             {
-                groupName: 'Authentication',
+                groupName: 'AuthUser',
                 menus: [
                     {
                         groupName: 'Login',

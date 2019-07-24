@@ -4,6 +4,7 @@
 
 {% block body %}
     <div class="row">
+
         <div class="col-12">
             <div class="panel">
                 <div class="panel-content">
@@ -15,101 +16,110 @@
                                 laudantium odit quibusdam quis vel?
                             </p>
                         </div>
-                        <div class="col-2">
-                            <form class="row" action="{{ path('repository_size_repository_size_create') }}"
-                                  method="post">
-                                <div class="col-12">
-                                    <input type="text" placeholder="Size name" value="{{ sizeModel.sizeName }}"
-                                           name="sizeName"
-                                           class="form-control mb-3">
+                        {% if canCreate %}
+                            <div class="col-2">
+                                <form class="row" action="{{ path('repository_size_repository_size_create') }}"
+                                      method="post">
+                                    <div class="col-12">
+                                        <input type="text" placeholder="Size name" value="{{ sizeModel.sizeName }}"
+                                               name="sizeName"
+                                               class="form-control mb-3">
 
-                                    <input type="number" placeholder="Width" value="{{ sizeModel.sizeWidth }}"
-                                           name="sizeWidth"
-                                           class="form-control mb-3">
+                                        <input type="number" placeholder="Width" value="{{ sizeModel.sizeWidth }}"
+                                               name="sizeWidth"
+                                               class="form-control mb-3">
 
-                                    <input type="number" placeholder="Length" value="{{ sizeModel.sizeLength }}"
-                                           name="sizeLength"
-                                           class="form-control mb-3">
+                                        <input type="number" placeholder="Length" value="{{ sizeModel.sizeLength }}"
+                                               name="sizeLength"
+                                               class="form-control mb-3">
 
-                                    <input type="number" placeholder="Depth" value="{{ sizeModel.sizeDepth }}"
-                                           name="sizeDepth"
-                                           class="form-control mb-3">
+                                        <input type="number" placeholder="Depth" value="{{ sizeModel.sizeDepth }}"
+                                               name="sizeDepth"
+                                               class="form-control mb-3">
 
-                                    <input type="number" placeholder="Order" value="{{ sizeModel.sizeOrder }}"
-                                           name="sizeOrder"
-                                           class="form-control mb-3">
-                                    <button type="submit" class="btn rounded btn-block btn-dark fa fa-save"></button>
-                                </div>
-                            </form>
-                        </div>
+                                        <input type="number" placeholder="Order" value="{{ sizeModel.sizeOrder }}"
+                                               name="sizeOrder"
+                                               class="form-control mb-3">
+                                        <button type="submit"
+                                                class="btn rounded btn-block btn-dark fa fa-save"></button>
+                                    </div>
+                                </form>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-12">
-            <div class="panel">
-                <div class="panel-content">
-                    <div class="form-group row">
-                        <div class="col-4"></div>
-                        <div class="col-md-4">
-                            <input type="text" placeholder="Search" name="text"
-                                   class="form-control">
+        {% if canSeeAll %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-content">
+                        <div class="form-group row">
+                            <div class="col-4"></div>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Search" name="text"
+                                       class="form-control">
+                            </div>
+                            <div class="col-4"></div>
                         </div>
-                        <div class="col-4"></div>
-                    </div>
-                    <!-- Records List Start -->
-                    <div class="records--list">
-                        <table id="usersRoleList">
-                            <thead>
-                            <tr>
-                                <th>Size name</th>
-                                <th>Width</th>
-                                <th>Length</th>
-                                <th>Depth</th>
-                                <th>Order</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for size in sizes %}
+                        <!-- Records List Start -->
+                        <div class="records--list">
+                            <table id="usersRoleList">
+                                <thead>
                                 <tr>
-                                    <td>
-                                        {{ size.sizeName }}
-                                    </td>
-                                    <td>
-                                        {{ size.sizeWidth }}
-                                    </td>
-                                    <td>
-                                        {{ size.sizeLength }}
-                                    </td>
-                                    <td>
-                                        {{ size.sizeDepth }}
-                                    </td>
-                                    <td>
-                                        {{ size.sizeOrder }}
-                                    </td>
-                                    <td>
+                                    <th>Size name</th>
+                                    <th>Width</th>
+                                    <th>Length</th>
+                                    <th>Depth</th>
+                                    <th>Order</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for size in sizes %}
+                                    <tr>
+                                        <td>
+                                            {{ size.sizeName }}
+                                        </td>
+                                        <td>
+                                            {{ size.sizeWidth }}
+                                        </td>
+                                        <td>
+                                            {{ size.sizeLength }}
+                                        </td>
+                                        <td>
+                                            {{ size.sizeDepth }}
+                                        </td>
+                                        <td>
+                                            {{ size.sizeOrder }}
+                                        </td>
+                                        <td>
                                         <span class="label rounded"
                                               style="background-color: {{ size.sizeStatus.sizeStatusColor }}">
                                              {{ size.sizeStatus.sizeStatusName }}
                                         </span>
-                                    </td>
-                                    <td>
-                                        <a href="{{ path('repository_size_repository_size_status' , {size_id:size.sizeID , machine_name:size.sizeStatus.sizeStatusMachineName }) }}"
-                                           class="{{ (size.sizeStatus.sizeStatusMachineName == 'active') ? 'fa fa-ban text-red' : 'fa fa-play text-green' }}"></a>
-                                        <a href="{{ path('repository_size_repository_size_edit' , {id:size.sizeID }) }}"
-                                           class="fa fa-edit"></a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                                        </td>
+                                        <td>
+                                            {% if canChangeStatus %}
+                                                <a href="{{ path('repository_size_repository_size_status' , {size_id:size.sizeID , machine_name:size.sizeStatus.sizeStatusMachineName }) }}"
+                                                   class="{{ (size.sizeStatus.sizeStatusMachineName == 'active') ? 'fa fa-ban text-red' : 'fa fa-play text-green' }}"></a>
+                                            {% endif %}
+                                            {% if canEdit %}
+                                                <a href="{{ path('repository_size_repository_size_edit' , {id:size.sizeID }) }}"
+                                                   class="fa fa-edit"></a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Records List End -->
                     </div>
-                    <!-- Records List End -->
                 </div>
             </div>
-        </div>
+        {% endif %}
     </div>
 {% endblock %}

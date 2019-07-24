@@ -5,6 +5,8 @@ namespace App\Controller\Repository;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\SpecGroupModel;
 use App\FormModels\Repository\SpecKeyModel;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;
@@ -26,6 +28,11 @@ class SpecGroupController extends AbstractController
      */
     public function create(Request $request)
     {
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::repository_specgroup_new);
+        $canCreateSpecKey = AuthUser::if_is_allowed(ServerPermissions::repository_specgroup_add_spec_key);
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::repository_specgroup_fetch);
+        $canRemoveSpecKey = AuthUser::if_is_allowed(ServerPermissions::repository_specgroup_remove_spec_key);
+
         $inputs = $request->request->all();
         /**
          * @var $specGroupModel SpecGroupModel
@@ -37,15 +44,18 @@ class SpecGroupController extends AbstractController
          */
         $specKeyModel = ModelSerializer::parse($inputs, SpecKeyModel::class);
 
-        if (!empty($inputs)) {
-            $request = new Req(Servers::Repository, Repository::SpecGroup, 'new');
-            $request->add_instance($specGroupModel);
-            $response = $request->send();
-            if ($response->getStatus() == ResponseStatus::successful) {
+        if ($canCreate) {
+            if (!empty($inputs)) {
+                $request = new Req(Servers::Repository, Repository::SpecGroup, 'new');
+                $request->add_instance($specGroupModel);
+                $response = $request->send();
+                if ($response->getStatus() == ResponseStatus::successful) {
+                    $this->addFlash('s', $response->getMessage());
+                }
                 $this->addFlash('s', $response->getMessage());
             }
-            $this->addFlash('s', $response->getMessage());
         }
+
 
         $allSpecGroupsRequest = new Req(Servers::Repository, Repository::SpecGroup, 'all');
         $allSpecGroupsResponse = $allSpecGroupsRequest->send();
@@ -64,6 +74,10 @@ class SpecGroupController extends AbstractController
             'specGroupModel' => $specGroupModel,
             'specKeyModel' => $specKeyModel,
             'specGroups' => $specGroups,
+            'canCreate' => $canCreate,
+            'canCreateSpecKey' => $canCreateSpecKey,
+            'canEdit' => $canEdit,
+            'canRemoveSpecKey' => $canRemoveSpecKey,
         ]);
     }
 

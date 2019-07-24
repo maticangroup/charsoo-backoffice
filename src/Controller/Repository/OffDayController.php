@@ -4,6 +4,8 @@ namespace App\Controller\Repository;
 
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\OffDayModel;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;
@@ -26,50 +28,61 @@ class OffDayController extends AbstractController
      */
     public function create(Request $request)
     {
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::repository_offdays_new);
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::repository_offdays_all);
+        $canRemove = AuthUser::if_is_allowed(ServerPermissions::repository_offdays_delete);
+
+
         $inputs = $request->request->all();
         /**
          * @var $offDayModel OffDayModel
          */
         $offDayModel = ModelSerializer::parse($inputs, OffDayModel::class);
-
-        if (!empty($inputs)) {
-//            dd($offDayModel);
-            $request = new Req(Servers::Repository, Repository::OffDays, 'new');
-            $request->add_instance($offDayModel);
-            $response = $request->send();
-//            dd($response);
-            if ($response->getStatus() == ResponseStatus::successful) {
-                $this->addFlash('success', $response->getMessage());
-            }
-            $this->addFlash('failed', $response->getMessage());
-        }
-
         $years = [];
-        for ($i = 1950; $i <= 2019; $i++) {
-            $years[] = $i;
-        }
-
         $months = [];
-        for ($j = 1; $j <= 12; $j++) {
-            $months[] = $j;
-        }
-
         $days = [];
-        for ($k = 1; $k <= 31; $k++) {
-            $days[] = $k;
-        }
 
-        $offDaysRequest = new Req(Servers::Repository, Repository::OffDays, 'all');
-        $offDaysResponse = $offDaysRequest->send();
+        if ($canCreate) {
+            if (!empty($inputs)) {
+
+                $request = new Req(Servers::Repository, Repository::OffDays, 'new');
+                $request->add_instance($offDayModel);
+                $response = $request->send();
+                if ($response->getStatus() == ResponseStatus::successful) {
+                    $this->addFlash('success', $response->getMessage());
+                }
+                $this->addFlash('failed', $response->getMessage());
+            }
+
+
+            for ($i = 1950; $i <= 2019; $i++) {
+                $years[] = $i;
+            }
+
+
+            for ($j = 1; $j <= 12; $j++) {
+                $months[] = $j;
+            }
+
+
+            for ($k = 1; $k <= 31; $k++) {
+                $days[] = $k;
+            }
+        }
 
 
         /**
          * @var $offDays OffDayModel[]
          */
         $offDays = [];
-        if ($offDaysResponse->getContent()) {
-            foreach ($offDaysResponse->getContent() as $offDay) {
-                $offDays[] = ModelSerializer::parse($offDay, OffDayModel::class);
+
+        if ($canSeeAll) {
+            $offDaysRequest = new Req(Servers::Repository, Repository::OffDays, 'all');
+            $offDaysResponse = $offDaysRequest->send();
+            if ($offDaysResponse->getContent()) {
+                foreach ($offDaysResponse->getContent() as $offDay) {
+                    $offDays[] = ModelSerializer::parse($offDay, OffDayModel::class);
+                }
             }
         }
 
@@ -80,6 +93,9 @@ class OffDayController extends AbstractController
             'years' => $years,
             'months' => $months,
             'days' => $days,
+            'canCreate' => $canCreate,
+            'canSeeAll' => $canSeeAll,
+            'canRemove' => $canRemove,
         ]);
     }
 

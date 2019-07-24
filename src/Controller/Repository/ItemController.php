@@ -16,6 +16,8 @@ use App\FormModels\Repository\ItemModel;
 use App\FormModels\Repository\ItemTypeModel;
 use App\FormModels\Repository\SpecKeyModel;
 use App\FormModels\Repository\SpecKeyValueModel;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;
@@ -35,24 +37,34 @@ class ItemController extends AbstractController
      */
     public function fetchAll()
     {
-        $request = new Req(Servers::Repository, Repository::Item, 'all');
-        $response = $request->send();
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::repository_item_new);
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::repository_item_fetch);
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::repository_color_all);
 
-        /**
-         * @var $items ItemModel[]
-         */
-        $items = [];
-        foreach ($response->getContent() as $item) {
-            $items[] = ModelSerializer::parse($item, ItemModel::class);
+        if ($canSeeAll) {
+            $request = new Req(Servers::Repository, Repository::Item, 'all');
+            $response = $request->send();
+
+            /**
+             * @var $items ItemModel[]
+             */
+            $items = [];
+            foreach ($response->getContent() as $item) {
+                $items[] = ModelSerializer::parse($item, ItemModel::class);
+            }
+
+            return $this->render('repository/item/list.html.twig', [
+                'controller_name' => 'ItemController',
+                'items' => $items,
+                'canCreate' => $canCreate,
+                'canEdit' => $canEdit,
+                'canSeeAll' => $canSeeAll,
+            ]);
+        } else {
+            return $this->redirect($this->generateUrl('repository_item_repository_item_create'));
         }
 
-//        dd($items);
 
-
-        return $this->render('repository/item/list.html.twig', [
-            'controller_name' => 'ItemController',
-            'items' => $items,
-        ]);
     }
 
     /**
@@ -63,59 +75,68 @@ class ItemController extends AbstractController
      */
     public function create(Request $request)
     {
-        $inputs = $request->request->all();
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::repository_item_new);
 
-        /**
-         * @var $itemModel ItemModel
-         */
-        $itemModel = ModelSerializer::parse($inputs, ItemModel::class);
+        if ($canCreate) {
+
+            $inputs = $request->request->all();
+
+            /**
+             * @var $itemModel ItemModel
+             */
+            $itemModel = ModelSerializer::parse($inputs, ItemModel::class);
 //        dd($itemModel);
-        if (!empty($inputs)) {
+            if (!empty($inputs)) {
 //            dd($inputs);
-            $request = new Req(Servers::Repository, Repository::Item, 'new');
-            $request->add_instance($itemModel);
-            $response = $request->send();
+                $request = new Req(Servers::Repository, Repository::Item, 'new');
+                $request->add_instance($itemModel);
+                $response = $request->send();
 //            dd($response);
-            if ($response->getStatus() == ResponseStatus::successful) {
-                /**
-                 * @var $itemModel ItemModel
-                 */
-                $itemModel = ModelSerializer::parse($response->getContent(), ItemModel::class);
+                if ($response->getStatus() == ResponseStatus::successful) {
+                    /**
+                     * @var $itemModel ItemModel
+                     */
+                    $itemModel = ModelSerializer::parse($response->getContent(), ItemModel::class);
+                    $this->addFlash('s', $response->getMessage());
+                    return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $itemModel->getItemID()]));
+                }
                 $this->addFlash('s', $response->getMessage());
-                return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $itemModel->getItemID()]));
             }
-            $this->addFlash('s', $response->getMessage());
+
+
+            $allBrandsRequest = new Req(Servers::Repository, Repository::Brand, 'all');
+            $allBrandsResponse = $allBrandsRequest->send();
+
+            /**
+             * @var $brands BrandModel[]
+             */
+            $brands = [];
+            foreach ($allBrandsResponse->getContent() as $brand) {
+                $brands[] = ModelSerializer::parse($brand, BrandModel::class);
+            }
+
+            $allItemTypesRequest = new Req(Servers::Repository, Repository::Item, 'get_types');
+            $allItemTypesResponse = $allItemTypesRequest->send();
+
+            /**
+             * @var $itemTypes ItemTypeModel[]
+             */
+            $itemTypes = [];
+            foreach ($allItemTypesResponse->getContent() as $itemType) {
+                $itemTypes[] = ModelSerializer::parse($itemType, ItemTypeModel::class);
+            }
+
+            return $this->render('repository/item/create.html.twig', [
+                'controller_name' => 'ItemController',
+                'itemModel' => $itemModel,
+                'brands' => $brands,
+                'itemTypes' => $itemTypes,
+                'canCreate' => $canCreate
+            ]);
+        } else {
+            return $this->redirect($this->generateUrl('repository_item_repository_item_list'));
         }
 
-
-        $allBrandsRequest = new Req(Servers::Repository, Repository::Brand, 'all');
-        $allBrandsResponse = $allBrandsRequest->send();
-
-        /**
-         * @var $brands BrandModel[]
-         */
-        $brands = [];
-        foreach ($allBrandsResponse->getContent() as $brand) {
-            $brands[] = ModelSerializer::parse($brand, BrandModel::class);
-        }
-
-        $allItemTypesRequest = new Req(Servers::Repository, Repository::Item, 'get_types');
-        $allItemTypesResponse = $allItemTypesRequest->send();
-
-        /**
-         * @var $itemTypes ItemTypeModel[]
-         */
-        $itemTypes = [];
-        foreach ($allItemTypesResponse->getContent() as $itemType) {
-            $itemTypes[] = ModelSerializer::parse($itemType, ItemTypeModel::class);
-        }
-
-        return $this->render('repository/item/create.html.twig', [
-            'controller_name' => 'ItemController',
-            'itemModel' => $itemModel,
-            'brands' => $brands,
-            'itemTypes' => $itemTypes,
-        ]);
     }
 
     /**
@@ -127,133 +148,142 @@ class ItemController extends AbstractController
      */
     public function edit($id, Request $request)
     {
-        $inputs = $request->request->all();
+        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::repository_item_update);
 
-        /**
-         * @var $itemModel ItemModel
-         */
-        $itemModel = ModelSerializer::parse($inputs, ItemModel::class);
-        $itemModel->setItemID($id);
-        $request = new Req(Servers::Repository, Repository::Item, 'fetch');
-        $request->add_instance($itemModel);
-        $response = $request->send();
-        $itemModel = ModelSerializer::parse($response->getContent(), ItemModel::class);
-//        dd($itemModel);
+        if ($canUpdate) {
+            $inputs = $request->request->all();
 
-        if (!empty($inputs)) {
+            /**
+             * @var $itemModel ItemModel
+             */
             $itemModel = ModelSerializer::parse($inputs, ItemModel::class);
             $itemModel->setItemID($id);
-            $request = new Req(Servers::Repository, Repository::Item, 'update');
+            $request = new Req(Servers::Repository, Repository::Item, 'fetch');
             $request->add_instance($itemModel);
             $response = $request->send();
-            if ($response->getStatus() == ResponseStatus::successful) {
-                $this->addFlash('s', '');
-                return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $id]));
-            } else {
-                $this->addFlash('f', '');
-            }
-        }
+            $itemModel = ModelSerializer::parse($response->getContent(), ItemModel::class);
+//        dd($itemModel);
 
-        $allBrandsRequest = new Req(Servers::Repository, Repository::Brand, 'all');
-        $allBrandsResponse = $allBrandsRequest->send();
-
-        /**
-         * @var $brands BrandModel[]
-         */
-        $brands = [];
-        foreach ($allBrandsResponse->getContent() as $brand) {
-            $brands[] = ModelSerializer::parse($brand, BrandModel::class);
-        }
-
-        $allItemTypesRequest = new Req(Servers::Repository, Repository::Item, 'get_types');
-        $allItemTypesResponse = $allItemTypesRequest->send();
-
-        /**
-         * @var $itemTypes ItemTypeModel[]
-         */
-        $itemTypes = [];
-        foreach ($allItemTypesResponse->getContent() as $itemType) {
-            $itemTypes[] = ModelSerializer::parse($itemType, ItemTypeModel::class);
-        }
-
-        $allColorsRequest = new Req(Servers::Repository, Repository::Color, 'all');
-        $allColorsResponse = $allColorsRequest->send();
-
-        /**
-         * @var $colors ItemColorModel[]
-         */
-        $colors = [];
-        foreach ($allColorsResponse->getContent() as $color) {
-            $colors[] = ModelSerializer::parse($color, ItemColorModel::class);
-        }
-
-        $guaranteeRequest = new Req(Servers::Repository, Repository::Guarantee, 'all');
-        $guaranteeResponse = $guaranteeRequest->send();
-
-        /**
-         * @var $guarantees GuaranteeModel[]
-         */
-        $guarantees = [];
-        foreach ($guaranteeResponse->getContent() as $guarantee) {
-            $guarantees[] = ModelSerializer::parse($guarantee, GuaranteeModel::class);
-        }
-
-        $brandSuppliersModel = new BrandSuppliersModel();
-        $brandSuppliersModel->setBrandId($itemModel->getItemBrandId());
-        $supplierRequest = new Req(Servers::Repository, Repository::Brand, 'get_suppliers');
-        $supplierRequest->add_instance($brandSuppliersModel);
-        $supplierResponse = $supplierRequest->send();
-        $supplierContent = $supplierResponse->getContent();
-//        dd($supplierContent);
-
-        /**
-         * @var $suppliers CompanyModel[]
-         */
-        $suppliers = [];
-        foreach ($supplierContent['brandSuppliers'] as $supplier) {
-            $suppliers[] = ModelSerializer::parse($supplier, CompanyModel::class);
-        }
-//        dd($suppliers);
-
-        $allItemCategoriesRequest = new Req(Servers::Repository, Repository::ItemCategory, 'all');
-        $allItemCategoriesResponse = $allItemCategoriesRequest->send();
-        /**
-         * @var $itemCategories ItemCategoryModel[]
-         */
-        $itemCategories = [];
-
-
-        foreach ($allItemCategoriesResponse->getContent() as $itemCategory) {
-            /**
-             * @var $itemCategoryModel ItemCategoryModel
-             */
-            $itemCategoryModel = ModelSerializer::parse($itemCategory, ItemCategoryModel::class);
-            if ($itemModel->getItemCategoriesIds()) {
-                if (in_array($itemCategoryModel->getItemCategoryID(), $itemModel->getItemCategoriesIds())) {
-                    $itemCategoryModel->setItemCategoryIsChecked(true);
+            if (!empty($inputs)) {
+                $itemModel = ModelSerializer::parse($inputs, ItemModel::class);
+                $itemModel->setItemID($id);
+                $request = new Req(Servers::Repository, Repository::Item, 'update');
+                $request->add_instance($itemModel);
+                $response = $request->send();
+                if ($response->getStatus() == ResponseStatus::successful) {
+                    $this->addFlash('s', '');
+                    return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $id]));
+                } else {
+                    $this->addFlash('f', '');
                 }
             }
 
-            $itemCategories[] = $itemCategoryModel;
-        }
+            $allBrandsRequest = new Req(Servers::Repository, Repository::Brand, 'all');
+            $allBrandsResponse = $allBrandsRequest->send();
+
+            /**
+             * @var $brands BrandModel[]
+             */
+            $brands = [];
+            foreach ($allBrandsResponse->getContent() as $brand) {
+                $brands[] = ModelSerializer::parse($brand, BrandModel::class);
+            }
+
+            $allItemTypesRequest = new Req(Servers::Repository, Repository::Item, 'get_types');
+            $allItemTypesResponse = $allItemTypesRequest->send();
+
+            /**
+             * @var $itemTypes ItemTypeModel[]
+             */
+            $itemTypes = [];
+            foreach ($allItemTypesResponse->getContent() as $itemType) {
+                $itemTypes[] = ModelSerializer::parse($itemType, ItemTypeModel::class);
+            }
+
+            $allColorsRequest = new Req(Servers::Repository, Repository::Color, 'all');
+            $allColorsResponse = $allColorsRequest->send();
+
+            /**
+             * @var $colors ItemColorModel[]
+             */
+            $colors = [];
+            foreach ($allColorsResponse->getContent() as $color) {
+                $colors[] = ModelSerializer::parse($color, ItemColorModel::class);
+            }
+
+            $guaranteeRequest = new Req(Servers::Repository, Repository::Guarantee, 'all');
+            $guaranteeResponse = $guaranteeRequest->send();
+
+            /**
+             * @var $guarantees GuaranteeModel[]
+             */
+            $guarantees = [];
+            foreach ($guaranteeResponse->getContent() as $guarantee) {
+                $guarantees[] = ModelSerializer::parse($guarantee, GuaranteeModel::class);
+            }
+
+            $brandSuppliersModel = new BrandSuppliersModel();
+            $brandSuppliersModel->setBrandId($itemModel->getItemBrandId());
+            $supplierRequest = new Req(Servers::Repository, Repository::Brand, 'get_suppliers');
+            $supplierRequest->add_instance($brandSuppliersModel);
+            $supplierResponse = $supplierRequest->send();
+            $supplierContent = $supplierResponse->getContent();
+//        dd($supplierContent);
+
+            /**
+             * @var $suppliers CompanyModel[]
+             */
+            $suppliers = [];
+            foreach ($supplierContent['brandSuppliers'] as $supplier) {
+                $suppliers[] = ModelSerializer::parse($supplier, CompanyModel::class);
+            }
+//        dd($suppliers);
+
+            $allItemCategoriesRequest = new Req(Servers::Repository, Repository::ItemCategory, 'all');
+            $allItemCategoriesResponse = $allItemCategoriesRequest->send();
+            /**
+             * @var $itemCategories ItemCategoryModel[]
+             */
+            $itemCategories = [];
+
+
+            foreach ($allItemCategoriesResponse->getContent() as $itemCategory) {
+                /**
+                 * @var $itemCategoryModel ItemCategoryModel
+                 */
+                $itemCategoryModel = ModelSerializer::parse($itemCategory, ItemCategoryModel::class);
+                if ($itemModel->getItemCategoriesIds()) {
+                    if (in_array($itemCategoryModel->getItemCategoryID(), $itemModel->getItemCategoriesIds())) {
+                        $itemCategoryModel->setItemCategoryIsChecked(true);
+                    }
+                }
+
+                $itemCategories[] = $itemCategoryModel;
+            }
 
 //        print_r(json_encode($itemModel->getItemSpecGroupsKeys())); die('s');
 
-        $specGroupsKeys = json_decode(json_encode($itemModel->getItemSpecGroupsKeys()), true);
+            $specGroupsKeys = json_decode(json_encode($itemModel->getItemSpecGroupsKeys()), true);
 //        print_r($specGroupsKeys); die;
 
 
-        return $this->render('repository/item/edit.html.twig', [
-            'controller_name' => 'ItemController',
-            'itemModel' => $itemModel,
-            'brands' => $brands,
-            'itemTypes' => $itemTypes,
-            'colors' => $colors,
-            'guarantees' => $guarantees,
-            'suppliers' => $suppliers,
-            'itemCategories' => $itemCategories,
-            'specGroupKeys' => $specGroupsKeys,
-        ]);
+            return $this->render('repository/item/edit.html.twig', [
+                'controller_name' => 'ItemController',
+                'itemModel' => $itemModel,
+                'brands' => $brands,
+                'itemTypes' => $itemTypes,
+                'colors' => $colors,
+                'guarantees' => $guarantees,
+                'suppliers' => $suppliers,
+                'itemCategories' => $itemCategories,
+                'specGroupKeys' => $specGroupsKeys,
+                'canUpdate' => $canUpdate,
+            ]);
+        } else {
+            return $this->redirect($this->generateUrl('repository_item_repository_item_list'));
+        }
+
+
     }
 
 

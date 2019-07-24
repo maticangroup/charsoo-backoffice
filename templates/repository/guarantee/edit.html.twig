@@ -103,8 +103,10 @@
                                     <td>
                                         <a href="{{ path('repository_guarantee_repository_guarantee_edit' , {id:guarantee.guaranteeID}) }}"
                                            class="fa fa-edit"></a>
-                                        <a href="{{ path('repository_guarantee_repository_guarantee_status' , {guarantee_id:guarantee.guaranteeID , machine_name:guarantee.guaranteeStatus.guaranteeStatusMachineName}) }}"
-                                           class="{{ (guarantee.guaranteeStatus.guaranteeStatusMachineName == 'active') ? 'fa fa-ban text-red' : 'fa fa-play text-green' }}"></a>
+                                        {% if canChangeStatus %}
+                                            <a href="{{ path('repository_guarantee_repository_guarantee_status' , {guarantee_id:guarantee.guaranteeID , machine_name:guarantee.guaranteeStatus.guaranteeStatusMachineName}) }}"
+                                               class="{{ (guarantee.guaranteeStatus.guaranteeStatusMachineName == 'active') ? 'fa fa-ban text-red' : 'fa fa-play text-green' }}"></a>
+                                        {% endif %}
                                     </td>
                                 </tr>
                             {% endfor %}

@@ -21,79 +21,81 @@
             </div>
         </div>
 
-        <div class="col-12">
-            <div class="panel">
-                <div class="panel-content">
-                    <form class="row" action="{{ path('repository_company_repository_company_create') }}" method="post">
-                        <div class="col-3">
-                            <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Name</span>
+        {% if canCreate %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-content">
+                        <form class="row" action="{{ path('repository_company_repository_company_create') }}"
+                              method="post">
+                            <div class="col-3">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">Name</span>
 
-                                <div class="col-md-12">
-                                    <input type="text" name="companyName"
-                                           value="{{ company.companyName }}"
-                                           placeholder="Company name"
-                                           class="form-control">
+                                    <div class="col-md-12">
+                                        <input type="text" name="companyName"
+                                               value="{{ company.companyName }}"
+                                               placeholder="Company name"
+                                               class="form-control">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">National code</span>
-                                <div class="col-md-12">
-                                    <input type="text" name="companyNationalCode"
-                                           value="{{ company.companyNationalCode }}"
-                                           placeholder="123335664789"
-                                           class="form-control">
+                            <div class="col-3">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">National code</span>
+                                    <div class="col-md-12">
+                                        <input type="text" name="companyNationalCode"
+                                               value="{{ company.companyNationalCode }}"
+                                               placeholder="123335664789"
+                                               class="form-control">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Registration Code</span>
+                            <div class="col-3">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">Registration Code</span>
 
-                                <div class="col-md-12">
-                                    <input type="text" name="companyRegistrationCode"
-                                           value="{{ company.companyRegistrationCode }}"
-                                           placeholder="123335664789"
-                                           class="form-control">
+                                    <div class="col-md-12">
+                                        <input type="text" name="companyRegistrationCode"
+                                               value="{{ company.companyRegistrationCode }}"
+                                               placeholder="123335664789"
+                                               class="form-control">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Economic Code</span>
+                            <div class="col-3">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">Economic Code</span>
 
-                                <div class="col-md-12">
-                                    <input type="text" name="companyEconomicCode"
-                                           value="{{ company.companyEconomicCode }}"
-                                           placeholder="123335664789"
-                                           class="form-control">
+                                    <div class="col-md-12">
+                                        <input type="text" name="companyEconomicCode"
+                                               value="{{ company.companyEconomicCode }}"
+                                               placeholder="123335664789"
+                                               class="form-control">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Email</span>
+                            <div class="col-3">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">Email</span>
 
-                                <div class="col-md-12">
-                                    <input type="text" name="companyEmail"
-                                           value="{{ company.companyEmail }}"
-                                           placeholder="info@site.com"
-                                           class="form-control">
+                                    <div class="col-md-12">
+                                        <input type="text" name="companyEmail"
+                                               value="{{ company.companyEmail }}"
+                                               placeholder="info@site.com"
+                                               class="form-control">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group row">
-                                <button type="submit" class="btn btn-block rounded btn-dark mt-5"><i
-                                            class="fa fa-save"></i></button>
+                            <div class="col-3">
+                                <div class="form-group row">
+                                    <button type="submit" class="btn btn-block rounded btn-dark mt-5"><i
+                                                class="fa fa-save"></i></button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-
+        {% endif %}
     </div>
 {% endblock %}

@@ -4,89 +4,99 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-12">
-            <div class="panel">
-                <div class="panel-content">
-                    <div class="row">
-                        <div class="col-10">
-                            <h3>Want to add a new Brand?</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores facilis,
-                                laudantium odit quibusdam quis vel?
-                            </p>
-                        </div>
-                        <div class="col-2">
-                            <form class="row" action="{{ path('repository_brand_repository_brand_create') }}"
-                                  method="post">
-                                <div class="col-12">
-                                    <input type="text" placeholder="Brand name" name="brandName"
-                                           value="{{ brandModel.brandName }}"
-                                           class="form-control mb-3">
-                                    <label class="custom-file mb-3">
-                                        <input type="file" value="{{ brandModel.brandImageUrl }}" name="brandImageUrl"
-                                               formenctype="multipart/form-data"
-                                               class="custom-file-input">
-                                        <span class="custom-file-label">Choose File</span>
-                                    </label>
-                                    <button class="btn btn-block rounded btn-dark fa fa-save"></button>
-                                </div>
-                            </form>
+        {% if canCreate %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-10">
+                                <h3>Want to add a new Brand?</h3>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores facilis,
+                                    laudantium odit quibusdam quis vel?
+                                </p>
+                            </div>
+                            <div class="col-2">
+                                <form class="row" action="{{ path('repository_brand_repository_brand_create') }}"
+                                      method="post">
+                                    <div class="col-12">
+                                        <input type="text" placeholder="Brand name" name="brandName"
+                                               value="{{ brandModel.brandName }}"
+                                               class="form-control mb-3">
+                                        <label class="custom-file mb-3">
+                                            <input type="file" value="{{ brandModel.brandImageUrl }}"
+                                                   name="brandImageUrl"
+                                                   formenctype="multipart/form-data"
+                                                   class="custom-file-input">
+                                            <span class="custom-file-label">Choose File</span>
+                                        </label>
+                                        <button class="btn btn-block rounded btn-dark fa fa-save"></button>
+                                    </div>
+                                </form>
+                            </div>
+
                         </div>
 
                     </div>
-
                 </div>
             </div>
-        </div>
-        <div class="col-12">
-            <div class="panel">
-                <div class="panel-content">
-                    <div class="form-group row">
-                        <div class="col-4"></div>
-                        <div class="col-md-4">
-                            <input type="text" placeholder="Search" name="text"
-                                   class="form-control">
+        {% endif %}
+
+        {% if canSeeAll %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-content">
+                        <div class="form-group row">
+                            <div class="col-4"></div>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Search" name="text"
+                                       class="form-control">
+                            </div>
+                            <div class="col-4"></div>
                         </div>
-                        <div class="col-4"></div>
-                    </div>
-                    <!-- Records List Start -->
-                    <div class="records--list">
-                        <table id="usersRoleList">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Supplier</th>
-                                <th>Image</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for brand in brands %}
+                        <!-- Records List Start -->
+                        <div class="records--list">
+                            <table id="usersRoleList">
+                                <thead>
                                 <tr>
-                                    <td>{{ brand.brandID }}</td>
-                                    <td>{{ brand.brandName }}</td>
-                                    <td>
-                                        {% for brandSupplier in brand.brandSuppliers %}
-                                        {{ brandSupplier.companyName }} ,
-                                        {% endfor %}
-                                    </td>
-                                    <td>
-                                        <img src="{{ brand.brandImageUrl }}" class="rounded-circle"
-                                             alt="{{ brand.brandImageAlt }}">
-                                    </td>
-                                    <td>
-                                        <a href="{{ path('repository_brand_repository_brand_edit' , {id:brand.brandID}) }}"
-                                           class="fa fa-edit"></a>
-                                    </td>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Supplier</th>
+                                    <th>Image</th>
+                                    {% if canEdit %}
+                                        <th>Action</th>
+                                    {% endif %}
                                 </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                {% for brand in brands %}
+                                    <tr>
+                                        <td>{{ brand.brandID }}</td>
+                                        <td>{{ brand.brandName }}</td>
+                                        <td>
+                                            {% for brandSupplier in brand.brandSuppliers %}
+                                                {{ brandSupplier.companyName }} ,
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            <img src="{{ brand.brandImageUrl }}" class="rounded-circle"
+                                                 alt="{{ brand.brandImageAlt }}">
+                                        </td>
+                                        {% if canEdit %}
+                                            <td>
+                                                <a href="{{ path('repository_brand_repository_brand_edit' , {id:brand.brandID}) }}"
+                                                   class="fa fa-edit"></a>
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Records List End -->
                     </div>
-                    <!-- Records List End -->
                 </div>
             </div>
-        </div>
+        {% endif %}
     </div>
 {% endblock %}

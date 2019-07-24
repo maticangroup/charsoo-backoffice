@@ -74,8 +74,10 @@
                                     <td>
                                         <a href="{{ path('repository_guarantee_duration_repository_guarantee_duration_edit' , {id:guaranteeDuration.guaranteeDurationID}) }}"
                                            class="fa fa-edit"></a>
-                                        <a href="{{ path('repository_guarantee_duration_repository_guarantee_duration_status' , {guarantee_duration_id:guaranteeDuration.guaranteeDurationID , machine_name:guaranteeDuration.guaranteeDurationStatus.guaranteeDurationStatusMachineName}) }}"
-                                           class="{{ (guaranteeDuration.guaranteeDurationStatus.guaranteeDurationStatusMachineName == 'active') ? 'fa fa-ban text-red' : 'fa fa-play text-green' }}"></a>
+                                        {% if canChangeStatus %}
+                                            <a href="{{ path('repository_guarantee_duration_repository_guarantee_duration_status' , {guarantee_duration_id:guaranteeDuration.guaranteeDurationID , machine_name:guaranteeDuration.guaranteeDurationStatus.guaranteeDurationStatusMachineName}) }}"
+                                               class="{{ (guaranteeDuration.guaranteeDurationStatus.guaranteeDurationStatusMachineName == 'active') ? 'fa fa-ban text-red' : 'fa fa-play text-green' }}"></a>
+                                        {% endif %}
                                     </td>
                                 </tr>
                             {% endfor %}

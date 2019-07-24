@@ -69,6 +69,7 @@
                                             <tr>
                                                 <th>Action ID</th>
                                                 <th>Action name</th>
+                                                <th>Machine name</th>
                                                 <th>Add Permission</th>
                                             </tr>
                                             </thead>
@@ -78,6 +79,7 @@
                                                     {#{{ dump(permission) }}#}
                                                     <td>{{ permission.permissionId }}</td>
                                                     <td>{{ permission.permissionName }}</td>
+                                                    <td>{{ permission.permissionMachineName }}</td>
                                                     <td>
                                                         {% if permission.permissionIsDisabled != false %}
                                                             <a href="{{ path('authentication_role_add_permission' , {role_id:roleModel.roleId , permission_id:permission.permissionId}) }}"

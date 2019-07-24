@@ -5,8 +5,12 @@ namespace App\Controller\Repository;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\CompanyAddEmployeeModel;
 use App\FormModels\Repository\CompanyModel;
+use App\FormModels\Repository\LocationModel;
 use App\FormModels\Repository\PersonModel;
 use App\FormModels\Repository\PhoneModel;
+use App\FormModels\Repository\ProvinceModel;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Actions\Repository\PersonActions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
@@ -26,20 +30,31 @@ class CompanyController extends AbstractController
      */
     public function fetchAll()
     {
-        $request = new Req(Servers::Repository, Repository::Company, 'all');
-        $response = $request->send();
-        $companies = $response->getContent();
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::repository_company_all);
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::repository_company_new);
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::repository_company_fetch);
 
         /**
          * @var $results CompanyModel[]
          */
         $results = [];
-        foreach ($companies as $company) {
-            $results[] = ModelSerializer::parse($company, CompanyModel::class);
+        if ($canSeeAll) {
+            $request = new Req(Servers::Repository, Repository::Company, 'all');
+            $response = $request->send();
+
+            if ($response->getContent()) {
+                foreach ($response->getContent() as $company) {
+                    $results[] = ModelSerializer::parse($company, CompanyModel::class);
+                }
+            }
         }
+
         return $this->render('repository/company/list.html.twig', [
             'controller_name' => 'CompanyController',
-            'companies' => $results
+            'companies' => $results,
+            'canSeeAll' => $canSeeAll,
+            'canCreate' => $canCreate,
+            'canEdit' => $canEdit,
         ]);
     }
 
@@ -51,29 +66,49 @@ class CompanyController extends AbstractController
      */
     public function create(Request $request)
     {
-        $inputs = $request->request->all();
-        /**
-         * @var $company CompanyModel
-         */
-        $company = ModelSerializer::parse($inputs, CompanyModel::class);
-        if (!empty($inputs)) {
-            $request = new Req(Servers::Repository, Repository::Company, 'new');
-            $request->add_instance($company);
-            $response = $request->send();
-            if ($response->getStatus() == ResponseStatus::successful) {
-                /**
-                 * @var $newCompany CompanyModel
-                 */
-                $newCompany = ModelSerializer::parse($response->getContent(), CompanyModel::class);
-                $this->addFlash('success', $response->getMessage());
-                return $this->redirect($this->generateUrl('repository_company_repository_company_edit', ['id' => $newCompany->getCompanyID()]));
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::repository_company_new);
+
+        if ($canCreate) {
+
+            $canEdit = AuthUser::if_is_allowed(ServerPermissions::repository_company_fetch);
+
+            $inputs = $request->request->all();
+            /**
+             * @var $company CompanyModel
+             */
+            $company = ModelSerializer::parse($inputs, CompanyModel::class);
+
+
+            if (!empty($inputs)) {
+                $request = new Req(Servers::Repository, Repository::Company, 'new');
+                $request->add_instance($company);
+                $response = $request->send();
+                if ($response->getStatus() == ResponseStatus::successful) {
+                    /**
+                     * @var $newCompany CompanyModel
+                     */
+                    $newCompany = ModelSerializer::parse($response->getContent(), CompanyModel::class);
+                    $this->addFlash('s', $response->getMessage());
+                    if ($canEdit) {
+                        return $this->redirect($this->generateUrl('repository_company_repository_company_edit', ['id' => $newCompany->getCompanyID()]));
+                    } else {
+                        return $this->redirect($this->generateUrl('repository_company_repository_company_list'));
+                    }
+                } else {
+                    $this->addFlash('f', $response->getMessage());
+                }
             }
-            $this->addFlash('failed', $response->getMessage());
+
+
+            return $this->render('repository/company/create.html.twig', [
+                'controller_name' => 'CompanyController',
+                'company' => $company,
+                'canCreate' => $canCreate,
+            ]);
+        } else {
+            return $this->redirect($this->generateUrl('repository_company_repository_company_list'));
         }
-        return $this->render('repository/company/create.html.twig', [
-            'controller_name' => 'CompanyController',
-            'company' => $company
-        ]);
+
     }
 
     /**
@@ -85,6 +120,14 @@ class CompanyController extends AbstractController
      */
     public function edit($id, Request $request)
     {
+        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::repository_company_update);
+        $canAddEmployee = AuthUser::if_is_allowed(ServerPermissions::repository_company_add_employee);
+        $canRemoveEmployee = AuthUser::if_is_allowed(ServerPermissions::repository_company_remove_employee);
+        $canAddPhone = AuthUser::if_is_allowed(ServerPermissions::repository_company_add_phone);
+        $canRemovePhone = AuthUser::if_is_allowed(ServerPermissions::repository_company_remove_phone);
+        $canAddLocation = AuthUser::if_is_allowed(ServerPermissions::repository_company_add_location);
+        $canRemoveLocation = AuthUser::if_is_allowed(ServerPermissions::repository_company_remove_location);
+
         $inputs = $request->request->all();
         /**
          * @var $companyModel CompanyModel
@@ -96,56 +139,135 @@ class CompanyController extends AbstractController
         $response = $request->send();
         $companyModel = ModelSerializer::parse($response->getContent(), CompanyModel::class);
 
-        if (!empty($inputs)) {
-            $companyModel = ModelSerializer::parse($inputs, CompanyModel::class);
-            $companyModel->setCompanyID($id);
-            $request = new Req(Servers::Repository, Repository::Company, 'update');
-            $request->add_instance($companyModel);
-            $response = $request->send();
-            if ($response->getStatus() == ResponseStatus::successful) {
-                $this->addFlash('s', '');
-            } else {
-                $this->addFlash('f', '');
-            }
-        }
+
         /**
          * @var $employees PersonModel[]
          */
         $employees = [];
+
+        /**
+         * @var $personResults PersonModel[]
+         */
+        $personResults = [];
+        $personsRequest = new Req(Servers::Repository, Repository::Person, PersonActions::all);
+        $personsResponse = $personsRequest->send();
+        if ($personsResponse->getContent()) {
+            foreach ($personsResponse->getContent() as $person) {
+                $personResults[] = ModelSerializer::parse($person, PersonModel::class);
+            }
+        }
+
+
         if ($companyModel->getCompanyEmployees()) {
             foreach ($companyModel->getCompanyEmployees() as $employee) {
                 $employees[] = ModelSerializer::parse($employee, PersonModel::class);
             }
         }
 
+
         /**
          * @var $phones PhoneModel[]
          */
         $phones = [];
-        if ($companyModel->getCompanyPhones()) {
-            foreach ($companyModel->getCompanyPhones() as $phone) {
-                $phones[] = ModelSerializer::parse($phone, PhoneModel::class);
+        if ($canAddPhone) {
+            if ($companyModel->getCompanyPhones()) {
+                foreach ($companyModel->getCompanyPhones() as $phone) {
+                    $phones[] = ModelSerializer::parse($phone, PhoneModel::class);
+                }
             }
         }
 
-        $personsRequest = new Req(Servers::Repository, Repository::Person, PersonActions::all);
-        $personsResponse = $personsRequest->send();
-        $persons = $personsResponse->getContent();
+        /**
+         * @var $provinces ProvinceModel[]
+         */
+        $provinces = [];
+
+        $locationModel = new LocationModel();
+
+        if (!empty($inputs)) {
+            if (isset($inputs['provinceName'])) {
+                if ($canAddLocation) {
+                    $provincesRequest = new Req(Servers::Repository, Repository::Location, 'get_provinces');
+                    $provincesResponse = $provincesRequest->send();
+                    if ($provincesResponse->getContent()) {
+                        foreach ($provincesResponse->getContent() as $province) {
+                            $provinces[] = ModelSerializer::parse($province, ProvinceModel::class);
+                        }
+                    }
+
+                    /**
+                     * @var $locationModel LocationModel
+                     */
+                    $locationModel = ModelSerializer::parse($inputs, LocationModel::class);
+                    $locationModel->setCompanyId($id);
+                    $latLang = str_replace(' ', '', $locationModel->getLocationGeoPoints());
+                    $latLang = explode(',', $latLang);
+                    if (count($latLang) != 2) {
+                        $this->addFlash('f', 'geo points are not formatted correctly');
+                        return $this->redirect($this->generateUrl('repository_company_repository_company_edit', ['id' => $locationModel->getCompanyId()]));
+                    }
+                    $locationModel->setLocationLat($latLang[0]);
+                    $locationModel->setLocationLng($latLang[1]);
+
+//                    dd($locationModel);
+
+                    $request = new Req(Servers::Repository, Repository::Location, 'new');
+                    $request->add_instance($locationModel);
+                    $response = $request->send();
+//                    dd($response);
+                    if ($response->getStatus() == ResponseStatus::successful) {
+                        $this->addFlash('s', $response->getMessage());
+                    } else {
+                        $this->addFlash('f', $response->getMessage());
+                    }
+                    return $this->redirect($this->generateUrl('repository_company_repository_company_edit', ['id' => $locationModel->getCompanyId()]));
+                }
+            } else {
+                if ($canUpdate) {
+                    $companyModel = ModelSerializer::parse($inputs, CompanyModel::class);
+                    $companyModel->setCompanyID($id);
+                    $request = new Req(Servers::Repository, Repository::Company, 'update');
+                    $request->add_instance($companyModel);
+                    $response = $request->send();
+                    if ($response->getStatus() == ResponseStatus::successful) {
+                        $this->addFlash('s', $response->getMessage());
+                    } else {
+                        $this->addFlash('f', $response->getMessage());
+                    }
+                }
+            }
+        }
+
+
+//        dd($companyModel->getCompanyAddresses());
 
         /**
-         * @var $personResults PersonModel[]
+         * @var $locations LocationModel[]
          */
-        $personResults = [];
-        foreach ($persons as $person) {
-            $personResults[] = ModelSerializer::parse($person, PersonModel::class);
+        $locations = [];
+        if ($companyModel->getCompanyAddresses()) {
+            foreach ($companyModel->getCompanyAddresses() as $location) {
+                $locations[] = ModelSerializer::parse($location, LocationModel::class);
+            }
         }
+
 
         return $this->render('repository/company/edit.html.twig', [
             'controller_name' => 'CompanyController',
             'company' => $companyModel,
             'employees' => $employees,
             'persons' => $personResults,
-            'phones' => $phones
+            'phones' => $phones,
+            'canUpdate' => $canUpdate,
+            'canAddEmployee' => $canAddEmployee,
+            'canRemoveEmployee' => $canRemoveEmployee,
+            'canAddPhone' => $canAddPhone,
+            'canRemovePhone' => $canRemovePhone,
+            'canAddLocation' => $canAddLocation,
+            'canRemoveLocation' => $canRemoveLocation,
+            'provinces' => $provinces,
+            'locations' => $locations,
+            'locationModel' => $locationModel,
         ]);
     }
 
@@ -194,7 +316,7 @@ class CompanyController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \ReflectionException
      */
-    public function removeEmployee($company_id , $employee_id)
+    public function removeEmployee($company_id, $employee_id)
     {
         $employeeModel = new CompanyAddEmployeeModel();
         $employeeModel->setCompanyID($company_id);
@@ -203,9 +325,9 @@ class CompanyController extends AbstractController
         $request->add_instance($employeeModel);
         $response = $request->send();
         if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s' , $response->getMessage());
+            $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('f' , $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('repository_company_repository_company_edit', ['id' => $company_id]));
     }
@@ -252,10 +374,38 @@ class CompanyController extends AbstractController
         $request->add_instance($phoneModel);
         $response = $request->send();
         if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s' , $response->getMessage());
+            $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('f' , $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
+        return $this->redirect($this->generateUrl('repository_company_repository_company_edit', ['id' => $company_id]));
+    }
+
+
+    /**
+     * @Route("/remove-address/{location_id}/{company_id}", name="_repository_company_remove_address")
+     * @param $location_id
+     * @param $company_id
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \ReflectionException
+     */
+    public function removeAddress($location_id, $company_id)
+    {
+        $locationModel = new LocationModel();
+        $locationModel->setLocationId($location_id);
+        $locationModel->setCompanyId($company_id);
+        $request = new Req(Servers::Repository, Repository::Location, 'remove');
+        $request->add_instance($locationModel);
+        $response = $request->send();
+
+
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('f', $response->getMessage());
+        }
+
+
         return $this->redirect($this->generateUrl('repository_company_repository_company_edit', ['id' => $company_id]));
     }
 }

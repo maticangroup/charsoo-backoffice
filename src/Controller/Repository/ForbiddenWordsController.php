@@ -4,6 +4,8 @@ namespace App\Controller\Repository;
 
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\ForbiddenWordsModel;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;
@@ -25,31 +27,41 @@ class ForbiddenWordsController extends AbstractController
      */
     public function create(Request $request)
     {
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::repository_forbiddenwords_new);
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::repository_forbiddenwords_all);
+        $canRemove = AuthUser::if_is_allowed(ServerPermissions::repository_forbiddenwords_delete);
+
         $inputs = $request->request->all();
         /**
          * @var $forbiddenWordModel ForbiddenWordsModel
          */
         $forbiddenWordModel = ModelSerializer::parse($inputs, ForbiddenWordsModel::class);
+
         if (!empty($inputs)) {
-            $request = new Req(Servers::Repository, Repository::ForbiddenWords, 'new');
-            $request->add_instance($forbiddenWordModel);
-            $response = $request->send();
-            if ($response->getStatus() == ResponseStatus::successful) {
-                $this->addFlash('success', $response->getMessage());
+            if ($canCreate) {
+                $request = new Req(Servers::Repository, Repository::ForbiddenWords, 'new');
+                $request->add_instance($forbiddenWordModel);
+                $response = $request->send();
+                if ($response->getStatus() == ResponseStatus::successful) {
+                    $this->addFlash('s', $response->getMessage());
+                }
+                $this->addFlash('f', $response->getMessage());
             }
-            $this->addFlash('failed', $response->getMessage());
         }
 
-
-        $allForbiddenWordsRequest = new Req(Servers::Repository, Repository::ForbiddenWords, 'all');
-        $allForbiddenWordsResponse = $allForbiddenWordsRequest->send();
 
         /**
          * @var $forbiddenWords ForbiddenWordsModel[]
          */
         $forbiddenWords = [];
-        foreach ($allForbiddenWordsResponse->getContent() as $forbiddenWord) {
-            $forbiddenWords[] = ModelSerializer::parse($forbiddenWord, ForbiddenWordsModel::class);
+        if ($canSeeAll) {
+            $allForbiddenWordsRequest = new Req(Servers::Repository, Repository::ForbiddenWords, 'all');
+            $allForbiddenWordsResponse = $allForbiddenWordsRequest->send();
+            if ($allForbiddenWordsResponse->getContent()) {
+                foreach ($allForbiddenWordsResponse->getContent() as $forbiddenWord) {
+                    $forbiddenWords[] = ModelSerializer::parse($forbiddenWord, ForbiddenWordsModel::class);
+                }
+            }
         }
 
 
@@ -57,6 +69,9 @@ class ForbiddenWordsController extends AbstractController
             'controller_name' => 'ForbiddenWordsController',
             'forbiddenWordModel' => $forbiddenWordModel,
             'forbiddenWords' => $forbiddenWords,
+            'canCreate' => $canCreate,
+            'canSeeAll' => $canSeeAll,
+            'canRemove' => $canRemove,
         ]);
     }
 

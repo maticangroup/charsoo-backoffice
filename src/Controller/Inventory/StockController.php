@@ -6,6 +6,8 @@ use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\ItemModel;
 use App\FormModels\Repository\ItemProductsModel;
 use App\FormModels\Repository\ProductModel;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,24 +26,33 @@ class StockController extends AbstractController
      */
     public function fetchAll()
     {
-        $request = new Req(Servers::Inventory, InventoryEntity::Inventory, 'all_item_products');
-        $response = $request->send();
+        if (AuthUser::if_is_allowed(ServerPermissions::inventory_inventory_all_item_products)) {
 
-        /**
-         * @var $itemProducts ItemProductsModel[]
-         */
-        $itemProducts = [];
-        foreach ($response->getContent() as $itemProduct) {
-            $itemProducts[] = ModelSerializer::parse($itemProduct, ItemProductsModel::class);
-        }
+
+            $request = new Req(Servers::Inventory, InventoryEntity::Inventory, 'all_item_products');
+            $response = $request->send();
+
+            /**
+             * @var $itemProducts ItemProductsModel[]
+             */
+            $itemProducts = [];
+            foreach ($response->getContent() as $itemProduct) {
+                $itemProducts[] = ModelSerializer::parse($itemProduct, ItemProductsModel::class);
+            }
 
 //        dd($itemProducts);
 
 
-        return $this->render('inventory/inventory_stock/list.html.twig', [
-            'controller_name' => 'StockController',
-            'itemProducts' => $itemProducts,
-        ]);
+            return $this->render('inventory/inventory_stock/list.html.twig', [
+                'controller_name' => 'StockController',
+                'itemProducts' => $itemProducts,
+            ]);
+        } else {
+            return $this->render('inventory/inventory_stock/list.html.twig', [
+                'controller_name' => 'StockController',
+                'itemProducts' => [],
+            ]);
+        }
     }
 
     /**
@@ -53,45 +64,56 @@ class StockController extends AbstractController
      */
     public function read($item_id, Request $request)
     {
-        $inputs = $request->request->all();
-
-        /**
-         * @var $itemModel ItemModel
-         */
-        $itemModel = ModelSerializer::parse($inputs, ItemModel::class);
-        $itemModel->setItemID($item_id);
-        $request = new Req(Servers::Repository, Repository::Item, 'fetch');
-        $request->add_instance($itemModel);
-        $response = $request->send();
-        /**
-         * @var $itemModel ItemModel
-         */
-        $itemModel = ModelSerializer::parse($response->getContent(), ItemModel::class);
+        if (AuthUser::if_is_allowed(ServerPermissions::repository_item_fetch)) {
+            if (AuthUser::if_is_allowed(ServerPermissions::inventory_inventory_get_item_products)) {
 
 
-        $newItemModel = new ItemModel();
-        $newItemModel->setItemID($item_id);
-        $productsRequest = new Req(Servers::Inventory, InventoryEntity::Inventory, 'get_item_products');
-        $productsRequest->add_instance($newItemModel);
-        $productsResponse = $productsRequest->send();
+                $inputs = $request->request->all();
+
+                /**
+                 * @var $itemModel ItemModel
+                 */
+                $itemModel = ModelSerializer::parse($inputs, ItemModel::class);
+                $itemModel->setItemID($item_id);
+                $request = new Req(Servers::Repository, Repository::Item, 'fetch');
+                $request->add_instance($itemModel);
+                $response = $request->send();
+                /**
+                 * @var $itemModel ItemModel
+                 */
+                $itemModel = ModelSerializer::parse($response->getContent(), ItemModel::class);
+
+
+                $newItemModel = new ItemModel();
+                $newItemModel->setItemID($item_id);
+                $productsRequest = new Req(Servers::Inventory, InventoryEntity::Inventory, 'get_item_products');
+                $productsRequest->add_instance($newItemModel);
+                $productsResponse = $productsRequest->send();
 
 //        dd($productsResponse);
 
-        /**
-         * @var $products ProductModel[]
-         */
-        $products = [];
-        if ($productsResponse->getContent()) {
-            foreach ($productsResponse->getContent() as $product) {
-                $products[] = ModelSerializer::parse($product, ProductModel::class);
+                /**
+                 * @var $products ProductModel[]
+                 */
+                $products = [];
+                if ($productsResponse->getContent()) {
+                    foreach ($productsResponse->getContent() as $product) {
+                        $products[] = ModelSerializer::parse($product, ProductModel::class);
+                    }
+                }
+
+
+                return $this->render('inventory/inventory_stock/read.html.twig', [
+                    'controller_name' => 'StockController',
+                    'itemModel' => $itemModel,
+                    'products' => $products,
+                ]);
+
+            } else {
+                return $this->redirect($this->generateUrl('inventory_stock_list'));
             }
+        } else {
+            return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_list'));
         }
-
-
-        return $this->render('inventory/inventory_stock/read.html.twig', [
-            'controller_name' => 'StockController',
-            'itemModel' => $itemModel,
-            'products' => $products,
-        ]);
     }
 }

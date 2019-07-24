@@ -13,6 +13,8 @@ use App\FormModels\Accounting\PaymentTypeModel;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\CompanyModel;
 use App\FormModels\Repository\PersonModel;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Accounting;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
@@ -32,6 +34,9 @@ class InvoiceController extends AbstractController
      */
     public function fetchAll()
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::accounting_invoice_all)) {
+            return $this->redirect($this->generateUrl('accounting_invoice_create'));
+        }
 
         $request = new Req(Servers::Accounting, Accounting::Invoice, 'all');
         $response = $request->send();
@@ -61,6 +66,9 @@ class InvoiceController extends AbstractController
      */
     public function create(Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::accounting_invoice_new)) {
+            return $this->redirect($this->generateUrl('accounting_gift_card_group_list'));
+        }
         $inputs = $request->request->all();
         /**
          * @var $invoiceModel InvoiceModel
@@ -134,7 +142,9 @@ class InvoiceController extends AbstractController
      */
     public function edit($id, Request $request)
     {
-
+        if (!AuthUser::if_is_allowed(ServerPermissions::accounting_invoice_fetch)) {
+            return $this->redirect($this->generateUrl('accounting_invoice_list'));
+        }
         $inputs = $request->request->all();
 
         /**
@@ -214,6 +224,9 @@ class InvoiceController extends AbstractController
      */
     public function addInvoiceItem($invoice_id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::accounting_invoice_add_invoice_item)) {
+            return $this->redirect($this->generateUrl('accounting_invoice_edit', ['id' => $invoice_id]));
+        }
         $inputs = $request->request->all();
 
         /**
@@ -242,6 +255,9 @@ class InvoiceController extends AbstractController
      */
     public function removeInvoiceItem($invoice_id, $invoice_item_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::accounting_invoice_remove_invoice_item)) {
+            return $this->redirect($this->generateUrl('accounting_invoice_edit', ['id' => $invoice_id]));
+        }
         $invoiceItemModel = new InvoiceItemModel();
         $invoiceItemModel->setInvoiceId($invoice_id);
         $invoiceItemModel->setInvoiceItemId($invoice_item_id);
@@ -265,6 +281,9 @@ class InvoiceController extends AbstractController
      */
     public function confirmInvoice($invoice_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::accounting_giftcardgroup_fetch)) {
+            return $this->redirect($this->generateUrl('accounting_invoice_edit', ['id' => $invoice_id]));
+        }
         $invoiceModel = new InvoiceModel();
         $invoiceModel->setInvoiceId($invoice_id);
         $request = new Req(Servers::Accounting, Accounting::Invoice, 'finalize_invoice');
@@ -287,6 +306,9 @@ class InvoiceController extends AbstractController
      */
     public function rejectInvoice($invoice_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::accounting_invoice_rethink_invoice)) {
+            return $this->redirect($this->generateUrl('accounting_invoice_edit', ['id' => $invoice_id]));
+        }
         $invoiceModel = new InvoiceModel();
         $invoiceModel->setInvoiceId($invoice_id);
         $request = new Req(Servers::Accounting, Accounting::Invoice, 'rethink_invoice');
@@ -312,6 +334,7 @@ class InvoiceController extends AbstractController
      */
     public function addPayment($invoice_id, $payment_request_id, Request $request)
     {
+
         $inputs = $request->request->all();
 
         if (!empty($inputs)) {

@@ -6,6 +6,7 @@ use App\FormModels\Authentication\PermissionModel;
 use App\FormModels\Authentication\RoleModel;
 use App\FormModels\Authentication\ServerPermissionModel;
 use App\FormModels\ModelSerializer;
+use App\General\AuthUser;
 use Matican\Core\Entities\Authentication;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;
@@ -88,18 +89,6 @@ class RoleController extends AbstractController
          */
         $roleModel = ModelSerializer::parse($response->getContent(), RoleModel::class);
 
-        $allServerPermissionsRequest = new Req(Servers::Authentication, Authentication::PermissionGroup, 'all');
-        $allServerPermissionsResponse = $allServerPermissionsRequest->send();
-
-        /**
-         * @var $serverPermissions ServerPermissionModel[]
-         */
-        $serverPermissions = [];
-        if ($allServerPermissionsResponse->getContent()) {
-            foreach ($allServerPermissionsResponse->getContent() as $server) {
-                $serverPermissions[] = ModelSerializer::parse($server, ServerPermissionModel::class);
-            }
-        }
 
         /**
          * @var $selectedPermissions PermissionModel[]
@@ -107,9 +96,36 @@ class RoleController extends AbstractController
         $selectedPermissions = [];
         if ($roleModel->getRolePermissions()) {
             foreach ($roleModel->getRolePermissions() as $permission) {
-                $selectedPermissions[] = ModelSerializer::parse($permission, PermissionModel::class);
+//                $selectedPermissions[] = ModelSerializer::parse($permission, PermissionModel::class);
+                $selectedPermissions[] = json_decode(json_encode($permission), true);
             }
         }
+        $selectedPermissionsActions = [];
+        foreach ($selectedPermissions as $permission) {
+            $selectedPermissionsActions[] = $permission['permissionMachineName'];
+        }
+
+        $allServerPermissionsRequest = new Req(Servers::Authentication, Authentication::PermissionGroup, 'all');
+        $allServerPermissionsResponse = $allServerPermissionsRequest->send();
+
+        $serverPermissions = $allServerPermissionsResponse->getContent();
+        foreach ($serverPermissions as $key => $serverPermission) {
+//            dd($serverPermission);
+            $serverPermissions[$key] = json_decode(json_encode($serverPermission), true);
+        }
+
+        foreach ($serverPermissions as $serverKey => $serverPermission) {
+            foreach ($serverPermission['serverPermissions'] as $permissionKey => $permission) {
+                if (!in_array($permission['permissionMachineName'], $selectedPermissionsActions)) {
+                    $serverPermissions[$serverKey]['serverPermissions'][$permissionKey]['permissionIsDisabled'] = true;
+                } else {
+                    $serverPermissions[$serverKey]['serverPermissions'][$permissionKey]['permissionIsDisabled'] = false;
+
+                }
+
+            }
+        }
+
 
         if (!empty($inputs)) {
             /**
@@ -156,7 +172,12 @@ class RoleController extends AbstractController
 //        dd($request);
         $response = $request->send();
 //        dd($response);
+
+
         if ($response->getStatus() == ResponseStatus::successful) {
+            $rolePermissionRequest = new Req(Servers::Authentication, Authentication::Role, 'get_roles_permissions');
+            $response = $rolePermissionRequest->send();
+            AuthUser::cachePermissions($response->getContent());
             $this->addFlash('s', $response->getMessage());
         } else {
             $this->addFlash('f', $response->getMessage());
@@ -181,6 +202,9 @@ class RoleController extends AbstractController
         $request->add_instance($permissionModel);
         $response = $request->send();
         if ($response->getStatus() == ResponseStatus::successful) {
+            $rolePermissionRequest = new Req(Servers::Authentication, Authentication::Role, 'get_roles_permissions');
+            $response = $rolePermissionRequest->send();
+            AuthUser::cachePermissions($response->getContent());
             $this->addFlash('s', $response->getMessage());
         } else {
             $this->addFlash('f', $response->getMessage());

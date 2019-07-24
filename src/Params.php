@@ -27,4 +27,10 @@ class Params
             return str_replace($public, '', $serverRoot) . DIRECTORY_SEPARATOR . $cacheDir;
         }
     }
+
+    public static function loginPageUrl()
+    {
+        return "/login";
+    }
+
 }

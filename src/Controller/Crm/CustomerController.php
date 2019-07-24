@@ -109,7 +109,6 @@ class CustomerController extends AbstractController
         $locationModel = new LocationModel();
 
         if (!empty($inputs)) {
-
             if (isset($inputs['provinceName'])) {
                 /**
                  * @var $locationModel LocationModel
@@ -124,7 +123,7 @@ class CustomerController extends AbstractController
                 }
                 $locationModel->setLocationLat($latLang[0]);
                 $locationModel->setLocationLng($latLang[1]);
-//        dd($locationModel);
+//                dd($locationModel);
                 $request = new Req(Servers::Repository, Repository::Location, 'new');
                 $request->add_instance($locationModel);
                 $response = $request->send();
@@ -140,7 +139,6 @@ class CustomerController extends AbstractController
             } else {
                 $personModel = ModelSerializer::parse($inputs, PersonModel::class);
                 $personModel->setId($id);
-//                dd($personModel);
                 $request = new Req(Servers::Repository, Repository::Person, 'update');
                 $request->add_instance($personModel);
                 $response = $request->send();
@@ -152,7 +150,7 @@ class CustomerController extends AbstractController
                     $personModel = ModelSerializer::parse($response->getContent(), PersonModel::class);
                     return $this->redirect($this->generateUrl('crm_customer_info', ['id' => $personModel->getId()]));
                 } else {
-                    $this->addFlash('s', $response->getMessage());
+                    $this->addFlash('f', $response->getMessage());
                 }
             }
         }
@@ -166,6 +164,7 @@ class CustomerController extends AbstractController
                 $locations[] = ModelSerializer::parse($location, LocationModel::class);
             }
         }
+
 
         $provincesRequest = new Req(Servers::Repository, Repository::Location, 'get_provinces');
         $provincesResponse = $provincesRequest->send();

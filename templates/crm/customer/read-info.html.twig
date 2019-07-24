@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="col-3">
                                     {#<input type="hidden" name="person_id" value="{{ personModel.id }}"#}
-                                           {#class="form-check-input">#}
+                                    {#class="form-check-input">#}
                                     <button type="submit" class="btn btn-block btn-info rounded mt-4"><i
                                                 class="fa fa-save"></i>
                                     </button>
@@ -305,10 +305,11 @@
                                                     <div class="form-group row">
                                                         <span class="label-text col-md-12 col-form-label ">First Name</span>
                                                         <div class="col-md-12">
-                                                            <input type="text" name="locationContactPersonFirstName"
+                                                            <input type="text"
+                                                                   name="locationExternalContactPersonFirstName"
                                                                    placeholder="First Name"
                                                                    class="form-control"
-                                                                   value="{{ locationModel.locationContactPersonFirstName }}">
+                                                                   value="{{ locationModel.locationExternalContactPersonFirstName }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -316,10 +317,11 @@
                                                     <div class="form-group row">
                                                         <span class="label-text col-md-12 col-form-label ">Last Name</span>
                                                         <div class="col-md-12">
-                                                            <input type="text" name="locationContactPersonLastName"
+                                                            <input type="text"
+                                                                   name="locationExternalContactPersonLastName"
                                                                    placeholder="Last Name"
                                                                    class="form-control"
-                                                                   value="{{ locationModel.locationContactPersonLastName }}">
+                                                                   value="{{ locationModel.locationExternalContactPersonLastName }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -327,10 +329,11 @@
                                                     <div class="form-group row">
                                                         <span class="label-text col-md-12 col-form-label ">Mobile</span>
                                                         <div class="col-md-12">
-                                                            <input type="text" name="locationContactPersonMobile"
+                                                            <input type="text"
+                                                                   name="locationExternalContactPersonMobile"
                                                                    placeholder="+98 xxx xx xx"
                                                                    class="form-control"
-                                                                   value="{{ locationModel.locationContactPersonMobile }}">
+                                                                   value="{{ locationModel.locationExternalContactPersonMobile }}">
                                                         </div>
                                                     </div>
                                                 </div>

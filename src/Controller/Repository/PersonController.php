@@ -209,10 +209,10 @@ class PersonController extends AbstractController
          */
         $personModel = ModelSerializer::parse($response->getContent(), PersonModel::class);
 
+
         $locationModel = new LocationModel();
 
         if (!empty($inputs)) {
-
             if (isset($inputs['provinceName'])) {
                 /**
                  * @var $locationModel LocationModel
@@ -248,13 +248,9 @@ class PersonController extends AbstractController
                 $response = $request->send();
                 if ($response->getContent() == ResponseStatus::successful) {
                     $this->addFlash('s', $response->getMessage());
-                    /**
-                     * @var $personModel PersonModel
-                     */
-                    $personModel = ModelSerializer::parse($response->getContent(), PersonModel::class);
-                    return $this->redirect($this->generateUrl('repository_person_repository_person_edit', ['id' => $personModel->getId()]));
+                    return $this->redirect($this->generateUrl('repository_person_repository_person_edit', ['id' => $id]));
                 } else {
-                    $this->addFlash('s', $response->getMessage());
+                    $this->addFlash('f', $response->getMessage());
                 }
             }
         }
@@ -268,6 +264,7 @@ class PersonController extends AbstractController
                 $locations[] = ModelSerializer::parse($location, LocationModel::class);
             }
         }
+
 
         $provincesRequest = new Req(Servers::Repository, Repository::Location, 'get_provinces');
         $provincesResponse = $provincesRequest->send();

@@ -45,7 +45,6 @@
                                 <th scope="col">Create Date</th>
                                 <th scope="col">Confirmir</th>
                                 <th scope="col">Confirm Date</th>
-                                <th scope="col">Confirm Status</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -63,21 +62,14 @@
                                     <td>{{ giftCardGroup.giftCardGroupConfirmPerson }}</td>
                                     <td>{{ giftCardGroup.giftCardGroupConfirmDate }}</td>
                                     <td>
-                                        {% if giftCardGroup.giftCardGroupStatus.giftCardGroupStatusMachineName == 'initialized' %}
-                                            <span class="label label-orange rounded">Waiting</span>
-                                        {% else %}
-                                            <span class="label label-green rounded">Accepted</span>
-                                        {% endif %}
-                                    </td>
-                                    <td>
                                         <span class="label rounded"
-                                              style="background-color: {{ giftCardGroup.giftCardGroupAvailabilityStatus.giftCardGroupAvailabilityColor }}">
-                                            {{ giftCardGroup.giftCardGroupAvailabilityStatus.giftCardGroupAvailabilityName }}
+                                              style="background-color: {{ giftCardGroup.giftCardGroupStatus.giftCardGroupStatusColor }}">
+                                            {{ giftCardGroup.giftCardGroupStatus.giftCardGroupStatusName }}
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="{{ path('accounting_gift_card_group_gift_card_group_status' , {gift_card_group_id:giftCardGroup.giftCardGroupId , machine_name:giftCardGroup.giftCardGroupAvailabilityStatus.giftCardGroupAvailabilityMachineName }) }}"
-                                           class="{{ (giftCardGroup.giftCardGroupAvailabilityStatus.giftCardGroupAvailabilityMachineName == 'active') ? 'fa fa-ban text-red' ? 'fa fa-play text-green' }}"></a>
+                                        <a href="{{ path('accounting_gift_card_group_gift_card_group_status' , {gift_card_group_id:giftCardGroup.giftCardGroupId , machine_name:giftCardGroup.giftCardGroupStatus.giftCardGroupStatusMachineName }) }}"
+                                           class="{{ (giftCardGroup.giftCardGroupStatus.giftCardGroupStatusMachineName == 'active') ? 'fa fa-ban text-red' ? 'fa fa-play text-green' }}"></a>
                                         <a href="{{ path('accounting_gift_card_group_edit' , {id:giftCardGroup.giftCardGroupId}) }}"
                                            class="fa fa-edit"></a>
                                         <a href="{{ path('accounting_gift_card_group_read' , {id:giftCardGroup.giftCardGroupId}) }}"

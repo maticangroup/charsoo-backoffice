@@ -7,6 +7,7 @@ use App\FormModels\Authentication\RoleModel;
 use App\FormModels\Authentication\ServerPermissionModel;
 use App\FormModels\ModelSerializer;
 use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Authentication;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;
@@ -29,6 +30,7 @@ class RoleController extends AbstractController
      */
     public function create(Request $request)
     {
+
         $inputs = $request->request->all();
         /**
          * @var $roleModel RoleModel
@@ -57,8 +59,12 @@ class RoleController extends AbstractController
                 $roles[] = ModelSerializer::parse($role, RoleModel::class);
             }
         }
-
-
+        if (!AuthUser::if_is_allowed(ServerPermissions::authentication_role_all)) {
+            $roleModel = [];
+        }
+        /**
+         * @todo authorization here should be handled in twig
+         */
         return $this->render('authentication/role/create.html.twig', [
             'controller_name' => 'RoleController',
             'roleModel' => $roleModel,
@@ -75,6 +81,9 @@ class RoleController extends AbstractController
      */
     public function edit($id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::authentication_role_fetch)) {
+            return $this->redirect($this->generateUrl('authentication_role_create'));
+        }
         $inputs = $request->request->all();
         /**
          * @var $roleModel RoleModel
@@ -163,6 +172,9 @@ class RoleController extends AbstractController
      */
     public function addPermission($role_id, $permission_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::authentication_role_grant_permission)) {
+            return $this->redirect($this->generateUrl('authentication_role_edit', ['id' => $role_id]));
+        }
         $permissionModel = new PermissionModel();
         $permissionModel->setRoleId($role_id);
         $permissionModel->setPermissionId($permission_id);
@@ -195,6 +207,9 @@ class RoleController extends AbstractController
      */
     public function removePermission($permission_id, $role_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::authentication_role_deny_permission)) {
+            return $this->redirect($this->generateUrl('authentication_role_edit', ['id' => $role_id]));
+        }
         $permissionModel = new PermissionModel();
         $permissionModel->setPermissionId($permission_id);
         $permissionModel->setRoleId($role_id);

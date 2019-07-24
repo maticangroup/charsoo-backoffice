@@ -21,13 +21,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-12">
-            <div class="panel">
-                <div class="panel-heading">
-                    Basic information
-                </div>
-                <div class="panel-content">
-                    <form class="row" action="{{ path('repository_item_repository_item_create') }}" method="post">
+        {% if canCreate %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        Basic information
+                    </div>
+                    <div class="panel-content">
+                        <form class="row" action="{{ path('repository_item_repository_item_create') }}" method="post">
                             <div class="col-3">
                                 <label for="name" class="label-text">Name</label>
                                 <input type="text" id="name" value="{{ itemModel.itemName }}" name="itemName"
@@ -53,10 +54,11 @@
                                 <button type="submit" class="btn btn-block btn-dark rounded mt-3"><i
                                             class="fa fa-save"></i></button>
                             </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
 
         {% if false %}
             <div class="col-12">

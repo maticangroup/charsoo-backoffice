@@ -6,6 +6,8 @@ use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\LocationModel;
 use App\FormModels\Repository\PersonModel;
 use App\FormModels\Repository\ProvinceModel;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Actions\Repository\PersonActions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
@@ -26,23 +28,33 @@ class PersonController extends AbstractController
      */
     public function fetchAll()
     {
-        $request = new Req(Servers::Repository, Repository::Person, PersonActions::all);
-        $response = $request->send();
-        $persons = $response->getContent();
-        /**
-         * @var $results PersonModel[]
-         */
-        $results = [];
-        foreach ($persons as $person) {
-            $results[] = ModelSerializer::parse($person, PersonModel::class);
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::repository_person_all);
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::repository_person_fetch);
+
+        if ($canSeeAll) {
+            $request = new Req(Servers::Repository, Repository::Person, PersonActions::all);
+            $response = $request->send();
+            $persons = $response->getContent();
+            /**
+             * @var $results PersonModel[]
+             */
+            $results = [];
+            foreach ($persons as $person) {
+                $results[] = ModelSerializer::parse($person, PersonModel::class);
+            }
+            /**
+             * @var $person PersonModel
+             */
+            return $this->render('repository/person/list.html.twig', [
+                'controller_name' => 'PersonController',
+                'persons' => $results,
+                'canSeeAll' => $canSeeAll,
+                'canEdit' => $canEdit,
+            ]);
+        } else {
+            return $this->redirect($this->generateUrl('repository_person_repository_person_create'));
         }
-        /**
-         * @var $person PersonModel
-         */
-        return $this->render('repository/person/list.html.twig', [
-            'controller_name' => 'PersonController',
-            'persons' => $results
-        ]);
+
     }
 
     /**
@@ -53,78 +65,73 @@ class PersonController extends AbstractController
      */
     public function create(Request $request)
     {
-        $inputs = $request->request->all();
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::repository_person_new);
 
-        $years = [];
-        for ($i = 1950; $i <= 2019; $i++) {
-            $years[] = $i;
-        }
+        if ($canCreate) {
+            $canEdit = AuthUser::if_is_allowed(ServerPermissions::repository_person_fetch);
 
-        $months = [];
-        for ($j = 1; $j <= 12; $j++) {
-            $months[] = $j;
-        }
+            $inputs = $request->request->all();
+            /**
+             * @var $person PersonModel
+             */
+            $person = ModelSerializer::parse($inputs, PersonModel::class);
 
-        $days = [];
-        for ($k = 1; $k <= 31; $k++) {
-            $days[] = $k;
-        }
 
-        if (empty($inputs)) {
-            $person = new PersonModel();
+            $years = [];
+            for ($i = 1950; $i <= 2019; $i++) {
+                $years[] = $i;
+            }
+
+            $months = [];
+            for ($j = 1; $j <= 12; $j++) {
+                $months[] = $j;
+            }
+
+            $days = [];
+            for ($k = 1; $k <= 31; $k++) {
+                $days[] = $k;
+            }
+
+            if (!empty($inputs)) {
+                /**
+                 * @var $person PersonModel
+                 */
+                $person = ModelSerializer::parse($inputs, PersonModel::class);
+//                dd($person);
+                $request = new Req(Servers::Repository, Repository::Person, PersonActions::new);
+                $request->add_instance($person);
+                $response = $request->send();
+
+                if ($response->getStatus() == ResponseStatus::successful) {
+                    $this->addFlash('s', $response->getMessage());
+                    /**
+                     * @var $responsePerson PersonModel
+                     */
+                    $responsePerson = ModelSerializer::parse($response->getContent(), PersonModel::class);
+                    if ($canEdit) {
+                        return $this->redirect($this->generateUrl('repository_person_repository_person_edit', ['id' => $responsePerson->getId()]));
+                    } else {
+                        return $this->redirect($this->generateUrl('repository_person_repository_person_list'));
+                    }
+                } else {
+                    $this->addFlash('f', $response->getMessage());
+                }
+            }
+
 
             return $this->render('repository/person/create.html.twig', [
                 'controller_name' => 'PersonController',
                 'years' => $years,
                 'months' => $months,
                 'days' => $days,
-                'person' => $person
+                'person' => $person,
+                'canCreate' => $canCreate,
             ]);
         } else {
-            $person = new PersonModel();
-            $person->setHumanName($inputs['person_name']);
-            $person->setHumanFamily($inputs['person_family']);
-            $person->setEmail($inputs['person_email']);
-            $person->setBirthDateYear($inputs['person_birth_date_year']);
-            $person->setBirthDateMonth($inputs['person_birth_date_month']);
-            $person->setBirthDateDay($inputs['person_birth_date_day']);
-            $person->setNationalCode($inputs['person_national_code']);
-            $person->setMobile($inputs['person_mobile']);
-            $person->setSendSMS((isset($inputs['send_sms'])) ? true : false);
-            if ($person->getSendSMS()) {
-                /**
-                 * @todo send sms should be handle by Notification server
-                 */
-            }
-
-            $request = new Req(Servers::Repository, Repository::Person, PersonActions::new);
-            $request->setMethod(Method::POST);
-            $request->add_instance($person);
-            $response = $request->send();
-
-            if ($response->getStatus() == ResponseStatus::successful) {
-                $this->addFlash('add_person_success', $response->getMessage());
-                /**
-                 * @var $responsePerson PersonModel
-                 */
-                $responsePerson = ModelSerializer::parse($response->getContent(), PersonModel::class);
-                return $this->redirect($this->generateUrl('repository_person_repository_person_edit', ['id' => $responsePerson->getId()]));
-
-            } else {
-                $this->addFlash('add_person_failed', $response->getMessage());
-                return $this->render('repository/person/create.html.twig', [
-                    'controller_name' => 'PersonController',
-                    'years' => $years,
-                    'months' => $months,
-                    'days' => $days,
-                    'person' => $person
-                ]);
-
-            }
-            /**
-             * @todo redirect to READ if user is not allowed to edit
-             */
+            return $this->redirect($this->generateUrl('repository_person_repository_person_list'));
         }
+
+
     }
 
     /**
@@ -166,6 +173,8 @@ class PersonController extends AbstractController
      */
     public function edit($id, Request $request)
     {
+//        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::repository_person_update);
+
         $inputs = $request->request->all();
 
         $years = [];

@@ -5,6 +5,8 @@ namespace App\Controller\Repository;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\SizeModel;
 use App\FormModels\Repository\SizeStatusModel;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;
@@ -26,40 +28,56 @@ class SizeController extends AbstractController
      */
     public function create(Request $request)
     {
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::repository_size_new);
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::repository_size_all);
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::repository_size_fetch);
+        $canChangeStatus = AuthUser::if_is_allowed(ServerPermissions::repository_size_change_size_status);
+
+
         $inputs = $request->request->all();
         /**
          * @var $sizeModel SizeModel
          */
         $sizeModel = ModelSerializer::parse($inputs, SizeModel::class);
-        if (!empty($inputs)) {
-            $request = new Req(Servers::Repository, Repository::Size, 'new');
-            $request->add_instance($sizeModel);
-            $response = $request->send();
-//            dd($response);
-            if ($response->getStatus() == ResponseStatus::successful) {
-                $this->addFlash('success', $response->getMessage());
+
+        if ($canCreate) {
+            if (!empty($inputs)) {
+                $request = new Req(Servers::Repository, Repository::Size, 'new');
+                $request->add_instance($sizeModel);
+                $response = $request->send();
+                if ($response->getStatus() == ResponseStatus::successful) {
+                    $this->addFlash('s', $response->getMessage());
+                }
+                $this->addFlash('f', $response->getMessage());
             }
-            $this->addFlash('failed', $response->getMessage());
         }
 
-        $sizesRequest = new Req(Servers::Repository, Repository::Size, 'all');
-        $sizesResponse = $sizesRequest->send();
 
         /**
          * @var $sizes SizeModel[]
          */
         $sizes = [];
-        if ($sizesResponse->getContent()) {
-            foreach ($sizesResponse->getContent() as $size) {
-                $sizes[] = ModelSerializer::parse($size, SizeModel::class);
+        if ($canSeeAll) {
+            $sizesRequest = new Req(Servers::Repository, Repository::Size, 'all');
+            $sizesResponse = $sizesRequest->send();
+            if ($sizesResponse->getContent()) {
+                foreach ($sizesResponse->getContent() as $size) {
+                    $sizes[] = ModelSerializer::parse($size, SizeModel::class);
+                }
             }
         }
+
 
 
         return $this->render('repository/size/create.html.twig', [
             'controller_name' => 'SizeController',
             'sizeModel' => $sizeModel,
             'sizes' => $sizes,
+            'canCreate' => $canCreate,
+            'canSeeAll' => $canSeeAll,
+            'canEdit' => $canEdit,
+            'canChangeStatus' => $canChangeStatus,
+
         ]);
     }
 

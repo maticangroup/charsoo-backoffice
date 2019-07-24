@@ -4,120 +4,129 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-12">
-            <div class="panel">
-                <div class="panel-content">
-                    <div class="row">
-                        <div class="col-10">
-                            <h1>Item Overview</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa
-                                delectus
-                                eos, minus nemo neque obcaecati placeat quam quisquam ullam?
-                            </p>
+        {% if canCreate %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-10">
+                                <h1>Item Overview</h1>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa
+                                    delectus
+                                    eos, minus nemo neque obcaecati placeat quam quisquam ullam?
+                                </p>
+                            </div>
+                            <div class="col-2 d-flex justify-content-center align-items-center">
+                                <a href="{{ path('repository_item_repository_item_create') }}"
+                                   class="btn btn-block btn-success fa fa-plus rounded"></a>
+                            </div>
                         </div>
-                        <div class="col-2 d-flex justify-content-center align-items-center">
-                            <a href="#" class="btn btn-block btn-success fa fa-plus rounded"></a>
-                        </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-12">
-            <div class="panel">
-                <div class="panel-content">
-                    <div class="form-group row">
-                        <div class="col-4"></div>
-                        <div class="col-md-4">
-                            <input type="text" placeholder="Search" name="text"
-                                   class="form-control">
+        {% endif %}
+        {% if canSeeAll %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-content">
+                        <div class="form-group row">
+                            <div class="col-4"></div>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Search" name="text"
+                                       class="form-control">
+                            </div>
+                            <div class="col-4"></div>
                         </div>
-                        <div class="col-4"></div>
-                    </div>
-                    <!-- Records List Start -->
-                    <div class="records--list">
-                        <table id="usersRoleList">
-                            <thead>
-                            <tr>
-                                <th>Barcode</th>
-                                <th>Name</th>
-                                <th>Category</th>
-                                <th>Brand</th>
-                                <th>Color</th>
-                                <th>Guarantee</th>
-                                <th>Supplier</th>
-                                <th>Created At</th>
-                                <th>Updated At</th>
-                                <th class="not-sortable">Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for item in items %}
+                        <!-- Records List Start -->
+                        <div class="records--list">
+                            <table id="usersRoleList">
+                                <thead>
                                 <tr>
-                                    <td>
-                                        {% for barcode in item.itemBarcodes %}
-                                            {{ barcode.barcodeName }},
-                                        {% endfor %}
-                                    </td>
-                                    <td>
-                                        {{ item.itemName }}
-                                    </td>
-                                    <td>
-                                        <ul class="">
-                                            <li><a href="#" class="btn-link">Category</a></li>
-                                            <li><a href="#" class="btn-link">Category</a></li>
-                                            <li>
-                                                <a href="#" class="btn-link">Category</a>
-                                                <ul>
-                                                    <li><a href="#" class="btn-link">Category</a></li>
-                                                    <li>
-                                                        <a href="#" class="btn-link">Category</a>
-                                                    <li><a href="#" class="btn-link">Category</a>
-                                                        <ul>
-                                                            <li><a href="#" class="btn-link">Category</a></li>
-                                                            <li>
-                                                                <a href="#" class="btn-link">Category</a>
-                                                            <li><a href="#" class="btn-link">Category</a></li>
-
-
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </td>
-
-                                    <td>{{ item.itemBrandName }}</td>
-                                    <td>
-                                        {% for color in item.itemColors %}
-                                            {{ color.itemColorName }},
-                                        {% endfor %}
-                                    </td>
-                                    <td>
-                                        {% for guarantee in item.itemGuarantees %}
-                                            {{ guarantee.guaranteeName }},
-                                        {% endfor %}
-                                    </td>
-                                    <td>
-                                        {% for supplier in item.itemSuppliers %}
-                                            {{ supplier.companyName }},
-                                        {% endfor %}
-                                    </td>
-                                    <td>{{ item.itemCreatedDate }}</td>
-                                    <td>{{ item.itemUpdatedDate }}</td>
-                                    <td>
-                                        <a href="{{ path('repository_item_repository_item_edit' , {id:item.itemID}) }}"
-                                           class="fa fa-edit"></a>
-                                    </td>
+                                    <th>Barcode</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Brand</th>
+                                    <th>Color</th>
+                                    <th>Guarantee</th>
+                                    <th>Supplier</th>
+                                    <th>Created At</th>
+                                    <th>Updated At</th>
+                                    {% if canEdit %}
+                                        <th class="not-sortable">Actions</th>
+                                    {% endif %}
                                 </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                {% for item in items %}
+                                    <tr>
+                                        <td>
+                                            {% for barcode in item.itemBarcodes %}
+                                                {{ barcode.barcodeName }},
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            {{ item.itemName }}
+                                        </td>
+                                        <td>
+                                            <ul class="">
+                                                <li><a href="#" class="btn-link">Category</a></li>
+                                                <li><a href="#" class="btn-link">Category</a></li>
+                                                <li>
+                                                    <a href="#" class="btn-link">Category</a>
+                                                    <ul>
+                                                        <li><a href="#" class="btn-link">Category</a></li>
+                                                        <li>
+                                                            <a href="#" class="btn-link">Category</a>
+                                                        <li><a href="#" class="btn-link">Category</a>
+                                                            <ul>
+                                                                <li><a href="#" class="btn-link">Category</a></li>
+                                                                <li>
+                                                                    <a href="#" class="btn-link">Category</a>
+                                                                <li><a href="#" class="btn-link">Category</a></li>
+
+
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+
+                                        <td>{{ item.itemBrandName }}</td>
+                                        <td>
+                                            {% for color in item.itemColors %}
+                                                {{ color.itemColorName }},
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            {% for guarantee in item.itemGuarantees %}
+                                                {{ guarantee.guaranteeName }},
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            {% for supplier in item.itemSuppliers %}
+                                                {{ supplier.companyName }},
+                                            {% endfor %}
+                                        </td>
+                                        <td>{{ item.itemCreatedDate }}</td>
+                                        <td>{{ item.itemUpdatedDate }}</td>
+                                        {% if canEdit %}
+                                            <td>
+                                                <a href="{{ path('repository_item_repository_item_edit' , {id:item.itemID}) }}"
+                                                   class="fa fa-edit"></a>
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Records List End -->
                     </div>
-                    <!-- Records List End -->
                 </div>
             </div>
-        </div>
+        {% endif %}
     </div>
 {% endblock %}

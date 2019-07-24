@@ -16,112 +16,123 @@
                                 maiores maxime mollitia obcaecati odit perspiciatis sequi tenetur.
                             </p>
                         </div>
-                        <div class="col-2">
-                            <form class="row" action="{{ path('repository_spec_group_repository_spec_group_create') }}"
-                                  method="post">
-                                <div class="col-12">
-                                    <input type="text" value="{{ specGroupModel.specGroupName }}"
-                                           class="form-control mb-3"
-                                           name="specGroupName"
-                                           placeholder="Group name">
-                                    <input type="number" value="{{ specGroupModel.specGroupDisplayOrder }}"
-                                           class="form-control mb-3"
-                                           name="specGroupDisplayOrder"
-                                           placeholder="Display order">
-                                    <button type="submit" class="btn btn-block rounded btn-dark fa fa-save"></button>
-                                </div>
-                            </form>
-                        </div>
+                        {% if canCreate %}
+                            <div class="col-2">
+                                <form class="row"
+                                      action="{{ path('repository_spec_group_repository_spec_group_create') }}"
+                                      method="post">
+                                    <div class="col-12">
+                                        <input type="text" value="{{ specGroupModel.specGroupName }}"
+                                               class="form-control mb-3"
+                                               name="specGroupName"
+                                               placeholder="Group name">
+                                        <input type="number" value="{{ specGroupModel.specGroupDisplayOrder }}"
+                                               class="form-control mb-3"
+                                               name="specGroupDisplayOrder"
+                                               placeholder="Display order">
+                                        <button type="submit"
+                                                class="btn btn-block rounded btn-dark fa fa-save"></button>
+                                    </div>
+                                </form>
+                            </div>
+                        {% endif %}
                     </div>
 
                 </div>
             </div>
         </div>
 
-        <div class="col-12">
-            <div class="panel">
-                <div class="panel-heading">
-                    Add new specification
-                </div>
-                <div class="panel-content">
-                    <form class="row" action="{{ path('repository_spec_group_repository_spec_group_add_spec_key') }}"
-                          method="post">
-                        <div class="col-4 mb-3">
-                            <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Specification name</span>
-                                <div class="col-md-12">
-                                    <input type="text" value="{{ specKeyModel.specKeyName }}" class="form-control"
-                                           name="specKeyName"
-                                           placeholder="Specification name">
+        {% if canCreateSpecKey %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        Add new specification
+                    </div>
+                    <div class="panel-content">
+                        <form class="row"
+                              action="{{ path('repository_spec_group_repository_spec_group_add_spec_key') }}"
+                              method="post">
+                            <div class="col-4 mb-3">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">Specification name</span>
+                                    <div class="col-md-12">
+                                        <input type="text" value="{{ specKeyModel.specKeyName }}" class="form-control"
+                                               name="specKeyName"
+                                               placeholder="Specification name">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-4 mb-3">
-                            <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Default Value</span>
-                                <div class="col-md-12">
-                                    <input type="text" value="{{ specKeyModel.specKeyDefaultValue }}"
-                                           class="form-control"
-                                           name="specKeyDefaultValue"
-                                           placeholder="Default Value">
+                            <div class="col-4 mb-3">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">Default Value</span>
+                                    <div class="col-md-12">
+                                        <input type="text" value="{{ specKeyModel.specKeyDefaultValue }}"
+                                               class="form-control"
+                                               name="specKeyDefaultValue"
+                                               placeholder="Default Value">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-4 mb-3">
-                            <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Group name</span>
-                                <div class="col-md-12">
-                                    <select name="specKeySpecGroupID" class="form-control">
-                                        {% for specGroup in specGroups %}
-                                            <option value="{{ specGroup.specGroupID }}">{{ specGroup.specGroupName }}</option>
-                                        {% endfor %}
+                            <div class="col-4 mb-3">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">Group name</span>
+                                    <div class="col-md-12">
+                                        <select name="specKeySpecGroupID" class="form-control">
+                                            {% for specGroup in specGroups %}
+                                                <option value="{{ specGroup.specGroupID }}">{{ specGroup.specGroupName }}</option>
+                                            {% endfor %}
 
-                                    </select>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-4 mb-3">
-                            <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Display order</span>
-                                <div class="col-md-12">
-                                    <input type="number" value="{{ specKeyModel.specKeyDisplayOrder }}"
-                                           class="form-control"
-                                           name="specKeyDisplayOrder"
-                                           placeholder="Display order">
+                            <div class="col-4 mb-3">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">Display order</span>
+                                    <div class="col-md-12">
+                                        <input type="number" value="{{ specKeyModel.specKeyDisplayOrder }}"
+                                               class="form-control"
+                                               name="specKeyDisplayOrder"
+                                               placeholder="Display order">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-4 mb-3">
-                            <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Is special</span>
-                                <div class="col-md-12">
-                                    <label class="form-check">
-                                        <input type="checkbox" name="specKeyIsSpecial" value="1" class="form-check-input">
-                                        <span class="form-check-label">Is Special</span>
-                                    </label>
+                            <div class="col-4 mb-3">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">Is special</span>
+                                    <div class="col-md-12">
+                                        <label class="form-check">
+                                            <input type="checkbox" name="specKeyIsSpecial" value="1"
+                                                   class="form-check-input">
+                                            <span class="form-check-label">Is Special</span>
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
 
-                        </div>
-                        <div class="col-4">
-                            <div class="form-group row">
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-block rounded btn-dark fa fa-save"></button>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <button type="submit"
+                                                class="btn btn-block rounded btn-dark fa fa-save"></button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
 
         {% for specGroup in specGroups %}
             <div class="col-12">
                 <div class="panel">
                     <div class="panel-heading">
                         <span>{{ specGroup.specGroupName }}</span>
-                        <a href="{{ path('repository_spec_group_repository_spec_group_edit' , {id:specGroup.specGroupID}) }}"
-                           class="fa fa-edit"></a>
+                        {% if canEdit %}
+                            <a href="{{ path('repository_spec_group_repository_spec_group_edit' , {id:specGroup.specGroupID}) }}"
+                               class="fa fa-edit"></a>
+                        {% endif %}
                     </div>
                     <div class="panel-content">
                         <table class="table">
@@ -130,7 +141,9 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Default value</th>
                                 <th scope="col">Is special</th>
-                                <th scope="col">Action</th>
+                                {% if canRemoveSpecKey %}
+                                    <th scope="col">Action</th>
+                                {% endif %}
                             </tr>
                             </thead>
                             <tbody>
@@ -145,10 +158,12 @@
                                             <span class="fa fa-times text-red"></span>
                                         {% endif %}
                                     </td>
-                                    <td>
-                                        <a href="{{ path('repository_spec_group_repository_spec_group_key_edit' , {key_id:specKey.specKeyID , group_id:specGroup.specGroupID }) }}"
-                                           class="fa fa-edit btn-rounded"></a>
-                                    </td>
+                                    {% if canRemoveSpecKey %}
+                                        <td>
+                                            <a href="{{ path('repository_spec_group_repository_spec_group_key_edit' , {key_id:specKey.specKeyID , group_id:specGroup.specGroupID }) }}"
+                                               class="fa fa-edit btn-rounded"></a>
+                                        </td>
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                             </tbody>

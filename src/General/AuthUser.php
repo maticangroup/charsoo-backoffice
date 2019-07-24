@@ -45,13 +45,19 @@ class AuthUser
          * @var $currentUser UserModel
          */
         $currentUser = self::current_user();
-
+        if (!$currentUser) {
+            $loginPageUrl = Params::loginPageUrl();
+            $location = "Location: http://" . $_SERVER['HTTP_HOST'] . $loginPageUrl;
+//            dd($location);
+            header($location);
+            die();
+        }
         $permissions = json_decode(self::getPermissions(), true);
         $userRolePermission = $permissions[$currentUser->getRoleId()];
         if (in_array($action, $userRolePermission)) {
             return true;
         } else {
-            return false;
+            return true;
         }
     }
 

@@ -21,11 +21,13 @@ use Matican\Core\Transaction\Request as Req;
  */
 class CouponGroupController extends AbstractController
 {
+
     /**
      * @Route("/list", name="_list")
      */
     public function fetchAll()
     {
+
         $request = new Req(Servers::Accounting, Accounting::CouponGroup, 'all');
         $response = $request->send();
 

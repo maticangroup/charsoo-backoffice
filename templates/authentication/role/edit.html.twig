@@ -75,11 +75,14 @@
                                             <tbody>
                                             {% for key , permission in server.serverPermissions %}
                                                 <tr>
+                                                    {#{{ dump(permission) }}#}
                                                     <td>{{ permission.permissionId }}</td>
                                                     <td>{{ permission.permissionName }}</td>
                                                     <td>
-                                                        <a href="{{ path('authentication_role_add_permission' , {role_id:roleModel.roleId , permission_id:permission.permissionId}) }}"
-                                                           class="fa fa-plus"></a>
+                                                        {% if permission.permissionIsDisabled != false %}
+                                                            <a href="{{ path('authentication_role_add_permission' , {role_id:roleModel.roleId , permission_id:permission.permissionId}) }}"
+                                                               class="fa fa-plus"></a>
+                                                        {% endif %}
                                                     </td>
                                                 </tr>
                                             {% endfor %}

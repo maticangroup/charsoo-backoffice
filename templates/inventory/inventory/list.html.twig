@@ -16,77 +16,87 @@
                                 quam.
                             </p>
                         </div>
-                        <div class="col-2">
-                            <a href="{{ path('inventory_inventory_create') }}"
-                               class="btn btn-block btn-success fa fa-plus rounded"></a>
-                        </div>
+                        {% if canCreateNew %}
+                            <div class="col-2">
+                                <a href="{{ path('inventory_inventory_create') }}"
+                                   class="btn btn-block btn-success fa fa-plus rounded"></a>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12">
-            <div class="panel">
-                <div class="panel-content">
-                    <div class="form-group row">
-                        <div class="col-4"></div>
-                        <div class="col-md-4">
-                            <input type="text" placeholder="Search" name="text"
-                                   class="form-control">
+        {% if canSeeAll %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-content">
+                        <div class="form-group row">
+                            <div class="col-4"></div>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Search" name="text"
+                                       class="form-control">
+                            </div>
+                            <div class="col-4"></div>
                         </div>
-                        <div class="col-4"></div>
-                    </div>
-                    <!-- Records List Start -->
-                    <div class="records--list">
-                        <table id="usersRoleList">
-                            <thead>
-                            <tr>
-                                <th>Inventory Name</th>
-                                <th>Inventory Address</th>
-                                <th>Inventory Phone</th>
-                                <th>Inventory Keeper</th>
-                                <th>Inventory Keeper Phone</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for inventory in inventories %}
+                        <!-- Records List Start -->
+                        <div class="records--list">
+                            <table id="usersRoleList">
+                                <thead>
                                 <tr>
-                                    <td>{{ inventory.inventoryName }}</td>
-                                    <td>{{ inventory.inventoryAddress }}</td>
-                                    <td><a href="tel:{{ inventory.inventoryMainPhone }}"
-                                           class="btn-link">{{ inventory.inventoryMainPhone }}</a></td>
-                                    <td>{{ inventory.inventoryKeeperName }}</td>
-                                    <td><a href="tel:{{ inventory.inventoryKeeperPhone }}"
-                                           class="btn-link">{{ inventory.inventoryKeeperPhone }}</a></td>
-                                    <td>
+                                    <th>Inventory Name</th>
+                                    <th>Inventory Address</th>
+                                    <th>Inventory Phone</th>
+                                    <th>Inventory Keeper</th>
+                                    <th>Inventory Keeper Phone</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for inventory in inventories %}
+                                    <tr>
+                                        <td>{{ inventory.inventoryName }}</td>
+                                        <td>{{ inventory.inventoryAddress }}</td>
+                                        <td><a href="tel:{{ inventory.inventoryMainPhone }}"
+                                               class="btn-link">{{ inventory.inventoryMainPhone }}</a></td>
+                                        <td>{{ inventory.inventoryKeeperName }}</td>
+                                        <td><a href="tel:{{ inventory.inventoryKeeperPhone }}"
+                                               class="btn-link">{{ inventory.inventoryKeeperPhone }}</a></td>
+                                        <td>
 
                                         <span class="label rounded"
                                               style="background-color: {{ inventory.inventoryStatus.inventoryStatusColor }}">
                                             {{ inventory.inventoryStatus.inventoryStatusName }}
                                         </span>
 
-                                    </td>
-                                    <td>
-                                        {% if inventory.inventoryMachineName != 'confirmed_orders_products' %}
-                                            <a href="{{ path('inventory_inventory_status' , {inventory_id:inventory.inventoryId , machine_name:inventory.inventoryStatus.inventoryStatusMachineName}) }}"
-                                               class="{{ (inventory.inventoryStatus.inventoryStatusMachineName == 'active')?'fa fa-ban text-red':'fa fa-play text-green' }}"></a>
+                                        </td>
+                                        <td>
+                                            {% if canChangeStatus %}
+                                                {% if inventory.inventoryMachineName != 'confirmed_orders_products' %}
 
-                                            <a href="{{ path('inventory_inventory_edit' , {id:inventory.inventoryId}) }}"
-                                               class="fa fa-edit"></a>
-                                        {% endif %}
+                                                    <a href="{{ path('inventory_inventory_status' , {inventory_id:inventory.inventoryId , machine_name:inventory.inventoryStatus.inventoryStatusMachineName}) }}"
+                                                       class="{{ (inventory.inventoryStatus.inventoryStatusMachineName == 'active')?'fa fa-ban text-red':'fa fa-play text-green' }}"></a>
+                                                    {% if canUpdate %}
+                                                        <a href="{{ path('inventory_inventory_edit' , {id:inventory.inventoryId}) }}"
+                                                           class="fa fa-edit"></a>
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endif %}
 
-                                        <a href="{{ path('inventory_inventory_read' , {id:inventory.inventoryId}) }}"
-                                           class="fa fa-eye"></a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                                            {% if canRead %}
+                                                <a href="{{ path('inventory_inventory_read' , {id:inventory.inventoryId}) }}"
+                                                   class="fa fa-eye"></a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Records List End -->
                     </div>
-                    <!-- Records List End -->
                 </div>
             </div>
-        </div>
+        {% endif %}
     </div>
 {% endblock %}

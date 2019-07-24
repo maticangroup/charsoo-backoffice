@@ -9,9 +9,11 @@ use App\FormModels\Inventory\ShelveStatusModel;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\ItemModel;
 use App\FormModels\Repository\ItemProductsModel;
+use App\FormModels\Repository\LocationModel;
 use App\FormModels\Repository\PersonModel;
 use App\FormModels\Repository\PhoneModel;
 use App\FormModels\Repository\ProductModel;
+use App\FormModels\Repository\ProvinceModel;
 use App\General\AuthUser;
 use App\Permissions\ServerPermissions;
 use Matican\Actions\Repository\PersonActions;
@@ -141,21 +143,65 @@ class ShelveController extends AbstractController
             $shelveModel = ModelSerializer::parse($response->getContent(), ShelveModel::class);
 
 //        dd($inventoryModel);
+            /**
+             * @var $provinces ProvinceModel[]
+             */
+            $provinces = [];
+
+            $locationModel = new LocationModel();
 
             if (!empty($inputs)) {
-                $shelveModel = ModelSerializer::parse($inputs, ShelveModel::class);
-                $shelveModel->setShelveId($id);
-                $request = new Req(Servers::Inventory, InventoryEntity::Shelve, 'update');
-                $request->add_instance($shelveModel);
-                $response = $request->send();
+
+                if (isset($inputs['provinceName'])) {
+                    $provincesRequest = new Req(Servers::Repository, Repository::Location, 'get_provinces');
+                    $provincesResponse = $provincesRequest->send();
+                    if ($provincesResponse->getContent()) {
+                        foreach ($provincesResponse->getContent() as $province) {
+                            $provinces[] = ModelSerializer::parse($province, ProvinceModel::class);
+                        }
+                    }
+
+                    /**
+                     * @var $locationModel LocationModel
+                     */
+                    $locationModel = ModelSerializer::parse($inputs, LocationModel::class);
+                    $locationModel->setShelveId($id);
+                    $latLang = str_replace(' ', '', $locationModel->getLocationGeoPoints());
+                    $latLang = explode(',', $latLang);
+                    if (count($latLang) != 2) {
+                        $this->addFlash('f', 'geo points are not formatted correctly');
+                        return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $locationModel->getShelveId()]));
+                    }
+                    $locationModel->setLocationLat($latLang[0]);
+                    $locationModel->setLocationLng($latLang[1]);
+
+//                    dd($locationModel);
+
+                    $request = new Req(Servers::Repository, Repository::Location, 'new');
+                    $request->add_instance($locationModel);
+                    $response = $request->send();
+//                    dd($response);
+                    if ($response->getStatus() == ResponseStatus::successful) {
+                        $this->addFlash('s', $response->getMessage());
+                    } else {
+                        $this->addFlash('f', $response->getMessage());
+                    }
+                    return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $locationModel->getShelveId()]));
+                } else {
+                    $shelveModel = ModelSerializer::parse($inputs, ShelveModel::class);
+                    $shelveModel->setShelveId($id);
+                    $request = new Req(Servers::Inventory, InventoryEntity::Shelve, 'update');
+                    $request->add_instance($shelveModel);
+                    $response = $request->send();
 
 //            dd($response);
 
-                if ($response->getStatus() == ResponseStatus::successful) {
-                    $this->addFlash('s', '');
-                    return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $id]));
-                } else {
-                    $this->addFlash('f', '');
+                    if ($response->getStatus() == ResponseStatus::successful) {
+                        $this->addFlash('s', '');
+                        return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $id]));
+                    } else {
+                        $this->addFlash('f', '');
+                    }
                 }
             }
 
@@ -180,11 +226,28 @@ class ShelveController extends AbstractController
                 $persons[] = ModelSerializer::parse($person, PersonModel::class);
             }
 
+            /**
+             * @var $locations LocationModel[]
+             */
+            $locations = [];
+            if ($shelveModel->getShelveLocation()) {
+                foreach ($shelveModel->getShelveLocation() as $location) {
+                    $locations[] = ModelSerializer::parse($location, LocationModel::class);
+                }
+            }
+//            dd($locations);
+
+            $locationCount = count($locations);
+
             return $this->render('inventory/shelve/edit.html.twig', [
                 'controller_name' => 'InventoryController',
                 'shelveModel' => $shelveModel,
                 'phones' => $phones,
                 'persons' => $persons,
+                'provinces' => $provinces,
+                'locations' => $locations,
+                'locationModel' => $locationModel,
+                'locationCount' => $locationCount,
 
             ]);
         } else {
@@ -423,5 +486,30 @@ class ShelveController extends AbstractController
 
         ]);
 
+    }
+
+    /**
+     * @Route("/remove-address/{location_id}/{shelve_id}", name="_remove_address")
+     * @param $location_id
+     * @param $shelve_id
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \ReflectionException
+     */
+    public function removeAddress($location_id, $shelve_id)
+    {
+        $locationModel = new LocationModel();
+        $locationModel->setLocationId($location_id);
+        $locationModel->setShelveId($shelve_id);
+        $request = new Req(Servers::Repository, Repository::Location, 'remove');
+        $request->add_instance($locationModel);
+        $response = $request->send();
+//dd($response);
+
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('f', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $shelve_id]));
     }
 }

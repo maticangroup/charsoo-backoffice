@@ -9,9 +9,11 @@ use App\FormModels\Inventory\InventoryStatusModel;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\ItemModel;
 use App\FormModels\Repository\ItemProductsModel;
+use App\FormModels\Repository\LocationModel;
 use App\FormModels\Repository\PersonModel;
 use App\FormModels\Repository\PhoneModel;
 use App\FormModels\Repository\ProductModel;
+use App\FormModels\Repository\ProvinceModel;
 use App\General\AuthUser;
 use App\Permissions\ServerPermissions;
 use Matican\Actions\Repository\PersonActions;
@@ -142,27 +144,75 @@ class InventoryController extends AbstractController
             /**
              * @var $inventoryModel InventoryModel
              */
-            $inventoryModel = ModelSerializer::parse($inputs, InventoryModel::class);
+            $inventoryModel = new InventoryModel();
             $inventoryModel->setInventoryId($id);
+//            dd($inventoryModel);
             $request = new Req(Servers::Inventory, InventoryEntity::Inventory, 'fetch');
             $request->add_instance($inventoryModel);
             $response = $request->send();
+//            dd($response);
             $inventoryModel = ModelSerializer::parse($response->getContent(), InventoryModel::class);
 
-//        dd($inventoryModel);
+
+            /**
+             * @var $provinces ProvinceModel[]
+             */
+            $provinces = [];
+
+            $locationModel = new LocationModel();
 
             if (!empty($inputs)) {
-                $inventoryModel = ModelSerializer::parse($inputs, InventoryModel::class);
-                $inventoryModel->setInventoryId($id);
-                $request = new Req(Servers::Inventory, InventoryEntity::Inventory, 'update');
-                $request->add_instance($inventoryModel);
-                $response = $request->send();
-                if ($response->getStatus() == ResponseStatus::successful) {
-                    $this->addFlash('s', '');
-                    return $this->redirect($this->generateUrl('inventory_inventory_edit', ['id' => $id]));
+
+                if (isset($inputs['provinceName'])) {
+                    $provincesRequest = new Req(Servers::Repository, Repository::Location, 'get_provinces');
+                    $provincesResponse = $provincesRequest->send();
+                    if ($provincesResponse->getContent()) {
+                        foreach ($provincesResponse->getContent() as $province) {
+                            $provinces[] = ModelSerializer::parse($province, ProvinceModel::class);
+                        }
+                    }
+
+                    /**
+                     * @var $locationModel LocationModel
+                     */
+                    $locationModel = ModelSerializer::parse($inputs, LocationModel::class);
+                    $locationModel->setInventoryId($id);
+                    $latLang = str_replace(' ', '', $locationModel->getLocationGeoPoints());
+                    $latLang = explode(',', $latLang);
+                    if (count($latLang) != 2) {
+                        $this->addFlash('f', 'geo points are not formatted correctly');
+                        return $this->redirect($this->generateUrl('inventory_inventory_edit', ['id' => $locationModel->getInventoryId()]));
+                    }
+                    $locationModel->setLocationLat($latLang[0]);
+                    $locationModel->setLocationLng($latLang[1]);
+
+//                    dd($locationModel);
+
+                    $request = new Req(Servers::Repository, Repository::Location, 'new');
+                    $request->add_instance($locationModel);
+                    $response = $request->send();
+//                    dd($response);
+                    if ($response->getStatus() == ResponseStatus::successful) {
+                        $this->addFlash('s', $response->getMessage());
+                    } else {
+                        $this->addFlash('f', $response->getMessage());
+                    }
+                    return $this->redirect($this->generateUrl('inventory_inventory_edit', ['id' => $locationModel->getInventoryId()]));
                 } else {
-                    $this->addFlash('f', '');
+                    $inventoryModel = ModelSerializer::parse($inputs, InventoryModel::class);
+                    $inventoryModel->setInventoryId($id);
+                    $request = new Req(Servers::Inventory, InventoryEntity::Inventory, 'update');
+                    $request->add_instance($inventoryModel);
+                    $response = $request->send();
+                    if ($response->getStatus() == ResponseStatus::successful) {
+                        $this->addFlash('s', '');
+                        return $this->redirect($this->generateUrl('inventory_inventory_edit', ['id' => $id]));
+                    } else {
+                        $this->addFlash('f', '');
+                    }
                 }
+
+
             }
 
             /**
@@ -186,17 +236,33 @@ class InventoryController extends AbstractController
                 $persons[] = ModelSerializer::parse($person, PersonModel::class);
             }
 
+            /**
+             * @var $locations LocationModel[]
+             */
+            $locations = [];
+            if ($inventoryModel->getInventoryLocation()) {
+                foreach ($inventoryModel->getInventoryLocation() as $location) {
+                    $locations[] = ModelSerializer::parse($location, LocationModel::class);
+                }
+            }
+
+            $locationCount = count($locations);
+
+
             return $this->render('inventory/inventory/edit.html.twig', [
                 'controller_name' => 'InventoryController',
                 'inventoryModel' => $inventoryModel,
                 'phones' => $phones,
                 'persons' => $persons,
+                'provinces' => $provinces,
+                'locations' => $locations,
+                'locationModel' => $locationModel,
+                'locationCount' => $locationCount,
 
             ]);
         } else {
             return $this->redirect($this->generateUrl('inventory_inventory_list'));
         }
-
     }
 
     /**
@@ -206,8 +272,7 @@ class InventoryController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \ReflectionException
      */
-    public
-    function read($id, Request $request)
+    public function read($id, Request $request)
     {
         if (AuthUser::if_is_allowed(ServerPermissions::inventory_inventory_fetch)) {
             $inputs = $request->request->all();
@@ -415,5 +480,31 @@ class InventoryController extends AbstractController
         } else {
             return $this->redirect($this->generateUrl('inventory_inventory_edit', ['id' => $inventory_id]));
         }
+    }
+
+    /**
+     * @Route("/remove-address/{location_id}/{inventory_id}", name="_remove_address")
+     * @param $location_id
+     * @param $inventory_id
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \ReflectionException
+     */
+    public function removeAddress($location_id, $inventory_id)
+    {
+        $locationModel = new LocationModel();
+        $locationModel->setLocationId($location_id);
+        $locationModel->setInventoryId($inventory_id);
+//        dd($locationModel);
+        $request = new Req(Servers::Repository, Repository::Location, 'remove');
+        $request->add_instance($locationModel);
+        $response = $request->send();
+//dd($response);
+
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('f', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('inventory_inventory_edit', ['id' => $inventory_id]));
     }
 }

@@ -51,7 +51,6 @@
                                 <th scope="col">Created Date</th>
                                 <th scope="col">Confirmer</th>
                                 <th scope="col">Confirm Date</th>
-                                <th scope="col">Confirm Status</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -71,25 +70,24 @@
                                     <td>{{ coupon.couponGroupConfirmPerson }}</td>
                                     <td>{{ coupon.couponGroupConfirmDate }}</td>
                                     <td>
-                                        {% if coupon.couponGroupConfirmStatus.couponGroupConfirmStatusMachineName == 'initialized' %}
+                                        {% if coupon.couponGroupStatus.couponGroupStatusMachineName == 'requested' %}
                                             <span class="label label-orange rounded">Waiting</span>
                                         {% else %}
-                                            <span class="label label-green rounded">Accepted</span>
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        <span class="label rounded"
-                                              style="background-color: {{ coupon.couponGroupStatus.couponGroupStatusColor }}">
+                                            <span class="label rounded"
+                                                  style="background-color: {{ coupon.couponGroupStatus.couponGroupStatusColor }}">
                                             {{ coupon.couponGroupStatus.couponGroupStatusName }}
                                         </span>
+                                        {% endif %}
                                     </td>
                                     <td>
                                         <a href="{{ path('accounting_coupon_group_read' , {id:coupon.couponGroupId}) }}"
                                            class="fa fa-eye"></a>
                                         <a href="{{ path('accounting_coupon_group_edit' , {id:coupon.couponGroupId}) }}"
                                            class="fa fa-edit"></a>
-                                        <a href="{{ path('accounting_coupon_group_status' , {coupon_group_id:coupon.couponGroupId , machine_name:coupon.couponGroupStatus.couponGroupStatusMachineName}) }}"
-                                           class="{{ (coupon.couponGroupStatus.couponGroupStatusMachineName == 'active') ? 'fa fa-ban text-red' : 'fa fa-play text-green' }}"></a>
+                                        {% if coupon.couponGroupStatus.couponGroupStatusMachineName != 'requested' %}
+                                            <a href="{{ path('accounting_coupon_group_status' , {coupon_group_id:coupon.couponGroupId , machine_name:coupon.couponGroupStatus.couponGroupStatusMachineName}) }}"
+                                               class="{{ (coupon.couponGroupStatus.couponGroupStatusMachineName == 'active') ? 'fa fa-ban text-red' : 'fa fa-play text-green' }}"></a>
+                                        {% endif %}
                                     </td>
                                 </tr>
                             {% endfor %}

@@ -5,6 +5,8 @@ namespace App\Controller\Authentication;
 use App\FormModels\Authentication\ClientModel;
 use App\FormModels\Authentication\RoleModel;
 use App\FormModels\ModelSerializer;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Authentication;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;
@@ -27,6 +29,7 @@ class ClientController extends AbstractController
      */
     public function create(Request $request)
     {
+
         $inputs = $request->request->all();
         /**
          * @var $clientModel ClientModel
@@ -69,6 +72,12 @@ class ClientController extends AbstractController
 //            }
 //        }
 
+        /**
+         * @todo Authorization here should be handled in the twig
+         */
+        if (!AuthUser::if_is_allowed(ServerPermissions::authentication_client_all)) {
+            $clients = [];
+        }
 
         return $this->render('authentication/client/create.html.twig', [
             'controller_name' => 'ClientController',
@@ -87,6 +96,9 @@ class ClientController extends AbstractController
      */
     public function edit($id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::authentication_client_update)) {
+            return $this->redirect($this->generateUrl('authentication_client_create'));
+        }
         $inputs = $request->request->all();
         /**
          * @var $clientModel ClientModel

@@ -18,6 +18,8 @@ use App\FormModels\Repository\PersonModel;
 use App\FormModels\Repository\ProvinceModel;
 use App\FormModels\Sale\OrderModel;
 use App\FormModels\Ticketing\CommentModel;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Accounting;
 use Matican\Core\Entities\Authentication;
 use Matican\Core\Entities\CRM;
@@ -41,6 +43,7 @@ class CustomerController extends AbstractController
      */
     public function fetchAll()
     {
+
         $request = new Req(Servers::Repository, Repository::Person, 'all');
         $response = $request->send();
 
@@ -52,6 +55,9 @@ class CustomerController extends AbstractController
             foreach ($response->getContent() as $customer) {
                 $customers[] = ModelSerializer::parse($customer, PersonModel::class);
             }
+        }
+        if (!AuthUser::if_is_allowed(ServerPermissions::repository_person_all)) {
+            $customers = [];
         }
         return $this->render('crm/customer/list.html.twig', [
             'controller_name' => 'CustomerController',
@@ -68,7 +74,9 @@ class CustomerController extends AbstractController
      */
     public function customerInfo($id, Request $request)
     {
-
+        if (!AuthUser::if_is_allowed(ServerPermissions::repository_person_fetch)) {
+            return $this->redirect($this->generateUrl('crm_customer_list'));
+        }
         $years = [];
         for ($i = 1950; $i <= 2019; $i++) {
             $years[] = $i;
@@ -198,6 +206,9 @@ class CustomerController extends AbstractController
      */
     public function removeAddress($location_id, $person_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::repository_location_remove)) {
+            return $this->redirect($this->generateUrl('crm_customer_list'));
+        }
         $locationModel = new LocationModel();
         $locationModel->setLocationId($location_id);
         $locationModel->setPersonId($person_id);
@@ -224,6 +235,13 @@ class CustomerController extends AbstractController
      */
     public function customerSMSLog($id, Request $request)
     {
+//        if (!AuthUser::if_is_allowed(ServerPermissions::)) {
+//
+//        }
+
+        /**
+         * @todo Authorization here is incomplete
+         */
         $inputs = $request->request->all();
         /**
          * @var $personModel PersonModel
@@ -269,6 +287,9 @@ class CustomerController extends AbstractController
      */
     public function customerOrder($id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_get_person_orders)) {
+            return $this->redirect($this->generateUrl('crm_customer_list'));
+        }
         $inputs = $request->request->all();
         /**
          * @var $personModel PersonModel
@@ -314,6 +335,9 @@ class CustomerController extends AbstractController
      */
     public function customerFavorite($id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::repository_person_fetch)) {
+            return $this->redirect($this->generateUrl('crm_customer_list'));
+        }
         $inputs = $request->request->all();
         /**
          * @var $personModel PersonModel
@@ -370,7 +394,9 @@ class CustomerController extends AbstractController
      */
     public function customerGiftCoupon($id, Request $request)
     {
-
+        /**
+         * @todo Authorization here (maybe the controller and requested actions are wrong, "person fetch")
+         */
         $inputs = $request->request->all();
         /**
          * @var $personModel PersonModel
@@ -427,6 +453,9 @@ class CustomerController extends AbstractController
      */
     public function customerCompanyGroup($id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::repository_person_fetch)) {
+            return $this->redirect($this->generateUrl('crm_customer_list'));
+        }
         $inputs = $request->request->all();
         /**
          * @var $personModel PersonModel
@@ -483,6 +512,9 @@ class CustomerController extends AbstractController
      */
     public function customerPaymentDeed($id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::repository_person_fetch)) {
+            return $this->redirect($this->generateUrl('crm_customer_list'));
+        }
         $inputs = $request->request->all();
         /**
          * @var $personModel PersonModel
@@ -529,6 +561,9 @@ class CustomerController extends AbstractController
      */
     public function customerInvoice($id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::repository_person_fetch)) {
+            return $this->redirect($this->generateUrl('crm_customer_list'));
+        }
         $inputs = $request->request->all();
         /**
          * @var $personModel PersonModel
@@ -585,6 +620,12 @@ class CustomerController extends AbstractController
      */
     public function customerInvitation($id, Request $request)
     {
+        /**
+         * @todo Authorization here
+         */
+        if (!AuthUser::if_is_allowed(ServerPermissions::repository_person_fetch)) {
+            return $this->redirect($this->generateUrl('crm_customer_list'));
+        }
         $inputs = $request->request->all();
         /**
          * @var $personModel PersonModel
@@ -647,6 +688,9 @@ class CustomerController extends AbstractController
      */
     public function customerComment($id, Request $request)
     {
+        /**
+         * @todo Authorization here
+         */
         $inputs = $request->request->all();
         /**
          * @var $personModel PersonModel

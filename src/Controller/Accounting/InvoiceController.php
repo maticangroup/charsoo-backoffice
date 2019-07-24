@@ -334,7 +334,9 @@ class InvoiceController extends AbstractController
      */
     public function addPayment($invoice_id, $payment_request_id, Request $request)
     {
-
+        if (!AuthUser::if_is_allowed(ServerPermissions::accounting_paymentrequest_add_payment)) {
+            return $this->redirect($this->generateUrl('accounting_invoice_edit', ['id' => $invoice_id]));
+        }
         $inputs = $request->request->all();
 
         if (!empty($inputs)) {
@@ -383,6 +385,9 @@ class InvoiceController extends AbstractController
      */
     public function confirmPayment($invoice_id, $payment_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::accounting_paymentrequest_confirm_payment)) {
+            return $this->redirect($this->generateUrl('accounting_invoice_edit', ['id' => $invoice_id]));
+        }
         $paymentStatusModel = new PaymentStatusModel();
         $paymentStatusModel->setPaymentId($payment_id);
         $request = new Req(Servers::Accounting, Accounting::PaymentRequest, 'confirm_payment');

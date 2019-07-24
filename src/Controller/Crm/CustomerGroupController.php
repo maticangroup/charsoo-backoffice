@@ -6,6 +6,8 @@ use App\FormModels\CRM\CustomerGroupModel;
 use App\FormModels\CRM\CustomerGroupStatusModel;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\PersonModel;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\CRM;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
@@ -29,6 +31,7 @@ class CustomerGroupController extends AbstractController
      */
     public function create(Request $request)
     {
+
         $inputs = $request->request->all();
         /**
          * @var $customerGroupModel CustomerGroupModel
@@ -58,8 +61,12 @@ class CustomerGroupController extends AbstractController
                 $customerGroups[] = ModelSerializer::parse($customerGroup, CustomerGroupModel::class);
             }
         }
-
-
+        if (!AuthUser::if_is_allowed(ServerPermissions::crm_customergroup_all)) {
+            $customerGroups = [];
+        }
+        /**
+         * @todo Authorization should be handled in twig
+         */
         return $this->render('crm/customer_group/create.html.twig', [
             'controller_name' => 'CustomerGroupController',
             'customerGroupModel' => $customerGroupModel,
@@ -77,6 +84,9 @@ class CustomerGroupController extends AbstractController
      */
     public function edit($id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::crm_customergroup_fetch)) {
+            return $this->redirect($this->generateUrl('crm_customer_group_create'));
+        }
 
         $inputs = $request->request->all();
         /**
@@ -152,6 +162,9 @@ class CustomerGroupController extends AbstractController
      */
     public function addCustomer($customer_group_id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::crm_customergroup_add_person)) {
+            return $this->redirect($this->generateUrl('crm_customer_group_edit', ['id' => $customer_group_id]));
+        }
         $inputs = $request->request->all();
         /**
          * @var $personModel PersonModel
@@ -180,6 +193,9 @@ class CustomerGroupController extends AbstractController
      */
     public function removeCustomer($person_id, $customer_group_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::crm_customergroup_remove_person)) {
+            return $this->redirect($this->generateUrl('crm_customer_group_edit', ['id' => $customer_group_id]));
+        }
         $personModel = new PersonModel();
         $personModel->setId($person_id);
         $personModel->setCustomerGroupId($customer_group_id);
@@ -203,6 +219,9 @@ class CustomerGroupController extends AbstractController
      */
     public function changeCustomerGroupAvailability($customer_group_id, $machine_name)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::crm_customergroup_set_status)) {
+            return $this->redirect($this->generateUrl('crm_customer_group_create'));
+        }
         $customerGroupStatusModel = new CustomerGroupStatusModel();
         if ($machine_name == 'active') {
             $customerGroupStatusModel->setCustomerGroupId($customer_group_id);

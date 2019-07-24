@@ -5,6 +5,8 @@ namespace App\Controller\Authentication;
 use App\FormModels\Authentication\RoleModel;
 use App\FormModels\Authentication\UserModel;
 use App\FormModels\ModelSerializer;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Authentication;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;
@@ -48,7 +50,9 @@ class UserController extends AbstractController
                 $roles[] = ModelSerializer::parse($role, RoleModel::class);
             }
         }
-
+        if (!AuthUser::if_is_allowed(ServerPermissions::authentication_user_all)) {
+            $users = [];
+        }
 
         return $this->render('authentication/user/list.html.twig', [
             'controller_name' => 'UserController',
@@ -67,6 +71,9 @@ class UserController extends AbstractController
      */
     public function saveRole($user_id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::authentication_user_set_role)) {
+            return $this->redirect($this->generateUrl('authentication_user_list'));
+        }
         $inputs = $request->request->all();
         /**
          * @var $roleModel RoleModel

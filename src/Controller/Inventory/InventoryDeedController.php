@@ -12,6 +12,9 @@ use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\ItemModel;
 use App\FormModels\Repository\ItemProductsModel;
 use App\FormModels\Repository\ProductModel;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
+use Grpc\Server;
 use Matican\Core\Entities\Inventory;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
@@ -32,21 +35,24 @@ class InventoryDeedController extends AbstractController
      */
     public function fetchAll()
     {
-        $request = new Req(Servers::Inventory, Inventory::Deed, 'all');
-        $response = $request->send();
+        if (AuthUser::if_is_allowed(ServerPermissions::inventory_transferdeed_all)) {
+            $request = new Req(Servers::Inventory, Inventory::Deed, 'all');
+            $response = $request->send();
 
-        /**
-         * @var $deeds InventoryDeedModel[]
-         */
-        $deeds = [];
-        foreach ($response->getContent() as $deed) {
-            $deeds[] = ModelSerializer::parse($deed, InventoryDeedModel::class);
+            /**
+             * @var $deeds InventoryDeedModel[]
+             */
+            $deeds = [];
+            foreach ($response->getContent() as $deed) {
+                $deeds[] = ModelSerializer::parse($deed, InventoryDeedModel::class);
+            }
+
+            return $this->render('inventory/inventory_deed/list.html.twig', [
+                'controller_name' => 'InventoryDeedController',
+                'deeds' => $deeds,
+            ]);
         }
-
-        return $this->render('inventory/inventory_deed/list.html.twig', [
-            'controller_name' => 'InventoryDeedController',
-            'deeds' => $deeds,
-        ]);
+        return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create'));
     }
 
     /**
@@ -57,90 +63,94 @@ class InventoryDeedController extends AbstractController
      */
     public function create(Request $request)
     {
-        $inputs = $request->request->all();
+        if (AuthUser::if_is_allowed(ServerPermissions::inventory_transferdeed_new)) {
+            $inputs = $request->request->all();
 
-        /**
-         * @var $deedModel InventoryDeedModel
-         */
-        $deedModel = ModelSerializer::parse($inputs, InventoryDeedModel::class);
+            /**
+             * @var $deedModel InventoryDeedModel
+             */
+            $deedModel = ModelSerializer::parse($inputs, InventoryDeedModel::class);
 
-        if (!empty($inputs)) {
+            if (!empty($inputs)) {
 
-            $request = new Req(Servers::Inventory, Inventory::Deed, 'new');
+                $request = new Req(Servers::Inventory, Inventory::Deed, 'new');
 
 //dd($inputs['deedFrom']);
-            if ($inputs['deedFrom'] == 'none') {
-                $deedModel->setInventoryDeedFromId(0);
-            } elseif (strpos($inputs['deedFrom'], 'inventory') !== false) {
-                $deedModel->setInventoryDeedFromInventoryId(explode('_', $inputs['deedFrom'])[1]);
-            } elseif (strpos($inputs['deedFrom'], 'shelve') !== false) {
-                $deedModel->setInventoryDeedFromShelveId(explode('_', $inputs['deedFrom'])[1]);
-            }
+                if ($inputs['deedFrom'] == 'none') {
+                    $deedModel->setInventoryDeedFromId(0);
+                } elseif (strpos($inputs['deedFrom'], 'inventory') !== false) {
+                    $deedModel->setInventoryDeedFromInventoryId(explode('_', $inputs['deedFrom'])[1]);
+                } elseif (strpos($inputs['deedFrom'], 'shelve') !== false) {
+                    $deedModel->setInventoryDeedFromShelveId(explode('_', $inputs['deedFrom'])[1]);
+                }
 
-            if (strpos($inputs['deedTo'], 'inventory') !== false) {
-                $deedModel->setInventoryDeedToInventoryId(explode('_', $inputs['deedTo'])[1]);
-            } elseif (strpos($inputs['deedTo'], 'shelve') !== false) {
-                $deedModel->setInventoryDeedToShelveId(explode('_', $inputs['deedTo'])[1]);
-            }
+                if (strpos($inputs['deedTo'], 'inventory') !== false) {
+                    $deedModel->setInventoryDeedToInventoryId(explode('_', $inputs['deedTo'])[1]);
+                } elseif (strpos($inputs['deedTo'], 'shelve') !== false) {
+                    $deedModel->setInventoryDeedToShelveId(explode('_', $inputs['deedTo'])[1]);
+                }
 
 //            dd($deedModel);
 
-            $request->add_instance($deedModel);
-            $response = $request->send();
+                $request->add_instance($deedModel);
+                $response = $request->send();
 
 //            dd($response);
 
 
-            if ($deedModel->getInventoryDeedFromId() != 'none') {
-                if ($response->getStatus() == ResponseStatus::successful) {
-                    $this->addFlash('s', $response->getMessage());
-                    $deedModel = ModelSerializer::parse($response->getContent(), InventoryDeedModel::class);
-                    return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create_product_deed', ['deed_id' => $deedModel->getInventoryDeedId()]));
+                if ($deedModel->getInventoryDeedFromId() != 'none') {
+                    if ($response->getStatus() == ResponseStatus::successful) {
+                        $this->addFlash('s', $response->getMessage());
+                        $deedModel = ModelSerializer::parse($response->getContent(), InventoryDeedModel::class);
+                        return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create_product_deed', ['deed_id' => $deedModel->getInventoryDeedId()]));
+                    } else {
+                        $this->addFlash('s', $response->getMessage());
+                    }
+
                 } else {
-                    $this->addFlash('s', $response->getMessage());
+                    if ($response->getStatus() == ResponseStatus::successful) {
+                        $this->addFlash('s', $response->getMessage());
+                        $deedModel = ModelSerializer::parse($response->getContent(), InventoryDeedModel::class);
+                        return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create_to_inventory_deed', ['deed_id' => $deedModel->getInventoryDeedId()]));
+                    } else {
+                        $this->addFlash('s', $response->getMessage());
+                    }
                 }
 
-            } else {
-                if ($response->getStatus() == ResponseStatus::successful) {
-                    $this->addFlash('s', $response->getMessage());
-                    $deedModel = ModelSerializer::parse($response->getContent(), InventoryDeedModel::class);
-                    return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create_to_inventory_deed', ['deed_id' => $deedModel->getInventoryDeedId()]));
-                } else {
-                    $this->addFlash('s', $response->getMessage());
-                }
+
             }
 
+            $inventoriesRequest = new Req(Servers::Inventory, Inventory::Inventory, 'all');
+            $inventoriesResponse = $inventoriesRequest->send();
 
+            /**
+             * @var $inventories InventoryModel[]
+             */
+            $inventories = [];
+            foreach ($inventoriesResponse->getContent() as $inventory) {
+                $inventories[] = ModelSerializer::parse($inventory, InventoryModel::class);
+            }
+
+            $shelvesRequest = new Req(Servers::Inventory, Inventory::Shelve, 'all');
+            $shelvesResponse = $shelvesRequest->send();
+
+            /**
+             * @var $shelves ShelveModel[]
+             */
+            $shelves = [];
+            foreach ($shelvesResponse->getContent() as $shelve) {
+                $shelves[] = ModelSerializer::parse($shelve, ShelveModel::class);
+            }
+
+            return $this->render('inventory/inventory_deed/create.html.twig', [
+                'controller_name' => 'InventoryDeedController',
+                'inventories' => $inventories,
+                'shelves' => $shelves,
+                'deedModel' => $deedModel,
+            ]);
+        } else {
+            return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_list'));
         }
-
-        $inventoriesRequest = new Req(Servers::Inventory, Inventory::Inventory, 'all');
-        $inventoriesResponse = $inventoriesRequest->send();
-
-        /**
-         * @var $inventories InventoryModel[]
-         */
-        $inventories = [];
-        foreach ($inventoriesResponse->getContent() as $inventory) {
-            $inventories[] = ModelSerializer::parse($inventory, InventoryModel::class);
-        }
-
-        $shelvesRequest = new Req(Servers::Inventory, Inventory::Shelve, 'all');
-        $shelvesResponse = $shelvesRequest->send();
-
-        /**
-         * @var $shelves ShelveModel[]
-         */
-        $shelves = [];
-        foreach ($shelvesResponse->getContent() as $shelve) {
-            $shelves[] = ModelSerializer::parse($shelve, ShelveModel::class);
-        }
-
-        return $this->render('inventory/inventory_deed/create.html.twig', [
-            'controller_name' => 'InventoryDeedController',
-            'inventories' => $inventories,
-            'shelves' => $shelves,
-            'deedModel' => $deedModel,
-        ]);
     }
 
     /**
@@ -153,25 +163,29 @@ class InventoryDeedController extends AbstractController
      */
     public function addItem($deed_id, $is_transfer, Request $request)
     {
-        $inputs = $request->request->all();
+        if (AuthUser::if_is_allowed(ServerPermissions::inventory_transferdeed_add_product_to_deed)) {
+            $inputs = $request->request->all();
 
-        /**
-         * @var $productModel ProductModel
-         */
-        $productModel = ModelSerializer::parse($inputs, ProductModel::class);
-        $productModel->setProductDeedId($deed_id);
+            /**
+             * @var $productModel ProductModel
+             */
+            $productModel = ModelSerializer::parse($inputs, ProductModel::class);
+            $productModel->setProductDeedId($deed_id);
 //        dd($productModel);
-        $request = new Req(Servers::Inventory, Inventory::Deed, 'add_product_to_deed');
-        $request->add_instance($productModel);
-        $response = $request->send();
+            $request = new Req(Servers::Inventory, Inventory::Deed, 'add_product_to_deed');
+            $request->add_instance($productModel);
+            $response = $request->send();
 //        dd($response);
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $response->getMessage());
-        } else {
-            $this->addFlash('f', $response->getMessage());
-        }
-        if ($is_transfer) {
-            return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create_product_deed', ['deed_id' => $deed_id]));
+            if ($response->getStatus() == ResponseStatus::successful) {
+                $this->addFlash('s', $response->getMessage());
+            } else {
+                $this->addFlash('f', $response->getMessage());
+            }
+            if ($is_transfer) {
+                return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create_product_deed', ['deed_id' => $deed_id]));
+            } else {
+                return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create_to_inventory_deed', ['deed_id' => $deed_id]));
+            }
         } else {
             return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create_to_inventory_deed', ['deed_id' => $deed_id]));
         }
@@ -187,24 +201,28 @@ class InventoryDeedController extends AbstractController
      */
     public function addProduct($deed_id, $product_id, Request $request)
     {
-        $inputs = $request->request->all();
+        if (AuthUser::if_is_allowed(ServerPermissions::inventory_transferdeed_add_product_to_deed)) {
+            $inputs = $request->request->all();
 
-        /**
-         * @var $productModel ProductModel
-         */
-        $productModel = ModelSerializer::parse($inputs, ProductModel::class);
-        $productModel->setProductDeedId($deed_id);
-        $productModel->setProductId($product_id);
-        $request = new Req(Servers::Inventory, Inventory::Deed, 'add_product_to_deed');
-        $request->add_instance($productModel);
-        $response = $request->send();
+            /**
+             * @var $productModel ProductModel
+             */
+            $productModel = ModelSerializer::parse($inputs, ProductModel::class);
+            $productModel->setProductDeedId($deed_id);
+            $productModel->setProductId($product_id);
+            $request = new Req(Servers::Inventory, Inventory::Deed, 'add_product_to_deed');
+            $request->add_instance($productModel);
+            $response = $request->send();
 //        dd($response);
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $response->getMessage());
+            if ($response->getStatus() == ResponseStatus::successful) {
+                $this->addFlash('s', $response->getMessage());
+            } else {
+                $this->addFlash('f', $response->getMessage());
+            }
+            return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create_product_deed', ['deed_id' => $deed_id]));
         } else {
-            $this->addFlash('f', $response->getMessage());
+            return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create_product_deed', ['deed_id' => $deed_id]));
         }
-        return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create_product_deed', ['deed_id' => $deed_id]));
     }
 
 
@@ -218,21 +236,26 @@ class InventoryDeedController extends AbstractController
      */
     public function removeItem($product_id, $deed_id, $is_transfer)
     {
-        $productModel = new ProductModel();
-        $productModel->setProductId($product_id);
-        $productModel->setProductDeedId($deed_id);
-        $request = new Req(Servers::Inventory, Inventory::Deed, 'remove_product_from_deed');
-        $request->add_instance($productModel);
-        $response = $request->send();
-//        dd($response);
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $response->getMessage());
-        } else {
-            $this->addFlash('f', $response->getMessage());
-        }
+        if (AuthUser::if_is_allowed(ServerPermissions::inventory_transferdeed_remove_product_from_deed)) {
 
-        if ($is_transfer) {
-            return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create_product_deed', ['deed_id' => $deed_id]));
+            $productModel = new ProductModel();
+            $productModel->setProductId($product_id);
+            $productModel->setProductDeedId($deed_id);
+            $request = new Req(Servers::Inventory, Inventory::Deed, 'remove_product_from_deed');
+            $request->add_instance($productModel);
+            $response = $request->send();
+//        dd($response);
+            if ($response->getStatus() == ResponseStatus::successful) {
+                $this->addFlash('s', $response->getMessage());
+            } else {
+                $this->addFlash('f', $response->getMessage());
+            }
+
+            if ($is_transfer) {
+                return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create_product_deed', ['deed_id' => $deed_id]));
+            } else {
+                return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create_to_inventory_deed', ['deed_id' => $deed_id]));
+            }
         } else {
             return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create_to_inventory_deed', ['deed_id' => $deed_id]));
         }
@@ -249,7 +272,9 @@ class InventoryDeedController extends AbstractController
      */
     public function createToInventoryDeed($deed_id, Request $request)
     {
-
+        /**
+         * @todo  Authorization is missing here
+         */
         $inputs = $request->request->all();
 
         /**
@@ -330,6 +355,9 @@ class InventoryDeedController extends AbstractController
      */
     public function createProductDeed($deed_id, Request $request)
     {
+        /**
+         * @todo  Authorization is missing here
+         */
         $inputs = $request->request->all();
 
         /**
@@ -482,40 +510,45 @@ class InventoryDeedController extends AbstractController
      */
     public function read($deed_id, Request $request)
     {
+        if (AuthUser::if_is_allowed(ServerPermissions::inventory_transferdeed_fetch)) {
 
-        $inputs = $request->request->all();
 
-        /**
-         * @var $deedModel InventoryDeedModel
-         */
-        $deedModel = ModelSerializer::parse($inputs, InventoryDeedModel::class);
-        $deedModel->setInventoryDeedId($deed_id);
-        $request = new Req(Servers::Inventory, Inventory::Deed, 'fetch');
-        $request->add_instance($deedModel);
-        $response = $request->send();
-        $deedModel = ModelSerializer::parse($response->getContent(), InventoryDeedModel::class);
+            $inputs = $request->request->all();
 
-        /**
-         * @var $products ProductModel[]
-         */
-        $products = [];
-        foreach ($deedModel->getInventoryDeedProducts() as $product) {
-            $products[] = ModelSerializer::parse($product, ProductModel::class);
+            /**
+             * @var $deedModel InventoryDeedModel
+             */
+            $deedModel = ModelSerializer::parse($inputs, InventoryDeedModel::class);
+            $deedModel->setInventoryDeedId($deed_id);
+            $request = new Req(Servers::Inventory, Inventory::Deed, 'fetch');
+            $request->add_instance($deedModel);
+            $response = $request->send();
+            $deedModel = ModelSerializer::parse($response->getContent(), InventoryDeedModel::class);
+
+            /**
+             * @var $products ProductModel[]
+             */
+            $products = [];
+            foreach ($deedModel->getInventoryDeedProducts() as $product) {
+                $products[] = ModelSerializer::parse($product, ProductModel::class);
+            }
+
+
+            /**
+             * @var $deedStatusModel InventoryDeedStatusModel
+             */
+            $deedStatusModel = ModelSerializer::parse($deedModel->getInventoryDeedStatus(), InventoryDeedStatusModel::class);
+
+
+            return $this->render('inventory/inventory_deed/read.html.twig', [
+                'controller_name' => 'InventoryDeedController',
+                'deedModel' => $deedModel,
+                'products' => $products,
+                'deedStatusModel' => $deedStatusModel,
+            ]);
+        } else {
+            return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_list'));
         }
-
-
-        /**
-         * @var $deedStatusModel InventoryDeedStatusModel
-         */
-        $deedStatusModel = ModelSerializer::parse($deedModel->getInventoryDeedStatus(), InventoryDeedStatusModel::class);
-
-
-        return $this->render('inventory/inventory_deed/read.html.twig', [
-            'controller_name' => 'InventoryDeedController',
-            'deedModel' => $deedModel,
-            'products' => $products,
-            'deedStatusModel' => $deedStatusModel,
-        ]);
     }
 
     /**
@@ -526,18 +559,24 @@ class InventoryDeedController extends AbstractController
      */
     public function InventoryDeedConfirm($deed_id)
     {
-        $inventoryDeedStatusModel = new InventoryDeedStatusModel();
-        $inventoryDeedStatusModel->setInventoryDeedId($deed_id);
-        $request = new Req(Servers::Inventory, Inventory::Deed, 'confirm_deed');
-        $request->add_instance($inventoryDeedStatusModel);
-        $response = $request->send();
-//        dd($response);
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $response->getMessage());
-        } else {
-            $this->addFlash('s', $response->getMessage());
-        }
+        if (AuthUser::if_is_allowed(ServerPermissions::inventory_transferdeed_confirm_deed)) {
 
-        return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_read', ['deed_id' => $deed_id]));
+
+            $inventoryDeedStatusModel = new InventoryDeedStatusModel();
+            $inventoryDeedStatusModel->setInventoryDeedId($deed_id);
+            $request = new Req(Servers::Inventory, Inventory::Deed, 'confirm_deed');
+            $request->add_instance($inventoryDeedStatusModel);
+            $response = $request->send();
+//        dd($response);
+            if ($response->getStatus() == ResponseStatus::successful) {
+                $this->addFlash('s', $response->getMessage());
+            } else {
+                $this->addFlash('s', $response->getMessage());
+            }
+
+            return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_read', ['deed_id' => $deed_id]));
+        } else {
+            return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_list'));
+        }
     }
 }

@@ -12,6 +12,8 @@ use App\FormModels\Repository\ItemProductsModel;
 use App\FormModels\Repository\PersonModel;
 use App\FormModels\Repository\PhoneModel;
 use App\FormModels\Repository\ProductModel;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Actions\Repository\PersonActions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
@@ -32,21 +34,27 @@ class ShelveController extends AbstractController
      */
     public function fetchAll()
     {
-        $request = new Req(Servers::Inventory, InventoryEntity::Shelve, 'all');
-        $response = $request->send();
+        if (AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_all)) {
 
-        /**
-         * @var $shelves ShelveModel[]
-         */
-        $shelves = [];
-        foreach ($response->getContent() as $shelve) {
-            $shelves[] = ModelSerializer::parse($shelve, ShelveModel::class);
+            $request = new Req(Servers::Inventory, InventoryEntity::Shelve, 'all');
+            $response = $request->send();
+
+            /**
+             * @var $shelves ShelveModel[]
+             */
+            $shelves = [];
+            foreach ($response->getContent() as $shelve) {
+                $shelves[] = ModelSerializer::parse($shelve, ShelveModel::class);
+            }
+
+
+            return $this->render('inventory/shelve/list.html.twig', [
+                'shelves' => $shelves,
+            ]);
+
+        } else {
+            return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_create'));
         }
-
-
-        return $this->render('inventory/shelve/list.html.twig', [
-            'shelves' => $shelves,
-        ]);
     }
 
     /**
@@ -58,44 +66,50 @@ class ShelveController extends AbstractController
     public function create(Request $request)
     {
 
-        $inputs = $request->request->all();
+        if (AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_new)) {
 
-        /**
-         * @var $shelveModel ShelveModel
-         */
-        $shelveModel = ModelSerializer::parse($inputs, ShelveModel::class);
 
-        if (!empty($inputs)) {
-            $request = new Req(Servers::Inventory, InventoryEntity::Shelve, 'new');
-            $request->add_instance($shelveModel);
-            $response = $request->send();
-            if ($response->getStatus() == ResponseStatus::successful) {
-                /**
-                 * @var $shelveModel ShelveModel
-                 */
-                $shelveModel = ModelSerializer::parse($response->getContent(), ShelveModel::class);
-                $this->addFlash('success', $response->getMessage());
-                return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $shelveModel->getShelveId()]));
+            $inputs = $request->request->all();
+
+            /**
+             * @var $shelveModel ShelveModel
+             */
+            $shelveModel = ModelSerializer::parse($inputs, ShelveModel::class);
+
+            if (!empty($inputs)) {
+                $request = new Req(Servers::Inventory, InventoryEntity::Shelve, 'new');
+                $request->add_instance($shelveModel);
+                $response = $request->send();
+                if ($response->getStatus() == ResponseStatus::successful) {
+                    /**
+                     * @var $shelveModel ShelveModel
+                     */
+                    $shelveModel = ModelSerializer::parse($response->getContent(), ShelveModel::class);
+                    $this->addFlash('success', $response->getMessage());
+                    return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $shelveModel->getShelveId()]));
+                }
+                $this->addFlash('failed', $response->getMessage());
             }
-            $this->addFlash('failed', $response->getMessage());
+
+            $allPersonsRequest = new Req(Servers::Repository, Repository::Person, PersonActions::all);
+            $allPersonsResponse = $allPersonsRequest->send();
+
+            /**
+             * @var $persons PersonModel[]
+             */
+            $persons = [];
+            foreach ($allPersonsResponse->getContent() as $person) {
+                $persons[] = ModelSerializer::parse($person, PersonModel::class);
+            }
+
+
+            return $this->render('inventory/shelve/create.html.twig', [
+                'shelveModel' => $shelveModel,
+                'persons' => $persons,
+            ]);
+        } else {
+            return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_list'));
         }
-
-        $allPersonsRequest = new Req(Servers::Repository, Repository::Person, PersonActions::all);
-        $allPersonsResponse = $allPersonsRequest->send();
-
-        /**
-         * @var $persons PersonModel[]
-         */
-        $persons = [];
-        foreach ($allPersonsResponse->getContent() as $person) {
-            $persons[] = ModelSerializer::parse($person, PersonModel::class);
-        }
-
-
-        return $this->render('inventory/shelve/create.html.twig', [
-            'shelveModel' => $shelveModel,
-            'persons' => $persons,
-        ]);
     }
 
 
@@ -108,68 +122,74 @@ class ShelveController extends AbstractController
      */
     public function edit($id, Request $request)
     {
-        $inputs = $request->request->all();
+        if (AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_fetch)) {
 
-        /**
-         * @var $shelveModel ShelveModel
-         */
-        $shelveModel = ModelSerializer::parse($inputs, ShelveModel::class);
-        $shelveModel->setShelveId($id);
-        $request = new Req(Servers::Inventory, InventoryEntity::Shelve, 'fetch');
-        $request->add_instance($shelveModel);
-        $response = $request->send();
-        /**
-         * @var $shelveModel ShelveModel
-         */
-        $shelveModel = ModelSerializer::parse($response->getContent(), ShelveModel::class);
+
+            $inputs = $request->request->all();
+
+            /**
+             * @var $shelveModel ShelveModel
+             */
+            $shelveModel = ModelSerializer::parse($inputs, ShelveModel::class);
+            $shelveModel->setShelveId($id);
+            $request = new Req(Servers::Inventory, InventoryEntity::Shelve, 'fetch');
+            $request->add_instance($shelveModel);
+            $response = $request->send();
+            /**
+             * @var $shelveModel ShelveModel
+             */
+            $shelveModel = ModelSerializer::parse($response->getContent(), ShelveModel::class);
 
 //        dd($inventoryModel);
 
-        if (!empty($inputs)) {
-            $shelveModel = ModelSerializer::parse($inputs, ShelveModel::class);
-            $shelveModel->setShelveId($id);
-            $request = new Req(Servers::Inventory, InventoryEntity::Shelve, 'update');
-            $request->add_instance($shelveModel);
-            $response = $request->send();
+            if (!empty($inputs)) {
+                $shelveModel = ModelSerializer::parse($inputs, ShelveModel::class);
+                $shelveModel->setShelveId($id);
+                $request = new Req(Servers::Inventory, InventoryEntity::Shelve, 'update');
+                $request->add_instance($shelveModel);
+                $response = $request->send();
 
 //            dd($response);
 
-            if ($response->getStatus() == ResponseStatus::successful) {
-                $this->addFlash('s', '');
-                return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $id]));
-            } else {
-                $this->addFlash('f', '');
+                if ($response->getStatus() == ResponseStatus::successful) {
+                    $this->addFlash('s', '');
+                    return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $id]));
+                } else {
+                    $this->addFlash('f', '');
+                }
             }
-        }
 
-        /**
-         * @var $phones PhoneModel[]
-         */
-        $phones = [];
-        if ($shelveModel->getShelvePhones()) {
-            foreach ($shelveModel->getShelvePhones() as $phone) {
-                $phones[] = ModelSerializer::parse($phone, PhoneModel::class);
+            /**
+             * @var $phones PhoneModel[]
+             */
+            $phones = [];
+            if ($shelveModel->getShelvePhones()) {
+                foreach ($shelveModel->getShelvePhones() as $phone) {
+                    $phones[] = ModelSerializer::parse($phone, PhoneModel::class);
+                }
             }
+
+            $allPersonsRequest = new Req(Servers::Repository, Repository::Person, PersonActions::all);
+            $allPersonsResponse = $allPersonsRequest->send();
+
+            /**
+             * @var $persons PersonModel[]
+             */
+            $persons = [];
+            foreach ($allPersonsResponse->getContent() as $person) {
+                $persons[] = ModelSerializer::parse($person, PersonModel::class);
+            }
+
+            return $this->render('inventory/shelve/edit.html.twig', [
+                'controller_name' => 'InventoryController',
+                'shelveModel' => $shelveModel,
+                'phones' => $phones,
+                'persons' => $persons,
+
+            ]);
+        } else {
+            return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_list'));
         }
-
-        $allPersonsRequest = new Req(Servers::Repository, Repository::Person, PersonActions::all);
-        $allPersonsResponse = $allPersonsRequest->send();
-
-        /**
-         * @var $persons PersonModel[]
-         */
-        $persons = [];
-        foreach ($allPersonsResponse->getContent() as $person) {
-            $persons[] = ModelSerializer::parse($person, PersonModel::class);
-        }
-
-        return $this->render('inventory/shelve/edit.html.twig', [
-            'controller_name' => 'InventoryController',
-            'shelveModel' => $shelveModel,
-            'phones' => $phones,
-            'persons' => $persons,
-
-        ]);
     }
 
     /**
@@ -181,58 +201,64 @@ class ShelveController extends AbstractController
      */
     public function read($id, Request $request)
     {
-        $inputs = $request->request->all();
+        if (AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_fetch)) {
 
-        /**
-         * @var $shelveModel ShelveModel
-         */
-        $shelveModel = ModelSerializer::parse($inputs, ShelveModel::class);
-        $shelveModel->setShelveId($id);
-        $request = new Req(Servers::Inventory, InventoryEntity::Shelve, 'fetch');
-        $request->add_instance($shelveModel);
-        $response = $request->send();
-        $shelveModel = ModelSerializer::parse($response->getContent(), ShelveModel::class);
 
-        /**
-         * @var $phones PhoneModel[]
-         */
-        $phones = [];
-        if ($shelveModel->getShelvePhones()) {
-            foreach ($shelveModel->getShelvePhones() as $phone) {
-                $phones[] = ModelSerializer::parse($phone, PhoneModel::class);
+            $inputs = $request->request->all();
+
+            /**
+             * @var $shelveModel ShelveModel
+             */
+            $shelveModel = ModelSerializer::parse($inputs, ShelveModel::class);
+            $shelveModel->setShelveId($id);
+            $request = new Req(Servers::Inventory, InventoryEntity::Shelve, 'fetch');
+            $request->add_instance($shelveModel);
+            $response = $request->send();
+            $shelveModel = ModelSerializer::parse($response->getContent(), ShelveModel::class);
+
+            /**
+             * @var $phones PhoneModel[]
+             */
+            $phones = [];
+            if ($shelveModel->getShelvePhones()) {
+                foreach ($shelveModel->getShelvePhones() as $phone) {
+                    $phones[] = ModelSerializer::parse($phone, PhoneModel::class);
+                }
             }
-        }
 
-        /**
-         * @var $itemProducts ItemProductsModel[]
-         */
-        $itemProducts = [];
-        if ($shelveModel->getShelveItemProducts()) {
-            foreach ($shelveModel->getShelveItemProducts() as $itemProduct) {
-                $itemProducts[] = ModelSerializer::parse($itemProduct, ItemProductsModel::class);
+            /**
+             * @var $itemProducts ItemProductsModel[]
+             */
+            $itemProducts = [];
+            if ($shelveModel->getShelveItemProducts()) {
+                foreach ($shelveModel->getShelveItemProducts() as $itemProduct) {
+                    $itemProducts[] = ModelSerializer::parse($itemProduct, ItemProductsModel::class);
+                }
             }
-        }
 
 
 //        dd($itemProducts);
 
-        /**
-         * @var $deeds InventoryDeedModel[]
-         */
-        $deeds = [];
-        if ($shelveModel->getShelveDeeds()) {
-            foreach ($shelveModel->getShelveDeeds() as $deed) {
-                $deeds[] = ModelSerializer::parse($deed, InventoryDeedModel::class);
+            /**
+             * @var $deeds InventoryDeedModel[]
+             */
+            $deeds = [];
+            if ($shelveModel->getShelveDeeds()) {
+                foreach ($shelveModel->getShelveDeeds() as $deed) {
+                    $deeds[] = ModelSerializer::parse($deed, InventoryDeedModel::class);
+                }
             }
+
+
+            return $this->render('inventory/shelve/read.html.twig', [
+                'shelveModel' => $shelveModel,
+                'phones' => $phones,
+                'itemProducts' => $itemProducts,
+                'deeds' => $deeds,
+            ]);
+        } else {
+            return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_list'));
         }
-
-
-        return $this->render('inventory/shelve/read.html.twig', [
-            'shelveModel' => $shelveModel,
-            'phones' => $phones,
-            'itemProducts' => $itemProducts,
-            'deeds' => $deeds,
-        ]);
     }
 
 
@@ -245,23 +271,30 @@ class ShelveController extends AbstractController
      */
     public function addPhone($shelve_id, Request $request)
     {
-        $inputs = $request->request->all();
-        /**
-         * @var $phoneModel PhoneModel
-         */
-        $phoneModel = ModelSerializer::parse($inputs, PhoneModel::class);
-        $phoneModel->setShelveID($shelve_id);
+        if (AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_add_phone)) {
+
+            $inputs = $request->request->all();
+            /**
+             * @var $phoneModel PhoneModel
+             */
+            $phoneModel = ModelSerializer::parse($inputs, PhoneModel::class);
+            $phoneModel->setShelveID($shelve_id);
 //        dd($phoneModel);
-        $request = new Req(Servers::Inventory, InventoryEntity::Shelve, 'add_phone');
-        $request->add_instance($phoneModel);
-        $response = $request->send();
+            $request = new Req(Servers::Inventory, InventoryEntity::Shelve, 'add_phone');
+            $request->add_instance($phoneModel);
+            $response = $request->send();
 //        dd($response);
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $response->getMessage());
+            if ($response->getStatus() == ResponseStatus::successful) {
+                $this->addFlash('s', $response->getMessage());
+            } else {
+                $this->addFlash('f', $response->getMessage());
+            }
+            return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $shelve_id]));
+
         } else {
-            $this->addFlash('f', $response->getMessage());
+            return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $shelve_id]));
+
         }
-        return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $shelve_id]));
     }
 
     /**
@@ -273,18 +306,24 @@ class ShelveController extends AbstractController
      */
     public function removePhone($shelve_id, $phone_id)
     {
-        $phoneModel = new PhoneModel();
-        $phoneModel->setShelveID($shelve_id);
-        $phoneModel->setId($phone_id);
-        $request = new Req(Servers::Inventory, InventoryEntity::Shelve, 'remove_phone');
-        $request->add_instance($phoneModel);
-        $response = $request->send();
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $response->getMessage());
+        if (AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_remove_phone)) {
+
+
+            $phoneModel = new PhoneModel();
+            $phoneModel->setShelveID($shelve_id);
+            $phoneModel->setId($phone_id);
+            $request = new Req(Servers::Inventory, InventoryEntity::Shelve, 'remove_phone');
+            $request->add_instance($phoneModel);
+            $response = $request->send();
+            if ($response->getStatus() == ResponseStatus::successful) {
+                $this->addFlash('s', $response->getMessage());
+            } else {
+                $this->addFlash('f', $response->getMessage());
+            }
+            return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $shelve_id]));
         } else {
-            $this->addFlash('f', $response->getMessage());
+            return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $shelve_id]));
         }
-        return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $shelve_id]));
     }
 
     /**
@@ -294,27 +333,34 @@ class ShelveController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \ReflectionException
      */
-    public function changeShelveAvailability($shelve_id, $machine_name)
+    public
+    function changeShelveAvailability($shelve_id, $machine_name)
     {
-        $shelveStatusModel = new ShelveStatusModel();
-        if ($machine_name == 'active') {
-            $shelveStatusModel->setShelveId($shelve_id);
-            $shelveStatusModel->setShelveStatusMachineName('deactive');
-        } else {
-            $shelveStatusModel->setShelveId($shelve_id);
-            $shelveStatusModel->setShelveStatusMachineName('active');
-        }
+        if (AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_change_status)) {
 
-        $request = new Req(Servers::Inventory, InventoryEntity::Shelve, 'change_status');
-        $request->add_instance($shelveStatusModel);
-        $response = $request->send();
+
+            $shelveStatusModel = new ShelveStatusModel();
+            if ($machine_name == 'active') {
+                $shelveStatusModel->setShelveId($shelve_id);
+                $shelveStatusModel->setShelveStatusMachineName('deactive');
+            } else {
+                $shelveStatusModel->setShelveId($shelve_id);
+                $shelveStatusModel->setShelveStatusMachineName('active');
+            }
+
+            $request = new Req(Servers::Inventory, InventoryEntity::Shelve, 'change_status');
+            $request->add_instance($shelveStatusModel);
+            $response = $request->send();
 //        dd($response);
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $response->getMessage());
+            if ($response->getStatus() == ResponseStatus::successful) {
+                $this->addFlash('s', $response->getMessage());
+            } else {
+                $this->addFlash('f', $response->getMessage());
+            }
+            return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_list'));
         } else {
-            $this->addFlash('f', $response->getMessage());
+            return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_list'));
         }
-        return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_list'));
     }
 
     /**
@@ -325,8 +371,11 @@ class ShelveController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \ReflectionException
      */
-    public function itemProducts($item_id, $shelve_id, Request $request)
+    public
+    function itemProducts($item_id, $shelve_id, Request $request)
     {
+
+
         $inputs = $request->request->all();
 
         /**
@@ -347,6 +396,7 @@ class ShelveController extends AbstractController
         $shelveItemProductsModel = new ShelveItemProductsModel();
         $shelveItemProductsModel->setShelveId($shelve_id);
         $shelveItemProductsModel->setItemId($item_id);
+
         $shelveItemProductsRequest = new Req(Servers::Inventory, InventoryEntity::Shelve, 'get_shelve_item_products');
         $shelveItemProductsRequest->add_instance($shelveItemProductsModel);
         $shelveItemProductsResponse = $shelveItemProductsRequest->send();
@@ -372,5 +422,6 @@ class ShelveController extends AbstractController
             'products' => $products,
 
         ]);
+
     }
 }

@@ -67,28 +67,30 @@
                         <div class="col-3">
                             <div class="form-group row">
                                 <span class="label-text col-md-12 col-form-label ">BirthDate</span>
-
-                                <div class="col-md-4">
-                                    <select name="birthDateYear" class="form-control">
-                                        {% for year in years %}
-                                            <option value="{{ year }}" {{ (year == personModel.birthDateYear) ? 'selected' : '' }}>{{ year }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <select name="birthDateMonth" class="form-control">
-                                        {% for month in months %}
-                                            <option value="{{ month }}" {{ (month == personModel.birthDateMonth) ? 'selected' : '' }}>{{ month }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <select name="birthDateDay" class="form-control">
-                                        {% for day in days %}
-                                            <option value="{{ day }}" {{ (day == personModel.birthDateDay) ? 'selected' : '' }}>{{ day }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
+                                <input type="text" id="date-picker" name="birthDate"
+                                       class="form-control" value="{{ personModel.birthDate }}"/>
+                                <span id="span-date-picker"></span>
+                                {#<div class="col-md-4">#}
+                                {#<select name="birthDateYear" class="form-control">#}
+                                {#{% for year in years %}#}
+                                {#<option value="{{ year }}" {{ (year == personModel.birthDateYear) ? 'selected' : '' }}>{{ year }}</option>#}
+                                {#{% endfor %}#}
+                                {#</select>#}
+                                {#</div>#}
+                                {#<div class="col-md-4">#}
+                                {#<select name="birthDateMonth" class="form-control">#}
+                                {#{% for month in months %}#}
+                                {#<option value="{{ month }}" {{ (month == personModel.birthDateMonth) ? 'selected' : '' }}>{{ month }}</option>#}
+                                {#{% endfor %}#}
+                                {#</select>#}
+                                {#</div>#}
+                                {#<div class="col-md-4">#}
+                                {#<select name="birthDateDay" class="form-control">#}
+                                {#{% for day in days %}#}
+                                {#<option value="{{ day }}" {{ (day == personModel.birthDateDay) ? 'selected' : '' }}>{{ day }}</option>#}
+                                {#{% endfor %}#}
+                                {#</select>#}
+                                {#</div>#}
                             </div>
                         </div>
                         <div class="col-3">

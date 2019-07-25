@@ -30,10 +30,9 @@
                             <div class="form-group row">
                                 <div class="col-md-12">
                                     <span class="label-text col-md-12 col-form-label ">Date</span>
-                                    <input type="date" value="{{ invoiceModel.invoiceCreateDate }}"
-                                           name="invoiceCreateDate"
-                                           placeholder="Today or any other dates"
-                                           class="form-control">
+                                    <input type="text" id="date-picker" name="invoiceCreateDate"
+                                           class="form-control" placeholder="Create Date" value="{{ invoiceModel.invoiceCreateDate }}"/>
+                                    <span id="span-date-picker"></span>
                                 </div>
                                 <div class="col-md-12">
                                     <span class="label-text col-md-12 col-form-label ">Invoice Group</span>

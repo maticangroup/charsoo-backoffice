@@ -17,86 +17,93 @@
                             </p>
 
                         </div>
-                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-                            <a href="" class="btn btn-block rounded btn-success fa fa-plus"></a>
-                        </div>
+                        {% if canCreate %}
+                            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                                <a href="{{ path('accounting_coupon_group_create') }}"
+                                   class="btn btn-block rounded btn-success fa fa-plus"></a>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12">
-            <div class="panel">
-                <div class="panel-content">
-                    <div class="form-group row">
-                        <div class="col-4"></div>
-                        <div class="col-md-4">
-                            <input type="text" placeholder="Search" name="text"
-                                   class="form-control">
+        {% if canSeeAll %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-content">
+                        <div class="form-group row">
+                            <div class="col-4"></div>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Search" name="text"
+                                       class="form-control">
+                            </div>
+                            <div class="col-4"></div>
                         </div>
-                        <div class="col-4"></div>
-                    </div>
-                    <!-- Records List Start -->
-                    <div class="records--list">
-                        <table id="usersRoleList">
-                            <thead>
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Expiry date</th>
-                                <th scope="col">Type</th>
-                                <th scope="col">Effect</th>
-                                <th scope="col">Minimum invoice price</th>
-                                <th scope="col">Is private</th>
-                                <th scope="col">Usage times</th>
-                                <th scope="col">Creator</th>
-                                <th scope="col">Created Date</th>
-                                <th scope="col">Confirmer</th>
-                                <th scope="col">Confirm Date</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for coupon in couponGroups %}
+                        <!-- Records List Start -->
+                        <div class="records--list">
+                            <table id="usersRoleList">
+                                <thead>
                                 <tr>
-                                    <td>{{ coupon.couponGroupName }}</td>
-                                    <td>{{ coupon.couponGroupExpiryDate }}</td>
-                                    <td>{{ coupon.couponGroupDiscountType }}</td>
-                                    <td>{{ coupon.couponGroupDiscountEffect }}</td>
-                                    <td>{{ coupon.couponGroupMinimumInvoicePrice }}</td>
-                                    <td>{{ (coupon.couponGroupIsPrivate == 'true') ? 'Private' : 'Public' }}</td>
-                                    <td>{{ coupon.couponGroupUsageTimes }}</td>
-                                    <td>{{ coupon.couponGroupCreatePerson }}</td>
-                                    <td>{{ coupon.couponGroupCreateDate }}</td>
-                                    <td>{{ coupon.couponGroupConfirmPerson }}</td>
-                                    <td>{{ coupon.couponGroupConfirmDate }}</td>
-                                    <td>
-                                        {% if coupon.couponGroupStatus.couponGroupStatusMachineName == 'requested' %}
-                                            <span class="label label-orange rounded">Waiting</span>
-                                        {% else %}
-                                            <span class="label rounded"
-                                                  style="background-color: {{ coupon.couponGroupStatus.couponGroupStatusColor }}">
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Expiry date</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Effect</th>
+                                    <th scope="col">Minimum invoice price</th>
+                                    <th scope="col">Is private</th>
+                                    <th scope="col">Usage times</th>
+                                    <th scope="col">Creator</th>
+                                    <th scope="col">Created Date</th>
+                                    <th scope="col">Confirmer</th>
+                                    <th scope="col">Confirm Date</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for coupon in couponGroups %}
+                                    <tr>
+                                        <td>{{ coupon.couponGroupName }}</td>
+                                        <td>{{ coupon.couponGroupExpiryDate }}</td>
+                                        <td>{{ coupon.couponGroupDiscountType }}</td>
+                                        <td>{{ coupon.couponGroupDiscountEffect }}</td>
+                                        <td>{{ coupon.couponGroupMinimumInvoicePrice }}</td>
+                                        <td>{{ (coupon.couponGroupIsPrivate == 'true') ? 'Private' : 'Public' }}</td>
+                                        <td>{{ coupon.couponGroupUsageTimes }}</td>
+                                        <td>{{ coupon.couponGroupCreatePerson }}</td>
+                                        <td>{{ coupon.couponGroupCreateDate }}</td>
+                                        <td>{{ coupon.couponGroupConfirmPerson }}</td>
+                                        <td>{{ coupon.couponGroupConfirmDate }}</td>
+                                        <td>
+                                            {% if coupon.couponGroupStatus.couponGroupStatusMachineName == 'requested' %}
+                                                <span class="label label-orange rounded">Waiting</span>
+                                            {% else %}
+                                                <span class="label rounded"
+                                                      style="background-color: {{ coupon.couponGroupStatus.couponGroupStatusColor }}">
                                             {{ coupon.couponGroupStatus.couponGroupStatusName }}
                                         </span>
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        <a href="{{ path('accounting_coupon_group_read' , {id:coupon.couponGroupId}) }}"
-                                           class="fa fa-eye"></a>
-                                        <a href="{{ path('accounting_coupon_group_edit' , {id:coupon.couponGroupId}) }}"
-                                           class="fa fa-edit"></a>
-                                        {% if coupon.couponGroupStatus.couponGroupStatusMachineName != 'requested' %}
-                                            <a href="{{ path('accounting_coupon_group_status' , {coupon_group_id:coupon.couponGroupId , machine_name:coupon.couponGroupStatus.couponGroupStatusMachineName}) }}"
-                                               class="{{ (coupon.couponGroupStatus.couponGroupStatusMachineName == 'active') ? 'fa fa-ban text-red' : 'fa fa-play text-green' }}"></a>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if canEdit %}
+                                                <a href="{{ path('accounting_coupon_group_read' , {id:coupon.couponGroupId}) }}"
+                                                   class="fa fa-eye"></a>
+                                                <a href="{{ path('accounting_coupon_group_edit' , {id:coupon.couponGroupId}) }}"
+                                                   class="fa fa-edit"></a>
+                                            {% endif %}
+                                            {% if coupon.couponGroupStatus.couponGroupStatusMachineName != 'requested' %}
+                                                <a href="{{ path('accounting_coupon_group_status' , {coupon_group_id:coupon.couponGroupId , machine_name:coupon.couponGroupStatus.couponGroupStatusMachineName}) }}"
+                                                   class="{{ (coupon.couponGroupStatus.couponGroupStatusMachineName == 'active') ? 'fa fa-ban text-red' : 'fa fa-play text-green' }}"></a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Records List End -->
                     </div>
-                    <!-- Records List End -->
                 </div>
             </div>
-        </div>
+        {% endif %}
     </div>
 {% endblock %}

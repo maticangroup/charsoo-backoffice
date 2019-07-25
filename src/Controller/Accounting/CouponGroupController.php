@@ -17,6 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Matican\Core\Transaction\Request as Req;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/accounting/coupon-group", name="accounting_coupon_group")
@@ -29,7 +30,11 @@ class CouponGroupController extends AbstractController
      */
     public function fetchAll()
     {
-        if (AuthUser::if_is_allowed(ServerPermissions::accounting_coupongroup_all)) {
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::accounting_coupongroup_all);
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::accounting_coupongroup_fetch);
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::accounting_coupongroup_new);
+
+        if ($canSeeAll) {
 
             $request = new Req(Servers::Accounting, Accounting::CouponGroup, 'all');
             $response = $request->send();
@@ -47,7 +52,10 @@ class CouponGroupController extends AbstractController
 //        $couponGroups = $response->getContent();
             return $this->render('accounting/coupon_group/list.html.twig', [
                 'controller_name' => 'CouponGroupController',
-                'couponGroups' => $couponGroups
+                'couponGroups' => $couponGroups,
+                'canSeeAll' => $canSeeAll,
+                'canEdit' => $canEdit,
+                'canCreate' => $canCreate,
             ]);
         } else {
             return $this->redirect($this->generateUrl('accounting_coupon_group_create'));
@@ -63,7 +71,10 @@ class CouponGroupController extends AbstractController
     public
     function create(Request $request)
     {
-        if (AuthUser::if_is_allowed(ServerPermissions::accounting_coupongroup_new)) {
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::accounting_coupongroup_new);
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::accounting_coupongroup_fetch);
+
+        if ($canCreate) {
 
 
             $inputs = $request->request->all();
@@ -88,9 +99,13 @@ class CouponGroupController extends AbstractController
                      * @var $couponGroupModel CouponGroupModel
                      */
                     $couponGroupModel = ModelSerializer::parse($response->getContent(), CouponGroupModel::class);
-                    return $this->redirect($this->generateUrl('accounting_coupon_group_edit', ['id' => $couponGroupModel->getCouponGroupId()]));
+                    if ($canEdit) {
+                        return $this->redirect($this->generateUrl('accounting_coupon_group_edit', ['id' => $couponGroupModel->getCouponGroupId()]));
+                    } else {
+                        return $this->redirect($this->generateUrl('accounting_coupon_group_list'));
+                    }
                 } else {
-                    $this->addFlash('s', $response->getMessage());
+                    $this->addFlash('f', $response->getMessage());
                 }
             }
 
@@ -98,6 +113,7 @@ class CouponGroupController extends AbstractController
             return $this->render('accounting/coupon_group/create.html.twig', [
                 'controller_name' => 'CouponGroupController',
                 'couponGroupModel' => $couponGroupModel,
+                'canCreate' => $canCreate,
             ]);
         } else {
             return $this->redirect($this->generateUrl('accounting_coupon_group_list'));
@@ -114,6 +130,10 @@ class CouponGroupController extends AbstractController
     public
     function edit($id, Request $request)
     {
+        $canConfirm = AuthUser::if_is_allowed(ServerPermissions::accounting_coupongroup_confirm);
+        $canAddCustomer = AuthUser::if_is_allowed(ServerPermissions::accounting_coupongroup_add_allowed_customer);
+        $canRemoveCustomer = AuthUser::if_is_allowed(ServerPermissions::accounting_coupongroup_remove_allowed_customer);
+
         if (AuthUser::if_is_allowed(ServerPermissions::accounting_coupongroup_fetch)) {
 
 
@@ -193,6 +213,9 @@ class CouponGroupController extends AbstractController
                 'usedPeopleCoupons' => $usedPeopleCoupons,
                 'persons' => $persons,
                 'selectedPersons' => $selectedPersons,
+                'canConfirm' => $canConfirm,
+                'canAddCustomer' => $canAddCustomer,
+                'canRemoveCustomer' => $canRemoveCustomer,
             ]);
         } else {
             return $this->redirect($this->generateUrl('accounting_coupon_group_list'));

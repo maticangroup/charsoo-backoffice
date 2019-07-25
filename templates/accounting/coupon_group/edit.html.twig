@@ -38,28 +38,30 @@
                 </div>
             </div>
         </div>
-        <div class="col-2">
-            <div class="panel">
-                <div class="weather--panel text-white bg-darker">
-                    <div class="weather--title">
-                        <i class="fa fa-exclamation"></i>
-                        <span>Confirm</span>
-                    </div>
-                    <div class="weather--info">
-                        {% if couponGroupModel.couponGroupStatus.couponGroupStatusMachineName == 'requested' %}
-                            <a href="{{ path('accounting_coupon_group_confirm_coupon_group' , {coupon_group_id:couponGroupModel.couponGroupId}) }}"
-                               class="fa fa-check text-green"></a>
-                        {% elseif couponGroupModel.couponGroupStatus.couponGroupStatusMachineName == 'deactive' %}
-                            <a href="{{ path('accounting_coupon_group_confirm_coupon_group' , {coupon_group_id:couponGroupModel.couponGroupId}) }}"
-                               class="fa fa-check text-green"></a>
-                        {% else %}
-                            <a href="{{ path('accounting_coupon_group_reject_coupon_group' , {coupon_group_id:couponGroupModel.couponGroupId}) }}"
-                               class="fa fa-ban text-red"></a>
-                        {% endif %}
+        {% if canConfirm %}
+            <div class="col-2">
+                <div class="panel">
+                    <div class="weather--panel text-white bg-darker">
+                        <div class="weather--title">
+                            <i class="fa fa-exclamation"></i>
+                            <span>Confirm</span>
+                        </div>
+                        <div class="weather--info">
+                            {% if couponGroupModel.couponGroupStatus.couponGroupStatusMachineName == 'requested' %}
+                                <a href="{{ path('accounting_coupon_group_confirm_coupon_group' , {coupon_group_id:couponGroupModel.couponGroupId}) }}"
+                                   class="fa fa-check text-green"></a>
+                            {% elseif couponGroupModel.couponGroupStatus.couponGroupStatusMachineName == 'deactive' %}
+                                <a href="{{ path('accounting_coupon_group_confirm_coupon_group' , {coupon_group_id:couponGroupModel.couponGroupId}) }}"
+                                   class="fa fa-check text-green"></a>
+                            {% else %}
+                                <a href="{{ path('accounting_coupon_group_reject_coupon_group' , {coupon_group_id:couponGroupModel.couponGroupId}) }}"
+                                   class="fa fa-ban text-red"></a>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
         <div class="col-12">
             <div class="panel">
                 <div class="panel-content">
@@ -202,22 +204,25 @@
                 <div class="col-12">
                     <div class="panel">
                         <div class="panel-content">
-                            <form action="{{ path('accounting_coupon_group_add_person' , {coupon_group_id:couponGroupModel.couponGroupId }) }}"
-                                  class="form-group row" method="post">
-                                <div class="col-3"></div>
-                                <div class="col-md-4">
-                                    <select name="id" class="form-control">
-                                        {% for person in persons %}
-                                            <option value="{{ person.id }}">{{ person.humanName }} {{ person.humanFamily }}
-                                                | {{ person.mobile }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="submit" class="btn rounded btn-block btn-dark fa fa-save"></button>
-                                </div>
-                                <div class="col-3"></div>
-                            </form>
+                            {% if canAddCustomer %}
+                                <form action="{{ path('accounting_coupon_group_add_person' , {coupon_group_id:couponGroupModel.couponGroupId }) }}"
+                                      class="form-group row" method="post">
+                                    <div class="col-3"></div>
+                                    <div class="col-md-4">
+                                        <select name="id" class="form-control">
+                                            {% for person in persons %}
+                                                <option value="{{ person.id }}">{{ person.humanName }} {{ person.humanFamily }}
+                                                    | {{ person.mobile }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="submit"
+                                                class="btn rounded btn-block btn-dark fa fa-save"></button>
+                                    </div>
+                                    <div class="col-3"></div>
+                                </form>
+                            {% endif %}
                             <!---->
                             <div class="records--list">
                                 <table id="countriesList">
@@ -228,7 +233,9 @@
                                         <th>Mobile</th>
                                         <th>Groups</th>
                                         <th>Company</th>
-                                        <th>Actions</th>
+                                        {% if canRemoveCustomer %}
+                                            <th>Actions</th>
+                                        {% endif %}
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -247,10 +254,12 @@
                                                     <span class="label label-info rounded">{{ company }}</span>
                                                 {% endfor %}
                                             </td>
-                                            <td>
-                                                <a href="{{ path('accounting_coupon_group_remove_person' , {person_id:selectedPerson.id , coupon_group_id:couponGroupModel.couponGroupId }) }}"
-                                                   class="fa fa-trash"></a>
-                                            </td>
+                                            {% if canRemoveCustomer %}
+                                                <td>
+                                                    <a href="{{ path('accounting_coupon_group_remove_person' , {person_id:selectedPerson.id , coupon_group_id:couponGroupModel.couponGroupId }) }}"
+                                                       class="fa fa-trash"></a>
+                                                </td>
+                                            {% endif %}
                                         </tr>
                                     {% endfor %}
                                     </tbody>

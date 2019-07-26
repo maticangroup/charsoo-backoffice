@@ -242,6 +242,4 @@ class CustomerGroupController extends AbstractController
         }
         return $this->redirect($this->generateUrl('crm_customer_group_create'));
     }
-
-
 }

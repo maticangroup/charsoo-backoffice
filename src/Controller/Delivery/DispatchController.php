@@ -12,6 +12,8 @@ use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\LocationModel;
 use App\FormModels\Repository\PersonModel;
 use App\FormModels\Sale\OrderModel;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Delivery;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Entities\Sale;
@@ -33,6 +35,9 @@ class DispatchController extends AbstractController
     public function fetchAll()
     {
 
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_dispatch_all)) {
+            return $this->redirect($this->generateUrl('default'));
+        }
         $request = new Req(Servers::Delivery, Delivery::Dispatch, 'all');
         $response = $request->send();
 
@@ -57,6 +62,9 @@ class DispatchController extends AbstractController
      */
     public function create()
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_all)) {
+            return $this->redirect($this->generateUrl('delivery_dispatch_list'));
+        }
 
         $ordersRequest = new Req(Servers::Sale, Sale::Order, 'all');
         $orderResponse = $ordersRequest->send();
@@ -89,6 +97,9 @@ class DispatchController extends AbstractController
      */
     public function createDispatch(Request $request, $order_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_dispatch_new)) {
+            return $this->redirect($this->generateUrl('delivery_dispatch_list'));
+        }
         $inputs = $request->request->all();
         /**
          * @var $dispatchModel DispatchModel
@@ -122,6 +133,10 @@ class DispatchController extends AbstractController
     public function edit($id, Request $request)
     {
 
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_dispatch_fetch)) {
+            return $this->redirect($this->generateUrl('delivery_dispatch_list'));
+
+        }
         $inputs = $request->request->all();
         /**
          * @var $dispatchModel DispatchModel
@@ -247,6 +262,10 @@ class DispatchController extends AbstractController
      */
     public function addDeliveryMethod($dispatch_id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_dispatch_set_delivery_method)) {
+            return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatch_id]));
+
+        }
         $inputs = $request->request->all();
         /**
          * @var $deliveryMethodModel DeliveryMethodModel
@@ -273,6 +292,10 @@ class DispatchController extends AbstractController
      */
     public function addQueue($dispatch_id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_dispatch_set_queue)) {
+            return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatch_id]));
+
+        }
         $inputs = $request->request->all();
         /**
          * @var $queueModel QueueModel
@@ -301,6 +324,9 @@ class DispatchController extends AbstractController
      */
     public function confirmQueue($dispatch_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_dispatch_finalize_dispatch)) {
+            return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatch_id]));
+        }
         $dispatchModel = new DispatchModel();
         $dispatchModel->setDispatchId($dispatch_id);
         $request = new Req(Servers::Delivery, Delivery::Dispatch, 'finalize_dispatch');
@@ -323,6 +349,9 @@ class DispatchController extends AbstractController
      */
     public function rethinkConfirmQueue($dispatch_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_dispatch_rethink_dispatch)) {
+            return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatch_id]));
+        }
         $dispatchModel = new DispatchModel();
         $dispatchModel->setDispatchId($dispatch_id);
         $request = new Req(Servers::Delivery, Delivery::Dispatch, 'rethink_dispatch');
@@ -347,6 +376,9 @@ class DispatchController extends AbstractController
      */
     public function addLocationToDispatch($dispatch_id, $location_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_dispatch_set_dispatch_location)) {
+            return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatch_id]));
+        }
         $locationModel = new LocationModel();
         $locationModel->setLocationId($location_id);
         $locationModel->setDispatchId($dispatch_id);
@@ -371,6 +403,9 @@ class DispatchController extends AbstractController
      */
     public function addDeliveryPersonToDispatch($dispatch_id, $delivery_person_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_dispatch_set_delivery_person)) {
+            return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatch_id]));
+        }
         $deliveryPersonModel = new DeliveryPersonModel();
         $deliveryPersonModel->setDeliveryPersonId($delivery_person_id);
         $deliveryPersonModel->setDispatchId($dispatch_id);

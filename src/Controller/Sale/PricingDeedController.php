@@ -9,6 +9,8 @@ use App\FormModels\Sale\OfferGroupModel;
 use App\FormModels\Sale\PricingDeedConfirmStatusModel;
 use App\FormModels\Sale\PricingDeedModel;
 use App\FormModels\Sale\PricingDeedStatusModel;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Inventory;
 use Matican\Core\Entities\Sale;
 use Matican\Core\Servers;
@@ -28,6 +30,10 @@ class PricingDeedController extends AbstractController
      */
     public function fetchAll()
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_all)) {
+            return $this->redirect($this->generateUrl('default'));
+
+        }
         $allPricingDeedsRequest = new Req(Servers::Sale, Sale::PricingDeed, 'all');
         $allPricingDeedsResponse = $allPricingDeedsRequest->send();
 
@@ -53,6 +59,9 @@ class PricingDeedController extends AbstractController
      */
     public function create(Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_new)) {
+            return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_list'));
+        }
         $inputs = $request->request->all();
         /**
          * @var $pricingDeedModel PricingDeedModel
@@ -110,6 +119,10 @@ class PricingDeedController extends AbstractController
      */
     public function edit($id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_fetch)) {
+            return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_read', ['id' => $pricing_deed_id]));
+
+        }
         $inputs = $request->request->all();
 
         /**
@@ -256,6 +269,10 @@ class PricingDeedController extends AbstractController
      */
     public function read($id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_fetch)) {
+            return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_list'));
+
+        }
         $inputs = $request->request->all();
 
         /**
@@ -292,6 +309,9 @@ class PricingDeedController extends AbstractController
      */
     public function pricingDeedConfirm($pricing_deed_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_apply_pricing_deed)) {
+            return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));
+        }
         $pricingDeedModel = new PricingDeedModel();
         $pricingDeedModel->setPricingDeedId($pricing_deed_id);
         $request = new Req(Servers::Sale, Sale::PricingDeed, 'apply_pricing_deed');
@@ -317,6 +337,9 @@ class PricingDeedController extends AbstractController
      */
     public function addProduct($pricing_deed_id, $product_id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_add_product)) {
+            return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));
+        }
         $inputs = $request->request->all();
 
         /**
@@ -348,6 +371,9 @@ class PricingDeedController extends AbstractController
      */
     public function removeProduct($pricing_deed_id, $deed_item_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_remove_product)) {
+            return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));
+        }
         $productModel = new ProductModel();
         $productModel->setProductDeedId($pricing_deed_id);
         $productModel->setProductPricingDeedItemId($deed_item_id);
@@ -372,7 +398,9 @@ class PricingDeedController extends AbstractController
      */
     public function addOfferGroup($pricing_deed_id, $offer_group_id)
     {
-
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_add_offer_group_products)) {
+            return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));
+        }
         $pricingDeedModel = new PricingDeedModel();
         $pricingDeedModel->setPricingDeedId($pricing_deed_id);
         $pricingDeedModel->setPricingDeedOfferGroupId($offer_group_id);
@@ -397,7 +425,9 @@ class PricingDeedController extends AbstractController
      */
     public function addShelve($pricing_deed_id, $shelve_id)
     {
-
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_add_shelve_products)) {
+            return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));
+        }
         $pricingDeedModel = new PricingDeedModel();
         $pricingDeedModel->setPricingDeedId($pricing_deed_id);
         $pricingDeedModel->setPricingDeedShelveId($shelve_id);
@@ -424,6 +454,9 @@ class PricingDeedController extends AbstractController
     public function acceptPricingDeed($pricing_deed_id, Request $request)
     {
 
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_accept_pricing_list)) {
+            return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));
+        }
         $inputs = $request->request->all();
 
         /**
@@ -447,6 +480,9 @@ class PricingDeedController extends AbstractController
     public function backToSelection($pricing_deed_id, Request $request)
     {
 
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_ignore_pricing_list)) {
+            return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));
+        }
         $inputs = $request->request->all();
 
         /**
@@ -469,7 +505,9 @@ class PricingDeedController extends AbstractController
      */
     public function savePricingList($pricing_deed_id, Request $request)
     {
-
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_save_pricing_list)) {
+            return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));
+        }
         $inputs = $request->request->all();
 
 //        dd($inputs);
@@ -528,7 +566,9 @@ class PricingDeedController extends AbstractController
      */
     public function addPricingDeed($pricing_deed_id, $import_pricing_deed_id)
     {
-
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_add_pricing_deed_products)) {
+            return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));
+        }
         $pricingDeedModel = new PricingDeedModel();
         $pricingDeedModel->setPricingDeedId($pricing_deed_id);
         $pricingDeedModel->setPricingDeedImportDeedId($import_pricing_deed_id);

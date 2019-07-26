@@ -6,6 +6,8 @@ use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\ProductModel;
 use App\FormModels\Sale\OfferGroupModel;
 use App\FormModels\Sale\OfferGroupStatusModel;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Inventory;
 use Matican\Core\Entities\Sale;
 use Matican\Core\Servers;
@@ -29,6 +31,7 @@ class OfferGroupController extends AbstractController
      */
     public function create(Request $request)
     {
+
         $inputs = $request->request->all();
 
         /**
@@ -64,7 +67,9 @@ class OfferGroupController extends AbstractController
         }
 
 //        dd($offerGroups);
-
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_all)) {
+            $offerGroups = [];
+        }
 
         return $this->render('sale/offer_group/create.html.twig', [
             'controller_name' => 'OfferGroupController',
@@ -82,6 +87,9 @@ class OfferGroupController extends AbstractController
      */
     public function edit($id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_fetch)) {
+            return $this->redirect($this->generateUrl('sale_offer_group_sale_offer_group_create'));
+        }
         $inputs = $request->request->all();
 
         /**
@@ -94,7 +102,12 @@ class OfferGroupController extends AbstractController
         $response = $request->send();
         $offerGroupModel = ModelSerializer::parse($response->getContent(), OfferGroupModel::class);
 
+
         if (!empty($inputs)) {
+            if (!AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_update)) {
+                return $this->redirect($this->generateUrl('sale_offer_group_sale_offer_group_edit', ['id' => $offerGroupModel->getOfferGroupId()]));
+
+            }
             /**
              * @var $offerGroupModel OfferGroupModel
              */
@@ -149,7 +162,9 @@ class OfferGroupController extends AbstractController
             }
         }
 
-
+        if (!AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_get_shelves_products)) {
+            $shelvesProducts = [];
+        }
         return $this->render('sale/offer_group/edit.html.twig', [
             'controller_name' => 'OfferGroupController',
             'offerGroupModel' => $offerGroupModel,
@@ -167,6 +182,9 @@ class OfferGroupController extends AbstractController
      */
     public function read($id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_fetch)) {
+            return $this->redirect($this->generateUrl('sale_offer_group_sale_offer_group_create'));
+        }
         $inputs = $request->request->all();
 
         /**
@@ -207,6 +225,9 @@ class OfferGroupController extends AbstractController
      */
     public function changeOfferGroupAvailability($offer_group_id, $machine_name)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_change_status)) {
+            return $this->redirect($this->generateUrl('sale_offer_group_sale_offer_group_create'));
+        }
         $offerGroupStatusModel = new OfferGroupStatusModel();
         if ($machine_name == 'deactive') {
             $offerGroupStatusModel->setOfferGroupId($offer_group_id);
@@ -238,6 +259,10 @@ class OfferGroupController extends AbstractController
      */
     public function addProduct($offer_group_id, $product_id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_add_product)) {
+            return $this->redirect($this->generateUrl('sale_offer_group_sale_offer_group_edit', ['id' => $offer_group_id]));
+
+        }
         $inputs = $request->request->all();
 
         /**
@@ -267,6 +292,10 @@ class OfferGroupController extends AbstractController
      */
     public function removeProduct($offer_group_id, $product_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_remove_product)) {
+            return $this->redirect($this->generateUrl('sale_offer_group_sale_offer_group_edit', ['id' => $offer_group_id]));
+
+        }
         $productModel = new ProductModel();
         $productModel->setProductId($product_id);
         $productModel->setProductOfferGroupId($offer_group_id);

@@ -11,6 +11,8 @@ use App\FormModels\Delivery\DispatchPaymentStatusModel;
 use App\FormModels\Delivery\DistrictModel;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\ProvinceModel;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Delivery;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
@@ -30,6 +32,9 @@ class DeliveryPersonController extends AbstractController
      */
     public function fetchAll()
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_all)) {
+            return $this->redirect($this->generateUrl('default'));
+        }
         $request = new Req(Servers::Delivery, Delivery::DeliveryPerson, 'all');
         $response = $request->send();
 
@@ -58,6 +63,9 @@ class DeliveryPersonController extends AbstractController
      */
     public function edit($id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_fetch)) {
+            return $this->redirect($this->generateUrl('delivery_person_list'));
+        }
         $inputs = $request->request->all();
         /**
          * @var $deliveryPersonModel DeliveryPersonModel
@@ -135,6 +143,9 @@ class DeliveryPersonController extends AbstractController
      */
     public function read($id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_fetch)) {
+            return $this->redirect($this->generateUrl('delivery_person_list'));
+        }
         $inputs = $request->request->all();
         /**
          * @var $deliveryPersonModel DeliveryPersonModel
@@ -211,6 +222,9 @@ class DeliveryPersonController extends AbstractController
      */
     public function changeDeliveryPersonAvailability($delivery_person_id, $machine_name)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_change_status)) {
+            return $this->redirect($this->generateUrl('delivery_person_list'));
+        }
         $deliveryPersonStatusModel = new DeliveryPersonStatusModel();
         if ($machine_name == 'active') {
             $deliveryPersonStatusModel->setDeliveryPersonId($delivery_person_id);
@@ -241,6 +255,9 @@ class DeliveryPersonController extends AbstractController
      */
     public function addDistrict($delivery_person_id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_add_allowed_district)) {
+            return $this->redirect($this->generateUrl('delivery_person_edit', ['id' => $delivery_person_id]));
+        }
         $inputs = $request->request->all();
         /**
          * @var $districtModel DistrictModel
@@ -270,6 +287,9 @@ class DeliveryPersonController extends AbstractController
      */
     public function removeDistrict($delivery_person_id, $district_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_remove_allowed_district)) {
+            return $this->redirect($this->generateUrl('delivery_person_edit', ['id' => $delivery_person_id]));
+        }
         $districtModel = new DistrictModel();
         $districtModel->setDeliveryPersonId($delivery_person_id);
         $districtModel->setDistrictId($district_id);
@@ -296,6 +316,9 @@ class DeliveryPersonController extends AbstractController
      */
     public function dispatchPayment($dispatch_id, $machine_name, $delivery_person_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_dispatch_confirm_dispatch_payment)) {
+            return $this->redirect($this->generateUrl('delivery_person_edit', ['id' => $delivery_person_id]));
+        }
         $dispatchPaymentStatusModel = new DispatchPaymentStatusModel();
         if ($machine_name == 'paid_back') {
             $dispatchPaymentStatusModel->setDispatchId($dispatch_id);

@@ -15,6 +15,7 @@ use App\FormModels\Repository\PersonModel;
 use App\FormModels\Repository\SizeModel;
 use App\General\AuthUser;
 use App\Params;
+use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Delivery;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
@@ -37,6 +38,9 @@ class DeliveryMethodController extends AbstractController
      */
     public function fetchAll()
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_all)) {
+            return $this->redirect($this->generateUrl('default'));
+        }
 
         $request = new Req(Servers::Delivery, Delivery::DeliveryMethod, 'all');
         $response = $request->send();
@@ -66,6 +70,9 @@ class DeliveryMethodController extends AbstractController
      */
     public function create(Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_new)) {
+            return $this->redirect($this->generateUrl('delivery_method_list'));
+        }
         $inputs = $request->request->all();
         /**
          * @var $deliveryMethodModel DeliveryMethodModel
@@ -119,6 +126,9 @@ class DeliveryMethodController extends AbstractController
      */
     public function edit($id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_fetch)) {
+            return $this->redirect($this->generateUrl('delivery_method_list'));
+        }
         $inputs = $request->request->all();
         /**
          * @var $deliveryMethodModel DeliveryMethodModel
@@ -251,6 +261,9 @@ class DeliveryMethodController extends AbstractController
      */
     public function read($id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_fetch)) {
+            return $this->redirect($this->generateUrl('delivery_method_list'));
+        }
         $inputs = $request->request->all();
         /**
          * @var $deliveryMethodModel DeliveryMethodModel
@@ -315,6 +328,10 @@ class DeliveryMethodController extends AbstractController
      */
     public function addSize($delivery_method_id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_add_allowed_size)) {
+            return $this->redirect($this->generateUrl('delivery_method_edit', ['id' => $delivery_method_id]));
+
+        }
         $inputs = $request->request->all();
         /**
          * @var $sizeModel SizeModel
@@ -342,6 +359,10 @@ class DeliveryMethodController extends AbstractController
      */
     public function removeSize($delivery_method_id, $size_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_remove_allowed_size)) {
+            return $this->redirect($this->generateUrl('delivery_method_edit', ['id' => $delivery_method_id]));
+
+        }
         $sizeModel = new SizeModel();
         $sizeModel->setDeliveryMethodId($delivery_method_id);
         $sizeModel->setSizeID($size_id);
@@ -366,6 +387,10 @@ class DeliveryMethodController extends AbstractController
      */
     public function addDeliveryPerson($delivery_method_id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_add_delivery_person)) {
+            return $this->redirect($this->generateUrl('delivery_method_edit', ['id' => $delivery_method_id]));
+
+        }
         $inputs = $request->request->all();
         /**
          * @var $deliveryPersonModel DeliveryPersonModel
@@ -395,6 +420,10 @@ class DeliveryMethodController extends AbstractController
      */
     public function removeDeliveryPerson($delivery_method_id, $delivery_person_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_remove_delivery_person)) {
+            return $this->redirect($this->generateUrl('delivery_method_edit', ['id' => $delivery_method_id]));
+
+        }
         $deliveryPersonModel = new DeliveryPersonModel();
         $deliveryPersonModel->setDeliveryPersonDeliveryMethodId($delivery_method_id);
         $deliveryPersonModel->setDeliveryPersonId($delivery_person_id);
@@ -422,6 +451,10 @@ class DeliveryMethodController extends AbstractController
      */
     public function addQueue($delivery_method_id, $week_day_id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_add_queue)) {
+            return $this->redirect($this->generateUrl('delivery_method_edit', ['id' => $delivery_method_id]));
+
+        }
         $inputs = $request->request->all();
         /**
          * @var $queueModel QueueModel
@@ -453,6 +486,9 @@ class DeliveryMethodController extends AbstractController
      */
     public function removeQueue($delivery_method_id, $week_day_id, $queue_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_remove_queue)) {
+            return $this->redirect($this->generateUrl('delivery_method_edit', ['id' => $delivery_method_id]));
+        }
         $queueModel = new QueueModel();
         $queueModel->setDeliveryMethodId($delivery_method_id);
         $queueModel->setWeekDayId($week_day_id);
@@ -479,6 +515,9 @@ class DeliveryMethodController extends AbstractController
      */
     public function changeQueueAvailability($queue_id, $machine_name, $delivery_method_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_change_queue_status)) {
+            return $this->redirect($this->generateUrl('delivery_method_edit', ['id' => $delivery_method_id]));
+        }
         $queueStatusModel = new QueueStatusModel();
         if ($machine_name == 'active') {
             $queueStatusModel->setQueueId($queue_id);
@@ -510,6 +549,10 @@ class DeliveryMethodController extends AbstractController
      */
     public function changeAvailability($delivery_method_id, $machine_name)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_change_delivery_method_status)) {
+            return $this->redirect($this->generateUrl('delivery_method_list'));
+
+        }
         $deliveryMethodStatusModel = new DeliveryMethodStatusModel();
         if ($machine_name == 'active') {
             $deliveryMethodStatusModel->setDeliveryMethodId($delivery_method_id);

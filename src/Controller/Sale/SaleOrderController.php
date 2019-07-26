@@ -6,6 +6,8 @@ use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\PersonModel;
 use App\FormModels\Repository\ProductModel;
 use App\FormModels\Sale\OrderModel;
+use App\General\AuthUser;
+use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Inventory;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Entities\Sale;
@@ -27,7 +29,9 @@ class SaleOrderController extends AbstractController
      */
     public function fetchAll()
     {
-
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_all)) {
+            return $this->redirect($this->generateUrl('default'));
+        }
         $allOrdersRequest = new Req(Servers::Sale, Sale::Order, 'all');
         $allOrdersResponse = $allOrdersRequest->send();
 
@@ -53,6 +57,9 @@ class SaleOrderController extends AbstractController
      */
     public function create(Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_new)) {
+            return $this->redirect($this->generateUrl('sale_order_list'));
+        }
         $inputs = $request->request->all();
 
         /**
@@ -103,6 +110,9 @@ class SaleOrderController extends AbstractController
      */
     public function edit($id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_fetch)) {
+            return $this->redirect($this->generateUrl('sale_order_read', ['id' => $id]));
+        }
         $inputs = $request->request->all();
         /**
          * @var $orderModel OrderModel
@@ -209,7 +219,9 @@ class SaleOrderController extends AbstractController
      */
     public function read($id, Request $request)
     {
-
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_fetch)) {
+            return $this->redirect($this->generateUrl('sale_order_list'));
+        }
         $inputs = $request->request->all();
         /**
          * @var $orderModel OrderModel
@@ -241,6 +253,10 @@ class SaleOrderController extends AbstractController
      */
     public function addProduct($order_id, $product_id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_add_product)) {
+            return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $order_id]));
+
+        }
         $inputs = $request->request->all();
 
         /**
@@ -271,6 +287,10 @@ class SaleOrderController extends AbstractController
      */
     public function removeProduct($order_id, $order_item_id)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_remove_product)) {
+            return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $order_id]));
+
+        }
         $productModel = new ProductModel();
         $productModel->setProductOrderId($order_id);
         $productModel->setProductOrderItemId($order_item_id);
@@ -296,6 +316,10 @@ class SaleOrderController extends AbstractController
      */
     public function goFinalOrder($order_id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_accept_order_list)) {
+            return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $order_id]));
+
+        }
 
         $inputs = $request->request->all();
 
@@ -321,7 +345,10 @@ class SaleOrderController extends AbstractController
      */
     public function backToSelection($order_id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_ignore_order_list)) {
+            return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $order_id]));
 
+        }
         $inputs = $request->request->all();
 
         /**
@@ -345,6 +372,10 @@ class SaleOrderController extends AbstractController
      */
     public function saveOrder($order_id, Request $request)
     {
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_save_order)) {
+            return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $order_id]));
+
+        }
 
         $inputs = $request->request->all();
 
@@ -405,6 +436,10 @@ class SaleOrderController extends AbstractController
      */
     public function orderConfirm($order_id)
     {
+
+        if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_confirm_order)) {
+            return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $order_id]));
+        }
         $orderModel = new OrderModel();
         $orderModel->setOrderId($order_id);
         $request = new Req(Servers::Sale, Sale::Order, 'confirm_order');
@@ -427,6 +462,9 @@ class SaleOrderController extends AbstractController
      */
     public function orderReject($order_id)
     {
+        /**
+         * @todo This controller maybe is not used
+         */
         $orderModel = new OrderModel();
         $orderModel->setOrderId($order_id);
         $request = new Req(Servers::Sale, Sale::Order, 'reject_order');

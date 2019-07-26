@@ -10,6 +10,7 @@ use App\General\AuthUser;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;
+use Matican\Models\Media\Image;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,14 +42,32 @@ class BrandController extends AbstractController
 
         if ($canCreate) {
             if (!empty($inputs)) {
-                $request = new Req(Servers::Repository, Repository::Brand, 'new');
-                $request->add_instance($brandModel);
-                $response = $request->send();
+
+                $createRequest = new Req(Servers::Repository, Repository::Brand, 'new');
+                $createRequest->add_instance($brandModel);
+                $response = $createRequest->send();
+
                 if ($response->getStatus() == ResponseStatus::successful) {
+
                     /**
                      * @var $newBrand BrandModel
                      */
                     $newBrand = ModelSerializer::parse($response->getContent(), BrandModel::class);
+
+                    $file = $request->files->get('brand_image');
+                    $image = new Image();
+                    $image->setName($file->getClientOriginalName());
+                    $image->setContent($file->getPathname());
+                    $image->setFileName($file->getPathname());
+                    $image->setMimeType($file->getMimeType());
+
+                    $coreRequest = new Req(Servers::Media, "Image", "upload");
+                    $imageUploadResponse = $coreRequest->uploadImage($image, ['brand_id' => $newBrand->getBrandID()]);
+                    dd($imageUploadResponse);
+                    if (!$imageUploadResponse) {
+                        $this->addFlash('s', $imageUploadResponse->getMessage());
+                        return $this->redirect($this->generateUrl('repository_brand_repository_brand_create'));
+                    }
                     $this->addFlash('s', $response->getMessage());
                     if ($canEdit) {
                         return $this->redirect($this->generateUrl('repository_brand_repository_brand_edit', ['id' => $newBrand->getBrandID()]));

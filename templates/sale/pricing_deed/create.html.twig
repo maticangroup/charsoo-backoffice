@@ -23,27 +23,32 @@
                                     <input type="text" name="pricingDeedName" class="form-control"
                                            placeholder="Deed name" value="{{ pricingDeedModel.pricingDeedName }}">
                                 </div>
-                                <div class="col-2 mb-3">
-                                    <select name="pricingDeedDateYear" class="form-control">
-                                        {% for year in years %}
-                                            <option value="{{ year }}" {{ (pricingDeedModel.pricingDeedDateYear == year) ? 'selected' : '' }}>{{ year }}</option>
-                                        {% endfor %}
-                                    </select>
+                                <div class="col-6 mb-3">
+                                    <input type="text" id="date-picker" name="pricingDeedExpiryDate"
+                                           class="form-control" placeholder="Expiry Date" value="{{ pricingDeedModel.pricingDeedExpiryDate }}"/>
+                                    <span id="span-date-picker"></span>
                                 </div>
-                                <div class="col-2 mb-3">
-                                    <select name="pricingDeedDateMonth" class="form-control">
-                                        {% for month in months %}
-                                            <option value="{{ month }}" {{ (pricingDeedModel.pricingDeedDateMonth == month) ? 'selected' : '' }}>{{ month }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div class="col-2 mb-3">
-                                    <select name="pricingDeedDateDay" class="form-control">
-                                        {% for day in days %}
-                                            <option value="{{ day }}" {{ (pricingDeedModel.pricingDeedDateDay == day) ? 'selected' : '' }}>{{ day }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
+                                {#<div class="col-2 mb-3">#}
+                                {#<select name="pricingDeedDateYear" class="form-control">#}
+                                {#{% for year in years %}#}
+                                {#<option value="{{ year }}" {{ (pricingDeedModel.pricingDeedDateYear == year) ? 'selected' : '' }}>{{ year }}</option>#}
+                                {#{% endfor %}#}
+                                {#</select>#}
+                                {#</div>#}
+                                {#<div class="col-2 mb-3">#}
+                                {#<select name="pricingDeedDateMonth" class="form-control">#}
+                                {#{% for month in months %}#}
+                                {#<option value="{{ month }}" {{ (pricingDeedModel.pricingDeedDateMonth == month) ? 'selected' : '' }}>{{ month }}</option>#}
+                                {#{% endfor %}#}
+                                {#</select>#}
+                                {#</div>#}
+                                {#<div class="col-2 mb-3">#}
+                                {#<select name="pricingDeedDateDay" class="form-control">#}
+                                {#{% for day in days %}#}
+                                {#<option value="{{ day }}" {{ (pricingDeedModel.pricingDeedDateDay == day) ? 'selected' : '' }}>{{ day }}</option>#}
+                                {#{% endfor %}#}
+                                {#</select>#}
+                                {#</div>#}
                                 <div class="col-12 mb-3">
                                     <textarea name="pricingDeedDescription" class="form-control"
                                               placeholder="Deed description">{{ pricingDeedModel.pricingDeedDescription }}</textarea>

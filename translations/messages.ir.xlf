@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="ir" target-language="ir" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="DweMuKR" resname="accounting.coupon.group.create.tab.title">
+        <source>accounting.coupon.group.create.tab.title</source>
+        <target>کوپن | ساختن</target>
+      </trans-unit>
+      <trans-unit id="HP6bqFf" resname="accounting.coupon.group.create.main.title">
+        <source>accounting.coupon.group.create.main.title</source>
+        <target>__accounting.coupon.group.create.main.title</target>
+      </trans-unit>
+      <trans-unit id="VZ_poBc" resname="accounting.coupon.group.create.main.description">
+        <source>accounting.coupon.group.create.main.description</source>
+        <target>__accounting.coupon.group.create.main.description</target>
+      </trans-unit>
+      <trans-unit id="TDD8Nq1" resname="accounting.coupon.group.create.form.input.title.name">
+        <source>accounting.coupon.group.create.form.input.title.name</source>
+        <target>__accounting.coupon.group.create.form.input.title.name</target>
+      </trans-unit>
+      <trans-unit id="mjA80Y5" resname="accounting.coupon.group.create.form.input.title.prefix">
+        <source>accounting.coupon.group.create.form.input.title.prefix</source>
+        <target>__accounting.coupon.group.create.form.input.title.prefix</target>
+      </trans-unit>
+      <trans-unit id="Z373NEJ" resname="accounting.coupon.group.create.form.input.title.expiry.date">
+        <source>accounting.coupon.group.create.form.input.title.expiry.date</source>
+        <target>__accounting.coupon.group.create.form.input.title.expiry.date</target>
+      </trans-unit>
+      <trans-unit id="Mo0x5gh" resname="accounting.coupon.group.create.form.input.title.discount.type">
+        <source>accounting.coupon.group.create.form.input.title.discount.type</source>
+        <target>__accounting.coupon.group.create.form.input.title.discount.type</target>
+      </trans-unit>
+      <trans-unit id="_K8VFYY" resname="accounting.coupon.group.create.form.input.title.effect">
+        <source>accounting.coupon.group.create.form.input.title.effect</source>
+        <target>__accounting.coupon.group.create.form.input.title.effect</target>
+      </trans-unit>
+      <trans-unit id="kls4vCS" resname="accounting.coupon.group.create.form.input.title.minimum.invoice.price">
+        <source>accounting.coupon.group.create.form.input.title.minimum.invoice.price</source>
+        <target>__accounting.coupon.group.create.form.input.title.minimum.invoice.price</target>
+      </trans-unit>
+      <trans-unit id="RjmnIER" resname="accounting.coupon.group.create.form.input.title.type">
+        <source>accounting.coupon.group.create.form.input.title.type</source>
+        <target>__accounting.coupon.group.create.form.input.title.type</target>
+      </trans-unit>
+      <trans-unit id="KcB57wz" resname="accounting.coupon.group.create.form.input.title.usage.times">
+        <source>accounting.coupon.group.create.form.input.title.usage.times</source>
+        <target>__accounting.coupon.group.create.form.input.title.usage.times</target>
+      </trans-unit>
+      <trans-unit id="v.1g3zh" resname="accounting.coupon.group.create.form.input.title.description">
+        <source>accounting.coupon.group.create.form.input.title.description</source>
+        <target>__accounting.coupon.group.create.form.input.title.description</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

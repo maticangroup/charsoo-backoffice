@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Coupon Group | Create{% endblock %}
+{% block title %}{{ 'accounting.coupon.group.create.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -9,118 +9,120 @@
                 <div class="panel-content">
                     <div class="row">
                         <div class="col-12">
-                            <h1>welcome section</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque eum libero
-                                numquam
-                                obcaecati perspiciatis quas quisquam soluta unde voluptates.
-                            </p>
+                            <h1>{{ 'accounting.coupon.group.create.main.title' | trans }}</h1>
+                            <p>{{ 'accounting.coupon.group.create.main.description' | trans }}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <form action="{{ path('accounting_coupon_group_create') }}" class="col-12" method="post">
-            <div class="panel">
-                <div class="panel-content">
-                    <div class="row">
-                        <div class="col-2 ">
-                            <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Name</span>
+        {% if canCreate %}
+            <form action="{{ path('accounting_coupon_group_create') }}" class="col-12" method="post">
+                <div class="panel">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-2 ">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.name' | trans }}</span>
 
-                                <div class="col-md-12">
-                                    <input type="text" value="{{ couponGroupModel.couponGroupName }}"
-                                           placeholder="Coupon Group Name"
-                                           class="form-control" name="couponGroupName">
+                                    <div class="col-md-12">
+                                        <input type="text" value="{{ couponGroupModel.couponGroupName }}"
+                                               placeholder="Coupon Group Name"
+                                               class="form-control" name="couponGroupName">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-2 ">
-                            <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Prefix</span>
+                            <div class="col-2 ">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.prefix' | trans }}</span>
 
-                                <div class="col-md-12">
-                                    <input type="text" value="{{ couponGroupModel.couponGroupPrefix }}"
-                                           placeholder="cpn_" class="form-control" name="couponGroupPrefix">
+                                    <div class="col-md-12">
+                                        <input type="text" value="{{ couponGroupModel.couponGroupPrefix }}"
+                                               placeholder="cpn_" class="form-control" name="couponGroupPrefix">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-2 ">
-                            <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Expiry date</span>
-                                <div class="col-md-12">
-                                    <input type="date" name="couponGroupExpiryDate" placeholder="" class="form-control">
+                            <div class="col-2 ">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.expiry.date' | trans }}</span>
+                                    <div class="col-md-12">
+                                        <input type="text" id="date-picker" name="couponGroupExpiryDate"
+                                               class="form-control" placeholder="Expiry Date"
+                                               value="{{ couponGroupModel.couponGroupExpiryDate }}"/>
+                                        <span id="span-date-picker"></span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-2 ">
-                            <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Discount type</span>
-                                <select name="couponGroupDiscountType" class="form-control">
-                                    <option value="fixed">Fixed</option>
-                                    <option value="percentage">Percentage</option>
-                                </select>
+                            <div class="col-2 ">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.discount.type' | trans }}</span>
+                                    <select name="couponGroupDiscountType" class="form-control">
+                                        <option value="fixed">Fixed</option>
+                                        <option value="percentage">Percentage</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-2 ">
-                            <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Effect</span>
-                                <div class="col-md-12">
-                                    <input type="text" value="{{ couponGroupModel.couponGroupDiscountEffect }}"
-                                           placeholder="Percentage or fixed amount"
-                                           class="form-control" name="couponGroupDiscountEffect">
+                            <div class="col-2 ">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.effect' | trans }}</span>
+                                    <div class="col-md-12">
+                                        <input type="text" value="{{ couponGroupModel.couponGroupDiscountEffect }}"
+                                               placeholder="Percentage or fixed amount"
+                                               class="form-control" name="couponGroupDiscountEffect">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-2 ">
-                            <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Minimum Invoice price</span>
+                            <div class="col-2 ">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.minimum.invoice.price' | trans }}</span>
 
-                                <div class="col-md-12">
-                                    <input type="text" value="{{ couponGroupModel.couponGroupMinimumInvoicePrice }}"
-                                           placeholder="Invoice Price"
-                                           class="form-control" name="couponGroupMinimumInvoicePrice">
+                                    <div class="col-md-12">
+                                        <input type="text" value="{{ couponGroupModel.couponGroupMinimumInvoicePrice }}"
+                                               placeholder="Invoice Price"
+                                               class="form-control" name="couponGroupMinimumInvoicePrice">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-1">
-                            <div class="form-group ">
-                                <span class="label-text col-md-12 col-form-label ">Type</span>
-                                <label class="form-check">
-                                    <input type="checkbox" name="couponGroupIsPrivate" value="true" class="form-check-input"
-                                           onclick="toggle('.myClass', this)"
-                                            {{ (couponGroupModel.couponGroupIsPrivate == 'true') ? 'checked' : '' }}>
-                                    <span class="form-check-label">Private</span>
-                                </label>
+                            <div class="col-1">
+                                <div class="form-group ">
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.type' | trans }}</span>
+                                    <label class="form-check">
+                                        <input type="checkbox" name="couponGroupIsPrivate" value="true"
+                                               class="form-check-input"
+                                               onclick="toggle('.myClass', this)"
+                                                {{ (couponGroupModel.couponGroupIsPrivate == 'true') ? 'checked' : '' }}>
+                                        <span class="form-check-label">Private</span>
+                                    </label>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-2 ">
-                            <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label myClass">Usage times</span>
-                                <div class="col-md-12">
-                                    <input type="number" value="{{ couponGroupModel.couponGroupUsageTimes }}"
-                                           placeholder="" class="form-control myClass" name="couponGroupUsageTimes">
+                            <div class="col-2 ">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label myClass">{{ 'accounting.coupon.group.create.form.input.title.usage.times' | trans }}</span>
+                                    <div class="col-md-12">
+                                        <input type="number" value="{{ couponGroupModel.couponGroupUsageTimes }}"
+                                               placeholder="" class="form-control myClass" name="couponGroupUsageTimes">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-6 ">
-                            <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Description</span>
-                                <div class="col-md-12">
+                            <div class="col-6 ">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.description' | trans }}</span>
+                                    <div class="col-md-12">
                                     <textarea name="couponGroupUsageDescription" placeholder=""
                                               class="form-control">{{ couponGroupModel.couponGroupUsageDescription }}</textarea>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-2 mt-5">
-                            <button type="submit" class="btn btn-block btn-dark fa fa-save rounded"></button>
+                            <div class="col-2 mt-5">
+                                <button type="submit" class="btn btn-block btn-dark fa fa-save rounded"></button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        {% endif %}
     </div>
 {% endblock %}

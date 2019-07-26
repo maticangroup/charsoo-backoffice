@@ -370,8 +370,9 @@
                                                 {#<input type="hidden" name="payment_request_id"#}
                                                 {#value="{{ paymentRequestModel.paymentRequestId }}">#}
                                                 <td>
-                                                    <input type="date" placeholder="Due date"
-                                                           class="form-control" name="paymentDueDate">
+                                                    <input type="text" id="date-picker" name="paymentDueDate"
+                                                           class="form-control" placeholder="Due date"/>
+                                                    <span id="span-date-picker"></span>
                                                 </td>
                                                 <td>
                                                     <input type="text" placeholder="Amount"

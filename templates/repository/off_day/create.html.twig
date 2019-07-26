@@ -23,27 +23,30 @@
                                     <div class="col-12 d-flex flex-column justify-content-center align-items-center">
                                         <div class="form-group row">
                                             <span class="label-text col-md-12 col-form-label ">Date</span>
-                                            <div class="col-md-4">
-                                                <select name="offDayYear" class="form-control">
-                                                    {% for year in years %}
-                                                        <option value="{{ year }}" {{ (offDayModel.offDayYear == year) ? 'selected' : '' }}>{{ year }}</option>
-                                                    {% endfor %}
-                                                </select>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <select name="offDayMonth" class="form-control">
-                                                    {% for month in months %}
-                                                        <option value="{{ month }}" {{ (offDayModel.offDayMonth == month) ? 'selected' : '' }}>{{ month }}</option>
-                                                    {% endfor %}
-                                                </select>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <select name="offDayDay" class="form-control">
-                                                    {% for day in days %}
-                                                        <option value="{{ day }}" {{ (offDayModel.offDayDay == day) ? 'selected' : '' }}>{{ day }}</option>
-                                                    {% endfor %}
-                                                </select>
-                                            </div>
+                                            <input type="text" id="date-picker" name="offDayDate"
+                                                   class="form-control" value="{{ offDayModel.offDayDate }}"/>
+                                            <span id="span-date-picker"></span>
+                                            {#<div class="col-md-4">#}
+                                            {#<select name="offDayYear" class="form-control">#}
+                                            {#{% for year in years %}#}
+                                            {#<option value="{{ year }}" {{ (offDayModel.offDayYear == year) ? 'selected' : '' }}>{{ year }}</option>#}
+                                            {#{% endfor %}#}
+                                            {#</select>#}
+                                            {#</div>#}
+                                            {#<div class="col-md-4">#}
+                                            {#<select name="offDayMonth" class="form-control">#}
+                                            {#{% for month in months %}#}
+                                            {#<option value="{{ month }}" {{ (offDayModel.offDayMonth == month) ? 'selected' : '' }}>{{ month }}</option>#}
+                                            {#{% endfor %}#}
+                                            {#</select>#}
+                                            {#</div>#}
+                                            {#<div class="col-md-4">#}
+                                            {#<select name="offDayDay" class="form-control">#}
+                                            {#{% for day in days %}#}
+                                            {#<option value="{{ day }}" {{ (offDayModel.offDayDay == day) ? 'selected' : '' }}>{{ day }}</option>#}
+                                            {#{% endfor %}#}
+                                            {#</select>#}
+                                            {#</div>#}
                                         </div>
                                         <div class="form-group row">
                                             <span class="label-text col-md-12 col-form-label ">Reason</span>

@@ -28,7 +28,7 @@
 
                                     <div class="col-md-12">
                                         <input type="text" value="{{ couponGroupModel.couponGroupName }}"
-                                               placeholder="Coupon Group Name"
+                                               placeholder="{{ 'accounting.coupon.group.create.form.input.placeholder.name' | trans }}"
                                                class="form-control" name="couponGroupName">
                                     </div>
                                 </div>
@@ -39,7 +39,8 @@
 
                                     <div class="col-md-12">
                                         <input type="text" value="{{ couponGroupModel.couponGroupPrefix }}"
-                                               placeholder="cpn_" class="form-control" name="couponGroupPrefix">
+                                               placeholder="{{ 'accounting.coupon.group.create.form.input.placeholder.prefix' | trans }}"
+                                               class="form-control" name="couponGroupPrefix">
                                     </div>
                                 </div>
                             </div>
@@ -48,7 +49,8 @@
                                     <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.expiry.date' | trans }}</span>
                                     <div class="col-md-12">
                                         <input type="text" id="date-picker" name="couponGroupExpiryDate"
-                                               class="form-control" placeholder="Expiry Date"
+                                               class="form-control"
+                                               placeholder="{{ 'accounting.coupon.group.create.form.input.placeholder.expiry.date' | trans }}"
                                                value="{{ couponGroupModel.couponGroupExpiryDate }}"/>
                                         <span id="span-date-picker"></span>
                                     </div>
@@ -69,7 +71,7 @@
                                     <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.effect' | trans }}</span>
                                     <div class="col-md-12">
                                         <input type="text" value="{{ couponGroupModel.couponGroupDiscountEffect }}"
-                                               placeholder="Percentage or fixed amount"
+                                               placeholder="{{ 'accounting.coupon.group.create.form.input.placeholder.effect' | trans }}"
                                                class="form-control" name="couponGroupDiscountEffect">
                                     </div>
                                 </div>
@@ -80,7 +82,7 @@
 
                                     <div class="col-md-12">
                                         <input type="text" value="{{ couponGroupModel.couponGroupMinimumInvoicePrice }}"
-                                               placeholder="Invoice Price"
+                                               placeholder="{{ 'accounting.coupon.group.create.form.input.placeholder.minimum.invoice.price' | trans }}"
                                                class="form-control" name="couponGroupMinimumInvoicePrice">
                                     </div>
                                 </div>
@@ -103,7 +105,8 @@
                                     <span class="label-text col-md-12 col-form-label myClass">{{ 'accounting.coupon.group.create.form.input.title.usage.times' | trans }}</span>
                                     <div class="col-md-12">
                                         <input type="number" value="{{ couponGroupModel.couponGroupUsageTimes }}"
-                                               placeholder="" class="form-control myClass" name="couponGroupUsageTimes">
+                                               placeholder="{{ 'accounting.coupon.group.create.form.input.placeholder.usage.times' | trans }}"
+                                               class="form-control myClass" name="couponGroupUsageTimes">
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +114,8 @@
                                 <div class="form-group row">
                                     <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.description' | trans }}</span>
                                     <div class="col-md-12">
-                                    <textarea name="couponGroupUsageDescription" placeholder=""
+                                    <textarea name="couponGroupUsageDescription"
+                                              placeholder="{{ 'accounting.coupon.group.create.form.input.placeholder.description' | trans }}"
                                               class="form-control">{{ couponGroupModel.couponGroupUsageDescription }}</textarea>
                                     </div>
                                 </div>

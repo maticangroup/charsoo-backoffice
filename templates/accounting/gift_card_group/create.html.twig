@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Gift Card Group | Add , List{% endblock %}
+{% block title %}{{ 'accounting.gift.card.group.create.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -9,12 +9,8 @@
                 <div class="panel-content">
                     <div class="row">
                         <div class="col-10">
-                            <h1>welcome section</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque eum libero
-                                numquam
-                                obcaecati perspiciatis quas quisquam soluta unde voluptates.
-                            </p>
+                            <h1>{{ 'accounting.gift.card.group.create.main.title' | trans }}</h1>
+                            <p>{{ 'accounting.gift.card.group.create.main.description' | trans }}</p>
                         </div>
                     </div>
                 </div>
@@ -26,53 +22,57 @@
                     <div class="row">
                         <div class="col-2 ">
                             <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Gift card name</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'accounting.gift.card.group.create.form.input.title.gift.card.name' | trans }}</span>
 
                                 <div class="col-md-12">
                                     <input type="text" value="{{ giftCardGroupModel.giftCardGroupName }}"
-                                           placeholder="name" class="form-control" name="giftCardGroupName">
+                                           placeholder="{{ 'accounting.gift.card.group.create.form.input.placeholder.gift.card.name' | trans }}"
+                                           class="form-control" name="giftCardGroupName">
                                 </div>
                             </div>
                         </div>
                         <div class="col-2 ">
                             <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Prefix</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'accounting.gift.card.group.create.form.input.title.prefix' | trans }}</span>
 
                                 <div class="col-md-12">
                                     <input type="text" value="{{ giftCardGroupModel.giftCardGroupPrefix }}"
-                                           placeholder="prefix" class="form-control" name="giftCardGroupPrefix">
+                                           placeholder="{{ 'accounting.gift.card.group.create.form.input.placeholder.prefix' | trans }}"
+                                           class="form-control" name="giftCardGroupPrefix">
                                 </div>
                             </div>
                         </div>
                         <div class="col-2 ">
                             <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Expiry date</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'accounting.gift.card.group.create.form.input.title.expiry.date' | trans }}</span>
 
                                 <div class="col-md-12">
                                     <input type="text" id="date-picker" name="giftCardGroupExpiryDate"
-                                           class="form-control" placeholder="Expiry Date" value="{{ giftCardGroupModel.giftCardGroupExpiryDate }}"/>
+                                           class="form-control"
+                                           placeholder="{{ 'accounting.gift.card.group.create.form.input.placeholder.expiry.date' | trans }}"
+                                           value="{{ giftCardGroupModel.giftCardGroupExpiryDate }}"/>
                                     <span id="span-date-picker"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-2 ">
                             <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Gift card count</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'accounting.gift.card.group.create.form.input.title.gift.card.count' | trans }}</span>
 
                                 <div class="col-md-12">
                                     <input type="text" value="{{ giftCardGroupModel.giftCardGroupCount }}"
-                                           placeholder="Gift card count"
+                                           placeholder="{{ 'accounting.gift.card.group.create.form.input.placeholder.gift.card.count' | trans }}"
                                            class="form-control" name="giftCardGroupCount">
                                 </div>
                             </div>
                         </div>
                         <div class="col-2 ">
                             <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Gift card amount</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'accounting.gift.card.group.create.form.input.title.gift.card.amount' | trans }}</span>
 
                                 <div class="col-md-12">
                                     <input type="text" value="{{ giftCardGroupModel.giftCardGroupAmount }}"
-                                           placeholder="Gift card amount"
+                                           placeholder="{{ 'accounting.gift.card.group.create.form.input.placeholder.gift.card.amount' | trans }}"
                                            class="form-control" name="giftCardGroupAmount">
                                 </div>
                             </div>

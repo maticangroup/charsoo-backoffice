@@ -216,7 +216,7 @@ class DispatchController extends AbstractController
         $ownerLocationsRequest = new Req(Servers::Repository, Repository::Person, 'get_all_addresses');
         $ownerLocationsRequest->add_instance($personModel);
         $ownerLocationsResponse = $ownerLocationsRequest->send();
-
+//        dd($ownerLocationsResponse);
         if ($ownerLocationsResponse->getContent()) {
             foreach ($ownerLocationsResponse->getContent() as $location) {
                 $ownerLocations[] = ModelSerializer::parse($location, LocationModel::class);

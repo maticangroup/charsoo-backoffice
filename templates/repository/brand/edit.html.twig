@@ -23,11 +23,22 @@
                                     <div class="col-12">
                                         <input type="text" name="brandName" value="{{ brand.brandName }}"
                                                class="form-control mb-3">
-                                        <label class="custom-file mb-3">
-                                            <input type="file" value="{{ brand.brandImageUrl }}" name="brandImageUrl"
-                                                   class="custom-file-input">
-                                            <span class="custom-file-label">Choose File</span>
-                                        </label>
+                                        {% if brand.brandImageUrl %}
+                                            <img src="{{ brand.brandImageUrl }}" alt="" class="rounded-circle">
+                                            <label class="custom-file mb-3">
+                                                <input type="file" value="{{ brand.brandImageUrl }}"
+                                                       name="brandImageUrl"
+                                                       class="custom-file-input">
+                                                <span class="custom-file-label">Change image</span>
+                                            </label>
+                                        {% else %}
+                                            <label class="custom-file mb-3">
+                                                <input type="file" value="{{ brand.brandImageUrl }}"
+                                                       name="brandImageUrl"
+                                                       class="custom-file-input">
+                                                <span class="custom-file-label">Add image</span>
+                                            </label>
+                                        {% endif %}
                                         <button type="submit"
                                                 class="btn btn-block rounded btn-info fa fa-save"></button>
                                     </div>

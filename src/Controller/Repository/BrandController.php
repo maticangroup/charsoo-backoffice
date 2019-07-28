@@ -25,14 +25,12 @@ class BrandController extends AbstractController
      * @Route("/create", name="_repository_brand_create")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \ReflectionException
      */
     public function create(Request $request)
     {
         $canCreate = AuthUser::if_is_allowed('repository_brand_new');
         $canSeeAll = AuthUser::if_is_allowed('repository_brand_all');
         $canEdit = AuthUser::if_is_allowed('repository_brand_fetch');
-
 
         $inputs = $request->request->all();
         /**
@@ -41,11 +39,21 @@ class BrandController extends AbstractController
         $brandModel = ModelSerializer::parse($inputs, BrandModel::class);
 
         if ($canCreate) {
+
             if (!empty($inputs)) {
 
                 $createRequest = new Req(Servers::Repository, Repository::Brand, 'new');
-                $createRequest->add_instance($brandModel);
-                $response = $createRequest->send();
+                $file = $request->files->get('brand_image');
+                if ($file) {
+                    $image = new Image();
+                    $image->setName($file->getClientOriginalName());
+                    $image->setContent($file->getPathname());
+                    $image->setFileName($file->getPathname());
+                    $image->setMimeType($file->getMimeType());
+                    $response = $createRequest->uploadImage($image, $brandModel);
+                } else {
+                    $response = $createRequest->uploadImage(null, $brandModel);
+                }
 
                 if ($response->getStatus() == ResponseStatus::successful) {
 
@@ -54,20 +62,13 @@ class BrandController extends AbstractController
                      */
                     $newBrand = ModelSerializer::parse($response->getContent(), BrandModel::class);
 
-                    $file = $request->files->get('brand_image');
-                    $image = new Image();
-                    $image->setName($file->getClientOriginalName());
-                    $image->setContent($file->getPathname());
-                    $image->setFileName($file->getPathname());
-                    $image->setMimeType($file->getMimeType());
 
-                    $coreRequest = new Req(Servers::Media, "Image", "upload");
-                    $imageUploadResponse = $coreRequest->uploadImage($image, ['brand_id' => $newBrand->getBrandID()]);
-                    dd($imageUploadResponse);
-                    if (!$imageUploadResponse) {
-                        $this->addFlash('s', $imageUploadResponse->getMessage());
-                        return $this->redirect($this->generateUrl('repository_brand_repository_brand_create'));
-                    }
+//                    $coreRequest = new Req(Servers::Media, "Image", "upload");
+//                    $imageUploadResponse = $coreRequest->uploadImage($image, ['brand_id' => $newBrand->getBrandID()]);
+//                    if (!$imageUploadResponse) {
+//                        $this->addFlash('s', $imageUploadResponse->getMessage());
+//                        return $this->redirect($this->generateUrl('repository_brand_repository_brand_create'));
+//                    }
                     $this->addFlash('s', $response->getMessage());
                     if ($canEdit) {
                         return $this->redirect($this->generateUrl('repository_brand_repository_brand_edit', ['id' => $newBrand->getBrandID()]));
@@ -95,7 +96,6 @@ class BrandController extends AbstractController
             }
         }
 
-
         return $this->render('repository/brand/create.html.twig', [
             'controller_name' => 'BrandController',
             'brandModel' => $brandModel,
@@ -116,6 +116,9 @@ class BrandController extends AbstractController
      */
     public function edit($id, Request $request)
     {
+        /**
+         * @todo updating image is missing
+         */
         $canUpdate = AuthUser::if_is_allowed('repository_brand_update');
         $canAddSupplier = AuthUser::if_is_allowed('repository_brand_add_supplier');
         $canRemoveSupplier = AuthUser::if_is_allowed('repository_brand_remove_supplier');
@@ -130,7 +133,6 @@ class BrandController extends AbstractController
         $request->add_instance($brandModel);
         $response = $request->send();
         $brandModel = ModelSerializer::parse($response->getContent(), BrandModel::class);
-
         if ($canUpdate) {
             if (!empty($inputs)) {
                 $brandModel = ModelSerializer::parse($inputs, BrandModel::class);
@@ -171,7 +173,6 @@ class BrandController extends AbstractController
                 }
             }
         }
-
 
         return $this->render('repository/brand/edit.html.twig', [
             'controller_name' => 'BrandController',

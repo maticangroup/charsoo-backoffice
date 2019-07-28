@@ -20,6 +20,7 @@ use Matican\Core\Entities\Delivery;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;
+use Matican\Models\Media\Image;
 use PhpParser\Node\Param;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -81,9 +82,22 @@ class DeliveryMethodController extends AbstractController
 
         if (!empty($inputs)) {
 //            dd($deliveryMethodModel);
-            $request = new Req(Servers::Delivery, Delivery::DeliveryMethod, 'new');
-            $request->add_instance($deliveryMethodModel);
-            $response = $request->send();
+            $coreRequest = new Req(Servers::Delivery, Delivery::DeliveryMethod, 'new');
+            $file = $request->files->get('deliveryMethodLogoUrl');
+
+            if ($file) {
+                $image = new Image();
+                $image->setName($file->getClientOriginalName());
+                $image->setMimeType($file->getMimeType());
+                $image->setFileName($file->getPathname());
+                $image->setContent($file->getPathname());
+                $response = $coreRequest->uploadImage($image, $deliveryMethodModel);
+            } else {
+
+
+                $response = $coreRequest->uploadImage(null, $deliveryMethodModel);
+            }
+//            $coreRequest->add_instance($deliveryMethodModel);
 //            dd($response);
             if ($response->getStatus() == ResponseStatus::successful) {
                 /**

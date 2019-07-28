@@ -250,6 +250,7 @@ class CustomerController extends AbstractController
         $request = new Req(Servers::Notifications, Notifications::SMS, 'get_person_sms_logs');
         $request->add_instance($personModel);
         $response = $request->send();
+//        dd($response);
         /**
          * @var $personModel PersonModel
          */
@@ -264,6 +265,7 @@ class CustomerController extends AbstractController
                 $smsLogs[] = ModelSerializer::parse($smsLog, SMSModel::class);
             }
         }
+
 
         $url = $_SERVER['PHP_SELF'];
         $url = explode('index.php', $url)[1];

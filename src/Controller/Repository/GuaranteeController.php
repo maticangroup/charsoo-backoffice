@@ -62,25 +62,23 @@ class GuaranteeController extends AbstractController
                 } else {
                     $this->addFlash('f', $response->getMessage());
                 }
-
-                $allGuaranteeProviderRequest = new Req(Servers::Repository, Repository::Guarantee, 'get_providers');
-                $guaranteeProviderResponse = $allGuaranteeProviderRequest->send();
-                if ($guaranteeProviderResponse->getContent()) {
-                    foreach ($guaranteeProviderResponse->getContent() as $guaranteeProvider) {
-                        $guaranteeProviders[] = ModelSerializer::parse($guaranteeProvider, GuaranteeProviderModel::class);
-                    }
-                }
-
-                $guaranteeDurationRequest = new Req(Servers::Repository, Repository::Guarantee, 'get_durations');
-                $guaranteeDurationResponse = $guaranteeDurationRequest->send();
-                if ($guaranteeDurationResponse->getContent()) {
-                    foreach ($guaranteeDurationResponse->getContent() as $guaranteeDuration) {
-                        $guaranteeDurations[] = ModelSerializer::parse($guaranteeDuration, GuaranteeDurationModel::class);
-                    }
-                }
+            }
+        }
+        $allGuaranteeProviderRequest = new Req(Servers::Repository, Repository::Guarantee, 'get_providers');
+        $guaranteeProviderResponse = $allGuaranteeProviderRequest->send();
+        if ($guaranteeProviderResponse->getContent()) {
+            foreach ($guaranteeProviderResponse->getContent() as $guaranteeProvider) {
+                $guaranteeProviders[] = ModelSerializer::parse($guaranteeProvider, GuaranteeProviderModel::class);
             }
         }
 
+        $guaranteeDurationRequest = new Req(Servers::Repository, Repository::Guarantee, 'get_durations');
+        $guaranteeDurationResponse = $guaranteeDurationRequest->send();
+        if ($guaranteeDurationResponse->getContent()) {
+            foreach ($guaranteeDurationResponse->getContent() as $guaranteeDuration) {
+                $guaranteeDurations[] = ModelSerializer::parse($guaranteeDuration, GuaranteeDurationModel::class);
+            }
+        }
         /**
          * @var $guarantees GuaranteeModel[]
          */
@@ -95,7 +93,7 @@ class GuaranteeController extends AbstractController
             }
         }
 
-
+//        dd($guaranteeDurations);
         return $this->render('repository/guarantee/create.html.twig', [
             'controller_name' => 'GuaranteeController',
             'guaranteeModel' => $guaranteeModel,

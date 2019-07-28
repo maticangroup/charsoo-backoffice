@@ -4,7 +4,8 @@
 
 {% block body %}
     <div class="row">
-        <form class="col-12" action="{{ path('delivery_method_create') }}" method="post">
+        <form class="col-12" action="{{ path('delivery_method_create') }}" method="post"
+              enctype="multipart/form-data">
             <div class="panel">
                 <div class="panel-content">
                     <div class="row">
@@ -28,9 +29,11 @@
                                 <div class="col-6">
                                     <span class="label-text col-form-label">Delivery Method Logo</span>
                                     <label class="custom-file">
-                                        <input type="file" value="{{ deliveryMethodModel.deliveryMethodLogoUrl }}"
-                                               name="deliveryMethodLogoUrl" class="custom-file-input">
-                                        <span class="custom-file-label">Delivery Logo</span>
+                                        <input type="file" value=""
+                                               name="deliveryMethodLogoUrl"
+                                               class="custom-file-input">
+                                        <span class="custom-file-label">Choose image</span>
+
                                     </label>
                                 </div>
                                 <div class="col-6">

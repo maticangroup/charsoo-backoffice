@@ -48,7 +48,6 @@ class CouponGroupController extends AbstractController
                     $couponGroups[] = ModelSerializer::parse($item, CouponGroupModel::class);
                 }
             }
-
 //        $couponGroups = $response->getContent();
             return $this->render('accounting/coupon_group/list.html.twig', [
                 'controller_name' => 'CouponGroupController',
@@ -248,7 +247,7 @@ class CouponGroupController extends AbstractController
              * @var $couponGroupModel CouponGroupModel
              */
             $couponGroupModel = ModelSerializer::parse($response->getContent(), CouponGroupModel::class);
-
+//            dd($couponGroupModel);
 
             /**
              * @var $usedCoupons UsedCouponModel[]

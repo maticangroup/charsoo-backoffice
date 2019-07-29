@@ -67,7 +67,6 @@ class DeliveryMethodController extends AbstractController
      * @Route("/create", name="_create")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \ReflectionException
      */
     public function create(Request $request)
     {

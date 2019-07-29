@@ -2,6 +2,7 @@
 
 namespace App\Controller\Repository;
 
+use App\FormModels\Media\ImageModel;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\BarcodeModel;
 use App\FormModels\Repository\BrandModel;
@@ -198,9 +199,12 @@ class ItemController extends AbstractController
              * @var $itemTypes ItemTypeModel[]
              */
             $itemTypes = [];
-            foreach ($allItemTypesResponse->getContent() as $itemType) {
-                $itemTypes[] = ModelSerializer::parse($itemType, ItemTypeModel::class);
+            if ($allItemTypesResponse->getContent()) {
+                foreach ($allItemTypesResponse->getContent() as $itemType) {
+                    $itemTypes[] = ModelSerializer::parse($itemType, ItemTypeModel::class);
+                }
             }
+
 
             $allColorsRequest = new Req(Servers::Repository, Repository::Color, 'all');
             $allColorsResponse = $allColorsRequest->send();
@@ -209,9 +213,12 @@ class ItemController extends AbstractController
              * @var $colors ItemColorModel[]
              */
             $colors = [];
-            foreach ($allColorsResponse->getContent() as $color) {
-                $colors[] = ModelSerializer::parse($color, ItemColorModel::class);
+            if ($allColorsResponse->getContent()) {
+                foreach ($allColorsResponse->getContent() as $color) {
+                    $colors[] = ModelSerializer::parse($color, ItemColorModel::class);
+                }
             }
+
 
             $guaranteeRequest = new Req(Servers::Repository, Repository::Guarantee, 'all');
             $guaranteeResponse = $guaranteeRequest->send();
@@ -241,32 +248,42 @@ class ItemController extends AbstractController
             }
 //        dd($suppliers);
 
-            $allItemCategoriesRequest = new Req(Servers::Repository, Repository::ItemCategory, 'all');
-            $allItemCategoriesResponse = $allItemCategoriesRequest->send();
+//            $allItemCategoriesRequest = new Req(Servers::Repository, Repository::ItemCategory, 'all');
+//            $allItemCategoriesResponse = $allItemCategoriesRequest->send();
             /**
              * @var $itemCategories ItemCategoryModel[]
              */
             $itemCategories = [];
 
 
-            foreach ($allItemCategoriesResponse->getContent() as $itemCategory) {
-                /**
-                 * @var $itemCategoryModel ItemCategoryModel
-                 */
-                $itemCategoryModel = ModelSerializer::parse($itemCategory, ItemCategoryModel::class);
-                if ($itemModel->getItemCategoriesIds()) {
-                    if (in_array($itemCategoryModel->getItemCategoryID(), $itemModel->getItemCategoriesIds())) {
-                        $itemCategoryModel->setItemCategoryIsChecked(true);
-                    }
-                }
-
-                $itemCategories[] = $itemCategoryModel;
-            }
+//            foreach ($allItemCategoriesResponse->getContent() as $itemCategory) {
+//                /**
+//                 * @var $itemCategoryModel ItemCategoryModel
+//                 */
+//                $itemCategoryModel = ModelSerializer::parse($itemCategory, ItemCategoryModel::class);
+//                if ($itemModel->getItemCategoriesIds()) {
+//                    if (in_array($itemCategoryModel->getItemCategoryID(), $itemModel->getItemCategoriesIds())) {
+//                        $itemCategoryModel->setItemCategoryIsChecked(true);
+//                    }
+//                }
+//
+//                $itemCategories[] = $itemCategoryModel;
+//            }
 
 //        print_r(json_encode($itemModel->getItemSpecGroupsKeys())); die('s');
 
             $specGroupsKeys = json_decode(json_encode($itemModel->getItemSpecGroupsKeys()), true);
 //        print_r($specGroupsKeys); die;
+
+            /**
+             * @var $itemImages ImageModel[]
+             */
+            $itemImages = [];
+            if ($itemModel->getItemImages()) {
+                foreach ($itemModel->getItemImages() as $itemImage) {
+                    $itemImages[] = ModelSerializer::parse($itemImage, ImageModel::class);
+                }
+            }
 
 
             return $this->render('repository/item/edit.html.twig', [
@@ -280,6 +297,7 @@ class ItemController extends AbstractController
                 'itemCategories' => $itemCategories,
                 'specGroupKeys' => $specGroupsKeys,
                 'canUpdate' => $canUpdate,
+                'itemImages' => $itemImages,
             ]);
         } else {
             return $this->redirect($this->generateUrl('repository_item_repository_item_list'));
@@ -528,9 +546,27 @@ class ItemController extends AbstractController
 
     /**
      * @Route("/remove_image/{image_id}/{item_id}", name="_repository_item_remove_image")
+     * @param $image_id
+     * @param $item_id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
      */
-    public function removeImage()
+    public function removeImage($image_id, $item_id)
     {
+        $imageModel = new ImageModel();
+        $imageModel->setImageSerial($image_id);
+        $imageModel->setItemID($item_id);
+        $request = new Req(Servers::Repository, Repository::Item, 'remove_image');
+        $request->add_instance($imageModel);
+//        dd($request);
+        $response = $request->send();
+//        dd($response);
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('f', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
 
     }
 

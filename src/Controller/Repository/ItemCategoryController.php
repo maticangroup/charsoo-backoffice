@@ -48,6 +48,13 @@ class ItemCategoryController extends AbstractController
          * @var $sizes SizeModel[]
          */
         $sizes = [];
+        $allSizesRequest = new Req(Servers::Repository, Repository::Size, 'all');
+        $allSizesResponse = $allSizesRequest->send();
+        if ($allSizesResponse->getContent()) {
+            foreach ($allSizesResponse->getContent() as $size) {
+                $sizes[] = ModelSerializer::parse($size, SizeModel::class);
+            }
+        }
 
         if (!empty($inputs)) {
             if ($canCreate) {
@@ -63,13 +70,6 @@ class ItemCategoryController extends AbstractController
                     return $this->redirect($this->generateUrl('repository_item_category_repository_item_category_edit', ['id' => $newItemCategory->getItemCategoryID()]));
                 } else {
                     $this->addFlash('f', $response->getMessage());
-                }
-                $allSizesRequest = new Req(Servers::Repository, Repository::Size, 'all');
-                $allSizesResponse = $allSizesRequest->send();
-                if ($allSizesResponse->getContent()) {
-                    foreach ($allSizesResponse->getContent() as $size) {
-                        $sizes[] = ModelSerializer::parse($size, SizeModel::class);
-                    }
                 }
             }
         }

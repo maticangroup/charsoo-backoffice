@@ -25,67 +25,99 @@
         {% if canUpdate %}
             <div class="col-8">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-6">
                         <div class="panel">
                             <div class="panel-heading">
                                 Barcodes
                             </div>
                             <div class="panel-content">
-                                <div class="row">
+                                <table class="table table-striped">
+                                    <tbody>
                                     {% for barcode in itemModel.itemBarcodes %}
-                                        <form class="col-6 mb-3 mt-3"
-                                              action="{{ path('repository_item_repository_item_remove_barcode' , {barcode_id:barcode.barcodeId , item_id:itemModel.itemID}) }}"
-                                              method="post">
-                                            <h4>{{ barcode.barcodeName }}</h4>
-                                            <button type="submit" class="btn btn-block btn-danger rounded"><i
-                                                        class="fa fa-trash"></i></button>
-                                        </form>
+                                        <tr>
+                                            <form class="col-6 mb-3 mt-3"
+                                                  action="{{ path('repository_item_repository_item_remove_barcode' , {barcode_id:barcode.barcodeId , item_id:itemModel.itemID}) }}"
+                                                  method="post">
+                                                <td>
+                                                    <h4>{{ barcode.barcodeName }}</h4>
+                                                </td>
+                                                <td>
+                                                    <button type="submit" class="btn btn-block btn-danger rounded"><i
+                                                                class="fa fa-trash"></i></button>
+                                                </td>
+                                            </form>
+                                        </tr>
                                     {% endfor %}
-
-                                    <form class="col-6 mb-3 mt-3"
-                                          action="{{ path('repository_item_repository_item_add_barcode' , {item_id:itemModel.itemID}) }}"
-                                          method="post">
-                                        <input type="text" name="barcodeName" class="form-control mb-3"
-                                               placeholder="Add New Barcode...">
-                                        <button type="submit" class="btn btn-block btn-dark rounded"><i
-                                                    class="fa fa-save"></i></button>
-                                    </form>
-                                </div>
+                                    <tr>
+                                        <form class="col-6 mb-3 mt-3"
+                                              action="{{ path('repository_item_repository_item_add_barcode' , {item_id:itemModel.itemID}) }}"
+                                              method="post">
+                                            <td>
+                                                <input type="text" name="barcodeName" class="form-control mb-3"
+                                                       placeholder="Add New Barcode...">
+                                            </td>
+                                            <td>
+                                                <button type="submit" class="btn btn-block btn-dark rounded"><i
+                                                            class="fa fa-save"></i></button>
+                                            </td>
+                                        </form>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-6">
                         <div class="panel">
                             <div class="panel-heading">
                                 Colors
                             </div>
+
                             <div class="panel-content">
-                                <div class="row">
+                                <table class="table table-striped">
+                                    <tbody>
                                     {% for itemColor in itemModel.itemColors %}
-                                        <form class="col-6 mb-3 mt-3"
-                                              action="{{ path('repository_item_repository_item_remove_color' , {color_id:itemColor.itemColorID , item_id:itemModel.itemID}) }}"
-                                              method="post">
-                                            <h4>{{ itemColor.itemColorName }}</h4>
-                                            <button type="submit" class="btn btn-block btn-danger rounded"><i
-                                                        class="fa fa-trash"></i></button>
-                                        </form>
+                                        <tr>
+                                            <form class="col-6 mb-3 mt-3"
+                                                  action="{{ path('repository_item_repository_item_remove_color' , {color_id:itemColor.itemColorID , item_id:itemModel.itemID}) }}"
+                                                  method="post">
+                                                <td>
+                                                    <h4>{{ itemColor.itemColorName }}</h4>
+                                                </td>
+                                                <td>
+                                                    <button type="submit" class="btn btn-block btn-danger rounded"><i
+                                                                class="fa fa-trash"></i></button>
+                                                </td>
+                                            </form>
+                                        </tr>
                                     {% endfor %}
-                                    <form class="col-6 mb-3 mt-3"
-                                          action="{{ path('repository_item_repository_item_add_color' , {item_id:itemModel.itemID}) }}"
-                                          method="post">
-                                        <select name="itemColorID" class="form-control mb-3">
-                                            {% for color in colors %}
-                                                <option value="{{ color.itemColorID }}">{{ color.itemColorName }}</option>
-                                            {% endfor %}
-                                        </select>
-                                        <button type="submit" class="btn btn-block btn-dark rounded"><i
-                                                    class="fa fa-save"></i></button>
-                                    </form>
-                                </div>
+                                    <tr>
+                                        <form class="col-6 mb-3 mt-3"
+                                              action="{{ path('repository_item_repository_item_add_color' , {item_id:itemModel.itemID}) }}"
+                                              method="post">
+                                            <td>
+                                                <select name="itemColorID" class="form-control mb-3">
+                                                    {% for color in colors %}
+                                                        <option value="{{ color.itemColorID }}">{{ color.itemColorName }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <button type="submit" class="btn btn-block btn-dark rounded"><i
+                                                            class="fa fa-save"></i></button>
+                                            </td>
+                                        </form>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
+
+
+
+
+                    <div class="col-6">
                         <div class="panel">
                             <div class="panel-heading">
                                 Guarantees
@@ -117,11 +149,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-6">
                         <div class="panel">
                             <div class="panel-heading">
                                 Suppliers
                             </div>
+
                             <div class="panel-content">
                                 <div class="row">
                                     {% for itemSupplier in itemModel.itemSuppliers %}
@@ -129,7 +162,7 @@
                                               action="{{ path('repository_item_repository_item_remove_supplier' , {supplier_id:itemSupplier.companyID , item_id:itemModel.itemID}) }}"
                                               method="post">
                                             <h4>{{ itemSupplier.companyName }}</h4>
-                                            <button type="submit" class="btn btn-block btn-danger rounded"><i
+                                            <button type="submit" class="btn btn-danger rounded"><i
                                                         class="fa fa-trash"></i></button>
                                         </form>
                                     {% endfor %}
@@ -149,30 +182,33 @@
                         </div>
                     </div>
 
-
-                    <div class="col-6">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                Images
-                            </div>
-                            <div class="panel-content">
-                                <table class="table table-borderless">
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <img src="https://images.samsung.com/is/image/samsung/my-galaxy-a10-a105-sm-a105gzrgxme-frontred-155348662?$PD_GALLERY_L_JPG$"
-                                                 alt="">
-                                        </td>
-                                        <td>
-                                            <a href="#" class="btn btn-danger rounded"><i
-                                                        class="fa fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                    {% for itemImage in itemImages %}
+                        <div class="col-6">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    Images
+                                </div>
+                                <div class="panel-content">
+                                    <table class="table table-borderless">
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <img src="{{ itemImage.url }}"
+                                                     alt="{{ itemImage.imageAlt }}">
+                                            </td>
+                                            <td>
+                                                <a href="{{ path('repository_item_repository_item_remove_image' , {image_id:itemImage.imageSerial , item_id:itemModel.itemID}) }}"
+                                                   class="btn btn-danger rounded"><i
+                                                            class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% endfor %}
+
                     <div class="col-6">
                         <div class="panel">
                             <div class="panel-heading">

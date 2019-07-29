@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Coupon Group | Read{% endblock %}
+{% block title %}{{ 'accounting.coupon.group.read.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -9,13 +9,8 @@
                 <div class="panel-content">
                     <div class="row">
                         <div class="col-12">
-                            <h1>welcome section</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque eum libero
-                                numquam
-                                obcaecati perspiciatis quas quisquam soluta unde voluptates.
-                            </p>
-
+                            <h1>{{ 'accounting.coupon.group.read.main.title' | trans }}</h1>
+                            <p>{{ 'accounting.coupon.group.read.main.description' | trans }}</p>
                         </div>
                     </div>
                 </div>
@@ -32,7 +27,7 @@
                         <li>
                             <span class="time">{{ couponGroupModel.couponGroupLeftUsageTimes }}</span>
                             <i class="fa fa-shopping-cart text-white bg-blue"></i>
-                            <span class="text">Left</span>
+                            <span class="text">{{ 'accounting.coupon.group.edit.left.title' | trans }}</span>
                         </li>
                     </ul>
                 </div>
@@ -43,7 +38,7 @@
                 <div class="weather--panel text-white bg-darker">
                     <div class="weather--title">
                         <i class="fa fa-exclamation"></i>
-                        <span>Availability</span>
+                        <span>{{ 'general.availability.title' | trans }}</span>
                     </div>
 
                     <div class="weather--info">
@@ -60,14 +55,14 @@
                 <div class="weather--panel text-white bg-darker">
                     <div class="weather--title">
                         <i class="fa fa-exclamation"></i>
-                        <span>Confirm</span>
+                        <span>{{ 'general.confirm.title' | trans }}</span>
                     </div>
 
                     <div class="weather--info">
                         {% if couponGroupModel.couponGroupStatus.couponGroupStatusMachineName == 'requested' %}
-                            <span class="label label-orange rounded">Waiting</span>
+                            <span class="label label-orange rounded">{{ 'general.status.waiting.title' | trans }}</span>
                         {% else %}
-                            <span class="label label-green rounded">Accepted</span>
+                            <span class="label label-green rounded">{{ 'general.status.accepted.title' | trans }}</span>
                         {% endif %}
                     </div>
                 </div>
@@ -79,7 +74,7 @@
                     <div class="row">
                         <div class="col-2 ">
                             <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Name</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.name' | trans }}</span>
 
                                 <div class="col-md-12">
                                     {{ couponGroupModel.couponGroupName }}
@@ -88,7 +83,7 @@
                         </div>
                         <div class="col-2 ">
                             <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Prefix</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.prefix' | trans }}</span>
                                 <div class="col-md-12">
                                     {{ couponGroupModel.couponGroupPrefix }}
                                 </div>
@@ -96,7 +91,7 @@
                         </div>
                         <div class="col-2 ">
                             <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Expiry date</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.expiry.date' | trans }}</span>
                                 <div class="col-md-12">
                                     {{ couponGroupModel.couponGroupExpiryDate }}
                                 </div>
@@ -104,14 +99,14 @@
                         </div>
                         <div class="col-2 ">
                             <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Discount type</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.discount.type' | trans }}</span>
                                 {{ couponGroupModel.couponGroupDiscountType.couponGroupDiscountTypeName }}
                             </div>
                         </div>
 
                         <div class="col-2 ">
                             <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Effect</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.effect' | trans }}</span>
 
                                 <div class="col-md-12">
                                     {{ couponGroupModel.couponGroupDiscountEffect }}
@@ -121,7 +116,7 @@
 
                         <div class="col-2 ">
                             <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Minimum Invoice price</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.minimum.invoice.price' | trans }}</span>
 
                                 <div class="col-md-12">
                                     {{ couponGroupModel.couponGroupMinimumInvoicePrice }}
@@ -130,14 +125,14 @@
                         </div>
                         <div class="col-1">
                             <div class="form-group">
-                                <span class="label-text col-md-12 col-form-label ">Type</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.type' | trans }}</span>
                                 {{ (couponGroupModel.couponGroupDiscountType == 'true') ? 'Private' : 'Public' }}
                             </div>
                         </div>
 
                         <div class="col-2 ">
                             <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Usage times</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.usage.times' | trans }}</span>
                                 <div class="col-md-12">
                                     {{ couponGroupModel.couponGroupUsageTimes }}
                                 </div>
@@ -145,7 +140,7 @@
                         </div>
                         <div class="col-2 ">
                             <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Confirmor</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'general.confirm.person.title' | trans }}</span>
                                 <div class="col-md-12">
                                     {{ couponGroupModel.couponGroupConfirmPerson }}
                                 </div>
@@ -153,7 +148,7 @@
                         </div>
                         <div class="col-2 ">
                             <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Confirm Date</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'general.confirm.date.title' | trans }}</span>
                                 <div class="col-md-12">
                                     {{ couponGroupModel.couponGroupConfirmDate }}
                                 </div>
@@ -161,7 +156,7 @@
                         </div>
                         <div class="col-4 ">
                             <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Description</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.description' | trans }}</span>
                                 <div class="col-md-12">{{ couponGroupModel.couponGroupUsageDescription }}</div>
                             </div>
                         </div>
@@ -178,7 +173,7 @@
                         <div class="form-group row">
                             <div class="col-4"></div>
                             <div class="col-md-4">
-                                <input type="text" placeholder="Search" name="text"
+                                <input type="text" placeholder="{{ 'general.search.title' | trans }}" name="text"
                                        class="form-control">
                             </div>
                             <div class="col-4"></div>
@@ -188,10 +183,10 @@
                             <table id="usersRoleList">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Owner</th>
-                                    <th scope="col">Use Date</th>
-                                    <th scope="col">Order</th>
-                                    <th scope="col">Order Price</th>
+                                    <th scope="col">{{ 'general.owner.title' | trans }}</th>
+                                    <th scope="col">{{ 'general.use.date.title' | trans }}</th>
+                                    <th scope="col">{{ 'general.order.serial.title' | trans }}</th>
+                                    <th scope="col">{{ 'general.order.price.title' | trans }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -220,11 +215,11 @@
                                 <table id="countriesList">
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Mobile</th>
-                                        <th>Groups</th>
-                                        <th>Company</th>
+                                        <th>{{ 'general.id.title' | trans }}</th>
+                                        <th>{{ 'general.name.title' | trans }}</th>
+                                        <th>{{ 'general.mobile.title' | trans }}</th>
+                                        <th>{{ 'general.groups.title' | trans }}</th>
+                                        <th>{{ 'general.companies.title' | trans }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>

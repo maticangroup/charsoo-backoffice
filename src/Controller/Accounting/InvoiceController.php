@@ -174,43 +174,11 @@ class InvoiceController extends AbstractController
         }
 
 
-        /**
-         * @var $paymentRequestModel PaymentRequestModel
-         */
-        $paymentRequestModel = ModelSerializer::parse($invoiceModel->getInvoicePaymentRequest(), PaymentRequestModel::class);
-
-
-        /**
-         * @var $payments PaymentModel[]
-         */
-        $payments = [];
-        if ($paymentRequestModel->getPaymentRequestPayments()) {
-            foreach ($paymentRequestModel->getPaymentRequestPayments() as $payment) {
-                $payments[] = ModelSerializer::parse($payment, PaymentModel::class);
-            }
-        }
-
-        $allPaymentMethodRequest = new Req(Servers::Accounting, Accounting::PaymentRequest, 'get_payment_methods');
-        $allPaymentMethodResponse = $allPaymentMethodRequest->send();
-
-        /**
-         * @var $paymentMethods PaymentMethodModel[]
-         */
-        $paymentMethods = [];
-        if ($allPaymentMethodResponse->getContent()) {
-            foreach ($allPaymentMethodResponse->getContent() as $paymentMethod) {
-                $paymentMethods[] = ModelSerializer::parse($paymentMethod, PaymentMethodModel::class);
-            }
-        }
-
 
         return $this->render('accounting/invoice/edit.html.twig', [
             'controller_name' => 'InvoiceController',
             'invoiceModel' => $invoiceModel,
             'invoiceItems' => $invoiceItems,
-            'paymentMethods' => $paymentMethods,
-            'paymentRequestModel' => $paymentRequestModel,
-            'payments' => $payments
         ]);
     }
 

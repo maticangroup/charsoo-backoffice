@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Invoice | Create{% endblock %}
+{% block title %}{{ 'accounting.invoice.create.tab.title' | trans }}{% endblock %}
 {% block body %}
     <div class="row">
         <div class="col-12">
@@ -8,13 +8,8 @@
                 <div class="panel-content">
                     <div class="row">
                         <div class="col-12">
-                            <h1>welcome section</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque eum libero
-                                numquam
-                                obcaecati perspiciatis quas quisquam soluta unde voluptates.
-                            </p>
-
+                            <h1>{{ 'accounting.invoice.create.main.title' | trans }}</h1>
+                            <p>{{ 'accounting.invoice.create.main.description' | trans }}</p>
                         </div>
                     </div>
                 </div>
@@ -29,15 +24,17 @@
                         <div class="col-2">
                             <div class="form-group row">
                                 <div class="col-md-12">
-                                    <span class="label-text col-md-12 col-form-label ">Date</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'accounting.invoice.create.form.input.title.create.date' | trans }}</span>
                                     <input type="text" id="date-picker" name="invoiceCreateDate"
-                                           class="form-control" placeholder="Create Date" value="{{ invoiceModel.invoiceCreateDate }}"/>
+                                           class="form-control"
+                                           placeholder="{{ 'accounting.invoice.create.form.input.placeholder.create.date' | trans }}"
+                                           value="{{ invoiceModel.invoiceCreateDate }}"/>
                                     <span id="span-date-picker"></span>
                                 </div>
                                 <div class="col-md-12">
-                                    <span class="label-text col-md-12 col-form-label ">Invoice Group</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'accounting.invoice.create.form.input.title.invoice.group' | trans }}</span>
                                     <input type="text" list="invoiceGroups" name="invoiceGroupName" class="form-control"
-                                           placeholder="Invoice Group">
+                                           placeholder="{{ 'accounting.invoice.create.form.input.placeholder.invoice.group' | trans }}">
                                     <datalist id="invoiceGroups">
                                         {% for invoiceGroup in invoiceGroups %}
                                         <option value="{{ invoiceGroup }}">
@@ -45,7 +42,7 @@
                                     </datalist>
                                 </div>
                                 <div class="col-md-12 form-inline">
-                                    <span class="label-text col-md-12 col-form-label ">Invoice Type</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'accounting.invoice.create.form.input.title.invoice.type' | trans }}</span>
                                     <label class="form-radio mr-3">
                                         <input type="radio" name="invoiceTypeMachineName"
                                                value="income"
@@ -71,7 +68,7 @@
                         <div class="col-3">
                             <div class="form-group row">
                                 <div class="col-md-12">
-                                    <span class="label-text col-md-12 col-form-label ">From Person</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'accounting.invoice.create.form.input.title.from.person' | trans }}</span>
                                     <select name="invoiceFromPersonId" class="form-control">
                                         <option value="none">None</option>
                                         {% for person in persons %}
@@ -81,7 +78,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-12">
-                                    <span class="label-text col-md-12 col-form-label ">To Person</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'accounting.invoice.create.form.input.title.to.person' | trans }}</span>
                                     <select name="invoiceToPersonId" class="form-control">
                                         <option value="none">None</option>
                                         {% for person in persons %}
@@ -95,7 +92,7 @@
                         <div class="col-3">
                             <div class="form-group row">
                                 <div class="col-md-12">
-                                    <span class="label-text col-md-12 col-form-label ">From Company</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'accounting.invoice.create.form.input.title.from.company' | trans }}</span>
                                     <select name="invoiceFromCompanyId" class="form-control">
                                         <option value="none">None</option>
                                         {% for company in companies %}
@@ -106,7 +103,7 @@
 
 
                                 <div class="col-md-12">
-                                    <span class="label-text col-md-12 col-form-label ">To Company</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'accounting.invoice.create.form.input.title.to.company' | trans }}</span>
                                     <select name="invoiceToCompanyId" class="form-control">
                                         <option value="none">None</option>
                                         {% for company in companies %}
@@ -119,7 +116,7 @@
 
                         <div class="col-4">
                             <div class="form-group row">
-                                <span class="label-text col-md-12">Description</span>
+                                <span class="label-text col-md-12">{{ 'accounting.invoice.create.form.input.title.description' | trans }}</span>
 
                                 <div class="col-md-12">
                                                     <textarea name="invoiceDescription" class="form-control"

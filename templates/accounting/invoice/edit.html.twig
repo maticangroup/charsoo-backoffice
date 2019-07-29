@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Invoice | Edit , Read{% endblock %}
+{% block title %}{{ 'accounting.invoice.edit.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -15,28 +15,32 @@
                             <div class="col-4">
                                 <div class="invoice--address">
                                     <div class="panel-heading">
-                                        TO
+                                        {{ 'general.to.title' | trans }}
                                     </div>
                                     <h5 class="h5">{{ invoiceModel.invoiceToCompanyName }}</h5>
-                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceToCompanyPhone }}</p>
+                                    <p><strong>{{ 'general.phone.title' | trans }}
+                                            : </strong>{{ invoiceModel.invoiceToCompanyPhone }}</p>
                                 </div>
                                 <div class="invoice--address">
                                     <h5 class="h5">{{ invoiceModel.invoiceToPersonFirstName }} {{ invoiceModel.invoiceToPersonLastName }}</h5>
-                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceToPersonPhone }}</p>
+                                    <p><strong>{{ 'general.phone.title' | trans }}
+                                            : </strong>{{ invoiceModel.invoiceToPersonPhone }}</p>
                                 </div>
                             </div>
                             <div class="col-4"></div>
                             <div class="col-4 text-right">
                                 <div class="invoice--address">
                                     <div class="panel-heading">
-                                        FROM
+                                        {{ 'general.from.title' | trans }}
                                     </div>
                                     <h5 class="h5">{{ invoiceModel.invoiceFromCompanyName }}</h5>
-                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceFromCompanyPhone }}</p>
+                                    <p><strong>{{ 'general.phone.title' | trans }}
+                                            : </strong>{{ invoiceModel.invoiceFromCompanyPhone }}</p>
                                 </div>
                                 <div class="invoice--address">
                                     <h5 class="h5">{{ invoiceModel.invoiceFromPersonFirstName }} {{ invoiceModel.invoiceFromPersonLastName }}</h5>
-                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceFromPersonPhone }}</p>
+                                    <p><strong>{{ 'general.phone.title' | trans }}
+                                            : </strong>{{ invoiceModel.invoiceFromPersonPhone }}</p>
                                 </div>
                             </div>
                         </div>
@@ -44,11 +48,14 @@
 
                         <div class="invoice--billing">
                             <div class="invoice--info">
-                                <h5 class="h5"><span>Invoice:</span> {{ invoiceModel.invoiceSerial }}</h5>
-                                <p>Invoice Date: <strong>{{ invoiceModel.invoiceCreateDate }}</strong></p>
-                                <p>Invoice Type: <strong>{{ invoiceModel.invoiceTypeName }}</strong></p>
-                                <p>Invoice Status: <span class="label rounded"
-                                                         style="background-color: {{ invoiceModel.invoiceStatusColor }};">
+                                <h5 class="h5"><span>{{ 'accounting.invoice.edit.serial.title' | trans }}
+                                        :</span> {{ invoiceModel.invoiceSerial }}</h5>
+                                <p>{{ 'accounting.invoice.create.form.input.title.create.date' | trans }}:
+                                    <strong>{{ invoiceModel.invoiceCreateDate }}</strong></p>
+                                <p>{{ 'accounting.invoice.create.form.input.title.invoice.type' | trans }}:
+                                    <strong>{{ invoiceModel.invoiceTypeName }}</strong></p>
+                                <p>{{ 'general.status.title' | trans }}: <span class="label rounded"
+                                                                               style="background-color: {{ invoiceModel.invoiceStatusColor }};">
                                         {{ invoiceModel.invoiceStatusName }}
                                     </span></p>
                             </div>
@@ -59,12 +66,12 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>Item</th>
-                                    <th>Quantity</th>
-                                    <th>Unit Price</th>
-                                    <th>Discount Price</th>
-                                    <th>Total</th>
-                                    <th>Action</th>
+                                    <th>{{ 'general.item.title' | trans }}</th>
+                                    <th>{{ 'general.quantity.title' | trans }}</th>
+                                    <th>{{ 'general.unit.price.title' | trans }}</th>
+                                    <th>{{ 'general.discount.price.title' | trans }}</th>
+                                    <th>{{ 'general.total.price.title' | trans }}</th>
+                                    <th>{{ 'general.action.title' | trans }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -85,17 +92,21 @@
                                     <form action="{{ path('accounting_invoice_add_invoice_item' , {invoice_id:invoiceModel.invoiceId}) }}"
                                           method="post">
                                         <td>
-                                            <input type="text" name="invoiceItemName"
+                                            <input type="text"
+                                                   name="{{ 'accounting.invoice.edit.input.placeholder.item' | trans }}"
                                                    placeholder=""
                                                    class="form-control">
                                         </td>
-                                        <td><input type="text" name="invoiceItemQuantity"
+                                        <td><input type="text"
+                                                   name="{{ 'accounting.invoice.edit.input.placeholder.quantity' | trans }}"
                                                    placeholder=""
                                                    class="form-control"></td>
-                                        <td><input type="text" name="invoiceItemCurrentPrice"
+                                        <td><input type="text"
+                                                   name="{{ 'accounting.invoice.edit.input.placeholder.current.price' | trans }}"
                                                    placeholder=""
                                                    class="form-control"></td>
-                                        <td><input type="text" name="invoiceItemDiscountPrice"
+                                        <td><input type="text"
+                                                   name="{{ 'accounting.invoice.edit.input.placeholder.discount.price' | trans }}"
                                                    placeholder=""
                                                    class="form-control"></td>
                                         <td></td>
@@ -106,17 +117,17 @@
                                     </form>
                                 </tr>
                                 <tr>
-                                    <td colspan="4"><strong>VAT</strong></td>
+                                    <td colspan="4"><strong>{{ 'general.vat.title' | trans }}</strong></td>
                                     <td>{{ invoiceModel.invoiceVat }}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="4"><strong>Interest</strong></td>
+                                    <td colspan="4"><strong>{{ 'general.interest.title' | trans }}</strong></td>
                                     <td>{{ invoiceModel.invoiceInterest }}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="4"><strong>Total</strong></td>
+                                    <td colspan="4"><strong>{{ 'general.total.price.title' | trans }}</strong></td>
                                     <td><strong>{{ invoiceModel.invoiceTotalPrice }}</strong></td>
                                     <td></td>
                                 </tr>
@@ -127,7 +138,8 @@
                             <div class="col-9">
                                 <div class="invoice--footer">
                                     <ul class="list-unstyled">
-                                        <li class="mb-3"><strong>Description</strong>
+                                        <li class="mb-3">
+                                            <strong>{{ 'accounting.invoice.create.form.input.title.description' | trans }}</strong>
                                             <ul class="list-unstyled">
                                                 <li>{{ invoiceModel.invoiceDescription }}</li>
                                             </ul>
@@ -141,7 +153,7 @@
                                         <div class="weather--panel text-white bg-darker">
                                             <div class="weather--title">
                                                 <i class="fa fa-exclamation"></i>
-                                                <span>Final Confirm</span>
+                                                <span>{{ 'general.confirm.title' | trans }}</span>
                                             </div>
 
                                             <div class="weather--info">
@@ -170,22 +182,26 @@
                             <div class="col-4">
                                 <div class="invoice--address">
                                     <h5 class="h5">{{ invoiceModel.invoiceToCompanyName }}</h5>
-                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceToCompanyPhone }}</p>
+                                    <p><strong>{{ 'general.phone.title' | trans }}
+                                            : </strong>{{ invoiceModel.invoiceToCompanyPhone }}</p>
                                 </div>
                                 <div class="invoice--address">
                                     <h5 class="h5">{{ invoiceModel.invoiceToPersonFirstName }} {{ invoiceModel.invoiceToPersonLastName }}</h5>
-                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceToPersonPhone }}</p>
+                                    <p><strong>{{ 'general.phone.title' | trans }}
+                                            : </strong>{{ invoiceModel.invoiceToPersonPhone }}</p>
                                 </div>
                             </div>
                             <div class="col-4"></div>
                             <div class="col-4 text-right">
                                 <div class="invoice--address">
                                     <h5 class="h5">{{ invoiceModel.invoiceFromCompanyName }}</h5>
-                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceFromCompanyPhone }}</p>
+                                    <p><strong>{{ 'general.phone.title' | trans }}
+                                            : </strong>{{ invoiceModel.invoiceFromCompanyPhone }}</p>
                                 </div>
                                 <div class="invoice--address">
                                     <h5 class="h5">{{ invoiceModel.invoiceFromPersonFirstName }} {{ invoiceModel.invoiceFromPersonLastName }}</h5>
-                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceFromPersonPhone }}</p>
+                                    <p><strong>{{ 'general.phone.title' | trans }}
+                                            : </strong>{{ invoiceModel.invoiceFromPersonPhone }}</p>
                                 </div>
                             </div>
                         </div>
@@ -193,11 +209,14 @@
 
                         <div class="invoice--billing">
                             <div class="invoice--info">
-                                <h5 class="h5"><span>Invoice:</span> {{ invoiceModel.invoiceSerial }}</h5>
-                                <p>Invoice Date: <strong>{{ invoiceModel.invoiceCreateDate }}</strong></p>
-                                <p>Invoice Type: <strong>{{ invoiceModel.invoiceTypeName }}</strong></p>
-                                <p>Invoice Status: <span class="label rounded"
-                                                         style="background-color: {{ invoiceModel.invoiceStatusColor }};">
+                                <h5 class="h5"><span>{{ 'accounting.invoice.edit.serial.title' | trans }}
+                                        :</span> {{ invoiceModel.invoiceSerial }}</h5>
+                                <p>{{ 'accounting.invoice.create.form.input.title.create.date' | trans }}:
+                                    <strong>{{ invoiceModel.invoiceCreateDate }}</strong></p>
+                                <p>{{ 'accounting.invoice.create.form.input.title.invoice.type' | trans }}:
+                                    <strong>{{ invoiceModel.invoiceTypeName }}</strong></p>
+                                <p>{{ 'general.status.title' | trans }}: <span class="label rounded"
+                                                                               style="background-color: {{ invoiceModel.invoiceStatusColor }};">
                                         {{ invoiceModel.invoiceStatusName }}
                                     </span></p>
                             </div>
@@ -207,11 +226,11 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>Item</th>
-                                    <th>Quantity</th>
-                                    <th>Unit Price</th>
-                                    <th>Discount Price</th>
-                                    <th>Total</th>
+                                    <th>{{ 'general.item.title' | trans }}</th>
+                                    <th>{{ 'general.quantity.title' | trans }}</th>
+                                    <th>{{ 'general.unit.price.title' | trans }}</th>
+                                    <th>{{ 'general.discount.price.title' | trans }}</th>
+                                    <th>{{ 'general.total.price.title' | trans }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -225,17 +244,17 @@
                                     </tr>
                                 {% endfor %}
                                 <tr>
-                                    <td colspan="4"><strong>VAT</strong></td>
+                                    <td colspan="4"><strong>{{ 'general.vat.title' | trans }}</strong></td>
                                     <td>{{ invoiceModel.invoiceVat }}</td>
 
                                 </tr>
                                 <tr>
-                                    <td colspan="4"><strong>Interest</strong></td>
+                                    <td colspan="4"><strong>{{ 'general.interest.title' | trans }}</strong></td>
                                     <td>{{ invoiceModel.invoiceInterest }}</td>
 
                                 </tr>
                                 <tr>
-                                    <td colspan="4"><strong>Total</strong></td>
+                                    <td colspan="4"><strong>{{ 'general.total.price.title' | trans }}</strong></td>
                                     <td><strong>{{ invoiceModel.invoiceTotalPrice }}</strong></td>
 
                                 </tr>
@@ -246,7 +265,8 @@
                             <div class="col-9">
                                 <div class="invoice--footer">
                                     <ul class="list-unstyled">
-                                        <li class="mb-3"><strong>Description</strong>
+                                        <li class="mb-3">
+                                            <strong>{{ 'accounting.invoice.create.form.input.title.description' | trans }}</strong>
                                             <ul class="list-unstyled">
                                                 <li>{{ invoiceModel.invoiceDescription }}</li>
                                             </ul>
@@ -254,13 +274,13 @@
                                     </ul>
                                 </div>
                             </div>
-                            {% if paymentRequestModel.paymentRequestStatus.paymentRequestStatusMachineName == 'requested' %}
+                            {% if invoiceModel.invoicePaymentRequest.paymentRequestStatus.paymentRequestStatusMachineName == 'requested' %}
                                 <div class="col-3 mt-4">
                                     <div class="panel">
                                         <div class="weather--panel text-white bg-darker">
                                             <div class="weather--title">
                                                 <i class="fa fa-exclamation"></i>
-                                                <span>Back To Invoice</span>
+                                                <span>{{ 'general.back.title' | trans }}</span>
                                             </div>
 
                                             <div class="weather--info">
@@ -275,213 +295,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12">
-                <div class="panel">
-                    <div class="panel-heading">
-                        Payments
-                    </div>
-                    <div class="panel-content">
-                        <div class="row">
-                            <div class="col-12">
-                                <table class="table table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">Date times</th>
-                                        <th scope="col">Amount</th>
-                                        <th scope="col">Payment method</th>
-                                        <th scope="col">From Bank</th>
-                                        <th scope="col">To Bank</th>
-                                        <th scope="col">Type</th>
-                                        <th scope="col">Follow token</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for payment in payments %}
-                                        <tr>
-                                            <td>
-                                                <ul class="list-unstyled">
-                                                    <li class="mb-3"><strong>Due Date</strong>
-                                                        <ul class="list-unstyled">
-                                                            <li>{{ payment.paymentDueDate }}</li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="mb-3"><strong>Created at</strong>
-                                                        <ul class="list-unstyled">
-                                                            <li>{{ payment.paymentCreateDate }}</li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="mb-3"><strong>Paid at</strong>
-                                                        <ul class="list-unstyled">
-                                                            <li>{{ payment.paymentPaidDate }}</li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                {{ payment.paymentAmount }}
-                                            </td>
-
-                                            <td>
-                                                <span class="label label-info rounded">{{ payment.paymentMethodName }}</span>
-                                            </td>
-                                            <td>
-                                                {{ payment.invoiceFromCompanyName }}
-                                                {{ payment.invoiceFromPersonFirstName }} {{ payment.invoiceFromPersonLastName }}
-                                            </td>
-                                            <td>
-                                                {{ payment.invoiceToCompanyName }}
-                                                {{ payment.invoiceToPersonFirstName }} {{ payment.invoiceToPersonLastName }}
-                                            </td>
-                                            <td>
-                                                {% if payment.paymentType.paymentTypeMachineName == 'income' %}
-                                                    <span class="fa fa-arrow-left text-green"></span>
-                                                {% else %}
-                                                    <span class="fa fa-arrow-right text-red"></span>
-                                                {% endif %}
-                                            </td>
-                                            <td>
-                                                {% if payment.paymentStatus.paymentStatusMachineName == 'requested' %}
-                                                    <input type="text" placeholder="Follow Token"
-                                                           class="form-control" name="paymentFollowToken">
-                                                {% else %}
-                                                    {{ payment.paymentFollowToken }}
-                                                {% endif %}
-                                            </td>
-                                            <td>
-                                                <span class="label rounded"
-                                                      style="background-color: {{ payment.paymentStatus.paymentStatusColor }}">
-                                                    {{ payment.paymentStatus.paymentStatusName }}
-                                                </span>
-                                            </td>
-                                            <td>
-                                                {% if payment.paymentStatus.paymentStatusMachineName == 'requested' %}
-                                                    <a href="{{ path('accounting_invoice_confirm_payment' , {invoice_id:invoiceModel.invoiceId , payment_id:payment.paymentId}) }}"
-                                                       class="fa fa-check text-green"></a>
-                                                {% endif %}
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                    {% if paymentRequestModel.paymentRequestStatus.paymentRequestStatusMachineName == 'requested' %}
-                                        <tr>
-                                            <form action="{{ path('accounting_invoice_add_payment' ,{invoice_id:invoiceModel.invoiceId , payment_request_id:paymentRequestModel.paymentRequestId}) }}"
-                                                  method="post">
-                                                {#<input type="hidden" name="payment_request_id"#}
-                                                {#value="{{ paymentRequestModel.paymentRequestId }}">#}
-                                                <td>
-                                                    <input type="text" id="date-picker" name="paymentDueDate"
-                                                           class="form-control" placeholder="Due date"/>
-                                                    <span id="span-date-picker"></span>
-                                                </td>
-                                                <td>
-                                                    <input type="text" placeholder="Amount"
-                                                           class="form-control" name="paymentAmount">
-                                                </td>
-                                                <td>
-                                                    <select name="paymentMethodMachineName" class="form-control">
-                                                        {% for paymentMethod in paymentMethods %}
-                                                            <option value="{{ paymentMethod.paymentMethodMachineName }}">{{ paymentMethod.paymentMethodName }}</option>
-                                                        {% endfor %}
-                                                        {#<option value="cash"></option>#}
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <select name="from" class="form-control">
-                                                        <option disabled>Person</option>
-                                                        <option value="person_{{ invoiceModel.invoiceFromPersonId }}">
-                                                            FROM
-                                                            - {{ invoiceModel.invoiceFromPersonFirstName }} {{ invoiceModel.invoiceFromPersonLastName }}</option>
-                                                        <option value="person_{{ invoiceModel.invoiceToPersonId }}">TO
-                                                            - {{ invoiceModel.invoiceToPersonFirstName }} {{ invoiceModel.invoiceToPersonLastName }}</option>
-                                                        <option disabled>Company</option>
-                                                        <option value="company_{{ invoiceModel.invoiceFromCompanyId }}">
-                                                            FROM
-                                                            - {{ invoiceModel.invoiceFromCompanyName }}</option>
-                                                        <option value="company_{{ invoiceModel.invoiceToCompanyId }}">TO
-                                                            - {{ invoiceModel.invoiceToCompanyName }}</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <select name="to" class="form-control">
-                                                        <option disabled>Person</option>
-                                                        <option value="person_{{ invoiceModel.invoiceFromPersonId }}">
-                                                            FROM
-                                                            - {{ invoiceModel.invoiceFromPersonFirstName }} {{ invoiceModel.invoiceFromPersonLastName }}</option>
-                                                        <option value="person_{{ invoiceModel.invoiceToPersonId }}">TO
-                                                            - {{ invoiceModel.invoiceToPersonFirstName }} {{ invoiceModel.invoiceToPersonLastName }}</option>
-                                                        <option disabled>Company</option>
-                                                        <option value="company_{{ invoiceModel.invoiceFromCompanyId }}">
-                                                            FROM
-                                                            - {{ invoiceModel.invoiceFromCompanyName }}</option>
-                                                        <option value="company_{{ invoiceModel.invoiceToCompanyId }}">TO
-                                                            - {{ invoiceModel.invoiceToCompanyName }}</option>
-                                                    </select>
-                                                </td>
-                                                <td colspan="2">
-                                                    <select name="paymentType" class="form-control">
-                                                        <option value="income">Income</option>
-                                                        <option value="outgo">Outgo</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                <td>
-                                                    <button type="submit"
-                                                            class="btn btn-block btn-success rounded fa fa-plus"></button>
-                                                </td>
-                                            </form>
-                                        </tr>
-                                    {% endif %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4 ">
-                <div class="panel">
-                    <div class="panel-heading">
-                        Payment info
-                    </div>
-                    <div class="panel-content">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th>Cleared amount</th>
-                                <th>Total price</th>
-                                <th>Paying count</th>
-                                <th>Left Amount</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    {{ paymentRequestModel.paymentRequestClearedAmount }}
-                                </td>
-                                <td>
-                                    {{ paymentRequestModel.paymentRequestTotalPrice }}
-                                </td>
-                                <td>
-                                    {{ paymentRequestModel.paymentRequestPayingCount }}
-                                </td>
-                                <td>{{ paymentRequestModel.paymentRequestTotalPrice - paymentRequestModel.paymentRequestClearedAmount }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="panel bg-info text-white ">
-                    <div class="panel-content text-center">
-                        <span>Requested</span>
-                    </div>
-                </div>
-            </div>
         {% endif %}
-        {#if invoice is accepted#}
 
+        {#if invoice is accepted#}
         {% if invoiceModel.invoiceStatusMachineName == 'paid' %}
             <div class="col-12">
                 <div class="panel">
@@ -490,22 +306,26 @@
                             <div class="col-4">
                                 <div class="invoice--address">
                                     <h5 class="h5">{{ invoiceModel.invoiceToCompanyName }}</h5>
-                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceToCompanyPhone }}</p>
+                                    <p><strong>{{ 'general.phone.title' | trans }}
+                                            : </strong>{{ invoiceModel.invoiceToCompanyPhone }}</p>
                                 </div>
                                 <div class="invoice--address">
                                     <h5 class="h5">{{ invoiceModel.invoiceToPersonFirstName }} {{ invoiceModel.invoiceToPersonLastName }}</h5>
-                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceToPersonPhone }}</p>
+                                    <p><strong>{{ 'general.phone.title' | trans }}
+                                            : </strong>{{ invoiceModel.invoiceToPersonPhone }}</p>
                                 </div>
                             </div>
                             <div class="col-4"></div>
                             <div class="col-4 text-right">
                                 <div class="invoice--address">
                                     <h5 class="h5">{{ invoiceModel.invoiceFromCompanyName }}</h5>
-                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceFromCompanyPhone }}</p>
+                                    <p><strong>{{ 'general.phone.title' | trans }}
+                                            : </strong>{{ invoiceModel.invoiceFromCompanyPhone }}</p>
                                 </div>
                                 <div class="invoice--address">
                                     <h5 class="h5">{{ invoiceModel.invoiceFromPersonFirstName }} {{ invoiceModel.invoiceFromPersonLastName }}</h5>
-                                    <p><strong>Phone : </strong>{{ invoiceModel.invoiceFromPersonPhone }}</p>
+                                    <p><strong>{{ 'general.phone.title' | trans }}
+                                            : </strong>{{ invoiceModel.invoiceFromPersonPhone }}</p>
                                 </div>
                             </div>
                         </div>
@@ -513,11 +333,14 @@
 
                         <div class="invoice--billing">
                             <div class="invoice--info">
-                                <h5 class="h5"><span>Invoice:</span> {{ invoiceModel.invoiceSerial }}</h5>
-                                <p>Invoice Date: <strong>{{ invoiceModel.invoiceCreateDate }}</strong></p>
-                                <p>Invoice Type: <strong>{{ invoiceModel.invoiceTypeName }}</strong></p>
-                                <p>Invoice Status: <span class="label rounded"
-                                                         style="background-color: {{ invoiceModel.invoiceStatusColor }};">
+                                <h5 class="h5"><span>{{ 'accounting.invoice.edit.serial.title' | trans }}
+                                        :</span> {{ invoiceModel.invoiceSerial }}</h5>
+                                <p>{{ 'accounting.invoice.create.form.input.title.create.date' | trans }}:
+                                    <strong>{{ invoiceModel.invoiceCreateDate }}</strong></p>
+                                <p>{{ 'accounting.invoice.create.form.input.title.invoice.type' | trans }}:
+                                    <strong>{{ invoiceModel.invoiceTypeName }}</strong></p>
+                                <p>{{ 'general.status.title' | trans }}: <span class="label rounded"
+                                                                               style="background-color: {{ invoiceModel.invoiceStatusColor }};">
                                         {{ invoiceModel.invoiceStatusName }}
                                     </span></p>
                             </div>
@@ -527,11 +350,11 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>Item</th>
-                                    <th>Quantity</th>
-                                    <th>Unit Price</th>
-                                    <th>Discount Price</th>
-                                    <th>Total</th>
+                                    <th>{{ 'general.item.title' | trans }}</th>
+                                    <th>{{ 'general.quantity.title' | trans }}</th>
+                                    <th>{{ 'general.unit.price.title' | trans }}</th>
+                                    <th>{{ 'general.discount.price.title' | trans }}</th>
+                                    <th>{{ 'general.total.price.title' | trans }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -545,17 +368,17 @@
                                     </tr>
                                 {% endfor %}
                                 <tr>
-                                    <td colspan="4"><strong>VAT</strong></td>
+                                    <td colspan="4"><strong>{{ 'general.vat.title' | trans }}</strong></td>
                                     <td>{{ invoiceModel.invoiceVat }}</td>
 
                                 </tr>
                                 <tr>
-                                    <td colspan="4"><strong>Interest</strong></td>
+                                    <td colspan="4"><strong>{{ 'general.interest.title' | trans }}</strong></td>
                                     <td>{{ invoiceModel.invoiceInterest }}</td>
 
                                 </tr>
                                 <tr>
-                                    <td colspan="4"><strong>Total</strong></td>
+                                    <td colspan="4"><strong>{{ 'general.total.price.title' | trans }}</strong></td>
                                     <td><strong>{{ invoiceModel.invoiceTotalPrice }}</strong></td>
 
                                 </tr>
@@ -566,7 +389,8 @@
                             <div class="col-9">
                                 <div class="invoice--footer">
                                     <ul class="list-unstyled">
-                                        <li class="mb-3"><strong>Description</strong>
+                                        <li class="mb-3">
+                                            <strong>{{ 'accounting.invoice.create.form.input.title.description' | trans }}</strong>
                                             <ul class="list-unstyled">
                                                 <li>{{ invoiceModel.invoiceDescription }}</li>
                                             </ul>
@@ -578,130 +402,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12">
-                <div class="panel">
-                    <div class="panel-heading">
-                        Payments
-                    </div>
-                    <div class="panel-content">
-                        <div class="row">
-                            <div class="col-12">
-                                <table class="table table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">Date times</th>
-                                        <th scope="col">Amount</th>
-                                        <th scope="col">Payment method</th>
-                                        <th scope="col">From Bank</th>
-                                        <th scope="col">To Bank</th>
-                                        <th scope="col">Type</th>
-                                        <th scope="col">Follow token</th>
-                                        <th scope="col">Status</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for payment in payments %}
-                                        <tr>
-                                            <td>
-                                                <ul class="list-unstyled">
-                                                    <li class="mb-3"><strong>Due Date</strong>
-                                                        <ul class="list-unstyled">
-                                                            <li>{{ payment.paymentDueDate }}</li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="mb-3"><strong>Created at</strong>
-                                                        <ul class="list-unstyled">
-                                                            <li>{{ payment.paymentCreateDate }}</li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="mb-3"><strong>Paid at</strong>
-                                                        <ul class="list-unstyled">
-                                                            <li>{{ payment.paymentPaidDate }}</li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                {{ payment.paymentAmount }}
-                                            </td>
-
-                                            <td>
-                                                <span class="label label-info rounded">{{ payment.paymentMethodName }}</span>
-                                            </td>
-                                            <td>
-                                                {{ payment.invoiceFromCompanyName }}
-                                                {{ payment.invoiceFromPersonFirstName }} {{ payment.invoiceFromPersonLastName }}
-                                            </td>
-                                            <td>
-                                                {{ payment.invoiceToCompanyName }}
-                                                {{ payment.invoiceToPersonFirstName }} {{ payment.invoiceToPersonLastName }}
-                                            </td>
-                                            <td>
-                                                {% if payment.paymentType.paymentTypeMachineName == 'income' %}
-                                                    <span class="fa fa-arrow-left text-green"></span>
-                                                {% else %}
-                                                    <span class="fa fa-arrow-right text-red"></span>
-                                                {% endif %}
-                                            </td>
-                                            <td>
-                                                {{ payment.paymentFollowToken }}
-                                            </td>
-                                            <td>
-                                                <span class="label rounded"
-                                                      style="background-color: {{ payment.paymentStatus.paymentStatusColor }}">
-                                                    {{ payment.paymentStatus.paymentStatusName }}
-                                                </span>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4 ">
-                <div class="panel">
-                    <div class="panel-heading">
-                        Payment info
-                    </div>
-                    <div class="panel-content">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th>Cleared amount</th>
-                                <th>Total price</th>
-                                <th>Paying count</th>
-                                <th>Left Amount</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    {{ paymentRequestModel.paymentRequestClearedAmount }}
-                                </td>
-                                <td>
-                                    {{ paymentRequestModel.paymentRequestTotalPrice }}
-                                </td>
-                                <td>
-                                    {{ paymentRequestModel.paymentRequestPayingCount }}
-                                </td>
-                                <td>{{ paymentRequestModel.paymentRequestTotalPrice - paymentRequestModel.paymentRequestClearedAmount }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="panel bg-success text-white ">
-                    <div class="panel-content text-center">
-                        <span>Transferred</span>
-                    </div>
-                </div>
-            </div>
         {% endif %}
+
+        {{ render(controller(
+            'App\\Controller\\General\\PaymentRequestViewController::index' , {invoiceModel:invoiceModel}
+        )) }}
 
     </div>
 {% endblock %}

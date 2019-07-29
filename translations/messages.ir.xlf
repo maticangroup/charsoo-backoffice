@@ -21,13 +21,25 @@
         <source>accounting.coupon.group.create.form.input.title.name</source>
         <target>__accounting.coupon.group.create.form.input.title.name</target>
       </trans-unit>
+      <trans-unit id="MZAjGE6" resname="accounting.coupon.group.create.form.input.placeholder.name">
+        <source>accounting.coupon.group.create.form.input.placeholder.name</source>
+        <target>__accounting.coupon.group.create.form.input.placeholder.name</target>
+      </trans-unit>
       <trans-unit id="mjA80Y5" resname="accounting.coupon.group.create.form.input.title.prefix">
         <source>accounting.coupon.group.create.form.input.title.prefix</source>
         <target>__accounting.coupon.group.create.form.input.title.prefix</target>
       </trans-unit>
+      <trans-unit id="YXbCKat" resname="accounting.coupon.group.create.form.input.placeholder.prefix">
+        <source>accounting.coupon.group.create.form.input.placeholder.prefix</source>
+        <target>__accounting.coupon.group.create.form.input.placeholder.prefix</target>
+      </trans-unit>
       <trans-unit id="Z373NEJ" resname="accounting.coupon.group.create.form.input.title.expiry.date">
         <source>accounting.coupon.group.create.form.input.title.expiry.date</source>
         <target>__accounting.coupon.group.create.form.input.title.expiry.date</target>
+      </trans-unit>
+      <trans-unit id="vfToqJt" resname="accounting.coupon.group.create.form.input.placeholder.expiry.date">
+        <source>accounting.coupon.group.create.form.input.placeholder.expiry.date</source>
+        <target>__accounting.coupon.group.create.form.input.placeholder.expiry.date</target>
       </trans-unit>
       <trans-unit id="Mo0x5gh" resname="accounting.coupon.group.create.form.input.title.discount.type">
         <source>accounting.coupon.group.create.form.input.title.discount.type</source>
@@ -37,9 +49,17 @@
         <source>accounting.coupon.group.create.form.input.title.effect</source>
         <target>__accounting.coupon.group.create.form.input.title.effect</target>
       </trans-unit>
+      <trans-unit id="rX2GevJ" resname="accounting.coupon.group.create.form.input.placeholder.effect">
+        <source>accounting.coupon.group.create.form.input.placeholder.effect</source>
+        <target>__accounting.coupon.group.create.form.input.placeholder.effect</target>
+      </trans-unit>
       <trans-unit id="kls4vCS" resname="accounting.coupon.group.create.form.input.title.minimum.invoice.price">
         <source>accounting.coupon.group.create.form.input.title.minimum.invoice.price</source>
         <target>__accounting.coupon.group.create.form.input.title.minimum.invoice.price</target>
+      </trans-unit>
+      <trans-unit id="yFlN13t" resname="accounting.coupon.group.create.form.input.placeholder.minimum.invoice.price">
+        <source>accounting.coupon.group.create.form.input.placeholder.minimum.invoice.price</source>
+        <target>__accounting.coupon.group.create.form.input.placeholder.minimum.invoice.price</target>
       </trans-unit>
       <trans-unit id="RjmnIER" resname="accounting.coupon.group.create.form.input.title.type">
         <source>accounting.coupon.group.create.form.input.title.type</source>
@@ -49,9 +69,37 @@
         <source>accounting.coupon.group.create.form.input.title.usage.times</source>
         <target>__accounting.coupon.group.create.form.input.title.usage.times</target>
       </trans-unit>
+      <trans-unit id="MbaJZ.M" resname="accounting.coupon.group.create.form.input.placeholder.usage.times">
+        <source>accounting.coupon.group.create.form.input.placeholder.usage.times</source>
+        <target>__accounting.coupon.group.create.form.input.placeholder.usage.times</target>
+      </trans-unit>
       <trans-unit id="v.1g3zh" resname="accounting.coupon.group.create.form.input.title.description">
         <source>accounting.coupon.group.create.form.input.title.description</source>
         <target>__accounting.coupon.group.create.form.input.title.description</target>
+      </trans-unit>
+      <trans-unit id="GsmrKWV" resname="accounting.coupon.group.create.form.input.placeholder.description">
+        <source>accounting.coupon.group.create.form.input.placeholder.description</source>
+        <target>__accounting.coupon.group.create.form.input.placeholder.description</target>
+      </trans-unit>
+      <trans-unit id="89NsRhf" resname="accounting.coupon.group.edit.tab.title">
+        <source>accounting.coupon.group.edit.tab.title</source>
+        <target>کوپن | ساختن</target>
+      </trans-unit>
+      <trans-unit id="twgrD4z" resname="accounting.coupon.group.edit.main.title">
+        <source>accounting.coupon.group.edit.main.title</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="yCg3RCr" resname="accounting.coupon.group.edit.main.description">
+        <source>accounting.coupon.group.edit.main.description</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="t00I_ip" resname="accounting.coupon.group.edit.left.title">
+        <source>accounting.coupon.group.edit.left.title</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="zFTGsB0" resname="general.confirm.title">
+        <source>general.confirm.title</source>
+        <target>__general.confirm.title</target>
       </trans-unit>
     </body>
   </file>

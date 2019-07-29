@@ -109,9 +109,9 @@ class GuaranteeDurationController extends AbstractController
                 $request->add_instance($guaranteeDurationModel);
                 $response = $request->send();
                 if ($response->getStatus() == ResponseStatus::successful) {
-                    $this->addFlash('s', '');
+                    $this->addFlash('s', $response->getMessage());
                 } else {
-                    $this->addFlash('f', '');
+                    $this->addFlash('f', $response->getMessage());
                 }
 
             }

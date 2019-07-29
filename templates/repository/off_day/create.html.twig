@@ -4,128 +4,130 @@
 
 {% block body %}
     <div class="row">
-        {% if canCreate %}
-            <div class="col-12">
-                <div class="panel">
-                    <div class="panel-content">
-                        <div class="row">
-                            <div class="col-6">
-                                <h3>Want to add a new user?</h3>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aspernatur
-                                    culpa doloribus laborum necessitatibus rem temporibus. Beatae ipsa officiis
-                                    quam.
-                                </p>
-                            </div>
-                            <div class="col-6">
-                                <form class="row" action="{{ path('repository_off_day_repository_off_day_create') }}"
-                                      method="post">
-                                    <div class="col-12 d-flex flex-column justify-content-center align-items-center">
-                                        <div class="form-group row">
-                                            <span class="label-text col-md-12 col-form-label ">Date</span>
-                                            <input type="text" id="date-picker" name="offDayDate"
-                                                   class="form-control" value="{{ offDayModel.offDayDate }}"/>
-                                            <span id="span-date-picker"></span>
-                                            {#<div class="col-md-4">#}
-                                            {#<select name="offDayYear" class="form-control">#}
-                                            {#{% for year in years %}#}
-                                            {#<option value="{{ year }}" {{ (offDayModel.offDayYear == year) ? 'selected' : '' }}>{{ year }}</option>#}
-                                            {#{% endfor %}#}
-                                            {#</select>#}
-                                            {#</div>#}
-                                            {#<div class="col-md-4">#}
-                                            {#<select name="offDayMonth" class="form-control">#}
-                                            {#{% for month in months %}#}
-                                            {#<option value="{{ month }}" {{ (offDayModel.offDayMonth == month) ? 'selected' : '' }}>{{ month }}</option>#}
-                                            {#{% endfor %}#}
-                                            {#</select>#}
-                                            {#</div>#}
-                                            {#<div class="col-md-4">#}
-                                            {#<select name="offDayDay" class="form-control">#}
-                                            {#{% for day in days %}#}
-                                            {#<option value="{{ day }}" {{ (offDayModel.offDayDay == day) ? 'selected' : '' }}>{{ day }}</option>#}
-                                            {#{% endfor %}#}
-                                            {#</select>#}
-                                            {#</div>#}
-                                        </div>
-                                        <div class="form-group row">
-                                            <span class="label-text col-md-12 col-form-label ">Reason</span>
-                                            <div class="col-md-12">
+    {% if canCreate %}
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-8">
+                            <h3>Want to add a new user?</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aspernatur
+                                culpa doloribus laborum necessitatibus rem temporibus. Beatae ipsa officiis
+                                quam.
+                            </p>
+                        </div>
+                        <div class="col-4">
+                            <form class="row" action="{{ path('repository_off_day_repository_off_day_create') }}"
+                                  method="post">
+                                <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+                                    <div class="form-group row">
+                                        <span class="label-text col-md-12 col-form-label ">Date</span>
+                                        <input type="text" id="date-picker" name="offDayDate"
+                                               class="form-control" value="{{ offDayModel.offDayDate }}"/>
+                                        <span id="span-date-picker"></span>
+                                        {#<div class="col-md-4">#}
+                                        {#<select name="offDayYear" class="form-control">#}
+                                        {#{% for year in years %}#}
+                                        {#<option value="{{ year }}" {{ (offDayModel.offDayYear == year) ? 'selected' : '' }}>{{ year }}</option>#}
+                                        {#{% endfor %}#}
+                                        {#</select>#}
+                                        {#</div>#}
+                                        {#<div class="col-md-4">#}
+                                        {#<select name="offDayMonth" class="form-control">#}
+                                        {#{% for month in months %}#}
+                                        {#<option value="{{ month }}" {{ (offDayModel.offDayMonth == month) ? 'selected' : '' }}>{{ month }}</option>#}
+                                        {#{% endfor %}#}
+                                        {#</select>#}
+                                        {#</div>#}
+                                        {#<div class="col-md-4">#}
+                                        {#<select name="offDayDay" class="form-control">#}
+                                        {#{% for day in days %}#}
+                                        {#<option value="{{ day }}" {{ (offDayModel.offDayDay == day) ? 'selected' : '' }}>{{ day }}</option>#}
+                                        {#{% endfor %}#}
+                                        {#</select>#}
+                                        {#</div>#}
+                                    </div>
+                                    <div class="form-group row">
+                                        <span class="label-text col-md-12 col-form-label ">Reason</span>
+                                        <div class="col-md-12">
                                             <textarea placeholder="Date" name="offDayReason"
                                                       class="form-control mb-3">{{ offDayModel.offDayReason }}</textarea>
-                                            </div>
                                         </div>
-                                        <button type="submit"
-                                                class="btn rounded btn-block btn-dark fa fa-save"></button>
                                     </div>
-                                </form>
-                            </div>
+                                    <button type="submit"
+                                            class="btn rounded btn-dark fa fa-save"></button>
+
+                                </div>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        {% endif %}
+        </div>
+        </div>
+    {% endif %}
 
-        {% if canSeeAll %}
-            <div class="col-12">
-                <div class="panel">
-                    <div class="panel-content">
-                        <div class="form-group row">
-                            <div class="col-4"></div>
-                            <div class="col-md-4">
-                                <input type="text" placeholder="Search" name="text"
-                                       class="form-control">
-                            </div>
-                            <div class="col-4"></div>
+    {% if canSeeAll %}
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="form-group row">
+                        <div class="col-4"></div>
+                        <div class="col-md-4">
+                            <input type="text" placeholder="Search" name="text"
+                                   class="form-control">
                         </div>
-                        <!-- Records List Start -->
-                        <div class="records--list">
-                            <table id="usersRoleList">
-                                <thead>
+                        <div class="col-4"></div>
+                    </div>
+                    <!-- Records List Start -->
+                    <div class="records--list">
+                        <table id="usersRoleList">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Date</th>
+                                <th>Reason</th>
+                                <th>Created At</th>
+                                <th>By</th>
+                                {% if canRemove %}
+                                    <th>Action</th>
+                                {% endif %}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for offDay in offDays %}
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Date</th>
-                                    <th>Reason</th>
-                                    <th>Created At</th>
-                                    <th>By</th>
+                                    <td>
+                                        {{ offDay.offDayID }}
+                                    </td>
+                                    <td>
+                                        {{ offDay.offDayYear }}/{{ offDay.offDayMonth }}/{{ offDay.offDayDay }}
+                                    </td>
+                                    <td>
+                                        {{ offDay.offDayReason }}
+                                    </td>
+                                    <td>
+                                        {{ offDay.offDayCreateDate }}
+                                    </td>
+                                    <td>
+                                        {{ offDay.offDayCreatePerson }}
+                                    </td>
                                     {% if canRemove %}
-                                        <th>Action</th>
+                                        <td>
+                                            <a href="{{ path('repository_off_day_repository_off_day_remove' , {id:offDay.offDayID}) }}"
+                                               class="fa fa-trash"></a>
+                                        </td>
                                     {% endif %}
                                 </tr>
-                                </thead>
-                                <tbody>
-                                {% for offDay in offDays %}
-                                    <tr>
-                                        <td>
-                                            {{ offDay.offDayID }}
-                                        </td>
-                                        <td>
-                                            {{ offDay.offDayYear }}/{{ offDay.offDayMonth }}/{{ offDay.offDayDay }}
-                                        </td>
-                                        <td>
-                                            {{ offDay.offDayReason }}
-                                        </td>
-                                        <td>
-                                            {{ offDay.offDayCreateDate }}
-                                        </td>
-                                        <td>
-                                            {{ offDay.offDayCreatePerson }}
-                                        </td>
-                                        {% if canRemove %}
-                                            <td>
-                                                <a href="{{ path('repository_off_day_repository_off_day_remove' , {id:offDay.offDayID}) }}"
-                                                   class="fa fa-trash"></a>
-                                            </td>
-                                        {% endif %}
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- Records List End -->
+                            {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
+                    <!-- Records List End -->
                 </div>
             </div>
-        {% endif %}
+        </div>
+    {% endif %}
     </div>
 {% endblock %}

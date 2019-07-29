@@ -21,10 +21,56 @@
                 </div>
             </div>
         </div>
-        {% if canUpdate %}
-            <div class="col-8">
+        {#{% if canUpdate %}#}
+            <div class="col-4">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-10">
+                        <form
+                              action="{{ path('repository_item_repository_item_update_categories' , {item_id:itemModel.itemID}) }}"
+                              method="post">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-6 text-left"><strong>Item categories</strong></div>
+                                    <div class="col-6 text-right">
+                                        <button type="submit" class="btn btn-info fa fa-save rounded"></button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            {#<div class="panel-content">#}
+                                <ul class="mtc-categories">
+                                    {% if itemCategories %}
+                                        {% for itemCategory in itemCategories %}
+                                            <li class="shadow list-group-item"
+                                                style="margin-left: {{ itemCategory.depth*20 }}px;">
+                                                <div class="category-header">
+                                                    <p class="category-name">
+                                                        {{ itemCategory.category.0.itemCategoryName }}
+                                                    </p>
+                                                    <div class="form-group pt-1 pb-1">
+                                                        <label class="form-check">
+                                                            <input type="checkbox" name="itemCategoriesIds[]"
+                                                                   value="{{ itemCategory.category.0.itemCategoryID }}"
+                                                                    {{ (itemCategory.category.is_checked)?'checked':'' }}
+                                                                   class="form-check-input">
+                                                            <span class="form-check-label"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                    {% else %}
+                                        <h4 class="text-center">no category is selected</h4>
+                                    {% endif %}
+                                </ul>
+                            {#</div>#}
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="row">
+                    <div class="col-12">
                         <div class="panel">
                             <div class="panel-heading">
                                 Barcodes
@@ -66,7 +112,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-12">
                         <div class="panel">
                             <div class="panel-heading">
                                 Colors
@@ -111,7 +157,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-12">
                         <div class="panel">
                             <div class="panel-heading">
                                 Guarantees
@@ -157,7 +203,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-12">
                         <div class="panel">
                             <div class="panel-heading">
                                 Suppliers
@@ -204,7 +250,7 @@
                         </div>
                     </div>
                     {% for itemImage in itemImages %}
-                        <div class="col-6">
+                        <div class="col-12">
                             <div class="panel">
                                 <div class="panel-heading">
                                     Images
@@ -229,7 +275,7 @@
                             </div>
                         </div>
                     {% endfor %}
-                    <div class="col-6">
+                    <div class="col-12">
                         <div class="panel">
                             <div class="panel-heading">
                                 Images
@@ -307,124 +353,85 @@
                             </div>
                         </form>
                     </div>
-
+                </div>
+                <div class="row">
                     <div class="col-12">
-                        <form class="panel"
-                              action="{{ path('repository_item_repository_item_update_categories' , {item_id:itemModel.itemID}) }}"
-                              method="post">
+                        <div class="panel">
                             <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-6 text-left">Item categories</div>
-                                    <div class="col-6 text-right">
-                                        <button type="submit" class="btn btn-info fa fa-save rounded"></button>
-                                    </div>
-                                </div>
-
+                                <strong>
+                                    Spec Groups
+                                </strong>
                             </div>
                             <div class="panel-content">
-                                <ul class="mtc-categories">
-                                    {% if itemCategories %}
-                                        {% for itemCategory in itemCategories %}
-                                            <li class="shadow list-group-item">
-                                                <div class="category-header">
-                                                    <p class="category-name">
-                                                        {{ itemCategory.itemCategoryName }}
-                                                    </p>
-                                                    <div class="form-group pt-1 pb-1">
-                                                        <label class="form-check">
-                                                            <input type="checkbox" name="itemCategoriesIds[]"
-                                                                   value="{{ itemCategory.itemCategoryID }}"
-                                                                    {{ (itemCategory.itemCategoryIsChecked)?'checked':'' }}
-                                                                   class="form-check-input">
-                                                            <span class="form-check-label"></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        {% endfor %}
-                                    {% else %}
-                                        <h4 class="text-center">no category is selected</h4>
-                                    {% endif %}
-                                </ul>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="panel">
-                    <div class="panel-heading">
-                        <strong>
-                            Spec Groups
-                        </strong>
-                    </div>
-                    <div class="panel-content">
-                        <div class="row">
-                            {#{{ dump(specGroupKeys) }}#}
-                            {% for key1 , specGroup in specGroupKeys %}
-                                {#{{ dump(specGroup) }}#}
-                                <div class="col-4">
-                                    <div class="panel shadow">
-                                        <div class="panel-heading">{{ key1 }}</div>
-                                        <div class="panel-content">
-                                            <table class="table">
-                                                <thead>
-                                                <tr>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Value</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                {% for key2 , specKey in specGroup %}
-                                                    {#{{ dump(specKey.specKeySuggestion) }}#}
-                                                    <tr>
-                                                        <td>{{ specKey.specKeyName }}</td>
-                                                        <td>
-                                                            {% for submittedValue in specKey.specKeySubmittedValues %}
-                                                                <div class="input-group">
-                                                                    <h4 style="margin-right: 200px">{{ submittedValue }}</h4>
-                                                                    <div class="input-group-append">
-                                                                        <a href="{{ path('repository_item_remove_key_value', {item_id: itemModel.itemID, key_id: specKey.specKeyID , value:submittedValue}) }}"
-                                                                           class="btn btn-block btn-rounded btn-danger fa fa-trash"></a>
-                                                                    </div>
-                                                                </div>
-                                                            {% endfor %}
-
-                                                            <form action="{{ path('repository_item_submit_key_value') }}"
-                                                                  method="post" class="input-group">
-                                                                <input type="hidden" name="itemId"
-                                                                       value="{{ itemModel.itemID }}">
-                                                                <input type="hidden" name="keyId"
-                                                                       value="{{ specKey.specKeyID }}">
-                                                                <input type="text"
-                                                                       list="specKeyValues{{ key1 }}{{ key2 }}"
-                                                                       name="value"
-                                                                       class="form-control"
-                                                                       placeholder="Spec Key Value">
-                                                                <datalist id="specKeyValues{{ key1 }}{{ key2 }}">
-                                                                    {% for suggestValue in specKey.specKeySuggestion %}
-                                                                        <option value="{{ suggestValue }}"></option>
+                                <div class="row">
+                                    {#{{ dump(specGroupKeys) }}#}
+                                    {% for key1 , specGroup in specGroupKeys %}
+                                        {#{{ dump(specGroup) }}#}
+                                        <div class="col-12">
+                                            <div class="panel shadow">
+                                                <div class="panel-heading">{{ key1 }}</div>
+                                                <div class="panel-content">
+                                                    <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col">Name</th>
+                                                            <th scope="col">Value</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {% for key2 , specKey in specGroup %}
+                                                            {#{{ dump(specKey.specKeySuggestion) }}#}
+                                                            <tr>
+                                                                <td>{{ specKey.specKeyName }}</td>
+                                                                <td>
+                                                                    {% for submittedValue in specKey.specKeySubmittedValues %}
+                                                                        <div class="input-group">
+                                                                            <h4 style="margin-right: 200px">{{ submittedValue }}</h4>
+                                                                            <div class="input-group-append">
+                                                                                <a href="{{ path('repository_item_remove_key_value', {item_id: itemModel.itemID, key_id: specKey.specKeyID , value:submittedValue}) }}"
+                                                                                   class="btn btn-block btn-rounded btn-danger fa fa-trash"></a>
+                                                                            </div>
+                                                                        </div>
                                                                     {% endfor %}
-                                                                </datalist>
-                                                                <div class="input-group-append">
-                                                                    <button type="submit"
-                                                                            class="btn btn-rounded btn-dark fa fa-plus"></button>
-                                                                </div>
-                                                            </form>
-                                                        </td>
-                                                    </tr>
-                                                {% endfor %}
-                                                </tbody>
-                                            </table>
+
+                                                                    <form action="{{ path('repository_item_submit_key_value') }}"
+                                                                          method="post" class="input-group">
+                                                                        <input type="hidden" name="itemId"
+                                                                               value="{{ itemModel.itemID }}">
+                                                                        <input type="hidden" name="keyId"
+                                                                               value="{{ specKey.specKeyID }}">
+                                                                        <input type="text"
+                                                                               list="specKeyValues{{ key1 }}{{ key2 }}"
+                                                                               name="value"
+                                                                               class="form-control"
+                                                                               placeholder="Spec Key Value">
+                                                                        <datalist id="specKeyValues{{ key1 }}{{ key2 }}">
+                                                                            {% for suggestValue in specKey.specKeySuggestion %}
+                                                                                <option value="{{ suggestValue }}"></option>
+                                                                            {% endfor %}
+                                                                        </datalist>
+                                                                        <div class="input-group-append">
+                                                                            <button type="submit"
+                                                                                    class="btn btn-rounded btn-dark fa fa-plus"></button>
+                                                                        </div>
+                                                                    </form>
+                                                                </td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    {% endfor %}
                                 </div>
-                            {% endfor %}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        {% endif %}
+
+        {#{% endif %}#}
 
 
         {% if false %}

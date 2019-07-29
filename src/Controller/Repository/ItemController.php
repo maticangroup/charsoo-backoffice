@@ -55,8 +55,6 @@ class ItemController extends AbstractController
             foreach ($response->getContent() as $item) {
                 $items[] = ModelSerializer::parse($item, ItemModel::class);
             }
-
-
             return $this->render('repository/item/list.html.twig', [
                 'controller_name' => 'ItemController',
                 'items' => $items,
@@ -249,27 +247,27 @@ class ItemController extends AbstractController
             }
 //        dd($suppliers);
 
-//            $allItemCategoriesRequest = new Req(Servers::Repository, Repository::ItemCategory, 'all');
-//            $allItemCategoriesResponse = $allItemCategoriesRequest->send();
-            /**
-             * @var $itemCategories ItemCategoryModel[]
-             */
-            $itemCategories = [];
+            $allItemCategoriesRequest = new Req(Servers::Repository, Repository::ItemCategory, 'all');
+            $allItemCategoriesResponse = $allItemCategoriesRequest->send();
 
 
-//            foreach ($allItemCategoriesResponse->getContent() as $itemCategory) {
+            $itemCategories = json_decode(json_encode($allItemCategoriesResponse->getContent()), true);
+
+//            dd($itemCategories);
+
+            foreach ($itemCategories as $key => $itemCategory) {
+//                dd($itemCategory);
 //                /**
 //                 * @var $itemCategoryModel ItemCategoryModel
 //                 */
 //                $itemCategoryModel = ModelSerializer::parse($itemCategory, ItemCategoryModel::class);
-//                if ($itemModel->getItemCategoriesIds()) {
-//                    if (in_array($itemCategoryModel->getItemCategoryID(), $itemModel->getItemCategoriesIds())) {
-//                        $itemCategoryModel->setItemCategoryIsChecked(true);
-//                    }
-//                }
-//
-//                $itemCategories[] = $itemCategoryModel;
-//            }
+                if ($itemModel->getItemCategoriesIds()) {
+                    if (in_array($itemCategory['category'][0]['itemCategoryID'], $itemModel->getItemCategoriesIds())) {
+                        $itemCategories[$key]['category']['is_checked'] = true;
+                    }
+                }
+
+            }
 
 //        print_r(json_encode($itemModel->getItemSpecGroupsKeys())); die('s');
 

@@ -34,8 +34,8 @@
                         <div class="form-group row">
                             <div class="col-4"></div>
                             <div class="col-md-4">
-                                <input type="text" placeholder="Search" name="text"
-                                       class="form-control">
+                                {#<input type="text" placeholder="Search" name="text"#}
+                                {#class="form-control">#}
                                 {#<input type="text" class="form-control" id="js-search" placeholder="Live Search...">#}
                             </div>
                             <div class="col-4"></div>
@@ -73,47 +73,42 @@
                                             {#<img src="{{ firstItemImageUrl }}" alt="{{ firstItemImageAlt }}">#}
                                         </td>
                                         <td>{{ item.itemBrandName }}</td>
-                                        <td>{{ item.itemName }}</td>
+                                        <td><strong>{{ item.itemName }}</strong></td>
                                         <td>
                                             {% for color in item.itemColors %}
-                                                {{ color.itemColorName }} <span class="label rounded"
-                                                                                style="background-color: {{ color.itemColorHex }}">
+                                                <span class="label rounded shadow-sm"
+                                                      style="background-color: {{ color.itemColorHex }}">
                                                      </span>
                                             {% endfor %}
                                         </td>
                                         <td>
-                                            {% for guarantee in item.itemGuarantees %}
-                                                {{ guarantee.guaranteeName }},
-                                            {% endfor %}
-                                        </td>
-                                        <td>
-                                            {% for supplier in item.itemSuppliers %}
-                                                {{ supplier.companyName }},
-                                            {% endfor %}
-                                        </td>
-                                        <td>
-                                            <ul class="">
-                                                <li><a href="#" class="btn-link">Category</a></li>
-                                                <li><a href="#" class="btn-link">Category</a></li>
-                                                <li>
-                                                    <a href="#" class="btn-link">Category</a>
-                                                    <ul>
-                                                        <li><a href="#" class="btn-link">Category</a></li>
-                                                        <li>
-                                                            <a href="#" class="btn-link">Category</a>
-                                                        <li><a href="#" class="btn-link">Category</a>
-                                                            <ul>
-                                                                <li><a href="#" class="btn-link">Category</a></li>
-                                                                <li>
-                                                                    <a href="#" class="btn-link">Category</a>
-                                                                <li><a href="#" class="btn-link">Category</a></li>
-
-
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </li>
+                                            <ul>
+                                                {% for guarantee in item.itemGuarantees %}
+                                                    <li>
+                                                        {{ guarantee.guaranteeName }}
+                                                    </li>
+                                                {% endfor %}
                                             </ul>
+                                        </td>
+                                        <td>
+                                            <ul>
+                                                {% for supplier in item.itemSuppliers %}
+                                                    <li>
+                                                        {{ supplier.companyName }}
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <ul>
+                                                {% for itemCategory in item.selectedItemCategories %}
+                                                    <li
+                                                            style="margin-left: {{ itemCategory.depth*20 }}px;">
+                                                        {{ itemCategory.category.0.itemCategoryName }}
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+
                                         </td>
                                         <td>{{ item.itemCreatedDate }}</td>
                                         <td>{{ item.itemUpdatedDate }}</td>

@@ -138,6 +138,7 @@
                         <table class="table">
                             <thead>
                             <tr>
+                                <th scope="col">Display Order</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Default value</th>
                                 <th scope="col">Is special</th>
@@ -149,6 +150,7 @@
                             <tbody>
                             {% for specKey in specGroup.specGroupSpecKeys %}
                                 <tr>
+                                    <td>{{ specKey.specKeyDisplayOrder }}</td>
                                     <td>{{ specKey.specKeyName }}</td>
                                     <td>{{ specKey.specKeyDefaultValue }}</td>
                                     <td>

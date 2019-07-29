@@ -150,33 +150,56 @@
                     </div>
 
 
-                    <div class="col-12">
+                    <div class="col-6">
                         <div class="panel">
                             <div class="panel-heading">
                                 Images
                             </div>
                             <div class="panel-content">
-                                <div class="row">
-                                    <form class="col-6 mb-3 mt-3 text-center" action="" method="post">
-                                        <img src="https://via.placeholder.com/400x400" class="mb-3" alt="">
-                                        <button type="submit" class="btn btn-block btn-danger rounded"><i
-                                                    class="fa fa-trash"></i></button>
-                                    </form>
-                                    <form class="col-6 mb-3 mt-3 text-center" action="" method="post">
-                                        <img src="https://via.placeholder.com/400x400" class="mb-3" alt="">
-                                        <button type="submit" class="btn btn-block btn-danger rounded"><i
-                                                    class="fa fa-trash"></i></button>
-                                    </form>
-                                    <form class="col-6 mb-3 mt-3" action="" method="post">
-                                        <input type="file" class="custom-file-input mb-3">
-                                        <span class="custom-file-label">Choose File</span>
-                                        <button type="submit" class="btn btn-block btn-dark rounded"><i
-                                                    class="fa fa-save"></i></button>
-                                    </form>
-                                </div>
+                                <table class="table table-borderless">
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <img src="https://images.samsung.com/is/image/samsung/my-galaxy-a10-a105-sm-a105gzrgxme-frontred-155348662?$PD_GALLERY_L_JPG$"
+                                                 alt="">
+                                        </td>
+                                        <td>
+                                            <a href="#" class="btn btn-danger rounded"><i
+                                                        class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
+                    <div class="col-6">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                Images
+                            </div>
+                            <div class="panel-content">
+                                <table class="table table-borderless">
+                                    <tbody>
+                                    <tr>
+                                        <form action="{{ path('repository_item_repository_item_add_image',{item_id:itemModel.itemID}) }}"
+                                              enctype="multipart/form-data"
+                                              method="post">
+                                            <td>
+                                                <input type="file" name="item_image">
+                                            </td>
+                                            <td>
+                                                <button type="submit" class="btn btn-block btn-danger rounded"><i
+                                                            class="fa fa-upload"></i></button>
+                                            </td>
+                                        </form>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="col-4">

@@ -509,6 +509,50 @@ class MenuController extends AbstractController
             ],
             //Ticketing
 
+            //Authentication
+            [
+                'main_menu_name' => 'Authentication',
+                'main_menu_items' => [
+                    [
+                        'menu_item_name' => 'Client',
+                        'menu_item_icon' => 'fa fa-th',
+                        'menu_item_children' => [
+                            [
+                                'menu_child_name' => 'Create',
+                                'menu_child_link' => 'http://127.0.0.1:8000/authentication/client/create',
+                                'action' => ServerPermissions::authentication_client_new
+                            ],
+                        ]
+
+                    ],
+                    [
+                        'menu_item_name' => 'Role',
+                        'menu_item_icon' => 'fa fa-th',
+                        'menu_item_children' => [
+                            [
+                                'menu_child_name' => 'List',
+                                'menu_child_link' => 'http://127.0.0.1:8000/authentication/role/create',
+                                'action' => ServerPermissions::authentication_role_all
+                            ],
+                        ]
+
+                    ],
+                    [
+                        'menu_item_name' => 'User',
+                        'menu_item_icon' => 'fa fa-th',
+                        'menu_item_children' => [
+                            [
+                                'menu_child_name' => 'List',
+                                'menu_child_link' => 'http://127.0.0.1:8000/authentication/user/list',
+                                'action' => ServerPermissions::authentication_user_all
+                            ],
+                        ]
+
+                    ],
+                ]
+            ],
+            //Authentication
+
         ];
         $authorizedMenu = [];
         foreach ($sideMenu as $menuNumber => $menu) {

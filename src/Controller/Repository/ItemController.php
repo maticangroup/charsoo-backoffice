@@ -20,7 +20,9 @@ use App\General\AuthUser;
 use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
+use Matican\Core\Transaction\Response;
 use Matican\Core\Transaction\ResponseStatus;
+use Matican\Models\Media\Image;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -502,10 +504,25 @@ class ItemController extends AbstractController
 
     /**
      * @Route("/add_image/{item_id}", name="_repository_item_add_image")
+     * @param Request $request
+     * @param $item_id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function addImage()
+    public function addImage(Request $request, $item_id)
     {
-
+        $file = $request->files->get('item_image');
+        $uploadRequest = new Req(Servers::Media, 'image', 'upload');
+        $itemModel = new ItemModel();
+        $itemModel->setItemID($item_id);
+        /**
+         * @var $uploadResponse Response
+         */
+        $uploadResponse = $uploadRequest->uploadImage($file, $itemModel);
+        if ($uploadResponse->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $uploadResponse->getMessage());
+        }
+        $this->addFlash('f', $uploadResponse->getMessage());
+        return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
     }
 
     /**

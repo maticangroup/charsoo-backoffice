@@ -511,7 +511,8 @@ class ItemController extends AbstractController
     public function addImage(Request $request, $item_id)
     {
         $file = $request->files->get('item_image');
-        $uploadRequest = new Req(Servers::Media, 'image', 'upload');
+
+        $uploadRequest = new Req(Servers::Repository, Repository::Item, 'add_image');
         $itemModel = new ItemModel();
         $itemModel->setItemID($item_id);
         /**

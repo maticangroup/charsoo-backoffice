@@ -17,6 +17,10 @@ class MenuController extends AbstractController
      */
     public function sideMenu()
     {
+        $serverName = $_SERVER['SERVER_NAME'];
+        $serverPort = $_SERVER['SERVER_PORT'];
+        $requestURI = $_SERVER['REQUEST_URI'];
+
         $sideMenu = [
             //Accounting
             [
@@ -28,12 +32,12 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'List',
-                                'menu_child_link' => 'http://127.0.0.1:8000/accounting/coupon-group/list',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/accounting/coupon-group/list',
                                 'action' => ServerPermissions::accounting_coupongroup_all
                             ],
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/accounting/coupon-group/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/accounting/coupon-group/create',
                                 'action' => ServerPermissions::accounting_coupongroup_new
                             ],
                         ]
@@ -45,12 +49,12 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'List',
-                                'menu_child_link' => 'http://127.0.0.1:8000/accounting/gift-card-group/list',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/accounting/gift-card-group/list',
                                 'action' => ServerPermissions::accounting_giftcardgroup_all
                             ],
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/accounting/gift-card-group/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/accounting/gift-card-group/create',
                                 'action' => ServerPermissions::accounting_giftcardgroup_new
                             ],
                         ]
@@ -62,12 +66,12 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'List',
-                                'menu_child_link' => 'http://127.0.0.1:8000/accounting/invoice/list',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/accounting/invoice/list',
                                 'action' => ServerPermissions::accounting_invoice_all
                             ],
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/accounting/invoice/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/accounting/invoice/create',
                                 'action' => ServerPermissions::accounting_invoice_new
                             ],
                         ]
@@ -89,7 +93,7 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/crm/customer-group/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/crm/customer-group/create',
                                 'action' => ServerPermissions::crm_customergroup_new
                             ],
                         ]
@@ -101,7 +105,7 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'List',
-                                'menu_child_link' => 'http://127.0.0.1:8000/crm/customer/list',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/crm/customer/list',
                                 'action' => ServerPermissions::crm_customergroup_all
                             ],
                         ]
@@ -121,12 +125,12 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'List',
-                                'menu_child_link' => 'http://127.0.0.1:8000/delivery/delivery-method/list',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/delivery/delivery-method/list',
                                 'action' => ServerPermissions::delivery_deliverymethod_all
                             ],
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/delivery/delivery-method/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/delivery/delivery-method/create',
                                 'action' => ServerPermissions::delivery_deliverymethod_new
                             ],
                         ]
@@ -138,7 +142,7 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'List',
-                                'menu_child_link' => 'http://127.0.0.1:8000/delivery/delivery-person/list',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/delivery/delivery-person/list',
                                 'action' => ServerPermissions::delivery_deliveryperson_all
                             ],
                         ]
@@ -150,12 +154,12 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'List',
-                                'menu_child_link' => 'http://127.0.0.1:8000/delivery/dispatch/list',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/delivery/dispatch/list',
                                 'action' => ServerPermissions::delivery_dispatch_all
                             ],
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/delivery/dispatch/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/delivery/dispatch/create',
                                 'action' => ServerPermissions::delivery_dispatch_new
                             ],
                         ]
@@ -175,12 +179,12 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'List',
-                                'menu_child_link' => 'http://127.0.0.1:8000/inventory/list',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/inventory/list',
                                 'action' => ServerPermissions::inventory_inventory_all
                             ],
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/inventory/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/inventory/create',
                                 'action' => ServerPermissions::inventory_inventory_new
                             ],
                         ]
@@ -192,12 +196,12 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'List',
-                                'menu_child_link' => 'http://127.0.0.1:8000/inventory/shelve/list',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/inventory/shelve/list',
                                 'action' => ServerPermissions::inventory_shelve_all
                             ],
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/inventory/shelve/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/inventory/shelve/create',
                                 'action' => ServerPermissions::inventory_shelve_new
                             ],
                         ]
@@ -209,12 +213,12 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'List',
-                                'menu_child_link' => 'http://127.0.0.1:8000/inventory/deed/list',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/inventory/deed/list',
                                 'action' => ServerPermissions::inventory_transferdeed_all
                             ],
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/inventory/deed/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/inventory/deed/create',
                                 'action' => ServerPermissions::inventory_transferdeed_new
                             ],
                         ]
@@ -226,7 +230,7 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'List',
-                                'menu_child_link' => 'http://127.0.0.1:8000/inventory/stock/list',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/inventory/stock/list',
                                 'action' => ServerPermissions::inventory_inventory_all_item_products
                             ],
                         ]
@@ -246,7 +250,7 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'List',
-                                'menu_child_link' => 'http://127.0.0.1:8000/delivery/delivery-method/list',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/delivery/delivery-method/list',
                                 'action' => ServerPermissions::delivery_deliverymethod_all
                             ],
                         ]
@@ -266,7 +270,7 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/repository/brand/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/repository/brand/create',
                                 'action' => ServerPermissions::repository_brand_new
                             ],
                         ]
@@ -278,12 +282,12 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'List',
-                                'menu_child_link' => 'http://127.0.0.1:8000/repository/company/list',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/repository/company/list',
                                 'action' => ServerPermissions::repository_company_all
                             ],
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/repository/company/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/repository/company/create',
                                 'action' => ServerPermissions::repository_company_new
                             ],
                         ]
@@ -295,7 +299,7 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/repository/forbidden-words/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/repository/forbidden-words/create',
                                 'action' => ServerPermissions::repository_forbiddenwords_new
                             ],
                         ]
@@ -307,7 +311,7 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/repository/guarantee/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/repository/guarantee/create',
                                 'action' => ServerPermissions::repository_guarantee_new
                             ],
                         ]
@@ -319,7 +323,7 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/repository/guarantee-duration/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/repository/guarantee-duration/create',
                                 'action' => ServerPermissions::repository_guarantee_add_duration
                             ],
                         ]
@@ -331,7 +335,7 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/repository/guarantee-provider/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/repository/guarantee-provider/create',
                                 'action' => ServerPermissions::repository_guarantee_add_provider
                             ],
                         ]
@@ -343,7 +347,7 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/repository/color/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/repository/color/create',
                                 'action' => ServerPermissions::repository_color_new
                             ],
                         ]
@@ -355,7 +359,7 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/repository/off-day/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/repository/off-day/create',
                                 'action' => ServerPermissions::repository_offdays_new
                             ],
                         ]
@@ -367,12 +371,12 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'List',
-                                'menu_child_link' => 'http://127.0.0.1:8000/repository/person/list',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/repository/person/list',
                                 'action' => ServerPermissions::repository_person_all
                             ],
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/repository/person/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/repository/person/create',
                                 'action' => ServerPermissions::repository_person_new
                             ],
                         ]
@@ -384,7 +388,7 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/repository/size/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/repository/size/create',
                                 'action' => ServerPermissions::repository_size_new
                             ],
                         ]
@@ -396,7 +400,7 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/repository/spec-group/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/repository/spec-group/create',
                                 'action' => ServerPermissions::repository_specgroup_new
                             ],
                         ]
@@ -408,7 +412,7 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/repository/item-category/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/repository/item-category/create',
                                 'action' => ServerPermissions::repository_itemcategory_new
                             ],
                         ]
@@ -420,12 +424,12 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'List',
-                                'menu_child_link' => 'http://127.0.0.1:8000/repository/item/list',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/repository/item/list',
                                 'action' => ServerPermissions::repository_item_all
                             ],
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/repository/item/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/repository/item/create',
                                 'action' => ServerPermissions::repository_item_new
                             ],
                         ]
@@ -445,7 +449,7 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/sale/offer-group/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/sale/offer-group/create',
                                 'action' => ServerPermissions::sale_offergroup_new
                             ],
                         ]
@@ -457,12 +461,12 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'List',
-                                'menu_child_link' => 'http://127.0.0.1:8000/sale/pricing-deed/list',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/sale/pricing-deed/list',
                                 'action' => ServerPermissions::sale_pricingdeed_all
                             ],
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/sale/pricing-deed/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/sale/pricing-deed/create',
                                 'action' => ServerPermissions::sale_pricingdeed_new
                             ],
                         ]
@@ -474,12 +478,12 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'List',
-                                'menu_child_link' => 'http://127.0.0.1:8000/sale/order/list',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/sale/order/list',
                                 'action' => ServerPermissions::sale_order_all
                             ],
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/sale/order/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/sale/order/create',
                                 'action' => ServerPermissions::sale_order_new
                             ],
                         ]
@@ -499,7 +503,7 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/sale/offer-group/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/sale/offer-group/create',
                                 'action' => ServerPermissions::sale_offergroup_new
                             ],
                         ]
@@ -519,7 +523,7 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'Create',
-                                'menu_child_link' => 'http://127.0.0.1:8000/authentication/client/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/authentication/client/create',
                                 'action' => ServerPermissions::authentication_client_new
                             ],
                         ]
@@ -531,7 +535,7 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'List',
-                                'menu_child_link' => 'http://127.0.0.1:8000/authentication/role/create',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/authentication/role/create',
                                 'action' => ServerPermissions::authentication_role_all
                             ],
                         ]
@@ -543,7 +547,7 @@ class MenuController extends AbstractController
                         'menu_item_children' => [
                             [
                                 'menu_child_name' => 'List',
-                                'menu_child_link' => 'http://127.0.0.1:8000/authentication/user/list',
+                                'menu_child_link' => 'http://' . $serverName .':'. $serverPort . '/authentication/user/list',
                                 'action' => ServerPermissions::authentication_user_all
                             ],
                         ]
@@ -572,10 +576,7 @@ class MenuController extends AbstractController
         }
 
 
-        $serverName = $_SERVER['SERVER_NAME'];
-        $serverPort = $_SERVER['SERVER_PORT'];
-        $requestURI = $_SERVER['REQUEST_URI'];
-        $currentULR = 'http://' . $serverName . ':' . $serverPort . $requestURI;
+        $currentULR = 'http://' . $serverName .':'. $serverPort . ':' . $serverPort . $requestURI;
 
         return $this->render('general/menu/side-menu.html.twig', [
             'controller_name' => 'MenuController',

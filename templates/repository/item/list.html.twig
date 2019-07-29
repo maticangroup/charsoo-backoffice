@@ -36,21 +36,22 @@
                             <div class="col-md-4">
                                 <input type="text" placeholder="Search" name="text"
                                        class="form-control">
+                                {#<input type="text" class="form-control" id="js-search" placeholder="Live Search...">#}
                             </div>
                             <div class="col-4"></div>
                         </div>
                         <!-- Records List Start -->
                         <div class="records--list">
-                            <table id="usersRoleList">
+                            <table id="usersRoleList" class="js-table">
                                 <thead>
                                 <tr>
-                                    <th>Barcode</th>
-                                    <th>Name</th>
-                                    <th>Category</th>
+                                    <th>Image</th>
                                     <th>Brand</th>
+                                    <th>Name</th>
                                     <th>Color</th>
                                     <th>Guarantee</th>
                                     <th>Supplier</th>
+                                    <th>Category</th>
                                     <th>Created At</th>
                                     <th>Updated At</th>
                                     {% if canEdit %}
@@ -62,12 +63,33 @@
                                 {% for item in items %}
                                     <tr>
                                         <td>
-                                            {% for barcode in item.itemBarcodes %}
-                                                {{ barcode.barcodeName }},
+                                            {% if item.itemImages %}
+                                                <img src="{{ item.itemImages.0.url }}"
+                                                     alt="{{ item.itemImages.0.imageAlt }}">
+                                            {% else %}
+
+                                            {% endif %}
+
+                                            {#<img src="{{ firstItemImageUrl }}" alt="{{ firstItemImageAlt }}">#}
+                                        </td>
+                                        <td>{{ item.itemBrandName }}</td>
+                                        <td>{{ item.itemName }}</td>
+                                        <td>
+                                            {% for color in item.itemColors %}
+                                                {{ color.itemColorName }} <span class="label rounded"
+                                                                                style="background-color: {{ color.itemColorHex }}">
+                                                     </span>
                                             {% endfor %}
                                         </td>
                                         <td>
-                                            {{ item.itemName }}
+                                            {% for guarantee in item.itemGuarantees %}
+                                                {{ guarantee.guaranteeName }},
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            {% for supplier in item.itemSuppliers %}
+                                                {{ supplier.companyName }},
+                                            {% endfor %}
                                         </td>
                                         <td>
                                             <ul class="">
@@ -93,23 +115,6 @@
                                                 </li>
                                             </ul>
                                         </td>
-
-                                        <td>{{ item.itemBrandName }}</td>
-                                        <td>
-                                            {% for color in item.itemColors %}
-                                                {{ color.itemColorName }},
-                                            {% endfor %}
-                                        </td>
-                                        <td>
-                                            {% for guarantee in item.itemGuarantees %}
-                                                {{ guarantee.guaranteeName }},
-                                            {% endfor %}
-                                        </td>
-                                        <td>
-                                            {% for supplier in item.itemSuppliers %}
-                                                {{ supplier.companyName }},
-                                            {% endfor %}
-                                        </td>
                                         <td>{{ item.itemCreatedDate }}</td>
                                         <td>{{ item.itemUpdatedDate }}</td>
                                         {% if canEdit %}
@@ -130,3 +135,5 @@
         {% endif %}
     </div>
 {% endblock %}
+
+

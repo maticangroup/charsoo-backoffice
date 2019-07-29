@@ -21,7 +21,6 @@
                 </div>
             </div>
         </div>
-
         {% if canUpdate %}
             <div class="col-8">
                 <div class="row">
@@ -42,7 +41,7 @@
                                                     <h4>{{ barcode.barcodeName }}</h4>
                                                 </td>
                                                 <td>
-                                                    <button type="submit" class="btn btn-block btn-danger rounded"><i
+                                                    <button type="submit" class="btn btn-danger rounded"><i
                                                                 class="fa fa-trash"></i></button>
                                                 </td>
                                             </form>
@@ -57,7 +56,7 @@
                                                        placeholder="Add New Barcode...">
                                             </td>
                                             <td>
-                                                <button type="submit" class="btn btn-block btn-dark rounded"><i
+                                                <button type="submit" class="btn btn-dark rounded"><i
                                                             class="fa fa-save"></i></button>
                                             </td>
                                         </form>
@@ -72,7 +71,6 @@
                             <div class="panel-heading">
                                 Colors
                             </div>
-
                             <div class="panel-content">
                                 <table class="table table-striped">
                                     <tbody>
@@ -85,7 +83,7 @@
                                                     <h4>{{ itemColor.itemColorName }}</h4>
                                                 </td>
                                                 <td>
-                                                    <button type="submit" class="btn btn-block btn-danger rounded"><i
+                                                    <button type="submit" class="btn btn-danger rounded"><i
                                                                 class="fa fa-trash"></i></button>
                                                 </td>
                                             </form>
@@ -103,7 +101,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <button type="submit" class="btn btn-block btn-dark rounded"><i
+                                                <button type="submit" class="btn btn-dark rounded"><i
                                                             class="fa fa-save"></i></button>
                                             </td>
                                         </form>
@@ -113,39 +111,49 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
                     <div class="col-6">
                         <div class="panel">
                             <div class="panel-heading">
                                 Guarantees
                             </div>
-                            <div class="panel-content">
-                                <div class="row">
-                                    {% for itemGuarantee in itemModel.itemGuarantees %}
-                                        <form class="col-6 mb-3 mt-3"
-                                              action="{{ path('repository_item_repository_item_remove_guarantee' , {guarantee_id:itemGuarantee.guaranteeID , item_id:itemModel.itemID}) }}"
-                                              method="post">
-                                            <h4>{{ itemGuarantee.guaranteeName }}</h4>
-                                            <button type="submit" class="btn btn-block btn-danger rounded"><i
-                                                        class="fa fa-trash"></i></button>
-                                        </form>
-                                    {% endfor %}
 
-                                    <form class="col-6 mb-3 mt-3"
-                                          action="{{ path('repository_item_repository_item_add_guarantee' , {item_id:itemModel.itemID}) }}"
-                                          method="post">
-                                        <select name="guaranteeID" class="form-control mb-3">
-                                            {% for guarantee in guarantees %}
-                                                <option value="{{ guarantee.guaranteeID }}">{{ guarantee.guaranteeName }}</option>
-                                            {% endfor %}
-                                        </select>
-                                        <button type="submit" class="btn btn-block btn-dark rounded"><i
-                                                    class="fa fa-save"></i></button>
-                                    </form>
-                                </div>
+                            <div class="panel-content">
+                                <table class="table table-striped">
+                                    <tbody>
+                                    {% for itemGuarantee in itemModel.itemGuarantees %}
+                                        <tr>
+                                            <form class="col-6 mb-3 mt-3"
+                                                  action="{{ path('repository_item_repository_item_remove_guarantee' , {guarantee_id:itemGuarantee.guaranteeID , item_id:itemModel.itemID}) }}"
+                                                  method="post">
+                                                <td>
+                                                    <h4>{{ itemGuarantee.guaranteeName }}</h4>
+                                                </td>
+                                                <td>
+                                                    <button type="submit" class="btn btn-danger rounded"><i
+                                                                class="fa fa-trash"></i></button>
+                                                </td>
+                                            </form>
+                                        </tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <form class="col-6 mb-3 mt-3"
+                                              action="{{ path('repository_item_repository_item_add_guarantee' , {item_id:itemModel.itemID}) }}"
+                                              method="post">
+                                            <td>
+                                                <select name="guaranteeID" class="form-control mb-3">
+                                                    {% for guarantee in guarantees %}
+                                                        <option value="{{ guarantee.guaranteeID }}">{{ guarantee.guaranteeName }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <button type="submit" class="btn btn-dark rounded"><i
+                                                            class="fa fa-save"></i></button>
+                                            </td>
+                                        </form>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -156,32 +164,45 @@
                             </div>
 
                             <div class="panel-content">
-                                <div class="row">
+                                <table class="table table-striped">
+                                    <tbody>
                                     {% for itemSupplier in itemModel.itemSuppliers %}
-                                        <form class="col-6 mb-3 mt-3"
-                                              action="{{ path('repository_item_repository_item_remove_supplier' , {supplier_id:itemSupplier.companyID , item_id:itemModel.itemID}) }}"
-                                              method="post">
-                                            <h4>{{ itemSupplier.companyName }}</h4>
-                                            <button type="submit" class="btn btn-danger rounded"><i
-                                                        class="fa fa-trash"></i></button>
-                                        </form>
+                                        <tr>
+                                            <form class="col-6 mb-3 mt-3"
+                                                  action="{{ path('repository_item_repository_item_remove_supplier' , {supplier_id:itemSupplier.companyID , item_id:itemModel.itemID}) }}"
+                                                  method="post">
+                                                <td>
+                                                    <h4>{{ itemSupplier.companyName }}</h4>
+                                                </td>
+                                                <td>
+                                                    <button type="submit" class="btn btn-danger rounded"><i
+                                                                class="fa fa-trash"></i></button>
+                                                </td>
+                                            </form>
+                                        </tr>
                                     {% endfor %}
-                                    <form class="col-6 mb-3 mt-3"
-                                          action="{{ path('repository_item_repository_item_add_supplier' , {item_id:itemModel.itemID}) }}"
-                                          method="post">
-                                        <select name="companyID" class="form-control mb-3">
-                                            {% for supplier in suppliers %}
-                                                <option value="{{ supplier.companyID }}">{{ supplier.companyName }}</option>
-                                            {% endfor %}
-                                        </select>
-                                        <button type="submit" class="btn btn-block btn-dark rounded"><i
-                                                    class="fa fa-save"></i></button>
-                                    </form>
-                                </div>
+                                    <tr>
+                                        <form class="col-6 mb-3 mt-3"
+                                              action="{{ path('repository_item_repository_item_add_supplier' , {item_id:itemModel.itemID}) }}"
+                                              method="post">
+                                            <td>
+                                                <select name="companyID" class="form-control mb-3">
+                                                    {% for supplier in suppliers %}
+                                                        <option value="{{ supplier.companyID }}">{{ supplier.companyName }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <button type="submit" class="btn btn-dark rounded"><i
+                                                            class="fa fa-save"></i></button>
+                                            </td>
+                                        </form>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-
                     {% for itemImage in itemImages %}
                         <div class="col-6">
                             <div class="panel">
@@ -208,7 +229,6 @@
                             </div>
                         </div>
                     {% endfor %}
-
                     <div class="col-6">
                         <div class="panel">
                             <div class="panel-heading">
@@ -225,7 +245,7 @@
                                                 <input type="file" name="item_image">
                                             </td>
                                             <td>
-                                                <button type="submit" class="btn btn-block btn-danger rounded"><i
+                                                <button type="submit" class="btn btn-block btn-dark rounded"><i
                                                             class="fa fa-upload"></i></button>
                                             </td>
                                         </form>
@@ -235,7 +255,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="col-4">
@@ -304,24 +323,28 @@
                             </div>
                             <div class="panel-content">
                                 <ul class="mtc-categories">
-                                    {% for itemCategory in itemCategories %}
-                                        <li class="shadow list-group-item">
-                                            <div class="category-header">
-                                                <p class="category-name">
-                                                    {{ itemCategory.itemCategoryName }}
-                                                </p>
-                                                <div class="form-group pt-1 pb-1">
-                                                    <label class="form-check">
-                                                        <input type="checkbox" name="itemCategoriesIds[]"
-                                                               value="{{ itemCategory.itemCategoryID }}"
-                                                                {{ (itemCategory.itemCategoryIsChecked)?'checked':'' }}
-                                                               class="form-check-input">
-                                                        <span class="form-check-label"></span>
-                                                    </label>
+                                    {% if itemCategories %}
+                                        {% for itemCategory in itemCategories %}
+                                            <li class="shadow list-group-item">
+                                                <div class="category-header">
+                                                    <p class="category-name">
+                                                        {{ itemCategory.itemCategoryName }}
+                                                    </p>
+                                                    <div class="form-group pt-1 pb-1">
+                                                        <label class="form-check">
+                                                            <input type="checkbox" name="itemCategoriesIds[]"
+                                                                   value="{{ itemCategory.itemCategoryID }}"
+                                                                    {{ (itemCategory.itemCategoryIsChecked)?'checked':'' }}
+                                                                   class="form-check-input">
+                                                            <span class="form-check-label"></span>
+                                                        </label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </li>
-                                    {% endfor %}
+                                            </li>
+                                        {% endfor %}
+                                    {% else %}
+                                        <h4 class="text-center">no category is selected</h4>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </form>
@@ -362,7 +385,7 @@
                                                                     <h4 style="margin-right: 200px">{{ submittedValue }}</h4>
                                                                     <div class="input-group-append">
                                                                         <a href="{{ path('repository_item_remove_key_value', {item_id: itemModel.itemID, key_id: specKey.specKeyID , value:submittedValue}) }}"
-                                                                           class="btn btn-rounded btn-danger fa fa-trash"></a>
+                                                                           class="btn btn-block btn-rounded btn-danger fa fa-trash"></a>
                                                                     </div>
                                                                 </div>
                                                             {% endfor %}

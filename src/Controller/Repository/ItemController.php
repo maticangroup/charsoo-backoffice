@@ -56,6 +56,7 @@ class ItemController extends AbstractController
                 $items[] = ModelSerializer::parse($item, ItemModel::class);
             }
 
+
             return $this->render('repository/item/list.html.twig', [
                 'controller_name' => 'ItemController',
                 'items' => $items,
@@ -103,7 +104,7 @@ class ItemController extends AbstractController
                     $this->addFlash('s', $response->getMessage());
                     return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $itemModel->getItemID()]));
                 }
-                $this->addFlash('s', $response->getMessage());
+                $this->addFlash('f', $response->getMessage());
             }
 
 
@@ -174,10 +175,10 @@ class ItemController extends AbstractController
                 $request->add_instance($itemModel);
                 $response = $request->send();
                 if ($response->getStatus() == ResponseStatus::successful) {
-                    $this->addFlash('s', '');
+                    $this->addFlash('s', $response->getMessage());
                     return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $id]));
                 } else {
-                    $this->addFlash('f', '');
+                    $this->addFlash('f', $response->getMessage());
                 }
             }
 
@@ -284,7 +285,6 @@ class ItemController extends AbstractController
                     $itemImages[] = ModelSerializer::parse($itemImage, ImageModel::class);
                 }
             }
-
 
             return $this->render('repository/item/edit.html.twig', [
                 'controller_name' => 'ItemController',

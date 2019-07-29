@@ -197,23 +197,23 @@
 
     <!-- Main Container Start -->
     <main class="main--container">
-        <section class="page--header">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <!-- Page Title Start -->
-                        <!--<h2 class="page&#45;&#45;title h5">Blank Page</h2>-->
-                        <!-- Page Title End -->
+        {#<section class="page--header">#}
+        {#<div class="container-fluid">#}
+        {#<div class="row">#}
+        {#<div class="col-lg-6">#}
+        {#<!-- Page Title Start -->#}
+        {#<!--<h2 class="page&#45;&#45;title h5">Blank Page</h2>-->#}
+        {#<!-- Page Title End -->#}
 
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item"><span>Page Layouts</span></li>
-                            <li class="breadcrumb-item active"><span>Blank Page</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+        {#<ul class="breadcrumb">#}
+        {#<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>#}
+        {#<li class="breadcrumb-item"><span>Page Layouts</span></li>#}
+        {#<li class="breadcrumb-item active"><span>Blank Page</span></li>#}
+        {#</ul>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+        {#</section>#}
         <!-- Main Content Start -->
         <section class="main--content">
             {% block body %}{% endblock %}
@@ -280,6 +280,34 @@
         }, 3000);
     });
 </script>
+
+<script type="text/javascript">
+    if (typeof(Storage) !== "undefined") {
+
+        var storedResult = localStorage.getItem("location");
+        var storedURL = localStorage.getItem("url");
+
+        if (storedURL !== 'undefined' && storedResult !== null) {
+
+
+            if (storedResult !== 'undefined' && storedResult !== null) {
+
+                $(window).scrollTop(storedResult);
+            }
+        }
+
+        $(window).scroll(function () {
+            var scrolledDown = window.scrollY;
+            var currentUrl = window.location.href;
+            localStorage.setItem("location", scrolledDown);
+            localStorage.setItem("url", currentUrl);
+        });
+
+    } else {
+        // No Web Storage Support.
+    }
+</script>
+{#<script src="{{ asset('assets/search/js/search.js') }}"></script>#}
 {% block javascripts %}
 {% endblock %}
 <!-- Page Level Scripts -->

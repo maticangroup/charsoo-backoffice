@@ -81,12 +81,10 @@ class ItemCategoryController extends AbstractController
         if ($canSeeAll) {
             $allItemCategoriesRequest = new Req(Servers::Repository, Repository::ItemCategory, 'all');
             $allItemCategoriesResponse = $allItemCategoriesRequest->send();
-            if ($allItemCategoriesResponse->getContent()) {
-                foreach ($allItemCategoriesResponse->getContent() as $itemCategory) {
-                    $itemCategories[] = ModelSerializer::parse($itemCategory, ItemCategoryModel::class);
-                }
-            }
+            $itemCategories = $allItemCategoriesResponse->getContent();
         }
+
+//        dd($itemCategories);
 
 
         return $this->render('repository/item_category/create.html.twig', [
@@ -152,11 +150,7 @@ class ItemCategoryController extends AbstractController
 
             $allItemCategoriesRequest = new Req(Servers::Repository, Repository::ItemCategory, 'all');
             $allItemCategoriesResponse = $allItemCategoriesRequest->send();
-            if ($allItemCategoriesResponse->getContent()) {
-                foreach ($allItemCategoriesResponse->getContent() as $itemCategory) {
-                    $itemCategories[] = ModelSerializer::parse($itemCategory, ItemCategoryModel::class);
-                }
-            }
+            $itemCategories = $allItemCategoriesResponse->getContent();
 
             $allSizesRequest = new Req(Servers::Repository, Repository::Size, 'all');
             $allSizesResponse = $allSizesRequest->send();
@@ -189,11 +183,14 @@ class ItemCategoryController extends AbstractController
                              * @var $specKeyModel SpecKeyModel
                              */
                             $specKeyModel = ModelSerializer::parse($specKey, SpecKeyModel::class);
-                            if (in_array($specKeyModel->getSpecKeyID(), $itemCategorySpecKeyIds)) {
+                            if (is_array($itemCategorySpecKeyIds)) {
+                                if (in_array($specKeyModel->getSpecKeyID(), $itemCategorySpecKeyIds)) {
 
-                                $specKeyModel->setSpecKeyIsChecked(true);
+                                    $specKeyModel->setSpecKeyIsChecked(true);
+                                }
+                                $keys[$key] = $specKeyModel;
                             }
-                            $keys[$key] = $specKeyModel;
+
                         }
                         $specGroupModel->setSpecGroupSpecKeys($keys);
                     }

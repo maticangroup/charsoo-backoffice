@@ -23,14 +23,15 @@
                                     <div class="col-12">
                                         <input type="text" placeholder="Brand name" name="brandName"
                                                value="{{ brandModel.brandName }}"
-                                               class="form-control mb-3">
+                                               class="form-control mb-3" required>
                                         <label class="custom-file mb-3">
                                             <input type="file" value="{{ brandModel.brandImageUrl }}"
                                                    name="brand_image"
                                                    class="custom-file-input">
                                             <span class="custom-file-label">Choose File</span>
                                         </label>
-                                        <button type="submit" class="btn btn-block rounded btn-dark fa fa-save"></button>
+                                        <button type="submit"
+                                                class="btn btn-block rounded btn-dark fa fa-save"></button>
                                     </div>
                                 </form>
                             </div>

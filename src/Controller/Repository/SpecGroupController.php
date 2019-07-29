@@ -52,7 +52,7 @@ class SpecGroupController extends AbstractController
                 if ($response->getStatus() == ResponseStatus::successful) {
                     $this->addFlash('s', $response->getMessage());
                 }
-                $this->addFlash('s', $response->getMessage());
+                $this->addFlash('f', $response->getMessage());
             }
         }
 
@@ -104,7 +104,7 @@ class SpecGroupController extends AbstractController
                 $this->addFlash('s', $response->getMessage());
                 return $this->redirect($this->generateUrl('repository_spec_group_repository_spec_group_create'));
             }
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
 
         $allSpecGroupsRequest = new Req(Servers::Repository, Repository::SpecGroup, 'all');
@@ -164,7 +164,7 @@ class SpecGroupController extends AbstractController
                 return $this->redirect($this->generateUrl('repository_spec_group_repository_spec_group_create'));
 
             } else {
-                $this->addFlash('s', $response->getMessage());
+                $this->addFlash('f', $response->getMessage());
             }
         }
 
@@ -224,7 +224,7 @@ class SpecGroupController extends AbstractController
             if ($response->getStatus() == ResponseStatus::successful) {
                 $this->addFlash('s', $response->getMessage());
             }
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
 
         $allSpecGroupsRequest = new Req(Servers::Repository, Repository::SpecGroup, 'all');

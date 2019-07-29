@@ -570,9 +570,18 @@ class MenuController extends AbstractController
                 }
             }
         }
+
+
+        $serverName = $_SERVER['SERVER_NAME'];
+        $serverPort = $_SERVER['SERVER_PORT'];
+        $requestURI = $_SERVER['REQUEST_URI'];
+        $currentULR = 'http://' . $serverName . ':' . $serverPort . $requestURI;
+
         return $this->render('general/menu/side-menu.html.twig', [
             'controller_name' => 'MenuController',
             'sideMenu' => $sideMenu,
+            'currentULR' => $currentULR,
+
         ]);
     }
 }

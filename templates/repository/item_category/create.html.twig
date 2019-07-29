@@ -24,76 +24,16 @@
         <div class="col-12">
             <div class="row">
                 {% if canSeeAll %}
-                    <div class="col-4">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                Categories
-                            </div>
-                            <div class="panel-content">
-                                <ul class="mtc-categories">
-                                    {% for itemCategory in itemCategories %}
-                                        <li class="shadow list-group-item">
-                                            <div class="category-header">
-                                                {{ itemCategory.itemCategoryName }}
-                                                <div class="list-inline">
-                                                    {% if canEdit %}
-                                                        <a href="{{ path('repository_item_category_repository_item_category_edit' , {id:itemCategory.itemCategoryID}) }}"
-                                                           class="fa fa-edit"></a>
-                                                    {% endif %}
-                                                </div>
-                                            </div>
-                                            {% if itemCategory.itemCategoryID == itemCategory.itemCategoryParentId %}
-                                                <ul class=" list-group">
-                                                    {% for category in itemCategory %}
-                                                        <li class="shadow list-group-item">
-                                                            <div class="category-header">
-                                                                {{ category.itemCategoryName }}
-                                                                <div class="list-inline">
-                                                                    <a href="{{ path('repository_item_category_repository_item_category_edit' , {id:category.itemCategoryID}) }}"
-                                                                       class="fa fa-edit"></a>
-                                                                </div>
-                                                            </div>
-                                                            {% if category.itemCategoryID == category.itemCategoryParentId %}
-                                                                <ul class=" list-group">
-                                                                    {% for cat in category %}
-                                                                        <li class="shadow list-group-item">
-                                                                            <div class="category-header">
-                                                                                {{ cat.itemCategoryName }}
-                                                                                <div class="list-inline">
-                                                                                    <a href="{{ path('repository_item_category_repository_item_category_edit' , {id:cat.itemCategoryID}) }}"
-                                                                                       class="fa fa-edit"></a>
-                                                                                </div>
-                                                                            </div>
-                                                                            {% if cat.itemCategoryID == cat.itemCategoryParentId %}
-                                                                                <ul class=" list-group">
-                                                                                    {% for ca in cat %}
-                                                                                        <li class="shadow list-group-item">
-                                                                                            <div class="category-header">
-                                                                                                {{ ca.itemCategoryName }}
-                                                                                                <div class="list-inline">
-                                                                                                    <a href="{{ path('repository_item_category_repository_item_category_edit' , {id:ca.itemCategoryID}) }}"
-                                                                                                       class="fa fa-edit"></a>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </li>
-                                                                                    {% endfor %}
-                                                                                </ul>
-                                                                            {% endif %}
-                                                                        </li>
-                                                                    {% endfor %}
-                                                                </ul>
-                                                            {% endif %}
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            {% endif %}
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="col-2">
+                        {#<div class="panel">#}
+                        {{ render(controller(
+                            'App\\Controller\\General\\ItemCategoryViewController::index' , {itemCategories:itemCategories}
+                        )) }}
+                        {#</div>#}
                     </div>
                 {% endif %}
+
+                <div class="col-2"></div>
 
                 {% if canCreate %}
                     <div class="col-8">
@@ -139,7 +79,7 @@
                                                         <select name="itemCategoryParentId" class="form-control">
                                                             <option>None</option>
                                                             {% for itemCategory in itemCategories %}
-                                                                <option value="{{ itemCategory.itemCategoryID }}" {{ (itemCategoryModel.itemCategoryID == itemCategory.itemCategoryID)?'selected':'' }}>{{ itemCategory.itemCategoryName }}</option>
+                                                                <option value="{{ itemCategory.category.0.itemCategoryID }}" {{ (itemCategoryModel.itemCategoryParentId == itemCategory.category.0.itemCategoryID)?'selected':'' }}>{{ itemCategory.category.0.itemCategoryName }}</option>
                                                             {% endfor %}
                                                         </select>
                                                     </div>

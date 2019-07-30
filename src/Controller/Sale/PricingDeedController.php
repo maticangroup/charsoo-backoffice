@@ -72,7 +72,6 @@ class PricingDeedController extends AbstractController
             $request = new Req(Servers::Sale, Sale::PricingDeed, 'new');
             $request->add_instance($pricingDeedModel);
             $response = $request->send();
-//            dd($response);
             if ($response->getStatus() == ResponseStatus::successful) {
                 /**
                  * @var $pricingDeedModel PricingDeedModel
@@ -81,30 +80,30 @@ class PricingDeedController extends AbstractController
                 $this->addFlash('s', $response->getMessage());
                 return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricingDeedModel->getPricingDeedId()]));
             } else {
-                $this->addFlash('s', $response->getMessage());
+                $this->addFlash('f', $response->getMessage());
             }
         }
 
-        $years = [];
-        for ($i = 1950; $i <= 2019; $i++) {
-            $years[] = $i;
-        }
-
-        $months = [];
-        for ($j = 1; $j <= 12; $j++) {
-            $months[] = $j;
-        }
-
-        $days = [];
-        for ($k = 1; $k <= 31; $k++) {
-            $days[] = $k;
-        }
+//        $years = [];
+//        for ($i = 1950; $i <= 2019; $i++) {
+//            $years[] = $i;
+//        }
+//
+//        $months = [];
+//        for ($j = 1; $j <= 12; $j++) {
+//            $months[] = $j;
+//        }
+//
+//        $days = [];
+//        for ($k = 1; $k <= 31; $k++) {
+//            $days[] = $k;
+//        }
 
         return $this->render('sale/pricing_deed/create.html.twig', [
             'controller_name' => 'PricingDeedController',
-            'years' => $years,
-            'months' => $months,
-            'days' => $days,
+//            'years' => $years,
+//            'months' => $months,
+//            'days' => $days,
             'pricingDeedModel' => $pricingDeedModel,
 
         ]);
@@ -120,7 +119,7 @@ class PricingDeedController extends AbstractController
     public function edit($id, Request $request)
     {
         if (!AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_fetch)) {
-            return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_read', ['id' => $pricing_deed_id]));
+            return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_read', ['id' => $id]));
 
         }
         $inputs = $request->request->all();
@@ -133,7 +132,6 @@ class PricingDeedController extends AbstractController
         $request = new Req(Servers::Sale, Sale::PricingDeed, 'fetch');
         $request->add_instance($pricingDeedModel);
         $response = $request->send();
-//        dd($response);
         $pricingDeedModel = ModelSerializer::parse($response->getContent(), PricingDeedModel::class);
 
         if (!empty($inputs)) {
@@ -156,7 +154,6 @@ class PricingDeedController extends AbstractController
                 $this->addFlash('s', $response->getMessage());
             }
         }
-
 
         $allShelvesProductsRequest = new Req(Servers::Inventory, Inventory::Shelve, 'get_shelves_products');
         $allShelvesProductsResponse = $allShelvesProductsRequest->send();

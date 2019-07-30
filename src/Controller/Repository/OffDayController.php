@@ -38,9 +38,9 @@ class OffDayController extends AbstractController
          * @var $offDayModel OffDayModel
          */
         $offDayModel = ModelSerializer::parse($inputs, OffDayModel::class);
-        $years = [];
-        $months = [];
-        $days = [];
+//        $years = [];
+//        $months = [];
+//        $days = [];
 
         if ($canCreate) {
             if (!empty($inputs)) {
@@ -49,25 +49,25 @@ class OffDayController extends AbstractController
                 $request->add_instance($offDayModel);
                 $response = $request->send();
                 if ($response->getStatus() == ResponseStatus::successful) {
-                    $this->addFlash('success', $response->getMessage());
+                    $this->addFlash('s', $response->getMessage());
                 }
-                $this->addFlash('failed', $response->getMessage());
+                $this->addFlash('f', $response->getMessage());
             }
 
 
-            for ($i = 1950; $i <= 2019; $i++) {
-                $years[] = $i;
-            }
-
-
-            for ($j = 1; $j <= 12; $j++) {
-                $months[] = $j;
-            }
-
-
-            for ($k = 1; $k <= 31; $k++) {
-                $days[] = $k;
-            }
+//            for ($i = 1950; $i <= 2019; $i++) {
+//                $years[] = $i;
+//            }
+//
+//
+//            for ($j = 1; $j <= 12; $j++) {
+//                $months[] = $j;
+//            }
+//
+//
+//            for ($k = 1; $k <= 31; $k++) {
+//                $days[] = $k;
+//            }
         }
 
 
@@ -90,9 +90,9 @@ class OffDayController extends AbstractController
             'controller_name' => 'OffDayController',
             'offDayModel' => $offDayModel,
             'offDays' => $offDays,
-            'years' => $years,
-            'months' => $months,
-            'days' => $days,
+//            'years' => $years,
+//            'months' => $months,
+//            'days' => $days,
             'canCreate' => $canCreate,
             'canSeeAll' => $canSeeAll,
             'canRemove' => $canRemove,

@@ -29,7 +29,6 @@ class ItemCategoryController extends AbstractController
      * @Route("/create", name="_repository_item_category_create")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \ReflectionException
      */
     public function create(Request $request)
     {
@@ -58,9 +57,15 @@ class ItemCategoryController extends AbstractController
 
         if (!empty($inputs)) {
             if ($canCreate) {
-                $request = new Req(Servers::Repository, Repository::ItemCategory, 'new');
-                $request->add_instance($itemCategoryModel);
-                $response = $request->send();
+                $coreRequest = new Req(Servers::Repository, Repository::ItemCategory, 'new');
+                $file = $request->files->get('itemCategoryImageUrl');
+//                dd($itemCategoryModel);
+                if ($file) {
+                    $response = $coreRequest->uploadImage($file, $itemCategoryModel);
+                } else {
+                    $response = $coreRequest->uploadImage(null, $itemCategoryModel);
+                }
+                dd($response);
                 if ($response->getStatus() == ResponseStatus::successful) {
                     /**
                      * @var $newItemCategory ItemCategoryModel

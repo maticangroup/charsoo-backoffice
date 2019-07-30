@@ -42,8 +42,8 @@
                     <div class="form-group row">
                         <div class="col-4"></div>
                         <div class="col-md-4">
-                            <input type="text" placeholder="Search" name="text"
-                                   class="form-control">
+                            {#<input type="text" placeholder="Search" name="text"#}
+                                   {#class="form-control">#}
                         </div>
                         <div class="col-4"></div>
                     </div>
@@ -52,7 +52,6 @@
                         <table id="usersRoleList">
                             <thead>
                             <tr>
-                                <th>Token</th>
                                 <th>Name</th>
                                 <th>Color Hex</th>
                                 <th>Status</th>
@@ -62,9 +61,6 @@
                             <tbody>
                             {% for color in colors %}
                                 <tr>
-                                    <td>
-                                        {{ color.itemColorID }}
-                                    </td>
                                     <td>
                                         {{ color.itemColorName }}
                                     </td>

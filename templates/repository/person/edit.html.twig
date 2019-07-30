@@ -14,13 +14,17 @@
             <div class="panel">
                 <div class="panel-content">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-10">
                             <h1>Welcome</h1>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa
                                 delectus
                                 eos, minus nemo neque obcaecati placeat quam quisquam ullam?
                             </p>
+                        </div>
+                        <div class="col-2 mt-5">
+                            <a href="{{ path('repository_person_repository_person_list') }}"
+                               class="btn btn-block btn-secondary rounded fa fa-list"></a>
                         </div>
                     </div>
                 </div>
@@ -39,7 +43,7 @@
                                 <div class="col-md-12">
                                     <input type="text" name="humanName"
                                            value="{{ personModel.humanName }}"
-                                           class="form-control">
+                                           class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +53,7 @@
                                 <div class="col-md-12">
                                     <input type="text" name="humanFamily"
                                            value="{{ personModel.humanFamily }}"
-                                           class="form-control">
+                                           class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -60,7 +64,7 @@
                                 <div class="col-md-12">
                                     <input type="text" name="email"
                                            value="{{ personModel.email }}"
-                                           class="form-control">
+                                           class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -100,7 +104,7 @@
                                 <div class="col-md-12">
                                     <input type="text" name="nationalCode"
                                            value="{{ personModel.nationalCode }}"
-                                           class="form-control">
+                                           class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +115,7 @@
                                 <div class="col-md-12">
                                     <input type="text" name="mobile"
                                            value="{{ personModel.mobile }}"
-                                           class="form-control">
+                                           class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -119,18 +123,6 @@
                             {#<input type="hidden" name="person_id" value="{{ personModel.id }}" class="form-check-input">#}
                             <button type="submit" class="btn btn-block btn-info rounded mt-4"><i class="fa fa-save"></i>
                             </button>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group row">
-                                {% for message in app.flashes('update_person_success') %}
-                                    <div class="col-md-12 mt-3 text-green"><span
-                                                class="fa fa-info text-green"></span> {{ message }}</div>
-                                {% endfor %}
-                                {% for message in app.flashes('update_person_failed') %}
-                                    <div class="col-md-12 mt-3 text-red"><span
-                                                class="fa fa-info text-red"></span> {{ message }}</div>
-                                {% endfor %}
-                            </div>
                         </div>
                     </form>
                 </div>
@@ -218,19 +210,6 @@
                                         </button>
                                     </div>
                                     <div class="col-4"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="form-group row">
-                                    {% for message in app.flashes('update_address_success') %}
-                                        <div class="col-md-12 mt-3 text-green"><span
-                                                    class="fa fa-info text-green"></span> {{ message }}</div>
-                                    {% endfor %}
-                                    {% for message in app.flashes('update_address_failed') %}
-                                        <div class="col-md-12 mt-3 text-red"><span
-                                                    class="fa fa-info text-red"></span> {{ message }}</div>
-                                    {% endfor %}
                                 </div>
                             </div>
                         </form>

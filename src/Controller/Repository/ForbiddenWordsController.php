@@ -44,6 +44,7 @@ class ForbiddenWordsController extends AbstractController
                 $response = $request->send();
                 if ($response->getStatus() == ResponseStatus::successful) {
                     $this->addFlash('s', $response->getMessage());
+                    return $this->redirect($this->generateUrl('repository_forbidden_words_repository_forbidden_words_create'));
                 }
                 $this->addFlash('f', $response->getMessage());
             }
@@ -67,7 +68,7 @@ class ForbiddenWordsController extends AbstractController
 
         return $this->render('repository/forbidden_words/create.html.twig', [
             'controller_name' => 'ForbiddenWordsController',
-            'forbiddenWordModel' => $forbiddenWordModel,
+//            'forbiddenWordModel' => $forbiddenWordModel,
             'forbiddenWords' => $forbiddenWords,
             'canCreate' => $canCreate,
             'canSeeAll' => $canSeeAll,

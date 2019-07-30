@@ -45,8 +45,7 @@
                             <table id="usersRoleList" class="search-tr">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Company name</th>
+                                    <th>Name</th>
                                     <th>Telephone</th>
                                     <th>Address</th>
                                     <th>Contact Person</th>
@@ -58,7 +57,6 @@
                                 <tbody>
                                 {% for company in companies %}
                                     <tr>
-                                        <td>{{ company.companyID }}</td>
                                         <td>{{ company.companyName }}</td>
                                         <td>{{ company.companyMainPhone }}</td>
                                         <td>{{ company.companyMainAddress }}</td>

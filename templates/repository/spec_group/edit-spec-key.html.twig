@@ -19,7 +19,7 @@
                                 <div class="col-md-12">
                                     <input type="text" value="{{ specKeyModel.specKeyName }}" class="form-control"
                                            name="specKeyName"
-                                           placeholder="Specification name">
+                                           placeholder="Specification name" required>
                                 </div>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                                     <input type="number" value="{{ specKeyModel.specKeyDisplayOrder }}"
                                            class="form-control"
                                            name="specKeyDisplayOrder"
-                                           placeholder="Display order">
+                                           placeholder="Display order" required>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
             <div class="col-12">
                 <div class="panel">
                     <div class="panel-heading">
-                        <span>{{ specGroup.specGroupName }}</span>
+                        <span>{{ specGroup.specGroupName }} | Display Order : ({{ specGroup.specGroupDisplayOrder }})</span>
                         <a href="{{ path('repository_spec_group_repository_spec_group_edit' , {id:specGroup.specGroupID}) }}"
                            class="fa fa-edit"></a>
                     </div>
@@ -96,6 +96,7 @@
                         <table class="table">
                             <thead>
                             <tr>
+                                <th scope="col">Display Order</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Default value</th>
                                 <th scope="col">Is special</th>
@@ -105,6 +106,7 @@
                             <tbody>
                             {% for specKey in specGroup.specGroupSpecKeys %}
                                 <tr>
+                                    <td>{{ specKey.specKeyDisplayOrder }}</td>
                                     <td>{{ specKey.specKeyName }}</td>
                                     <td>{{ specKey.specKeyDefaultValue }}</td>
                                     <td>

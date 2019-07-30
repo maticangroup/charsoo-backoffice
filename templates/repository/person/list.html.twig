@@ -8,14 +8,17 @@
             <div class="panel">
                 <div class="panel-content">
                     <div class="row">
-
-                        <div class="col-12">
+                        <div class="col-10">
                             <h1>Welcome</h1>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa
                                 delectus
                                 eos, minus nemo neque obcaecati placeat quam quisquam ullam?
                             </p>
+                        </div>
+                        <div class="col-2 mt-5">
+                            <a href="{{ path('repository_person_repository_person_create') }}"
+                               class="btn-block btn btn-success fa fa-plus rounded"></a>
                         </div>
                     </div>
 
@@ -45,7 +48,6 @@
                                     <th>Mobile</th>
                                     <th>Email</th>
                                     <th>Address</th>
-                                    <th>Birth Date</th>
                                     {% if canEdit %}
                                         <th>Actions</th>
                                     {% endif %}
@@ -69,8 +71,6 @@
                                                target="_blank">{{ person.email }}</a>
                                         </td>
                                         <td>{{ person.mainAddressString }}</td>
-                                        <td>{{ person.birthDateYear }}-{{ person.birthDateMonth }}
-                                            -{{ person.birthDateDay }}</td>
                                         {% if canEdit %}
                                             <td>
                                                 <a href="{{ path('repository_person_repository_person_edit',{id:person.id}) }}"

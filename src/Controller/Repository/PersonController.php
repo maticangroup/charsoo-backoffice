@@ -155,9 +155,9 @@ class PersonController extends AbstractController
         $response = $request->send();
 
         if ($response->getStatus() == ResponseStatus::record_added_successfully) {
-            $this->addFlash('add_person_quick_success', $response->getMessage());
+            $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('add_person_quick_failed', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
 
         $referer = $_SERVER['HTTP_REFERER'];
@@ -177,20 +177,20 @@ class PersonController extends AbstractController
 
         $inputs = $request->request->all();
 
-        $years = [];
-        for ($i = 1950; $i <= 2019; $i++) {
-            $years[] = $i;
-        }
-
-        $months = [];
-        for ($j = 1; $j <= 12; $j++) {
-            $months[] = $j;
-        }
-
-        $days = [];
-        for ($k = 1; $k <= 31; $k++) {
-            $days[] = $k;
-        }
+//        $years = [];
+//        for ($i = 1950; $i <= 2019; $i++) {
+//            $years[] = $i;
+//        }
+//
+//        $months = [];
+//        for ($j = 1; $j <= 12; $j++) {
+//            $months[] = $j;
+//        }
+//
+//        $days = [];
+//        for ($k = 1; $k <= 31; $k++) {
+//            $days[] = $k;
+//        }
 
         /**
          * @todo create person edit function
@@ -222,7 +222,7 @@ class PersonController extends AbstractController
                 $latLang = str_replace(' ', '', $locationModel->getLocationGeoPoints());
                 $latLang = explode(',', $latLang);
                 if (count($latLang) != 2) {
-                    $this->addFlash('add_address_success', 'geo points are not formatted correctly');
+                    $this->addFlash('f', 'geo points are not formatted correctly');
                     return $this->redirect($this->generateUrl('repository_person_repository_person_edit', ['id' => $locationModel->getPersonId()]));
                 }
                 $locationModel->setLocationLat($latLang[0]);
@@ -233,9 +233,9 @@ class PersonController extends AbstractController
                 $response = $request->send();
 //                dd($response);
                 if ($response->getStatus() == ResponseStatus::successful) {
-                    $this->addFlash('add_address_success', $response->getMessage());
+                    $this->addFlash('s', $response->getMessage());
                 } else {
-                    $this->addFlash('add_address_failed', $response->getMessage());
+                    $this->addFlash('f', $response->getMessage());
                 }
 
 
@@ -246,7 +246,7 @@ class PersonController extends AbstractController
                 $request = new Req(Servers::Repository, Repository::Person, 'update');
                 $request->add_instance($personModel);
                 $response = $request->send();
-                if ($response->getContent() == ResponseStatus::successful) {
+                if ($response->getStatus() == ResponseStatus::successful) {
                     $this->addFlash('s', $response->getMessage());
                     return $this->redirect($this->generateUrl('repository_person_repository_person_edit', ['id' => $id]));
                 } else {
@@ -295,9 +295,9 @@ class PersonController extends AbstractController
 
         return $this->render('repository/person/edit.html.twig', [
             'controller_name' => 'PersonController',
-            'years' => $years,
-            'months' => $months,
-            'days' => $days,
+//            'years' => $years,
+//            'months' => $months,
+//            'days' => $days,
             'personModel' => $personModel,
             'locations' => $locations,
             'provinces' => $provinces,

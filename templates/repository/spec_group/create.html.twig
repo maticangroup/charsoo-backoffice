@@ -25,11 +25,11 @@
                                         <input type="text" value="{{ specGroupModel.specGroupName }}"
                                                class="form-control mb-3"
                                                name="specGroupName"
-                                               placeholder="Group name">
+                                               placeholder="Group name" required>
                                         <input type="number" value="{{ specGroupModel.specGroupDisplayOrder }}"
                                                class="form-control mb-3"
                                                name="specGroupDisplayOrder"
-                                               placeholder="Display order">
+                                               placeholder="Display order" required>
                                         <button type="submit"
                                                 class="btn btn-block rounded btn-dark fa fa-save"></button>
                                     </div>
@@ -58,7 +58,7 @@
                                     <div class="col-md-12">
                                         <input type="text" value="{{ specKeyModel.specKeyName }}" class="form-control"
                                                name="specKeyName"
-                                               placeholder="Specification name">
+                                               placeholder="Specification name" required>
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +93,7 @@
                                         <input type="number" value="{{ specKeyModel.specKeyDisplayOrder }}"
                                                class="form-control"
                                                name="specKeyDisplayOrder"
-                                               placeholder="Display order">
+                                               placeholder="Display order" required>
                                     </div>
                                 </div>
                             </div>
@@ -128,7 +128,8 @@
             <div class="col-12">
                 <div class="panel">
                     <div class="panel-heading">
-                        <span>{{ specGroup.specGroupName }}</span>
+                        <span>{{ specGroup.specGroupName }} | Display Order : ({{ specGroup.specGroupDisplayOrder }}
+                            )</span>
                         {% if canEdit %}
                             <a href="{{ path('repository_spec_group_repository_spec_group_edit' , {id:specGroup.specGroupID}) }}"
                                class="fa fa-edit"></a>

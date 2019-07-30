@@ -69,7 +69,7 @@ class SaleOrderController extends AbstractController
         $request = new Req(Servers::Sale, Sale::Order, 'new');
         $request->add_instance($orderModel);
         $response = $request->send();
-//        dd($response);
+
         if ($response->getStatus() == ResponseStatus::successful) {
             /**
              * @var $orderModel OrderModel
@@ -78,7 +78,7 @@ class SaleOrderController extends AbstractController
             $this->addFlash('s', $response->getMessage());
             return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $orderModel->getOrderId()]));
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
 
         $allPersonsRequest = new Req(Servers::Repository, Repository::Person, 'all');
@@ -167,8 +167,6 @@ class SaleOrderController extends AbstractController
             }
         }
 
-//        dd($selectedProducts);
-
 
         $selectedProductsIds = [];
         foreach ($selectedProducts as $product) {
@@ -193,11 +191,9 @@ class SaleOrderController extends AbstractController
                 $this->addFlash('s', $response->getMessage());
                 return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $orderModel->getOrderId()]));
             } else {
-                $this->addFlash('s', $response->getMessage());
+                $this->addFlash('f', $response->getMessage());
             }
         }
-
-//        dd($selectedProducts);
 
 
         return $this->render('sale/sale_order/edit.html.twig', [
@@ -255,21 +251,17 @@ class SaleOrderController extends AbstractController
     {
         if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_add_product)) {
             return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $order_id]));
-
         }
         $inputs = $request->request->all();
-
         /**
          * @var $productModel ProductModel
          */
         $productModel = ModelSerializer::parse($inputs, ProductModel::class);
         $productModel->setProductOrderId($order_id);
         $productModel->setProductId($product_id);
-//        dd($productModel);
         $request = new Req(Servers::Sale, Sale::Order, 'add_product');
         $request->add_instance($productModel);
         $response = $request->send();
-//        dd($response);
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
@@ -297,7 +289,6 @@ class SaleOrderController extends AbstractController
         $request = new Req(Servers::Sale, Sale::Order, 'remove_product');
         $request->add_instance($productModel);
         $response = $request->send();
-//dd($response);
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
@@ -318,11 +309,8 @@ class SaleOrderController extends AbstractController
     {
         if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_accept_order_list)) {
             return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $order_id]));
-
         }
-
         $inputs = $request->request->all();
-
         /**
          * @var $orderModel OrderModel
          */
@@ -331,7 +319,6 @@ class SaleOrderController extends AbstractController
         $request = new Req(Servers::Sale, Sale::Order, 'accept_order_list');
         $request->add_instance($orderModel);
         $response = $request->send();
-//        dd($response);
         return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $order_id]));
     }
 
@@ -347,10 +334,8 @@ class SaleOrderController extends AbstractController
     {
         if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_ignore_order_list)) {
             return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $order_id]));
-
         }
         $inputs = $request->request->all();
-
         /**
          * @var $orderModel OrderModel
          */
@@ -374,13 +359,8 @@ class SaleOrderController extends AbstractController
     {
         if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_save_order)) {
             return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $order_id]));
-
         }
-
         $inputs = $request->request->all();
-
-//        dd($inputs);
-
         $orderItemArray = [];
         $products = $inputs['productId'];
         $productSerials = $inputs['productSerial'];
@@ -409,22 +389,16 @@ class SaleOrderController extends AbstractController
             $productModel['productOrderItemId'] = $item['productOrderItemId'];
             $productModelArray[] = $productModel;
         }
-//        dd(json_encode($productModelArray);
         $orderModel->setOrderProducts(json_encode($productModelArray));
         $orderModel->setOrderId($order_id);
-
-//        dd($orderModel);
-
         $request = new Req(Servers::Sale, Sale::Order, 'save_order');
         $request->add_instance($orderModel);
         $response = $request->send();
-//        dd($response);
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
             $this->addFlash('s', $response->getMessage());
         }
-
         return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $order_id]));
     }
 
@@ -436,7 +410,6 @@ class SaleOrderController extends AbstractController
      */
     public function orderConfirm($order_id)
     {
-
         if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_confirm_order)) {
             return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $order_id]));
         }
@@ -445,7 +418,6 @@ class SaleOrderController extends AbstractController
         $request = new Req(Servers::Sale, Sale::Order, 'confirm_order');
         $request->add_instance($orderModel);
         $response = $request->send();
-//        dd($response);
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
@@ -470,7 +442,6 @@ class SaleOrderController extends AbstractController
         $request = new Req(Servers::Sale, Sale::Order, 'reject_order');
         $request->add_instance($orderModel);
         $response = $request->send();
-//        dd($response);
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
             return $this->redirect($this->generateUrl('sale_order_read', ['id' => $order_id]));

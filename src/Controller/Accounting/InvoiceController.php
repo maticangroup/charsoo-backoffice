@@ -174,7 +174,6 @@ class InvoiceController extends AbstractController
         }
 
 
-
         return $this->render('accounting/invoice/edit.html.twig', [
             'controller_name' => 'InvoiceController',
             'invoiceModel' => $invoiceModel,
@@ -202,7 +201,12 @@ class InvoiceController extends AbstractController
          */
         $invoiceItemModel = ModelSerializer::parse($inputs, InvoiceItemModel::class);
         $invoiceItemModel->setInvoiceId($invoice_id);
+        $currentPrice = str_replace(',', '', $inputs['invoiceItemCurrentPrice']);
+        $discountPrice = str_replace(',', '', $inputs['invoiceItemDiscountPrice']);
+        $invoiceItemModel->setInvoiceItemCurrentPrice($currentPrice);
+        $invoiceItemModel->setInvoiceItemDiscountPrice($discountPrice);
         $request = new Req(Servers::Accounting, Accounting::Invoice, 'add_invoice_item');
+//        dd($invoiceItemModel);
         $request->add_instance($invoiceItemModel);
         $response = $request->send();
         if ($response->getStatus() == ResponseStatus::successful) {

@@ -59,7 +59,8 @@
                                 <tr>
                                     <td>{{ deliveryMethod.deliveryMethodId }}</td>
                                     <td>
-                                        <img src="https://via.placeholder.com/50x50" alt="" class="rounded-circle">
+                                        <img src="{{ deliveryMethod.thumbnail.url }}"
+                                             alt="{{ deliveryMethod.thumbnail.imageAlt }}" class="rounded-circle">
                                     </td>
                                     <td>{{ deliveryMethod.deliveryMethodName }}</td>
                                     <td>{{ deliveryMethod.deliveryMethodTypeName }}</td>

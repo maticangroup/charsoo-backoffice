@@ -56,7 +56,6 @@ class DeliveryMethodController extends AbstractController
             }
         }
 
-
         return $this->render('delivery/delivery_method/list.html.twig', [
             'controller_name' => 'DeliveryMethodController',
             'deliveryMethods' => $deliveryMethods,
@@ -80,24 +79,14 @@ class DeliveryMethodController extends AbstractController
         $deliveryMethodModel = ModelSerializer::parse($inputs, DeliveryMethodModel::class);
 
         if (!empty($inputs)) {
-//            dd($deliveryMethodModel);
             $coreRequest = new Req(Servers::Delivery, Delivery::DeliveryMethod, 'new');
             $file = $request->files->get('deliveryMethodLogoUrl');
 
             if ($file) {
-                $image = new Image();
-                $image->setName($file->getClientOriginalName());
-                $image->setMimeType($file->getMimeType());
-                $image->setFileName($file->getPathname());
-                $image->setContent($file->getPathname());
-                $response = $coreRequest->uploadImage($image, $deliveryMethodModel);
+                $response = $coreRequest->uploadImage($file, $deliveryMethodModel);
             } else {
-
-
                 $response = $coreRequest->uploadImage(null, $deliveryMethodModel);
             }
-//            $coreRequest->add_instance($deliveryMethodModel);
-//            dd($response);
             if ($response->getStatus() == ResponseStatus::successful) {
                 /**
                  * @var $deliveryMethodModel DeliveryMethodModel
@@ -151,11 +140,12 @@ class DeliveryMethodController extends AbstractController
         $request = new Req(Servers::Delivery, Delivery::DeliveryMethod, 'fetch');
         $request->add_instance($deliveryMethodModel);
         $response = $request->send();
+//        dd($response);
         /**
          * @var $deliveryMethodModel DeliveryMethodModel
          */
         $deliveryMethodModel = ModelSerializer::parse($response->getContent(), DeliveryMethodModel::class);
-
+//        dd($deliveryMethodModel);
 
         $deliveryMethodTypesRequest = new Req(Servers::Delivery, Delivery::DeliveryMethod, 'get_all_types');
         $deliveryMethodTypesResponse = $deliveryMethodTypesRequest->send();
@@ -248,7 +238,7 @@ class DeliveryMethodController extends AbstractController
                 $this->addFlash('s', $response->getMessage());
                 return $this->redirect($this->generateUrl('delivery_method_edit', ['id' => $deliveryMethodModel->getDeliveryMethodId()]));
             } else {
-                $this->addFlash('s', $response->getMessage());
+                $this->addFlash('f', $response->getMessage());
             }
         }
 

@@ -45,12 +45,7 @@ class BrandController extends AbstractController
                 $createRequest = new Req(Servers::Repository, Repository::Brand, 'new');
                 $file = $request->files->get('brand_image');
                 if ($file) {
-                    $image = new Image();
-                    $image->setName($file->getClientOriginalName());
-                    $image->setContent($file->getPathname());
-                    $image->setFileName($file->getPathname());
-                    $image->setMimeType($file->getMimeType());
-                    $response = $createRequest->uploadImage($image, $brandModel);
+                    $response = $createRequest->uploadImage($file, $brandModel);
                 } else {
                     $response = $createRequest->uploadImage(null, $brandModel);
                 }

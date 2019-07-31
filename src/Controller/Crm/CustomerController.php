@@ -2,6 +2,7 @@
 
 namespace App\Controller\Crm;
 
+use App\Controller\General\LocationViewController;
 use App\FormModels\Accounting\CouponGroupModel;
 use App\FormModels\Accounting\GiftCardModel;
 use App\FormModels\Accounting\InvoiceModel;
@@ -77,20 +78,20 @@ class CustomerController extends AbstractController
         if (!AuthUser::if_is_allowed(ServerPermissions::repository_person_fetch)) {
             return $this->redirect($this->generateUrl('crm_customer_list'));
         }
-        $years = [];
-        for ($i = 1950; $i <= 2019; $i++) {
-            $years[] = $i;
-        }
-
-        $months = [];
-        for ($j = 1; $j <= 12; $j++) {
-            $months[] = $j;
-        }
-
-        $days = [];
-        for ($k = 1; $k <= 31; $k++) {
-            $days[] = $k;
-        }
+//        $years = [];
+//        for ($i = 1950; $i <= 2019; $i++) {
+//            $years[] = $i;
+//        }
+//
+//        $months = [];
+//        for ($j = 1; $j <= 12; $j++) {
+//            $months[] = $j;
+//        }
+//
+//        $days = [];
+//        for ($k = 1; $k <= 31; $k++) {
+//            $days[] = $k;
+//        }
 
         $inputs = $request->request->all();
         /**
@@ -108,6 +109,7 @@ class CustomerController extends AbstractController
 
         $locationModel = new LocationModel();
 
+
         if (!empty($inputs)) {
             if (isset($inputs['provinceName'])) {
                 /**
@@ -115,27 +117,11 @@ class CustomerController extends AbstractController
                  */
                 $locationModel = ModelSerializer::parse($inputs, LocationModel::class);
                 $locationModel->setPersonId($id);
-                $latLang = str_replace(' ', '', $locationModel->getLocationGeoPoints());
-                $latLang = explode(',', $latLang);
-                if (count($latLang) != 2) {
-                    $this->addFlash('add_address_success', 'geo points are not formatted correctly');
-                    return $this->redirect($this->generateUrl('crm_customer_info', ['id' => $locationModel->getPersonId()]));
-                }
-                $locationModel->setLocationLat($latLang[0]);
-                $locationModel->setLocationLng($latLang[1]);
-//                dd($locationModel);
-                $request = new Req(Servers::Repository, Repository::Location, 'new');
-                $request->add_instance($locationModel);
-                $response = $request->send();
-//                dd($response);
-                if ($response->getStatus() == ResponseStatus::successful) {
-                    $this->addFlash('add_address_success', $response->getMessage());
-                } else {
-                    $this->addFlash('add_address_failed', $response->getMessage());
-                }
+                return $this->forward(LocationViewController::class . '::addLocation', [
+                    'locationModel' => $locationModel,
+                    'redirectCallBack' => $this->generateUrl('crm_customer_info', ['id' => $locationModel->getPersonId()])
+                ]);
 
-
-                return $this->redirect($this->generateUrl('crm_customer_info', ['id' => $locationModel->getPersonId()]));
             } else {
                 $personModel = ModelSerializer::parse($inputs, PersonModel::class);
                 $personModel->setId($id);
@@ -166,31 +152,22 @@ class CustomerController extends AbstractController
         }
 
 
-        $provincesRequest = new Req(Servers::Repository, Repository::Location, 'get_provinces');
-        $provincesResponse = $provincesRequest->send();
 
-        /**
-         * @var $provinces ProvinceModel[]
-         */
-        $provinces = [];
-        if ($provincesResponse->getContent()) {
-            foreach ($provincesResponse->getContent() as $province) {
-                $provinces[] = ModelSerializer::parse($province, ProvinceModel::class);
-            }
-        }
 
         $url = $_SERVER['PHP_SELF'];
         $url = explode('index.php', $url)[1];
+
+        $locationModel->setPersonId($personModel->getId());
+
 
         return $this->render('crm/customer/read-info.html.twig', [
             'controller_name' => 'CustomerController',
             'personModel' => $personModel,
             'locationModel' => $locationModel,
             'locations' => $locations,
-            'provinces' => $provinces,
-            'years' => $years,
-            'months' => $months,
-            'days' => $days,
+//            'years' => $years,
+//            'months' => $months,
+//            'days' => $days,
             'url' => $url,
         ]);
     }
@@ -201,7 +178,6 @@ class CustomerController extends AbstractController
      * @param $location_id
      * @param $person_id
      * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \ReflectionException
      */
     public function removeAddress($location_id, $person_id)
     {
@@ -211,17 +187,11 @@ class CustomerController extends AbstractController
         $locationModel = new LocationModel();
         $locationModel->setLocationId($location_id);
         $locationModel->setPersonId($person_id);
-        $request = new Req(Servers::Repository, Repository::Location, 'remove');
-        $request->add_instance($locationModel);
-        $response = $request->send();
+        return $this->forward(LocationViewController::class . '::removeLocation', [
+            'locationModel' => $locationModel,
+            'redirectCallBack' => $this->generateUrl('crm_customer_info', ['id' => $locationModel->getPersonId()])
+        ]);
 
-
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('add_address_success', $response->getMessage());
-        } else {
-            $this->addFlash('add_address_failed', $response->getMessage());
-        }
-        return $this->redirect($this->generateUrl('crm_customer_info', ['id' => $person_id]));
     }
 
 

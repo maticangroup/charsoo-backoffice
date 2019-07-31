@@ -163,21 +163,21 @@ class InvoiceController extends AbstractController
 
 //        dd($invoiceModel);
 
-        /**
-         * @var $invoiceItems InvoiceItemModel[]
-         */
-        $invoiceItems = [];
-        if ($invoiceModel->getInvoiceItems()) {
-            foreach ($invoiceModel->getInvoiceItems() as $invoiceItem) {
-                $invoiceItems[] = ModelSerializer::parse($invoiceItem, InvoiceItemModel::class);
-            }
-        }
+//        /**
+//         * @var $invoiceItems InvoiceItemModel[]
+//         */
+//        $invoiceItems = [];
+//        if ($invoiceModel->getInvoiceItems()) {
+//            foreach ($invoiceModel->getInvoiceItems() as $invoiceItem) {
+//                $invoiceItems[] = ModelSerializer::parse($invoiceItem, InvoiceItemModel::class);
+//            }
+//        }
 
 
         return $this->render('accounting/invoice/edit.html.twig', [
             'controller_name' => 'InvoiceController',
             'invoiceModel' => $invoiceModel,
-            'invoiceItems' => $invoiceItems,
+//            'invoiceItems' => $invoiceItems,
         ]);
     }
 

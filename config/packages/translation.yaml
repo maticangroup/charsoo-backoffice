@@ -6,4 +6,5 @@ framework:
         paths:
             - "%kernel.project_dir%/translations/fa/accounting"
             - "%kernel.project_dir%/translations/fa/general"
+            - "%kernel.project_dir%/translations/fa/repository"
             - "%kernel.project_dir%/translations/en/accounting"

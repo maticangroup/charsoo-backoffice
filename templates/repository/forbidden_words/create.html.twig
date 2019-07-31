@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Forbidden Words | Create{% endblock %}
+{% block title %}{{ 'repository.forbidden.word.create.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -9,11 +9,8 @@
                 <div class="panel-content">
                     <div class="row">
                         <div class="col-10">
-                            <h3>Want to add a new forbidden word?</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores facilis,
-                                laudantium odit quibusdam quis vel?
-                            </p>
+                            <h3>{{ 'repository.forbidden.word.create.main.title' | trans }}</h3>
+                            <p>{{ 'repository.forbidden.word.create.main.description' | trans }}</p>
                         </div>
                         {% if canCreate %}
                             <div class="col-2">
@@ -21,7 +18,8 @@
                                       action="{{ path('repository_forbidden_words_repository_forbidden_words_create') }}"
                                       method="post">
                                     <div class="col-12">
-                                        <input type="text" name="forbiddenWord" placeholder="Forbidden Word"
+                                        <input type="text" name="forbiddenWord"
+                                               placeholder="{{ 'general.forbidden.word.title' | trans }}"
                                                class="form-control mb-3">
                                         <button type="submit"
                                                 class="btn btn-block rounded btn-dark fa fa-save"></button>
@@ -41,7 +39,7 @@
                         <div class="form-group row">
                             <div class="col-4"></div>
                             <div class="col-md-4">
-                                <input type="text" placeholder="Search" name="text"
+                                <input type="text" placeholder="{{ 'general.search.title' | trans }}" name="text"
                                        class="form-control">
                             </div>
                             <div class="col-4"></div>
@@ -51,10 +49,10 @@
                             <table id="usersRoleList">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
+                                    <th>{{ 'general.id.title' | trans }}</th>
+                                    <th>{{ 'general.name.title' | trans }}</th>
                                     {% if canRemove %}
-                                        <th>Action</th>
+                                        <th>{{ 'general.action.title' | trans }}</th>
                                     {% endif %}
                                 </tr>
                                 </thead>

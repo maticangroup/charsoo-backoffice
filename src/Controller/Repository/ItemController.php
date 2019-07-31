@@ -242,9 +242,12 @@ class ItemController extends AbstractController
              * @var $suppliers CompanyModel[]
              */
             $suppliers = [];
-            foreach ($supplierContent['brandSuppliers'] as $supplier) {
-                $suppliers[] = ModelSerializer::parse($supplier, CompanyModel::class);
+            if ($supplierContent['brandSuppliers']) {
+                foreach ($supplierContent['brandSuppliers'] as $supplier) {
+                    $suppliers[] = ModelSerializer::parse($supplier, CompanyModel::class);
+                }
             }
+
 //        dd($suppliers);
 
             $allItemCategoriesRequest = new Req(Servers::Repository, Repository::ItemCategory, 'all');

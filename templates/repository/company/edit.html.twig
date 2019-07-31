@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Company | Edit{% endblock %}
+{% block title %}{{ 'repository.company.edit.tab.title' | trans }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -16,12 +16,8 @@
                     <div class="row">
 
                         <div class="col-12">
-                            <h1>Welcome</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa
-                                delectus
-                                eos, minus nemo neque obcaecati placeat quam quisquam ullam?
-                            </p>
+                            <h1>{{ 'repository.company.edit.main.title' | trans }}</h1>
+                            <p>{{ 'repository.company.edit.main.description' | trans }}</p>
                         </div>
                     </div>
 
@@ -38,7 +34,7 @@
                               method="post">
                             <div class="col-3">
                                 <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Name</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.name.title' | trans }}</span>
 
                                     <div class="col-md-12">
                                         <input type="text" name="companyName"
@@ -49,7 +45,7 @@
                             </div>
                             <div class="col-3">
                                 <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">National code</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.national.code.title' | trans }}</span>
                                     <div class="col-md-12">
                                         <input type="text" name="companyNationalCode"
                                                value="{{ company.companyNationalCode }}"
@@ -59,7 +55,7 @@
                             </div>
                             <div class="col-3">
                                 <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Registration Code</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'repository.company.create.form.input.title.register.code' | trans }}</span>
 
                                     <div class="col-md-12">
                                         <input type="text" name="companyRegistrationCode"
@@ -70,7 +66,7 @@
                             </div>
                             <div class="col-3">
                                 <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Economic Code</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'repository.company.create.form.input.title.economic.code' | trans }}</span>
 
                                     <div class="col-md-12">
                                         <input type="text" name="companyEconomicCode"
@@ -81,7 +77,7 @@
                             </div>
                             <div class="col-3">
                                 <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Email</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.email.title' | trans }}</span>
 
                                     <div class="col-md-12">
                                         <input type="text" name="companyEmail"
@@ -106,9 +102,6 @@
         {% for phone in phones %}
             <div class="col-3">
                 <div class="panel">
-                    <div class="panel-heading">
-                        <strong>Phone</strong>
-                    </div>
                     <div class="panel-content">
                         <form class="row"
                               action="{{ path('repository_company_repository_company_remove_phone' , {company_id:company.companyID , phone_id:phone.id}) }}"
@@ -139,7 +132,7 @@
             <div class="col-3">
                 <div class="panel">
                     <div class="panel-heading">
-                        <strong>Add New Phone</strong>
+                        <strong>{{ 'general.add.new.phone.title' | trans }}</strong>
                     </div>
                     <div class="panel-content">
                         <form class="row"
@@ -147,7 +140,7 @@
                               method="post">
                             <div class="col-12">
                                 <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Telephone</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.phone.title' | trans }}</span>
                                     <div class="col-md-12">
                                         <input type="text" name="phone"
                                                value=""
@@ -195,14 +188,14 @@
                         <table id="usersRoleList">
                             <thead>
                             <tr>
-                                <th>Global Token</th>
-                                <th>Name</th>
-                                <th>Mobile</th>
-                                <th>Email</th>
-                                <th>Groups</th>
-                                <th>Company</th>
+                                <th>{{ 'general.id.title' | trans }}</th>
+                                <th>{{ 'general.name.title' | trans }}</th>
+                                <th>{{ 'general.mobile.title' | trans }}</th>
+                                <th>{{ 'general.email.title' | trans }}</th>
+                                <th>{{ 'general.groups.title' | trans }}</th>
+                                <th>{{ 'general.companies.title' | trans }}</th>
                                 {% if canRemoveEmployee %}
-                                    <th>Actions</th>
+                                    <th>{{ 'general.action.title' | trans }}</th>
                                 {% endif %}
                             </tr>
                             </thead>
@@ -210,7 +203,7 @@
                             {% for employee in employees %}
                                 <tr>
                                     <td>
-                                        <a href="#" class="btn-link">#315321</a>
+                                        {{ employee.id }}
                                     </td>
                                     <td>
                                         {{ employee.humanName }} {{ employee.humanFamily }}
@@ -363,7 +356,8 @@
                             <div class="form-group row">
                                 <div class="col-12">
                                     <span class="label-text col-form-label">Province</span>
-                                    <input type="text" list="provinces" name="provinceName" class="form-control location_province_input"
+                                    <input type="text" list="provinces" name="provinceName"
+                                           class="form-control location_province_input"
                                            placeholder="Province"
                                            value="{{ locationModel.provinceName }}">
                                     <datalist id="provinces">
@@ -378,7 +372,8 @@
                             <div class="form-group row">
                                 <div class="col-12">
                                     <span class="label-text col-form-label">City</span>
-                                    <input type="text" list="cities" name="cityName" class="form-control location_city_input"
+                                    <input type="text" list="cities" name="cityName"
+                                           class="form-control location_city_input"
                                            placeholder="City"
                                            value="{{ locationModel.cityName }}">
                                     <datalist id="cities">
@@ -393,7 +388,8 @@
                             <div class="form-group row">
                                 <div class="col-12">
                                     <span class="label-text col-form-label">Districts</span>
-                                    <input type="search" list="districts" name="districtName" class="form-control location_district_input"
+                                    <input type="search" list="districts" name="districtName"
+                                           class="form-control location_district_input"
                                            placeholder="District" value="{{ locationModel.districtName }}">
                                     <datalist id="districts">
                                         <option value="1">

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Item Category | Edit{% endblock %}
+{% block title %}{{ 'repository.item.category.edit.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -9,12 +9,8 @@
                 <div class="panel-content">
                     <div class="row">
                         <div class="col-12">
-                            <h1>Want to add a new category?</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt eum fuga in
-                                neque
-                                quia. Aperiam at facere itaque odit quasi!
-                            </p>
+                            <h1>{{ 'repository.item.category.edit.main.title' | trans }}</h1>
+                            <p>{{ 'repository.item.category.edit.main.description' | trans }}</p>
                         </div>
 
                     </div>
@@ -40,12 +36,16 @@
                                   action="{{ path('repository_item_category_repository_item_category_edit' , {id:itemCategoryModel.itemCategoryID}) }}"
                                   method="post">
                                 <div class="panel">
-                                    <div class="panel-heading">Basic Information</div>
+                                    <div class="panel-heading">
+                                        <strong>
+                                            {{ 'general.basic.information.title' | trans }}
+                                        </strong>
+                                    </div>
                                     <div class="panel-content">
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="form-group row">
-                                                    <span class="label-text col-md-4 col-form-label text-md-right">Category name</span>
+                                                    <span class="label-text col-md-4 col-form-label text-md-right">{{ 'general.name.title' | trans }}</span>
                                                     <div class="col-md-8">
                                                         <input type="text"
                                                                value="{{ itemCategoryModel.itemCategoryName }}"
@@ -55,14 +55,14 @@
                                             </div>
                                             <div class="col-6">
                                                 <div class="form-group row">
-                                                    <span class="label-text col-md-4 col-form-label text-md-right">Thumbnail</span>
+                                                    <span class="label-text col-md-4 col-form-label text-md-right">{{ 'general.image.title' | trans }}</span>
                                                     <div class="col-md-8">
                                                         <label class="custom-file">
                                                             <input type="file"
                                                                    value="{{ itemCategoryModel.itemCategoryImageUrl }}"
                                                                    name="itemCategoryImageUrl"
                                                                    class="custom-file-input">
-                                                            <span class="custom-file-label">Choose File</span>
+                                                            <span class="custom-file-label">{{ 'general.file.upload.title' | trans }}</span>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -72,7 +72,7 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="form-group row">
-                                                    <span class="label-text col-md-4 col-form-label text-md-right">Is child of</span>
+                                                    <span class="label-text col-md-4 col-form-label text-md-right">{{ 'general.is.child.of.title' | trans }}</span>
                                                     <div class="col-md-8">
                                                         <select name="itemCategoryParentId" class="form-control">
                                                             <option>None</option>
@@ -85,7 +85,7 @@
                                             </div>
                                             <div class="col-6">
                                                 <div class="form-group row">
-                                                    <span class="label-text col-md-4 col-form-label text-md-right">Size</span>
+                                                    <span class="label-text col-md-4 col-form-label text-md-right">{{ 'general.size.title' | trans }}</span>
 
                                                     <div class="col-md-8">
                                                         <select name="itemCategorySizeId" class="form-control">
@@ -102,10 +102,10 @@
                                             <div class="col-10">
 
                                                 <div class="form-group row">
-                                                    <span class="label-text col-md-2 col-form-label text-md-right">Category description</span>
+                                                    <span class="label-text col-md-2 col-form-label text-md-right">{{ 'general.description.title' | trans }}</span>
                                                     <div class="col-md-10">
                                     <textarea name="itemCategoryDescription" class="form-control"
-                                              placeholder="Text input area">{{ itemCategoryModel.itemCategoryDescription }}</textarea>
+                                              placeholder="{{ 'general.description.placeholder' | trans }}">{{ itemCategoryModel.itemCategoryDescription }}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -126,7 +126,9 @@
                                 <div class="panel">
                                     <div class="panel-heading">
                                         <div class="row">
-                                            <div class="col-6 text-left">Spec Keys</div>
+                                            <div class="col-6 text-left">
+                                                <strong>{{ 'general.spec.keys.title' | trans }}</strong>
+                                            </div>
                                             <div class="col-6 text-right">
                                                 <button type="submit" class="btn btn-info rounded fa fa-save"></button>
                                             </div>
@@ -143,10 +145,10 @@
                                                                 <table class="table">
                                                                     <thead>
                                                                     <tr>
-                                                                        <th scope="col">Name</th>
-                                                                        <th scope="col">Default value</th>
-                                                                        <th scope="col">Is special</th>
-                                                                        <th scope="col">Include</th>
+                                                                        <th scope="col">{{ 'general.name.title' | trans }}</th>
+                                                                        <th scope="col">{{ 'general.default.value.title' | trans }}</th>
+                                                                        <th scope="col">{{ 'general.is.special.title' | trans }}</th>
+                                                                        <th scope="col">{{ 'general.include.title' | trans }}</th>
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>

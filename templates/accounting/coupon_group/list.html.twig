@@ -61,7 +61,11 @@
                                         <td>{{ coupon.couponGroupExpiryDate }}</td>
                                         <td>{{ coupon.couponGroupDiscountType }}</td>
                                         <td>{{ coupon.couponGroupDiscountEffect }}</td>
-                                        <td>{{ coupon.couponGroupMinimumInvoicePrice }}</td>
+                                        <td>
+                                            <script>
+                                                document.write(addCommas({{ coupon.couponGroupMinimumInvoicePrice }}))
+                                            </script>
+                                        </td>
                                         <td>{{ (coupon.couponGroupIsPrivate == 'true') ? 'Private' : 'Public' }}</td>
                                         <td>{{ coupon.couponGroupUsageTimes }}</td>
                                         <td>{{ coupon.couponGroupCreatePerson }}</td>

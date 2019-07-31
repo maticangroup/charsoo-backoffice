@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Off Days | Create{% endblock %}
+{% block title %}{{ 'repository.off.day.create.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -10,12 +10,8 @@
                     <div class="panel-content">
                         <div class="row">
                             <div class="col-10">
-                                <h3>Want to add a new user?</h3>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aspernatur
-                                    culpa doloribus laborum necessitatibus rem temporibus. Beatae ipsa officiis
-                                    quam.
-                                </p>
+                                <h3>{{ 'repository.off.day.create.main.title' | trans }}</h3>
+                                <p>{{ 'repository.off.day.create.main.description' | trans }}</p>
                             </div>
                             <div class="col-2">
                                 <form class="row" action="{{ path('repository_off_day_repository_off_day_create') }}"
@@ -23,14 +19,15 @@
                                     <div class="col-12">
                                         {#<span class="label-text col-md-12 col-form-label ">Date</span>#}
                                         <input type="text" id="date-picker" name="offDayDate"
-                                               class="form-control" placeholder="Date"
+                                               class="form-control" placeholder="{{ 'general.date.title' | trans }}"
                                                value="{{ offDayModel.offDayDate }}" required/>
                                         <span id="span-date-picker"></span>
                                     </div>
                                     <div class="col-12">
                                         <span class="label-text col-md-12 col-form-label "></span>
-                                            <textarea placeholder="Reason" name="offDayReason"
-                                                      class="form-control mb-3" required>{{ offDayModel.offDayReason }}</textarea>
+                                        <textarea placeholder="{{ 'general.reason.title' | trans }}" name="offDayReason"
+                                                  class="form-control mb-3"
+                                                  required>{{ offDayModel.offDayReason }}</textarea>
                                     </div>
                                     <div class="col-12">
                                         <button type="submit"
@@ -51,7 +48,7 @@
                         <div class="form-group row">
                             <div class="col-4"></div>
                             <div class="col-md-4">
-                                <input type="text" placeholder="Search" name="text"
+                                <input type="text" placeholder="{{ 'general.search.title' | trans }}" name="text"
                                        class="form-control">
                             </div>
                             <div class="col-4"></div>
@@ -61,13 +58,13 @@
                             <table id="usersRoleList">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Date</th>
-                                    <th>Reason</th>
-                                    <th>Created At</th>
-                                    <th>By</th>
+                                    <th>{{ 'general.id.title' | trans }}</th>
+                                    <th>{{ 'general.date.title' | trans }}</th>
+                                    <th>{{ 'general.reason.title' | trans }}</th>
+                                    <th>{{ 'general.create.date.title' | trans }}</th>
+                                    <th>{{ 'general.create.person.title' | trans }}</th>
                                     {% if canRemove %}
-                                        <th>Action</th>
+                                        <th>{{ 'general.action.title' | trans }}</th>
                                     {% endif %}
                                 </tr>
                                 </thead>

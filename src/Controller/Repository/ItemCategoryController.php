@@ -65,7 +65,7 @@ class ItemCategoryController extends AbstractController
                 } else {
                     $response = $coreRequest->uploadImage(null, $itemCategoryModel);
                 }
-                dd($response);
+//                dd($response);
                 if ($response->getStatus() == ResponseStatus::successful) {
                     /**
                      * @var $newItemCategory ItemCategoryModel

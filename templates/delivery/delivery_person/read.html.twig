@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Delivery Person | Read{% endblock %}
+{% block title %}{{ 'delivery.person.read.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -9,27 +9,21 @@
                 <div class="col-12">
                     <div class="panel">
                         <div class="panel-content">
-                            <h3>Want to add a new user?</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci
-                                aspernatur
-                                culpa doloribus laborum necessitatibus rem temporibus. Beatae ipsa
-                                officiis
-                                quam.
-                            </p>
+                            <h3>{{ 'delivery.person.read.main.title' | trans }}</h3>
+                            <p>{{ 'delivery.person.read.main.description' | trans }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="panel">
                         <div class="panel-heading"><strong>
-                                Allowed Districts
+                                {{ 'general.allowed.districts.title' | trans }}
                             </strong></div>
                         <div class="panel-content">
                             <div class="form-group row">
                                 <div class="col-4"></div>
                                 <div class="col-md-4">
-                                    <input type="text" placeholder="Search" name="text"
+                                    <input type="text" placeholder="{{ 'general.search.title' | trans }}" name="text"
                                            class="form-control">
                                 </div>
                                 <div class="col-4"></div>
@@ -39,9 +33,9 @@
                                 <table id="usersRoleList">
                                     <thead>
                                     <tr>
-                                        <th>Province</th>
-                                        <th>City</th>
-                                        <th>Districts</th>
+                                        <th>{{ 'general.province.title' | trans }}</th>
+                                        <th>{{ 'general.city.title' | trans }}</th>
+                                        <th>{{ 'general.district.title' | trans }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -73,7 +67,7 @@
                                 <i class="miniStats--icon fa fa-user text-blue"></i>
                                 <h3 class="miniStats--title h4">{{ deliveryPersonModel.deliveryPersonFirstName }} {{ deliveryPersonModel.deliveryPersonLastName }}</h3>
                                 <p class="miniStats--caption text-blue">{{ deliveryPersonModel.deliveryPersonMobile }}</p>
-                                <p class="miniStats--caption text-blue">Dispatches</p>
+                                <p class="miniStats--caption text-blue">{{ 'general.dispatches.title' | trans }}</p>
                                 <p class="miniStats--num text-blue">
                                     {{ deliveryPersonModel.deliveryPersonDispatchCount }}
                                 </p>
@@ -87,7 +81,7 @@
                         <div class="weather--panel text-white bg-orange">
                             <div class="weather--title">
                                 <i class="fa fa-money-bill-alt"></i>
-                                <span>Clear amount</span>
+                                <span>{{ 'general.clear.amount.title' | trans }}</span>
                             </div>
 
                             <div class="weather--info">
@@ -102,14 +96,14 @@
             <div class="panel">
                 <div class="panel-heading">
                     <strong>
-                        Delivery Methods
+                        {{ 'general.delivery.methods.title' | trans }}
                     </strong>
                 </div>
                 <div class="panel-content">
                     <div class="form-group row">
                         <div class="col-4"></div>
                         <div class="col-md-4">
-                            <input type="text" placeholder="Search" name="text"
+                            <input type="text" placeholder="{{ 'general.search.title' | trans }}" name="text"
                                    class="form-control">
                         </div>
                         <div class="col-4"></div>
@@ -119,16 +113,16 @@
                         <table id="table10">
                             <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Cost</th>
-                                <th>Accepted size</th>
-                                <th>Can Receive Money</th>
-                                <th>Delivery Persons</th>
-                                <th>Dispatches</th>
-                                <th>Status</th>
+                                <th>{{ 'general.id.title' | trans }}</th>
+                                <th>{{ 'general.image.title' | trans }}</th>
+                                <th>{{ 'general.name.title' | trans }}</th>
+                                <th>{{ 'general.type.title' | trans }}</th>
+                                <th>{{ 'general.cost.title' | trans }}</th>
+                                <th>{{ 'general.allowed.sizes.title' | trans }}</th>
+                                <th>{{ 'general.receive.money.title' | trans }}</th>
+                                <th>{{ 'general.delivery.persons.count.title' | trans }}</th>
+                                <th scope="col">{{ 'general.dispatches.title' | trans }}</th>
+                                <th scope="col">{{ 'general.status.title' | trans }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -172,13 +166,13 @@
         <div class="col-12">
             <div class="panel">
                 <div class="panel-heading"><strong>
-                        Dispatch Delivery
+                        {{ 'general.dispatch.delivery.title' | trans }}
                     </strong></div>
                 <div class="panel-content">
                     <div class="form-group row">
                         <div class="col-4"></div>
                         <div class="col-md-4">
-                            <input type="text" placeholder="Search" name="text"
+                            <input type="text" placeholder="{{ 'general.search.title' | trans }}" name="text"
                                    class="form-control">
                         </div>
                         <div class="col-4"></div>
@@ -188,14 +182,13 @@
                         <table id="actionsOverview">
                             <thead>
                             <tr>
-
-                                <th>Create Date</th>
-                                <th>Delivery Method</th>
-                                <th>Queue</th>
-                                <th>Address</th>
-                                <th>Dispatch Total Price</th>
-                                <th>Delivery Status</th>
-                                <th>Price Paid Status</th>
+                                <th>{{ 'general.create.date.title' | trans }}</th>
+                                <th>{{ 'general.delivery.method.title' | trans }}</th>
+                                <th>{{ 'general.queue.title' | trans }}</th>
+                                <th>{{ 'general.address.title' | trans }}</th>
+                                <th>{{ 'general.total.price.title' | trans }}</th>
+                                <th>{{ 'general.delivery.status.title' | trans }}</th>
+                                <th>{{ 'general.pay.status.title' | trans }}</th>
                             </tr>
                             </thead>
                             <tbody>

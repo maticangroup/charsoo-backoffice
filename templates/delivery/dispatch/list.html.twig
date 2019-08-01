@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dispatch | List{% endblock %}
+{% block title %}{{ 'delivery.dispatch.list.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -9,126 +9,119 @@
                 <div class="panel-content">
                     <div class="row">
                         <div class="col-12">
-                            <h1>Welcome</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa
-                                delectus
-                                eos, minus nemo neque obcaecati placeat quam quisquam ullam?
-                            </p>
+                            <h1>{{ 'delivery.dispatch.list.main.title' | trans }}</h1>
+                            <p>{{ 'delivery.dispatch.list.main.description' | trans }}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         {#<div class="col-12">#}
-            {#<div class="panel">#}
-                {#<div class="panel-heading">#}
-                    {#<strong>#}
-                        {#Dispatch Delivery Status#}
-                    {#</strong>#}
-                {#</div>#}
-                {#<div class="panel-content">#}
-                    {#<div class="row">#}
-                        {#<div class="col-4">#}
-                            {#<div class="panel">#}
-                                {#<div class="weather--panel text-white bg-green">#}
-                                    {#<div class="weather--title">#}
-                                        {#<i class="fa fa-exclamation"></i>#}
-                                        {#<span>Delivered On Time</span>#}
-                                    {#</div>#}
-                                    {#<div class="weather--info">#}
-                                        {#<span>25</span>#}
-                                    {#</div>#}
-                                {#</div>#}
-                            {#</div>#}
-                        {#</div>#}
-                        {#<div class="col-4">#}
-                            {#<div class="panel">#}
-                                {#<div class="weather--panel text-white bg-info">#}
-                                    {#<div class="weather--title">#}
-                                        {#<i class="fa fa-exclamation"></i>#}
-                                        {#<span>Delivered With Delay</span>#}
-                                    {#</div>#}
+        {#<div class="panel">#}
+        {#<div class="panel-heading">#}
+        {#<strong>#}
+        {#Dispatch Delivery Status#}
+        {#</strong>#}
+        {#</div>#}
+        {#<div class="panel-content">#}
+        {#<div class="row">#}
+        {#<div class="col-4">#}
+        {#<div class="panel">#}
+        {#<div class="weather--panel text-white bg-green">#}
+        {#<div class="weather--title">#}
+        {#<i class="fa fa-exclamation"></i>#}
+        {#<span>Delivered On Time</span>#}
+        {#</div>#}
+        {#<div class="weather--info">#}
+        {#<span>25</span>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+        {#<div class="col-4">#}
+        {#<div class="panel">#}
+        {#<div class="weather--panel text-white bg-info">#}
+        {#<div class="weather--title">#}
+        {#<i class="fa fa-exclamation"></i>#}
+        {#<span>Delivered With Delay</span>#}
+        {#</div>#}
 
-                                    {#<div class="weather--info">#}
-                                        {#<span>25</span>#}
-                                    {#</div>#}
-                                {#</div>#}
-                            {#</div>#}
-                        {#</div>#}
-                        {#<div class="col-4">#}
-                            {#<div class="panel">#}
-                                {#<div class="weather--panel text-white bg-red">#}
-                                    {#<div class="weather--title">#}
-                                        {#<i class="fa fa-exclamation"></i>#}
-                                        {#<span>Rejected</span>#}
-                                    {#</div>#}
+        {#<div class="weather--info">#}
+        {#<span>25</span>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+        {#<div class="col-4">#}
+        {#<div class="panel">#}
+        {#<div class="weather--panel text-white bg-red">#}
+        {#<div class="weather--title">#}
+        {#<i class="fa fa-exclamation"></i>#}
+        {#<span>Rejected</span>#}
+        {#</div>#}
 
-                                    {#<div class="weather--info">#}
-                                        {#<span>25</span>#}
-                                    {#</div>#}
-                                {#</div>#}
-                            {#</div>#}
-                        {#</div>#}
-                        {#<div class="col-4">#}
-                            {#<div class="panel">#}
-                                {#<div class="weather--panel text-white bg-secondary">#}
-                                    {#<div class="weather--title">#}
-                                        {#<i class="fa fa-exclamation"></i>#}
-                                        {#<span>On The Way</span>#}
-                                    {#</div>#}
+        {#<div class="weather--info">#}
+        {#<span>25</span>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+        {#<div class="col-4">#}
+        {#<div class="panel">#}
+        {#<div class="weather--panel text-white bg-secondary">#}
+        {#<div class="weather--title">#}
+        {#<i class="fa fa-exclamation"></i>#}
+        {#<span>On The Way</span>#}
+        {#</div>#}
 
-                                    {#<div class="weather--info">#}
-                                        {#<span>25</span>#}
-                                    {#</div>#}
-                                {#</div>#}
-                            {#</div>#}
-                        {#</div>#}
-                        {#<div class="col-4">#}
-                            {#<div class="panel">#}
-                                {#<div class="weather--panel text-white bg-orange">#}
-                                    {#<div class="weather--title">#}
-                                        {#<i class="fa fa-exclamation"></i>#}
-                                        {#<span>Delayed</span>#}
-                                    {#</div>#}
+        {#<div class="weather--info">#}
+        {#<span>25</span>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+        {#<div class="col-4">#}
+        {#<div class="panel">#}
+        {#<div class="weather--panel text-white bg-orange">#}
+        {#<div class="weather--title">#}
+        {#<i class="fa fa-exclamation"></i>#}
+        {#<span>Delayed</span>#}
+        {#</div>#}
 
-                                    {#<div class="weather--info">#}
-                                        {#<span>25</span>#}
-                                    {#</div>#}
-                                {#</div>#}
-                            {#</div>#}
-                        {#</div>#}
-                        {#<div class="col-4">#}
-                            {#<div class="panel">#}
-                                {#<div class="weather--panel text-white bg-darker">#}
-                                    {#<div class="weather--title">#}
-                                        {#<i class="fa fa-exclamation"></i>#}
-                                        {#<span>Canceled</span>#}
-                                    {#</div>#}
+        {#<div class="weather--info">#}
+        {#<span>25</span>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+        {#<div class="col-4">#}
+        {#<div class="panel">#}
+        {#<div class="weather--panel text-white bg-darker">#}
+        {#<div class="weather--title">#}
+        {#<i class="fa fa-exclamation"></i>#}
+        {#<span>Canceled</span>#}
+        {#</div>#}
 
-                                    {#<div class="weather--info">#}
-                                        {#<span>25</span>#}
-                                    {#</div>#}
-                                {#</div>#}
-                            {#</div>#}
-                        {#</div>#}
-                    {#</div>#}
+        {#<div class="weather--info">#}
+        {#<span>25</span>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
+        {#</div>#}
 
-                {#</div>#}
-            {#</div>#}
+        {#</div>#}
+        {#</div>#}
         {#</div>#}
 
 
         <div class="col-12">
             <div class="panel">
-                <div class="panel-heading"><strong>
-                        Dispatch List
-                    </strong></div>
                 <div class="panel-content">
                     <div class="form-group row">
                         <div class="col-4"></div>
                         <div class="col-md-4">
-                            <input type="text" placeholder="Search" name="text"
+                            <input type="text" placeholder="{{ 'general.search.title' | trans }}" name="text"
                                    class="form-control">
                         </div>
                         <div class="col-4"></div>
@@ -139,14 +132,14 @@
                             <thead>
                             <tr>
 
-                                <th>Create Date</th>
-                                <th>Delivery Method</th>
-                                <th>Queue</th>
-                                <th>Address</th>
-                                <th>Dispatch Total Price</th>
-                                <th>Delivery Status</th>
-                                <th>Price Paid Status</th>
-                                <th>Action</th>
+                                <th>{{ 'general.create.date.title' | trans }}</th>
+                                <th>{{ 'general.delivery.method.title' | trans }}</th>
+                                <th>{{ 'general.queue.title' | trans }}</th>
+                                <th>{{ 'general.address.title' | trans }}</th>
+                                <th>{{ 'general.total.price.title' | trans }}</th>
+                                <th>{{ 'general.delivery.status.title' | trans }}</th>
+                                <th>{{ 'general.pay.status.title' | trans }}</th>
+                                <th>{{ 'general.action.title' | trans }}</th>
                             </tr>
                             </thead>
                             <tbody>

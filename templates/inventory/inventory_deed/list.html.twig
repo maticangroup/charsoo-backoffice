@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inventory Deed | List{% endblock %}
+{% block title %}{{ 'inventory.deed.list.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -9,14 +9,8 @@
                 <div class="panel-content">
                     <div class="row">
                         <div class="col-10">
-                            <h3>Want to add a new user?</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci
-                                aspernatur
-                                culpa doloribus laborum necessitatibus rem temporibus. Beatae ipsa
-                                officiis
-                                quam.
-                            </p>
+                            <h3>{{ 'inventory.deed.list.main.title' | trans }}</h3>
+                            <p>{{ 'inventory.deed.list.main.description' | trans }}</p>
                         </div>
                         <div class="col-2">
                             <a href="{{ path('inventory_deed_inventory_deed_create') }}"
@@ -29,13 +23,13 @@
         <div class="col-12">
             <div class="panel">
                 <div class="panel-heading"><strong>
-                        Inventory Deed
+                        {{ 'general.inventory.deed.title' | trans }}
                     </strong></div>
                 <div class="panel-content">
                     <div class="form-group row">
                         <div class="col-4"></div>
                         <div class="col-md-4">
-                            <input type="text" placeholder="Search" name="text"
+                            <input type="text" placeholder="{{ 'general.search.title' | trans }}" name="text"
                                    class="form-control">
                         </div>
                         <div class="col-4"></div>
@@ -45,17 +39,17 @@
                         <table id="ProvincesList">
                             <thead>
                             <tr>
-                                <th>Deed Serial</th>
-                                <th>Deed Name</th>
-                                <th>From</th>
-                                <th>To</th>
-                                <th>Deed Total Price</th>
-                                <th>Deed Status</th>
-                                <th>Creator</th>
-                                <th>Created At</th>
-                                <th>Confirmed Person</th>
-                                <th>Confirmed At</th>
-                                <th>Action</th>
+                                <th>{{ 'general.serial.title' | trans }}</th>
+                                <th>{{ 'general.name.title' | trans }}</th>
+                                <th>{{ 'general.from.title' | trans }}</th>
+                                <th>{{ 'general.to.title' | trans }}</th>
+                                <th>{{ 'general.total.price.title' | trans }}</th>
+                                <th>{{ 'general.status.title' | trans }}</th>
+                                <th>{{ 'general.create.person.title' | trans }}</th>
+                                <th>{{ 'general.create.date.title' | trans }}</th>
+                                <th>{{ 'general.confirm.person.title' | trans }}</th>
+                                <th>{{ 'general.confirm.date.title' | trans }}</th>
+                                <th>{{ 'general.action.title' | trans }}</th>
                             </tr>
                             </thead>
                             <tbody>

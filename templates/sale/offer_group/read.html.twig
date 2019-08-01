@@ -1,18 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Offer Group | Read{% endblock %}
+{% block title %}{{ 'sale.offer.group.read.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
         <div class="col-8">
             <div class="panel">
                 <div class="panel-content">
-                    <h1>Welcome</h1>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa
-                        delectus
-                        eos, minus nemo neque obcaecati placeat quam quisquam ullam?
-                    </p>
+                    <h1>{{ 'sale.offer.group.read.main.title' | trans }}</h1>
+                    <p>{{ 'sale.offer.group.read.main.description' | trans }}</p>
                 </div>
             </div>
         </div>
@@ -21,7 +17,7 @@
                 <div class="weather--panel text-white bg-info">
                     <div class="weather--title">
                         <i class="fa fa-exclamation"></i>
-                        <span>Group Name</span>
+                        <span>{{ 'general.name.title' | trans }}</span>
                     </div>
 
                     <div class="weather--info">
@@ -35,7 +31,7 @@
                 <div class="weather--panel text-white bg-darker">
                     <div class="weather--title">
                         <i class="fa fa-exclamation"></i>
-                        <span>Availability</span>
+                        <span>{{ 'general.availability.title' | trans }}</span>
                     </div>
                     <div class="weather--info">
                         <span class="label rounded"
@@ -50,7 +46,7 @@
         <div class="col-12">
             <div class="panel">
                 <div class="panel-heading"><strong>
-                        Stock
+                        {{ 'general.stock.title' | trans }}
                     </strong></div>
                 <div class="panel-content">
                     <!-- Records List Start -->
@@ -58,16 +54,16 @@
                         <table id="ProvincesList">
                             <thead>
                             <tr>
-                                <th>Product Name</th>
-                                <th>Guarantee</th>
-                                <th>Color</th>
-                                <th>Supplier</th>
-                                <th>Current Price</th>
-                                <th>Discount Price</th>
-                                <th>Serial / Quantity</th>
-                                <th>Last Pricing Deed</th>
-                                <th>Expiry last pricing deed date</th>
-                                <th>Current Place</th>
+                                <th>{{ 'general.product.name.title' | trans }}</th>
+                                <th>{{ 'general.guarantee.title' | trans }}</th>
+                                <th>{{ 'general.color.title' | trans }}</th>
+                                <th>{{ 'general.supplier.title' | trans }}</th>
+                                <th>{{ 'general.current.price.title' | trans }}</th>
+                                <th>{{ 'general.discount.price.title' | trans }}</th>
+                                <th>{{ 'general.serial.quantity.title'  | trans }}</th>
+                                <th>{{ 'general.last.pricing.deed.title' | trans }}</th>
+                                <th>{{ 'general.last.pricing.deed.expier.date.title' | trans }}</th>
+                                <th>{{ 'general.current.place.title' | trans }}</th>
                             </tr>
                             </thead>
                             <tbody>

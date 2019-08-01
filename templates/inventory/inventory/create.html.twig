@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inventory | Create{% endblock %}
+{% block title %}{{ 'inventory.create.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -9,12 +9,8 @@
                 <div class="panel-content">
                     <div class="row">
                         <div class="col-12">
-                            <h3>Want to add a new user?</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aspernatur
-                                culpa doloribus laborum necessitatibus rem temporibus. Beatae ipsa officiis
-                                quam.
-                            </p>
+                            <h3>{{ 'inventory.create.main.title' | trans }}</h3>
+                            <p>{{ 'inventory.create.main.description' | trans }}</p>
                         </div>
                     </div>
                 </div>
@@ -26,20 +22,19 @@
                     <form class="row" action="{{ path('inventory_inventory_create') }}" method="post">
                         <div class="col-3">
                             <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Inventory Name</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'general.name.title' | trans }}</span>
 
                                 <div class="col-md-12">
                                     <input type="text" value="{{ inventoryModel.inventoryName }}"
                                            name="inventoryName"
-                                           placeholder="Inventory Name"
+                                           placeholder="{{ 'general.name.title' | trans }}"
                                            class="form-control" required>
                                 </div>
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Inventory Keeper</span>
-
+                                <span class="label-text col-md-12 col-form-label ">{{ 'general.inventory.keeper.title' | trans }}</span>
                                 <div class="col-md-12">
                                     <select name="inventoryKeeperId" class="form-control">
                                         {% for person in persons %}

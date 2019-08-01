@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Order | Read{% endblock %}
+{% block title %}{{ 'sale.order.read.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -8,18 +8,22 @@
             <div class="panel">
                 <div class="invoice">
                     <div class="panel-heading">
-                        <p><strong>Order Serial : </strong>{{ orderModel.orderSerial }}</p>
+                        <p><strong>{{ 'general.serial.title' | trans }} : </strong>{{ orderModel.orderSerial }}
+                        </p>
 
-                        <p><strong>Create Date : </strong>{{ orderModel.orderCreateDate }}</p>
+                        <p><strong>{{ 'general.create.date.title' | trans }}
+                                : </strong>{{ orderModel.orderCreateDate }}</p>
 
-                        <p><strong>Order Status : </strong>{{ orderModel.orderStatus.orderStatusName }}</p>
+                        <p><strong>{{ 'general.status.title' | trans }}
+                                : </strong>{{ orderModel.orderStatus.orderStatusName }}</p>
                         <span class="label rounded">
 
                         </span>
                     </div>
                     <div class="invoice--header">
                         <div class="invoice--logo">
-                            <img src="{{ asset('assets/images/matican_images/arad_mobile_logo.png') }}" width="200px"
+                            <img src="{{ asset('assets/images/matican_images/arad_mobile_logo.png') }}"
+                                 width="200px"
                                  alt="">
                         </div>
 
@@ -34,13 +38,17 @@
                         <div class="invoice--address">
                             <h5 class="h5"></h5>
 
-                            <p><strong>Address : </strong>{{ orderModel.orderOwnerAddress }}</p>
-                            <p><strong>Phone : </strong>{{ orderModel.orderOwnerPhone }}</p>
+                            <p><strong>{{ 'general.address.title' | trans }}
+                                    : </strong>{{ orderModel.orderOwnerAddress }}</p>
+                            <p><strong>{{ 'general.phone.title' | trans }}
+                                    : </strong>{{ orderModel.orderOwnerPhone }}</p>
                         </div>
 
                         <div class="invoice--info">
-                            <h5 class="h5"><span>Invoice Serial : {{ orderModel.orderInvoiceSerial }}</span></h5>
-                            <p>Invoice Date: <span>{{ orderModel.orderInvoiceCreateDate }}</span></p>
+                            <h5 class="h5"><span>{{ 'general.invoice.serial.title' | trans }}
+                                    : {{ orderModel.orderInvoiceSerial }}</span></h5>
+                            <p>{{ 'general.invoice.date.title' | trans }}:
+                                <span>{{ orderModel.orderInvoiceCreateDate }}</span></p>
                         </div>
                     </div>
 
@@ -48,13 +56,13 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th scope="col">Product Name</th>
-                                <th scope="col">Guarantee</th>
-                                <th scope="col">Color</th>
-                                <th scope="col">Supplier</th>
-                                <th scope="col">Serial / Quantity</th>
-                                <th scope="col">Current price</th>
-                                <th scope="col">Discount price</th>
+                                <th>{{ 'general.product.name.title' | trans }}</th>
+                                <th>{{ 'general.guarantee.title' | trans }}</th>
+                                <th>{{ 'general.color.title' | trans }}</th>
+                                <th>{{ 'general.supplier.title' | trans }}</th>
+                                <th scope="col">{{ 'general.serial.quantity.title' | trans }}</th>
+                                <th>{{ 'general.current.place.title' | trans }}</th>
+                                <th>{{ 'general.current.price.title' | trans }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -79,7 +87,7 @@
                             {% endfor %}
 
                             <tr>
-                                <td colspan="6"><strong>VAT</strong></td>
+                                <td colspan="8"><strong>{{ 'general.vat.title' | trans }}</strong></td>
                                 <td>
                                     {% if orderModel.orderVatPrice %}
                                         {{ orderModel.orderVatPrice }}
@@ -87,7 +95,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="6"><strong>Total</strong></td>
+                                <td colspan="8"><strong>{{ 'general.total.price.title' | trans }}</strong></td>
                                 <td>
                                     {% if orderModel.orderTotalPrice %}
                                         <strong>{{ orderModel.orderTotalPrice }}</strong>
@@ -99,7 +107,7 @@
                     </div>
                     <div class="invoice--footer">
                         <ul class="list-unstyled">
-                            <li class="mb-3"><strong>Description</strong>
+                            <li class="mb-3"><strong>{{ 'general.description.title' | trans }}</strong>
                                 <ul class="list-unstyled">
                                     <li>
                                         {{ orderModel.orderDescription }}
@@ -110,7 +118,8 @@
                     </div>
                     <div class="row">
                         <div class="col-4">
-                            <input type="text" placeholder="Add Coupon" class="form-control">
+                            <input type="text" placeholder="{{ 'general.add.coupon.title' | trans }}"
+                                   class="form-control">
                         </div>
                         <div class="col-4">
                             <button type="submit" class="btn btn-dark rounded fa fa-save"></button>
@@ -127,11 +136,11 @@
                 <div class="weather--panel text-white bg-darker">
                     <div class="weather--title">
                         <i class="fa fa-exclamation"></i>
-                        <span>Confirm Status</span>
+                        <span>{{ 'general.status.title' | trans }}</span>
                     </div>
 
                     <div class="weather--info">
-                        <span class="label label-green rounded">Accepted</span>
+                        <span class="label label-green rounded">{{ 'general.status.accepted.title' | trans }}</span>
                     </div>
                 </div>
             </div>

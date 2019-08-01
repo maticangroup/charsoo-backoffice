@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Pricing Deed | Create{% endblock %}
+{% block title %}{{ 'sale.pricing.deed.create.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -9,23 +9,20 @@
                 <div class="panel-content">
                     <form class="row" action="{{ path('sale_pricing_deed_sale_pricing_deed_create') }}" method="post">
                         <div class="col-5">
-                            <h1>welcome section</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores eligendi
-                                est,
-                                exercitationem nihil perspiciatis reprehenderit sit voluptas. Fugiat, placeat,
-                                tenetur!
-                            </p>
+                            <h1>{{ 'sale.pricing.deed.create.main.title' | trans }}</h1>
+                            <p>{{ 'sale.pricing.deed.create.main.description' | trans }}</p>
                         </div>
                         <div class="col-7">
                             <div class="row">
                                 <div class="col-6 mb-3">
                                     <input type="text" name="pricingDeedName" class="form-control"
-                                           placeholder="Deed name" value="{{ pricingDeedModel.pricingDeedName }}">
+                                           placeholder="{{ 'general.name.title' | trans }}"
+                                           value="{{ pricingDeedModel.pricingDeedName }}">
                                 </div>
                                 <div class="col-6 mb-3">
                                     <input type="text" id="date-picker" name="pricingDeedExpiryDate"
-                                           class="form-control" placeholder="Expiry Date" value="{{ pricingDeedModel.pricingDeedExpiryDate }}"/>
+                                           class="form-control" placeholder="{{ 'general.expiry.date.title' | trans }}"
+                                           value="{{ pricingDeedModel.pricingDeedExpiryDate }}"/>
                                     <span id="span-date-picker"></span>
                                 </div>
                                 {#<div class="col-2 mb-3">#}
@@ -51,7 +48,7 @@
                                 {#</div>#}
                                 <div class="col-12 mb-3">
                                     <textarea name="pricingDeedDescription" class="form-control"
-                                              placeholder="Deed description">{{ pricingDeedModel.pricingDeedDescription }}</textarea>
+                                              placeholder="{{ 'general.description.title' | trans }}">{{ pricingDeedModel.pricingDeedDescription }}</textarea>
                                 </div>
                                 <div class="col-4"></div>
                                 <div class="col-4">

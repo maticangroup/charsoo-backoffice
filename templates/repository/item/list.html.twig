@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Item | List{% endblock %}
+{% block title %}{{ 'repository.item.list.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -10,12 +10,8 @@
                     <div class="panel-content">
                         <div class="row">
                             <div class="col-10">
-                                <h1>Item Overview</h1>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa
-                                    delectus
-                                    eos, minus nemo neque obcaecati placeat quam quisquam ullam?
-                                </p>
+                                <h1>{{ 'repository.item.list.main.title' | trans }}</h1>
+                                <p>{{ 'repository.item.list.main.description' | trans }}</p>
                             </div>
                             <div class="col-2 d-flex justify-content-center align-items-center">
                                 <a href="{{ path('repository_item_repository_item_create') }}"
@@ -45,17 +41,16 @@
                             <table id="usersRoleList" class="js-table">
                                 <thead>
                                 <tr>
-                                    <th>Image</th>
-                                    <th>Brand</th>
-                                    <th>Name</th>
-                                    <th>Color</th>
-                                    <th>Guarantee</th>
-                                    <th>Supplier</th>
-                                    <th>Category</th>
-                                    <th>Created At</th>
-                                    <th>Updated At</th>
+                                    <th>{{ 'general.image.title' | trans }}</th>
+                                    <th>{{ 'general.brand.title' | trans }}</th>
+                                    <th>{{ 'general.name.title' | trans }}</th>
+                                    <th>{{ 'general.color.title' | trans }}</th>
+                                    <th>{{ 'general.guarantee.title' | trans }}</th>
+                                    <th>{{ 'general.supplier.title' | trans }}</th>
+                                    <th>{{ 'general.category.title' | trans }}</th>
+                                    <th>{{ 'general.create.date.title' | trans }}</th>
                                     {% if canEdit %}
-                                        <th class="not-sortable">Actions</th>
+                                        <th class="not-sortable">{{ 'general.action.title' | trans }}</th>
                                     {% endif %}
                                 </tr>
                                 </thead>
@@ -111,7 +106,6 @@
 
                                         </td>
                                         <td>{{ item.itemCreatedDate }}</td>
-                                        <td>{{ item.itemUpdatedDate }}</td>
                                         {% if canEdit %}
                                             <td>
                                                 <a href="{{ path('repository_item_repository_item_edit' , {id:item.itemID}) }}"

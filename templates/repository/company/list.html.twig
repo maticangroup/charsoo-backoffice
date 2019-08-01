@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Company | List{% endblock %}
+{% block title %}{{ 'repository.company.list.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -10,12 +10,8 @@
                     <div class="row">
 
                         <div class="col-10">
-                            <h1>Welcome</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa
-                                delectus
-                                eos, minus nemo neque obcaecati placeat quam quisquam ullam?
-                            </p>
+                            <h1>{{ 'repository.company.list.main.title' | trans }}</h1>
+                            <p>{{ 'repository.company.list.main.description' | trans }}</p>
                         </div>
                         {% if canCreate %}
                             <div class="col-2 d-flex justify-content-center align-items-center">
@@ -35,7 +31,7 @@
                         <div class="form-group row">
                             <div class="col-4"></div>
                             <div class="col-md-4">
-                                <input type="text" placeholder="Search" name="text"
+                                <input type="text" placeholder="{{ 'general.search.title' | trans }}" name="text"
                                        class="form-control live-search-box">
                             </div>
                             <div class="col-4"></div>
@@ -45,12 +41,12 @@
                             <table id="usersRoleList" class="search-tr">
                                 <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Telephone</th>
-                                    <th>Address</th>
-                                    <th>Contact Person</th>
+                                    <th>{{ 'general.name.title' | trans }}</th>
+                                    <th>{{ 'general.phone.title' | trans }}</th>
+                                    <th>{{ 'general.address.title' | trans }}</th>
+                                    <th>{{ 'general.address.title' | trans }}</th>
                                     {% if canEdit %}
-                                        <th>Actions</th>
+                                        <th>{{ 'general.action.title' | trans }}</th>
                                     {% endif %}
                                 </tr>
                                 </thead>

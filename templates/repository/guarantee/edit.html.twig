@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Guarantee | Edit{% endblock %}
+{% block title %}{{ 'repository.guarantee.edit.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -9,22 +9,21 @@
                 <div class="panel-content">
                     <div class="row">
                         <div class="col-10">
-                            <h3>Want to add a new color?</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores facilis,
-                                laudantium odit quibusdam quis vel?
-                            </p>
+                            <h3>{{ 'repository.guarantee.edit.main.title' | trans }}</h3>
+                            <p>{{ 'repository.guarantee.edit.main.description' | trans }}</p>
                         </div>
                         <div class="col-2">
                             <form class="row"
                                   action="{{ path('repository_guarantee_repository_guarantee_edit' , {id:guaranteeModel.guaranteeID}) }}"
                                   method="post">
                                 <div class="col-12">
-                                    <input type="text" placeholder="Guarantee name"
+                                    <input type="text"
+                                           placeholder="{{ 'repository.guarantee.create.form.input.placeholder.guarantee.name' | trans }}"
                                            value="{{ guaranteeModel.guaranteeName }}"
                                            name="guaranteeName"
                                            class="form-control mb-3">
-                                    <input type="text" placeholder="Guarantee Price"
+                                    <input type="text"
+                                           placeholder="{{ 'repository.guarantee.create.form.input.placeholder.guarantee.price' | trans }}"
                                            value="{{ guaranteeModel.guaranteePrice }}"
                                            name="guaranteePrice"
                                            class="form-control mb-3">
@@ -58,7 +57,7 @@
                     <div class="form-group row">
                         <div class="col-4"></div>
                         <div class="col-md-4">
-                            <input type="text" placeholder="Search" name="text"
+                            <input type="text" placeholder="{{ 'general.search.title' | trans }}" name="text"
                                    class="form-control">
                         </div>
                         <div class="col-4"></div>
@@ -68,12 +67,13 @@
                         <table id="usersRoleList">
                             <thead>
                             <tr>
-                                <th>Token</th>
-                                <th>Name</th>
-                                <th>Provider</th>
-                                <th>Duration</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>{{ 'general.id.title' | trans }}</th>
+                                <th>{{ 'general.name.title' | trans }}</th>
+                                <th>{{ 'general.price.title' | trans }}</th>
+                                <th>{{ 'general.provider.title' | trans }}</th>
+                                <th>{{ 'general.duration.title' | trans }}</th>
+                                <th>{{ 'general.status.title' | trans }}</th>
+                                <th>{{ 'general.action.title' | trans }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -84,6 +84,9 @@
                                     </td>
                                     <td>
                                         {{ guarantee.guaranteeName }}
+                                    </td>
+                                    <td>
+                                        {{ guarantee.guaranteePrice }}
                                     </td>
                                     <td>
                                         {{ guarantee.guaranteePrice }}

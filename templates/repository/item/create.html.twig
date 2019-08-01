@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Item | Create{% endblock %}
+{% block title %}{{ 'repository.item.create.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -9,12 +9,8 @@
                 <div class="panel-content">
                     <div class="row">
                         <div class="col-12">
-                            <h1>Want to add a new item?</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt eum fuga in
-                                neque
-                                quia. Aperiam at facere itaque odit quasi!
-                            </p>
+                            <h1>{{ 'repository.item.create.main.title' | trans }}</h1>
+                            <p>{{ 'repository.item.create.main.description' | trans }}</p>
                         </div>
                     </div>
 
@@ -25,17 +21,17 @@
             <div class="col-12">
                 <div class="panel">
                     <div class="panel-heading">
-                        Basic information
+                        <strong>{{ 'general.basic.information.title' | trans }}</strong>
                     </div>
                     <div class="panel-content">
                         <form class="row" action="{{ path('repository_item_repository_item_create') }}" method="post">
                             <div class="col-3">
-                                <label for="name" class="label-text">Name</label>
+                                <label for="name" class="label-text">{{ 'general.name.title' | trans }}</label>
                                 <input type="text" id="name" value="{{ itemModel.itemName }}" name="itemName"
                                        class="form-control">
                             </div>
                             <div class="col-3">
-                                <label for="brand" class="label-text">Brand</label>
+                                <label for="brand" class="label-text">{{ 'general.brand.title' | trans }}</label>
                                 <select name="itemBrandId" class="form-control mb-3" id="brand">
                                     {% for brand in brands %}
                                         <option value="{{ brand.brandID }}" {{ (itemModel.itemBrandId == brand.brandID) ? 'selected' : '' }}>{{ brand.brandName }}</option>
@@ -43,7 +39,7 @@
                                 </select>
                             </div>
                             <div class="col-3">
-                                <label for="type" class="label-text">Type</label>
+                                <label for="type" class="label-text">{{ 'general.type.title' | trans }}</label>
                                 <select name="itemTypeId" class="form-control" id="type">
                                     {% for itemType in itemTypes %}
                                         <option value="{{ itemType.itemTypeId }}" {{ (itemModel.itemTypeId == itemType.itemTypeId) ? 'selected' : '' }}>{{ itemType.itemTypeName }}</option>

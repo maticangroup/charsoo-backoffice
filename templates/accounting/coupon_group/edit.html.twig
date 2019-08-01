@@ -109,7 +109,9 @@
                                 <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.minimum.invoice.price' | trans }}</span>
 
                                 <div class="col-md-12">
-                                    {{ couponGroupModel.couponGroupMinimumInvoicePrice }}
+                                    <script>
+                                        document.write(addCommas({{ couponGroupModel.couponGroupMinimumInvoicePrice }}))
+                                    </script>
                                 </div>
                             </div>
                         </div>
@@ -186,7 +188,11 @@
                                         <td>{{ usedCoupon.usedCouponOwnerFirstName }} {{ usedCoupon.usedCouponOwnerLastName }}</td>
                                         <td>{{ usedCoupon.usedCouponDate }}</td>
                                         <td>{{ usedCoupon.usedCouponOrderSerial }}</td>
-                                        <td>{{ usedCoupon.usedCouponOrderPrice }}</td>
+                                        <td>
+                                            <script>
+                                                document.write(addCommas({{ usedCoupon.usedCouponOrderPrice }}))
+                                            </script>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>

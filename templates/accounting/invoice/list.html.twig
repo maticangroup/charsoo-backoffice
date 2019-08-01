@@ -68,7 +68,9 @@
                                         {{ invoice.invoiceToPersonFirstName }} {{ invoice.invoiceToPersonLastName }}
                                     </td>
                                     <td>
-                                        {{ invoice.invoiceTotalPrice }}
+                                        <script>
+                                            document.write(addCommas({{ invoice.invoiceTotalPrice }}))
+                                        </script>
                                     </td>
                                     <td>
                                         <span class="label rounded {{ (invoice.invoiceTypeMachineName == 'income') ? 'label-green' : 'label-red' }}">

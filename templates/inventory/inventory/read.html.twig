@@ -5,38 +5,47 @@
 {% block body %}
     <div class="row">
         <div class="col-10">
+
             <div class="panel">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{ inventoryModel.inventoryName }}</h3>
                 </div>
+                <div class="row">
+                    <div class="col-10">
+                        <div class="panel-content panel-about">
+                            {#<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem odit esse quae, et praesentium eligendi, corporis minima repudiandae similique voluptatum dolorem temporibus doloremque.</p>#}
 
-                <div class="panel-content panel-about">
-                    {#<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem odit esse quae, et praesentium eligendi, corporis minima repudiandae similique voluptatum dolorem temporibus doloremque.</p>#}
+                            <table>
+                                <tbody>
+                                {#<tr>#}
+                                {#<th><i class="fas fa-briefcase"></i>Inventory Keeper</th>#}
+                                {#<td>{{ inventoryModel.inventoryKeeperName }}</td>#}
+                                {#</tr>#}
+                                {#<tr>#}
+                                {#<th><i class="fas fa-mobile-alt"></i>Inventory Keeper Phone No.</th>#}
+                                {#<td><a href="tel:{{ inventoryModel.inventoryKeeperPhone }}"#}
+                                {#class="btn-link">{{ inventoryModel.inventoryKeeperPhone }}</a></td>#}
+                                {#</tr>#}
+                                <tr>
+                                    <th><i class="fas fa-map-marker-alt"></i>Address</th>
+                                    <td>{{ inventoryModel.inventoryAddress }}</td>
+                                </tr>
+                                <tr>
+                                    <th><i class="fas fa-mobile-alt"></i>Phone No.</th>
+                                    <td><a href="tel:{{ inventoryModel.inventoryMainPhone }}"
+                                           class="btn-link">{{ inventoryModel.inventoryMainPhone }}</a></td>
+                                </tr>
 
-                    <table>
-                        <tbody>
-                        {#<tr>#}
-                        {#<th><i class="fas fa-briefcase"></i>Inventory Keeper</th>#}
-                        {#<td>{{ inventoryModel.inventoryKeeperName }}</td>#}
-                        {#</tr>#}
-                        {#<tr>#}
-                        {#<th><i class="fas fa-mobile-alt"></i>Inventory Keeper Phone No.</th>#}
-                        {#<td><a href="tel:{{ inventoryModel.inventoryKeeperPhone }}"#}
-                        {#class="btn-link">{{ inventoryModel.inventoryKeeperPhone }}</a></td>#}
-                        {#</tr>#}
-                        <tr>
-                            <th><i class="fas fa-map-marker-alt"></i>Address</th>
-                            <td>{{ inventoryModel.inventoryAddress }}</td>
-                        </tr>
-                        <tr>
-                            <th><i class="fas fa-mobile-alt"></i>Phone No.</th>
-                            <td><a href="tel:{{ inventoryModel.inventoryMainPhone }}"
-                                   class="btn-link">{{ inventoryModel.inventoryMainPhone }}</a></td>
-                        </tr>
-
-                        </tbody>
-                    </table>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-2 mt-4">
+                        <a href="{{ path('inventory_deed_inventory_deed_create') }}"
+                           class="btn btn-block btn-secondary rounded fa fa-file"></a>
+                    </div>
                 </div>
+
             </div>
         </div>
         <div class="col-2">

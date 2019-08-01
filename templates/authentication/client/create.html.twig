@@ -56,8 +56,8 @@
                                 <th>Username</th>
                                 <th>Public Key</th>
                                 <th>Secret Key</th>
-                                <th>Role</th>
                                 <th>IP</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -68,8 +68,8 @@
                                     <td>{{ client.clientUsername }}</td>
                                     <td>{{ client.clientPublicKey }}</td>
                                     <td>{{ client.clientSecretKey }}</td>
-                                    <td>{{ client.clientRoleName }}</td>
                                     <td>{{ client.clientIP }}</td>
+                                    <td>Status should be implemented</td>
                                     <td>
                                         <a href="{{ path('authentication_client_edit' , {id:client.clientId}) }}"
                                            class="fa fa-edit"></a>

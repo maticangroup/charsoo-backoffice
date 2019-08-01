@@ -139,7 +139,6 @@ class CompanyController extends AbstractController
         $response = $request->send();
         $companyModel = ModelSerializer::parse($response->getContent(), CompanyModel::class);
 
-
         /**
          * @var $employees PersonModel[]
          */

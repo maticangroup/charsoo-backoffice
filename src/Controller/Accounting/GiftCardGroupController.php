@@ -90,7 +90,7 @@ class GiftCardGroupController extends AbstractController
                     $giftCardGroupModel = ModelSerializer::parse($response->getContent(), GiftCardGroupModel::class);
                     return $this->redirect($this->generateUrl('accounting_gift_card_group_edit', ['id' => $giftCardGroupModel->getGiftCardGroupId()]));
                 } else {
-                    $this->addFlash('s', $response->getMessage());
+                    $this->addFlash('f', $response->getMessage());
                 }
             }
 

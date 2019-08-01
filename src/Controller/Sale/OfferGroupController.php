@@ -31,9 +31,7 @@ class OfferGroupController extends AbstractController
      */
     public function create(Request $request)
     {
-
         $inputs = $request->request->all();
-
         /**
          * @var $offerGroupModel OfferGroupModel
          */
@@ -42,7 +40,6 @@ class OfferGroupController extends AbstractController
             $request = new Req(Servers::Sale, Sale::OfferGroup, 'new');
             $request->add_instance($offerGroupModel);
             $response = $request->send();
-//            dd($response);
             if ($response->getStatus() == ResponseStatus::successful) {
                 /**
                  * @var $offerGroupModel OfferGroupModel
@@ -51,13 +48,12 @@ class OfferGroupController extends AbstractController
                 $this->addFlash('s', $response->getStatus());
                 return $this->redirect($this->generateUrl('sale_offer_group_sale_offer_group_edit', ['id' => $offerGroupModel->getOfferGroupId()]));
             } else {
-                $this->addFlash('s', $response->getStatus());
+                $this->addFlash('f', $response->getStatus());
             }
         }
 
         $allOfferGroupsRequest = new Req(Servers::Sale, Sale::OfferGroup, 'all');
         $allOfferGroupResponse = $allOfferGroupsRequest->send();
-
         /**
          * @var $offerGroups OfferGroupModel[]
          */
@@ -65,8 +61,6 @@ class OfferGroupController extends AbstractController
         foreach ($allOfferGroupResponse->getContent() as $offerGroup) {
             $offerGroups[] = ModelSerializer::parse($offerGroup, OfferGroupModel::class);
         }
-
-//        dd($offerGroups);
         if (!AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_all)) {
             $offerGroups = [];
         }
@@ -102,7 +96,6 @@ class OfferGroupController extends AbstractController
         $response = $request->send();
         $offerGroupModel = ModelSerializer::parse($response->getContent(), OfferGroupModel::class);
 
-
         if (!empty($inputs)) {
             if (!AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_update)) {
                 return $this->redirect($this->generateUrl('sale_offer_group_sale_offer_group_edit', ['id' => $offerGroupModel->getOfferGroupId()]));
@@ -116,7 +109,6 @@ class OfferGroupController extends AbstractController
             $request = new Req(Servers::Sale, Sale::OfferGroup, 'update');
             $request->add_instance($offerGroupModel);
             $response = $request->send();
-//            dd($response);
             if ($response->getStatus() == ResponseStatus::successful) {
                 /**
                  * @var $offerGroupModel OfferGroupModel
@@ -125,7 +117,7 @@ class OfferGroupController extends AbstractController
                 $this->addFlash('s', $response->getMessage());
                 return $this->redirect($this->generateUrl('sale_offer_group_sale_offer_group_edit', ['id' => $offerGroupModel->getOfferGroupId()]));
             } else {
-                $this->addFlash('s', $response->getMessage());
+                $this->addFlash('f', $response->getMessage());
             }
         }
 

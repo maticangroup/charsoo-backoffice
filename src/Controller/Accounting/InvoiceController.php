@@ -163,22 +163,21 @@ class InvoiceController extends AbstractController
 
 //        dd($invoiceModel);
 
-        /**
-         * @var $invoiceItems InvoiceItemModel[]
-         */
-        $invoiceItems = [];
-        if ($invoiceModel->getInvoiceItems()) {
-            foreach ($invoiceModel->getInvoiceItems() as $invoiceItem) {
-                $invoiceItems[] = ModelSerializer::parse($invoiceItem, InvoiceItemModel::class);
-            }
-        }
-
+//        /**
+//         * @var $invoiceItems InvoiceItemModel[]
+//         */
+//        $invoiceItems = [];
+//        if ($invoiceModel->getInvoiceItems()) {
+//            foreach ($invoiceModel->getInvoiceItems() as $invoiceItem) {
+//                $invoiceItems[] = ModelSerializer::parse($invoiceItem, InvoiceItemModel::class);
+//            }
+//        }
 
 
         return $this->render('accounting/invoice/edit.html.twig', [
             'controller_name' => 'InvoiceController',
             'invoiceModel' => $invoiceModel,
-            'invoiceItems' => $invoiceItems,
+//            'invoiceItems' => $invoiceItems,
         ]);
     }
 
@@ -202,7 +201,12 @@ class InvoiceController extends AbstractController
          */
         $invoiceItemModel = ModelSerializer::parse($inputs, InvoiceItemModel::class);
         $invoiceItemModel->setInvoiceId($invoice_id);
+        $currentPrice = str_replace(',', '', $inputs['invoiceItemCurrentPrice']);
+        $discountPrice = str_replace(',', '', $inputs['invoiceItemDiscountPrice']);
+        $invoiceItemModel->setInvoiceItemCurrentPrice($currentPrice);
+        $invoiceItemModel->setInvoiceItemDiscountPrice($discountPrice);
         $request = new Req(Servers::Accounting, Accounting::Invoice, 'add_invoice_item');
+//        dd($invoiceItemModel);
         $request->add_instance($invoiceItemModel);
         $response = $request->send();
         if ($response->getStatus() == ResponseStatus::successful) {

@@ -122,6 +122,50 @@
 
 <body>
 
+<script>
+    function separated(element) {
+        alert('sss');
+        var num = $(element).html();
+        var comma = /,/g;
+        num = num.replace(comma, '');
+        $('.num').html(num);
+        var numCommas = addCommas(num);
+        $(element).html(numCommas);
+    }
+
+    function addCommas(nStr) {
+        nStr += '';
+        var comma = /,/g;
+        nStr = nStr.replace(comma, '');
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        return x1 + x2;
+    }
+
+    setTimeout(function () {
+
+
+        var textbox = '.commas';
+        var hidden = '.num';
+        $(textbox).keyup(function () {
+            var num = $(this).val();
+            var comma = /,/g;
+            num = num.replace(comma, '');
+            $(hidden).val(num);
+            var numCommas = addCommas(num);
+            $(this).val(numCommas);
+        });
+
+
+    }, 1000);
+
+</script>
+
 <!-- Wrapper Start -->
 <div class="wrapper">
     <!-- Navbar Start -->
@@ -280,24 +324,26 @@
         }, 3000);
 
 
-        // persian = {0: '۰', 1: '۱', 2: '۲', 3: '۳', 4: '۴', 5: '۵', 6: '۶', 7: '۷', 8: '۸', 9: '۹'};
-        //
-        // function traverse(el) {
-        //     if (el.nodeType == 3) {
-        //         var list = el.data.match(/[0-9]/g);
-        //         if (list != null && list.length != 0) {
-        //             for (var i = 0; i < list.length; i++)
-        //                 el.data = el.data.replace(list[i], persian[list[i]]);
-        //         }
-        //     }
-        //     for (var i = 0; i < el.childNodes.length; i++) {
-        //         traverse(el.childNodes[i]);
-        //     }
-        // }
-        //
-        // traverse(document.body);
+        persian = {0: '۰', 1: '۱', 2: '۲', 3: '۳', 4: '۴', 5: '۵', 6: '۶', 7: '۷', 8: '۸', 9: '۹'};
+
+        function traverse(el) {
+            if (el.nodeType == 3) {
+                var list = el.data.match(/[0-9]/g);
+                if (list != null && list.length != 0) {
+                    for (var i = 0; i < list.length; i++)
+                        el.data = el.data.replace(list[i], persian[list[i]]);
+                }
+            }
+            for (var i = 0; i < el.childNodes.length; i++) {
+                traverse(el.childNodes[i]);
+            }
+        }
+
+        traverse(document.body);
 
     });
+
+
 </script>
 
 <script type="text/javascript">

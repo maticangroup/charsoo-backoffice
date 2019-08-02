@@ -129,100 +129,13 @@
             </div>
         </div>
     </div>
-    <!--Address Panel-->
-    <div class="row">
-        <div class="col-8">
-            <div class="panel">
-                <div class="panel-heading">
-                    Address
-                </div>
-                {% for location in locations %}
-                    <div class="panel-content">
-                        <form class="row"
-                              action="{{ path('repository_person_repository_person_remove_address' , {location_id:location.locationId , person_id:personModel.id}) }}"
-                              method="post">
-                            <input type="hidden" name="personId">
-                            <div class="col-3">
-                                <div class="form-group row">
-                                    <div class="col-12">
-                                        <span class="label-text col-form-label">Province</span>
-                                        <h4>{{ location.provinceName }}</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group row">
-                                    <div class="col-12">
-                                        <span class="label-text col-form-label">City</span>
-                                        <h4>{{ location.cityName }}</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group row">
-                                    <div class="col-12">
-                                        <span class="label-text col-form-label">Districts</span>
-                                        <h4>{{ location.districtName }}</h4>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group row">
-                                    <div class="col-md-12">
-                                        <span class="label-text col-md-12 col-form-label ">Postal Code</span>
-                                        <h4>{{ location.postalCode }}</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group row">
-                                    <div class="col-md-12">
-                                        <span class="label-text col-md-12 col-form-label ">Address</span>
-                                        <h4>{{ location.address }}</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-5">
-                                <div class="form-group row">
-                                    <div class="col-md-12">
-                                        <span class="label-text col-md-12 col-form-label ">Person</span>
-                                        <h4>{{ location.locationContactPersonFirstName }} {{ location.locationContactPersonLastName }}
-                                            | {{ location.locationContactPersonMobile }}</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Google Map</span>
-                                    <div class="col-md-12">
-                                        <img src="https://map.ir/static?width=700&height=400&markers=color:red|{{ location.locationLng }},{{ location.locationLat }}&zoom_level=16"
-                                             alt="" width="100%">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-4"></div>
-                                    <div class="col-4">
-                                        <button type="submit" class="btn btn-block btn-danger rounded"><i
-                                                    class="fa fa-trash"></i>
-                                        </button>
-                                    </div>
-                                    <div class="col-4"></div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                {% endfor %}
-                {#Add New Address Panel#}
-                {% include 'repository/person/add-new-address.html.twig' %}
-                {#Add New Address Panel#}
-            </div>
-        </div>
-        {% include 'repository/person/add-quick.html.twig' %}
-    </div>
-    <!--Address Panel-->
+    {{ render(controller(
+        'App\\Controller\\General\\LocationViewController::index' ,{
+            locationModel:locationModel ,
+            addedLocations:locations ,
+            submitUrl:path('repository_person_repository_person_edit',{id:personModel.id})
+        }
+    )) }}
 {% endblock %}
 
 

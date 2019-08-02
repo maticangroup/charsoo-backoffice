@@ -1047,23 +1047,23 @@
       </trans-unit>
       <trans-unit id="TCDBCMk" resname="general.first.name.title">
         <source>general.first.name.title</source>
-        <target>افزودن کوپن</target>
+        <target>نام</target>
       </trans-unit>
       <trans-unit id="xKH0o2C" resname="general.last.name.title">
         <source>general.last.name.title</source>
-        <target>افزودن کوپن</target>
+        <target>نام خانوادگی</target>
       </trans-unit>
       <trans-unit id="O9w.DuV" resname="general.birth.date.title">
         <source>general.birth.date.title</source>
-        <target>افزودن کوپن</target>
+        <target>تاریخ تولد</target>
       </trans-unit>
       <trans-unit id="NEtRc7." resname="general.sms.title">
         <source>general.sms.title</source>
-        <target>افزودن کوپن</target>
+        <target>پیامک</target>
       </trans-unit>
       <trans-unit id="7gA3LvS" resname="general.sms.descrption">
         <source>general.sms.descrption</source>
-        <target>افزودن کوپن</target>
+        <target>آیا مایلید برای فرد پیامک ارسال شود؟</target>
       </trans-unit>
       <trans-unit id="ljXyU6S" resname="repository.brand.create.tab.title">
         <source>repository.brand.create.tab.title</source>

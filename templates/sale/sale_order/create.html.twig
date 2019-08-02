@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Order | Create{% endblock %}
+{% block title %}{{ 'sale.order.create.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -9,13 +9,8 @@
                 <div class="panel-content">
                     <div class="row">
                         <div class="col-12">
-                            <h1>welcome section</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores eligendi
-                                est,
-                                exercitationem nihil perspiciatis reprehenderit sit voluptas. Fugiat, placeat,
-                                tenetur!
-                            </p>
+                            <h1>{{ 'sale.order.create.main.title' | trans }}</h1>
+                            <p>{{ 'sale.order.create.main.description' | trans }}</p>
                         </div>
                     </div>
                 </div>
@@ -27,14 +22,15 @@
                     <form class="row" action="{{ path('sale_order_create') }}" method="post">
                         <div class="col-3">
                             <div class="form-group">
-                                <span class="label-text col-md-12 col-form-label ">Order Name</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'general.name.title' | trans }}</span>
                                 <input type="text" name="orderName" class="form-control"
-                                       placeholder="Order Name" value="{{ orderModel.orderName }}">
+                                       placeholder="{{ 'general.name.title' | trans }}"
+                                       value="{{ orderModel.orderName }}">
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group">
-                                <span class="label-text col-md-12 col-form-label ">Owner</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'general.owner.title' | trans }}</span>
                                 <select name="orderOwnerId" class="form-control">
                                     {% for person in persons %}
                                         <option value="{{ person.id }}" {{ (person.id == orderModel.orderOwnerId) ? 'selected' : '' }}>
@@ -47,9 +43,9 @@
                         </div>
                         <div class="col-4">
                             <div class="form-group">
-                                <span class="label-text col-md-12 col-form-label ">Description</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'general.description.title' | trans }}</span>
                                 <textarea type="text" name="orderDescription" class="form-control"
-                                          placeholder="Description">{{ orderModel.orderDescription }}</textarea>
+                                          placeholder="{{ 'general.description.title' | trans }}">{{ orderModel.orderDescription }}</textarea>
                             </div>
                         </div>
                         <div class="col-2">

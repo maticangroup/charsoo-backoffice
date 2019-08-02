@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inventory Item Products | Read{% endblock %}
+{% block title %}{{ 'inventory.stock.read.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -14,11 +14,11 @@
                     <table>
                         <tbody>
                         <tr>
-                            <th><i class="fas fa-info"></i>Brand</th>
+                            <th><i class="fas fa-info"></i>{{ 'general.brand.title' | trans }}</th>
                             <td>{{ itemModel.itemBrandName }}</td>
                         </tr>
                         <tr>
-                            <th><i class="fas fa-barcode"></i>Barcodes</th>
+                            <th><i class="fas fa-barcode"></i>{{ 'general.barcodes.title' | trans }}</th>
                             <td>
                                 {% for barcode in itemModel.itemBarcodes %}
                                     {{ barcode.barcodeName }}
@@ -26,7 +26,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th><i class="fas fa-code-branch"></i>Categories</th>
+                            <th><i class="fas fa-code-branch"></i>{{ 'general.categories.title' | trans }}</th>
                             <td>
                                 <ul>
                                     <li>Category</li>
@@ -53,13 +53,13 @@
         <div class="col-12">
             <div class="panel">
                 <div class="panel-heading"><strong>
-                        Stock
+                        {{ 'general.stock.title' | trans }}
                     </strong></div>
                 <div class="panel-content">
                     <div class="form-group row">
                         <div class="col-4"></div>
                         <div class="col-md-4">
-                            <input type="text" placeholder="Search" name="text"
+                            <input type="text" placeholder="{{ 'general.search.title' | trans }}" name="text"
                                    class="form-control">
                         </div>
                         <div class="col-4"></div>
@@ -69,16 +69,16 @@
                         <table id="ProvincesList">
                             <thead>
                             <tr>
-                                <th>Product Name</th>
-                                <th>Guarantee</th>
-                                <th>Color</th>
-                                <th>Supplier</th>
-                                <th>Current Price</th>
-                                <th>Discount Price</th>
-                                <th>Serial / Quantity</th>
-                                <th>Last Pricing Deed</th>
-                                <th>Expiry last pricing deed date</th>
-                                <th>Current Place</th>
+                                <th>{{ 'general.product.name.title' | trans }}</th>
+                                <th>{{ 'general.guarantee.title' | trans }}</th>
+                                <th>{{ 'general.color.title' | trans }}</th>
+                                <th>{{ 'general.supplier.title' | trans }}</th>
+                                <th>{{ 'general.current.price.title' | trans }}</th>
+                                <th>{{ 'general.discount.price.title' | trans }}</th>
+                                <th>{{ 'general.serial.quantity.title'  | trans }}</th>
+                                <th>{{ 'general.last.pricing.deed.title' | trans }}</th>
+                                <th>{{ 'general.last.pricing.deed.expier.date.title' | trans }}</th>
+                                <th>{{ 'general.current.place.title' | trans }}</th>
                             </tr>
                             </thead>
                             <tbody>

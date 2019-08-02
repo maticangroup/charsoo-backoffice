@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Delivery Method | List{% endblock %}
+{% block title %}{{ 'delivery.method.list.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -9,12 +9,8 @@
                 <div class="panel-content">
                     <div class="row">
                         <div class="col-10">
-                            <h1>Welcome</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa
-                                delectus
-                                eos, minus nemo neque obcaecati placeat quam quisquam ullam?
-                            </p>
+                            <h1>{{ 'delivery.method.list.main.title' | trans }}</h1>
+                            <p>{{ 'delivery.method.list.main.description' | trans }}</p>
                         </div>
                         <div class="col-2 d-flex justify-content-center align-items-center">
                             <a href="{{ path('delivery_method_create') }}"
@@ -31,7 +27,7 @@
                     <div class="form-group row">
                         <div class="col-4"></div>
                         <div class="col-md-4">
-                            <input type="text" placeholder="Search" name="text"
+                            <input type="text" placeholder="{{ 'general.search.title' | trans }}" name="text"
                                    class="form-control">
                         </div>
                         <div class="col-4"></div>
@@ -41,17 +37,17 @@
                         <table id="usersRoleList">
                             <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Cost</th>
-                                <th>Accepted size</th>
-                                <th>Can Receive Money</th>
-                                <th>Delivery Persons Count</th>
-                                <th>Dispatches</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>{{ 'general.id.title' | trans }}</th>
+                                <th>{{ 'general.image.title' | trans }}</th>
+                                <th>{{ 'general.name.title' | trans }}</th>
+                                <th>{{ 'general.type.title' | trans }}</th>
+                                <th>{{ 'general.cost.title' | trans }}</th>
+                                <th>{{ 'general.allowed.sizes.title' | trans }}</th>
+                                <th>{{ 'general.receive.money.title' | trans }}</th>
+                                <th>{{ 'general.delivery.persons.count.title' | trans }}</th>
+                                <th scope="col">{{ 'general.dispatches.title' | trans }}</th>
+                                <th scope="col">{{ 'general.status.title' | trans }}</th>
+                                <th scope="col">{{ 'general.action.title' | trans }}</th>
                             </tr>
                             </thead>
                             <tbody>

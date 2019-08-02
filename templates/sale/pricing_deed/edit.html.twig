@@ -1,89 +1,91 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Pricing Deed | Edit{% endblock %}
+{% block title %}{{ 'sale.pricing.deed.edit.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
-        {% if pricingDeedModel.pricingDeedStatus.pricingDeedStatusMachineName == 'initialized' %}
-            <div class="col-12">
-                <div class="panel">
-                    <div class="panel-content">
-                        <form class="row"
-                              action="{{ path('sale_pricing_deed_sale_pricing_deed_edit' , {id:pricingDeedModel.pricingDeedId}) }}"
-                              method="post">
-                            <div class="col-5">
-                                <h1>welcome section</h1>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores eligendi
-                                    est,
-                                    exercitationem nihil perspiciatis reprehenderit sit voluptas. Fugiat, placeat,
-                                    tenetur!
-                                </p>
-                            </div>
-                            <div class="col-7">
-                                <div class="row">
-                                    <div class="col-6 mb-3">
-                                        <input type="text" name="pricingDeedName" class="form-control"
-                                               placeholder="Deed name" value="{{ pricingDeedModel.pricingDeedName }}">
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <input type="text" id="date-picker" name="pricingDeedExpiryDate"
-                                               class="form-control" placeholder="Expiry Date" value="{{ pricingDeedModel.pricingDeedExpiryDate }}"/>
-                                        <span id="span-date-picker"></span>
-                                    </div>
-                                    {#<div class="col-2 mb-3">#}
-                                    {#<select name="pricingDeedDateYear" class="form-control">#}
-                                    {#{% for year in years %}#}
-                                    {#<option value="{{ year }}" {{ (pricingDeedModel.pricingDeedDateYear == year) ? 'selected' : '' }}>{{ year }}</option>#}
-                                    {#{% endfor %}#}
-                                    {#</select>#}
-                                    {#</div>#}
-                                    {#<div class="col-2 mb-3">#}
-                                    {#<select name="pricingDeedDateMonth" class="form-control">#}
-                                    {#{% for month in months %}#}
-                                    {#<option value="{{ month }}" {{ (pricingDeedModel.pricingDeedDateMonth == month) ? 'selected' : '' }}>{{ month }}</option>#}
-                                    {#{% endfor %}#}
-                                    {#</select>#}
-                                    {#</div>#}
-                                    {#<div class="col-2 mb-3">#}
-                                    {#<select name="pricingDeedDateDay" class="form-control">#}
-                                    {#{% for day in days %}#}
-                                    {#<option value="{{ day }}" {{ (pricingDeedModel.pricingDeedDateDay == day) ? 'selected' : '' }}>{{ day }}</option>#}
-                                    {#{% endfor %}#}
-                                    {#</select>#}
-                                    {#</div>#}
-                                    <div class="col-12 mb-3">
-                                    <textarea name="pricingDeedDescription" class="form-control"
-                                              placeholder="Deed description">{{ pricingDeedModel.pricingDeedDescription }}</textarea>
-                                    </div>
-                                    <div class="col-4"></div>
-                                    <div class="col-4">
-                                        <button type="submit"
-                                                class="btn btn-block btn-info rounded fa fa-save"></button>
-                                    </div>
-                                    <div class="col-4"></div>
+        <div class="col-10">
+            <div class="panel">
+                <div class="panel-content">
+                    <form class="row"
+                          action="{{ path('sale_pricing_deed_sale_pricing_deed_edit' , {id:pricingDeedModel.pricingDeedId}) }}"
+                          method="post">
+                        <div class="col-5">
+                            <h1>{{ 'sale.pricing.deed.edit.main.title' | trans }}</h1>
+                            <p>{{ 'sale.pricing.deed.edit.main.description' | trans }}</p>
+                        </div>
+                        <div class="col-7">
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <input type="text" name="pricingDeedName" class="form-control"
+                                           placeholder="{{ 'general.name.title' | trans }}"
+                                           value="{{ pricingDeedModel.pricingDeedName }}">
                                 </div>
+                                <div class="col-6 mb-3">
+                                    <input type="text" id="date-picker" name="pricingDeedExpiryDate"
+                                           class="form-control"
+                                           placeholder="{{ 'general.expiry.date.title' | trans }}"
+                                           value="{{ pricingDeedModel.pricingDeedExpiryDate }}"/>
+                                    <span id="span-date-picker"></span>
+                                </div>
+                                {#<div class="col-2 mb-3">#}
+                                {#<select name="pricingDeedDateYear" class="form-control">#}
+                                {#{% for year in years %}#}
+                                {#<option value="{{ year }}" {{ (pricingDeedModel.pricingDeedDateYear == year) ? 'selected' : '' }}>{{ year }}</option>#}
+                                {#{% endfor %}#}
+                                {#</select>#}
+                                {#</div>#}
+                                {#<div class="col-2 mb-3">#}
+                                {#<select name="pricingDeedDateMonth" class="form-control">#}
+                                {#{% for month in months %}#}
+                                {#<option value="{{ month }}" {{ (pricingDeedModel.pricingDeedDateMonth == month) ? 'selected' : '' }}>{{ month }}</option>#}
+                                {#{% endfor %}#}
+                                {#</select>#}
+                                {#</div>#}
+                                {#<div class="col-2 mb-3">#}
+                                {#<select name="pricingDeedDateDay" class="form-control">#}
+                                {#{% for day in days %}#}
+                                {#<option value="{{ day }}" {{ (pricingDeedModel.pricingDeedDateDay == day) ? 'selected' : '' }}>{{ day }}</option>#}
+                                {#{% endfor %}#}
+                                {#</select>#}
+                                {#</div>#}
+                                <div class="col-12 mb-3">
+                                    <textarea name="pricingDeedDescription" class="form-control"
+                                              placeholder="{{ 'general.description.title' | trans }}">{{ pricingDeedModel.pricingDeedDescription }}</textarea>
+                                </div>
+                                <div class="col-4"></div>
+                                <div class="col-4">
+                                    <button type="submit"
+                                            class="btn btn-block btn-info rounded fa fa-save"></button>
+                                </div>
+                                <div class="col-4"></div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
+        </div>
+        {% if pricingDeedModel.pricingDeedStatus.pricingDeedStatusMachineName == 'initialized' %}
             <div class="col-12">
                 <div class="panel">
                     <div class="panel-content">
 
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a href="#tab01" data-toggle="tab" class="nav-link active show">Add Product</a>
+                                <a href="#tab01" data-toggle="tab"
+                                   class="nav-link active show">{{ 'general.add.product.title' | trans }}</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#tab02" data-toggle="tab" class="nav-link">Add Offer Group</a>
+                                <a href="#tab02" data-toggle="tab"
+                                   class="nav-link">{{ 'general.add.offer.group.title' | trans }}</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#tab03" data-toggle="tab" class="nav-link">Add Shelve</a>
+                                <a href="#tab03" data-toggle="tab"
+                                   class="nav-link">{{ 'general.add.shelve.title' | trans }}</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#tab04" data-toggle="tab" class="nav-link">Add Pricing Deed</a>
+                                <a href="#tab04" data-toggle="tab"
+                                   class="nav-link">{{ 'general.add.pricing.deed.title' | trans }}</a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -95,17 +97,16 @@
                                         <table class="table table-hover">
                                             <thead>
                                             <tr>
-                                                <th>Product Name</th>
-                                                <th>Guarantee</th>
-                                                <th>Color</th>
-                                                <th>Supplier</th>
-                                                <th>Current Price</th>
-                                                <th>Discount Price</th>
-                                                <th>Serial / Quantity</th>
-                                                <th>Last Pricing Deed</th>
-                                                <th>Expiry last pricing deed date</th>
-                                                <th>Current Place</th>
-                                                <th>Action</th>
+                                                <th>{{ 'general.product.name.title' | trans }}</th>
+                                                <th>{{ 'general.guarantee.title' | trans }}</th>
+                                                <th>{{ 'general.color.title' | trans }}</th>
+                                                <th>{{ 'general.supplier.title' | trans }}</th>
+                                                <th>{{ 'general.current.price.title' | trans }}</th>
+                                                <th>{{ 'general.discount.price.title' | trans }}</th>
+                                                <th>{{ 'general.serial.quantity.title'  | trans }}</th>
+                                                <th>{{ 'general.last.pricing.deed.title' | trans }}</th>
+                                                <th>{{ 'general.last.pricing.deed.expier.date.title' | trans }}</th>
+                                                <th>{{ 'general.current.place.title' | trans }}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -149,11 +150,11 @@
                                         <table class="table table-hover">
                                             <thead>
                                             <tr>
-                                                <th scope="col">Global token</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Number of products</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Action</th>
+                                                <th scope="col">{{ 'general.id.title' | trans }}</th>
+                                                <th scope="col">{{ 'general.name.title' | trans }}</th>
+                                                <th scope="col">{{ 'general.count.title' | trans }}</th>
+                                                <th scope="col">{{ 'general.status.title' | trans }}</th>
+                                                <th scope="col">{{ 'general.action.title' | trans }}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -201,13 +202,13 @@
                                         <table class="table table-hover">
                                             <thead>
                                             <tr>
-                                                <th>Shelve Name</th>
-                                                <th>Shelve Address</th>
-                                                <th>Shelve Phone</th>
-                                                <th>Shelve Keeper</th>
-                                                <th>Shelve Keeper Phone</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
+                                                <th>{{ 'general.name.title' | trans }}</th>
+                                                <th>{{ 'general.address.title' | trans }}</th>
+                                                <th>{{ 'general.phone.title' | trans }}</th>
+                                                <th>{{ 'general.shelve.keeper.title' | trans }}</th>
+                                                <th>{{ 'general.shelve.keeper.phone.title' | trans }}</th>
+                                                <th>{{ 'general.status.title' | trans }}</th>
+                                                <th>{{ 'general.action.title' | trans }}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -252,14 +253,14 @@
                                         <table class="table table-hover">
                                             <thead>
                                             <tr>
-                                                <th>Deed Name</th>
-                                                <th>Amount Product</th>
-                                                <th>Creator</th>
-                                                <th>Create Date</th>
-                                                <th>Confirmor</th>
-                                                <th>Confirm Date</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
+                                                <th>{{ 'general.name.title' | trans }}</th>
+                                                <th>{{ 'general.amount.title' | trans }}</th>
+                                                <th>{{ 'general.create.person.title' | trans }}</th>
+                                                <th>{{ 'general.create.date.title' | trans }}</th>
+                                                <th>{{ 'general.confirm.person.title' | trans }}</th>
+                                                <th>{{ 'general.confirm.date.title' | trans }}</th>
+                                                <th>{{ 'general.status.title' | trans }}</th>
+                                                <th>{{ 'general.action.title' | trans }}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -326,14 +327,14 @@
                             <table id="usersRoleList">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Product Name</th>
-                                    <th scope="col">Guarantee</th>
-                                    <th scope="col">Color</th>
-                                    <th scope="col">Supplier</th>
-                                    <th scope="col">Serial / Quantity</th>
-                                    <th scope="col">Current price</th>
-                                    <th scope="col">Discount price</th>
-                                    <th scope="col">Action</th>
+                                    <th>{{ 'general.product.name.title' | trans }}</th>
+                                    <th>{{ 'general.guarantee.title' | trans }}</th>
+                                    <th>{{ 'general.color.title' | trans }}</th>
+                                    <th>{{ 'general.supplier.title' | trans }}</th>
+                                    <th>{{ 'general.serial.quantity.title'  | trans }}</th>
+                                    <th>{{ 'general.current.price.title' | trans }}</th>
+                                    <th>{{ 'general.discount.price.title' | trans }}</th>
+                                    <th scope="col">{{ 'general.action.title' | trans }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -373,70 +374,12 @@
         {% endif %}
 
         {% if pricingDeedModel.pricingDeedStatus.pricingDeedStatusMachineName == 'list_accepted' %}
-            <div class="col-10">
-                <div class="panel">
-                    <div class="panel-content">
-                        <form class="row"
-                              action="{{ path('sale_pricing_deed_sale_pricing_deed_edit' , {id:pricingDeedModel.pricingDeedId}) }}"
-                              method="post">
-                            <div class="col-5">
-                                <h1>welcome section</h1>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores eligendi
-                                    est,
-                                    exercitationem nihil perspiciatis reprehenderit sit voluptas. Fugiat, placeat,
-                                    tenetur!
-                                </p>
-                            </div>
-                            <div class="col-7">
-                                <div class="row">
-                                    <div class="col-6 mb-3">
-                                        <input type="text" name="pricingDeedName" class="form-control"
-                                               placeholder="Deed name" value="{{ pricingDeedModel.pricingDeedName }}">
-                                    </div>
-                                    <div class="col-2 mb-3">
-                                        <select name="pricingDeedDateYear" class="form-control">
-                                            {% for year in years %}
-                                                <option value="{{ year }}" {{ (pricingDeedModel.pricingDeedDateYear == year) ? 'selected' : '' }}>{{ year }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                    <div class="col-2 mb-3">
-                                        <select name="pricingDeedDateMonth" class="form-control">
-                                            {% for month in months %}
-                                                <option value="{{ month }}" {{ (pricingDeedModel.pricingDeedDateMonth == month) ? 'selected' : '' }}>{{ month }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                    <div class="col-2 mb-3">
-                                        <select name="pricingDeedDateDay" class="form-control">
-                                            {% for day in days %}
-                                                <option value="{{ day }}" {{ (pricingDeedModel.pricingDeedDateDay == day) ? 'selected' : '' }}>{{ day }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                    <textarea name="pricingDeedDescription" class="form-control"
-                                              placeholder="Deed description">{{ pricingDeedModel.pricingDeedDescription }}</textarea>
-                                    </div>
-                                    <div class="col-4"></div>
-                                    <div class="col-4">
-                                        <button type="submit"
-                                                class="btn btn-block btn-info rounded fa fa-save"></button>
-                                    </div>
-                                    <div class="col-4"></div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
             <div class="col-2">
                 <div class="panel">
                     <div class="weather--panel text-white bg-darker">
                         <div class="weather--title">
                             <i class="fa fa-exclamation"></i>
-                            <span>Status</span>
+                            <span>{{ 'general.status.title' | trans }}</span>
                         </div>
 
                         <div class="weather--info">
@@ -449,7 +392,7 @@
             <div class="col-12">
                 <div class="panel">
                     <div class="panel-heading">
-                        Products
+                        {{ 'general.products.title' | trans }}
                     </div>
                     <div class="panel-content">
                         <form action="{{ path('sale_pricing_deed_sale_pricing_deed_save_pricing' , {pricing_deed_id:pricingDeedModel.pricingDeedId}) }}"
@@ -457,27 +400,28 @@
                             <div class="form-group row">
                                 <div class="col-4">
                                     <a href="{{ path('sale_pricing_deed_sale_pricing_deed_back_selection' , {pricing_deed_id:pricingDeedModel.pricingDeedId}) }}"
-                                       class="btn btn-block btn-default rounded"> Back To Selection </a>
+                                       class="btn btn-block btn-default rounded"> {{ 'general.back.to.selection.title' | trans }} </a>
                                 </div>
                                 <div class="col-md-4">
                                     <p><strong>NOTE : </strong>Your data will be lost if you don't save your deed</p>
                                 </div>
                                 <div class="col-4">
-                                    <button type="submit" class="btn btn-block btn-dark rounded"> Save Pricing</button>
+                                    <button type="submit"
+                                            class="btn btn-block btn-dark rounded"> {{ 'general.save.pricing.title' | trans }}</button>
                                 </div>
                             </div>
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Product Name</th>
-                                    <th scope="col">Guarantee</th>
-                                    <th scope="col">Color</th>
-                                    <th scope="col">Supplier</th>
-                                    <th scope="col">Serial / Quantity</th>
-                                    <th scope="col">Current price</th>
-                                    <th scope="col">Discount price</th>
-                                    <th scope="col">New Current price</th>
-                                    <th scope="col">New Discount price</th>
+                                    <th>{{ 'general.product.name.title' | trans }}</th>
+                                    <th>{{ 'general.guarantee.title' | trans }}</th>
+                                    <th>{{ 'general.color.title' | trans }}</th>
+                                    <th>{{ 'general.supplier.title' | trans }}</th>
+                                    <th>{{ 'general.serial.quantity.title'  | trans }}</th>
+                                    <th>{{ 'general.current.price.title' | trans }}</th>
+                                    <th>{{ 'general.discount.price.title' | trans }}</th>
+                                    <th scope="col">{{ 'general.new.current.price.title' | trans }}</th>
+                                    <th scope="col">{{ 'general.new.discount.price.title' | trans }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -507,12 +451,12 @@
                                         </td>
                                         <td>
                                             <input type="number" name="productCurrentPrice[]" class="form-control"
-                                                   placeholder="New Current Price"
+                                                   placeholder="{{ 'general.new.current.price.title' | trans }}"
                                                    value="{{ selectedProduct.productNewCurrentPrice }}" required>
                                         </td>
                                         <td>
                                             <input type="number" name="productDiscountPrice[]" class="form-control"
-                                                   placeholder="New Discount Price"
+                                                   placeholder="{{ 'general.new.discount.price.title' | trans }}"
                                                    value="{{ selectedProduct.productNewDiscountPrice }}" required>
                                         </td>
                                     </tr>

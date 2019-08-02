@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inventory Deed | Create{% endblock %}
+{% block title %}{{ 'inventory.import.deed.create.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -9,30 +9,25 @@
                 <div class="panel-content">
                     <div class="row">
                         <div class="col-5">
-                            <h1>welcome section</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores eligendi
-                                est,
-                                exercitationem nihil perspiciatis reprehenderit sit voluptas. Fugiat, placeat,
-                                tenetur!
-                            </p>
+                            <h1>{{ 'inventory.import.deed.create.main.title' | trans }}</h1>
+                            <p>{{ 'inventory.import.deed.create.main.description' | trans }}</p>
                         </div>
                         <div class="col-7">
                             <div class="row">
                                 <div class="col-3">
-                                    <span class="label-text col-form-label">From</span>
+                                    <span class="label-text col-form-label">{{ 'general.from.title' | trans }}</span>
                                     <h4>None</h4>
                                 </div>
                                 <div class="col-3">
-                                    <span class="label-text col-form-label">To</span>
+                                    <span class="label-text col-form-label">{{ 'general.to.title' | trans }}</span>
                                     <h4>{{ deedModel.inventoryDeedToInventoryName }} {{ deedModel.inventoryDeedToShelveName }} {{ deedModel.inventoryDeedToQueueName }}</h4>
                                 </div>
                                 <div class="col-3">
-                                    <span class="label-text col-form-label">Deed Name</span>
+                                    <span class="label-text col-form-label">{{ 'general.name.title' | trans }}</span>
                                     <h4>{{ deedModel.inventoryDeedName }}</h4>
                                 </div>
                                 <div class="col-3">
-                                    <span class="label-text col-form-label">Deed Serial</span>
+                                    <span class="label-text col-form-label">{{ 'general.serial.title' | trans }}</span>
                                     <h4>{{ deedModel.inventoryDeedSerial }}</h4>
                                 </div>
                             </div>
@@ -48,7 +43,7 @@
                 <div class="weather--panel text-white bg-darker">
                     <div class="weather--title">
                         <i class="fa fa-info"></i>
-                        <span>Confirmation</span>
+                        <span>{{ 'general.confirm.title' | trans }}</span>
                     </div>
 
                     <div class="weather--info">
@@ -64,7 +59,7 @@
         <div class="col-6">
             <div class="panel">
                 <div class="panel-heading"><strong>
-                        Search & Add Item
+                        {{ 'general.add.item.title' | trans }}
                     </strong></div>
                 <div class="panel-content">
                     <form class="row"
@@ -92,20 +87,22 @@
                   method="post">
                 <div class="panel">
                     <div class="panel-heading">
-                        <strong>Save Product</strong>
+                        <strong>
+                            {{ 'general.save.product.title' | trans }}
+                        </strong>
                     </div>
                     <div class="panel-content">
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th scope="col">Item</th>
-                                <th scope="col">Supplier</th>
-                                <th scope="col">Guarantee</th>
-                                <th scope="col">Color</th>
+                                <th scope="col">{{ 'general.item.title' | trans }}</th>
+                                <th scope="col">{{ 'general.supplier.title' | trans }}</th>
+                                <th scope="col">{{ 'general.guarantee.title' | trans }}</th>
+                                <th scope="col">{{ 'general.color.title' | trans }}</th>
                                 <th scope="col">{{ (selectedItemModel.itemTypeId != 1)?'Quantity':'Serial' }}</th>
-                                <th scope="col">Base price</th>
-                                <th scope="col">Current price</th>
-                                <th scope="col">Save</th>
+                                <th scope="col">{{ 'general.base.price.title' | trans }}</th>
+                                <th scope="col">{{ 'general.current.price.title' | trans }}</th>
+                                <th scope="col">{{ 'general.save.title' | trans }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -137,19 +134,19 @@
                                 <td>
                                     {% if selectedItemModel.itemTypeId != 1 %}
                                         <input type="number" class="form-control" name="productQuantity"
-                                               placeholder="Quantity">
+                                               placeholder="{{ 'general.quantity.title' | trans }}">
                                     {% else %}
                                         <input type="number" class="form-control" name="productSerial"
-                                               placeholder="Serial">
+                                               placeholder="{{ 'general.serial.title' | trans }}">
                                     {% endif %}
                                 </td>
                                 <td>
                                     <input type="text" class="form-control" name="productBasePrice"
-                                           placeholder="Base price">
+                                           placeholder="{{ 'general.base.price.title' | trans }}">
                                 </td>
                                 <td>
                                     <input type="text" class="form-control" name="productCurrentPrice"
-                                           placeholder="Current price">
+                                           placeholder="{{ 'general.current.price.title' | trans }}">
                                     <input type="hidden" name="productTypeMachineName"
                                            value="{{ selectedItemModel.itemTypeMachineName }}">
                                     <input type="hidden" value="{{ selectedItemModel.itemID }}" name="productItemId">
@@ -169,22 +166,24 @@
         <div class="col-12">
             <div class="panel">
                 <div class="panel-heading">
-                    <strong>Products To Import</strong>
+                    <strong>
+                        {{ 'general.products.to.import.title' | trans }}
+                    </strong>
                 </div>
                 <div class="panel-content">
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th scope="col">Item</th>
-                            <th scope="col">Supplier</th>
-                            <th scope="col">Guarantee</th>
-                            <th scope="col">Color</th>
+                            <th scope="col">{{ 'general.item.title' | trans }}</th>
+                            <th scope="col">{{ 'general.supplier.title' | trans }}</th>
+                            <th scope="col">{{ 'general.guarantee.title' | trans }}</th>
+                            <th scope="col">{{ 'general.color.title' | trans }}</th>
                             <th></th>
-                            <th scope="col">Quantity / Serial</th>
-                            <th scope="col">Base price</th>
-                            <th scope="col">Current price</th>
-                            <th scope="col">Total price</th>
-                            <th scope="col">remove</th>
+                            <th scope="col">{{ 'general.serial.quantity.title' | trans }}</th>
+                            <th scope="col">{{ 'general.base.price.title' | trans }}</th>
+                            <th scope="col">{{ 'general.current.price.title' | trans }}</th>
+                            <th scope="col">{{ 'general.total.price.title' | trans }}</th>
+                            <th scope="col">{{ 'general.remove.title' | trans }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -228,10 +227,10 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td><strong>Total Count</strong></td>
+                            <td><strong>{{ 'general.total.count.title' | trans }}</strong></td>
                             <td>{{ deedModel.inventoryDeedTotalCount }}</td>
                             <td></td>
-                            <td><strong>Total Price</strong></td>
+                            <td><strong>{{ 'general.total.price.title' | trans }}</strong></td>
                             <td>{{ deedModel.inventoryDeedTotalPrice }}</td>
                         </tr>
                         </tbody>
@@ -244,7 +243,7 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="form-group">
-                                        <span class="label-text col-form-label text-md-right">Description</span>
+                                        <span class="label-text col-form-label text-md-right">{{ 'general.description.title' | trans }}</span>
                                         <textarea name="textarea" class="form-control"
                                                   placeholder="Text input area"></textarea>
                                     </div>

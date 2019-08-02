@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Order | Edit{% endblock %}
+{% block title %}{{ 'sale.order.edit.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -13,13 +13,8 @@
                     <div class="panel-content">
                         <div class="row">
                             <div class="col-12">
-                                <h1>welcome section</h1>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores eligendi
-                                    est,
-                                    exercitationem nihil perspiciatis reprehenderit sit voluptas. Fugiat, placeat,
-                                    tenetur!
-                                </p>
+                                <h1>{{ 'sale.order.edit.main.title' | trans }}</h1>
+                                <p>{{ 'sale.order.edit.main.description' | trans }}</p>
                             </div>
                         </div>
                     </div>
@@ -32,14 +27,15 @@
                               method="post">
                             <div class="col-3">
                                 <div class="form-group">
-                                    <span class="label-text col-md-12 col-form-label ">Order Name</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.name.title' | trans }}</span>
                                     <input type="text" name="orderName" class="form-control"
-                                           placeholder="Order Name" value="{{ orderModel.orderName }}">
+                                           placeholder="{{ 'general.name.title' | trans }}"
+                                           value="{{ orderModel.orderName }}">
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
-                                    <span class="label-text col-md-12 col-form-label ">Owner</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.owner.title' | trans }}</span>
                                     <select name="orderOwnerId" class="form-control">
                                         {% for person in persons %}
                                             <option value="{{ person.id }}" {{ (person.id == orderModel.orderOwnerId) ? 'selected' : '' }}>
@@ -52,9 +48,9 @@
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
-                                    <span class="label-text col-md-12 col-form-label ">Description</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.description.title' | trans }}</span>
                                     <textarea type="text" name="orderDescription" class="form-control"
-                                              placeholder="Description">{{ orderModel.orderDescription }}</textarea>
+                                              placeholder="{{ 'general.description.title' | trans }}">{{ orderModel.orderDescription }}</textarea>
                                 </div>
                             </div>
                             <div class="col-2">
@@ -78,17 +74,17 @@
                             <table id="usersRoleList">
                                 <thead>
                                 <tr>
-                                    <th>Product Name</th>
-                                    <th>Guarantee</th>
-                                    <th>Color</th>
-                                    <th>Supplier</th>
-                                    <th>Current Price</th>
-                                    <th>Discount Price</th>
-                                    <th>Serial / Quantity</th>
-                                    <th>Last Pricing Deed</th>
-                                    <th>Expiry last pricing deed date</th>
-                                    <th>Current Place</th>
-                                    <th>Action</th>
+                                    <th>{{ 'general.product.name.title' | trans }}</th>
+                                    <th>{{ 'general.guarantee.title' | trans }}</th>
+                                    <th>{{ 'general.color.title' | trans }}</th>
+                                    <th>{{ 'general.supplier.title' | trans }}</th>
+                                    <th>{{ 'general.current.price.title' | trans }}</th>
+                                    <th>{{ 'general.discount.price.title' | trans }}</th>
+                                    <th>{{ 'general.serial.quantity.title'  | trans }}</th>
+                                    <th>{{ 'general.last.pricing.deed.title' | trans }}</th>
+                                    <th>{{ 'general.last.pricing.deed.expier.date.title' | trans }}</th>
+                                    <th>{{ 'general.current.place.title' | trans }}</th>
+                                    <th>{{ 'general.action.title' | trans }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -135,11 +131,13 @@
                             <div class="col-4"></div>
                         </div>
                         <div class="panel-heading">
-                            <p><strong>Order Serial : </strong>{{ orderModel.orderSerial }}</p>
+                            <p><strong>{{ 'general.serial.title' | trans }} : </strong>{{ orderModel.orderSerial }}</p>
 
-                            <p><strong>Create Date : </strong>{{ orderModel.orderCreateDate }}</p>
+                            <p><strong>{{ 'general.create.date.title' | trans }}
+                                    : </strong>{{ orderModel.orderCreateDate }}</p>
 
-                            <p><strong>Order Status : </strong>{{ orderModel.orderStatus.orderStatusName }}</p>
+                            <p><strong>{{ 'general.status.title' | trans }}
+                                    : </strong>{{ orderModel.orderStatus.orderStatusName }}</p>
                             <span class="label rounded">
 
                         </span>
@@ -162,13 +160,17 @@
                             <div class="invoice--address">
                                 <h5 class="h5"></h5>
 
-                                <p><strong>Address : </strong>{{ orderModel.orderOwnerAddress }}</p>
-                                <p><strong>Phone : </strong>{{ orderModel.orderOwnerPhone }}</p>
+                                <p><strong>{{ 'general.address.title' | trans }}
+                                        : </strong>{{ orderModel.orderOwnerAddress }}</p>
+                                <p><strong>{{ 'general.phone.title' | trans }}
+                                        : </strong>{{ orderModel.orderOwnerPhone }}</p>
                             </div>
 
                             <div class="invoice--info">
-                                <h5 class="h5"><span>Invoice Serial : {{ orderModel.orderInvoiceSerial }}</span></h5>
-                                <p>Invoice Date: <span>{{ orderModel.orderInvoiceCreateDate }}</span></p>
+                                <h5 class="h5"><span>{{ 'general.invoice.serial.title' | trans }}
+                                        : {{ orderModel.orderInvoiceSerial }}</span></h5>
+                                <p>{{ 'general.invoice.date.title' | trans }}:
+                                    <span>{{ orderModel.orderInvoiceCreateDate }}</span></p>
                             </div>
                         </div>
 
@@ -176,16 +178,16 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Product Name</th>
-                                    <th scope="col">Guarantee</th>
-                                    <th scope="col">Color</th>
-                                    <th scope="col">Supplier</th>
-                                    <th scope="col">Serial</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Current Place</th>
-                                    <th scope="col">Current price</th>
-                                    <th scope="col">Discount price</th>
-                                    <th scope="col">Action</th>
+                                    <th>{{ 'general.product.name.title' | trans }}</th>
+                                    <th>{{ 'general.guarantee.title' | trans }}</th>
+                                    <th>{{ 'general.color.title' | trans }}</th>
+                                    <th>{{ 'general.supplier.title' | trans }}</th>
+                                    <th scope="col">{{ 'general.serial.title' | trans }}</th>
+                                    <th scope="col">{{ 'general.quantity.title' | trans }}</th>
+                                    <th>{{ 'general.current.place.title' | trans }}</th>
+                                    <th>{{ 'general.current.price.title' | trans }}</th>
+                                    <th>{{ 'general.discount.price.title' | trans }}</th>
+                                    <th scope="col">{{ 'general.action.title' | trans }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -216,7 +218,7 @@
                         </div>
                         <div class="invoice--footer">
                             <ul class="list-unstyled">
-                                <li class="mb-3"><strong>Description</strong>
+                                <li class="mb-3"><strong>{{ 'general.description.title' | trans }}</strong>
                                     <ul class="list-unstyled">
                                         <li>
                                             {{ orderModel.orderDescription }}
@@ -242,21 +244,25 @@
                             <div class="form-group row">
                                 <div class="col-4">
                                     <a href="{{ path('sale_order_back_selection', {order_id:orderModel.orderId}) }}"
-                                       class="btn btn-block btn-default rounded"> Back To Selection </a>
+                                       class="btn btn-block btn-default rounded"> {{ 'general.back.to.selection.title' | trans }} </a>
                                 </div>
                                 <div class="col-md-4">
                                     <p><strong>NOTE : </strong>Your data will be lost if you don't save your order</p>
                                 </div>
                                 <div class="col-4">
-                                    <button type="submit" class="btn btn-block btn-dark rounded"> Save Pricing</button>
+                                    <button type="submit"
+                                            class="btn btn-block btn-dark rounded"> {{ 'general.save.order.title' | trans }}</button>
                                 </div>
                             </div>
                             <div class="panel-heading">
-                                <p><strong>Order Serial : </strong>{{ orderModel.orderSerial }}</p>
+                                <p><strong>{{ 'general.serial.title' | trans }} : </strong>{{ orderModel.orderSerial }}
+                                </p>
 
-                                <p><strong>Create Date : </strong>{{ orderModel.orderCreateDate }}</p>
+                                <p><strong>{{ 'general.create.date.title' | trans }}
+                                        : </strong>{{ orderModel.orderCreateDate }}</p>
 
-                                <p><strong>Order Status : </strong>{{ orderModel.orderStatus.orderStatusName }}</p>
+                                <p><strong>{{ 'general.status.title' | trans }}
+                                        : </strong>{{ orderModel.orderStatus.orderStatusName }}</p>
                                 <span class="label rounded">
 
                         </span>
@@ -279,14 +285,17 @@
                                 <div class="invoice--address">
                                     <h5 class="h5"></h5>
 
-                                    <p><strong>Address : </strong>{{ orderModel.orderOwnerAddress }}</p>
-                                    <p><strong>Phone : </strong>{{ orderModel.orderOwnerPhone }}</p>
+                                    <p><strong>{{ 'general.address.title' | trans }}
+                                            : </strong>{{ orderModel.orderOwnerAddress }}</p>
+                                    <p><strong>{{ 'general.phone.title' | trans }}
+                                            : </strong>{{ orderModel.orderOwnerPhone }}</p>
                                 </div>
 
                                 <div class="invoice--info">
-                                    <h5 class="h5"><span>Invoice Serial : {{ orderModel.orderInvoiceSerial }}</span>
-                                    </h5>
-                                    <p>Invoice Date: <span>{{ orderModel.orderInvoiceCreateDate }}</span></p>
+                                    <h5 class="h5"><span>{{ 'general.invoice.serial.title' | trans }}
+                                            : {{ orderModel.orderInvoiceSerial }}</span></h5>
+                                    <p>{{ 'general.invoice.date.title' | trans }}:
+                                        <span>{{ orderModel.orderInvoiceCreateDate }}</span></p>
                                 </div>
                             </div>
 
@@ -294,16 +303,16 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th scope="col">Product Name</th>
-                                        <th scope="col">Guarantee</th>
-                                        <th scope="col">Color</th>
-                                        <th scope="col">Supplier</th>
-                                        <th scope="col">Serial</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Current Place</th>
-                                        <th scope="col">Current price</th>
-                                        <th scope="col">Discount price</th>
-                                        <th scope="col">Total Product price</th>
+                                        <th>{{ 'general.product.name.title' | trans }}</th>
+                                        <th>{{ 'general.guarantee.title' | trans }}</th>
+                                        <th>{{ 'general.color.title' | trans }}</th>
+                                        <th>{{ 'general.supplier.title' | trans }}</th>
+                                        <th scope="col">{{ 'general.serial.title' | trans }}</th>
+                                        <th scope="col">{{ 'general.quantity.title' | trans }}</th>
+                                        <th>{{ 'general.current.place.title' | trans }}</th>
+                                        <th>{{ 'general.current.price.title' | trans }}</th>
+                                        <th>{{ 'general.discount.price.title' | trans }}</th>
+                                        <th scope="col">{{ 'general.total.price.title' | trans }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -324,7 +333,7 @@
                                                           style="background-color: {{ selectedProduct.productColorHex }};">  </span>
                                                 </td>
                                                 <td>{{ selectedProduct.productSupplierName }}</td>
-                                                <td><input type="text" placeholder="Add Serial" class="form-control"
+                                                <td><input type="text" class="form-control"
                                                            value="{{ selectedProduct.productSerial }}"
                                                            name="productSerial[]" required>
                                                 </td>
@@ -354,7 +363,7 @@
                                                     {{ selectedProduct.productSerial }}
                                                 </td>
                                                 <td>
-                                                    <input type="number" placeholder="Add Quantity" class="form-control"
+                                                    <input type="number" class="form-control"
                                                            value="{{ selectedProduct.productQuantity }}"
                                                            name="productQuantity[]" required min="1"
                                                            max="{{ selectedProduct.productMaxQuantity }}">
@@ -368,7 +377,7 @@
                                     {% endfor %}
 
                                     <tr>
-                                        <td colspan="8"><strong>VAT</strong></td>
+                                        <td colspan="8"><strong>{{ 'general.vat.title' | trans }}</strong></td>
                                         <td>
                                             {% if orderModel.orderVatPrice %}
                                                 {{ orderModel.orderVatPrice }}
@@ -376,7 +385,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="8"><strong>Total</strong></td>
+                                        <td colspan="8"><strong>{{ 'general.total.price.title' | trans }}</strong></td>
                                         <td>
                                             {% if orderModel.orderTotalPrice %}
                                                 <strong>{{ orderModel.orderTotalPrice }}</strong>
@@ -388,7 +397,7 @@
                             </div>
                             <div class="invoice--footer">
                                 <ul class="list-unstyled">
-                                    <li class="mb-3"><strong>Description</strong>
+                                    <li class="mb-3"><strong>{{ 'general.description.title' | trans }}</strong>
                                         <ul class="list-unstyled">
                                             <li>
                                                 {{ orderModel.orderDescription }}
@@ -404,7 +413,7 @@
                                         <div class="weather--panel text-white bg-darker">
                                             <div class="weather--title">
                                                 <i class="fa fa-exclamation"></i>
-                                                <span>Final Confirm</span>
+                                                <span>{{ 'general.final.confirm.title' | trans }}</span>
                                             </div>
 
                                             <div class="weather--info">
@@ -430,11 +439,14 @@
                 <div class="panel">
                     <div class="invoice">
                         <div class="panel-heading">
-                            <p><strong>Order Serial : </strong>{{ orderModel.orderSerial }}</p>
+                            <p><strong>{{ 'general.serial.title' | trans }} : </strong>{{ orderModel.orderSerial }}
+                            </p>
 
-                            <p><strong>Create Date : </strong>{{ orderModel.orderCreateDate }}</p>
+                            <p><strong>{{ 'general.create.date.title' | trans }}
+                                    : </strong>{{ orderModel.orderCreateDate }}</p>
 
-                            <p><strong>Order Status : </strong>{{ orderModel.orderStatus.orderStatusName }}</p>
+                            <p><strong>{{ 'general.status.title' | trans }}
+                                    : </strong>{{ orderModel.orderStatus.orderStatusName }}</p>
                             <span class="label rounded">
 
                         </span>
@@ -457,14 +469,17 @@
                             <div class="invoice--address">
                                 <h5 class="h5"></h5>
 
-                                <p><strong>Address : </strong>{{ orderModel.orderOwnerAddress }}</p>
-                                <p><strong>Phone : </strong>{{ orderModel.orderOwnerPhone }}</p>
+                                <p><strong>{{ 'general.address.title' | trans }}
+                                        : </strong>{{ orderModel.orderOwnerAddress }}</p>
+                                <p><strong>{{ 'general.phone.title' | trans }}
+                                        : </strong>{{ orderModel.orderOwnerPhone }}</p>
                             </div>
 
                             <div class="invoice--info">
-                                <h5 class="h5"><span>Invoice Serial : {{ orderModel.orderInvoiceSerial }}</span>
-                                </h5>
-                                <p>Invoice Date: <span>{{ orderModel.orderInvoiceCreateDate }}</span></p>
+                                <h5 class="h5"><span>{{ 'general.invoice.serial.title' | trans }}
+                                        : {{ orderModel.orderInvoiceSerial }}</span></h5>
+                                <p>{{ 'general.invoice.date.title' | trans }}:
+                                    <span>{{ orderModel.orderInvoiceCreateDate }}</span></p>
                             </div>
                         </div>
 
@@ -472,15 +487,16 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Product Name</th>
-                                    <th scope="col">Guarantee</th>
-                                    <th scope="col">Color</th>
-                                    <th scope="col">Supplier</th>
-                                    <th scope="col">Serial</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Current price</th>
-                                    <th scope="col">Discount price</th>
-                                    <th scope="col">Total Product price</th>
+                                    <th>{{ 'general.product.name.title' | trans }}</th>
+                                    <th>{{ 'general.guarantee.title' | trans }}</th>
+                                    <th>{{ 'general.color.title' | trans }}</th>
+                                    <th>{{ 'general.supplier.title' | trans }}</th>
+                                    <th scope="col">{{ 'general.serial.title' | trans }}</th>
+                                    <th scope="col">{{ 'general.quantity.title' | trans }}</th>
+                                    <th>{{ 'general.current.place.title' | trans }}</th>
+                                    <th>{{ 'general.current.price.title' | trans }}</th>
+                                    <th>{{ 'general.discount.price.title' | trans }}</th>
+                                    <th scope="col">{{ 'general.total.price.title' | trans }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -506,7 +522,7 @@
                                 {% endfor %}
 
                                 <tr>
-                                    <td colspan="8"><strong>VAT</strong></td>
+                                    <td colspan="8"><strong>{{ 'general.vat.title' | trans }}</strong></td>
                                     <td>
                                         {% if orderModel.orderVatPrice %}
                                             {{ orderModel.orderVatPrice }}
@@ -514,7 +530,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="8"><strong>Total</strong></td>
+                                    <td colspan="8"><strong>{{ 'general.total.price.title' | trans }}</strong></td>
                                     <td>
                                         {% if orderModel.orderTotalPrice %}
                                             <strong>{{ orderModel.orderTotalPrice }}</strong>
@@ -526,7 +542,7 @@
                         </div>
                         <div class="invoice--footer">
                             <ul class="list-unstyled">
-                                <li class="mb-3"><strong>Description</strong>
+                                <li class="mb-3"><strong>{{ 'general.description.title' | trans }}</strong>
                                     <ul class="list-unstyled">
                                         <li>
                                             {{ orderModel.orderDescription }}
@@ -542,7 +558,7 @@
                                     <div class="weather--panel text-white bg-darker">
                                         <div class="weather--title">
                                             <i class="fa fa-exclamation"></i>
-                                            <span>Do you want to reject the order?</span>
+                                            <span>{{ 'sale.order.edit.reject.order.description' | trans }}</span>
                                         </div>
 
                                         <div class="weather--info">

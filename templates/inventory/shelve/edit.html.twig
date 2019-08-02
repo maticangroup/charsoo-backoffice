@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Shelve | Edit{% endblock %}
+{% block title %}{{ 'inventory.shelve.edit.tab.title' | trans }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -15,12 +15,8 @@
                 <div class="panel-content">
                     <div class="row">
                         <div class="col-12">
-                            <h3>Want to add a new user?</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aspernatur
-                                culpa doloribus laborum necessitatibus rem temporibus. Beatae ipsa officiis
-                                quam.
-                            </p>
+                            <h3>{{ 'inventory.shelve.edit.main.title' | trans }}</h3>
+                            <p>{{ 'inventory.shelve.edit.main.description' | trans }}</p>
                         </div>
                     </div>
                 </div>
@@ -34,19 +30,19 @@
                           method="post">
                         <div class="col-3">
                             <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Shelve Name</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'general.name.title' | trans }}</span>
 
                                 <div class="col-md-12">
                                     <input type="text" value="{{ shelveModel.shelveName }}"
                                            name="shelveName"
-                                           placeholder="Shelve Name"
+                                           placeholder="{{ 'general.name.title' | trans }}"
                                            class="form-control">
                                 </div>
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">Shelve Keeper</span>
+                                <span class="label-text col-md-12 col-form-label ">{{ 'general.shelve.keeper.title' | trans }}</span>
 
                                 <div class="col-md-12">
                                     <select name="shelveKeeperId" class="form-control">
@@ -69,7 +65,9 @@
                             <div class="col-3">
                                 <div class="panel">
                                     <div class="panel-heading">
-                                        <strong>Phone</strong>
+                                        <strong>
+                                            {{ 'general.phone.title' | trans }}
+                                        </strong>
                                     </div>
                                     <div class="panel-content">
                                         <form class="row"
@@ -97,7 +95,9 @@
                         <div class="col-3">
                             <div class="panel">
                                 <div class="panel-heading">
-                                    <strong>Add New Phone</strong>
+                                    <strong>
+                                        {{ 'general.add.new.phone.title' | trans }}
+                                    </strong>
                                 </div>
                                 <div class="panel-content">
                                     <form class="row"
@@ -105,7 +105,7 @@
                                           method="post">
                                         <div class="col-12">
                                             <div class="form-group row">
-                                                <span class="label-text col-md-12 col-form-label ">Telephone</span>
+                                                <span class="label-text col-md-12 col-form-label ">{{ 'general.phone.title' | trans }}</span>
                                                 <div class="col-md-12">
                                                     <input type="text" name="phone"
                                                            value=""
@@ -133,7 +133,7 @@
         <div class="col-12">
             <div class="panel">
                 <div class="panel-heading">
-                    Address
+                    {{ 'general.address.title' | trans }}
                 </div>
 
                 {% for location in locations %}
@@ -145,7 +145,7 @@
                             <div class="col-3">
                                 <div class="form-group row">
                                     <div class="col-12">
-                                        <span class="label-text col-form-label">Province</span>
+                                        <span class="label-text col-form-label">{{ 'general.province.title' | trans }}</span>
                                         <h4>{{ location.provinceName }}</h4>
                                     </div>
                                 </div>
@@ -153,7 +153,7 @@
                             <div class="col-3">
                                 <div class="form-group row">
                                     <div class="col-12">
-                                        <span class="label-text col-form-label">City</span>
+                                        <span class="label-text col-form-label">{{ 'general.city.title' | trans }}</span>
                                         <h4>{{ location.cityName }}</h4>
                                     </div>
                                 </div>
@@ -161,7 +161,7 @@
                             <div class="col-3">
                                 <div class="form-group row">
                                     <div class="col-12">
-                                        <span class="label-text col-form-label">Districts</span>
+                                        <span class="label-text col-form-label">{{ 'general.district.title' | trans }}</span>
                                         <h4>{{ location.districtName }}</h4>
                                     </div>
 
@@ -170,7 +170,7 @@
                             <div class="col-3">
                                 <div class="form-group row">
                                     <div class="col-md-12">
-                                        <span class="label-text col-md-12 col-form-label ">Postal Code</span>
+                                        <span class="label-text col-md-12 col-form-label ">{{ 'general.postal.code.title' | trans }}</span>
                                         <h4>{{ location.postalCode }}</h4>
                                     </div>
                                 </div>
@@ -178,7 +178,7 @@
                             <div class="col-12">
                                 <div class="form-group row">
                                     <div class="col-md-12">
-                                        <span class="label-text col-md-12 col-form-label ">Address</span>
+                                        <span class="label-text col-md-12 col-form-label ">{{ 'general.address.title' | trans }}</span>
                                         <h4>{{ location.address }}</h4>
                                     </div>
                                 </div>
@@ -186,7 +186,7 @@
                             <div class="col-5">
                                 <div class="form-group row">
                                     <div class="col-md-12">
-                                        <span class="label-text col-md-12 col-form-label ">Person</span>
+                                        <span class="label-text col-md-12 col-form-label ">{{ 'general.contact.person.title' | trans }}</span>
                                         <h4>{{ location.locationContactPersonFirstName }} {{ location.locationContactPersonLastName }}
                                             | {{ location.locationContactPersonMobile }}</h4>
                                     </div>
@@ -194,7 +194,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Google Map</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.google.map.title' | trans }}</span>
                                     <div class="col-md-12">
                                         <img src="https://map.ir/static?width=700&height=400&markers=color:red|{{ location.locationLng }},{{ location.locationLat }}&zoom_level=16"
                                              alt="" width="100%">
@@ -214,19 +214,6 @@
                                 </div>
                             </div>
                             {#{% endif %}#}
-
-                            <div class="col-12">
-                                <div class="form-group row">
-                                    {% for message in app.flashes('s') %}
-                                        <div class="col-md-12 mt-3 text-green"><span
-                                                    class="fa fa-info text-green"></span> {{ message }}</div>
-                                    {% endfor %}
-                                    {% for message in app.flashes('f') %}
-                                        <div class="col-md-12 mt-3 text-red"><span
-                                                    class="fa fa-info text-red"></span> {{ message }}</div>
-                                    {% endfor %}
-                                </div>
-                            </div>
                         </form>
                     </div>
                 {% endfor %}
@@ -239,9 +226,9 @@
                             <div class="col-3">
                                 <div class="form-group row">
                                     <div class="col-12">
-                                        <span class="label-text col-form-label">Province</span>
+                                        <span class="label-text col-form-label">{{ 'general.province.title' | trans }}</span>
                                         <input type="text" list="provinces" name="provinceName" class="form-control"
-                                               placeholder="Province"
+                                               placeholder="{{ 'general.province.title' | trans }}"
                                                value="{{ locationModel.provinceName }}">
                                         <datalist id="provinces">
                                             {% for province in provinces %}
@@ -254,9 +241,9 @@
                             <div class="col-3">
                                 <div class="form-group row">
                                     <div class="col-12">
-                                        <span class="label-text col-form-label">City</span>
+                                        <span class="label-text col-form-label">{{ 'general.city.title' | trans }}</span>
                                         <input type="text" list="cities" name="cityName" class="form-control"
-                                               placeholder="City"
+                                               placeholder="{{ 'general.city.title' | trans }}"
                                                value="{{ locationModel.cityName }}">
                                         <datalist id="cities">
                                             <option value="city 1">
@@ -269,9 +256,9 @@
                             <div class="col-3">
                                 <div class="form-group row">
                                     <div class="col-12">
-                                        <span class="label-text col-form-label">Districts</span>
+                                        <span class="label-text col-form-label">{{ 'general.district.title' | trans }}</span>
                                         <input type="search" list="districts" name="districtName" class="form-control"
-                                               placeholder="District" value="{{ locationModel.districtName }}">
+                                               placeholder="{{ 'general.district.title' | trans }}" value="{{ locationModel.districtName }}">
                                         <datalist id="districts">
                                             <option value="1">
                                             <option value="2">
@@ -283,28 +270,28 @@
                             </div>
                             <div class="col-3">
                                 <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Postal Code</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.postal.code.title' | trans }}</span>
 
                                     <div class="col-md-12">
                                         <input type="text" name="postalCode"
-                                               placeholder="254477788"
+                                               placeholder="{{ 'general.postal.code.placeholder' | trans }}"
                                                class="form-control" value="{{ locationModel.postalCode }}">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Address</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.address.title' | trans }}</span>
                                     <div class="col-md-12">
                                         <input type="text" name="address"
-                                               placeholder="Address"
+                                               placeholder="{{ 'general.address.title' | trans }}"
                                                class="form-control" value="{{ locationModel.address }}">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-5">
                                 <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Person</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.contact.person.title' | trans }}</span>
                                     <div class="col-md-12">
                                         <select name="locationContactPersonId" class="form-control">
                                             {% for person in persons %}
@@ -318,7 +305,7 @@
                             </div>
                             <div class="col-7">
                                 <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Lat & Lng</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.lat.lng.title' | trans }}</span>
                                     <div class="col-md-12">
                                         <input type="text" name="locationGeoPoints"
                                                placeholder="Example : 35.68128, 51.42254"
@@ -328,7 +315,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Google Map</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.google.map.title' | trans }}</span>
                                     <div class="col-md-12">
                                         <div id="map" style="width: 100%;height: 320px;"></div>
                                     </div>
@@ -345,19 +332,6 @@
                                                     class="fa fa-save"></i></button>
                                     </div>
                                     <div class="col-4"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="form-group row">
-                                    {% for message in app.flashes('s') %}
-                                        <div class="col-md-12 mt-3 text-green"><span
-                                                    class="fa fa-info text-green"></span> {{ message }}</div>
-                                    {% endfor %}
-                                    {% for message in app.flashes('f') %}
-                                        <div class="col-md-12 mt-3 text-red"><span
-                                                    class="fa fa-info text-red"></span> {{ message }}</div>
-                                    {% endfor %}
                                 </div>
                             </div>
                         </form>

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Pricing Deed | Pricing{% endblock %}
+{% block title %}{{ 'sale.pricing.deed.accepted.pricing.list.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -11,23 +11,20 @@
                           action="{{ path('sale_pricing_deed_sale_pricing_deed_edit' , {id:pricingDeedModel.pricingDeedId}) }}"
                           method="post">
                         <div class="col-5">
-                            <h1>welcome section</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores eligendi
-                                est,
-                                exercitationem nihil perspiciatis reprehenderit sit voluptas. Fugiat, placeat,
-                                tenetur!
-                            </p>
+                            <h1>{{ 'sale.pricing.deed.accepted.pricing.list.main.title' | trans }}</h1>
+                            <p>{{ 'sale.pricing.deed.accepted.pricing.list.main.description' | trans }}</p>
                         </div>
                         <div class="col-7">
                             <div class="row">
                                 <div class="col-6 mb-3">
                                     <input type="text" name="pricingDeedName" class="form-control"
-                                           placeholder="Deed name" value="{{ pricingDeedModel.pricingDeedName }}">
+                                           placeholder="{{ 'general.name.title' | trans }}"
+                                           value="{{ pricingDeedModel.pricingDeedName }}">
                                 </div>
                                 <div class="col-6 mb-3">
                                     <input type="text" id="date-picker" name="pricingDeedExpiryDate"
-                                           class="form-control" placeholder="Expiry Date" value="{{ pricingDeedModel.pricingDeedExpiryDate }}"/>
+                                           class="form-control" placeholder="{{ 'general.expiry.date.title' | trans }}"
+                                           value="{{ pricingDeedModel.pricingDeedExpiryDate }}"/>
                                     <span id="span-date-picker"></span>
                                 </div>
                                 {#<div class="col-2 mb-3">#}
@@ -53,7 +50,7 @@
                                 {#</div>#}
                                 <div class="col-12 mb-3">
                                     <textarea name="pricingDeedDescription" class="form-control"
-                                              placeholder="Deed description">{{ pricingDeedModel.pricingDeedDescription }}</textarea>
+                                              placeholder="{{ 'general.description.title' | trans }}">{{ pricingDeedModel.pricingDeedDescription }}</textarea>
                                 </div>
                                 <div class="col-4"></div>
                                 <div class="col-4">
@@ -71,7 +68,7 @@
                 <div class="weather--panel text-white bg-darker">
                     <div class="weather--title">
                         <i class="fa fa-exclamation"></i>
-                        <span>Status</span>
+                        <span>{{ 'general.status.title' | trans }}</span>
                     </div>
 
                     <div class="weather--info">
@@ -88,22 +85,22 @@
         <div class="col-12">
             <div class="panel">
                 <div class="panel-heading">
-                    Products
+                    {{ 'general.products.title' | trans }}
                 </div>
                 <div class="panel-content">
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th scope="col">Product Name</th>
-                            <th scope="col">Guarantee</th>
-                            <th scope="col">Color</th>
-                            <th scope="col">Supplier</th>
-                            <th scope="col">Serial / Quantity</th>
-                            <th scope="col">Base price</th>
-                            <th scope="col">Current price</th>
-                            <th scope="col">Discount price</th>
-                            <th scope="col">Discount Percentage</th>
-                            <th scope="col">Action</th>
+                            <th>{{ 'general.product.name.title' | trans }}</th>
+                            <th>{{ 'general.guarantee.title' | trans }}</th>
+                            <th>{{ 'general.color.title' | trans }}</th>
+                            <th>{{ 'general.supplier.title' | trans }}</th>
+                            <th>{{ 'general.serial.quantity.title'  | trans }}</th>
+                            <th scope="col">{{ 'general.base.price.title' | trans }}</th>
+                            <th>{{ 'general.current.price.title' | trans }}</th>
+                            <th>{{ 'general.discount.price.title' | trans }}</th>
+                            <th scope="col">{{ 'general.discount.percentage.title' | trans }}</th>
+                            <th scope="col">{{ 'general.action.title' | trans }}</th>
                         </tr>
                         </thead>
                         <tbody>

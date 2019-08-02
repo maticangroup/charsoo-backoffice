@@ -110,8 +110,8 @@ repository.forbidden.word.create.main.title: "ساختن کلمات نامناس
 repository.forbidden.word.create.main.description: "توضیحات ساختن کلمات نامناسب"
 
 repository.person.create.tab.title: "فرد | ساختن"
-repository.person.list.main.title: "ساختن فرد"
-repository.person.list.main.description: "توضیحات ساختن فرد"
+repository.person.create.main.title: "ساختن فرد"
+repository.person.create.main.description: "توضیحات ساختن فرد"
 
 repository.person.list.tab.title: "فرد | لیست"
 repository.person.list.main.title: "لیست افراد"

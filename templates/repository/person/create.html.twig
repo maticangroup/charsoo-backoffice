@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Person | Create{% endblock %}
+{% block title %}{{ 'repository.person.create.tab.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -9,12 +9,8 @@
                 <div class="panel-content">
                     <div class="row">
                         <div class="col-12">
-                            <h1>Welcome</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa
-                                delectus
-                                eos, minus nemo neque obcaecati placeat quam quisquam ullam?
-                            </p>
+                            <h1>{{ 'repository.person.create.main.title' | trans }}</h1>
+                            <p>{{ 'repository.person.create.main.description' | trans }}</p>
                         </div>
                     </div>
                 </div>

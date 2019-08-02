@@ -1045,6 +1045,26 @@
         <source>general.add.coupon.title</source>
         <target>افزودن کوپن</target>
       </trans-unit>
+      <trans-unit id="TCDBCMk" resname="general.first.name.title">
+        <source>general.first.name.title</source>
+        <target>افزودن کوپن</target>
+      </trans-unit>
+      <trans-unit id="xKH0o2C" resname="general.last.name.title">
+        <source>general.last.name.title</source>
+        <target>افزودن کوپن</target>
+      </trans-unit>
+      <trans-unit id="O9w.DuV" resname="general.birth.date.title">
+        <source>general.birth.date.title</source>
+        <target>افزودن کوپن</target>
+      </trans-unit>
+      <trans-unit id="NEtRc7." resname="general.sms.title">
+        <source>general.sms.title</source>
+        <target>افزودن کوپن</target>
+      </trans-unit>
+      <trans-unit id="7gA3LvS" resname="general.sms.descrption">
+        <source>general.sms.descrption</source>
+        <target>افزودن کوپن</target>
+      </trans-unit>
       <trans-unit id="ljXyU6S" resname="repository.brand.create.tab.title">
         <source>repository.brand.create.tab.title</source>
         <target>برند | ساختن</target>
@@ -1399,6 +1419,18 @@
       </trans-unit>
       <trans-unit id="ncsJl5c" resname="repository.person.create.main.description">
         <source>repository.person.create.main.description</source>
+        <target>توضیحات ساختن فرد</target>
+      </trans-unit>
+      <trans-unit id="qTKIDBi" resname="repository.person.edit.tab.title">
+        <source>repository.person.edit.tab.title</source>
+        <target>فرد | ساختن</target>
+      </trans-unit>
+      <trans-unit id="twe5yMo" resname="repository.person.edit.main.title">
+        <source>repository.person.edit.main.title</source>
+        <target>ساختن فرد</target>
+      </trans-unit>
+      <trans-unit id="2peKBA6" resname="repository.person.edit.main.description">
+        <source>repository.person.edit.main.description</source>
         <target>توضیحات ساختن فرد</target>
       </trans-unit>
       <trans-unit id="TsIC1Qv" resname="repository.person.list.tab.title">

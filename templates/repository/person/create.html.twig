@@ -25,11 +25,11 @@
                               method="post">
                             <div class="col-3">
                                 <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Name</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.first.name.title' | trans }}</span>
 
                                     <div class="col-md-12">
                                         <input type="text" name="humanName"
-                                               placeholder="First Name"
+                                               placeholder="{{ 'general.first.name.title' | trans }}"
                                                value="{{ person.humanName }}"
                                                class="form-control" required>
                                     </div>
@@ -37,10 +37,10 @@
                             </div>
                             <div class="col-3">
                                 <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Family</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.last.name.title' | trans }}</span>
                                     <div class="col-md-12">
                                         <input type="text" name="humanFamily"
-                                               placeholder="Last Name"
+                                               placeholder="{{ 'general.last.name.title' | trans }}"
                                                value="{{ person.humanFamily }}"
                                                class="form-control" required>
                                     </div>
@@ -48,11 +48,11 @@
                             </div>
                             <div class="col-3">
                                 <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Email</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.email.title' | trans }}</span>
 
                                     <div class="col-md-12">
                                         <input type="text" name="email"
-                                               placeholder="info@site.com"
+                                               placeholder="{{ 'general.email.placeholder' | trans }}"
                                                value="{{ person.email }}"
                                                class="form-control" required>
                                     </div>
@@ -60,7 +60,7 @@
                             </div>
                             <div class="col-3">
                                 <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">BirthDate</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.birth.date.title' | trans }}</span>
                                     <input type="text" id="date-picker" name="birthDate"
                                            class="form-control" value="{{ person.birthDate }}"/>
                                     <span id="span-date-picker"></span>
@@ -89,33 +89,33 @@
                             </div>
                             <div class="col-3">
                                 <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">National Code</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.national.code.title' | trans }}</span>
 
                                     <div class="col-md-12">
                                         <input type="text" name="nationalCode"
-                                               placeholder="0019455465"
+                                               placeholder="{{ 'general.national.code.placeholder' | trans }}"
                                                class="form-control" value="{{ person.nationalCode }}" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">Mobile</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.mobile.title' | trans }}</span>
 
                                     <div class="col-md-12">
                                         <input type="text" name="mobile"
-                                               placeholder="0912-1254477788"
+                                               placeholder="{{ 'general.mobile.title' | trans }}"
                                                class="form-control" value="{{ person.mobile }}" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group row">
-                                    <span class="label-text col-md-12 col-form-label ">SMS</span>
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.sms.title' | trans }}</span>
 
                                     <label class="form-check">
                                         <input type="checkbox" name="send_sms" class="form-check-input">
-                                        <span class="form-check-label">Do You want to send SMS to user?</span>
+                                        <span class="form-check-label">{{ 'general.sms.descrption' | trans }}</span>
                                     </label>
                                 </div>
                             </div>

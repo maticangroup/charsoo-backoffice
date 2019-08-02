@@ -113,6 +113,10 @@ repository.person.create.tab.title: "فرد | ساختن"
 repository.person.create.main.title: "ساختن فرد"
 repository.person.create.main.description: "توضیحات ساختن فرد"
 
+repository.person.edit.tab.title: "فرد | ساختن"
+repository.person.edit.main.title: "ساختن فرد"
+repository.person.edit.main.description: "توضیحات ساختن فرد"
+
 repository.person.list.tab.title: "فرد | لیست"
 repository.person.list.main.title: "لیست افراد"
 repository.person.list.main.description: "توضیحات لیست افراد"

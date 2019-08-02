@@ -26,6 +26,9 @@ class Params
             $cacheDir = 'cache' . DIRECTORY_SEPARATOR . 'Permissions' . DIRECTORY_SEPARATOR;
             return str_replace($public, '', $serverRoot) . DIRECTORY_SEPARATOR . $cacheDir;
         }
+        if ($param == 'APPLICATION_DOMAIN') {
+            return $_SERVER['HTTP_HOST'];
+        }
     }
 
     public static function loginPageUrl()

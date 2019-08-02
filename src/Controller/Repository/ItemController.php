@@ -236,15 +236,18 @@ class ItemController extends AbstractController
             $supplierRequest->add_instance($brandSuppliersModel);
             $supplierResponse = $supplierRequest->send();
             $supplierContent = $supplierResponse->getContent();
+//            dd();
 //        dd($supplierContent);
 
             /**
              * @var $suppliers CompanyModel[]
              */
             $suppliers = [];
-            if ($supplierContent['brandSuppliers']) {
-                foreach ($supplierContent['brandSuppliers'] as $supplier) {
-                    $suppliers[] = ModelSerializer::parse($supplier, CompanyModel::class);
+            if ($supplierContent) {
+                if ($supplierContent['brandSuppliers']) {
+                    foreach ($supplierContent['brandSuppliers'] as $supplier) {
+                        $suppliers[] = ModelSerializer::parse($supplier, CompanyModel::class);
+                    }
                 }
             }
 

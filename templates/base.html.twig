@@ -206,33 +206,10 @@
         </a>
         <!-- Sidebar Toggle Button End -->
 
+        {{ render(controller(
+            'App\\Controller\\Authentication\\NavbarProfileController::index'
+        )) }}
 
-        <div class="navbar--nav ml-auto">
-            <ul class="nav">
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fa fa-bell"></i>
-                        <span class="badge text-white bg-blue">7</span>
-                    </a>
-                </li>
-
-                <!-- Nav User Start -->
-                <li class="nav-item dropdown nav--user">
-                    <a href="#" class="nav-link" data-toggle="dropdown">
-                        <!--<img src="../../images/avatars/01_80x80.png" alt="" class="rounded-circle">-->
-                        <span>Mohsen Roshani</span>
-                        <i class="fa fa-angle-down"></i>
-                    </a>
-
-                    <ul class="dropdown-menu">
-                        <li><a href="profile.html"><i class="far fa-user"></i>Profile</a></li>
-                        <li class="dropdown-divider"></li>
-                        <li><a href="#"><i class="fa fa-power-off"></i>Logout</a></li>
-                    </ul>
-                </li>
-                <!-- Nav User End -->
-            </ul>
-        </div>
     </header>
     <!-- Navbar End -->
 

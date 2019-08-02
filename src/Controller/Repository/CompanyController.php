@@ -2,6 +2,7 @@
 
 namespace App\Controller\Repository;
 
+use App\Controller\General\LocationViewController;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\CompanyAddEmployeeModel;
 use App\FormModels\Repository\CompanyModel;
@@ -186,40 +187,15 @@ class CompanyController extends AbstractController
         if (!empty($inputs)) {
             if (isset($inputs['provinceName'])) {
                 if ($canAddLocation) {
-                    $provincesRequest = new Req(Servers::Repository, Repository::Location, 'get_provinces');
-                    $provincesResponse = $provincesRequest->send();
-                    if ($provincesResponse->getContent()) {
-                        foreach ($provincesResponse->getContent() as $province) {
-                            $provinces[] = ModelSerializer::parse($province, ProvinceModel::class);
-                        }
-                    }
-
                     /**
                      * @var $locationModel LocationModel
                      */
                     $locationModel = ModelSerializer::parse($inputs, LocationModel::class);
                     $locationModel->setCompanyId($id);
-                    $latLang = str_replace(' ', '', $locationModel->getLocationGeoPoints());
-                    $latLang = explode(',', $latLang);
-                    if (count($latLang) != 2) {
-                        $this->addFlash('f', 'geo points are not formatted correctly');
-                        return $this->redirect($this->generateUrl('repository_company_repository_company_edit', ['id' => $locationModel->getCompanyId()]));
-                    }
-                    $locationModel->setLocationLat($latLang[0]);
-                    $locationModel->setLocationLng($latLang[1]);
-
-//                    dd($locationModel);
-
-                    $request = new Req(Servers::Repository, Repository::Location, 'new');
-                    $request->add_instance($locationModel);
-                    $response = $request->send();
-//                    dd($response);
-                    if ($response->getStatus() == ResponseStatus::successful) {
-                        $this->addFlash('s', $response->getMessage());
-                    } else {
-                        $this->addFlash('f', $response->getMessage());
-                    }
-                    return $this->redirect($this->generateUrl('repository_company_repository_company_edit', ['id' => $locationModel->getCompanyId()]));
+                    return $this->forward(LocationViewController::class . '::addLocation', [
+                        'locationModel' => $locationModel,
+                        'redirectCallBack' =>
+                            $this->generateUrl('repository_company_repository_company_edit', ['id' => $id])]);
                 }
             } else {
                 if ($canUpdate) {

@@ -78,8 +78,8 @@ class LocationViewController extends AbstractController
             } else {
                 $this->addFlash('f', $response->getMessage());
             }
-            return $this->redirect($redirectCallBack);
         }
+        return $this->redirect($redirectCallBack);
     }
 
 

@@ -109,6 +109,10 @@ repository.forbidden.word.create.tab.title: "کلمات نامناسب | ساخ�
 repository.forbidden.word.create.main.title: "ساختن کلمات نامناسب"
 repository.forbidden.word.create.main.description: "توضیحات ساختن کلمات نامناسب"
 
-repository.person.list.tab.title: "فرد | ساختن"
+repository.person.create.tab.title: "فرد | ساختن"
 repository.person.list.main.title: "ساختن فرد"
 repository.person.list.main.description: "توضیحات ساختن فرد"
+
+repository.person.list.tab.title: "فرد | لیست"
+repository.person.list.main.title: "لیست افراد"
+repository.person.list.main.description: "توضیحات لیست افراد"

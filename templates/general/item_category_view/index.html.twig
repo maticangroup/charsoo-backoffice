@@ -3,7 +3,7 @@
 </div>
 <ul class="mtc-categories">
     {% for itemCategory in itemCategories %}
-        <li class="shadow list-group-item" style="margin-left: {{ itemCategory.depth*20 }}px;">
+        <li class="shadow list-group-item" style="margin-right: {{ itemCategory.depth*20 }}px;">
             <div class="category-header">
                 {{ itemCategory.category.0.itemCategoryName }}
                 <div class="list-inline">

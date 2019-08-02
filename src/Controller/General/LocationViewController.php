@@ -72,7 +72,6 @@ class LocationViewController extends AbstractController
             $request = new Req(Servers::Repository, Repository::Location, 'new');
             $request->add_instance($locationModel);
             $response = $request->send();
-
             if ($response->getStatus() == ResponseStatus::successful) {
                 $this->addFlash('s', $response->getMessage());
             } else {
@@ -95,11 +94,10 @@ class LocationViewController extends AbstractController
         $redirect = $request->query->get('redirect');
         $locationModel = new LocationModel();
         $locationModel->setLocationId($id);
-
+//        dd($locationModel);
         $request = new Req(Servers::Repository, Repository::Location, 'remove');
         $request->add_instance($locationModel);
         $response = $request->send();
-
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {

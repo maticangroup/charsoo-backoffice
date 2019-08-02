@@ -31,6 +31,11 @@
             direction: rtl;
             text-align: right !important;
         }
+
+        input[type=file] {
+            direction: ltr !important;
+            text-align: left !important;
+        }
     </style>
     <style>
         .form-message {
@@ -128,7 +133,9 @@
 </head>
 
 <body>
-
+<div class="loader">
+    <img src="{{ asset('assets/images/loading.gif') }}" alt="">
+</div>
 <script>
     function separated(element) {
         alert('sss');
@@ -272,7 +279,8 @@
         <!-- Main Content End -->
         <!-- Main Footer Start -->
         <footer class="main--footer main--footer-transparent">
-            <p>All rights are reserved to Arad Mobile, Engineered by <a href="#">Matican Group</a></p>
+            <p>All rights are reserved to Arad Mobile, Engineered by <a target="_blank" href="http://maticangroup.com">Matican
+                    Group</a></p>
         </footer>
         <!-- Main Footer End -->
     </main>
@@ -401,29 +409,5 @@
         {% endfor %}
     </ul>
 </div>
-
-
-{#<div class="message">#}
-{#<ul>#}
-{#{% for message in app.flashes('s') %}#}
-{#<li class="message-success">#}
-{#{{ message }}#}
-{#</li>#}
-{#{% endfor %}#}
-
-{#{% for message in app.flashes('f') %}#}
-{#<li class="message-failed">#}
-{#{{ message }}#}
-{#</li>#}
-{#{% endfor %}#}
-
-{#{% for message in app.flashes('w') %}#}
-{#<li class="message-warning">#}
-{#{{ message }}#}
-{#</li>#}
-{#{% endfor %}#}
-{#</ul>#}
-{#</div>#}
-
 </body>
 </html>

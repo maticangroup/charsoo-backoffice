@@ -16,15 +16,15 @@
                             <div class="col-2">
                                 <form class="row"
                                       action="{{ path('repository_brand_repository_brand_edit', {'id': brand.brandID}) }}"
-                                      method="post">
+                                      method="post" enctype="multipart/form-data">
                                     <div class="col-12">
                                         <input type="text" name="brandName" value="{{ brand.brandName }}"
                                                class="form-control mb-3" required>
                                         {% if brand.brandImageUrl %}
                                             <img src="{{ brand.brandImageUrl }}" alt="" class="rounded-circle">
                                             <label class="custom-file mb-3">
-                                                <input type="file" value="{{ brand.brandImageUrl }}"
-                                                       name="brandImageUrl"
+                                                <input type="file" value=""
+                                                       name="brand_image"
                                                        class="custom-file-input">
                                                 <span class="custom-file-label">{{ 'general.change.file.upload.title' | trans }}</span>
                                             </label>

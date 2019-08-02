@@ -889,7 +889,7 @@ $(document).ready(
                             },
                             {
                                 menuName: 'TMP Read & Update',
-                                menuLink: '/page/accounting/--coupon-group-update.html'
+                                menuLink: '/page/accounting/--coupon-group-read-update.html'
                             }
                         ]
                     },
@@ -897,7 +897,7 @@ $(document).ready(
             },
 
             {
-                groupName: 'AuthUser',
+                groupName: 'Authentication',
                 menus: [
                     {
                         groupName: 'Login',
@@ -1043,7 +1043,7 @@ $(document).ready(
                             },
                             {
                                 menuName: 'TMP Read & Update',
-                                menuLink: '/page/inventory/--inventory-update.html'
+                                menuLink: '/page/inventory/--inventory-read-update.html'
                             },
                         ]
                     },
@@ -1067,11 +1067,11 @@ $(document).ready(
                         groupMenuItems: [
                             {
                                 menuName: 'New',
-                                menuLink: '/page/inventory/--inventory-deed-create.html'
+                                menuLink: '/page/inventory/--inventory-import-deed-create.html'
                             },
                             {
                                 menuName: 'TMP Read',
-                                menuLink: '/page/inventory/--inventory-deed-read.html'
+                                menuLink: '/page/inventory/--inventory-import-deed-read.html'
                             },
                         ]
                     },
@@ -1436,3 +1436,22 @@ function menuGroup($menuGroup) {
 
 
 
+
+$(document).ready(function () {
+    $('.loader').hide("fade");
+
+    $('[href]').on('click touch', function () {
+
+        let link = $(this).attr('href');
+        if (link !== '#') {
+            // console.log("here");
+            $('.loader').show("fade");
+        }
+        // let parent = $(this).parent();
+        // let parentClass = $(parent).getClasses();
+        // console.log(tagName);
+    });
+    $('form').submit(function () {
+        $('.loader').show("fade");
+    });
+});

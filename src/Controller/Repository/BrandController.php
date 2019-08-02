@@ -105,7 +105,7 @@ class BrandController extends AbstractController
     /**
      * @Route("/edit/{id}", name="_repository_brand_edit")
      * @param $id
-     * @param Request $request
+     * @param  Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \ReflectionException
      */
@@ -124,22 +124,30 @@ class BrandController extends AbstractController
          */
         $brandModel = ModelSerializer::parse($inputs, BrandModel::class);
         $brandModel->setBrandID($id);
-        $request = new Req(Servers::Repository, Repository::Brand, 'fetch');
-        $request->add_instance($brandModel);
-        $response = $request->send();
+        $coreRequest = new Req(Servers::Repository, Repository::Brand, 'fetch');
+        $coreRequest->add_instance($brandModel);
+        $response = $coreRequest->send();
         $brandModel = ModelSerializer::parse($response->getContent(), BrandModel::class);
         if ($canUpdate) {
             if (!empty($inputs)) {
                 $brandModel = ModelSerializer::parse($inputs, BrandModel::class);
                 $brandModel->setBrandID($id);
-                $request = new Req(Servers::Repository, Repository::Brand, 'update');
-                $request->add_instance($brandModel);
-                $response = $request->send();
+                $updateRequest = new Req(Servers::Repository, Repository::Brand, 'update');
+                $file = $request->files->get('brand_image');
+//                dd($request->files);
+                if ($file) {
+//                    dd("with file");
+                    $response = $updateRequest->uploadImage($file, $brandModel);
+                } else {
+//                    dd("with no file");
+                    $response = $updateRequest->uploadImage(null, $brandModel);
+                }
                 if ($response->getStatus() == ResponseStatus::successful) {
                     $this->addFlash('s', $response->getMessage());
                 } else {
                     $this->addFlash('f', $response->getMessage());
                 }
+                return $this->redirect($this->generateUrl('repository_brand_repository_brand_edit', ['id' => $id]));
             }
         }
 

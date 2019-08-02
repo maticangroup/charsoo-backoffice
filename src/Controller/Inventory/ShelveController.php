@@ -2,6 +2,7 @@
 
 namespace App\Controller\Inventory;
 
+use App\Controller\General\LocationViewController;
 use App\FormModels\Inventory\InventoryDeedModel;
 use App\FormModels\Inventory\ShelveItemProductsModel;
 use App\FormModels\Inventory\ShelveModel;
@@ -142,7 +143,6 @@ class ShelveController extends AbstractController
              */
             $shelveModel = ModelSerializer::parse($response->getContent(), ShelveModel::class);
 
-//        dd($inventoryModel);
             /**
              * @var $provinces ProvinceModel[]
              */
@@ -153,40 +153,15 @@ class ShelveController extends AbstractController
             if (!empty($inputs)) {
 
                 if (isset($inputs['provinceName'])) {
-                    $provincesRequest = new Req(Servers::Repository, Repository::Location, 'get_provinces');
-                    $provincesResponse = $provincesRequest->send();
-                    if ($provincesResponse->getContent()) {
-                        foreach ($provincesResponse->getContent() as $province) {
-                            $provinces[] = ModelSerializer::parse($province, ProvinceModel::class);
-                        }
-                    }
-
                     /**
                      * @var $locationModel LocationModel
                      */
                     $locationModel = ModelSerializer::parse($inputs, LocationModel::class);
                     $locationModel->setShelveId($id);
-                    $latLang = str_replace(' ', '', $locationModel->getLocationGeoPoints());
-                    $latLang = explode(',', $latLang);
-                    if (count($latLang) != 2) {
-                        $this->addFlash('f', 'geo points are not formatted correctly');
-                        return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $locationModel->getShelveId()]));
-                    }
-                    $locationModel->setLocationLat($latLang[0]);
-                    $locationModel->setLocationLng($latLang[1]);
-
-//                    dd($locationModel);
-
-                    $request = new Req(Servers::Repository, Repository::Location, 'new');
-                    $request->add_instance($locationModel);
-                    $response = $request->send();
-//                    dd($response);
-                    if ($response->getStatus() == ResponseStatus::successful) {
-                        $this->addFlash('s', $response->getMessage());
-                    } else {
-                        $this->addFlash('f', $response->getMessage());
-                    }
-                    return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $locationModel->getShelveId()]));
+                    return $this->forward(LocationViewController::class . '::addLocation', [
+                        'locationModel' => $locationModel,
+                        'redirectCallBack' =>
+                            $this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $id])]);
                 } else {
                     $shelveModel = ModelSerializer::parse($inputs, ShelveModel::class);
                     $shelveModel->setShelveId($id);

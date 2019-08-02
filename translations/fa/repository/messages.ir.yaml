@@ -1,114 +1,114 @@
-repository.brand.create.tab.title: "کوپن | ساختن"
-repository.brand.create.main.title:
-repository.brand.create.main.description:
-repository.brand.create.form.input.placeholder.name:
+repository.brand.create.tab.title: "برند | ساختن"
+repository.brand.create.main.title: "ساختن برند جدید"
+repository.brand.create.main.description: "توضیحات ساختن برند جدید"
+repository.brand.create.form.input.placeholder.name: "نام برند"
 
-repository.brand.edit.tab.title: "کوپن | ساختن"
-repository.brand.edit.main.title:
-repository.brand.edit.main.description:
-repository.brand.edit.supplier.table.title:
+repository.brand.edit.tab.title: "برند | ویرایش"
+repository.brand.edit.main.title: "ویرایش برند"
+repository.brand.edit.main.description: "توضیحات ویرایش برند"
+repository.brand.edit.supplier.table.title: "تامین کنندگان"
 
 repository.company.create.tab.title: "کوپن | ساختن"
-repository.company.create.main.title:
-repository.company.create.main.description:
-repository.company.create.form.input.placeholder.name:
-repository.company.create.form.input.title.register.code:
-repository.company.create.form.input.placeholder.register.code:
-repository.company.create.form.input.title.economic.code:
-repository.company.create.form.input.placeholder.economic.code:
+repository.company.create.main.title: ""
+repository.company.create.main.description: ""
+repository.company.create.form.input.placeholder.name: ""
+repository.company.create.form.input.title.register.code: ""
+repository.company.create.form.input.placeholder.register.code: ""
+repository.company.create.form.input.title.economic.code: ""
+repository.company.create.form.input.placeholder.economic.code: ""
 
 repository.company.list.tab.title: "کوپن | ساختن"
-repository.company.list.main.title:
-repository.company.list.main.description:
+repository.company.list.main.title: ""
+repository.company.list.main.description: ""
 
 repository.company.edit.tab.title: "کوپن | ساختن"
-repository.company.edit.main.title:
-repository.company.edit.main.description:
+repository.company.edit.main.title: ""
+repository.company.edit.main.description: ""
 
 repository.guarantee.create.tab.title: "کوپن | ساختن"
-repository.guarantee.create.main.title:
-repository.guarantee.create.main.description:
-repository.guarantee.create.form.input.placeholder.guarantee.name:
-repository.guarantee.create.form.input.placeholder.guarantee.price:
+repository.guarantee.create.main.title: ""
+repository.guarantee.create.main.description: ""
+repository.guarantee.create.form.input.placeholder.guarantee.name: ""
+repository.guarantee.create.form.input.placeholder.guarantee.price: ""
 
 repository.guarantee.edit.tab.title: "کوپن | ساختن"
-repository.guarantee.edit.main.title:
-repository.guarantee.edit.main.description:
+repository.guarantee.edit.main.title: ""
+repository.guarantee.edit.main.description: ""
 
 repository.guarantee.duration.create.tab.title: "کوپن | ساختن"
-repository.guarantee.duration.create.main.title:
-repository.guarantee.duration.create.main.description:
-repository.guarantee.duration.create.form.input.placeholder.guarantee.duration:
+repository.guarantee.duration.create.main.title: ""
+repository.guarantee.duration.create.main.description: ""
+repository.guarantee.duration.create.form.input.placeholder.guarantee.duration: ""
 
 repository.guarantee.duration.edit.tab.title: "کوپن | ساختن"
-repository.guarantee.duration.edit.main.title:
-repository.guarantee.duration.edit.main.description:
+repository.guarantee.duration.edit.main.title: ""
+repository.guarantee.duration.edit.main.description: ""
 
 repository.guarantee.provider.create.tab.title: "کوپن | ساختن"
-repository.guarantee.provider.create.main.title:
-repository.guarantee.provider.create.main.description:
-repository.guarantee.provider.create.form.input.placeholder.guarantee.provider:
+repository.guarantee.provider.create.main.title: ""
+repository.guarantee.provider.create.main.description: ""
+repository.guarantee.provider.create.form.input.placeholder.guarantee.provider: ""
 
 repository.guarantee.provider.edit.tab.title: "کوپن | ساختن"
-repository.guarantee.provider.edit.main.title:
-repository.guarantee.provider.edit.main.description:
+repository.guarantee.provider.edit.main.title: ""
+repository.guarantee.provider.edit.main.description: ""
 
 repository.item.create.tab.title: "کوپن | ساختن"
-repository.item.create.main.title:
-repository.item.create.main.description:
+repository.item.create.main.title: ""
+repository.item.create.main.description: ""
 
 repository.item.edit.tab.title: "کوپن | ساختن"
-repository.item.edit.main.title:
-repository.item.edit.main.description:
-repository.item.edit.empty.categories.description:
-repository.item.edit.form.input.placeholder.barcode:
+repository.item.edit.main.title: ""
+repository.item.edit.main.description: ""
+repository.item.edit.empty.categories.description: ""
+repository.item.edit.form.input.placeholder.barcode: ""
 
 repository.item.list.tab.title: "کوپن | ساختن"
-repository.item.list.main.title:
-repository.item.list.main.description:
+repository.item.list.main.title: ""
+repository.item.list.main.description: ""
 
 repository.item.category.create.tab.title: "کوپن | ساختن"
-repository.item.category.create.main.title:
-repository.item.category.create.main.description:
+repository.item.category.create.main.title: ""
+repository.item.category.create.main.description: ""
 
 repository.item.category.edit.tab.title: "کوپن | ساختن"
-repository.item.category.edit.main.title:
-repository.item.category.edit.main.description:
+repository.item.category.edit.main.title: ""
+repository.item.category.edit.main.description: ""
 
 repository.spec.group.create.tab.title: "کوپن | ساختن"
-repository.spec.group.create.main.title:
-repository.spec.group.create.main.description:
-repository.spec.group.create.form.input.placeholder.group.name:
-repository.spec.group.create.add.new.spec.title:
+repository.spec.group.create.main.title: ""
+repository.spec.group.create.main.description: ""
+repository.spec.group.create.form.input.placeholder.group.name: ""
+repository.spec.group.create.add.new.spec.title: ""
 
 repository.spec.group.edit.tab.title: "کوپن | ساختن"
 
 repository.spec.key.edit.tab.title: "کوپن | ساختن"
 
 repository.color.create.tab.title: "کوپن | ساختن"
-repository.color.create.main.title:
-repository.color.create.main.description:
+repository.color.create.main.title: ""
+repository.color.create.main.description: ""
 
 repository.color.edit.tab.title: "کوپن | ساختن"
-repository.color.edit.main.title:
-repository.color.edit.main.description:
+repository.color.edit.main.title: ""
+repository.color.edit.main.description: ""
 
 repository.size.create.tab.title: "کوپن | ساختن"
-repository.size.create.main.title:
-repository.size.create.main.description:
+repository.size.create.main.title: ""
+repository.size.create.main.description: ""
 
 repository.size.edit.tab.title: "کوپن | ساختن"
-repository.size.edit.main.title:
-repository.size.edit.main.description:
+repository.size.edit.main.title: ""
+repository.size.edit.main.description: ""
 
 repository.off.day.create.tab.title: "کوپن | ساختن"
-repository.off.day.create.main.title:
-repository.off.day.create.main.description:
+repository.off.day.create.main.title: ""
+repository.off.day.create.main.description: ""
 
 repository.forbidden.word.create.tab.title: "کوپن | ساختن"
-repository.forbidden.word.create.main.title:
-repository.forbidden.word.create.main.description:
+repository.forbidden.word.create.main.title: ""
+repository.forbidden.word.create.main.description: ""
 
 repository.person.list.tab.title: "کوپن | ساختن"
-repository.person.list.main.title:
-repository.person.list.main.description:
+repository.person.list.main.title: ""
+repository.person.list.main.description: ""

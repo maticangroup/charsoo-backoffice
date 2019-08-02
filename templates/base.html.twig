@@ -26,6 +26,13 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}">
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/date-picker/css/persianDatepicker-default.css') }}"/>
     <style>
+        .main--content, span, h1, h2, h3, h4, h5, h6, p {
+            /*float: left !important;*/
+            direction: rtl;
+            text-align: right !important;
+        }
+    </style>
+    <style>
         .form-message {
             position: fixed;
             z-index: 999;
@@ -347,7 +354,7 @@
 </script>
 
 <script type="text/javascript">
-    if (typeof(Storage) !== "undefined") {
+    if (typeof (Storage) !== "undefined") {
 
         var storedResult = localStorage.getItem("location");
         var storedURL = localStorage.getItem("url");

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\ClientConfig;
 use App\FormModels\Authentication\UserModel;
 use App\FormModels\Repository\PersonModel;
 use Matican\Core\Servers;
@@ -18,6 +19,10 @@ class DefaultController extends AbstractController
      */
     public function index()
     {
+
+//        $request = new Request("test", "test", "test");
+//        $response = $request->uploadImage(null, null);
+
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
         ]);

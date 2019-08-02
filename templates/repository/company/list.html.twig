@@ -56,9 +56,9 @@
                                         <td>{{ company.companyName }}</td>
                                         <td>{{ company.companyMainPhone }}</td>
                                         <td>{{ company.companyMainAddress }}</td>
-                                        <td>
+                                        {#<td>#}
                                             {#<a href="{{ path('repository_person_repository_person_edit',{id:company.companyMainAddressContactPersonID}) }}"></a>{{ company.companyMainAddressContactPersonName }}#}
-                                        </td>
+                                        {#</td>#}
                                         {% if canEdit %}
                                             <td>
                                                 <a href="{{ path('repository_company_repository_company_edit',{id:company.companyID}) }}"

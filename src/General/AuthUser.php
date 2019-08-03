@@ -103,7 +103,7 @@ class AuthUser
         @session_start();
         $currentUser = AuthUser::current_user();
         if ($_SERVER) {
-            if ($_SERVER['REQUEST_URI'] != Params::loginPageUrl()) {
+            if (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] != Params::loginPageUrl()) {
 //            dd('Location: http://' . Params::get('APPLICATION_DOMAIN') . Params::loginPageUrl());
                 if (!$currentUser) {
 //                die("sss");

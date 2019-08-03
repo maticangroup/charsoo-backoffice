@@ -45,6 +45,7 @@ class InvoiceController extends AbstractController
          */
         $invoices = [];
         if ($response->getContent()) {
+//            dd($response);
             foreach ($response->getContent() as $invoice) {
                 $invoices[] = ModelSerializer::parse($invoice, InvoiceModel::class);
             }

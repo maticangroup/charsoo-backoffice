@@ -18,9 +18,8 @@ class Kernel extends BaseKernel
 
     public function registerBundles(): iterable
     {
-        if (false) {
-            AuthUser::check_if_user_is_logged_in();
-        }
+
+        AuthUser::check_if_user_is_logged_in();
         $contents = require $this->getProjectDir() . '/config/bundles.php';
         foreach ($contents as $class => $envs) {
             if ($envs[$this->environment] ?? $envs['all'] ?? false) {

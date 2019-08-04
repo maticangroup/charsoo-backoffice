@@ -34,7 +34,7 @@
                         {% if canUpdate %}
                             <form class="col-12"
                                   action="{{ path('repository_item_category_repository_item_category_edit' , {id:itemCategoryModel.itemCategoryID}) }}"
-                                  method="post">
+                                  method="post" enctype="multipart/form-data">
                                 <div class="panel">
                                     <div class="panel-heading">
                                         <strong>
@@ -61,7 +61,6 @@
                                                              alt="{{ itemCategoryModel.thumbnail.imageAlt }}">
                                                         <label class="custom-file">
                                                             <input type="file"
-                                                                   value="{{ itemCategoryModel.itemCategoryImageUrl }}"
                                                                    name="itemCategoryImageUrl"
                                                                    class="custom-file-input">
                                                             <span class="custom-file-label">{{ 'general.file.upload.title' | trans }}</span>

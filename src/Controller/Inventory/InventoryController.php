@@ -100,10 +100,10 @@ class InventoryController extends AbstractController
                      * @var $inventoryModel InventoryModel
                      */
                     $inventoryModel = ModelSerializer::parse($response->getContent(), InventoryModel::class);
-                    $this->addFlash('success', $response->getMessage());
+                    $this->addFlash('s', $response->getMessage());
                     return $this->redirect($this->generateUrl('inventory_inventory_edit', ['id' => $inventoryModel->getInventoryId()]));
                 }
-                $this->addFlash('failed', $response->getMessage());
+                $this->addFlash('f', $response->getMessage());
             }
 
             $allPersonsRequest = new Req(Servers::Repository, Repository::Person, PersonActions::all);

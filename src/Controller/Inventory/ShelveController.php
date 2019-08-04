@@ -71,15 +71,13 @@ class ShelveController extends AbstractController
 
         if (AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_new)) {
 
-
             $inputs = $request->request->all();
-
             /**
              * @var $shelveModel ShelveModel
              */
             $shelveModel = ModelSerializer::parse($inputs, ShelveModel::class);
-
             if (!empty($inputs)) {
+//                dd($shelveModel);
                 $request = new Req(Servers::Inventory, InventoryEntity::Shelve, 'new');
                 $request->add_instance($shelveModel);
                 $response = $request->send();
@@ -88,10 +86,10 @@ class ShelveController extends AbstractController
                      * @var $shelveModel ShelveModel
                      */
                     $shelveModel = ModelSerializer::parse($response->getContent(), ShelveModel::class);
-                    $this->addFlash('success', $response->getMessage());
+                    $this->addFlash('s', $response->getMessage());
                     return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $shelveModel->getShelveId()]));
                 }
-                $this->addFlash('failed', $response->getMessage());
+                $this->addFlash('f', $response->getMessage());
             }
 
             $allPersonsRequest = new Req(Servers::Repository, Repository::Person, PersonActions::all);

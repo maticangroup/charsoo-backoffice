@@ -135,20 +135,27 @@ class ItemCategoryController extends AbstractController
 
         if ($canUpdate) {
             $itemCategoryModel->setItemCategoryID($id);
-            $request = new Req(Servers::Repository, Repository::ItemCategory, 'fetch');
-            $request->add_instance($itemCategoryModel);
-            $response = $request->send();
+            $updateRequest = new Req(Servers::Repository, Repository::ItemCategory, 'fetch');
+            $updateRequest->add_instance($itemCategoryModel);
+            $response = $updateRequest->send();
 
             $itemCategoryModel = ModelSerializer::parse($response->getContent(), ItemCategoryModel::class);
+
+//            dd($itemCategoryModel);
 
             if (!empty($inputs)) {
                 $itemCategoryModel = ModelSerializer::parse($inputs, ItemCategoryModel::class);
                 $itemCategoryModel->setItemCategoryID($id);
-                $request = new Req(Servers::Repository, Repository::ItemCategory, 'update');
-                $request->add_instance($itemCategoryModel);
-                $response = $request->send();
+                $updateRequest = new Req(Servers::Repository, Repository::ItemCategory, 'update');
+                $file = $request->files->get('itemCategoryImageUrl');
+                if ($file) {
+                    $response = $updateRequest->uploadImage($file, $itemCategoryModel);
+                } else {
+                    $response = $updateRequest->uploadImage(null, $itemCategoryModel);
+                }
                 if ($response->getStatus() == ResponseStatus::successful) {
                     $this->addFlash('s', $response->getMessage());
+                    return $this->redirect($this->generateUrl('repository_item_category_repository_item_category_edit', ['id' => $id]));
                 }
                 $this->addFlash('f', $response->getMessage());
             }

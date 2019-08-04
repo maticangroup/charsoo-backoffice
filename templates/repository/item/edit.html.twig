@@ -386,13 +386,17 @@
                                                             <td>{{ specKey.specKeyName }}</td>
                                                             <td>
                                                                 {% for submittedValue in specKey.specKeySubmittedValues %}
-                                                                    <div class="input-group">
-                                                                        <h4 style="margin-right: 200px">{{ submittedValue }}</h4>
-                                                                        <div class="input-group-append">
-                                                                            <a href="{{ path('repository_item_remove_key_value', {item_id: itemModel.itemID, key_id: specKey.specKeyID , value:submittedValue}) }}"
-                                                                               class="btn btn-block btn-rounded btn-danger fa fa-trash"></a>
+
+                                                                        <div class="row my-3">
+                                                                            <div class="col-10">
+                                                                                <strong>{{ submittedValue }}</strong>
+                                                                            </div>
+                                                                            <div class="col-2">
+                                                                                <a href="{{ path('repository_item_remove_key_value', {item_id: itemModel.itemID, key_id: specKey.specKeyID , value:submittedValue}) }}"
+                                                                                   class="text-red fa fa-trash"></a>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
+
                                                                 {% endfor %}
 
                                                                 <form action="{{ path('repository_item_submit_key_value') }}"

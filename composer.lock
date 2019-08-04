@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0e47240023fd91527d1996faebb955cc",
+    "content-hash": "9a68247c028aa20ccc3906dff752d3c7",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1555,16 +1555,16 @@
         },
         {
             "name": "maticangroup/core_client_api",
-            "version": "v24",
+            "version": "v29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maticangroup/core_client_api.git",
-                "reference": "90e2f6e76dfb4d58908259d375dd525a2ae19274"
+                "reference": "ab369392e6ad8802e3c18341e36b4d8e3b5587a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maticangroup/core_client_api/zipball/90e2f6e76dfb4d58908259d375dd525a2ae19274",
-                "reference": "90e2f6e76dfb4d58908259d375dd525a2ae19274",
+                "url": "https://api.github.com/repos/maticangroup/core_client_api/zipball/ab369392e6ad8802e3c18341e36b4d8e3b5587a7",
+                "reference": "ab369392e6ad8802e3c18341e36b4d8e3b5587a7",
                 "shasum": ""
             },
             "require": {
@@ -1587,7 +1587,7 @@
                     "email": "maticangroup@gmail.com"
                 }
             ],
-            "time": "2019-08-02T12:52:48+00:00"
+            "time": "2019-08-04T11:58:21+00:00"
         },
         {
             "name": "monolog/monolog",

@@ -377,6 +377,7 @@ class ItemController extends AbstractController
         } else {
             $this->addFlash('f', $response->getMessage());
         }
+        Cache::cache_action(Servers::Repository, Repository::Item, 'all');
         return $this->redirect($this->generateUrl('repository_item_repository_item_list'));
     }
 

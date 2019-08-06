@@ -35,9 +35,21 @@ class Cache
         return self::cache_directory() . $server . DIRECTORY_SEPARATOR . $entity . DIRECTORY_SEPARATOR . $action . '.txt';
     }
 
-    public static function action_cache_directory($server, $entity, $action)
+    private static function record_cache_file($server, $entity, $action, $id)
+    {
+        $var = self::cache_directory() . $server . DIRECTORY_SEPARATOR . $entity . DIRECTORY_SEPARATOR . $action . DIRECTORY_SEPARATOR . $id . '.txt';
+        return $var;
+
+    }
+
+    public static function action_cache_directory($server, $entity)
     {
         return self::cache_directory() . $server . DIRECTORY_SEPARATOR . $entity . DIRECTORY_SEPARATOR;
+    }
+
+    public static function record_cache_directory($server, $entity, $action)
+    {
+        return self::cache_directory() . $server . DIRECTORY_SEPARATOR . $entity . DIRECTORY_SEPARATOR . $action . DIRECTORY_SEPARATOR;
     }
 
     public static function get_cached($server, $entity, $action)
@@ -45,6 +57,16 @@ class Cache
         $fileSystem = new Filesystem();
         if ($fileSystem->exists(self::action_cache_file($server, $entity, $action))) {
             $fileContent = file_get_contents(self::action_cache_file($server, $entity, $action));
+            return json_decode($fileContent, true);
+        }
+        return null;
+    }
+
+    public static function get_cached_record($server, $entity, $action, $id)
+    {
+        $fileSystem = new Filesystem();
+        if ($fileSystem->exists(self::record_cache_file($server, $entity, $action, $id))) {
+            $fileContent = file_get_contents(self::record_cache_file($server, $entity, $action, $id));
             return json_decode($fileContent, true);
         }
         return null;
@@ -62,15 +84,50 @@ class Cache
 
         $fileSystem = new Filesystem();
         if (!$fileSystem->exists(self::action_cache_file($server, $entity, $action))) {
-            $fileSystem->mkdir(self::action_cache_directory($server, $entity, $action));
+            $fileSystem->mkdir(self::action_cache_directory($server, $entity));
             $fileSystem->touch(self::action_cache_file($server, $entity, $action));
-//            dd("ssssss");
+
         } else {
-//            dd("aaaaaa");
             $fileSystem->remove(self::action_cache_file($server, $entity, $action));
             $fileSystem->touch(self::action_cache_file($server, $entity, $action));
         }
         $fileSystem->appendToFile(self::action_cache_file($server, $entity, $action), $content);
+        return true;
+    }
+
+
+    public static function is_record_cached($server, $entity, $action, $id)
+    {
+
+
+        $fileSystem = new Filesystem();
+        if ($fileSystem->exists(self::record_cache_file($server, $entity, $action, $id))) {
+            return true;
+        } else {
+            return false;
+        }
+//        $fileSystem = new Filesystem();
+//        if (!$fileSystem->exists(self::record_cache_file($server, $entity, $action, $id))) {
+//            $fileSystem->mkdir(self::action_cache_directory($server, $entity, $action));
+//            $fileSystem->touch(self::record_cache_file($server, $entity, $action, $id));
+//        } else {
+//            $fileSystem->remove(self::record_cache_file($server, $entity, $action, $id));
+//            $fileSystem->touch(self::record_cache_file($server, $entity, $action, $id));
+//        }
+    }
+
+    public static function cache_record($server, $entity, $action, $id, $record)
+    {
+        $content = json_encode($record);
+        $fileSystem = new Filesystem();
+        if (!$fileSystem->exists(self::record_cache_file($server, $entity, $action, $id))) {
+            $fileSystem->mkdir(self::record_cache_directory($server, $entity, $action));
+            $fileSystem->touch(self::record_cache_file($server, $entity, $action, $id));
+        } else {
+            $fileSystem->remove(self::record_cache_file($server, $entity, $action, $id));
+            $fileSystem->touch(self::record_cache_file($server, $entity, $action, $id));
+        }
+        $fileSystem->appendToFile(self::record_cache_file($server, $entity, $action, $id), $content);
         return true;
     }
 }

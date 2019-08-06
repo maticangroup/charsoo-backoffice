@@ -309,6 +309,7 @@ class ItemController extends AbstractController
                         );
                     }
 
+<<<<<<< HEAD
                     if ($item->getBarcodes()->count() > 0) {
                         $barcodeModelArray = [];
                         foreach ($item->getBarcodes() as $barcode) {
@@ -417,6 +418,34 @@ class ItemController extends AbstractController
                         }
                     }
                     $itemModel->setItemImages($imageModelsArray);
+=======
+            $itemModel = ModelSerializer::parse($responseContent, ItemModel::class);
+            if (!empty($inputs)) {
+                $itemModel = ModelSerializer::parse($inputs, ItemModel::class);
+                $itemModel->setItemID($id);
+                $request = new Req(Servers::Repository, Repository::Item, 'update');
+                $request->add_instance($itemModel);
+                $response = $request->send();
+                if ($response->getStatus() == ResponseStatus::successful) {
+                    $this->addFlash('s', $response->getMessage());
+                    /*
+    * Cache
+    */
+                    $itemModel = new ItemModel();
+                    $itemModel->setItemID($id);
+                    $request = new Req(Servers::Repository, Repository::Item, 'fetch');
+                    $request->add_instance($itemModel);
+                    $response = $request->send();
+                    $responseContent = $response->getContent();
+
+                    Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $id, $responseContent);
+
+                    return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $id]));
+                } else {
+                    $this->addFlash('f', $response->getMessage());
+                }
+            }
+>>>>>>> fb7b51c731bda4a3890eb1efb706a2b4ec2a602d
 
                     return $this->json(Json::response($itemModel, "Suc", Json::successful));
                 } else {
@@ -730,7 +759,18 @@ class ItemController extends AbstractController
         });
     }
 
+<<<<<<< HEAD
     public function get_types(): JsonResponse
+=======
+
+    /**
+     * @Route("/duplicate/{id}", name="_duplicate")
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
+     */
+    public function duplicate($id)
+>>>>>>> fb7b51c731bda4a3890eb1efb706a2b4ec2a602d
     {
         /**
          * @var $itemTypes ItemType[]

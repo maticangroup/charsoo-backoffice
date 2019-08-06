@@ -310,6 +310,27 @@ class ItemController extends AbstractController
 
     }
 
+    /**
+     * @Route("/duplicate/{id}", name="_duplicate")
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
+     */
+    public function duplicate($id)
+    {
+        $itemModel = new ItemModel();
+        $itemModel->setItemID($id);
+        $request = new Req(Servers::Repository, Repository::Item, 'duplicate');
+        $request->add_instance($itemModel);
+        $response = $request->send();
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('f', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('repository_item_repository_item_list'));
+    }
+
 
     /**
      * @Route("/add_barcode/{item_id}", name="_repository_item_add_barcode")

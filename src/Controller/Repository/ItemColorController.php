@@ -2,6 +2,7 @@
 
 namespace App\Controller\Repository;
 
+use App\Cache;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\ItemColorModel;
 use App\FormModels\Repository\ItemColorStatusModel;
@@ -67,7 +68,7 @@ class ItemColorController extends AbstractController
             }
         }
 
-
+        Cache::cache_action(Servers::Repository, Repository::Color, 'all');
         return $this->render('repository/item_color/create.html.twig', [
             'controller_name' => 'ItemColorController',
 //            'colorModel' => $colorModel,
@@ -133,6 +134,7 @@ class ItemColorController extends AbstractController
                 $colors[] = ModelSerializer::parse($color, ItemColorModel::class);
             }
 
+            Cache::cache_action(Servers::Repository, Repository::Color, 'all');
 
             return $this->render('repository/item_color/edit.html.twig', [
                 'controller_name' => 'ItemColorController',
@@ -174,6 +176,8 @@ class ItemColorController extends AbstractController
         } else {
             $this->addFlash('f', $response->getMessage());
         }
+        Cache::cache_action(Servers::Repository, Repository::Color, 'all');
+
         return $this->redirect($this->generateUrl('repository_item_color_repository_item_color_create'));
     }
 

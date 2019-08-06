@@ -2,6 +2,7 @@
 
 namespace App\Controller\Repository;
 
+use App\Cache;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\GuaranteeProviderModel;
 use App\FormModels\Repository\GuaranteeProviderStatusModel;
@@ -67,6 +68,7 @@ class GuaranteeProviderController extends AbstractController
                 }
             }
         }
+        Cache::cache_action(Servers::Repository, Repository::Guarantee, 'all');
 
         return $this->render('repository/guarantee_provider/create.html.twig', [
             'controller_name' => 'GuaranteeProviderController',
@@ -130,6 +132,7 @@ class GuaranteeProviderController extends AbstractController
                 $guaranteeProviders[] = ModelSerializer::parse($guaranteeProvider, GuaranteeProviderModel::class);
             }
 
+            Cache::cache_action(Servers::Repository, Repository::Guarantee, 'all');
 
             return $this->render('repository/guarantee_provider/edit.html.twig', [
                 'controller_name' => 'GuaranteeProviderController',
@@ -172,6 +175,8 @@ class GuaranteeProviderController extends AbstractController
         } else {
             $this->addFlash('f', $response->getMessage());
         }
+        Cache::cache_action(Servers::Repository, Repository::Guarantee, 'all');
+
         return $this->redirect($this->generateUrl('repository_guarantee_provider_repository_guarantee_provider_create'));
     }
 }

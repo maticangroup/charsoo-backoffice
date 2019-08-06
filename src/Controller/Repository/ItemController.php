@@ -2,6 +2,7 @@
 
 namespace App\Controller\Repository;
 
+use App\Cache;
 use App\FormModels\Media\ImageModel;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\BarcodeModel;
@@ -18,6 +19,7 @@ use App\FormModels\Repository\ItemTypeModel;
 use App\FormModels\Repository\SpecKeyModel;
 use App\FormModels\Repository\SpecKeyValueModel;
 use App\General\AuthUser;
+use App\Params;
 use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
@@ -65,8 +67,6 @@ class ItemController extends AbstractController
         } else {
             return $this->redirect($this->generateUrl('repository_item_repository_item_create'));
         }
-
-
     }
 
     /**
@@ -104,8 +104,6 @@ class ItemController extends AbstractController
                 }
                 $this->addFlash('f', $response->getMessage());
             }
-
-
             $allBrandsRequest = new Req(Servers::Repository, Repository::Brand, 'all');
             $allBrandsResponse = $allBrandsRequest->send();
 
@@ -150,6 +148,8 @@ class ItemController extends AbstractController
      */
     public function edit($id, Request $request)
     {
+//        Cache::cache_action(Servers::Repository, Repository::Brand, 'all');
+
         $canUpdate = AuthUser::if_is_allowed(ServerPermissions::repository_item_update);
 
         if ($canUpdate) {
@@ -164,7 +164,6 @@ class ItemController extends AbstractController
             $request->add_instance($itemModel);
             $response = $request->send();
             $itemModel = ModelSerializer::parse($response->getContent(), ItemModel::class);
-//        dd($itemModel);
 
             if (!empty($inputs)) {
                 $itemModel = ModelSerializer::parse($inputs, ItemModel::class);
@@ -180,53 +179,81 @@ class ItemController extends AbstractController
                 }
             }
 
-            $allBrandsRequest = new Req(Servers::Repository, Repository::Brand, 'all');
-            $allBrandsResponse = $allBrandsRequest->send();
+
+            if (Cache::is_cached(Servers::Repository, Repository::Brand, 'all')) {
+                $allBrandsResponseContent = Cache::get_cached(Servers::Repository, Repository::Brand, 'all');
+            } else {
+                $allBrandsRequest = new Req(Servers::Repository, Repository::Brand, 'all');
+                $allBrandsResponse = $allBrandsRequest->send();
+                $allBrandsResponseContent = $allBrandsResponse->getContent();
+            }
+
 
             /**
              * @var $brands BrandModel[]
              */
             $brands = [];
-            foreach ($allBrandsResponse->getContent() as $brand) {
+            foreach ($allBrandsResponseContent as $brand) {
                 $brands[] = ModelSerializer::parse($brand, BrandModel::class);
             }
 
-            $allItemTypesRequest = new Req(Servers::Repository, Repository::Item, 'get_types');
-            $allItemTypesResponse = $allItemTypesRequest->send();
+            if (Cache::is_cached(Servers::Repository, Repository::Item, 'get_types')) {
+
+                $allItemTypesResponseContent = Cache::get_cached(
+                    Servers::Repository,
+                    Repository::Item,
+                    'get_types');
+
+            } else {
+                Cache::cache_action(Servers::Repository, Repository::Item, 'get_types');
+                $allItemTypesRequest = new Req(Servers::Repository, Repository::Item, 'get_types');
+                $allItemTypesResponse = $allItemTypesRequest->send();
+                $allItemTypesResponseContent = $allItemTypesResponse->getContent();
+            }
 
             /**
              * @var $itemTypes ItemTypeModel[]
              */
             $itemTypes = [];
-            if ($allItemTypesResponse->getContent()) {
-                foreach ($allItemTypesResponse->getContent() as $itemType) {
+
+            if ($allItemTypesResponseContent) {
+                foreach ($allItemTypesResponseContent as $itemType) {
                     $itemTypes[] = ModelSerializer::parse($itemType, ItemTypeModel::class);
                 }
             }
 
+            if (Cache::is_cached(Servers::Repository, Repository::Color, 'all')) {
+                $allColorsResponseContent = Cache::get_cached(Servers::Repository, Repository::Color, 'all');
+            } else {
+                $allColorsRequest = new Req(Servers::Repository, Repository::Color, 'all');
+                $allColorsResponse = $allColorsRequest->send();
+                $allColorsResponseContent = $allColorsResponse->getContent();
+            }
 
-            $allColorsRequest = new Req(Servers::Repository, Repository::Color, 'all');
-            $allColorsResponse = $allColorsRequest->send();
 
             /**
              * @var $colors ItemColorModel[]
              */
             $colors = [];
-            if ($allColorsResponse->getContent()) {
-                foreach ($allColorsResponse->getContent() as $color) {
+            if ($allColorsResponseContent) {
+                foreach ($allColorsResponseContent as $color) {
                     $colors[] = ModelSerializer::parse($color, ItemColorModel::class);
                 }
             }
 
-
-            $guaranteeRequest = new Req(Servers::Repository, Repository::Guarantee, 'all');
-            $guaranteeResponse = $guaranteeRequest->send();
+            if (Cache::is_cached(Servers::Repository, Repository::Guarantee, 'all')) {
+                $guaranteeResponseContent = Cache::get_cached(Servers::Repository, Repository::Guarantee, 'all');
+            } else {
+                $guaranteeRequest = new Req(Servers::Repository, Repository::Guarantee, 'all');
+                $guaranteeResponse = $guaranteeRequest->send();
+                $guaranteeResponseContent = $guaranteeResponse->getContent();
+            }
 
             /**
              * @var $guarantees GuaranteeModel[]
              */
             $guarantees = [];
-            foreach ($guaranteeResponse->getContent() as $guarantee) {
+            foreach ($guaranteeResponseContent as $guarantee) {
                 $guarantees[] = ModelSerializer::parse($guarantee, GuaranteeModel::class);
             }
 
@@ -236,8 +263,7 @@ class ItemController extends AbstractController
             $supplierRequest->add_instance($brandSuppliersModel);
             $supplierResponse = $supplierRequest->send();
             $supplierContent = $supplierResponse->getContent();
-//            dd();
-//        dd($supplierContent);
+
 
             /**
              * @var $suppliers CompanyModel[]
@@ -250,29 +276,33 @@ class ItemController extends AbstractController
                     }
                 }
             }
+            if (Cache::is_cached(Servers::Repository, Repository::ItemCategory, 'all')) {
 
-//        dd($suppliers);
+                $allItemCategoriesResponseContent = Cache::get_cached(Servers::Repository, Repository::ItemCategory, 'all');
+            } else {
+                $allItemCategoriesRequest = new Req(Servers::Repository, Repository::ItemCategory, 'all');
+                $allItemCategoriesResponse = $allItemCategoriesRequest->send();
+                $allItemCategoriesResponseContent = $allItemCategoriesResponse->getContent();
 
-            $allItemCategoriesRequest = new Req(Servers::Repository, Repository::ItemCategory, 'all');
-            $allItemCategoriesResponse = $allItemCategoriesRequest->send();
+
+            }
 
 
-            $itemCategories = json_decode(json_encode($allItemCategoriesResponse->getContent()), true);
+            $itemCategories = json_decode(json_encode($allItemCategoriesResponseContent), true);
 
-//            dd($itemCategories);
 
             foreach ($itemCategories as $key => $itemCategory) {
-//                dd($itemCategory);
-//                /**
-//                 * @var $itemCategoryModel ItemCategoryModel
-//                 */
+//
+                /**
+                 * @var $itemCategoryModel ItemCategoryModel
+                 */
 //                $itemCategoryModel = ModelSerializer::parse($itemCategory, ItemCategoryModel::class);
                 if ($itemModel->getItemCategoriesIds()) {
                     if (in_array($itemCategory['category'][0]['itemCategoryID'], $itemModel->getItemCategoriesIds())) {
                         $itemCategories[$key]['category']['is_checked'] = true;
                     }
                 }
-
+//
             }
 
 //        print_r(json_encode($itemModel->getItemSpecGroupsKeys())); die('s');

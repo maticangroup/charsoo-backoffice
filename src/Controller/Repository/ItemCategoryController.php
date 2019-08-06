@@ -2,6 +2,7 @@
 
 namespace App\Controller\Repository;
 
+use App\Cache;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\ItemCategoryModel;
 use App\FormModels\Repository\ItemCategorySpecKeyModel;
@@ -29,6 +30,7 @@ class ItemCategoryController extends AbstractController
      * @Route("/create", name="_repository_item_category_create")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \ReflectionException
      */
     public function create(Request $request)
     {
@@ -90,7 +92,7 @@ class ItemCategoryController extends AbstractController
         }
 
 //        dd($itemCategories);
-
+        Cache::cache_action(Servers::Repository, Repository::ItemCategory, 'all');
 
         return $this->render('repository/item_category/create.html.twig', [
             'controller_name' => 'ItemCategoryController',
@@ -210,6 +212,7 @@ class ItemCategoryController extends AbstractController
                 }
             }
         }
+        Cache::cache_action(Servers::Repository, Repository::ItemCategory, 'all');
 
         return $this->render('repository/item_category/edit.html.twig', [
             'controller_name' => 'ItemCategoryController',
@@ -250,6 +253,7 @@ class ItemCategoryController extends AbstractController
         } else {
             $this->addFlash('s', $response->getMessage());
         }
+        Cache::cache_action(Servers::Repository, Repository::ItemCategory, 'all');
 
         return $this->redirect($this->generateUrl('repository_item_category_repository_item_category_edit', ['id' => $category_id]));
     }

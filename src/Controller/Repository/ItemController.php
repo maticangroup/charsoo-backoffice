@@ -359,6 +359,7 @@ class ItemController extends AbstractController
 
     }
 
+
     /**
      * @Route("/duplicate/{id}", name="_duplicate")
      * @param $id

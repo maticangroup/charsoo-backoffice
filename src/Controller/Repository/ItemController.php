@@ -186,6 +186,18 @@ class ItemController extends AbstractController
                 $response = $request->send();
                 if ($response->getStatus() == ResponseStatus::successful) {
                     $this->addFlash('s', $response->getMessage());
+                    /*
+    * Cache
+    */
+                    $itemModel = new ItemModel();
+                    $itemModel->setItemID($id);
+                    $request = new Req(Servers::Repository, Repository::Item, 'fetch');
+                    $request->add_instance($itemModel);
+                    $response = $request->send();
+                    $responseContent = $response->getContent();
+
+                    Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $id, $responseContent);
+
                     return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $id]));
                 } else {
                     $this->addFlash('f', $response->getMessage());

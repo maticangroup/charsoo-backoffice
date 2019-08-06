@@ -2,894 +2,1273 @@
 
 namespace App\Controller\Repository;
 
-use App\Cache;
+use App\Convert2;
+use App\Entity\Media\ImageMedia;
+use App\Entity\Repository\Barcode;
+use App\Entity\Repository\Brand;
+use App\Entity\Repository\Company;
+use App\Entity\Repository\Guarantee;
+use App\Entity\Repository\Item;
+use App\Entity\Repository\ItemCategory;
+use App\Entity\Repository\ItemColor;
+use App\Entity\Repository\ItemType;
+use App\Entity\Repository\SpecKey;
+use App\Entity\Repository\SpecKeyValue;
+use App\Entity\Repository\SpecValue;
 use App\FormModels\Media\ImageModel;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\BarcodeModel;
-use App\FormModels\Repository\BrandModel;
-use App\FormModels\Repository\BrandSuppliersModel;
 use App\FormModels\Repository\CompanyModel;
 use App\FormModels\Repository\GuaranteeModel;
 use App\FormModels\Repository\ItemCategoriesModel;
 use App\FormModels\Repository\ItemCategoryModel;
-use App\FormModels\Repository\ItemCategorySpecKeyModel;
 use App\FormModels\Repository\ItemColorModel;
 use App\FormModels\Repository\ItemModel;
 use App\FormModels\Repository\ItemTypeModel;
 use App\FormModels\Repository\SpecKeyModel;
-use App\FormModels\Repository\SpecKeyValueModel;
-use App\General\AuthUser;
-use App\Params;
-use App\Permissions\ServerPermissions;
-use Matican\Core\Entities\Repository;
+use App\General;
+use App\Helpers;
+use App\Json;
+use App\Library\Search;
+use App\Library\Serialize;
+use App\Library\Validation;
+use App\Repository\Repository\ItemRepository;
+use App\Services\Database;
+use Doctrine\Common\Persistence\ObjectManager;
 use Matican\Core\Servers;
-use Matican\Core\Transaction\Response;
-use Matican\Core\Transaction\ResponseStatus;
-use Matican\Models\Media\Image;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
-use Matican\Core\Transaction\Request as Req;
 
-/**
- * @Route("/repository/item", name="repository_item")
- */
+
+use Matican\Core\Transaction\Request as Req;
+use Symfony\Component\HttpFoundation\Response;
+
+
 class ItemController extends AbstractController
 {
-    /**
-     * @Route("/list", name="_repository_item_list")
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function fetchAll()
+    public function all($request, ObjectManager $entityManager): JsonResponse
     {
-        $canCreate = AuthUser::if_is_allowed(ServerPermissions::repository_item_new);
-        $canEdit = AuthUser::if_is_allowed(ServerPermissions::repository_item_fetch);
-        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::repository_color_all);
+        /**
+         * @todo Related Items and Gifts assigned to items are not written even in the client side
+         */
+        /**
+         * @var $items Item[]
+         */
+        $items = Database::all(Item::class, $entityManager);
+//        $items = $this->getDoctrine()->getRepository(Item::class)->findAll();
+        if ($items) {
+            $itemsModelArray = [];
+            foreach ($items as $item) {
+                $itemModel = new ItemModel();
 
-        if ($canSeeAll) {
-            if (Cache::is_cached(Servers::Repository, Repository::Item, 'all')) {
-                $responseContent = Cache::get_cached(Servers::Repository, Repository::Item, 'all');
-            } else {
-                Cache::cache_action(Servers::Repository, Repository::Item, 'all');
-                $request = new Req(Servers::Repository, Repository::Item, 'all');
-                $response = $request->send();
-                $responseContent = $response->getContent();
-            }
+                $itemModel->setItemName(
+                    $item->getName()
+                );
+                $itemModel->setItemID(
+                    $item->getId()
+                );
 
-            /**
-             * @var $items ItemModel[]
-             */
-            $items = [];
-            foreach ($responseContent as $item) {
-                $items[] = ModelSerializer::parse($item, ItemModel::class);
+
+                /**
+                 * @todo Check here
+                 */
+//                $item->getLastModified();
+//                $item->getCreateDate();
+                if ($item->getItemType()) {
+                    /**
+                     * @var $itemType ItemType
+                     */
+                    $itemType = $item->getItemType();
+                    $itemTypeModel = new ItemTypeModel();
+                    $itemTypeModel->setItemTypeName($itemType->getName());
+                    $itemTypeModel->setItemTypeMachineName($itemType->getMachineName());
+                    $itemTypeModel->setItemTypeId($itemType->getId());
+                }
+                if ($item->getBrand()) {
+                    $itemModel->setItemBrandId($item->getBrand()->getId());
+                    $itemModel->setItemBrandName($item->getBrand()->getName());
+                }
+                if ($item->getAvailableGuarantees()->count() > 0) {
+                    $guaranteesModelArray = [];
+                    foreach ($item->getAvailableGuarantees() as $guarantee) {
+                        $guaranteeModel = new GuaranteeModel();
+                        $guaranteeModel->setGuaranteeID($guarantee->getId());
+                        $guaranteeModel->setGuaranteeName($guarantee->getName());
+                        $guaranteesModelArray[] = $guaranteeModel;
+                    }
+                    $itemModel->setItemGuarantees($guaranteesModelArray);
+                }
+                if ($item->getAvailableSuppliers()->count() > 0) {
+                    $supplierModelArray = [];
+                    foreach ($item->getAvailableSuppliers() as $supplier) {
+                        $supplierModelArray[] = \App\Library\Repository\Company::toModelForOverview($supplier);
+                    }
+                    $itemModel->setItemSuppliers($supplierModelArray);
+                }
+                if ($item->getAvailableColors()->count() > 0) {
+                    $colorModelArray = [];
+                    foreach ($item->getAvailableColors() as $color) {
+                        $colorModel = new ItemColorModel();
+                        $colorModel->setItemColorID($color->getId());
+                        $colorModel->setItemColorName($color->getName());
+                        $colorModel->setItemColorHex($color->getHexCode());
+                        $colorModelArray[] = $colorModel;
+                    }
+                    $itemModel->setItemColors($colorModelArray);
+                }
+                if ($item->getBarcodes()->count() > 0) {
+                    $barcodeModelArray = [];
+                    foreach ($item->getBarcodes() as $barcode) {
+                        $barcodeModel = new BarcodeModel();
+                        $barcodeModel->setBarcodeName($barcode->getSerial());
+                        $barcodeModel->setBarcodeId($barcode->getId());
+                        $barcodeModelArray[] = $barcodeModel;
+                    }
+                    $itemModel->setItemBarcodes($barcodeModelArray);
+                }
+                $itemModel->setItemCreatedDate($item->getCreateDate());
+                $itemModel->setItemUpdatedDate($item->getLastModified());
+                if ($item->getImages()->count()) {
+                    $imagesArray = [];
+                    foreach ($item->getImages() as $image) {
+                        $imageModel = new ImageModel();
+                        $imageModel->setImageAlt($image->getAlt());
+                        $imageModel->setUrl(Helpers::get_image_link($image->getSerial(), 'default_size'));
+                        $imageModel->setImageSerial($image->getSerial());
+                        $imageModel->setImageSize('default_size');
+                        $imagesArray[] = $imageModel;
+                    }
+                    $itemModel->setItemImages($imagesArray);
+                }
+                if ($item->getItemCategories()->count()) {
+                    /**
+                     * @var $selectedCategories
+                     */
+                    $selectedCategories = $item->getItemCategories();
+                    $itemModel->setSelectedItemCategories(
+                        \App\Library\Repository\ItemCategory::define_categories_depth($selectedCategories)
+                    );
+                } else {
+                    $itemModel->setSelectedItemCategories([]);
+                }
+
+                $itemModel->setItemCategoriesIds([]);
+                $itemsModelArray[] = $itemModel;
             }
-            return $this->render('repository/item/list.html.twig', [
-                'controller_name' => 'ItemController',
-                'items' => $items,
-                'canCreate' => $canCreate,
-                'canEdit' => $canEdit,
-                'canSeeAll' => $canSeeAll,
-            ]);
+            return $this->json(Json::response($itemsModelArray, "suc", Json::successful));
         } else {
-            return $this->redirect($this->generateUrl('repository_item_repository_item_create'));
+            return $this->json(Json::response(null, "suc but empty", Json::input_parameter_is_missing));
         }
     }
 
     /**
-     * @Route("/create", name="_repository_item_create")
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \ReflectionException
+     * @param $request Request
+     * @param ObjectManager $entityManager
+     * @return JsonResponse
+     * @throws \Exception
      */
-    public function create(Request $request)
+    public function duplicate($request, ObjectManager $entityManager)
     {
-        $canCreate = AuthUser::if_is_allowed(ServerPermissions::repository_item_new);
+        if (Validation::check_request($request)) {
+            return $this->json(Validation::check_request($request));
+        }
+        /**
+         * @var $itemModel ItemModel
+         */
+        $itemModel = Serialize::Model($request, ItemModel::class);
+        if (Validation::check($itemModel->getItemID())) {
+            return $this->json(Validation::check($itemModel->getItemID(), "Item ID"));
+        }
+        /**
+         * @var $item Item
+         */
+        $item = Database::fetchOneById($itemModel->getItemID(), Item::class, $entityManager);
+        $newItem = new Item();
+        $newItem->setName($item->getName() . " - Duplicate*");
+        $newItem->setCreateDate(new \DateTime('now'));
+        if ($item->getBrand()) {
+            $newItem->setBrand($item->getBrand());
+        }
+        if ($item->getItemSize()) {
+            $newItem->setItemSize($item->getItemSize());
+        }
+        if ($item->getItemType()) {
+            $newItem->setItemType($item->getItemType());
+        }
 
-        if ($canCreate) {
 
-            $inputs = $request->request->all();
+        if ($item->getImages()) {
+            foreach ($item->getImages() as $image) {
+                $newItem->addImage($image);
+            }
+        }
+        if ($item->getSpecKeyValues()) {
+            foreach ($item->getSpecKeyValues() as $specKeyValue) {
+                $newSpecKeyValue = new SpecKeyValue();
+                $newSpecKeyValue->setItem($newItem);
+                $newSpecKeyValue->setSpecValue($specKeyValue->getSpecValue());
+                $newSpecKeyValue->setSpecKey($specKeyValue->getSpecKey());
+                $entityManager->persist($newSpecKeyValue);
+                $newItem->addSpecKeyValue($newSpecKeyValue);
+            }
+        }
+        if ($item->getAvailableColors()) {
+            foreach ($item->getAvailableColors() as $availableColor) {
+                $newItem->addAvailableColor($availableColor);
+            }
+        }
+        if ($item->getAvailableGuarantees()) {
+            foreach ($item->getAvailableGuarantees() as $guarantee) {
+                $newItem->addAvailableGuarantee($guarantee);
+            }
+        }
+        if ($item->getAvailableSuppliers()) {
+            foreach ($item->getAvailableSuppliers() as $availableSupplier) {
+                $newItem->addAvailableSupplier($availableSupplier);
+            }
+        }
+        if ($item->getBarcodes()) {
+            foreach ($item->getBarcodes() as $barcode) {
+                $newItem->addBarcode($barcode);
+            }
+        }
+        if ($item->getItemCategories()) {
+            foreach ($item->getItemCategories() as $itemCategory) {
+                $newItem->addItemCategory($itemCategory);
+            }
+        }
+        if ($item->getRelatedAccessories()) {
+            foreach ($item->getRelatedAccessories() as $accessory) {
+                $newItem->addRelatedAccessory($accessory);
+            }
+        }
 
+        Search::persist_searchable($newItem, $entityManager);
+        $entityManager->flush();
+        return $this->json(Json::response($itemModel, "Record been duplicated", Json::successful));
+
+    }
+
+    public function fetch($request): JsonResponse
+    {
+
+        return Helpers::validateRequest($request, function ($reqParam) {
+            /**
+             * @var $reqParam Request
+             */
             /**
              * @var $itemModel ItemModel
              */
-            $itemModel = ModelSerializer::parse($inputs, ItemModel::class);
-//        dd($itemModel);
-            if (!empty($inputs)) {
-//            dd($inputs);
-                $request = new Req(Servers::Repository, Repository::Item, 'new');
-                $request->add_instance($itemModel);
-                $response = $request->send();
-//            dd($response);
-                if ($response->getStatus() == ResponseStatus::successful) {
-                    /**
-                     * @var $itemModel ItemModel
-                     */
-                    $itemModel = ModelSerializer::parse($response->getContent(), ItemModel::class);
-                    $this->addFlash('s', $response->getMessage());
-                    return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $itemModel->getItemID()]));
+            $itemModel = ModelSerializer::parse($reqParam->query->all(), ItemModel::class);
+            if ($itemModel->getItemID()) {
+
+//                $fileSystem = new Filesystem();
+//                if ($fileSystem->exists(\App\Library\Repository\Item::cached_file_path(
+//                    $itemModel->getItemID()
+//                ))) {
+////                    $this->forward(ItemController::class . "::purge_single_cache", [
+////                        'itemID' => 1
+////                    ]);
+//                    $content = file_get_contents(\App\Library\Repository\Item::cached_file_path(
+//                        $itemModel->getItemID()
+//                    ));
+//                    return $this->json(Json::response($content, "successful", Json::successful));
+//                }
+
+                /**
+                 * @var $item Item
+                 */
+                $item = $this->getDoctrine()->getRepository(Item::class)->find($itemModel->getItemID());
+                if ($item) {
+
+                    $itemModel->setItemID(
+                        $item->getId()
+                    );
+                    $itemModel->setItemName(
+                        $item->getName()
+                    );
+                    if ($item->getBrand()) {
+                        $itemModel->setItemBrandName(
+                            $item->getBrand()->getName()
+                        );
+                        $itemModel->setItemBrandId(
+                            $item->getBrand()->getId()
+                        );
+                    }
+                    if ($item->getItemType()) {
+                        $itemModel->setItemTypeId(
+                            $item->getItemType()->getId()
+                        );
+                        $itemModel->setItemTypeName(
+                            $item->getItemType()->getName()
+                        );
+                        $itemModel->setItemTypeMachineName(
+                            $item->getItemType()->getMachineName()
+                        );
+                    }
+
+                    if ($item->getBarcodes()->count() > 0) {
+                        $barcodeModelArray = [];
+                        foreach ($item->getBarcodes() as $barcode) {
+                            $barcodeModel = new BarcodeModel();
+                            $barcodeModel->setBarcodeId($barcode->getId());
+                            $barcodeModel->setBarcodeName($barcode->getSerial());
+                            $barcodeModelArray[] = $barcodeModel;
+                        }
+                        $itemModel->setItemBarcodes($barcodeModelArray);
+                    }
+                    if ($item->getAvailableSuppliers()->count() > 0) {
+                        $suppliers = $item->getAvailableSuppliers();
+                        $supplierModelArray = [];
+                        foreach ($suppliers as $supplier) {
+                            $supplierModelArray[] = \App\Library\Repository\Company::toModelForOverview($supplier);
+                        }
+                        $itemModel->setItemSuppliers($supplierModelArray);
+                    }
+                    if ($item->getAvailableColors()->count() > 0) {
+                        $colors = $item->getAvailableColors();
+                        $colorsModelArray = [];
+                        foreach ($colors as $color) {
+                            $colorModel = new ItemColorModel();
+                            $colorModel->setItemColorHex($color->getHexCode());
+                            $colorModel->setItemColorName($color->getName());
+                            $colorModel->setItemColorID($color->getId());
+                            $colorsModelArray[] = $colorModel;
+                        }
+                        $itemModel->setItemColors($colorsModelArray);
+                    }
+                    if ($item->getAvailableGuarantees()->count() > 0) {
+                        $guarantees = $item->getAvailableGuarantees();
+                        $guaranteesModelArray = [];
+                        foreach ($guarantees as $guarantee) {
+                            $guaranteeModel = new GuaranteeModel();
+                            $guaranteeModel->setGuaranteeName($guarantee->getName());
+                            $guaranteeModel->setGuaranteeID($guarantee->getId());
+                            $guaranteesModelArray[] = $guaranteeModel;
+                        }
+                        $itemModel->setItemGuarantees($guaranteesModelArray);
+                    }
+                    if ($item->getItemCategories()->count() > 0) {
+                        $categories = $item->getItemCategories();
+                        $categoriesArray = [];
+                        $specGroupKeysStack = [];
+                        foreach ($categories as $category) {
+                            $categoriesArray[] = $category->getId();
+                            if ($category->getSpecKeys()) {
+                                $specKeys = $category->getSpecKeys();
+                                foreach ($specKeys as $specKey) {
+                                    $specKeyModel = new SpecKeyModel();
+                                    $specKeyModel->setSpecKeyName($specKey->getName());
+                                    $specKeyModel->setSpecKeyID($specKey->getId());
+                                    $specKeyModel->setSpecKeyIsSpecial($specKey->getIsSpecial());
+                                    $specKeyModel->setSpecKeyDefaultValue($specKey->getDefaultValue());
+                                    $specKeyModel->setSpecKeySpecGroupID($specKey->getSpecGroup()->getId());
+                                    $specKeyModel->setSpecKeySpecGroupName($specKey->getSpecGroup()->getName());
+                                    $submittedValuesArray = [];
+                                    /**
+                                     * @var $itemSpecKeyValues SpecKeyValue[]
+                                     */
+                                    $itemSpecKeyValues = $this->getDoctrine()
+                                        ->getRepository(SpecKeyValue::class)
+                                        ->findBy([
+                                            'item' => $item,
+                                            'spec_key' => $specKey
+                                        ]);
+                                    if ($itemSpecKeyValues) {
+                                        foreach ($itemSpecKeyValues as $itemSpecKeyValue) {
+                                            $value = $itemSpecKeyValue->getSpecValue()->getValue();
+                                            $submittedValuesArray[] = $value;
+                                        }
+                                    }
+
+                                    $specKeyModel->setSpecKeySubmittedValues($submittedValuesArray);
+                                    $suggestionsArray = [];
+                                    if ($specKey->getSpecKeyValues()->count()) {
+                                        foreach ($specKey->getSpecKeyValues() as $keyValue) {
+                                            $suggestion = $keyValue->getSpecValue()->getValue();
+                                            $suggestionsArray[] = $suggestion;
+                                        }
+                                    }
+                                    $specKeyModel->setSpecKeySuggestion(array_unique($suggestionsArray));
+                                    $specGroupKeysStack[$specKey->getSpecGroup()->getName()][$specKey->getId()] = $specKeyModel;
+                                }
+                                $itemModel->setItemSpecGroupsKeys($specGroupKeysStack);
+                            }
+                        }
+                        $itemModel->setItemCategoriesIds($categoriesArray);
+                    }
+                    $itemModel->setItemUpdatedDate(
+                        $item->getLastModified()
+                    );
+                    $itemModel->setItemCreatedDate(
+                        $item->getCreateDate()
+                    );
+                    $imageModelsArray = [];
+                    if ($item->getImages()->count()) {
+                        foreach ($item->getImages() as $image) {
+                            $imageModel = new ImageModel();
+                            $imageModel->setImageSize('default_size');
+                            $imageModel->setImageSerial($image->getSerial());
+                            $imageModel->setImageAlt($image->getAlt());
+                            $imageModel->setUrl(Helpers::get_image_link($image->getSerial(), 'default_size'));
+                            $imageModelsArray[] = $imageModel;
+                        }
+                    }
+                    $itemModel->setItemImages($imageModelsArray);
+
+                    return $this->json(Json::response($itemModel, "Suc", Json::successful));
+                } else {
+                    return $this->json(Json::response($itemModel, "Could not find item", Json::input_parameter_is_missing));
+
                 }
-                $this->addFlash('f', $response->getMessage());
+            } else {
+                return $this->json(Json::response($itemModel, "ID is required", Json::input_parameter_is_missing));
             }
-            $allBrandsRequest = new Req(Servers::Repository, Repository::Brand, 'all');
-            $allBrandsResponse = $allBrandsRequest->send();
-
-            /**
-             * @var $brands BrandModel[]
-             */
-            $brands = [];
-            foreach ($allBrandsResponse->getContent() as $brand) {
-                $brands[] = ModelSerializer::parse($brand, BrandModel::class);
-            }
-
-            $allItemTypesRequest = new Req(Servers::Repository, Repository::Item, 'get_types');
-            $allItemTypesResponse = $allItemTypesRequest->send();
-
-            /**
-             * @var $itemTypes ItemTypeModel[]
-             */
-            $itemTypes = [];
-            foreach ($allItemTypesResponse->getContent() as $itemType) {
-                $itemTypes[] = ModelSerializer::parse($itemType, ItemTypeModel::class);
-            }
-
-            return $this->render('repository/item/create.html.twig', [
-                'controller_name' => 'ItemController',
-                'itemModel' => $itemModel,
-                'brands' => $brands,
-                'itemTypes' => $itemTypes,
-                'canCreate' => $canCreate
-            ]);
-        } else {
-            return $this->redirect($this->generateUrl('repository_item_repository_item_list'));
-        }
-
+        }, function ($reqParam) {
+            return $this->json(Json::response(null, "Inputs are missing", Json::input_parameter_is_missing));
+        });
     }
 
-    /**
-     * @Route("/edit/{id}", name="_repository_item_edit")
-     * @param $id
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \ReflectionException
-     */
-    public function edit($id, Request $request)
-    {
-//        Cache::cache_action(Servers::Repository, Repository::Brand, 'all');
-
-        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::repository_item_update);
-
-        if ($canUpdate) {
-            $inputs = $request->request->all();
 
 
-            if (Cache::is_record_cached(Servers::Repository, Repository::Item, 'fetch', $id)) {
-                $responseContent = Cache::get_cached_record(Servers::Repository, Repository::Item, 'fetch', $id);
-            } else {
-                /**
-                 * @var $itemModel ItemModel
-                 */
-                $itemModel = ModelSerializer::parse($inputs, ItemModel::class);
-                $itemModel->setItemID($id);
-                $request = new Req(Servers::Repository, Repository::Item, 'fetch');
-                $request->add_instance($itemModel);
-                $response = $request->send();
-                $responseContent = $response->getContent();
-                Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $id, $responseContent);
-            }
-
-            $itemModel = ModelSerializer::parse($responseContent, ItemModel::class);
-            if (!empty($inputs)) {
-                $itemModel = ModelSerializer::parse($inputs, ItemModel::class);
-                $itemModel->setItemID($id);
-                $request = new Req(Servers::Repository, Repository::Item, 'update');
-                $request->add_instance($itemModel);
-                $response = $request->send();
-                if ($response->getStatus() == ResponseStatus::successful) {
-                    $this->addFlash('s', $response->getMessage());
-                    return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $id]));
-                } else {
-                    $this->addFlash('f', $response->getMessage());
-                }
-            }
-
-
-            if (Cache::is_cached(Servers::Repository, Repository::Brand, 'all')) {
-                $allBrandsResponseContent = Cache::get_cached(Servers::Repository, Repository::Brand, 'all');
-            } else {
-                Cache::cache_action(Servers::Repository, Repository::Brand, 'all');
-
-                $allBrandsRequest = new Req(Servers::Repository, Repository::Brand, 'all');
-                $allBrandsResponse = $allBrandsRequest->send();
-                $allBrandsResponseContent = $allBrandsResponse->getContent();
-            }
-
-
-            /**
-             * @var $brands BrandModel[]
-             */
-            $brands = [];
-            foreach ($allBrandsResponseContent as $brand) {
-                $brands[] = ModelSerializer::parse($brand, BrandModel::class);
-            }
-
-//            if (Cache::is_cached(Servers::Repository, Repository::Item, 'get_types')) {
 //
-//                $allItemTypesResponseContent = Cache::get_cached(
-//                    Servers::Repository,
-//                    Repository::Item,
-//                    'get_types');
 //
-//            } else {
-//                Cache::cache_action(Servers::Repository, Repository::Item, 'get_types');
-//                $allItemTypesRequest = new Req(Servers::Repository, Repository::Item, 'get_types');
-//                $allItemTypesResponse = $allItemTypesRequest->send();
-//                $allItemTypesResponseContent = $allItemTypesResponse->getContent();
+//    public function fetch_raw($itemID): JsonResponse
+//    {
+//        $itemModel = new ItemModel();
+//
+//        /**
+//         * @var $item Item
+//         */
+//        $item = $this->getDoctrine()->getRepository(Item::class)->find($itemID);
+//
+//        $itemModel->setItemID(
+//            $item->getId()
+//        );
+//        $itemModel->setItemName(
+//            $item->getName()
+//        );
+//
+//        if ($item->getBrand()) {
+//            $itemModel->setItemBrandName(
+//                $item->getBrand()->getName()
+//            );
+//            $itemModel->setItemBrandId(
+//                $item->getBrand()->getId()
+//            );
+//        }
+//        if ($item->getItemType()) {
+//            $itemModel->setItemTypeId(
+//                $item->getItemType()->getId()
+//            );
+//            $itemModel->setItemTypeName(
+//                $item->getItemType()->getName()
+//            );
+//            $itemModel->setItemTypeMachineName(
+//                $item->getItemType()->getMachineName()
+//            );
+//        }
+//
+//        if ($item->getBarcodes()->count() > 0) {
+//            $barcodeModelArray = [];
+//            foreach ($item->getBarcodes() as $barcode) {
+//                $barcodeModel = new BarcodeModel();
+//                $barcodeModel->setBarcodeId($barcode->getId());
+//                $barcodeModel->setBarcodeName($barcode->getSerial());
+//                $barcodeModelArray[] = $barcodeModel;
 //            }
+//            $itemModel->setItemBarcodes($barcodeModelArray);
+//        }
+//        if ($item->getAvailableSuppliers()->count() > 0) {
+//            $suppliers = $item->getAvailableSuppliers();
+//            $supplierModelArray = [];
+//            foreach ($suppliers as $supplier) {
+//                $supplierModelArray[] = \App\Library\Repository\Company::toModelForOverview($supplier);
+//            }
+//            $itemModel->setItemSuppliers($supplierModelArray);
+//        }
+//        if ($item->getAvailableColors()->count() > 0) {
+//            $colors = $item->getAvailableColors();
+//            $colorsModelArray = [];
+//            foreach ($colors as $color) {
+//                $colorModel = new ItemColorModel();
+//                $colorModel->setItemColorHex($color->getHexCode());
+//                $colorModel->setItemColorName($color->getName());
+//                $colorModel->setItemColorID($color->getId());
+//                $colorsModelArray[] = $colorModel;
+//            }
+//            $itemModel->setItemColors($colorsModelArray);
+//        }
+//        if ($item->getAvailableGuarantees()->count() > 0) {
+//            $guarantees = $item->getAvailableGuarantees();
+//            $guaranteesModelArray = [];
+//            foreach ($guarantees as $guarantee) {
+//                $guaranteeModel = new GuaranteeModel();
+//                $guaranteeModel->setGuaranteeName($guarantee->getName());
+//                $guaranteeModel->setGuaranteeID($guarantee->getId());
+//                $guaranteesModelArray[] = $guaranteeModel;
+//            }
+//            $itemModel->setItemGuarantees($guaranteesModelArray);
+//        }
+//        if ($item->getItemCategories()->count() > 0) {
+//            $categories = $item->getItemCategories();
+//            $categoriesArray = [];
+//            $specGroupKeysStack = [];
+//            foreach ($categories as $category) {
+//                $categoriesArray[] = $category->getId();
+//                if ($category->getSpecKeys()) {
+//                    $specKeys = $category->getSpecKeys();
+//                    foreach ($specKeys as $specKey) {
+//                        $specKeyModel = new SpecKeyModel();
+//                        $specKeyModel->setSpecKeyName($specKey->getName());
+//                        $specKeyModel->setSpecKeyID($specKey->getId());
+//                        $specKeyModel->setSpecKeyIsSpecial($specKey->getIsSpecial());
+//                        $specKeyModel->setSpecKeyDefaultValue($specKey->getDefaultValue());
+//                        $specKeyModel->setSpecKeySpecGroupID($specKey->getSpecGroup()->getId());
+//                        $specKeyModel->setSpecKeySpecGroupName($specKey->getSpecGroup()->getName());
+//                        $submittedValuesArray = [];
+//                        /**
+//                         * @var $itemSpecKeyValues SpecKeyValue[]
+//                         */
+//                        $itemSpecKeyValues = $this->getDoctrine()
+//                            ->getRepository(SpecKeyValue::class)
+//                            ->findBy([
+//                                'item' => $item,
+//                                'spec_key' => $specKey
+//                            ]);
+//                        if ($itemSpecKeyValues) {
+//                            foreach ($itemSpecKeyValues as $itemSpecKeyValue) {
+//                                $value = $itemSpecKeyValue->getSpecValue()->getValue();
+//                                $submittedValuesArray[] = $value;
+//                            }
+//                        }
 //
-//            /**
-//             * @var $itemTypes ItemTypeModel[]
-//             */
-//            $itemTypes = [];
-//
-//            if ($allItemTypesResponseContent) {
-//                foreach ($allItemTypesResponseContent as $itemType) {
-//                    $itemTypes[] = ModelSerializer::parse($itemType, ItemTypeModel::class);
+//                        $specKeyModel->setSpecKeySubmittedValues($submittedValuesArray);
+//                        $suggestionsArray = [];
+//                        if ($specKey->getSpecKeyValues()->count()) {
+//                            foreach ($specKey->getSpecKeyValues() as $keyValue) {
+//                                $suggestion = $keyValue->getSpecValue()->getValue();
+//                                $suggestionsArray[] = $suggestion;
+//                            }
+//                        }
+//                        $specKeyModel->setSpecKeySuggestion(array_unique($suggestionsArray));
+//                        $specGroupKeysStack[$specKey->getSpecGroup()->getName()][$specKey->getId()] = $specKeyModel;
+//                    }
+//                    $itemModel->setItemSpecGroupsKeys($specGroupKeysStack);
 //                }
 //            }
-
-            if (Cache::is_cached(Servers::Repository, Repository::Color, 'all')) {
-                $allColorsResponseContent = Cache::get_cached(Servers::Repository, Repository::Color, 'all');
-            } else {
-                Cache::cache_action(Servers::Repository, Repository::Color, 'all');
-
-                $allColorsRequest = new Req(Servers::Repository, Repository::Color, 'all');
-                $allColorsResponse = $allColorsRequest->send();
-                $allColorsResponseContent = $allColorsResponse->getContent();
-            }
-
-
-            /**
-             * @var $colors ItemColorModel[]
-             */
-            $colors = [];
-            if ($allColorsResponseContent) {
-                foreach ($allColorsResponseContent as $color) {
-                    $colors[] = ModelSerializer::parse($color, ItemColorModel::class);
-                }
-            }
-
-            if (Cache::is_cached(Servers::Repository, Repository::Guarantee, 'all')) {
-                $guaranteeResponseContent = Cache::get_cached(Servers::Repository, Repository::Guarantee, 'all');
-            } else {
-                Cache::cache_action(Servers::Repository, Repository::Guarantee, 'all');
-                $guaranteeRequest = new Req(Servers::Repository, Repository::Guarantee, 'all');
-                $guaranteeResponse = $guaranteeRequest->send();
-                $guaranteeResponseContent = $guaranteeResponse->getContent();
-            }
-
-            /**
-             * @var $guarantees GuaranteeModel[]
-             */
-            $guarantees = [];
-            foreach ($guaranteeResponseContent as $guarantee) {
-                $guarantees[] = ModelSerializer::parse($guarantee, GuaranteeModel::class);
-            }
-
-            $brandSuppliersModel = new BrandSuppliersModel();
-            $brandSuppliersModel->setBrandId($itemModel->getItemBrandId());
-            $supplierRequest = new Req(Servers::Repository, Repository::Brand, 'get_suppliers');
-            $supplierRequest->add_instance($brandSuppliersModel);
-            $supplierResponse = $supplierRequest->send();
-            $supplierContent = $supplierResponse->getContent();
-
-
-            /**
-             * @var $suppliers CompanyModel[]
-             */
-            $suppliers = [];
-            if ($supplierContent) {
-                if ($supplierContent['brandSuppliers']) {
-                    foreach ($supplierContent['brandSuppliers'] as $supplier) {
-                        $suppliers[] = ModelSerializer::parse($supplier, CompanyModel::class);
-                    }
-                }
-            }
-            if (Cache::is_cached(Servers::Repository, Repository::ItemCategory, 'all')) {
-
-                $allItemCategoriesResponseContent = Cache::get_cached(Servers::Repository, Repository::ItemCategory, 'all');
-            } else {
-                Cache::cache_action(Servers::Repository, Repository::ItemCategory, 'all');
-                $allItemCategoriesRequest = new Req(Servers::Repository, Repository::ItemCategory, 'all');
-                $allItemCategoriesResponse = $allItemCategoriesRequest->send();
-                $allItemCategoriesResponseContent = $allItemCategoriesResponse->getContent();
-
-
-            }
-
-
-            $itemCategories = json_decode(json_encode($allItemCategoriesResponseContent), true);
-
-
-            foreach ($itemCategories as $key => $itemCategory) {
+//            $itemModel->setItemCategoriesIds($categoriesArray);
+//        }
 //
+//        $itemModel->setItemUpdatedDate(
+//            $item->getLastModified()
+//        );
+//        $itemModel->setItemCreatedDate(
+//            $item->getCreateDate()
+//        );
+//
+//        $imageModelsArray = [];
+//
+//        if ($item->getImages()->count()) {
+//            foreach ($item->getImages() as $image) {
+//                $imageModel = new ImageModel();
+//                $imageModel->setImageSize('default_size');
+//                $imageModel->setImageSerial($image->getSerial());
+//                $imageModel->setImageAlt($image->getAlt());
+//                $imageModel->setUrl(Helpers::get_image_link($image->getSerial(), 'default_size'));
+//                $imageModelsArray[] = $imageModel;
+//            }
+//        }
+//
+//        $itemModel->setItemImages($imageModelsArray);
+//
+//        return $this->json($itemModel);
+//
+//    }
+//
+//    public function purge_single_cache($itemID): bool
+//    {
+//        $fileSystem = new Filesystem();
+//        if (!$fileSystem->exists(General::ITEMS_CACHE_DIRECTORY)) {
+//            $fileSystem->mkdir(General::ITEMS_CACHE_DIRECTORY);
+//        }
+//        if (!$fileSystem->exists(General::ITEMS_CACHE_DIRECTORY . $itemID . '.txt')) {
+//            $fileSystem->touch(General::ITEMS_CACHE_DIRECTORY . $itemID . '.txt');
+//        } else {
+//            $fileSystem->remove(General::ITEMS_CACHE_DIRECTORY . $itemID . '.txt');
+//            $fileSystem->touch(General::ITEMS_CACHE_DIRECTORY . $itemID . '.txt');
+//        }
+//        /**
+//         * @var $raw_response Response
+//         */
+//        $raw_response = $this->forward(ItemController::class . "::fetch_raw", [
+//            'itemID' => $itemID
+//        ]);
+//
+//        $itemEncoded = $raw_response->getContent();
+//        $fileSystem->appendToFile(General::ITEMS_CACHE_DIRECTORY . $itemID . '.txt', $itemEncoded);
+//        return true;
+//    }
+
+
+    public function update($request): JsonResponse
+    {
+        return Helpers::validateRequest($request, function ($reqParam) {
+            /**
+             * @var $reqParam Request
+             */
+            /**
+             * @var $itemModel ItemModel
+             */
+            $itemModel = ModelSerializer::parse($reqParam->query->all(), ItemModel::class);
+            if ($itemModel->getItemID()) {
                 /**
-                 * @var $itemCategoryModel ItemCategoryModel
+                 * @var $item Item
                  */
-//                $itemCategoryModel = ModelSerializer::parse($itemCategory, ItemCategoryModel::class);
-                if ($itemModel->getItemCategoriesIds()) {
-                    if (in_array($itemCategory['category'][0]['itemCategoryID'], $itemModel->getItemCategoriesIds())) {
-                        $itemCategories[$key]['category']['is_checked'] = true;
+                $item = $this->getDoctrine()->getRepository(Item::class)->find($itemModel->getItemID());
+                if ($item) {
+                    if ($itemModel->getItemBrandId()) {
+                        /**
+                         * @var $brand Brand
+                         */
+                        $brand = $this->getDoctrine()->getRepository(Brand::class)->find($itemModel->getItemBrandId());
+                        if ($brand) {
+                            $item->setBrand($brand);
+                        } else {
+                            return $this->json(Json::response($itemModel, "Could not find brand with provided ID", Json::input_parameter_is_missing));
+                        }
                     }
+                    $item->setLastModified(new \DateTime('now'));
+                    $item->setName($itemModel->getItemName());
+                    $item->setSearchableContent();
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($item);
+                    $em->flush();
+
+                    return $this->json(Json::response($itemModel, "Suc updated", Json::successful));
+                } else {
+                    return $this->json(Json::response($itemModel, "Could not fid Item", Json::input_parameter_is_missing));
                 }
-//
+            } else {
+                return $this->json(Json::response($itemModel, "ID is required", Json::input_parameter_is_missing));
             }
+        }, function ($reqParam) {
+            return $this->json(Json::response(null, "Inputs are missing", Json::input_parameter_is_missing));
+        });
+    }
 
-//        print_r(json_encode($itemModel->getItemSpecGroupsKeys())); die('s');
+    public function new($request): JsonResponse
+    {
 
-            $specGroupsKeys = json_decode(json_encode($itemModel->getItemSpecGroupsKeys()), true);
-//        print_r($specGroupsKeys); die;
-
+        return Helpers::validateRequest($request, function ($reqParam) {
             /**
-             * @var $itemImages ImageModel[]
+             * @var $reqParam Request
              */
-            $itemImages = [];
-            if ($itemModel->getItemImages()) {
-                foreach ($itemModel->getItemImages() as $itemImage) {
-                    $itemImages[] = ModelSerializer::parse($itemImage, ImageModel::class);
+            /**
+             * @var $itemModel ItemModel
+             */
+
+            $itemModel = ModelSerializer::parse($reqParam->query->all(), ItemModel::class);
+
+
+            if ($itemModel->getItemName()) {
+
+                $item = new Item();
+                $item->setName($itemModel->getItemName());
+                $item->setSearchableContent();
+                $item->setCreateDate(new \DateTime('now'));
+                $item->setLastModified(new \DateTime('now'));
+                if ($itemModel->getItemTypeId()) {
+
+                    $itemTypeModelID = $itemModel->getItemTypeId();
+                    /**
+                     * @var $itemType ItemType
+                     */
+                    $itemType = $this->getDoctrine()
+                        ->getRepository(ItemType::class)
+                        ->find($itemTypeModelID);
+                    if ($itemType) {
+                        $item->setItemType($itemType);
+                    } else {
+                        return $this->json(Json::response($itemModel, "Could not find item type", Json::input_parameter_is_missing));
+                    }
+                    if ($itemModel->getItemBrandId()) {
+
+                        $itemBrandModelID = $itemModel->getItemBrandId();
+                        /**
+                         * @var $brand Brand
+                         */
+                        $brand = $this->getDoctrine()
+                            ->getRepository(Brand::class)
+                            ->find($itemBrandModelID);
+                        /**
+                         * @todo Validation can be more tight here
+                         */
+                        if ($brand) {
+                            $item->setBrand($brand);
+                        } else {
+                            return $this->json(Json::response($itemModel, "Could not find brand", Json::input_parameter_is_missing));
+                        }
+                    }
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($item);
+                    $em->flush();
+                    $itemModel->setItemID($item->getId());
+                    return $this->json(Json::response($itemModel, "Item is added", Json::successful));
+                } else {
+                    return $this->json(Json::response($itemModel, "Item Type is required", Json::input_parameter_is_missing));
                 }
+
+            } else {
+                return $this->json(Json::response($itemModel, "Name is required.", Json::input_parameter_is_missing));
+
+            }
+        }, function ($reqParam) {
+            return $this->json(Json::response(null, "Inputs are missing", Json::input_parameter_is_missing));
+        });
+    }
+
+    public function get_types(): JsonResponse
+    {
+        /**
+         * @var $itemTypes ItemType[]
+         */
+        $itemTypes = $this->getDoctrine()->getRepository(ItemType::class)->findAll();
+        $itemTypeModels = [];
+        if ($itemTypes) {
+            foreach ($itemTypes as $itemType) {
+                $itemTypeModel = new ItemTypeModel();
+                $itemTypeModel->setItemTypeId($itemType->getId());
+                $itemTypeModel->setItemTypeMachineName($itemType->getMachineName());
+                $itemTypeModel->setItemTypeName($itemType->getName());
+                $itemTypeModels[] = $itemTypeModel;
+            }
+            return $this->json(Json::response($itemTypeModels, "suc", Json::successful));
+        } else {
+            $em = $this->getDoctrine()->getManager();
+            $uniqueItemType = new ItemType();
+            $uniqueItemTypeName = "Unique";
+            $uniqueItemType->setName($uniqueItemTypeName);
+            $uniqueItemType->setMachineName(Convert2::machine_name($uniqueItemTypeName));
+            $em->persist($uniqueItemType);
+            $quantityType = new ItemType();
+            $quantityTypeName = "Quantity";
+            $quantityType->setName($quantityTypeName);
+            $quantityType->setMachineName(Convert2::machine_name($quantityTypeName));
+            $em->persist($quantityType);
+            $em->flush();
+            return $this->get_types();
+        }
+    }
+
+    public function add_barcode($request): JsonResponse
+    {
+        return Helpers::validateRequest($request, function ($reqParam) {
+            /**
+             * @var $reqParam Request
+             */
+            /**
+             * @var $barcodeModel BarcodeModel
+             */
+            $barcodeModel = ModelSerializer::parse($reqParam->query->all(), BarcodeModel::class);
+            /**
+             * @todo IMPORTANT: barcode duplication should be checked
+             */
+            if ($barcodeModel->getItemId()) {
+                /**
+                 * @var $item Item
+                 */
+                $item = $this->getDoctrine()->getRepository(Item::class)->find($barcodeModel->getItemId());
+                if ($item) {
+                    $barcode = new Barcode();
+                    $barcode->setSerial($barcodeModel->getBarcodeName());
+                    $barcode->setItem($item);
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($barcode);
+                    $item->addBarcode($barcode);
+                    $em->persist($item);
+                    $em->flush();
+
+                    return $this->json(Json::response($barcodeModel, "Suc", Json::successful));
+                } else {
+                    return $this->json(Json::response($barcodeModel, "Could not find Item", Json::input_parameter_is_missing));
+                }
+            } else {
+                return $this->json(Json::response($barcodeModel, "Item ID is missing", Json::input_parameter_is_missing));
+            }
+        }, function ($reqParam) {
+            return $this->json(Json::response(null, "Inputs are missing", Json::input_parameter_is_missing));
+        });
+    }
+
+    public function remove_barcode($request): JsonResponse
+    {
+
+        return Helpers::validateRequest($request, function ($reqParam) {
+            /**
+             * @var $reqParam Request
+             */
+            /**
+             * @var $barcodeModel BarcodeModel
+             */
+            $barcodeModel = ModelSerializer::parse($reqParam->query->all(), BarcodeModel::class);
+            /**
+             * @todo IMPORTANT: barcode duplication should be checked
+             */
+            if ($barcodeModel->getItemId()) {
+                /**
+                 * @var $item Item
+                 */
+                $item = $this->getDoctrine()->getRepository(Item::class)->find($barcodeModel->getItemId());
+                if ($item) {
+                    if ($barcodeModel->getBarcodeId()) {
+                        /**
+                         * @var $barcode Barcode
+                         */
+                        $barcode = $this->getDoctrine()->getRepository(Barcode::class)->find($barcodeModel->getBarcodeId());
+                        $em = $this->getDoctrine()->getManager();
+                        $item->removeBarcode($barcode);
+                        $em->persist($item);
+                        $em->remove($barcode);
+                        $em->persist($barcode);
+                        $em->flush();
+
+                        return $this->json(Json::response($barcodeModel, "Suc remove", Json::successful));
+                    } else {
+                        return $this->json(Json::response($barcodeModel, "Barcode ID is missing", Json::input_parameter_is_missing));
+                    }
+                } else {
+                    return $this->json(Json::response($barcodeModel, "Could not find Item", Json::input_parameter_is_missing));
+                }
+            } else {
+                return $this->json(Json::response($barcodeModel, "Item ID is missing", Json::input_parameter_is_missing));
             }
 
-            return $this->render('repository/item/edit.html.twig', [
-                'controller_name' => 'ItemController',
-                'itemModel' => $itemModel,
-                'brands' => $brands,
-//                'itemTypes' => $itemTypes,
-                'colors' => $colors,
-                'guarantees' => $guarantees,
-                'suppliers' => $suppliers,
-                'itemCategories' => $itemCategories,
-                'specGroupKeys' => $specGroupsKeys,
-                'canUpdate' => $canUpdate,
-                'itemImages' => $itemImages,
+        }, function ($reqParam) {
+            return $this->json(Json::response(null, "Inputs are missing", Json::input_parameter_is_missing));
+        });
+    }
+
+    public function add_available_guarantee($request): JsonResponse
+    {
+        return Helpers::validateRequest($request, function ($reqParam) {
+            /**
+             * @var $reqParam Request
+             */
+            /**
+             * @var $guaranteeModel GuaranteeModel
+             */
+            $guaranteeModel = ModelSerializer::parse($reqParam->query->all(), GuaranteeModel::class);
+
+            if ($guaranteeModel->getItemId()) {
+                /**
+                 * @var $item Item
+                 */
+                $item = $this->getDoctrine()->getRepository(Item::class)->find($guaranteeModel->getItemId());
+                if ($item) {
+                    if ($guaranteeModel->getGuaranteeID()) {
+                        /**
+                         * @var $guarantee Guarantee
+                         */
+                        $guarantee = $this->getDoctrine()->getRepository(Guarantee::class)->find($guaranteeModel->getGuaranteeID());
+                        if ($guarantee) {
+                            $item->addAvailableGuarantee($guarantee);
+                            $em = $this->getDoctrine()->getManager();
+                            $em->persist($item);
+                            $em->flush();
+                            return $this->json(Json::response($guaranteeModel, "Suc", Json::successful));
+
+                        } else {
+                            return $this->json(Json::response($guaranteeModel, "Could not find guarantee", Json::input_parameter_is_missing));
+                        }
+                    } else {
+                        return $this->json(Json::response($guaranteeModel, "Guarantee ID is missing", Json::input_parameter_is_missing));
+                    }
+                } else {
+                    return $this->json(Json::response($guaranteeModel, "Could not find Item", Json::input_parameter_is_missing));
+                }
+            } else {
+                return $this->json(Json::response($guaranteeModel, "Item ID is missing", Json::input_parameter_is_missing));
+            }
+        }, function ($reqParam) {
+            return $this->json(Json::response(null, "Inputs are missing", Json::input_parameter_is_missing));
+        });
+    }
+
+    public function remove_available_guarantee($request): JsonResponse
+    {
+        return Helpers::validateRequest($request, function ($reqParam) {
+            /**
+             * @var $reqParam Request
+             */
+            /**
+             * @var $guaranteeModel GuaranteeModel
+             */
+            $guaranteeModel = ModelSerializer::parse($reqParam->query->all(), GuaranteeModel::class);
+
+            if ($guaranteeModel->getItemId()) {
+                /**
+                 * @var $item Item
+                 */
+                $item = $this->getDoctrine()->getRepository(Item::class)->find($guaranteeModel->getItemId());
+                if ($item) {
+                    if ($guaranteeModel->getGuaranteeID()) {
+                        /**
+                         * @var $guarantee Guarantee
+                         */
+                        $guarantee = $this->getDoctrine()->getRepository(Guarantee::class)->find($guaranteeModel->getGuaranteeID());
+                        if ($guarantee) {
+                            $item->removeAvailableGuarantee($guarantee);
+                            $em = $this->getDoctrine()->getManager();
+                            $em->persist($item);
+                            $em->flush();
+                            return $this->json(Json::response($guaranteeModel, "Suc", Json::successful));
+
+                        } else {
+                            return $this->json(Json::response($guaranteeModel, "Could not find guarantee", Json::input_parameter_is_missing));
+                        }
+                    } else {
+                        return $this->json(Json::response($guaranteeModel, "Guarantee ID is missing", Json::input_parameter_is_missing));
+                    }
+                } else {
+                    return $this->json(Json::response($guaranteeModel, "Could not find Item", Json::input_parameter_is_missing));
+                }
+            } else {
+                return $this->json(Json::response($guaranteeModel, "Item ID is missing", Json::input_parameter_is_missing));
+            }
+        }, function ($reqParam) {
+            return $this->json(Json::response(null, "Inputs are missing", Json::input_parameter_is_missing));
+        });
+    }
+
+    public function add_available_supplier($request): JsonResponse
+    {
+        return Helpers::validateRequest($request, function ($reqParam) {
+            /**
+             * @var $reqParam Request
+             */
+            /**
+             * @var $supplierModel CompanyModel
+             */
+            $supplierModel = ModelSerializer::parse($reqParam->query->all(), CompanyModel::class);
+
+            if ($supplierModel->getItemId()) {
+                /**
+                 * @var $item Item
+                 */
+                $item = $this->getDoctrine()->getRepository(Item::class)->find($supplierModel->getItemId());
+                if ($item) {
+                    if ($supplierModel->getCompanyID()) {
+                        /**
+                         * @var $supplier Company
+                         */
+                        $supplier = $this->getDoctrine()->getRepository(Company::class)->find($supplierModel->getCompanyID());
+                        if ($supplier) {
+                            $item->addAvailableSupplier($supplier);
+                            $em = $this->getDoctrine()->getManager();
+                            $em->persist($item);
+                            $em->flush();
+                            return $this->json(Json::response($supplierModel, "Suc", Json::successful));
+
+                        } else {
+                            return $this->json(Json::response($supplierModel, "Could not find company", Json::input_parameter_is_missing));
+                        }
+                    } else {
+                        return $this->json(Json::response($supplierModel, "company ID is missing", Json::input_parameter_is_missing));
+                    }
+                } else {
+                    return $this->json(Json::response($supplierModel, "Could not find Item", Json::input_parameter_is_missing));
+                }
+            } else {
+                return $this->json(Json::response($supplierModel, "Item ID is missing", Json::input_parameter_is_missing));
+            }
+        }, function ($reqParam) {
+            return $this->json(Json::response(null, "Inputs are missing", Json::input_parameter_is_missing));
+        });
+
+    }
+
+    public function remove_available_supplier($request): JsonResponse
+    {
+        return Helpers::validateRequest($request, function ($reqParam) {
+            /**
+             * @var $reqParam Request
+             */
+            /**
+             * @var $supplierModel CompanyModel
+             */
+            $supplierModel = ModelSerializer::parse($reqParam->query->all(), CompanyModel::class);
+
+            if ($supplierModel->getItemId()) {
+                /**
+                 * @var $item Item
+                 */
+                $item = $this->getDoctrine()->getRepository(Item::class)->find($supplierModel->getItemId());
+                if ($item) {
+                    if ($supplierModel->getCompanyID()) {
+                        /**
+                         * @var $supplier Company
+                         */
+                        $supplier = $this->getDoctrine()->getRepository(Company::class)->find($supplierModel->getCompanyID());
+                        if ($supplier) {
+                            $item->removeAvailableSupplier($supplier);
+                            $em = $this->getDoctrine()->getManager();
+                            $em->persist($item);
+                            $em->flush();
+                            return $this->json(Json::response($supplierModel, "Suc", Json::successful));
+
+                        } else {
+                            return $this->json(Json::response($supplierModel, "Could not find company", Json::input_parameter_is_missing));
+                        }
+                    } else {
+                        return $this->json(Json::response($supplierModel, "company ID is missing", Json::input_parameter_is_missing));
+                    }
+                } else {
+                    return $this->json(Json::response($supplierModel, "Could not find Item", Json::input_parameter_is_missing));
+                }
+            } else {
+                return $this->json(Json::response($supplierModel, "Item ID is missing", Json::input_parameter_is_missing));
+            }
+        }, function ($reqParam) {
+            return $this->json(Json::response(null, "Inputs are missing", Json::input_parameter_is_missing));
+        });
+    }
+
+    public function add_available_color($request): JsonResponse
+    {
+
+        return Helpers::validateRequest($request, function ($reqParam) {
+            /**
+             * @var $reqParam Request
+             */
+            /**
+             * @var $colorModel ItemColorModel
+             */
+            $colorModel = ModelSerializer::parse($reqParam->query->all(), ItemColorModel::class);
+
+
+            if ($colorModel->getItemId()) {
+                /**
+                 * @var $item Item
+                 */
+                $item = $this->getDoctrine()->getRepository(Item::class)->find($colorModel->getItemId());
+                if ($item) {
+                    if ($colorModel->getItemColorID()) {
+                        /**
+                         * @var $color ItemColor
+                         */
+                        $color = $this->getDoctrine()->getRepository(ItemColor::class)->find($colorModel->getItemColorID());
+                        if ($color) {
+                            $item->addAvailableColor($color);
+                            $em = $this->getDoctrine()->getManager();
+                            $em->persist($item);
+                            $em->flush();
+                            return $this->json(Json::response($colorModel, "Suc", Json::successful));
+
+                        } else {
+                            return $this->json(Json::response($colorModel, "Could not find", Json::input_parameter_is_missing));
+                        }
+                    } else {
+                        return $this->json(Json::response($colorModel, "ID is missing", Json::input_parameter_is_missing));
+                    }
+                } else {
+                    return $this->json(Json::response($colorModel, "Could not find Item", Json::input_parameter_is_missing));
+                }
+            } else {
+                return $this->json(Json::response($colorModel, "Item ID is missing", Json::input_parameter_is_missing));
+            }
+        }, function ($reqParam) {
+            return $this->json(Json::response(null, "Inputs are missing", Json::input_parameter_is_missing));
+        });
+    }
+
+    public function remove_available_color($request): JsonResponse
+    {
+        return Helpers::validateRequest($request, function ($reqParam) {
+            /**
+             * @var $reqParam Request
+             */
+            /**
+             * @var $colorModel ItemColorModel
+             */
+            $colorModel = ModelSerializer::parse($reqParam->query->all(), ItemColorModel::class);
+
+            if ($colorModel->getItemId()) {
+                /**
+                 * @var $item Item
+                 */
+                $item = $this->getDoctrine()->getRepository(Item::class)->find($colorModel->getItemId());
+                if ($item) {
+                    if ($colorModel->getItemColorID()) {
+                        /**
+                         * @var $color ItemColor
+                         */
+                        $color = $this->getDoctrine()->getRepository(ItemColor::class)->find($colorModel->getItemColorID());
+                        if ($color) {
+                            $item->removeAvailableColor($color);
+                            $em = $this->getDoctrine()->getManager();
+                            $em->persist($item);
+                            $em->flush();
+                            return $this->json(Json::response($colorModel, "Suc", Json::successful));
+
+                        } else {
+                            return $this->json(Json::response($colorModel, "Could not find", Json::input_parameter_is_missing));
+                        }
+                    } else {
+                        return $this->json(Json::response($colorModel, "ID is missing", Json::input_parameter_is_missing));
+                    }
+                } else {
+                    return $this->json(Json::response($colorModel, "Could not find Item", Json::input_parameter_is_missing));
+                }
+            } else {
+                return $this->json(Json::response($colorModel, "Item ID is missing", Json::input_parameter_is_missing));
+            }
+        }, function ($reqParam) {
+            return $this->json(Json::response(null, "Inputs are missing", Json::input_parameter_is_missing));
+        });
+    }
+
+    public function update_category($request): JsonResponse
+    {
+        return Helpers::validateRequest($request, function ($reqParam) {
+            /**
+             * @var $reqParam Request
+             */
+            /**
+             * @var $itemCategoriesModel ItemCategoriesModel
+             */
+            $itemCategoriesModel = ModelSerializer::parse($reqParam->query->all(), ItemCategoriesModel::class);
+
+            if ($itemCategoriesModel->getItemId()) {
+                /**
+                 * @var $item Item | null
+                 */
+                $item = $this->getDoctrine()->getRepository(Item::class)->find($itemCategoriesModel->getItemId());
+                if ($item) {
+                    $em = $this->getDoctrine()->getManager();
+                    if ($item->getItemCategories()->count() > 0) {
+                        foreach ($item->getItemCategories() as $category) {
+                            $item->removeItemCategory($category);
+                        }
+                        $em->persist($item);
+                        $em->flush();
+                    }
+
+                    $itemCategoriesIdsArray = json_decode($itemCategoriesModel->getItemCategoriesIds());
+                    if ($itemCategoriesIdsArray) {
+                        $categoryManager = $this->getDoctrine()->getRepository(ItemCategory::class);
+                        foreach ($itemCategoriesIdsArray as $categoryId) {
+                            /**
+                             * @var $category ItemCategory
+                             */
+                            $category = $categoryManager->find($categoryId);
+                            if ($category) {
+                                if ($item->getItemSize()) {
+                                    if ($item->getItemSize()->getSizeOrder() < $category->getSize()->getSizeOrder()) {
+                                        $item->setItemSize($category->getSize());
+                                    }
+                                } else {
+                                    $item->setItemSize($category->getSize());
+                                }
+                                $item->addItemCategory($category);
+                            }
+                        }
+                        $em->persist($item);
+                        $em->flush();
+                    }
+                    return $this->json(Json::response($itemCategoriesModel, "Updated successfully", Json::successful));
+
+                } else {
+                    return $this->json(Json::response(null, "Could not find Item", Json::input_parameter_is_missing));
+
+                }
+            } else {
+                return $this->json(Json::response(null, "Item ID is missing", Json::input_parameter_is_missing));
+            }
+        }, function ($reqParam) {
+            return $this->json(Json::response(null, "Inputs are missing", Json::input_parameter_is_missing));
+        });
+    }
+
+    public function add_image($request): JsonResponse
+    {
+        return Helpers::validateRequest($request, function ($reqParam) {
+            /**
+             * @var $reqParam Request
+             */
+            /**
+             * @var $itemModel ItemModel
+             */
+            $itemModel = ModelSerializer::parse(Json::getArray($reqParam->request->get('instance')), ItemModel::class);
+            if (Validation::check($itemModel->getItemID())) {
+                return $this->json(Validation::check($itemModel->getItemID(), "Item id"));
+            }
+            $response = $this->forward('App\Controller\Media\ImageController::upload', [
+                'request' => $reqParam,
+                'instance' => $itemModel
             ]);
-        } else {
-            return $this->redirect($this->generateUrl('repository_item_repository_item_list'));
-        }
+            $response = json_decode($response->getContent(), true);
+            if ($response['status'] == Json::successful) {
+                return $this->json(Json::response($itemModel, "Successful", Json::successful));
+            } else {
+                return $this->json(Json::response($itemModel, "Failed to upload image", Json::input_parameter_is_missing));
+
+            }
 
 
+        }, function ($reqParam) {
+            return $this->json(Json::response(null, "Inputs are missing", Json::input_parameter_is_missing));
+        });
     }
 
     /**
-     * @Route("/duplicate/{id}", name="_duplicate")
-     * @param $id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \ReflectionException
+     * @param $request
+     * @return JsonResponse
      */
-    public function duplicate($id)
+    public function remove_image($request): JsonResponse
     {
-        $itemModel = new ItemModel();
-        $itemModel->setItemID($id);
-        $request = new Req(Servers::Repository, Repository::Item, 'duplicate');
-        $request->add_instance($itemModel);
-        $response = $request->send();
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $response->getMessage());
-        } else {
-            $this->addFlash('f', $response->getMessage());
-        }
-<<<<<<< HEAD
-=======
-        Cache::cache_action(Servers::Repository, Repository::Item, 'all');
->>>>>>> 326310811bf4e6d76632e730679db21dc614aa22
-        return $this->redirect($this->generateUrl('repository_item_repository_item_list'));
+        return Helpers::validateRequest($request, function ($reqParam) {
+            /**
+             * @var $reqParam Request
+             */
+            /**
+             * @var $imageModel ImageModel
+             */
+            $imageModel = Serialize::Model($reqParam, ImageModel::class);
+            if (Validation::check($imageModel->getImageSerial())) {
+                return $this->json(Validation::check($imageModel->getImageSerial(), 'Image serial'));
+            }
+            if (Validation::check($imageModel->getItemID())) {
+                return $this->json(Validation::check($imageModel->getItemID(), 'Item ID'));
+            }
+            $manager = $this->getDoctrine()->getManager();
+            /**
+             * @var $imageMedia ImageMedia
+             */
+            $imageMedia = $manager->getRepository(ImageMedia::class)->findOneBy([
+                'serial' => $imageModel->getImageSerial()
+            ]);
+            if (Validation::check($imageMedia)) {
+                return $this->json(Validation::check($imageMedia, 'Image media'));
+            }
+            /**
+             * @var $item Item
+             */
+            $item = $manager->getRepository(Item::class)->find($imageModel->getItemID());
+            if (Validation::check($item)) {
+                return $this->json(Validation::check($item, 'Item'));
+            }
+            $item->removeImage($imageMedia);
+            $manager->persist($item);
+            $manager->flush();
+            return $this->json(Json::response(null, "Suc", Json::successful));
+        }, function ($reqParam) {
+            return $this->json(Json::response(null, "Inputs are missing", Json::input_parameter_is_missing));
+        });
     }
 
 
-    /**
-     * @Route("/add_barcode/{item_id}", name="_repository_item_add_barcode")
-     * @param $item_id
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \ReflectionException
-     */
-    public function addBarcode($item_id, Request $request)
-    {
-        $inputs = $request->request->all();
-
-        /**
-         * @var $barcodeModel BarcodeModel
-         */
-        $barcodeModel = ModelSerializer::parse($inputs, BarcodeModel::class);
-        $barcodeModel->setItemId($item_id);
-        $request = new Req(Servers::Repository, Repository::Item, 'add_barcode');
-        $request->add_instance($barcodeModel);
-        $response = $request->send();
-//        dd($response);
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $response->getMessage());
-        } else {
-            $this->addFlash('f', $response->getMessage());
-        }
-
-        /*
-         * Cache
-         */
-        $itemModel = new ItemModel();
-        $itemModel->setItemID($item_id);
-        $request = new Req(Servers::Repository, Repository::Item, 'fetch');
-        $request->add_instance($itemModel);
-        $response = $request->send();
-        $responseContent = $response->getContent();
-
-        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
-
-        return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
-
-
-    }
-
-    /**
-     * @Route("/remove_barcode/{barcode_id}/{item_id}", name="_repository_item_remove_barcode")
-     * @param $barcode_id
-     * @param $item_id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \ReflectionException
-     */
-    public function removeBarcode($barcode_id, $item_id)
-    {
-        $barcodeModel = new BarcodeModel();
-        $barcodeModel->setBarcodeId($barcode_id);
-        $barcodeModel->setItemId($item_id);
-        $request = new Req(Servers::Repository, Repository::Item, 'remove_barcode');
-        $request->add_instance($barcodeModel);
-        $response = $request->send();
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $response->getMessage());
-        } else {
-            $this->addFlash('f', $response->getMessage());
-        }
-
-        /*
-         * Cache
-         */
-        $itemModel = new ItemModel();
-        $itemModel->setItemID($item_id);
-        $request = new Req(Servers::Repository, Repository::Item, 'fetch');
-        $request->add_instance($itemModel);
-        $response = $request->send();
-        $responseContent = $response->getContent();
-
-        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
-
-
-        return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
-    }
-
-
-    /**
-     * @Route("/add_color/{item_id}", name="_repository_item_add_color")
-     * @param $item_id
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \ReflectionException
-     */
-    public function addColor($item_id, Request $request)
-    {
-        $inputs = $request->request->all();
-
-        /**
-         * @var $colorModel ItemColorModel
-         */
-        $colorModel = ModelSerializer::parse($inputs, ItemColorModel::class);
-        $colorModel->setItemId($item_id);
-        $request = new Req(Servers::Repository, Repository::Item, 'add_available_color');
-        $request->add_instance($colorModel);
-        $response = $request->send();
-//        dd($response);
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $response->getMessage());
-        } else {
-            $this->addFlash('f', $response->getMessage());
-        }
-        /*
-         * Cache
-         */
-        $itemModel = new ItemModel();
-        $itemModel->setItemID($item_id);
-        $request = new Req(Servers::Repository, Repository::Item, 'fetch');
-        $request->add_instance($itemModel);
-        $response = $request->send();
-        $responseContent = $response->getContent();
-
-        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
-
-        return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
-    }
-
-
-    /**
-     * @Route("/remove_color/{color_id}/{item_id}", name="_repository_item_remove_color")
-     * @param $color_id
-     * @param $item_id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \ReflectionException
-     */
-    public function removeColor($color_id, $item_id)
-    {
-        $colorModel = new ItemColorModel();
-        $colorModel->setItemColorID($color_id);
-        $colorModel->setItemId($item_id);
-        $request = new Req(Servers::Repository, Repository::Item, 'remove_available_color');
-        $request->add_instance($colorModel);
-        $response = $request->send();
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $response->getMessage());
-        } else {
-            $this->addFlash('f', $response->getMessage());
-        }
-        /*
-         * Cache
-         */
-        $itemModel = new ItemModel();
-        $itemModel->setItemID($item_id);
-        $request = new Req(Servers::Repository, Repository::Item, 'fetch');
-        $request->add_instance($itemModel);
-        $response = $request->send();
-        $responseContent = $response->getContent();
-
-        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
-
-        return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
-    }
-
-
-    /**
-     * @Route("/add_guarantee/{item_id}", name="_repository_item_add_guarantee")
-     * @param $item_id
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \ReflectionException
-     */
-    public function addGuarantee($item_id, Request $request)
-    {
-        $inputs = $request->request->all();
-
-        /**
-         * @var $guaranteeModel GuaranteeModel
-         */
-        $guaranteeModel = ModelSerializer::parse($inputs, GuaranteeModel::class);
-        $guaranteeModel->setItemId($item_id);
-        $request = new Req(Servers::Repository, Repository::Item, 'add_available_guarantee');
-        $request->add_instance($guaranteeModel);
-        $response = $request->send();
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $response->getMessage());
-        } else {
-            $this->addFlash('f', $response->getMessage());
-        }
-        /*
-         * Cache
-         */
-        $itemModel = new ItemModel();
-        $itemModel->setItemID($item_id);
-        $request = new Req(Servers::Repository, Repository::Item, 'fetch');
-        $request->add_instance($itemModel);
-        $response = $request->send();
-        $responseContent = $response->getContent();
-
-        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
-
-        return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
-    }
-
-
-    /**
-     * @Route("/remove_guarantee/{guarantee_id}/{item_id}", name="_repository_item_remove_guarantee")
-     * @param $guarantee_id
-     * @param $item_id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \ReflectionException
-     */
-    public function removeGuarantee($guarantee_id, $item_id)
-    {
-        $guaranteeModel = new GuaranteeModel();
-        $guaranteeModel->setGuaranteeID($guarantee_id);
-        $guaranteeModel->setItemId($item_id);
-//        dd($guaranteeModel);
-        $request = new Req(Servers::Repository, Repository::Item, 'remove_available_guarantee');
-        $request->add_instance($guaranteeModel);
-//        dd($request);
-        $response = $request->send();
-//        dd($response);
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $response->getMessage());
-        } else {
-            $this->addFlash('f', $response->getMessage());
-        }
-        /*
-         * Cache
-         */
-        $itemModel = new ItemModel();
-        $itemModel->setItemID($item_id);
-        $request = new Req(Servers::Repository, Repository::Item, 'fetch');
-        $request->add_instance($itemModel);
-        $response = $request->send();
-        $responseContent = $response->getContent();
-
-        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
-
-        return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
-    }
-
-
-    /**
-     * @Route("/add_supplier/{item_id}", name="_repository_item_add_supplier")
-     * @param $item_id
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \ReflectionException
-     */
-    public function addSupplier($item_id, Request $request)
-    {
-        $inputs = $request->request->all();
-
-        /**
-         * @var $supplierModel CompanyModel
-         */
-        $supplierModel = ModelSerializer::parse($inputs, CompanyModel::class);
-        $supplierModel->setItemId($item_id);
-        $request = new Req(Servers::Repository, Repository::Item, 'add_available_supplier');
-        $request->add_instance($supplierModel);
-        $response = $request->send();
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $response->getMessage());
-        } else {
-            $this->addFlash('f', $response->getMessage());
-        }
-        /*
-         * Cache
-         */
-        $itemModel = new ItemModel();
-        $itemModel->setItemID($item_id);
-        $request = new Req(Servers::Repository, Repository::Item, 'fetch');
-        $request->add_instance($itemModel);
-        $response = $request->send();
-        $responseContent = $response->getContent();
-
-        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
-
-        return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
-    }
-
-
-    /**
-     * @Route("/remove_supplier/{supplier_id}/{item_id}", name="_repository_item_remove_supplier")
-     * @param $supplier_id
-     * @param $item_id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \ReflectionException
-     */
-    public function removeSupplier($supplier_id, $item_id)
-    {
-        $supplierModel = new CompanyModel();
-        $supplierModel->setCompanyID($supplier_id);
-        $supplierModel->setItemId($item_id);
-        $request = new Req(Servers::Repository, Repository::Item, 'remove_available_supplier');
-        $request->add_instance($supplierModel);
-        $response = $request->send();
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $response->getMessage());
-        } else {
-            $this->addFlash('f', $response->getMessage());
-        }
-        /*
-         * Cache
-         */
-        $itemModel = new ItemModel();
-        $itemModel->setItemID($item_id);
-        $request = new Req(Servers::Repository, Repository::Item, 'fetch');
-        $request->add_instance($itemModel);
-        $response = $request->send();
-        $responseContent = $response->getContent();
-
-        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
-
-        return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
-    }
-
-    /**
-     * @Route("/add_image/{item_id}", name="_repository_item_add_image")
-     * @param Request $request
-     * @param $item_id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function addImage(Request $request, $item_id)
-    {
-        $file = $request->files->get('item_image');
-
-        $uploadRequest = new Req(Servers::Repository, Repository::Item, 'add_image');
-        $itemModel = new ItemModel();
-        $itemModel->setItemID($item_id);
-        /**
-         * @var $uploadResponse Response
-         */
-        $uploadResponse = $uploadRequest->uploadImage($file, $itemModel);
-        if ($uploadResponse->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $uploadResponse->getMessage());
-        }
-        $this->addFlash('f', $uploadResponse->getMessage());
-
-        /*
-         * Cache
-         */
-        $itemModel = new ItemModel();
-        $itemModel->setItemID($item_id);
-        $cacheRequest = new Req(Servers::Repository, Repository::Item, 'fetch');
-        $cacheRequest->add_instance($itemModel);
-        $response = $cacheRequest->send();
-        $responseContent = $response->getContent();
-
-        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
-
-        return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
-    }
-
-    /**
-     * @Route("/remove_image/{image_id}/{item_id}", name="_repository_item_remove_image")
-     * @param $image_id
-     * @param $item_id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \ReflectionException
-     */
-    public function removeImage($image_id, $item_id)
-    {
-        $imageModel = new ImageModel();
-        $imageModel->setImageSerial($image_id);
-        $imageModel->setItemID($item_id);
-        $request = new Req(Servers::Repository, Repository::Item, 'remove_image');
-        $request->add_instance($imageModel);
-//        dd($request);
-        $response = $request->send();
-//        dd($response);
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $response->getMessage());
-        } else {
-            $this->addFlash('f', $response->getMessage());
-        }
-        /*
-         * Cache
-         */
-        $itemModel = new ItemModel();
-        $itemModel->setItemID($item_id);
-        $cacheRequest = new Req(Servers::Repository, Repository::Item, 'fetch');
-        $cacheRequest->add_instance($itemModel);
-        $response = $cacheRequest->send();
-        $responseContent = $response->getContent();
-
-        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
-
-        return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
-
-    }
-
-    /**
-     * @Route("/update_categories/{item_id}", name="_repository_item_update_categories")
-     * @param $item_id
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \ReflectionException
-     */
-    public function updateCategories($item_id, Request $request)
-    {
-        $inputs = $request->request->all();
-
-        /**
-         * @var $itemCategoriesModel ItemCategoriesModel
-         */
-        $itemCategoriesModel = ModelSerializer::parse($inputs, ItemCategoriesModel::class);
-        $itemCategoriesModel->setItemId($item_id);
-//        dd($itemCategoriesModel);
-        $request = new Req(Servers::Repository, Repository::Item, 'update_category');
-        $request->add_instance($itemCategoriesModel);
-        $response = $request->send();
-//        dd($response);
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $response->getMessage());
-        } else {
-            $this->addFlash('s', $response->getMessage());
-        }
-        /*
-         * Cache
-         */
-        $itemModel = new ItemModel();
-        $itemModel->setItemID($item_id);
-        $cacheRequest = new Req(Servers::Repository, Repository::Item, 'fetch');
-        $cacheRequest->add_instance($itemModel);
-        $response = $cacheRequest->send();
-        $responseContent = $response->getContent();
-
-        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
-
-        return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
-    }
-
-
-    /**
-     * @Route("/submit-key-value", name="_submit_key_value")
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \ReflectionException
-     */
-    public function submitKeyValue(Request $request)
-    {
-        $inputs = $request->request->all();
-//        dd($inputs);
-        /**
-         * @var $specKeyValueModel SpecKeyValueModel
-         */
-        $specKeyValueModel = ModelSerializer::parse($inputs, SpecKeyValueModel::class);
-//        $specKeyModel->setSpecKeySpecGroupName();
-        $request = new Req(Servers::Repository, Repository::SpecKey, 'submit_key_value');
-        $request->add_instance($specKeyValueModel);
-        $response = $request->send();
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $response->getMessage());
-        } else {
-            $this->addFlash('s', $response->getMessage());
-        }
-        $item_id = $specKeyValueModel->getItemId();
-        /*
-         * Cache
-         */
-        $itemModel = new ItemModel();
-        $itemModel->setItemID($item_id);
-        $cacheRequest = new Req(Servers::Repository, Repository::Item, 'fetch');
-        $cacheRequest->add_instance($itemModel);
-        $response = $cacheRequest->send();
-        $responseContent = $response->getContent();
-
-        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
-
-        return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $specKeyValueModel->getItemId()]));
-    }
-
-    /**
-     * @Route("/remove-key-value/{item_id}/{key_id}/{value}", name="_remove_key_value")
-     * @param $item_id
-     * @param $key_id
-     * @param $value
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \ReflectionException
-     */
-    public function removeKeyValue($item_id, $key_id, $value)
-    {
-        $keyValueModel = new SpecKeyValueModel();
-        $keyValueModel->setItemId($item_id);
-        $keyValueModel->setKeyId($key_id);
-        $keyValueModel->setValue($value);
-
-//        dd($keyValueModel);
-
-        $request = new Req(Servers::Repository, Repository::SpecKey, 'remove_key_value');
-        $request->add_instance($keyValueModel);
-        $response = $request->send();
-//        dd($response);
-        if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('s', $response->getMessage());
-        } else {
-            $this->addFlash('s', $response->getMessage());
-        }
-        /*
-         * Cache
-         */
-        $itemModel = new ItemModel();
-        $itemModel->setItemID($item_id);
-        $cacheRequest = new Req(Servers::Repository, Repository::Item, 'fetch');
-        $cacheRequest->add_instance($itemModel);
-        $response = $cacheRequest->send();
-        $responseContent = $response->getContent();
-
-        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
-        return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
-    }
 }
+

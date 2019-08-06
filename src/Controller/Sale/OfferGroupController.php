@@ -22,6 +22,31 @@ use Matican\Core\Transaction\Request as Req;
  */
 class OfferGroupController extends AbstractController
 {
+    /**
+     * @Route("/list", name="_list")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function fetchAll()
+    {
+        $request = new Req(Servers::Sale, Sale::OfferGroup, 'all');
+        $response = $request->send();
+
+        /**
+         * @var $offerGroups OfferGroupModel[]
+         */
+        $offerGroups = [];
+        if ($response->getContent()) {
+            foreach ($response->getContent() as $offerGroup) {
+                $offerGroups[] = ModelSerializer::parse($offerGroup, OfferGroupModel::class);
+            }
+        }
+
+        return $this->render('sale/offer_group/list.html.twig', [
+            'controller_name' => 'OfferGroupController',
+            'offerGroups' => $offerGroups,
+        ]);
+    }
+
 
     /**
      * @Route("/create", name="_sale_offer_group_create")
@@ -238,7 +263,7 @@ class OfferGroupController extends AbstractController
         } else {
             $this->addFlash('f', $response->getMessage());
         }
-        return $this->redirect($this->generateUrl('sale_offer_group_sale_offer_group_create'));
+        return $this->redirect($this->generateUrl('sale_offer_group_list'));
     }
 
     /**

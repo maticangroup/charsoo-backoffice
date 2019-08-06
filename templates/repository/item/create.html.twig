@@ -8,9 +8,13 @@
             <div class="panel">
                 <div class="panel-content">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-10">
                             <h1>{{ 'repository.item.create.main.title' | trans }}</h1>
                             <p>{{ 'repository.item.create.main.description' | trans }}</p>
+                        </div>
+                        <div class="col-2 mt-3">
+                            <a href="{{ path('repository_item_repository_item_list') }}"
+                               class="btn-secondary btn btn-block rounded fa fa-list"></a>
                         </div>
                     </div>
 

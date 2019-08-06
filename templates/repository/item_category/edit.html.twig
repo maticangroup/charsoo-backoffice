@@ -8,9 +8,13 @@
             <div class="panel">
                 <div class="panel-content">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-10">
                             <h1>{{ 'repository.item.category.edit.main.title' | trans }}</h1>
                             <p>{{ 'repository.item.category.edit.main.description' | trans }}</p>
+                        </div>
+                        <div class="col-2">
+                            <a href="{{ path('repository_item_category_repository_item_category_create') }}"
+                               class="btn btn-block btn-success rounded fa fa-plus"></a>
                         </div>
 
                     </div>
@@ -34,7 +38,7 @@
                         {% if canUpdate %}
                             <form class="col-12"
                                   action="{{ path('repository_item_category_repository_item_category_edit' , {id:itemCategoryModel.itemCategoryID}) }}"
-                                  method="post">
+                                  method="post" enctype="multipart/form-data">
                                 <div class="panel">
                                     <div class="panel-heading">
                                         <strong>
@@ -61,7 +65,6 @@
                                                              alt="{{ itemCategoryModel.thumbnail.imageAlt }}">
                                                         <label class="custom-file">
                                                             <input type="file"
-                                                                   value="{{ itemCategoryModel.itemCategoryImageUrl }}"
                                                                    name="itemCategoryImageUrl"
                                                                    class="custom-file-input">
                                                             <span class="custom-file-label">{{ 'general.file.upload.title' | trans }}</span>

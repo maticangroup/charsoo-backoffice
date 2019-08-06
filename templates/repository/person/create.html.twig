@@ -8,9 +8,13 @@
             <div class="panel">
                 <div class="panel-content">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-10">
                             <h1>{{ 'repository.person.create.main.title' | trans }}</h1>
                             <p>{{ 'repository.person.create.main.description' | trans }}</p>
+                        </div>
+                        <div class="col-2 mt-5">
+                            <a href="{{ path('repository_person_repository_person_list') }}"
+                               class="btn-block btn btn-secondary fa fa-list rounded"></a>
                         </div>
                     </div>
                 </div>

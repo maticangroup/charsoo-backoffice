@@ -183,6 +183,8 @@ class ItemController extends AbstractController
             if (Cache::is_cached(Servers::Repository, Repository::Brand, 'all')) {
                 $allBrandsResponseContent = Cache::get_cached(Servers::Repository, Repository::Brand, 'all');
             } else {
+                Cache::cache_action(Servers::Repository, Repository::Brand, 'all');
+
                 $allBrandsRequest = new Req(Servers::Repository, Repository::Brand, 'all');
                 $allBrandsResponse = $allBrandsRequest->send();
                 $allBrandsResponseContent = $allBrandsResponse->getContent();
@@ -197,34 +199,36 @@ class ItemController extends AbstractController
                 $brands[] = ModelSerializer::parse($brand, BrandModel::class);
             }
 
-            if (Cache::is_cached(Servers::Repository, Repository::Item, 'get_types')) {
-
-                $allItemTypesResponseContent = Cache::get_cached(
-                    Servers::Repository,
-                    Repository::Item,
-                    'get_types');
-
-            } else {
-                Cache::cache_action(Servers::Repository, Repository::Item, 'get_types');
-                $allItemTypesRequest = new Req(Servers::Repository, Repository::Item, 'get_types');
-                $allItemTypesResponse = $allItemTypesRequest->send();
-                $allItemTypesResponseContent = $allItemTypesResponse->getContent();
-            }
-
-            /**
-             * @var $itemTypes ItemTypeModel[]
-             */
-            $itemTypes = [];
-
-            if ($allItemTypesResponseContent) {
-                foreach ($allItemTypesResponseContent as $itemType) {
-                    $itemTypes[] = ModelSerializer::parse($itemType, ItemTypeModel::class);
-                }
-            }
+//            if (Cache::is_cached(Servers::Repository, Repository::Item, 'get_types')) {
+//
+//                $allItemTypesResponseContent = Cache::get_cached(
+//                    Servers::Repository,
+//                    Repository::Item,
+//                    'get_types');
+//
+//            } else {
+//                Cache::cache_action(Servers::Repository, Repository::Item, 'get_types');
+//                $allItemTypesRequest = new Req(Servers::Repository, Repository::Item, 'get_types');
+//                $allItemTypesResponse = $allItemTypesRequest->send();
+//                $allItemTypesResponseContent = $allItemTypesResponse->getContent();
+//            }
+//
+//            /**
+//             * @var $itemTypes ItemTypeModel[]
+//             */
+//            $itemTypes = [];
+//
+//            if ($allItemTypesResponseContent) {
+//                foreach ($allItemTypesResponseContent as $itemType) {
+//                    $itemTypes[] = ModelSerializer::parse($itemType, ItemTypeModel::class);
+//                }
+//            }
 
             if (Cache::is_cached(Servers::Repository, Repository::Color, 'all')) {
                 $allColorsResponseContent = Cache::get_cached(Servers::Repository, Repository::Color, 'all');
             } else {
+                Cache::cache_action(Servers::Repository, Repository::Color, 'all');
+
                 $allColorsRequest = new Req(Servers::Repository, Repository::Color, 'all');
                 $allColorsResponse = $allColorsRequest->send();
                 $allColorsResponseContent = $allColorsResponse->getContent();
@@ -244,6 +248,7 @@ class ItemController extends AbstractController
             if (Cache::is_cached(Servers::Repository, Repository::Guarantee, 'all')) {
                 $guaranteeResponseContent = Cache::get_cached(Servers::Repository, Repository::Guarantee, 'all');
             } else {
+                Cache::cache_action(Servers::Repository, Repository::Guarantee, 'all');
                 $guaranteeRequest = new Req(Servers::Repository, Repository::Guarantee, 'all');
                 $guaranteeResponse = $guaranteeRequest->send();
                 $guaranteeResponseContent = $guaranteeResponse->getContent();
@@ -280,6 +285,7 @@ class ItemController extends AbstractController
 
                 $allItemCategoriesResponseContent = Cache::get_cached(Servers::Repository, Repository::ItemCategory, 'all');
             } else {
+                Cache::cache_action(Servers::Repository, Repository::ItemCategory, 'all');
                 $allItemCategoriesRequest = new Req(Servers::Repository, Repository::ItemCategory, 'all');
                 $allItemCategoriesResponse = $allItemCategoriesRequest->send();
                 $allItemCategoriesResponseContent = $allItemCategoriesResponse->getContent();
@@ -324,7 +330,7 @@ class ItemController extends AbstractController
                 'controller_name' => 'ItemController',
                 'itemModel' => $itemModel,
                 'brands' => $brands,
-                'itemTypes' => $itemTypes,
+//                'itemTypes' => $itemTypes,
                 'colors' => $colors,
                 'guarantees' => $guarantees,
                 'suppliers' => $suppliers,

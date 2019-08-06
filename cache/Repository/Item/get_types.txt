@@ -1,0 +1,1 @@
+[{"itemTypeId":1,"itemTypeName":"Unique","itemTypeMachineName":"unique","itemId":null},{"itemTypeId":2,"itemTypeName":"Quantity","itemTypeMachineName":"quantity","itemId":null}]

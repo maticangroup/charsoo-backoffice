@@ -2,6 +2,7 @@
 
 namespace App\Controller\Repository;
 
+use App\Cache;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\BrandModel;
 use App\FormModels\Repository\BrandSupplierModel;
@@ -25,6 +26,7 @@ class BrandController extends AbstractController
      * @Route("/create", name="_repository_brand_create")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \ReflectionException
      */
     public function create(Request $request)
     {
@@ -90,7 +92,7 @@ class BrandController extends AbstractController
                 }
             }
         }
-
+        Cache::cache_action(Servers::Repository, Repository::Brand, 'all');
         return $this->render('repository/brand/create.html.twig', [
             'controller_name' => 'BrandController',
             'brandModel' => $brandModel,
@@ -176,6 +178,7 @@ class BrandController extends AbstractController
                 }
             }
         }
+        Cache::cache_action(Servers::Repository, Repository::Brand, 'all');
 
         return $this->render('repository/brand/edit.html.twig', [
             'controller_name' => 'BrandController',
@@ -212,6 +215,8 @@ class BrandController extends AbstractController
         } else {
             $this->addFlash('f', $response->getMessage());
         }
+        Cache::cache_action(Servers::Repository, Repository::Brand, 'all');
+
         return $this->redirect($this->generateUrl('repository_brand_repository_brand_edit', ['id' => $brand_id]));
     }
 
@@ -235,6 +240,7 @@ class BrandController extends AbstractController
         } else {
             $this->addFlash('f', $response->getMessage());
         }
+        Cache::cache_action(Servers::Repository, Repository::Brand, 'all');
         return $this->redirect($this->generateUrl('repository_brand_repository_brand_edit', ['id' => $brand_id]));
     }
 

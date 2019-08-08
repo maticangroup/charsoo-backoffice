@@ -104,6 +104,7 @@ class ItemController extends AbstractController
                     /**
                      * @var $itemModel ItemModel
                      */
+                    Cache::cache_action(Servers::Repository, Repository::Item, 'all');
                     $itemModel = ModelSerializer::parse($response->getContent(), ItemModel::class);
                     $this->addFlash('s', $response->getMessage());
 
@@ -132,7 +133,7 @@ class ItemController extends AbstractController
             foreach ($allItemTypesResponse->getContent() as $itemType) {
                 $itemTypes[] = ModelSerializer::parse($itemType, ItemTypeModel::class);
             }
-
+            Cache::cache_action(Servers::Repository, Repository::Item, 'all');
             return $this->render('repository/item/create.html.twig', [
                 'controller_name' => 'ItemController',
                 'itemModel' => $itemModel,

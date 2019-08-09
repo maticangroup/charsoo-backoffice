@@ -26,12 +26,12 @@
             Coupon</a>
     </li>
     {% if canSeeCompanyGroup %}
-        <li class="nav-item">
-            <a href="{{ path('crm_customer_company_group' , {id:personModel.id}) }}"
-               class="nav-link {{ (path('crm_customer_company_group' , {id:personModel.id}) == url)? 'active':'' }}">Company
-                &
-                Group</a>
-        </li>
+    <li class="nav-item">
+        <a href="{{ path('crm_customer_company_group' , {id:personModel.id}) }}"
+           class="nav-link {{ (path('crm_customer_company_group' , {id:personModel.id}) == url)? 'active':'' }}">Company
+            &
+            Group</a>
+    </li>
     {% endif %}
     <li class="nav-item">
         <a href="{{ path('crm_customer_payment_deed' , {id:personModel.id}) }}"

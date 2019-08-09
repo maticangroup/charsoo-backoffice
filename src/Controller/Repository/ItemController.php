@@ -2,6 +2,7 @@
 
 namespace App\Controller\Repository;
 
+use App\Cache;
 use App\FormModels\Media\ImageModel;
 use App\FormModels\ModelSerializer;
 use App\FormModels\Repository\BarcodeModel;
@@ -18,6 +19,7 @@ use App\FormModels\Repository\ItemTypeModel;
 use App\FormModels\Repository\SpecKeyModel;
 use App\FormModels\Repository\SpecKeyValueModel;
 use App\General\AuthUser;
+use App\Params;
 use App\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
@@ -45,14 +47,20 @@ class ItemController extends AbstractController
         $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::repository_color_all);
 
         if ($canSeeAll) {
-            $request = new Req(Servers::Repository, Repository::Item, 'all');
-            $response = $request->send();
+            if (Cache::is_cached(Servers::Repository, Repository::Item, 'all')) {
+                $responseContent = Cache::get_cached(Servers::Repository, Repository::Item, 'all');
+            } else {
+                Cache::cache_action(Servers::Repository, Repository::Item, 'all');
+                $request = new Req(Servers::Repository, Repository::Item, 'all');
+                $response = $request->send();
+                $responseContent = $response->getContent();
+            }
 
             /**
              * @var $items ItemModel[]
              */
             $items = [];
-            foreach ($response->getContent() as $item) {
+            foreach ($responseContent as $item) {
                 $items[] = ModelSerializer::parse($item, ItemModel::class);
             }
             return $this->render('repository/item/list.html.twig', [
@@ -65,8 +73,6 @@ class ItemController extends AbstractController
         } else {
             return $this->redirect($this->generateUrl('repository_item_repository_item_create'));
         }
-
-
     }
 
     /**
@@ -98,14 +104,14 @@ class ItemController extends AbstractController
                     /**
                      * @var $itemModel ItemModel
                      */
+                    Cache::cache_action(Servers::Repository, Repository::Item, 'all');
                     $itemModel = ModelSerializer::parse($response->getContent(), ItemModel::class);
                     $this->addFlash('s', $response->getMessage());
+
                     return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $itemModel->getItemID()]));
                 }
                 $this->addFlash('f', $response->getMessage());
             }
-
-
             $allBrandsRequest = new Req(Servers::Repository, Repository::Brand, 'all');
             $allBrandsResponse = $allBrandsRequest->send();
 
@@ -127,7 +133,7 @@ class ItemController extends AbstractController
             foreach ($allItemTypesResponse->getContent() as $itemType) {
                 $itemTypes[] = ModelSerializer::parse($itemType, ItemTypeModel::class);
             }
-
+            Cache::cache_action(Servers::Repository, Repository::Item, 'all');
             return $this->render('repository/item/create.html.twig', [
                 'controller_name' => 'ItemController',
                 'itemModel' => $itemModel,
@@ -150,22 +156,30 @@ class ItemController extends AbstractController
      */
     public function edit($id, Request $request)
     {
+//        Cache::cache_action(Servers::Repository, Repository::Brand, 'all');
+
         $canUpdate = AuthUser::if_is_allowed(ServerPermissions::repository_item_update);
 
         if ($canUpdate) {
             $inputs = $request->request->all();
 
-            /**
-             * @var $itemModel ItemModel
-             */
-            $itemModel = ModelSerializer::parse($inputs, ItemModel::class);
-            $itemModel->setItemID($id);
-            $request = new Req(Servers::Repository, Repository::Item, 'fetch');
-            $request->add_instance($itemModel);
-            $response = $request->send();
-            $itemModel = ModelSerializer::parse($response->getContent(), ItemModel::class);
-//        dd($itemModel);
 
+            if (Cache::is_record_cached(Servers::Repository, Repository::Item, 'fetch', $id)) {
+                $responseContent = Cache::get_cached_record(Servers::Repository, Repository::Item, 'fetch', $id);
+            } else {
+                /**
+                 * @var $itemModel ItemModel
+                 */
+                $itemModel = ModelSerializer::parse($inputs, ItemModel::class);
+                $itemModel->setItemID($id);
+                $request = new Req(Servers::Repository, Repository::Item, 'fetch');
+                $request->add_instance($itemModel);
+                $response = $request->send();
+                $responseContent = $response->getContent();
+                Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $id, $responseContent);
+            }
+
+            $itemModel = ModelSerializer::parse($responseContent, ItemModel::class);
             if (!empty($inputs)) {
                 $itemModel = ModelSerializer::parse($inputs, ItemModel::class);
                 $itemModel->setItemID($id);
@@ -174,59 +188,109 @@ class ItemController extends AbstractController
                 $response = $request->send();
                 if ($response->getStatus() == ResponseStatus::successful) {
                     $this->addFlash('s', $response->getMessage());
+
+                    /*
+      * Cache
+      */
+                    $itemModel = new ItemModel();
+                    $itemModel->setItemID($id);
+                    $cacheRequest = new Req(Servers::Repository, Repository::Item, 'fetch');
+                    $cacheRequest->add_instance($itemModel);
+                    $response = $cacheRequest->send();
+                    $responseContent = $response->getContent();
+
+
+                    Cache::cache_action(Servers::Repository, Repository::Item, 'all');
+                    Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $id, $responseContent);
+
+//                    dd($response);
+
                     return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $id]));
                 } else {
                     $this->addFlash('f', $response->getMessage());
                 }
             }
 
-            $allBrandsRequest = new Req(Servers::Repository, Repository::Brand, 'all');
-            $allBrandsResponse = $allBrandsRequest->send();
+
+            if (Cache::is_cached(Servers::Repository, Repository::Brand, 'all')) {
+                $allBrandsResponseContent = Cache::get_cached(Servers::Repository, Repository::Brand, 'all');
+            } else {
+                Cache::cache_action(Servers::Repository, Repository::Brand, 'all');
+
+                $allBrandsRequest = new Req(Servers::Repository, Repository::Brand, 'all');
+                $allBrandsResponse = $allBrandsRequest->send();
+                $allBrandsResponseContent = $allBrandsResponse->getContent();
+            }
+
 
             /**
              * @var $brands BrandModel[]
              */
             $brands = [];
-            foreach ($allBrandsResponse->getContent() as $brand) {
+            foreach ($allBrandsResponseContent as $brand) {
                 $brands[] = ModelSerializer::parse($brand, BrandModel::class);
             }
 
-            $allItemTypesRequest = new Req(Servers::Repository, Repository::Item, 'get_types');
-            $allItemTypesResponse = $allItemTypesRequest->send();
+//            if (Cache::is_cached(Servers::Repository, Repository::Item, 'get_types')) {
+//
+//                $allItemTypesResponseContent = Cache::get_cached(
+//                    Servers::Repository,
+//                    Repository::Item,
+//                    'get_types');
+//
+//            } else {
+//                Cache::cache_action(Servers::Repository, Repository::Item, 'get_types');
+//                $allItemTypesRequest = new Req(Servers::Repository, Repository::Item, 'get_types');
+//                $allItemTypesResponse = $allItemTypesRequest->send();
+//                $allItemTypesResponseContent = $allItemTypesResponse->getContent();
+//            }
+//
+//            /**
+//             * @var $itemTypes ItemTypeModel[]
+//             */
+//            $itemTypes = [];
+//
+//            if ($allItemTypesResponseContent) {
+//                foreach ($allItemTypesResponseContent as $itemType) {
+//                    $itemTypes[] = ModelSerializer::parse($itemType, ItemTypeModel::class);
+//                }
+//            }
 
-            /**
-             * @var $itemTypes ItemTypeModel[]
-             */
-            $itemTypes = [];
-            if ($allItemTypesResponse->getContent()) {
-                foreach ($allItemTypesResponse->getContent() as $itemType) {
-                    $itemTypes[] = ModelSerializer::parse($itemType, ItemTypeModel::class);
-                }
+            if (Cache::is_cached(Servers::Repository, Repository::Color, 'all')) {
+                $allColorsResponseContent = Cache::get_cached(Servers::Repository, Repository::Color, 'all');
+            } else {
+                Cache::cache_action(Servers::Repository, Repository::Color, 'all');
+
+                $allColorsRequest = new Req(Servers::Repository, Repository::Color, 'all');
+                $allColorsResponse = $allColorsRequest->send();
+                $allColorsResponseContent = $allColorsResponse->getContent();
             }
 
-
-            $allColorsRequest = new Req(Servers::Repository, Repository::Color, 'all');
-            $allColorsResponse = $allColorsRequest->send();
 
             /**
              * @var $colors ItemColorModel[]
              */
             $colors = [];
-            if ($allColorsResponse->getContent()) {
-                foreach ($allColorsResponse->getContent() as $color) {
+            if ($allColorsResponseContent) {
+                foreach ($allColorsResponseContent as $color) {
                     $colors[] = ModelSerializer::parse($color, ItemColorModel::class);
                 }
             }
 
-
-            $guaranteeRequest = new Req(Servers::Repository, Repository::Guarantee, 'all');
-            $guaranteeResponse = $guaranteeRequest->send();
+            if (Cache::is_cached(Servers::Repository, Repository::Guarantee, 'all')) {
+                $guaranteeResponseContent = Cache::get_cached(Servers::Repository, Repository::Guarantee, 'all');
+            } else {
+                Cache::cache_action(Servers::Repository, Repository::Guarantee, 'all');
+                $guaranteeRequest = new Req(Servers::Repository, Repository::Guarantee, 'all');
+                $guaranteeResponse = $guaranteeRequest->send();
+                $guaranteeResponseContent = $guaranteeResponse->getContent();
+            }
 
             /**
              * @var $guarantees GuaranteeModel[]
              */
             $guarantees = [];
-            foreach ($guaranteeResponse->getContent() as $guarantee) {
+            foreach ($guaranteeResponseContent as $guarantee) {
                 $guarantees[] = ModelSerializer::parse($guarantee, GuaranteeModel::class);
             }
 
@@ -236,8 +300,7 @@ class ItemController extends AbstractController
             $supplierRequest->add_instance($brandSuppliersModel);
             $supplierResponse = $supplierRequest->send();
             $supplierContent = $supplierResponse->getContent();
-//            dd();
-//        dd($supplierContent);
+
 
             /**
              * @var $suppliers CompanyModel[]
@@ -250,29 +313,34 @@ class ItemController extends AbstractController
                     }
                 }
             }
+            if (Cache::is_cached(Servers::Repository, Repository::ItemCategory, 'all')) {
 
-//        dd($suppliers);
+                $allItemCategoriesResponseContent = Cache::get_cached(Servers::Repository, Repository::ItemCategory, 'all');
+            } else {
+                Cache::cache_action(Servers::Repository, Repository::ItemCategory, 'all');
+                $allItemCategoriesRequest = new Req(Servers::Repository, Repository::ItemCategory, 'all');
+                $allItemCategoriesResponse = $allItemCategoriesRequest->send();
+                $allItemCategoriesResponseContent = $allItemCategoriesResponse->getContent();
 
-            $allItemCategoriesRequest = new Req(Servers::Repository, Repository::ItemCategory, 'all');
-            $allItemCategoriesResponse = $allItemCategoriesRequest->send();
+
+            }
 
 
-            $itemCategories = json_decode(json_encode($allItemCategoriesResponse->getContent()), true);
+            $itemCategories = json_decode(json_encode($allItemCategoriesResponseContent), true);
 
-//            dd($itemCategories);
 
             foreach ($itemCategories as $key => $itemCategory) {
-//                dd($itemCategory);
-//                /**
-//                 * @var $itemCategoryModel ItemCategoryModel
-//                 */
+//
+                /**
+                 * @var $itemCategoryModel ItemCategoryModel
+                 */
 //                $itemCategoryModel = ModelSerializer::parse($itemCategory, ItemCategoryModel::class);
                 if ($itemModel->getItemCategoriesIds()) {
                     if (in_array($itemCategory['category'][0]['itemCategoryID'], $itemModel->getItemCategoriesIds())) {
                         $itemCategories[$key]['category']['is_checked'] = true;
                     }
                 }
-
+//
             }
 
 //        print_r(json_encode($itemModel->getItemSpecGroupsKeys())); die('s');
@@ -294,7 +362,7 @@ class ItemController extends AbstractController
                 'controller_name' => 'ItemController',
                 'itemModel' => $itemModel,
                 'brands' => $brands,
-                'itemTypes' => $itemTypes,
+//                'itemTypes' => $itemTypes,
                 'colors' => $colors,
                 'guarantees' => $guarantees,
                 'suppliers' => $suppliers,
@@ -309,6 +377,7 @@ class ItemController extends AbstractController
 
 
     }
+
 
     /**
      * @Route("/duplicate/{id}", name="_duplicate")
@@ -328,6 +397,7 @@ class ItemController extends AbstractController
         } else {
             $this->addFlash('f', $response->getMessage());
         }
+        Cache::cache_action(Servers::Repository, Repository::Item, 'all');
         return $this->redirect($this->generateUrl('repository_item_repository_item_list'));
     }
 
@@ -357,6 +427,19 @@ class ItemController extends AbstractController
         } else {
             $this->addFlash('f', $response->getMessage());
         }
+
+        /*
+         * Cache
+         */
+        $itemModel = new ItemModel();
+        $itemModel->setItemID($item_id);
+        $request = new Req(Servers::Repository, Repository::Item, 'fetch');
+        $request->add_instance($itemModel);
+        $response = $request->send();
+        $responseContent = $response->getContent();
+
+        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
+
         return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
 
 
@@ -382,6 +465,20 @@ class ItemController extends AbstractController
         } else {
             $this->addFlash('f', $response->getMessage());
         }
+
+        /*
+         * Cache
+         */
+        $itemModel = new ItemModel();
+        $itemModel->setItemID($item_id);
+        $request = new Req(Servers::Repository, Repository::Item, 'fetch');
+        $request->add_instance($itemModel);
+        $response = $request->send();
+        $responseContent = $response->getContent();
+
+        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
+
+
         return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
     }
 
@@ -411,6 +508,18 @@ class ItemController extends AbstractController
         } else {
             $this->addFlash('f', $response->getMessage());
         }
+        /*
+         * Cache
+         */
+        $itemModel = new ItemModel();
+        $itemModel->setItemID($item_id);
+        $request = new Req(Servers::Repository, Repository::Item, 'fetch');
+        $request->add_instance($itemModel);
+        $response = $request->send();
+        $responseContent = $response->getContent();
+
+        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
+
         return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
     }
 
@@ -435,6 +544,18 @@ class ItemController extends AbstractController
         } else {
             $this->addFlash('f', $response->getMessage());
         }
+        /*
+         * Cache
+         */
+        $itemModel = new ItemModel();
+        $itemModel->setItemID($item_id);
+        $request = new Req(Servers::Repository, Repository::Item, 'fetch');
+        $request->add_instance($itemModel);
+        $response = $request->send();
+        $responseContent = $response->getContent();
+
+        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
+
         return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
     }
 
@@ -463,6 +584,18 @@ class ItemController extends AbstractController
         } else {
             $this->addFlash('f', $response->getMessage());
         }
+        /*
+         * Cache
+         */
+        $itemModel = new ItemModel();
+        $itemModel->setItemID($item_id);
+        $request = new Req(Servers::Repository, Repository::Item, 'fetch');
+        $request->add_instance($itemModel);
+        $response = $request->send();
+        $responseContent = $response->getContent();
+
+        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
+
         return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
     }
 
@@ -490,6 +623,18 @@ class ItemController extends AbstractController
         } else {
             $this->addFlash('f', $response->getMessage());
         }
+        /*
+         * Cache
+         */
+        $itemModel = new ItemModel();
+        $itemModel->setItemID($item_id);
+        $request = new Req(Servers::Repository, Repository::Item, 'fetch');
+        $request->add_instance($itemModel);
+        $response = $request->send();
+        $responseContent = $response->getContent();
+
+        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
+
         return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
     }
 
@@ -518,6 +663,18 @@ class ItemController extends AbstractController
         } else {
             $this->addFlash('f', $response->getMessage());
         }
+        /*
+         * Cache
+         */
+        $itemModel = new ItemModel();
+        $itemModel->setItemID($item_id);
+        $request = new Req(Servers::Repository, Repository::Item, 'fetch');
+        $request->add_instance($itemModel);
+        $response = $request->send();
+        $responseContent = $response->getContent();
+
+        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
+
         return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
     }
 
@@ -542,6 +699,18 @@ class ItemController extends AbstractController
         } else {
             $this->addFlash('f', $response->getMessage());
         }
+        /*
+         * Cache
+         */
+        $itemModel = new ItemModel();
+        $itemModel->setItemID($item_id);
+        $request = new Req(Servers::Repository, Repository::Item, 'fetch');
+        $request->add_instance($itemModel);
+        $response = $request->send();
+        $responseContent = $response->getContent();
+
+        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
+
         return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
     }
 
@@ -550,6 +719,7 @@ class ItemController extends AbstractController
      * @param Request $request
      * @param $item_id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \ReflectionException
      */
     public function addImage(Request $request, $item_id)
     {
@@ -566,6 +736,19 @@ class ItemController extends AbstractController
             $this->addFlash('s', $uploadResponse->getMessage());
         }
         $this->addFlash('f', $uploadResponse->getMessage());
+
+        /*
+         * Cache
+         */
+        $itemModel = new ItemModel();
+        $itemModel->setItemID($item_id);
+        $cacheRequest = new Req(Servers::Repository, Repository::Item, 'fetch');
+        $cacheRequest->add_instance($itemModel);
+        $response = $cacheRequest->send();
+        $responseContent = $response->getContent();
+
+        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
+
         return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
     }
 
@@ -591,6 +774,18 @@ class ItemController extends AbstractController
         } else {
             $this->addFlash('f', $response->getMessage());
         }
+        /*
+         * Cache
+         */
+        $itemModel = new ItemModel();
+        $itemModel->setItemID($item_id);
+        $cacheRequest = new Req(Servers::Repository, Repository::Item, 'fetch');
+        $cacheRequest->add_instance($itemModel);
+        $response = $cacheRequest->send();
+        $responseContent = $response->getContent();
+
+        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
+
         return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
 
     }
@@ -621,6 +816,17 @@ class ItemController extends AbstractController
         } else {
             $this->addFlash('s', $response->getMessage());
         }
+        /*
+         * Cache
+         */
+        $itemModel = new ItemModel();
+        $itemModel->setItemID($item_id);
+        $cacheRequest = new Req(Servers::Repository, Repository::Item, 'fetch');
+        $cacheRequest->add_instance($itemModel);
+        $response = $cacheRequest->send();
+        $responseContent = $response->getContent();
+
+        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
 
         return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
     }
@@ -649,6 +855,18 @@ class ItemController extends AbstractController
         } else {
             $this->addFlash('s', $response->getMessage());
         }
+        $item_id = $specKeyValueModel->getItemId();
+        /*
+         * Cache
+         */
+        $itemModel = new ItemModel();
+        $itemModel->setItemID($item_id);
+        $cacheRequest = new Req(Servers::Repository, Repository::Item, 'fetch');
+        $cacheRequest->add_instance($itemModel);
+        $response = $cacheRequest->send();
+        $responseContent = $response->getContent();
+
+        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
 
         return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $specKeyValueModel->getItemId()]));
     }
@@ -679,7 +897,17 @@ class ItemController extends AbstractController
         } else {
             $this->addFlash('s', $response->getMessage());
         }
+        /*
+         * Cache
+         */
+        $itemModel = new ItemModel();
+        $itemModel->setItemID($item_id);
+        $cacheRequest = new Req(Servers::Repository, Repository::Item, 'fetch');
+        $cacheRequest->add_instance($itemModel);
+        $response = $cacheRequest->send();
+        $responseContent = $response->getContent();
 
+        Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $item_id, $responseContent);
         return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $item_id]));
     }
 }

@@ -57,10 +57,11 @@ class LoginController extends AbstractController
             $request = new Req(Servers::Authentication, Authentication::User, 'login');
             $request->add_instance($userModel);
             $response = $request->send();
+//            dd($response);
             if ($response->getStatus() == ResponseStatus::successful) {
 
                 $userModel = ModelSerializer::parse($response->getContent(), UserModel::class);
-                $userModel->setUserPassword('');
+//                $userModel->setUserPassword('');
 
                 AuthUser::login($userModel);
 

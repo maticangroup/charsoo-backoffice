@@ -203,7 +203,7 @@ class ItemController extends AbstractController
                     Cache::cache_action(Servers::Repository, Repository::Item, 'all');
                     Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $id, $responseContent);
 
-
+//                    dd($response);
 
                     return $this->redirect($this->generateUrl('repository_item_repository_item_edit', ['id' => $id]));
                 } else {

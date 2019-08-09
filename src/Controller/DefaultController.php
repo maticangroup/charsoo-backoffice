@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\ClientConfig;
 use App\FormModels\Authentication\UserModel;
 use App\FormModels\Repository\PersonModel;
+use App\General\AuthUser;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\Request;
 use Matican\Models\Media\Image;
@@ -19,6 +20,8 @@ class DefaultController extends AbstractController
      */
     public function index()
     {
+
+//        dd(AuthUser::class);
 
 //        $request = new Request("test", "test", "test");
 //        $response = $request->uploadImage(null, null);

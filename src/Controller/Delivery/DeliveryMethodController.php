@@ -39,7 +39,12 @@ class DeliveryMethodController extends AbstractController
      */
     public function fetchAll()
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_all)) {
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_all);
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_update);
+        $canRead = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_fetch);
+        $canChangeStatus = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_change_delivery_method_status);
+
+        if (!$canSeeAll) {
             return $this->redirect($this->generateUrl('default'));
         }
 
@@ -59,6 +64,10 @@ class DeliveryMethodController extends AbstractController
         return $this->render('delivery/delivery_method/list.html.twig', [
             'controller_name' => 'DeliveryMethodController',
             'deliveryMethods' => $deliveryMethods,
+            'canSeeAll' => $canSeeAll,
+            'canEdit' => $canEdit,
+            'canRead' => $canRead,
+            'canChangeStatus' => $canChangeStatus,
         ]);
     }
 
@@ -66,6 +75,7 @@ class DeliveryMethodController extends AbstractController
      * @Route("/create", name="_create")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \ReflectionException
      */
     public function create(Request $request)
     {

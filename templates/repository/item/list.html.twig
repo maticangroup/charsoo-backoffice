@@ -52,6 +52,7 @@
                                     {% if canEdit %}
                                         <th class="not-sortable">{{ 'general.action.title' | trans }}</th>
                                     {% endif %}
+                                    <th class="not-sortable">{{ 'general.duplicate.title' | trans }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -110,6 +111,8 @@
                                             <td>
                                                 <a href="{{ path('repository_item_repository_item_edit' , {id:item.itemID}) }}"
                                                    class="fa fa-edit"></a>
+                                            </td>
+                                            <td>
                                                 <a href="{{ path('repository_item_duplicate' , {id:item.itemID}) }}"
                                                    class="fa fa-copy"></a>
                                             </td>

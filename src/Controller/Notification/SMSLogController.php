@@ -2,8 +2,8 @@
 
 namespace App\Controller\Notification;
 
-use App\FormModels\ModelSerializer;
-use App\FormModels\Notification\SMSModel;
+use Matican\ModelSerializer;
+use Matican\Models\Notification\SMSModel;
 use Matican\Core\Entities\Notifications;
 use Matican\Core\Servers;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

@@ -9,8 +9,8 @@
 namespace App\General;
 
 
-use App\FormModels\Authentication\UserModel;
-use App\FormModels\ModelSerializer;
+use Matican\Models\Authentication\UserModel;
+use Matican\ModelSerializer;
 use App\Params;
 use Matican\Core\Entities\Authentication;
 use Matican\Core\Servers;

@@ -2,12 +2,12 @@
 
 namespace App\Controller\Sale;
 
-use App\FormModels\ModelSerializer;
-use App\FormModels\Repository\PersonModel;
-use App\FormModels\Repository\ProductModel;
-use App\FormModels\Sale\OrderModel;
+use Matican\ModelSerializer;
+use Matican\Models\Repository\PersonModel;
+use Matican\Models\Repository\ProductModel;
+use Matican\Models\Sale\OrderModel;
 use App\General\AuthUser;
-use App\Permissions\ServerPermissions;
+use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Inventory;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Entities\Sale;

@@ -2,18 +2,18 @@
 
 namespace App\Controller\Delivery;
 
-use App\FormModels\Delivery\AvailableQueuesModel;
-use App\FormModels\Delivery\DeliveryMethodModel;
-use App\FormModels\Delivery\DeliveryPersonModel;
-use App\FormModels\Delivery\DispatchModel;
-use App\FormModels\Delivery\QueueModel;
-use App\FormModels\Delivery\WeekDayModel;
-use App\FormModels\ModelSerializer;
-use App\FormModels\Repository\LocationModel;
-use App\FormModels\Repository\PersonModel;
-use App\FormModels\Sale\OrderModel;
+use Matican\Models\Delivery\AvailableQueuesModel;
+use Matican\Models\Delivery\DeliveryMethodModel;
+use Matican\Models\Delivery\DeliveryPersonModel;
+use Matican\Models\Delivery\DispatchModel;
+use Matican\Models\Delivery\QueueModel;
+use Matican\Models\Delivery\WeekDayModel;
+use Matican\ModelSerializer;
+use Matican\Models\Repository\LocationModel;
+use Matican\Models\Repository\PersonModel;
+use Matican\Models\Sale\OrderModel;
 use App\General\AuthUser;
-use App\Permissions\ServerPermissions;
+use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Delivery;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Entities\Sale;

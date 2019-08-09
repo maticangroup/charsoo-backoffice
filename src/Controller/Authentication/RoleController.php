@@ -2,12 +2,12 @@
 
 namespace App\Controller\Authentication;
 
-use App\FormModels\Authentication\PermissionModel;
-use App\FormModels\Authentication\RoleModel;
-use App\FormModels\Authentication\ServerPermissionModel;
-use App\FormModels\ModelSerializer;
+use Matican\Models\Authentication\PermissionModel;
+use Matican\Models\Authentication\RoleModel;
+use Matican\Models\Authentication\ServerPermissionModel;
+use Matican\ModelSerializer;
 use App\General\AuthUser;
-use App\Permissions\ServerPermissions;
+use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Authentication;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;

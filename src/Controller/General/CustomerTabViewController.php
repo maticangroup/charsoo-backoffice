@@ -2,8 +2,8 @@
 
 namespace App\Controller\General;
 
-use App\FormModels\ModelSerializer;
-use App\FormModels\Repository\PersonModel;
+use Matican\ModelSerializer;
+use Matican\Models\Repository\PersonModel;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;

@@ -2,9 +2,9 @@
 
 namespace App\Controller\General;
 
-use App\FormModels\ModelSerializer;
-use App\FormModels\Repository\LocationModel;
-use App\FormModels\Repository\ProvinceModel;
+use Matican\ModelSerializer;
+use Matican\Models\Repository\LocationModel;
+use Matican\Models\Repository\ProvinceModel;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;

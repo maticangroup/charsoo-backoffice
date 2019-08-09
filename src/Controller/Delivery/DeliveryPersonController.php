@@ -2,17 +2,17 @@
 
 namespace App\Controller\Delivery;
 
-use App\FormModels\Delivery\DeliveryMethodModel;
-use App\FormModels\Delivery\DeliveryPersonModel;
-use App\FormModels\Delivery\DeliveryPersonStatusModel;
-use App\FormModels\Delivery\DispatchModel;
-use App\FormModels\Delivery\DispatchPaymentModel;
-use App\FormModels\Delivery\DispatchPaymentStatusModel;
-use App\FormModels\Delivery\DistrictModel;
-use App\FormModels\ModelSerializer;
-use App\FormModels\Repository\ProvinceModel;
+use Matican\Models\Delivery\DeliveryMethodModel;
+use Matican\Models\Delivery\DeliveryPersonModel;
+use Matican\Models\Delivery\DeliveryPersonStatusModel;
+use Matican\Models\Delivery\DispatchModel;
+use Matican\Models\Delivery\DispatchPaymentModel;
+use Matican\Models\Delivery\DispatchPaymentStatusModel;
+use Matican\Models\Delivery\DistrictModel;
+use Matican\ModelSerializer;
+use Matican\Models\Repository\ProvinceModel;
 use App\General\AuthUser;
-use App\Permissions\ServerPermissions;
+use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Delivery;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;

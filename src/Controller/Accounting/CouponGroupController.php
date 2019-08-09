@@ -2,13 +2,13 @@
 
 namespace App\Controller\Accounting;
 
-use App\FormModels\Accounting\CouponGroupModel;
-use App\FormModels\Accounting\CouponGroupStatusModel;
-use App\FormModels\Accounting\UsedCouponModel;
-use App\FormModels\ModelSerializer;
-use App\FormModels\Repository\PersonModel;
+use Matican\Models\Accounting\CouponGroupModel;
+use Matican\Models\Accounting\CouponGroupStatusModel;
+use Matican\Models\Accounting\UsedCouponModel;
+use Matican\ModelSerializer;
+use Matican\Models\Repository\PersonModel;
 use App\General\AuthUser;
-use App\Permissions\ServerPermissions;
+use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Accounting;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;

@@ -2,20 +2,20 @@
 
 namespace App\Controller\Delivery;
 
-use App\FormModels\Delivery\DeliveryMethodModel;
-use App\FormModels\Delivery\DeliveryMethodStatusModel;
-use App\FormModels\Delivery\DeliveryMethodTypeModel;
-use App\FormModels\Delivery\DeliveryPersonModel;
-use App\FormModels\Delivery\DeliveryPersonStatusModel;
-use App\FormModels\Delivery\QueueModel;
-use App\FormModels\Delivery\QueueStatusModel;
-use App\FormModels\Delivery\WeekDayModel;
-use App\FormModels\ModelSerializer;
-use App\FormModels\Repository\PersonModel;
-use App\FormModels\Repository\SizeModel;
+use Matican\Models\Delivery\DeliveryMethodModel;
+use Matican\Models\Delivery\DeliveryMethodStatusModel;
+use Matican\Models\Delivery\DeliveryMethodTypeModel;
+use Matican\Models\Delivery\DeliveryPersonModel;
+use Matican\Models\Delivery\DeliveryPersonStatusModel;
+use Matican\Models\Delivery\QueueModel;
+use Matican\Models\Delivery\QueueStatusModel;
+use Matican\Models\Delivery\WeekDayModel;
+use Matican\ModelSerializer;
+use Matican\Models\Repository\PersonModel;
+use Matican\Models\Repository\SizeModel;
 use App\General\AuthUser;
 
-use App\Permissions\ServerPermissions;
+use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Delivery;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;

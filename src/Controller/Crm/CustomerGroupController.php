@@ -2,12 +2,12 @@
 
 namespace App\Controller\Crm;
 
-use App\FormModels\CRM\CustomerGroupModel;
-use App\FormModels\CRM\CustomerGroupStatusModel;
-use App\FormModels\ModelSerializer;
-use App\FormModels\Repository\PersonModel;
+use Matican\Models\CRM\CustomerGroupModel;
+use Matican\Models\CRM\CustomerGroupStatusModel;
+use Matican\ModelSerializer;
+use Matican\Models\Repository\PersonModel;
 use App\General\AuthUser;
-use App\Permissions\ServerPermissions;
+use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\CRM;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;

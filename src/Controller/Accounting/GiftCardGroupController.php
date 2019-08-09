@@ -2,14 +2,14 @@
 
 namespace App\Controller\Accounting;
 
-use App\FormModels\Accounting\GiftCardGroupAvailabilityStatus;
-use App\FormModels\Accounting\GiftCardGroupModel;
-use App\FormModels\Accounting\GiftCardGroupStatusModel;
-use App\FormModels\Accounting\GiftCardModel;
-use App\FormModels\Accounting\GiftCardStatusModel;
-use App\FormModels\ModelSerializer;
+use Matican\Models\Accounting\GiftCardGroupAvailabilityStatus;
+use Matican\Models\Accounting\GiftCardGroupModel;
+use Matican\Models\Accounting\GiftCardGroupStatusModel;
+use Matican\Models\Accounting\GiftCardModel;
+use Matican\Models\Accounting\GiftCardStatusModel;
+use Matican\ModelSerializer;
 use App\General\AuthUser;
-use App\Permissions\ServerPermissions;
+use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Accounting;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;

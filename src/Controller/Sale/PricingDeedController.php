@@ -2,15 +2,15 @@
 
 namespace App\Controller\Sale;
 
-use App\FormModels\Inventory\ShelveModel;
-use App\FormModels\ModelSerializer;
-use App\FormModels\Repository\ProductModel;
-use App\FormModels\Sale\OfferGroupModel;
-use App\FormModels\Sale\PricingDeedConfirmStatusModel;
-use App\FormModels\Sale\PricingDeedModel;
-use App\FormModels\Sale\PricingDeedStatusModel;
+use Matican\Models\Inventory\ShelveModel;
+use Matican\ModelSerializer;
+use Matican\Models\Repository\ProductModel;
+use Matican\Models\Sale\OfferGroupModel;
+use Matican\Models\Sale\PricingDeedConfirmStatusModel;
+use Matican\Models\Sale\PricingDeedModel;
+use Matican\Models\Sale\PricingDeedStatusModel;
 use App\General\AuthUser;
-use App\Permissions\ServerPermissions;
+use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Inventory;
 use Matican\Core\Entities\Sale;
 use Matican\Core\Servers;

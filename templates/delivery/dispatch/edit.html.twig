@@ -99,175 +99,183 @@
         {% endif %}
 
         {% if dispatchModel.dispatchStatus.dispatchStatusMachineName != 'waiting_for_delivery_person' %}
-            <div class="col-3">
-                <div class="panel">
-                    <div class="panel-heading">
-                        <strong>{{ 'general.delivery.method.title' | trans }}</strong>
-                    </div>
-                    <div class="panel-content">
-                        <form class="row"
-                              action="{{ path('delivery_dispatch_add_delivery_method' , { dispatch_id:dispatchModel.dispatchId }) }}"
-                              method="post">
-                            <div class="col-12">
-                                <div class="form-group row">
-                                    <div class="col-md-12">
-                                        <span class="label-text col-form-label">{{ 'general.size.title' | trans }}</span>
-                                        <select name="deliveryMethodId" class="form-control">
-                                            {% for deliveryMethod in deliveryMethods %}
-                                                <option value="{{ deliveryMethod.deliveryMethodId }}" {{ (deliveryMethod.deliveryMethodId == dispatchModel.dispatchDeliveryMethodId) ? 'selected' : '' }}>
-                                                    {{ deliveryMethod.deliveryMethodName }}
-                                                    | {{ deliveryMethod.deliveryMethodCost }}
-                                                    | {{ deliveryMethod.deliveryMethodTypeName }}
-                                                </option>
-                                            {% endfor %}
-
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <button type="submit"
-                                            class="btn btn-block rounded btn-dark fa fa-save"></button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-9">
-                <div class="panel">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-4 text-left">
-                                <strong>{{ 'general.address.title' | trans }}</strong>
-                            </div>
-                            <div class="col-4"></div>
-                            <div class="col-4 text-right">
-                                <strong>{{ dispatchModel.dispatchDeliveryCost }}</strong>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <div class="panel-content">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th scope="col">{{ 'general.address.title' | trans }}</th>
-                                <th scope="col">{{ 'general.postal.code.title' | trans }}</th>
-                                <th scope="col">{{ 'general.contact.person.title' | trans }}</th>
-                                <th scope="col">{{ 'general.contact.person.mobile.title' | trans }}</th>
-                                <th scope="col">{{ 'general.add.address.title' | trans }}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for ownerLocation in ownerLocations %}
-                                <tr {{ (ownerLocation.locationId == dispatchModel.dispatchToLocationId) ? 'bg-success' : '' }}>
-                                    <td>{{ ownerLocation.address }}</td>
-                                    <td>{{ ownerLocation.postalCode }}</td>
-                                    <td>{{ ownerLocation.locationContactPersonLastName }}</td>
-                                    <td>{{ ownerLocation.locationContactPersonMobile }}</td>
-                                    <td>
-                                        {% if ownerLocation.locationId != dispatchModel.dispatchToLocationId %}
-                                            <a href="{{ path('delivery_dispatch_add_location_to_dispatch' , {dispatch_id:dispatchModel.dispatchId , location_id:ownerLocation.locationId }) }}"
-                                               class="fa fa-plus"></a>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            {% if availableQueues %}
-                <form action="{{ path('delivery_dispatch_add_queue' , {dispatch_id:dispatchModel.dispatchId}) }}"
-                      class="col-12" method="post">
+            {% if canAddDeliveryMethod %}
+                <div class="col-3">
                     <div class="panel">
                         <div class="panel-heading">
-                            <strong>
-                                {{ 'general.available.days.title' | trans }}
-                            </strong>
+                            <strong>{{ 'general.delivery.method.title' | trans }}</strong>
                         </div>
                         <div class="panel-content">
-                            <div class="row">
-                                {% for day in availableQueues %}
-                                    <div class="col-6">
-                                        <div class="panel shadow">
-                                            <div class="panel-heading">
-                                                <strong>{{ day.weekDayName }} | {{ day.weekDayDate }}</strong></div>
-                                            <input type="hidden" name="queueDueDate" value="{{ day.weekDayDate }}">
-                                            <div class="panel-content">
-                                                <table class="table table-striped">
-                                                    <thead>
-                                                    <tr>
-                                                        <th scope="col">{{ 'general.from.time.title' | trans }}</th>
-                                                        <th scope="col">{{ 'general.to.time.title' | trans }}</th>
-                                                        <th scope="col">{{ 'general.capacity.title' | trans }}</th>
-                                                        <th scope="col">{{ 'general.dispatches.title' | trans }}</th>
-                                                        <th scope="col">{{ 'general.action.title' | trans }}</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
+                            <form class="row"
+                                  action="{{ path('delivery_dispatch_add_delivery_method' , { dispatch_id:dispatchModel.dispatchId }) }}"
+                                  method="post">
+                                <div class="col-12">
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <span class="label-text col-form-label">{{ 'general.size.title' | trans }}</span>
+                                            <select name="deliveryMethodId" class="form-control">
+                                                {% for deliveryMethod in deliveryMethods %}
+                                                    <option value="{{ deliveryMethod.deliveryMethodId }}" {{ (deliveryMethod.deliveryMethodId == dispatchModel.dispatchDeliveryMethodId) ? 'selected' : '' }}>
+                                                        {{ deliveryMethod.deliveryMethodName }}
+                                                        | {{ deliveryMethod.deliveryMethodCost }}
+                                                        | {{ deliveryMethod.deliveryMethodTypeName }}
+                                                    </option>
+                                                {% endfor %}
 
-                                                    {% for queue in day.weekDayQueues %}
-                                                        <tr>
-                                                            <td>{{ queue.queueFrom }}</td>
-                                                            <td>{{ queue.queueTo }}</td>
-                                                            <td>{{ queue.queueCapacity }}</td>
-                                                            <td>{{ queue.dispatchesCount }}</td>
-                                                            <td>
-                                                                <label class="form-radio">
-                                                                    <input type="radio" name="queueId"
-                                                                           value="{{ queue.queueId }}" {{ (dispatchModel.dispatchDeliveryQueueId == queue.queueId) ? 'checked' : '' }}
-                                                                           class="form-radio-input">
-                                                                    <span class="form-radio-label"></span>
-                                                                </label>
-                                                            </td>
-                                                        </tr>
-                                                    {% endfor %}
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                            </select>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <button type="submit"
+                                                class="btn btn-block rounded btn-dark fa fa-save"></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if canAddLocation %}
+                <div class="col-9">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-4 text-left">
+                                    <strong>{{ 'general.address.title' | trans }}</strong>
+                                </div>
+                                <div class="col-4"></div>
+                                <div class="col-4 text-right">
+                                    <strong>{{ dispatchModel.dispatchDeliveryCost }}</strong>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="panel-content">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col">{{ 'general.address.title' | trans }}</th>
+                                    <th scope="col">{{ 'general.postal.code.title' | trans }}</th>
+                                    <th scope="col">{{ 'general.contact.person.title' | trans }}</th>
+                                    <th scope="col">{{ 'general.contact.person.mobile.title' | trans }}</th>
+                                    <th scope="col">{{ 'general.add.address.title' | trans }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for ownerLocation in ownerLocations %}
+                                    <tr {{ (ownerLocation.locationId == dispatchModel.dispatchToLocationId) ? 'bg-success' : '' }}>
+                                        <td>{{ ownerLocation.address }}</td>
+                                        <td>{{ ownerLocation.postalCode }}</td>
+                                        <td>{{ ownerLocation.locationContactPersonLastName }}</td>
+                                        <td>{{ ownerLocation.locationContactPersonMobile }}</td>
+                                        <td>
+                                            {% if ownerLocation.locationId != dispatchModel.dispatchToLocationId %}
+                                                <a href="{{ path('delivery_dispatch_add_location_to_dispatch' , {dispatch_id:dispatchModel.dispatchId , location_id:ownerLocation.locationId }) }}"
+                                                   class="fa fa-plus"></a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
                                 {% endfor %}
-                                <div class="col-6">
-                                    <div class="row">
-                                        <div class="col-4"></div>
-                                        <div class="col-4 mt-5">
-                                            <button type="submit"
-                                                    class="fa fa-save btn btn-dark btn-block rounded"></button>
-                                        </div>
-                                        <div class="col-4"></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-4"></div>
-                                        <div class="col-4 mt-5">
-                                            <div class="panel">
-                                                <div class="weather--panel text-white bg-darker">
-                                                    <div class="weather--title">
-                                                        <i class="fa fa-exclamation"></i>
-                                                        <span>
-                                                            {{ 'general.confirm.title' | trans }}
-                                                        </span>
-                                                    </div>
-                                                    <div class="weather--info">
-                                                        <a href="{{ path('delivery_dispatch_confirm_queue' , {dispatch_id:dispatchModel.dispatchId }) }}"
-                                                           class="fa fa-check text-green"></a>
-                                                    </div>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if availableQueues %}
+                {% if canAddQueue %}
+                    <form action="{{ path('delivery_dispatch_add_queue' , {dispatch_id:dispatchModel.dispatchId}) }}"
+                          class="col-12" method="post">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <strong>
+                                    {{ 'general.available.days.title' | trans }}
+                                </strong>
+                            </div>
+                            <div class="panel-content">
+                                <div class="row">
+                                    {% for day in availableQueues %}
+                                        <div class="col-6">
+                                            <div class="panel shadow">
+                                                <div class="panel-heading">
+                                                    <strong>{{ day.weekDayName }} | {{ day.weekDayDate }}</strong></div>
+                                                <input type="hidden" name="queueDueDate" value="{{ day.weekDayDate }}">
+                                                <div class="panel-content">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col">{{ 'general.from.time.title' | trans }}</th>
+                                                            <th scope="col">{{ 'general.to.time.title' | trans }}</th>
+                                                            <th scope="col">{{ 'general.capacity.title' | trans }}</th>
+                                                            <th scope="col">{{ 'general.dispatches.title' | trans }}</th>
+                                                            <th scope="col">{{ 'general.action.title' | trans }}</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        {% for queue in day.weekDayQueues %}
+                                                            <tr>
+                                                                <td>{{ queue.queueFrom }}</td>
+                                                                <td>{{ queue.queueTo }}</td>
+                                                                <td>{{ queue.queueCapacity }}</td>
+                                                                <td>{{ queue.dispatchesCount }}</td>
+                                                                <td>
+                                                                    <label class="form-radio">
+                                                                        <input type="radio" name="queueId"
+                                                                               value="{{ queue.queueId }}" {{ (dispatchModel.dispatchDeliveryQueueId == queue.queueId) ? 'checked' : '' }}
+                                                                               class="form-radio-input">
+                                                                        <span class="form-radio-label"></span>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-4"></div>
+                                    {% endfor %}
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-4"></div>
+                                            <div class="col-4 mt-5">
+                                                <button type="submit"
+                                                        class="fa fa-save btn btn-dark btn-block rounded"></button>
+                                            </div>
+                                            <div class="col-4"></div>
+                                        </div>
+                                        {% if canConfirmQueue %}
+                                            <div class="row">
+                                                <div class="col-4"></div>
+                                                <div class="col-4 mt-5">
+                                                    <div class="panel">
+                                                        <div class="weather--panel text-white bg-darker">
+                                                            <div class="weather--title">
+                                                                <i class="fa fa-exclamation"></i>
+                                                                <span>
+                                                            {{ 'general.confirm.title' | trans }}
+                                                        </span>
+                                                            </div>
+                                                            <div class="weather--info">
+                                                                <a href="{{ path('delivery_dispatch_confirm_queue' , {dispatch_id:dispatchModel.dispatchId }) }}"
+                                                                   class="fa fa-check text-green"></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4"></div>
+                                            </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                {% endif %}
             {% endif %}
         {% endif %}
 

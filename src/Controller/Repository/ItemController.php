@@ -3,29 +3,28 @@
 namespace App\Controller\Repository;
 
 use App\Cache;
-use App\FormModels\Media\ImageModel;
-use App\FormModels\ModelSerializer;
-use App\FormModels\Repository\BarcodeModel;
-use App\FormModels\Repository\BrandModel;
-use App\FormModels\Repository\BrandSuppliersModel;
-use App\FormModels\Repository\CompanyModel;
-use App\FormModels\Repository\GuaranteeModel;
-use App\FormModels\Repository\ItemCategoriesModel;
-use App\FormModels\Repository\ItemCategoryModel;
-use App\FormModels\Repository\ItemCategorySpecKeyModel;
-use App\FormModels\Repository\ItemColorModel;
-use App\FormModels\Repository\ItemModel;
-use App\FormModels\Repository\ItemTypeModel;
-use App\FormModels\Repository\SpecKeyModel;
-use App\FormModels\Repository\SpecKeyValueModel;
+use Matican\Models\Media\ImageModel;
+use Matican\ModelSerializer;
+use Matican\Models\Repository\BarcodeModel;
+use Matican\Models\Repository\BrandModel;
+use Matican\Models\Repository\BrandSuppliersModel;
+use Matican\Models\Repository\CompanyModel;
+use Matican\Models\Repository\GuaranteeModel;
+use Matican\Models\Repository\ItemCategoriesModel;
+use Matican\Models\Repository\ItemCategoryModel;
+use Matican\Models\Repository\ItemCategorySpecKeyModel;
+use Matican\Models\Repository\ItemColorModel;
+use Matican\Models\Repository\ItemModel;
+use Matican\Models\Repository\ItemTypeModel;
+use Matican\Models\Repository\SpecKeyModel;
+use Matican\Models\Repository\SpecKeyValueModel;
 use App\General\AuthUser;
 use App\Params;
-use App\Permissions\ServerPermissions;
+use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\Response;
 use Matican\Core\Transaction\ResponseStatus;
-use Matican\Models\Media\Image;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -45,6 +44,7 @@ class ItemController extends AbstractController
         $canCreate = AuthUser::if_is_allowed(ServerPermissions::repository_item_new);
         $canEdit = AuthUser::if_is_allowed(ServerPermissions::repository_item_fetch);
         $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::repository_color_all);
+        $canDuplicate = AuthUser::if_is_allowed('repository_item_duplicate');
 
         if ($canSeeAll) {
             if (Cache::is_cached(Servers::Repository, Repository::Item, 'all')) {
@@ -69,6 +69,7 @@ class ItemController extends AbstractController
                 'canCreate' => $canCreate,
                 'canEdit' => $canEdit,
                 'canSeeAll' => $canSeeAll,
+                'canDuplicate' => $canDuplicate,
             ]);
         } else {
             return $this->redirect($this->generateUrl('repository_item_repository_item_create'));

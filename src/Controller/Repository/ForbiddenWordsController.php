@@ -2,10 +2,10 @@
 
 namespace App\Controller\Repository;
 
-use App\FormModels\ModelSerializer;
-use App\FormModels\Repository\ForbiddenWordsModel;
+use Matican\ModelSerializer;
+use Matican\Models\Repository\ForbiddenWordsModel;
 use App\General\AuthUser;
-use App\Permissions\ServerPermissions;
+use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;

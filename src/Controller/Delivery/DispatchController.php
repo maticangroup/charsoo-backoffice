@@ -2,18 +2,18 @@
 
 namespace App\Controller\Delivery;
 
-use App\FormModels\Delivery\AvailableQueuesModel;
-use App\FormModels\Delivery\DeliveryMethodModel;
-use App\FormModels\Delivery\DeliveryPersonModel;
-use App\FormModels\Delivery\DispatchModel;
-use App\FormModels\Delivery\QueueModel;
-use App\FormModels\Delivery\WeekDayModel;
-use App\FormModels\ModelSerializer;
-use App\FormModels\Repository\LocationModel;
-use App\FormModels\Repository\PersonModel;
-use App\FormModels\Sale\OrderModel;
+use Matican\Models\Delivery\AvailableQueuesModel;
+use Matican\Models\Delivery\DeliveryMethodModel;
+use Matican\Models\Delivery\DeliveryPersonModel;
+use Matican\Models\Delivery\DispatchModel;
+use Matican\Models\Delivery\QueueModel;
+use Matican\Models\Delivery\WeekDayModel;
+use Matican\ModelSerializer;
+use Matican\Models\Repository\LocationModel;
+use Matican\Models\Repository\PersonModel;
+use Matican\Models\Sale\OrderModel;
 use App\General\AuthUser;
-use App\Permissions\ServerPermissions;
+use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Delivery;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Entities\Sale;
@@ -35,7 +35,10 @@ class DispatchController extends AbstractController
     public function fetchAll()
     {
 
-        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_dispatch_all)) {
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::delivery_dispatch_all);
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::delivery_dispatch_edit);
+
+        if (!$canSeeAll) {
             return $this->redirect($this->generateUrl('default'));
         }
         $request = new Req(Servers::Delivery, Delivery::Dispatch, 'all');
@@ -54,6 +57,8 @@ class DispatchController extends AbstractController
         return $this->render('delivery/dispatch/list.html.twig', [
             'controller_name' => 'DispatchController',
             'dispatches' => $dispatches,
+            'canSeeAll' => $canSeeAll,
+            'canEdit' => $canEdit,
         ]);
     }
 
@@ -62,7 +67,9 @@ class DispatchController extends AbstractController
      */
     public function create()
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_all)) {
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::sale_order_all);
+
+        if (!$canCreate) {
             return $this->redirect($this->generateUrl('delivery_dispatch_list'));
         }
 
@@ -85,6 +92,7 @@ class DispatchController extends AbstractController
         return $this->render('delivery/dispatch/create.html.twig', [
             'controller_name' => 'DispatchController',
             'orders' => $orders,
+            'canCreate' => $canCreate,
         ]);
     }
 
@@ -132,6 +140,11 @@ class DispatchController extends AbstractController
      */
     public function edit($id, Request $request)
     {
+
+        $canAddDeliveryMethod = AuthUser::if_is_allowed(ServerPermissions::delivery_dispatch_set_delivery_method);
+        $canAddLocation = AuthUser::if_is_allowed(ServerPermissions::delivery_dispatch_set_dispatch_location);
+        $canAddQueue = AuthUser::if_is_allowed(ServerPermissions::delivery_dispatch_set_dispatch_queue);
+        $canConfirmQueue = AuthUser::if_is_allowed(ServerPermissions::delivery_dispatch_finalize_dispatch);
 
         if (!AuthUser::if_is_allowed(ServerPermissions::delivery_dispatch_fetch)) {
             return $this->redirect($this->generateUrl('delivery_dispatch_list'));
@@ -250,6 +263,10 @@ class DispatchController extends AbstractController
             'availableQueues' => $availableQueues,
             'ownerLocations' => $ownerLocations,
             'deliveryPersons' => $deliveryPersons,
+            'canAddDeliveryMethod' => $canAddDeliveryMethod,
+            'canAddLocation' => $canAddLocation,
+            'canAddQueue' => $canAddQueue,
+            'canConfirmQueue' => $canConfirmQueue,
         ]);
     }
 

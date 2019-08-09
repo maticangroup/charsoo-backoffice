@@ -33,7 +33,9 @@
                                 <th>{{ 'general.invoice.serial.title' | trans }}</th>
                                 <th>{{ 'general.total.price.title' | trans }}</th>
                                 <th>{{ 'general.status.title' | trans }}</th>
-                                <th class="not-sortable">{{ 'general.create.dispatch.title' | trans }}</th>
+                                {% if canCreate %}
+                                    <th class="not-sortable">{{ 'general.create.dispatch.title' | trans }}</th>
+                                {% endif %}
                             </tr>
                             </thead>
                             <tbody>
@@ -49,10 +51,12 @@
                                             {{ order.orderStatus.orderStatusName }}
                                         </span>
                                     </td>
-                                    <td>
-                                        <a href="{{ path('delivery_dispatch_add_dispatch' , {order_id:order.orderId}) }}"
-                                           class="btn btn-dark rounded fa fa-plus"></a>
-                                    </td>
+                                    {% if canCreate %}
+                                        <td>
+                                            <a href="{{ path('delivery_dispatch_add_dispatch' , {order_id:order.orderId}) }}"
+                                               class="btn btn-dark rounded fa fa-plus"></a>
+                                        </td>
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                             </tbody>

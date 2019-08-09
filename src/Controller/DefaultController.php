@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\ClientConfig;
-use App\FormModels\Authentication\UserModel;
-use App\FormModels\Repository\PersonModel;
+use Matican\Models\Authentication\UserModel;
+use Matican\Models\Repository\PersonModel;
 use App\General\AuthUser;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\Request;

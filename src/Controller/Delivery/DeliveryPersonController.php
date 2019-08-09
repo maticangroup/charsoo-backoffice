@@ -2,17 +2,17 @@
 
 namespace App\Controller\Delivery;
 
-use App\FormModels\Delivery\DeliveryMethodModel;
-use App\FormModels\Delivery\DeliveryPersonModel;
-use App\FormModels\Delivery\DeliveryPersonStatusModel;
-use App\FormModels\Delivery\DispatchModel;
-use App\FormModels\Delivery\DispatchPaymentModel;
-use App\FormModels\Delivery\DispatchPaymentStatusModel;
-use App\FormModels\Delivery\DistrictModel;
-use App\FormModels\ModelSerializer;
-use App\FormModels\Repository\ProvinceModel;
+use Matican\Models\Delivery\DeliveryMethodModel;
+use Matican\Models\Delivery\DeliveryPersonModel;
+use Matican\Models\Delivery\DeliveryPersonStatusModel;
+use Matican\Models\Delivery\DispatchModel;
+use Matican\Models\Delivery\DispatchPaymentModel;
+use Matican\Models\Delivery\DispatchPaymentStatusModel;
+use Matican\Models\Delivery\DistrictModel;
+use Matican\ModelSerializer;
+use Matican\Models\Repository\ProvinceModel;
 use App\General\AuthUser;
-use App\Permissions\ServerPermissions;
+use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Delivery;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
@@ -32,7 +32,13 @@ class DeliveryPersonController extends AbstractController
      */
     public function fetchAll()
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_all)) {
+
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_all);
+        $canReadDeliveryPerson = AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_fetch);
+        $canEditDeliveryPerson = AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_update);
+        $canChangeDeliveryPersonStatus = AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_change_status);
+
+        if (!$canSeeAll) {
             return $this->redirect($this->generateUrl('default'));
         }
         $request = new Req(Servers::Delivery, Delivery::DeliveryPerson, 'all');
@@ -51,6 +57,10 @@ class DeliveryPersonController extends AbstractController
         return $this->render('delivery/delivery_person/list.html.twig', [
             'controller_name' => 'DeliveryPersonController',
             'deliveryPersons' => $deliveryPersons,
+            'canReadDeliveryPerson' => $canReadDeliveryPerson,
+            'canEditDeliveryPerson' => $canEditDeliveryPerson,
+            'canChangeDeliveryPersonStatus' => $canChangeDeliveryPersonStatus,
+            'canSeeAll' => $canSeeAll,
         ]);
     }
 
@@ -63,7 +73,12 @@ class DeliveryPersonController extends AbstractController
      */
     public function edit($id, Request $request)
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_fetch)) {
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_fetch);
+        $canAddDistrict = AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_add_allowed_district);
+        $canRemoveDistrict = AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_remove_allowed_district);
+        $canReadDeliveryMethod = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_fetch);
+
+        if (!$canEdit) {
             return $this->redirect($this->generateUrl('delivery_person_list'));
         }
         $inputs = $request->request->all();
@@ -131,6 +146,9 @@ class DeliveryPersonController extends AbstractController
             'deliveryMethods' => $deliveryMethods,
             'provinces' => $provinces,
             'dispatches' => $dispatches,
+            'canAddDistrict' => $canAddDistrict,
+            'canRemoveDistrict' => $canRemoveDistrict,
+            'canReadDeliveryMethod' => $canReadDeliveryMethod,
         ]);
     }
 
@@ -143,7 +161,8 @@ class DeliveryPersonController extends AbstractController
      */
     public function read($id, Request $request)
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_fetch)) {
+        $canRead = AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_fetch);
+        if (!$canRead) {
             return $this->redirect($this->generateUrl('delivery_person_list'));
         }
         $inputs = $request->request->all();
@@ -210,6 +229,7 @@ class DeliveryPersonController extends AbstractController
             'deliveryMethods' => $deliveryMethods,
             'provinces' => $provinces,
             'dispatches' => $dispatches,
+            'canRead' => $canRead,
         ]);
     }
 

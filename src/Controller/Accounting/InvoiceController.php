@@ -2,19 +2,19 @@
 
 namespace App\Controller\Accounting;
 
-use App\FormModels\Accounting\InvoiceGroupModel;
-use App\FormModels\Accounting\InvoiceItemModel;
-use App\FormModels\Accounting\InvoiceModel;
-use App\FormModels\Accounting\PaymentMethodModel;
-use App\FormModels\Accounting\PaymentModel;
-use App\FormModels\Accounting\PaymentRequestModel;
-use App\FormModels\Accounting\PaymentStatusModel;
-use App\FormModels\Accounting\PaymentTypeModel;
-use App\FormModels\ModelSerializer;
-use App\FormModels\Repository\CompanyModel;
-use App\FormModels\Repository\PersonModel;
+use Matican\Models\Accounting\InvoiceGroupModel;
+use Matican\Models\Accounting\InvoiceItemModel;
+use Matican\Models\Accounting\InvoiceModel;
+use Matican\Models\Accounting\PaymentMethodModel;
+use Matican\Models\Accounting\PaymentModel;
+use Matican\Models\Accounting\PaymentRequestModel;
+use Matican\Models\Accounting\PaymentStatusModel;
+use Matican\Models\Accounting\PaymentTypeModel;
+use Matican\ModelSerializer;
+use Matican\Models\Repository\CompanyModel;
+use Matican\Models\Repository\PersonModel;
 use App\General\AuthUser;
-use App\Permissions\ServerPermissions;
+use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Accounting;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;

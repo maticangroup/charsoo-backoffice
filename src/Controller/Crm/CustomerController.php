@@ -3,24 +3,25 @@
 namespace App\Controller\Crm;
 
 use App\Controller\General\LocationViewController;
-use App\FormModels\Accounting\CouponGroupModel;
-use App\FormModels\Accounting\GiftCardModel;
-use App\FormModels\Accounting\InvoiceModel;
-use App\FormModels\Accounting\PaymentModel;
-use App\FormModels\CRM\CustomerCouponModel;
-use App\FormModels\CRM\CustomerGroupModel;
-use App\FormModels\CRM\InvitationModel;
-use App\FormModels\ModelSerializer;
-use App\FormModels\Notification\SMSModel;
-use App\FormModels\Repository\CompanyModel;
-use App\FormModels\Repository\ItemModel;
-use App\FormModels\Repository\LocationModel;
-use App\FormModels\Repository\PersonModel;
-use App\FormModels\Repository\ProvinceModel;
-use App\FormModels\Sale\OrderModel;
-use App\FormModels\Ticketing\CommentModel;
+use Matican\Models\Accounting\CouponGroupModel;
+use Matican\Models\Accounting\GiftCardModel;
+use Matican\Models\Accounting\InvoiceModel;
+use Matican\Models\Accounting\PaymentModel;
+use Matican\Models\Authentication\UserModel;
+use Matican\Models\CRM\CustomerCouponModel;
+use Matican\Models\CRM\CustomerGroupModel;
+use Matican\Models\CRM\InvitationModel;
+use Matican\ModelSerializer;
+use Matican\Models\Notification\SMSModel;
+use Matican\Models\Repository\CompanyModel;
+use Matican\Models\Repository\ItemModel;
+use Matican\Models\Repository\LocationModel;
+use Matican\Models\Repository\PersonModel;
+use Matican\Models\Repository\ProvinceModel;
+use Matican\Models\Sale\OrderModel;
+use Matican\Models\Ticketing\CommentModel;
 use App\General\AuthUser;
-use App\Permissions\ServerPermissions;
+use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Accounting;
 use Matican\Core\Entities\Authentication;
 use Matican\Core\Entities\CRM;
@@ -44,26 +45,38 @@ class CustomerController extends AbstractController
      */
     public function fetchAll()
     {
+        $canSeeAll = AuthUser::if_is_allowed('crm_customer_list');
 
-        $request = new Req(Servers::Repository, Repository::Person, 'all');
-        $response = $request->send();
+        if ($canSeeAll) {
+            $request = new Req(Servers::Repository, Repository::Person, 'all');
+            $response = $request->send();
 
-        /**
-         * @var $customers PersonModel[]
-         */
-        $customers = [];
-        if ($response->getContent()) {
-            foreach ($response->getContent() as $customer) {
-                $customers[] = ModelSerializer::parse($customer, PersonModel::class);
-            }
-        }
-        if (!AuthUser::if_is_allowed(ServerPermissions::repository_person_all)) {
+            /**
+             * @var $customers PersonModel[]
+             */
             $customers = [];
+            if ($response->getContent()) {
+                foreach ($response->getContent() as $customer) {
+                    $customers[] = ModelSerializer::parse($customer, PersonModel::class);
+                }
+            }
+            if (!AuthUser::if_is_allowed(ServerPermissions::repository_person_all)) {
+                $customers = [];
+            }
+            return $this->render('crm/customer/list.html.twig', [
+                'controller_name' => 'CustomerController',
+                'customers' => $customers,
+                'canSeeAll' => $canSeeAll
+            ]);
+        } else {
+            /**
+             * @var $currentUser UserModel
+             */
+            $currentUser = AuthUser::current_user();
+            return $this->redirect($this->generateUrl('crm_customer_info', ['id' => $currentUser->getPersonId()]));
         }
-        return $this->render('crm/customer/list.html.twig', [
-            'controller_name' => 'CustomerController',
-            'customers' => $customers,
-        ]);
+
+
     }
 
     /**
@@ -146,6 +159,7 @@ class CustomerController extends AbstractController
         $url = explode('index.php', $url)[1];
 
         $locationModel->setPersonId($personModel->getId());
+        $canSeeCompanyGroup = AuthUser::if_is_allowed('crm_customer_company_group');
 
 
         return $this->render('crm/customer/read-info.html.twig', [
@@ -157,6 +171,8 @@ class CustomerController extends AbstractController
 //            'months' => $months,
 //            'days' => $days,
             'url' => $url,
+            'canSeeCompanyGroup' => $canSeeCompanyGroup,
+
         ]);
     }
 
@@ -228,13 +244,15 @@ class CustomerController extends AbstractController
 
         $url = $_SERVER['PHP_SELF'];
         $url = explode('index.php', $url)[1];
+        $canSeeCompanyGroup = AuthUser::if_is_allowed('crm_customer_company_group');
 
 
         return $this->render('crm/customer/read-sms.html.twig', [
             'controller_name' => 'CustomerController',
             'personModel' => $personModel,
             'smsLogs' => $smsLogs,
-            'url' => $url
+            'url' => $url,
+            'canSeeCompanyGroup' => $canSeeCompanyGroup,
         ]);
     }
 
@@ -277,12 +295,14 @@ class CustomerController extends AbstractController
 
         $url = $_SERVER['PHP_SELF'];
         $url = explode('index.php', $url)[1];
+        $canSeeCompanyGroup = AuthUser::if_is_allowed('crm_customer_company_group');
 
         return $this->render('crm/customer/read-order.html.twig', [
             'controller_name' => 'CustomerController',
             'personModel' => $personModel,
             'url' => $url,
             'orders' => $orders,
+            'canSeeCompanyGroup' => $canSeeCompanyGroup,
         ]);
     }
 
@@ -325,6 +345,7 @@ class CustomerController extends AbstractController
 
         $url = $_SERVER['PHP_SELF'];
         $url = explode('index.php', $url)[1];
+        $canSeeCompanyGroup = AuthUser::if_is_allowed('crm_customer_company_group');
 
 
         return $this->render('crm/customer/read-favorite.html.twig', [
@@ -332,6 +353,7 @@ class CustomerController extends AbstractController
             'personModel' => $personModel,
             'url' => $url,
             'favoriteItems' => $favoriteItems,
+            'canSeeCompanyGroup' => $canSeeCompanyGroup,
         ]);
     }
 
@@ -394,6 +416,7 @@ class CustomerController extends AbstractController
 
         $url = $_SERVER['PHP_SELF'];
         $url = explode('index.php', $url)[1];
+        $canSeeCompanyGroup = AuthUser::if_is_allowed('crm_customer_company_group');
 
         return $this->render('crm/customer/read-gift-coupon.html.twig', [
             'controller_name' => 'CustomerController',
@@ -401,6 +424,7 @@ class CustomerController extends AbstractController
             'url' => $url,
             'giftCards' => $giftCards,
             'coupons' => $coupons,
+            'canSeeCompanyGroup' => $canSeeCompanyGroup
         ]);
     }
 
@@ -416,51 +440,56 @@ class CustomerController extends AbstractController
         if (!AuthUser::if_is_allowed(ServerPermissions::repository_person_fetch)) {
             return $this->redirect($this->generateUrl('crm_customer_list'));
         }
-        $inputs = $request->request->all();
-        /**
-         * @var $personModel PersonModel
-         */
-        $personModel = ModelSerializer::parse($inputs, PersonModel::class);
-        $personModel->setId($id);
-        $request = new Req(Servers::Repository, Repository::Person, 'fetch');
-        $request->add_instance($personModel);
-        $response = $request->send();
-        /**
-         * @var $personModel PersonModel
-         */
-        $personModel = ModelSerializer::parse($response->getContent(), PersonModel::class);
 
-        /**
-         * @var $companies CompanyModel[]
-         */
-        $companies = [];
-        if ($personModel->getCompanies()) {
-            foreach ($personModel->getCompanies() as $company) {
-                $companies[] = ModelSerializer::parse($company, CompanyModel::class);
+        $canSeeCompanyGroup = AuthUser::if_is_allowed('crm_customer_company_group');
+        if ($canSeeCompanyGroup) {
+            $inputs = $request->request->all();
+            /**
+             * @var $personModel PersonModel
+             */
+            $personModel = ModelSerializer::parse($inputs, PersonModel::class);
+            $personModel->setId($id);
+            $request = new Req(Servers::Repository, Repository::Person, 'fetch');
+            $request->add_instance($personModel);
+            $response = $request->send();
+            /**
+             * @var $personModel PersonModel
+             */
+            $personModel = ModelSerializer::parse($response->getContent(), PersonModel::class);
+
+            /**
+             * @var $companies CompanyModel[]
+             */
+            $companies = [];
+            if ($personModel->getCompanies()) {
+                foreach ($personModel->getCompanies() as $company) {
+                    $companies[] = ModelSerializer::parse($company, CompanyModel::class);
+                }
             }
-        }
 
-        /**
-         * @var $groups CustomerGroupModel[]
-         */
-        $groups = [];
-        if ($personModel->getGroups()) {
-            foreach ($personModel->getGroups() as $group) {
-                $groups[] = ModelSerializer::parse($group, CustomerGroupModel::class);
+            /**
+             * @var $groups CustomerGroupModel[]
+             */
+            $groups = [];
+            if ($personModel->getGroups()) {
+                foreach ($personModel->getGroups() as $group) {
+                    $groups[] = ModelSerializer::parse($group, CustomerGroupModel::class);
+                }
             }
+
+
+            $url = $_SERVER['PHP_SELF'];
+            $url = explode('index.php', $url)[1];
+
+            return $this->render('crm/customer/read-company-group.html.twig', [
+                'controller_name' => 'CustomerController',
+                'personModel' => $personModel,
+                'url' => $url,
+                'companies' => $companies,
+                'groups' => $groups,
+                'canSeeCompanyGroup' => $canSeeCompanyGroup,
+            ]);
         }
-
-
-        $url = $_SERVER['PHP_SELF'];
-        $url = explode('index.php', $url)[1];
-
-        return $this->render('crm/customer/read-company-group.html.twig', [
-            'controller_name' => 'CustomerController',
-            'personModel' => $personModel,
-            'url' => $url,
-            'companies' => $companies,
-            'groups' => $groups,
-        ]);
     }
 
     /**
@@ -503,12 +532,15 @@ class CustomerController extends AbstractController
         $url = $_SERVER['PHP_SELF'];
         $url = explode('index.php', $url)[1];
 
+        $canSeeCompanyGroup = AuthUser::if_is_allowed('crm_customer_company_group');
+
 
         return $this->render('crm/customer/read-payment-deed.html.twig', [
             'controller_name' => 'CustomerController',
             'personModel' => $personModel,
             'url' => $url,
             'payments' => $payments,
+            'canSeeCompanyGroup' => $canSeeCompanyGroup,
         ]);
     }
 
@@ -551,6 +583,7 @@ class CustomerController extends AbstractController
 
         $url = $_SERVER['PHP_SELF'];
         $url = explode('index.php', $url)[1];
+        $canSeeCompanyGroup = AuthUser::if_is_allowed('crm_customer_company_group');
 
 
         return $this->render('crm/customer/read-invoice.html.twig', [
@@ -558,6 +591,8 @@ class CustomerController extends AbstractController
             'personModel' => $personModel,
             'url' => $url,
             'invoices' => $invoices,
+            'canSeeCompanyGroup' => $canSeeCompanyGroup
+
         ]);
     }
 
@@ -630,12 +665,15 @@ class CustomerController extends AbstractController
             return $this->redirect($this->generateUrl('crm_customer_invitation', ['id' => $id]));
         }
 
+        $canSeeCompanyGroup = AuthUser::if_is_allowed('crm_customer_company_group');
+
         return $this->render('crm/customer/read-invitation.html.twig', [
             'controller_name' => 'CustomerController',
             'personModel' => $personModel,
             'url' => $url,
             'invitations' => $invitations,
             'invitationModel' => $invitationModel,
+            'canSeeCompanyGroup' => $canSeeCompanyGroup,
         ]);
     }
 
@@ -678,12 +716,14 @@ class CustomerController extends AbstractController
 
         $url = $_SERVER['PHP_SELF'];
         $url = explode('index.php', $url)[1];
+        $canSeeCompanyGroup = AuthUser::if_is_allowed('crm_customer_company_group');
 
         return $this->render('crm/customer/read-comment.html.twig', [
             'controller_name' => 'CustomerController',
             'personModel' => $personModel,
             'url' => $url,
             'comments' => $comments,
+            'canSeeCompanyGroup' => $canSeeCompanyGroup,
         ]);
     }
 }

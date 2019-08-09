@@ -2,9 +2,9 @@
 
 namespace App\Controller\Ticketing;
 
-use App\FormModels\ModelSerializer;
-use App\FormModels\Ticketing\CommentModel;
-use App\FormModels\Ticketing\ItemCommentsModel;
+use Matican\ModelSerializer;
+use Matican\Models\Ticketing\CommentModel;
+use Matican\Models\Ticketing\ItemCommentsModel;
 use Matican\Core\Entities\Ticketing;
 use Matican\Core\Servers;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

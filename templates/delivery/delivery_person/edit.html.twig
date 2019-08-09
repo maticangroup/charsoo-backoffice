@@ -38,7 +38,9 @@
                                         <th>{{ 'general.province.title' | trans }}</th>
                                         <th>{{ 'general.city.title' | trans }}</th>
                                         <th>{{ 'general.district.title' | trans }}</th>
-                                        <th>{{ 'general.action.title' | trans }}</th>
+                                        {% if canRemoveDistrict %}
+                                            <th>{{ 'general.action.title' | trans }}</th>
+                                        {% endif %}
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -47,51 +49,55 @@
                                             <td>{{ allowedDistrict.provinceName }}</td>
                                             <td>{{ allowedDistrict.cityName }}</td>
                                             <td>{{ allowedDistrict.districtName }}</td>
-                                            <td>
-                                                <a href="{{ path('delivery_person_remove_district' , {delivery_person_id:deliveryPersonModel.deliveryPersonId , district_id:allowedDistrict.districtId}) }}"
-                                                   class="fa fa-trash"></a>
-                                            </td>
+                                            {% if canRemoveDistrict %}
+                                                <td>
+                                                    <a href="{{ path('delivery_person_remove_district' , {delivery_person_id:deliveryPersonModel.deliveryPersonId , district_id:allowedDistrict.districtId}) }}"
+                                                       class="fa fa-trash"></a>
+                                                </td>
+                                            {% endif %}
                                         </tr>
                                     {% endfor %}
-                                    <tr>
-                                        <form action="{{ path('delivery_person_add_district' , {delivery_person_id:deliveryPersonModel.deliveryPersonId}) }}"
-                                              method="post">
-                                            <td>
-                                                <input type="text" list="provinces" name="provinceName"
-                                                       class="form-control"
-                                                       placeholder="{{ 'general.province.title' | trans }}">
-                                                <datalist id="provinces">
-                                                    {% for province in provinces %}
-                                                    <option value="{{ province.provinceName }}">
-                                                        {% endfor %}
-                                                </datalist>
-                                            </td>
-                                            <td>
-                                                <input type="text" list="cities" name="cityName" class="form-control"
-                                                       placeholder="{{ 'general.city.title' | trans }}">
-                                                <datalist id="cities">
-                                                    <option value="city 1">
-                                                    <option value="city 1">
-                                                    <option value="city 1">
-                                                </datalist>
-                                            </td>
-                                            <td>
-                                                <input type="search" list="districts" name="districtName"
-                                                       class="form-control"
-                                                       placeholder="{{ 'general.district.title' | trans }}">
-                                                <datalist id="districts">
-                                                    <option value="1">
-                                                    <option value="2">
-                                                    <option value="3">
-                                                </datalist>
-                                            </td>
-                                            <td>
-                                                <button type="submit"
-                                                        class="btn rounded btn-block btn-dark fa fa-save"></button>
-                                            </td>
-                                        </form>
-
-                                    </tr>
+                                    {% if canAddDistrict %}
+                                        <tr>
+                                            <form action="{{ path('delivery_person_add_district' , {delivery_person_id:deliveryPersonModel.deliveryPersonId}) }}"
+                                                  method="post">
+                                                <td>
+                                                    <input type="text" list="provinces" name="provinceName"
+                                                           class="form-control"
+                                                           placeholder="{{ 'general.province.title' | trans }}">
+                                                    <datalist id="provinces">
+                                                        {% for province in provinces %}
+                                                        <option value="{{ province.provinceName }}">
+                                                            {% endfor %}
+                                                    </datalist>
+                                                </td>
+                                                <td>
+                                                    <input type="text" list="cities" name="cityName"
+                                                           class="form-control"
+                                                           placeholder="{{ 'general.city.title' | trans }}">
+                                                    <datalist id="cities">
+                                                        <option value="city 1">
+                                                        <option value="city 1">
+                                                        <option value="city 1">
+                                                    </datalist>
+                                                </td>
+                                                <td>
+                                                    <input type="search" list="districts" name="districtName"
+                                                           class="form-control"
+                                                           placeholder="{{ 'general.district.title' | trans }}">
+                                                    <datalist id="districts">
+                                                        <option value="1">
+                                                        <option value="2">
+                                                        <option value="3">
+                                                    </datalist>
+                                                </td>
+                                                <td>
+                                                    <button type="submit"
+                                                            class="btn rounded btn-block btn-dark fa fa-save"></button>
+                                                </td>
+                                            </form>
+                                        </tr>
+                                    {% endif %}
 
                                     </tbody>
                                 </table>
@@ -169,7 +175,9 @@
                                 <th>{{ 'general.delivery.persons.count.title' | trans }}</th>
                                 <th scope="col">{{ 'general.dispatches.title' | trans }}</th>
                                 <th scope="col">{{ 'general.status.title' | trans }}</th>
-                                <th scope="col">{{ 'general.action.title' | trans }}</th>
+                                {% if canReadDeliveryMethod %}
+                                    <th scope="col">{{ 'general.action.title' | trans }}</th>
+                                {% endif %}
                             </tr>
                             </thead>
                             <tbody>
@@ -199,10 +207,12 @@
                                             {{ deliveryMethod.deliveryMethodStatus.deliveryMethodStatusName }}
                                         </span>
                                     </td>
-                                    <td>
-                                        <a href="{{ path('delivery_method_read' , {id:deliveryMethod.deliveryMethodId}) }}"
-                                           class="fa fa-eye"></a>
-                                    </td>
+                                    {% if canReadDeliveryMethod %}
+                                        <td>
+                                            <a href="{{ path('delivery_method_read' , {id:deliveryMethod.deliveryMethodId}) }}"
+                                               class="fa fa-eye"></a>
+                                        </td>
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                             </tbody>

@@ -48,11 +48,11 @@
                                                     {% for sms in smsLogs %}
                                                         <tr>
                                                             <td>{{ sms.smsLogSendDate }}</td>
-                                                            <td>{{ sms.smsLogDescription }}</td>
+                                                            <td>{{ sms.smsLogContent }}</td>
                                                             <td>{{ sms.smsLogFrom }}</td>
                                                             <td>{{ sms.smsLogLength }}</td>
-                                                            <td>{{ sms.smsLogTo }}</td>
-                                                            <td>{{ sms.smsLogToPersonName }}</td>
+                                                            <td>{{ sms.smsLogToPersonPhone }}</td>
+                                                            <td>{{ sms.smsLogToPersonFirstName }} {{ sms.smsLogToPersonLastName }}</td>
                                                         </tr>
                                                     {% endfor %}
                                                     </tbody>

@@ -2,8 +2,8 @@
 
 namespace App\Controller\Authentication;
 
-use App\FormModels\Authentication\UserModel;
-use App\FormModels\ModelSerializer;
+use Matican\Models\Authentication\UserModel;
+use Matican\ModelSerializer;
 use App\General\AuthUser;
 use Grpc\Server;
 use Matican\Core\Entities\Authentication;

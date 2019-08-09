@@ -2,18 +2,18 @@
 
 namespace App\Controller\Inventory;
 
-use App\FormModels\Inventory\InventoryDeedModel;
-use App\FormModels\Inventory\InventoryDeedStatusModel;
-use App\FormModels\Inventory\InventoryModel;
-use App\FormModels\Inventory\InventoryProductsModel;
-use App\FormModels\Inventory\ShelveModel;
-use App\FormModels\Inventory\ShelveProductsModel;
-use App\FormModels\ModelSerializer;
-use App\FormModels\Repository\ItemModel;
-use App\FormModels\Repository\ItemProductsModel;
-use App\FormModels\Repository\ProductModel;
+use Matican\Models\Inventory\InventoryDeedModel;
+use Matican\Models\Inventory\InventoryDeedStatusModel;
+use Matican\Models\Inventory\InventoryModel;
+use Matican\Models\Inventory\InventoryProductsModel;
+use Matican\Models\Inventory\ShelveModel;
+use Matican\Models\Inventory\ShelveProductsModel;
+use Matican\ModelSerializer;
+use Matican\Models\Repository\ItemModel;
+use Matican\Models\Repository\ItemProductsModel;
+use Matican\Models\Repository\ProductModel;
 use App\General\AuthUser;
-use App\Permissions\ServerPermissions;
+use Matican\Permissions\ServerPermissions;
 use Grpc\Server;
 use Matican\Core\Entities\Inventory;
 use Matican\Core\Entities\Repository;

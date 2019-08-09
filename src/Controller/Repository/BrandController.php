@@ -3,10 +3,10 @@
 namespace App\Controller\Repository;
 
 use App\Cache;
-use App\FormModels\ModelSerializer;
-use App\FormModels\Repository\BrandModel;
-use App\FormModels\Repository\BrandSupplierModel;
-use App\FormModels\Repository\CompanyModel;
+use Matican\ModelSerializer;
+use Matican\Models\Repository\BrandModel;
+use Matican\Models\Repository\BrandSupplierModel;
+use Matican\Models\Repository\CompanyModel;
 use App\General\AuthUser;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;

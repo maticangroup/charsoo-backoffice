@@ -2,9 +2,9 @@
 
 namespace App\Controller\Notification;
 
-use App\FormModels\ModelSerializer;
-use App\FormModels\Notification\MailTemplateModel;
-use App\FormModels\Notification\TokenModel;
+use Matican\ModelSerializer;
+use Matican\Models\Notification\MailTemplateModel;
+use Matican\Models\Notification\TokenModel;
 use Matican\Core\Entities\Notifications;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\ResponseStatus;

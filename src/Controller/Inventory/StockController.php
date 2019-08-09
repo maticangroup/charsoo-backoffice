@@ -2,12 +2,12 @@
 
 namespace App\Controller\Inventory;
 
-use App\FormModels\ModelSerializer;
-use App\FormModels\Repository\ItemModel;
-use App\FormModels\Repository\ItemProductsModel;
-use App\FormModels\Repository\ProductModel;
+use Matican\ModelSerializer;
+use Matican\Models\Repository\ItemModel;
+use Matican\Models\Repository\ItemProductsModel;
+use Matican\Models\Repository\ProductModel;
 use App\General\AuthUser;
-use App\Permissions\ServerPermissions;
+use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

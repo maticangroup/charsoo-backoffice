@@ -2,11 +2,11 @@
 
 namespace App\Controller\General;
 
-use App\FormModels\Accounting\InvoiceItemModel;
-use App\FormModels\Accounting\InvoiceModel;
+use Matican\Models\Accounting\InvoiceItemModel;
+use Matican\Models\Accounting\InvoiceModel;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use App\FormModels\ModelSerializer;
+use Matican\ModelSerializer;
 
 class InvoiceViewController extends AbstractController
 {

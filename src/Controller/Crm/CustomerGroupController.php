@@ -31,39 +31,46 @@ class CustomerGroupController extends AbstractController
      */
     public function create(Request $request)
     {
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::crm_customergroup_new);
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::crm_customergroup_all);
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::crm_customergroup_fetch);
+        $canChangeStatus = AuthUser::if_is_allowed(ServerPermissions::crm_customergroup_set_status);
 
         $inputs = $request->request->all();
         /**
          * @var $customerGroupModel CustomerGroupModel
          */
         $customerGroupModel = ModelSerializer::parse($inputs, CustomerGroupModel::class);
-        if (!empty($inputs)) {
+        if ($canCreate) {
+            if (!empty($inputs)) {
 //            dd($customerGroupModel);
-            $request = new Req(Servers::CRM, CRM::CustomerGroup, 'new');
-            $request->add_instance($customerGroupModel);
-            $response = $request->send();
+                $request = new Req(Servers::CRM, CRM::CustomerGroup, 'new');
+                $request->add_instance($customerGroupModel);
+                $response = $request->send();
 //            dd($response);
-            if ($response->getStatus() == ResponseStatus::successful) {
-                $this->addFlash('s', $response->getMessage());
-            } else {
-                $this->addFlash('f', $response->getMessage());
+                if ($response->getStatus() == ResponseStatus::successful) {
+                    $this->addFlash('s', $response->getMessage());
+                } else {
+                    $this->addFlash('f', $response->getMessage());
+                }
             }
         }
+
 
         /**
          * @var $customerGroups CustomerGroupModel[]
          */
         $customerGroups = [];
-        $allCustomerGroupsRequest = new Req(Servers::CRM, CRM::CustomerGroup, 'all');
-        $allCustomerGroupsResponse = $allCustomerGroupsRequest->send();
-        if ($allCustomerGroupsResponse->getContent()) {
-            foreach ($allCustomerGroupsResponse->getContent() as $customerGroup) {
-                $customerGroups[] = ModelSerializer::parse($customerGroup, CustomerGroupModel::class);
+        if ($canSeeAll) {
+            $allCustomerGroupsRequest = new Req(Servers::CRM, CRM::CustomerGroup, 'all');
+            $allCustomerGroupsResponse = $allCustomerGroupsRequest->send();
+            if ($allCustomerGroupsResponse->getContent()) {
+                foreach ($allCustomerGroupsResponse->getContent() as $customerGroup) {
+                    $customerGroups[] = ModelSerializer::parse($customerGroup, CustomerGroupModel::class);
+                }
             }
         }
-        if (!AuthUser::if_is_allowed(ServerPermissions::crm_customergroup_all)) {
-            $customerGroups = [];
-        }
+
         /**
          * @todo Authorization should be handled in twig
          */
@@ -71,6 +78,10 @@ class CustomerGroupController extends AbstractController
             'controller_name' => 'CustomerGroupController',
             'customerGroupModel' => $customerGroupModel,
             'customerGroups' => $customerGroups,
+            'canCreate' => $canCreate,
+            'canSeeAll' => $canSeeAll,
+            'canEdit' => $canEdit,
+            'canChangeStatus' => $canChangeStatus,
         ]);
     }
 
@@ -87,6 +98,10 @@ class CustomerGroupController extends AbstractController
         if (!AuthUser::if_is_allowed(ServerPermissions::crm_customergroup_fetch)) {
             return $this->redirect($this->generateUrl('crm_customer_group_create'));
         }
+
+        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::crm_customergroup_update);
+        $canAddPerson = AuthUser::if_is_allowed(ServerPermissions::crm_customergroup_add_person);
+        $canRemovePerson = AuthUser::if_is_allowed(ServerPermissions::crm_customergroup_remove_person);
 
         $inputs = $request->request->all();
         /**
@@ -126,29 +141,34 @@ class CustomerGroupController extends AbstractController
             }
         }
 
-
-        if (!empty($inputs)) {
-            /**
-             * @var $customerGroupModel CustomerGroupModel
-             */
-            $customerGroupModel = ModelSerializer::parse($inputs, CustomerGroupModel::class);
-            $customerGroupModel->setCustomerGroupId($id);
-            $request = new Req(Servers::CRM, CRM::CustomerGroup, 'update');
-            $request->add_instance($customerGroupModel);
-            $response = $request->send();
-            if ($response->getStatus() == ResponseStatus::successful) {
-                $this->addFlash('s', $response->getMessage());
-                return $this->redirect($this->generateUrl('crm_customer_group_edit', ['id' => $id]));
-            } else {
-                $this->addFlash('f', $response->getMessage());
+        if ($canUpdate) {
+            if (!empty($inputs)) {
+                /**
+                 * @var $customerGroupModel CustomerGroupModel
+                 */
+                $customerGroupModel = ModelSerializer::parse($inputs, CustomerGroupModel::class);
+                $customerGroupModel->setCustomerGroupId($id);
+                $request = new Req(Servers::CRM, CRM::CustomerGroup, 'update');
+                $request->add_instance($customerGroupModel);
+                $response = $request->send();
+                if ($response->getStatus() == ResponseStatus::successful) {
+                    $this->addFlash('s', $response->getMessage());
+                    return $this->redirect($this->generateUrl('crm_customer_group_edit', ['id' => $id]));
+                } else {
+                    $this->addFlash('f', $response->getMessage());
+                }
             }
         }
+
 
         return $this->render('crm/customer_group/edit.html.twig', [
             'controller_name' => 'CustomerGroupController',
             'customerGroupModel' => $customerGroupModel,
             'persons' => $persons,
             'selectedPersons' => $selectedPersons,
+            'canUpdate' => $canUpdate,
+            'canAddPerson' => $canAddPerson,
+            'canRemovePerson' => $canRemovePerson
         ]);
     }
 

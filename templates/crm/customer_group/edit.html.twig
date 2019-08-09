@@ -26,7 +26,10 @@
                                            class="form-control mb-3" name="customerGroupName">
                                     <textarea name="customerGroupDescription" class="form-control mb-3"
                                               placeholder="{{ 'general.description.title' | trans }}">{{ customerGroupModel.customerGroupDescription }}</textarea>
-                                    <button type="submit" class="btn btn-block rounded btn-info fa fa-save"></button>
+                                    {% if canUpdate %}
+                                        <button type="submit"
+                                                class="btn btn-block rounded btn-info fa fa-save"></button>
+                                    {% endif %}
                                 </div>
                             </div>
                         </form>
@@ -48,9 +51,11 @@
                                 {% endfor %}
                             </select>
                         </div>
-                        <div class="col-md-2">
-                            <button type="submit" class="btn rounded btn-block btn-dark fa fa-save"></button>
-                        </div>
+                        {% if canAddPerson %}
+                            <div class="col-md-2">
+                                <button type="submit" class="btn rounded btn-block btn-dark fa fa-save"></button>
+                            </div>
+                        {% endif %}
                         <div class="col-3"></div>
                     </form>
                     <!---->
@@ -64,7 +69,9 @@
                                 <th>{{ 'general.email.title' | trans }}</th>
                                 <th>{{ 'general.groups.title' | trans }}</th>
                                 <th>{{ 'general.companies.title' | trans }}</th>
-                                <th>{{ 'general.action.title' | trans }}</th>
+                                {% if canRemovePerson %}
+                                    <th>{{ 'general.action.title' | trans }}</th>
+                                {% endif %}
                             </tr>
                             </thead>
                             <tbody>
@@ -84,10 +91,12 @@
                                             <span class="label label-info rounded">{{ company.companyName }}</span>
                                         {% endfor %}
                                     </td>
-                                    <td>
-                                        <a href="{{ path('crm_customer_group_remove_customer' , {person_id:selectedPerson.id , customer_group_id:customerGroupModel.customerGroupId }) }}"
-                                           class="fa fa-trash"></a>
-                                    </td>
+                                    {% if canRemovePerson %}
+                                        <td>
+                                            <a href="{{ path('crm_customer_group_remove_customer' , {person_id:selectedPerson.id , customer_group_id:customerGroupModel.customerGroupId }) }}"
+                                               class="fa fa-trash"></a>
+                                        </td>
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                             </tbody>

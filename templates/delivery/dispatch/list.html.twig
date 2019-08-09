@@ -114,66 +114,71 @@
         {#</div>#}
         {#</div>#}
 
-
-        <div class="col-12">
-            <div class="panel">
-                <div class="panel-content">
-                    <div class="form-group row">
-                        <div class="col-4"></div>
-                        <div class="col-md-4">
-                            <input type="text" placeholder="{{ 'general.search.title' | trans }}" name="text"
-                                   class="form-control">
+        {% if canSeeAll %}
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-content">
+                        <div class="form-group row">
+                            <div class="col-4"></div>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="{{ 'general.search.title' | trans }}" name="text"
+                                       class="form-control">
+                            </div>
+                            <div class="col-4"></div>
                         </div>
-                        <div class="col-4"></div>
-                    </div>
-                    <!-- Records List Start -->
-                    <div class="records--list">
-                        <table id="usersRoleList">
-                            <thead>
-                            <tr>
-
-                                <th>{{ 'general.create.date.title' | trans }}</th>
-                                <th>{{ 'general.delivery.method.title' | trans }}</th>
-                                <th>{{ 'general.queue.title' | trans }}</th>
-                                <th>{{ 'general.address.title' | trans }}</th>
-                                <th>{{ 'general.total.price.title' | trans }}</th>
-                                <th>{{ 'general.delivery.status.title' | trans }}</th>
-                                <th>{{ 'general.pay.status.title' | trans }}</th>
-                                <th>{{ 'general.action.title' | trans }}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            {% for dispatch in dispatches %}
+                        <!-- Records List Start -->
+                        <div class="records--list">
+                            <table id="usersRoleList">
+                                <thead>
                                 <tr>
-                                    {#{{ dump(dispatch) }}#}
-                                    <td>{{ dispatch.dispatchCreateDate }}</td>
-                                    <td>{{ dispatch.dispatchDeliveryMethodName }}</td>
-                                    <td>{{ dispatch.dispatchDeliveryQueueName }}</td>
-                                    <td>{{ dispatch.dispatchAddress }}</td>
-                                    <td>{{ dispatch.dispatchTotalPrice }}</td>
-                                    <td>
+
+                                    <th>{{ 'general.create.date.title' | trans }}</th>
+                                    <th>{{ 'general.delivery.method.title' | trans }}</th>
+                                    <th>{{ 'general.queue.title' | trans }}</th>
+                                    <th>{{ 'general.address.title' | trans }}</th>
+                                    <th>{{ 'general.total.price.title' | trans }}</th>
+                                    <th>{{ 'general.delivery.status.title' | trans }}</th>
+                                    <th>{{ 'general.pay.status.title' | trans }}</th>
+                                    {% if canEdit %}
+                                        <th>{{ 'general.action.title' | trans }}</th>
+                                    {% endif %}
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for dispatch in dispatches %}
+                                    <tr>
+                                        {#{{ dump(dispatch) }}#}
+                                        <td>{{ dispatch.dispatchCreateDate }}</td>
+                                        <td>{{ dispatch.dispatchDeliveryMethodName }}</td>
+                                        <td>{{ dispatch.dispatchDeliveryQueueName }}</td>
+                                        <td>{{ dispatch.dispatchAddress }}</td>
+                                        <td>{{ dispatch.dispatchTotalPrice }}</td>
+                                        <td>
                                         <span class="label rounded"
                                               style="background-color: {{ dispatch.dispatchDeliveryStatus.dispatchDeliveryStatusColor }}">{{ dispatch.dispatchDeliveryStatus.dispatchDeliveryStatusName }}</span>
-                                    </td>
-                                    <td>
+                                        </td>
+                                        <td>
                                         <span class="label rounded"
                                               style="background-color: {{ dispatch.dispatchPriceStatus.dispatchPriceColor }}">{{ dispatch.dispatchPriceStatus.dispatchPriceName }}</span>
-                                    </td>
-                                    <td>
-                                        <a href="{{ path('delivery_dispatch_edit' , {id:dispatch.dispatchId}) }}"
-                                           class="fa fa-edit"></a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
+                                        </td>
+                                        {% if canEdit %}
+                                            <td>
+                                                <a href="{{ path('delivery_dispatch_edit' , {id:dispatch.dispatchId}) }}"
+                                                   class="fa fa-edit"></a>
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
 
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Records List End -->
                     </div>
-                    <!-- Records List End -->
                 </div>
             </div>
-        </div>
+        {% endif %}
     </div>
 {% endblock %}

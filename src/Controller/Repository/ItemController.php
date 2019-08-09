@@ -45,6 +45,7 @@ class ItemController extends AbstractController
         $canCreate = AuthUser::if_is_allowed(ServerPermissions::repository_item_new);
         $canEdit = AuthUser::if_is_allowed(ServerPermissions::repository_item_fetch);
         $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::repository_color_all);
+        $canDuplicate = AuthUser::if_is_allowed('repository_item_duplicate');
 
         if ($canSeeAll) {
             if (Cache::is_cached(Servers::Repository, Repository::Item, 'all')) {
@@ -69,6 +70,7 @@ class ItemController extends AbstractController
                 'canCreate' => $canCreate,
                 'canEdit' => $canEdit,
                 'canSeeAll' => $canSeeAll,
+                'canDuplicate' => $canDuplicate,
             ]);
         } else {
             return $this->redirect($this->generateUrl('repository_item_repository_item_create'));

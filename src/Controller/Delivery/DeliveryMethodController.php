@@ -40,6 +40,7 @@ class DeliveryMethodController extends AbstractController
     public function fetchAll()
     {
         $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_all);
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_new);
         $canEdit = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_update);
         $canRead = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_fetch);
         $canChangeStatus = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_change_delivery_method_status);
@@ -68,6 +69,7 @@ class DeliveryMethodController extends AbstractController
             'canEdit' => $canEdit,
             'canRead' => $canRead,
             'canChangeStatus' => $canChangeStatus,
+            'canCreate' => $canCreate,
         ]);
     }
 
@@ -79,7 +81,10 @@ class DeliveryMethodController extends AbstractController
      */
     public function create(Request $request)
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_new)) {
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_new);
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_update);
+
+        if (!$canCreate) {
             return $this->redirect($this->generateUrl('delivery_method_list'));
         }
         $inputs = $request->request->all();
@@ -103,7 +108,11 @@ class DeliveryMethodController extends AbstractController
                  */
                 $deliveryMethodModel = ModelSerializer::parse($response->getContent(), DeliveryMethodModel::class);
                 $this->addFlash('s', $response->getMessage());
-                return $this->redirect($this->generateUrl('delivery_method_edit', ['id' => $deliveryMethodModel->getDeliveryMethodId()]));
+                if ($canEdit) {
+                    return $this->redirect($this->generateUrl('delivery_method_edit', ['id' => $deliveryMethodModel->getDeliveryMethodId()]));
+                } else {
+                    return $this->redirect($this->generateUrl('delivery_method_list'));
+                }
             } else {
                 $this->addFlash('f', $response->getMessage());
             }
@@ -126,6 +135,7 @@ class DeliveryMethodController extends AbstractController
             'controller_name' => 'DeliveryMethodController',
             'deliveryMethodModel' => $deliveryMethodModel,
             'deliveryMethodTypes' => $deliveryMethodTypes,
+            'canCreate' => $canCreate
         ]);
     }
 
@@ -138,7 +148,18 @@ class DeliveryMethodController extends AbstractController
      */
     public function edit($id, Request $request)
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_fetch)) {
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_update);
+        $canAddSize = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_add_allowed_size);
+        $canRemoveSize = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_remove_allowed_size);
+        $canAddDeliveryPerson = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_add_delivery_person);
+        $canRemoveDeliveryPerson = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_remove_delivery_person);
+        $canAddQueue = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_add_queue);
+        $canRemoveQueue = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_remove_queue);
+        $canChangeQueueStatus = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_change_queue_status);
+        $canReadDeliveryPerson = AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_fetch);
+        $canEditDeliveryPerson = AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_update);
+
+        if (!$canEdit) {
             return $this->redirect($this->generateUrl('delivery_method_list'));
         }
         $inputs = $request->request->all();
@@ -262,6 +283,16 @@ class DeliveryMethodController extends AbstractController
             'deliveryPersons' => $deliveryPersons,
             'persons' => $persons,
             'weekDays' => $weekDays,
+            'canAddSize' => $canAddSize,
+            'canAddDeliveryPerson' => $canAddDeliveryPerson,
+            'canAddQueue' => $canAddQueue,
+            'canEdit' => $canEdit,
+            'canRemoveSize' => $canRemoveSize,
+            'canRemoveDeliveryPerson' => $canRemoveDeliveryPerson,
+            'canRemoveQueue' => $canRemoveQueue,
+            'canChangeQueueStatus' => $canChangeQueueStatus,
+            'canReadDeliveryPerson' => $canReadDeliveryPerson,
+            'canEditDeliveryPerson' => $canEditDeliveryPerson
         ]);
     }
 
@@ -274,7 +305,10 @@ class DeliveryMethodController extends AbstractController
      */
     public function read($id, Request $request)
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_fetch)) {
+
+        $canRead = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_fetch);
+
+        if (!$canRead) {
             return $this->redirect($this->generateUrl('delivery_method_list'));
         }
         $inputs = $request->request->all();
@@ -329,6 +363,7 @@ class DeliveryMethodController extends AbstractController
             'selectedSizes' => $selectedSizes,
             'deliveryPersons' => $deliveryPersons,
             'weekDays' => $weekDays,
+            'canRead' => $canRead
         ]);
     }
 

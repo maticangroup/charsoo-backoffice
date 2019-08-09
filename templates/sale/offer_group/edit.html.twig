@@ -18,13 +18,16 @@
                             <input type="text" value="{{ offerGroupModel.offerGroupName }}" name="offerGroupName"
                                    class="form-control mb-3"
                                    placeholder="{{ 'general.name.title' | trans }}">
-                            <button type="submit" class="btn btn-block btn-info fa fa-save rounded"></button>
+                            {% if canUpdate %}
+                                <button type="submit" class="btn btn-block btn-info fa fa-save rounded"></button>
+                            {% endif %}
                         </div>
                     </form>
 
                 </div>
             </div>
         </div>
+
         <div class="col-12">
             <div class="panel">
                 <div class="panel-content">
@@ -53,7 +56,9 @@
                                     <th>{{ 'general.last.pricing.deed.title' | trans }}</th>
                                     <th>{{ 'general.last.pricing.deed.expier.date.title' | trans }}</th>
                                     <th>{{ 'general.current.place.title' | trans }}</th>
-                                    <th>{{ 'general.action.title' | trans }}</th>
+                                    {% if canAddProduct %}
+                                        <th>{{ 'general.action.title' | trans }}</th>
+                                    {% endif %}
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -75,8 +80,10 @@
                                         <td>{{ shelvesProduct.productCurrentPlace }}</td>
                                         <td>
                                             {% if shelvesProduct.productIsDisabled == false %}
-                                                <a href="{{ path('sale_offer_group_sale_offer_group_add_product' , {offer_group_id:offerGroupModel.offerGroupId , product_id:shelvesProduct.productId}) }}"
-                                                   class="fa fa-plus"></a>
+                                                {% if canAddProduct %}
+                                                    <a href="{{ path('sale_offer_group_sale_offer_group_add_product' , {offer_group_id:offerGroupModel.offerGroupId , product_id:shelvesProduct.productId}) }}"
+                                                       class="fa fa-plus"></a>
+                                                {% endif %}
                                             {% endif %}
                                         </td>
                                     </tr>
@@ -88,6 +95,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-12">
             <div class="panel">
                 <div class="panel-heading"><strong>
@@ -109,7 +117,9 @@
                                 <th>{{ 'general.last.pricing.deed.title' | trans }}</th>
                                 <th>{{ 'general.last.pricing.deed.expier.date.title' | trans }}</th>
                                 <th>{{ 'general.current.place.title' | trans }}</th>
-                                <th>{{ 'general.action.title' | trans }}</th>
+                                {% if canRemoveProduct %}
+                                    <th>{{ 'general.action.title' | trans }}</th>
+                                {% endif %}
                             </tr>
                             </thead>
                             <tbody>
@@ -129,10 +139,12 @@
                                     <td>{{ selectedProduct.productPricingDeedId }}</td>
                                     <td>{{ selectedProduct.productPricingDeedExpiryDate }}</td>
                                     <td>{{ selectedProduct.productCurrentPlace }}</td>
-                                    <td>
-                                        <a href="{{ path('sale_offer_group_sale_offer_group_remove_product' , {offer_group_id:offerGroupModel.offerGroupId , product_id:selectedProduct.productId}) }}"
-                                           class="fa fa-times"></a>
-                                    </td>
+                                    {% if canRemoveProduct %}
+                                        <td>
+                                            <a href="{{ path('sale_offer_group_sale_offer_group_remove_product' , {offer_group_id:offerGroupModel.offerGroupId , product_id:selectedProduct.productId}) }}"
+                                               class="fa fa-times"></a>
+                                        </td>
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                             </tbody>

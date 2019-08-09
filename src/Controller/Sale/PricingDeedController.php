@@ -30,7 +30,12 @@ class PricingDeedController extends AbstractController
      */
     public function fetchAll()
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_all)) {
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_all);
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_new);
+        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_update);
+
+
+        if (!$canSeeAll) {
             return $this->redirect($this->generateUrl('default'));
 
         }
@@ -48,6 +53,9 @@ class PricingDeedController extends AbstractController
         return $this->render('sale/pricing_deed/list.html.twig', [
             'controller_name' => 'PricingDeedController',
             'pricingDeeds' => $pricingDeeds,
+            'canSeeAll' => $canSeeAll,
+            'canCreate' => $canCreate,
+            'canUpdate' => $canUpdate,
         ]);
     }
 
@@ -59,7 +67,10 @@ class PricingDeedController extends AbstractController
      */
     public function create(Request $request)
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_new)) {
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_new);
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_update);
+
+        if (!$canCreate) {
             return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_list'));
         }
         $inputs = $request->request->all();
@@ -78,7 +89,11 @@ class PricingDeedController extends AbstractController
                  */
                 $pricingDeedModel = ModelSerializer::parse($response->getContent(), PricingDeedModel::class);
                 $this->addFlash('s', $response->getMessage());
-                return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricingDeedModel->getPricingDeedId()]));
+                if ($canEdit) {
+                    return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricingDeedModel->getPricingDeedId()]));
+                } else {
+                    return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_list'));
+                }
             } else {
                 $this->addFlash('f', $response->getMessage());
             }
@@ -105,6 +120,7 @@ class PricingDeedController extends AbstractController
 //            'months' => $months,
 //            'days' => $days,
             'pricingDeedModel' => $pricingDeedModel,
+            'canCreate' => $canCreate,
 
         ]);
     }
@@ -118,7 +134,18 @@ class PricingDeedController extends AbstractController
      */
     public function edit($id, Request $request)
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_fetch)) {
+        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_update);
+        $canAddProduct = AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_add_product);
+        $canAddOfferGroup = AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_add_offer_group_products);
+        $canAddShelve = AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_add_shelve_products);
+        $canAddPricingDeed = AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_add_pricing_deed_products);
+        $canRemoveProduct = AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_remove_product);
+        $canGoPricing = AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_accept_pricing_list);
+        $canConfirm = AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_apply_pricing_deed);
+        $canSave = AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_save_pricing_list);
+        $canBack = AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_ignore_pricing_list);
+
+        if (!$canUpdate) {
             return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_read', ['id' => $id]));
 
         }
@@ -254,6 +281,16 @@ class PricingDeedController extends AbstractController
             'shelves' => $shelves,
             'selectedProducts' => $selectedProducts,
             'pricingDeeds' => $pricingDeeds,
+            'canAddProduct' => $canAddProduct,
+            'canAddOfferGroup' => $canAddOfferGroup,
+            'canAddShelve' => $canAddShelve,
+            'canAddPricingDeed' => $canAddPricingDeed,
+            'canRemoveProduct' => $canRemoveProduct,
+            'canGoPricing' => $canGoPricing,
+            'canConfirm' => $canConfirm,
+            'canSave' => $canSave,
+            'canBack' => $canBack,
+            'canUpdate' => $canUpdate,
         ]);
     }
 

@@ -28,6 +28,17 @@ class OfferGroupController extends AbstractController
      */
     public function fetchAll()
     {
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_new);
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_all);
+        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_update);
+        $canRead = AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_fetch);
+        $canChangeStatus = AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_change_status);
+
+        if (!$canSeeAll) {
+            return $this->redirect($this->generateUrl('default'));
+        }
+
+
         $request = new Req(Servers::Sale, Sale::OfferGroup, 'all');
         $response = $request->send();
 
@@ -44,6 +55,11 @@ class OfferGroupController extends AbstractController
         return $this->render('sale/offer_group/list.html.twig', [
             'controller_name' => 'OfferGroupController',
             'offerGroups' => $offerGroups,
+            'canCreate' => $canCreate,
+            'canSeeAll' => $canSeeAll,
+            'canUpdate' => $canUpdate,
+            'canRead' => $canRead,
+            'canChangeStatus' => $canChangeStatus,
         ]);
     }
 
@@ -56,6 +72,17 @@ class OfferGroupController extends AbstractController
      */
     public function create(Request $request)
     {
+
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_new);
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_all);
+        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_update);
+        $canRead = AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_fetch);
+        $canChangeStatus = AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_change_status);
+
+        if (!$canCreate) {
+            return $this->redirect($this->generateUrl('default'));
+        }
+
         $inputs = $request->request->all();
         /**
          * @var $offerGroupModel OfferGroupModel
@@ -94,6 +121,11 @@ class OfferGroupController extends AbstractController
             'controller_name' => 'OfferGroupController',
             'offerGroupModel' => $offerGroupModel,
             'offerGroups' => $offerGroups,
+            'canCreate' => $canCreate,
+            'canSeeAll' => $canSeeAll,
+            'canUpdate' => $canUpdate,
+            'canRead' => $canRead,
+            'canChangeStatus' => $canChangeStatus,
         ]);
     }
 
@@ -106,7 +138,11 @@ class OfferGroupController extends AbstractController
      */
     public function edit($id, Request $request)
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_fetch)) {
+        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_update);
+        $canAddProduct = AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_add_product);
+        $canRemoveProduct = AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_remove_product);
+
+        if (!$canUpdate) {
             return $this->redirect($this->generateUrl('sale_offer_group_sale_offer_group_create'));
         }
         $inputs = $request->request->all();
@@ -187,6 +223,9 @@ class OfferGroupController extends AbstractController
             'offerGroupModel' => $offerGroupModel,
             'shelvesProducts' => $shelvesProducts,
             'selectedProducts' => $selectedProducts,
+            'canUpdate' => $canUpdate,
+            'canAddProduct' => $canAddProduct,
+            'canRemoveProduct' => $canRemoveProduct,
         ]);
     }
 
@@ -199,7 +238,10 @@ class OfferGroupController extends AbstractController
      */
     public function read($id, Request $request)
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_fetch)) {
+
+        $canRead = AuthUser::if_is_allowed(ServerPermissions::sale_offergroup_fetch);
+
+        if (!$canRead) {
             return $this->redirect($this->generateUrl('sale_offer_group_sale_offer_group_create'));
         }
         $inputs = $request->request->all();
@@ -230,6 +272,7 @@ class OfferGroupController extends AbstractController
             'controller_name' => 'OfferGroupController',
             'offerGroupModel' => $offerGroupModel,
             'selectedProducts' => $selectedProducts,
+            'canRead' => $canRead,
         ]);
     }
 

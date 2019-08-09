@@ -39,6 +39,7 @@ class Params
 
 
         if ($param == 'APPLICATION_DOMAIN') {
+//            return 'test_domain';
             return $_SERVER['HTTP_HOST'];
         }
         if ($param === self::REPOSITORY_ITEM_CACHE_DIRECTORY) {
@@ -62,7 +63,6 @@ class Params
         $projectRoot = str_replace($public, '', $serverRoot) . '/';
         return $projectRoot;
     }
-
 
 
 }

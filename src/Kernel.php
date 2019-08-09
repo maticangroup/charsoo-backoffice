@@ -25,8 +25,8 @@ class Kernel extends BaseKernel
         Settings::set('LOGIN_PAGE_URL', '/login');
         Settings::set('CLIENT_IP', '');
         Settings::set('CLIENT_ACCESS_TOKEN', '');
-        Settings::set('APPLICATION_DOMAIN', Params::get('APPLICATION_DOMAIN'));
-        Settings::set('SERVER_DOMAIN', 'http://core.maticangroup.com');
+        Settings::set('APPLICATION_DOMAIN', 'http://127.0.0.1:8000');
+        Settings::set('SERVER_DOMAIN', 'http://core-dev.maticangroup.com');
         AuthUser::check_if_user_is_logged_in();
         /*### MATICAN ###*/
 

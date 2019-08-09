@@ -25,7 +25,6 @@ use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\Response;
 use Matican\Core\Transaction\ResponseStatus;
-use Matican\Models\Media\Image;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;

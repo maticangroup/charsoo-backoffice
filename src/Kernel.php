@@ -3,6 +3,7 @@
 namespace App;
 
 use App\General\AuthUser;
+use Matican\Settings;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
@@ -18,8 +19,17 @@ class Kernel extends BaseKernel
 
     public function registerBundles(): iterable
     {
-
+        /*### MATICAN ###*/
+        Settings::set('PERMISSIONS_CACHE_FILE', Params::get('PERMISSION_CACHE_FILE'));
+        Settings::set('PERMISSION_CACHE_DIR', Params::get('PERMISSION_CACHE_DIR'));
+        Settings::set('LOGIN_PAGE_URL', '/login');
+        Settings::set('CLIENT_IP', '');
+        Settings::set('CLIENT_ACCESS_TOKEN', '');
+        Settings::set('APPLICATION_DOMAIN', Params::get('APPLICATION_DOMAIN'));
+        Settings::set('SERVER_DOMAIN', 'http://core.maticangroup.com');
         AuthUser::check_if_user_is_logged_in();
+        /*### MATICAN ###*/
+
         $contents = require $this->getProjectDir() . '/config/bundles.php';
         foreach ($contents as $class => $envs) {
             if ($envs[$this->environment] ?? $envs['all'] ?? false) {

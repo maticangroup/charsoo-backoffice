@@ -303,7 +303,8 @@ class PricingDeedController extends AbstractController
      */
     public function read($id, Request $request)
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_fetch)) {
+        $canRead = AuthUser::if_is_allowed(ServerPermissions::sale_pricingdeed_fetch);
+        if (!$canRead) {
             return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_list'));
 
         }
@@ -332,6 +333,7 @@ class PricingDeedController extends AbstractController
             'controller_name' => 'PricingDeedController',
             'pricingDeedModel' => $pricingDeedModel,
             'selectedProducts' => $selectedProducts,
+            'canRead' => $canRead,
         ]);
     }
 

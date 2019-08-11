@@ -19,7 +19,7 @@ use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Delivery;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
-use Matican\Core\Transaction\ResponseStatus;
+use Matican\ResponseStatus;
 use Matican\Models\Media\Image;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

@@ -10,7 +10,7 @@ namespace App;
 
 
 use Matican\Core\Transaction\Request;
-use Matican\Core\Transaction\ResponseStatus;
+use Matican\ResponseStatus;
 use Symfony\Component\Filesystem\Filesystem;
 
 class Cache

@@ -14,6 +14,7 @@ use Matican\ModelSerializer;
 use App\Params;
 use Matican\Core\Entities\Authentication;
 use Matican\Core\Servers;
+use Matican\Settings;
 use Symfony\Component\Filesystem\Filesystem;
 use Matican\Core\Transaction\Request as Req;
 
@@ -107,10 +108,11 @@ class AuthUser
             if (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] != Params::loginPageUrl()) {
 //            dd('Location: http://' . Params::get('APPLICATION_DOMAIN') . Params::loginPageUrl());
                 if (!$currentUser) {
-//                die("sss");
-//                dd(Params::get('APPLICATION_DOMAIN') . Params::loginPageUrl());
-//                die;
-                    header('Location: http://' . Params::get('APPLICATION_DOMAIN') . Params::loginPageUrl());
+                    header(
+                        'Location: ' .
+                        Settings::get('APPLICATION_DOMAIN') .
+                        Settings::get('LOGIN_PAGE_URL')
+                    );
                     die;
                 }
             }

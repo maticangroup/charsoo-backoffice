@@ -109,10 +109,10 @@
         "version": "v1.2.17"
     },
     "maticangroup/core_client_api": {
-        "version": "v41"
+        "version": "v44"
     },
     "maticangroup/core_models": {
-        "version": "v9"
+        "version": "v16"
     },
     "monolog/monolog": {
         "version": "1.24.0"

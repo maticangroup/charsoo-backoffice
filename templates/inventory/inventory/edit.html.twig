@@ -25,40 +25,43 @@
         <div class="col-12">
             <div class="panel">
                 <div class="panel-content">
-                    <form class="row" action="{{ path('inventory_inventory_edit' , {id:inventoryModel.inventoryId}) }}"
-                          method="post">
-                        <div class="col-3">
-                            <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">{{ 'general.name.title' | trans }}</span>
+                    {% if canUpdate %}
+                        <form class="row"
+                              action="{{ path('inventory_inventory_edit' , {id:inventoryModel.inventoryId}) }}"
+                              method="post">
+                            <div class="col-3">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.name.title' | trans }}</span>
 
-                                <div class="col-md-12">
-                                    <input type="text" value="{{ inventoryModel.inventoryName }}"
-                                           name="inventoryName"
-                                           placeholder="{{ 'general.name.title' | trans }}"
-                                           class="form-control" required>
+                                    <div class="col-md-12">
+                                        <input type="text" value="{{ inventoryModel.inventoryName }}"
+                                               name="inventoryName"
+                                               placeholder="{{ 'general.name.title' | trans }}"
+                                               class="form-control" required>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group row">
-                                <span class="label-text col-md-12 col-form-label ">{{ 'general.inventory.keeper.title' | trans }}</span>
+                            <div class="col-3">
+                                <div class="form-group row">
+                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.inventory.keeper.title' | trans }}</span>
 
-                                <div class="col-md-12">
-                                    <select name="inventoryKeeperId" class="form-control">
-                                        {% for person in persons %}
-                                            <option value="{{ person.id }}" {{ (inventoryModel.inventoryKeeperId == person.id)?'selected':'' }}>{{ person.humanName }} {{ person.humanFamily }}
-                                                | {{ person.mobile }}</option>
-                                        {% endfor %}
-                                    </select>
+                                    <div class="col-md-12">
+                                        <select name="inventoryKeeperId" class="form-control">
+                                            {% for person in persons %}
+                                                <option value="{{ person.id }}" {{ (inventoryModel.inventoryKeeperId == person.id)?'selected':'' }}>{{ person.humanName }} {{ person.humanFamily }}
+                                                    | {{ person.mobile }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-3 mt-5">
-                            <div class="form-group row">
-                                <button type="submit" class="btn btn-block rounded btn-info fa fa-save"></button>
+                            <div class="col-3 mt-5">
+                                <div class="form-group row">
+                                    <button type="submit" class="btn btn-block rounded btn-info fa fa-save"></button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    {% endif %}
                     <div class="row">
                         {% for phone in phones %}
                             <div class="col-3">
@@ -80,48 +83,52 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            {% if canRemovePhone %}
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <button type="submit"
+                                                                class="btn btn-block rounded btn-danger fa fa-trash"></button>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {% if canAddPhone %}
+                            <div class="col-3">
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <strong>
+                                            {{ 'general.add.new.phone.title' | trans }}
+                                        </strong>
+                                    </div>
+                                    <div class="panel-content">
+                                        <form class="row"
+                                              action="{{ path('inventory_inventory_add_phone' , {inventory_id:inventoryModel.inventoryId}) }}"
+                                              method="post">
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.phone.title' | trans }}</span>
+                                                    <div class="col-md-12">
+                                                        <input type="text" name="phone"
+                                                               value=""
+                                                               class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <button type="submit"
-                                                            class="btn btn-block rounded btn-danger fa fa-trash"></button>
+                                                            class="btn btn-block rounded btn-dark fa fa-save"></button>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                        {% endfor %}
-                        <div class="col-3">
-                            <div class="panel">
-                                <div class="panel-heading">
-                                    <strong>
-                                        {{ 'general.add.new.phone.title' | trans }}
-                                    </strong>
-                                </div>
-                                <div class="panel-content">
-                                    <form class="row"
-                                          action="{{ path('inventory_inventory_add_phone' , {inventory_id:inventoryModel.inventoryId}) }}"
-                                          method="post">
-                                        <div class="col-12">
-                                            <div class="form-group row">
-                                                <span class="label-text col-md-12 col-form-label ">{{ 'general.phone.title' | trans }}</span>
-                                                <div class="col-md-12">
-                                                    <input type="text" name="phone"
-                                                           value=""
-                                                           class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <button type="submit"
-                                                        class="btn btn-block rounded btn-dark fa fa-save"></button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

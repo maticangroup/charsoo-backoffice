@@ -25,6 +25,11 @@ class UserController extends AbstractController
      */
     public function fetchAll()
     {
+
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::authentication_user_all);
+        $canChangeRole = AuthUser::if_is_allowed(ServerPermissions::authentication_user_set_role);
+        $canSendPassword = AuthUser::if_is_allowed(ServerPermissions::authentication_user_send_password_to_user);
+
         $request = new Req(Servers::Authentication, Authentication::User, 'all');
         $response = $request->send();
 
@@ -58,6 +63,9 @@ class UserController extends AbstractController
             'controller_name' => 'UserController',
             'users' => $users,
             'roles' => $roles,
+            'canSeeAll' => $canSeeAll,
+            'canChangeRole' => $canChangeRole,
+            'canSendPassword' => $canSendPassword,
         ]);
     }
 

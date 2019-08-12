@@ -164,7 +164,7 @@ class RoleController extends AbstractController
                 $this->addFlash('s', $response->getMessage());
                 return $this->redirect($this->generateUrl('authentication_role_edit', ['id' => $id]));
             } else {
-                $this->addFlash('s', $response->getMessage());
+                $this->addFlash('f', $response->getMessage());
             }
         }
 

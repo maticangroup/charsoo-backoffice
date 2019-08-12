@@ -192,10 +192,10 @@ class ShelveController extends AbstractController
 //            dd($response);
 
                     if ($response->getStatus() == ResponseStatus::successful) {
-                        $this->addFlash('s', '');
+                        $this->addFlash('s', $response->getMessage());
                         return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $id]));
                     } else {
-                        $this->addFlash('f', '');
+                        $this->addFlash('f', $response->getMessage());
                     }
                 }
             }

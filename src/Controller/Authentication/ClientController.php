@@ -165,7 +165,7 @@ class ClientController extends AbstractController
                 $this->addFlash('s', $response->getMessage());
                 return $this->redirect($this->generateUrl('authentication_client_edit', ['id' => $id]));
             } else {
-                $this->addFlash('s', $response->getMessage());
+                $this->addFlash('f', $response->getMessage());
             }
         }
 

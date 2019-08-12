@@ -115,7 +115,7 @@ class OffDayController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('repository_off_day_repository_off_day_create'));
     }

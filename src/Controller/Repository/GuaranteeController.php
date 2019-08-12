@@ -142,10 +142,10 @@ class GuaranteeController extends AbstractController
                 $request->add_instance($guaranteeModel);
                 $response = $request->send();
                 if ($response->getStatus() == ResponseStatus::successful) {
-                    $this->addFlash('s', '');
+                    $this->addFlash('s', $response->getMessage());
                     return $this->redirect($this->generateUrl('repository_guarantee_repository_guarantee_create'));
                 } else {
-                    $this->addFlash('f', '');
+                    $this->addFlash('f', $response->getMessage());
                 }
             }
 

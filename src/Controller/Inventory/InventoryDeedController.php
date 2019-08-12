@@ -113,7 +113,7 @@ class InventoryDeedController extends AbstractController
                         $deedModel = ModelSerializer::parse($response->getContent(), InventoryDeedModel::class);
                         return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create_product_deed', ['deed_id' => $deedModel->getInventoryDeedId()]));
                     } else {
-                        $this->addFlash('s', $response->getMessage());
+                        $this->addFlash('f', $response->getMessage());
                     }
 
                 } else {
@@ -122,7 +122,7 @@ class InventoryDeedController extends AbstractController
                         $deedModel = ModelSerializer::parse($response->getContent(), InventoryDeedModel::class);
                         return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create_to_inventory_deed', ['deed_id' => $deedModel->getInventoryDeedId()]));
                     } else {
-                        $this->addFlash('s', $response->getMessage());
+                        $this->addFlash('f', $response->getMessage());
                     }
                 }
 
@@ -403,6 +403,10 @@ class InventoryDeedController extends AbstractController
             }
         }
 
+        /**
+         * @var $products ProductModel[]
+         */
+        $products = [];
 
         if ($deedModel->getInventoryDeedFromShelveId()) {
             $shelveProductsModel = new ShelveProductsModel();
@@ -585,7 +589,7 @@ class InventoryDeedController extends AbstractController
             if ($response->getStatus() == ResponseStatus::successful) {
                 $this->addFlash('s', $response->getMessage());
             } else {
-                $this->addFlash('s', $response->getMessage());
+                $this->addFlash('f', $response->getMessage());
             }
 
             return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_read', ['deed_id' => $deed_id]));

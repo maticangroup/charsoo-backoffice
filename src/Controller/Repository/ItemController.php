@@ -815,7 +815,7 @@ class ItemController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         /*
          * Cache
@@ -854,7 +854,7 @@ class ItemController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         $item_id = $specKeyValueModel->getItemId();
         /*
@@ -896,7 +896,7 @@ class ItemController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         /*
          * Cache

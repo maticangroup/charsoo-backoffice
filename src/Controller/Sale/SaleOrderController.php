@@ -470,7 +470,7 @@ class SaleOrderController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $order_id]));
     }
@@ -495,7 +495,7 @@ class SaleOrderController extends AbstractController
             $this->addFlash('s', $response->getMessage());
             return $this->redirect($this->generateUrl('sale_order_read', ['id' => $order_id]));
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $order_id]));
     }

@@ -30,6 +30,10 @@ class UserController extends AbstractController
         $canChangeRole = AuthUser::if_is_allowed(ServerPermissions::authentication_user_set_role);
         $canSendPassword = AuthUser::if_is_allowed(ServerPermissions::authentication_user_send_password_to_user);
 
+        if (!$canSeeAll) {
+            return $this->redirect($this->generateUrl('default'));
+        }
+
         $request = new Req(Servers::Authentication, Authentication::User, 'all');
         $response = $request->send();
 
@@ -96,7 +100,7 @@ class UserController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('authentication_user_list'));
     }
@@ -118,7 +122,7 @@ class UserController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('authentication_user_list'));
     }

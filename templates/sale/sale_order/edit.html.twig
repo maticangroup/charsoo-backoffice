@@ -19,48 +19,53 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12">
-                <div class="panel">
-                    <div class="panel-content">
-                        <form class="row" action="{{ path('sale_order_edit' , {id:orderModel.orderId}) }}"
-                              method="post">
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.name.title' | trans }}</span>
-                                    <input type="text" name="orderName" class="form-control"
-                                           placeholder="{{ 'general.name.title' | trans }}"
-                                           value="{{ orderModel.orderName }}">
+            {% if canUpdate %}
+                <div class="col-12">
+                    <div class="panel">
+                        <div class="panel-content">
+                            <form class="row" action="{{ path('sale_order_edit' , {id:orderModel.orderId}) }}"
+                                  method="post">
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <span class="label-text col-md-12 col-form-label ">{{ 'general.name.title' | trans }}</span>
+                                        <input type="text" name="orderName" class="form-control"
+                                               placeholder="{{ 'general.name.title' | trans }}"
+                                               value="{{ orderModel.orderName }}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.owner.title' | trans }}</span>
-                                    <select name="orderOwnerId" class="form-control">
-                                        {% for person in persons %}
-                                            <option value="{{ person.id }}" {{ (person.id == orderModel.orderOwnerId) ? 'selected' : '' }}>
-                                                {{ person.humanName }} {{ person.humanFamily }}
-                                                | {{ person.mobile }}
-                                            </option>
-                                        {% endfor %}
-                                    </select>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <span class="label-text col-md-12 col-form-label ">{{ 'general.owner.title' | trans }}</span>
+                                        <select name="orderOwnerId" class="form-control">
+                                            {% for person in persons %}
+                                                <option value="{{ person.id }}" {{ (person.id == orderModel.orderOwnerId) ? 'selected' : '' }}>
+                                                    {{ person.humanName }} {{ person.humanFamily }}
+                                                    | {{ person.mobile }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.description.title' | trans }}</span>
-                                    <textarea type="text" name="orderDescription" class="form-control"
-                                              placeholder="{{ 'general.description.title' | trans }}">{{ orderModel.orderDescription }}</textarea>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <span class="label-text col-md-12 col-form-label ">{{ 'general.description.title' | trans }}</span>
+                                        <textarea type="text" name="orderDescription" class="form-control"
+                                                  placeholder="{{ 'general.description.title' | trans }}">{{ orderModel.orderDescription }}</textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-block btn-info fa fa-save rounded"></button>
-                                </div>
-                            </div>
-                        </form>
+                                {% if canUpdate %}
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <button type="submit"
+                                                    class="btn btn-block btn-info fa fa-save rounded"></button>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
         {% endif %}
 
         {#if order is initialized#}
@@ -83,7 +88,9 @@
                                     <th>{{ 'general.last.pricing.deed.title' | trans }}</th>
                                     <th>{{ 'general.last.pricing.deed.expier.date.title' | trans }}</th>
                                     <th>{{ 'general.current.place.title' | trans }}</th>
-                                    <th>{{ 'general.action.title' | trans }}</th>
+                                    {% if canAddProduct %}
+                                        <th>{{ 'general.action.title' | trans }}</th>
+                                    {% endif %}
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -104,9 +111,11 @@
                                         <td>{{ shelvesProduct.productPricingDeedExpiryDate }}</td>
                                         <td>{{ shelvesProduct.productCurrentPlace }}</td>
                                         <td>
-                                            {% if shelvesProduct.productIsDisabled == false %}
-                                                <a href="{{ path('sale_order_add_product' , {order_id:orderModel.orderId , product_id:shelvesProduct.productId }) }}"
-                                                   class="fa fa-plus"></a>
+                                            {% if canAddProduct %}
+                                                {% if shelvesProduct.productIsDisabled == false %}
+                                                    <a href="{{ path('sale_order_add_product' , {order_id:orderModel.orderId , product_id:shelvesProduct.productId }) }}"
+                                                       class="fa fa-plus"></a>
+                                                {% endif %}
                                             {% endif %}
                                         </td>
                                     </tr>
@@ -121,14 +130,16 @@
             <div class="col-12">
                 <div class="panel">
                     <div class="invoice">
-                        <div class="form-group row">
-                            <div class="col-4"></div>
-                            <div class="col-md-4">
-                                <a href="{{ path('sale_order_go_final_order' , { order_id:orderModel.orderId }) }}"
-                                   class="btn btn-block btn-dark rounded"> Go For Final Order ... </a>
+                        {% if canGoForFinal %}
+                            <div class="form-group row">
+                                <div class="col-4"></div>
+                                <div class="col-md-4">
+                                    <a href="{{ path('sale_order_go_final_order' , { order_id:orderModel.orderId }) }}"
+                                       class="btn btn-block btn-dark rounded"> Go For Final Order ... </a>
+                                </div>
+                                <div class="col-4"></div>
                             </div>
-                            <div class="col-4"></div>
-                        </div>
+                        {% endif %}
                         <div class="panel-heading">
                             <p><strong>{{ 'general.serial.title' | trans }} : </strong>{{ orderModel.orderSerial }}</p>
 
@@ -186,7 +197,9 @@
                                     <th>{{ 'general.current.place.title' | trans }}</th>
                                     <th>{{ 'general.current.price.title' | trans }}</th>
                                     <th>{{ 'general.discount.price.title' | trans }}</th>
-                                    <th scope="col">{{ 'general.action.title' | trans }}</th>
+                                    {% if canRemoveProduct %}
+                                        <th scope="col">{{ 'general.action.title' | trans }}</th>
+                                    {% endif %}
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -206,10 +219,12 @@
                                         <td>{{ selectedProduct.productCurrentPlace }}</td>
                                         <td>{{ selectedProduct.productCurrentPrice }}</td>
                                         <td>{{ selectedProduct.productDiscountPrice }}</td>
-                                        <td>
-                                            <a href="{{ path('sale_order_remove_product' , {order_id:orderModel.orderId , order_item_id:selectedProduct.productOrderItemId }) }}"
-                                               class="fa fa-times"></a>
-                                        </td>
+                                        {% if canRemoveProduct %}
+                                            <td>
+                                                <a href="{{ path('sale_order_remove_product' , {order_id:orderModel.orderId , order_item_id:selectedProduct.productOrderItemId }) }}"
+                                                   class="fa fa-times"></a>
+                                            </td>
+                                        {% endif %}
                                     </tr>
                                 {% endfor %}
                                 </tbody>
@@ -241,17 +256,21 @@
                         <form action="{{ path('sale_order_save_order' , {order_id:orderModel.orderId}) }}"
                               method="post">
                             <div class="form-group row">
-                                <div class="col-4">
-                                    <a href="{{ path('sale_order_back_selection', {order_id:orderModel.orderId}) }}"
-                                       class="btn btn-block btn-default rounded"> {{ 'general.back.to.selection.title' | trans }} </a>
-                                </div>
+                                {% if canBack %}
+                                    <div class="col-4">
+                                        <a href="{{ path('sale_order_back_selection', {order_id:orderModel.orderId}) }}"
+                                           class="btn btn-block btn-default rounded"> {{ 'general.back.to.selection.title' | trans }} </a>
+                                    </div>
+                                {% endif %}
                                 <div class="col-md-4">
                                     <p><strong>NOTE : </strong>Your data will be lost if you don't save your order</p>
                                 </div>
-                                <div class="col-4">
-                                    <button type="submit"
-                                            class="btn btn-block btn-dark rounded"> {{ 'general.save.order.title' | trans }}</button>
-                                </div>
+                                {% if canSaveSerial %}
+                                    <div class="col-4">
+                                        <button type="submit"
+                                                class="btn btn-block btn-dark rounded"> {{ 'general.save.order.title' | trans }}</button>
+                                    </div>
+                                {% endif %}
                             </div>
                             <div class="panel-heading">
                                 <p><strong>{{ 'general.serial.title' | trans }} : </strong>{{ orderModel.orderSerial }}
@@ -405,25 +424,27 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="row">
-                                <div class="col-4"></div>
-                                <div class="col-4">
-                                    <div class="panel">
-                                        <div class="weather--panel text-white bg-darker">
-                                            <div class="weather--title">
-                                                <i class="fa fa-exclamation"></i>
-                                                <span>{{ 'general.final.confirm.title' | trans }}</span>
-                                            </div>
+                            {% if canConfirm %}
+                                <div class="row">
+                                    <div class="col-4"></div>
+                                    <div class="col-4">
+                                        <div class="panel">
+                                            <div class="weather--panel text-white bg-darker">
+                                                <div class="weather--title">
+                                                    <i class="fa fa-exclamation"></i>
+                                                    <span>{{ 'general.final.confirm.title' | trans }}</span>
+                                                </div>
 
-                                            <div class="weather--info">
-                                                <a href="{{ path('sale_order_confirm' , {order_id:orderModel.orderId}) }}"
-                                                   class="fa fa-check text-green"></a>
+                                                <div class="weather--info">
+                                                    <a href="{{ path('sale_order_confirm' , {order_id:orderModel.orderId}) }}"
+                                                       class="fa fa-check text-green"></a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-4"></div>
                                 </div>
-                                <div class="col-4"></div>
-                            </div>
+                            {% endif %}
                         </form>
                     </div>
                 </div>
@@ -550,25 +571,27 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="row">
-                            <div class="col-4"></div>
-                            <div class="col-4">
-                                <div class="panel">
-                                    <div class="weather--panel text-white bg-darker">
-                                        <div class="weather--title">
-                                            <i class="fa fa-exclamation"></i>
-                                            <span>{{ 'sale.order.edit.reject.order.description' | trans }}</span>
-                                        </div>
+                        {% if canReject %}
+                            <div class="row">
+                                <div class="col-4"></div>
+                                <div class="col-4">
+                                    <div class="panel">
+                                        <div class="weather--panel text-white bg-darker">
+                                            <div class="weather--title">
+                                                <i class="fa fa-exclamation"></i>
+                                                <span>{{ 'sale.order.edit.reject.order.description' | trans }}</span>
+                                            </div>
 
-                                        <div class="weather--info">
-                                            <a href="{{ path('sale_order_reject' , {order_id:orderModel.orderId}) }}"
-                                               class="fa fa-ban text-red"></a>
+                                            <div class="weather--info">
+                                                <a href="{{ path('sale_order_reject' , {order_id:orderModel.orderId}) }}"
+                                                   class="fa fa-ban text-red"></a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-4"></div>
                             </div>
-                            <div class="col-4"></div>
-                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

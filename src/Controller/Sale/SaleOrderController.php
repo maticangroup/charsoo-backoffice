@@ -76,6 +76,10 @@ class SaleOrderController extends AbstractController
             return $this->redirect($this->generateUrl('sale_order_list'));
         }
         $inputs = $request->request->all();
+        /**
+         * @var $orderModel OrderModel
+         */
+        $orderModel = ModelSerializer::parse($inputs, OrderModel::class);
 
         if (!$inputs) {
             /**
@@ -134,7 +138,18 @@ class SaleOrderController extends AbstractController
      */
     public function edit($id, Request $request)
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_fetch)) {
+
+        $canRead = AuthUser::if_is_allowed(ServerPermissions::sale_order_fetch);
+        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::sale_order_update);
+        $canAddProduct = AuthUser::if_is_allowed(ServerPermissions::sale_order_add_product);
+        $canRemoveProduct = AuthUser::if_is_allowed(ServerPermissions::sale_order_remove_product);
+        $canGoForFinal = AuthUser::if_is_allowed(ServerPermissions::sale_order_accept_order_list);
+        $canSaveSerial = AuthUser::if_is_allowed(ServerPermissions::sale_order_save_order);
+        $canBack = AuthUser::if_is_allowed(ServerPermissions::sale_order_ignore_order_list);
+        $canConfirm = AuthUser::if_is_allowed(ServerPermissions::sale_order_confirm_order);
+        $canReject = AuthUser::if_is_allowed('reject_order');
+
+        if (!$canRead) {
             return $this->redirect($this->generateUrl('sale_order_read', ['id' => $id]));
         }
         $inputs = $request->request->all();
@@ -226,6 +241,14 @@ class SaleOrderController extends AbstractController
             'persons' => $persons,
             'shelvesProducts' => $shelvesProducts,
             'selectedProducts' => $selectedProducts,
+            'canUpdate' => $canUpdate,
+            'canAddProduct' => $canAddProduct,
+            'canRemoveProduct' => $canRemoveProduct,
+            'canGoForFinal' => $canGoForFinal,
+            'canSaveSerial' => $canSaveSerial,
+            'canBack' => $canBack,
+            'canConfirm' => $canConfirm,
+            'canReject' => $canReject,
         ]);
     }
 

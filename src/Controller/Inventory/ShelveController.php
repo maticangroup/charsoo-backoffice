@@ -37,7 +37,13 @@ class ShelveController extends AbstractController
      */
     public function fetchAll()
     {
-        if (AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_all)) {
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_new);
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_all);
+        $canRead = AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_fetch);
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_update);
+        $canChangeStatus = AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_change_status);
+
+        if ($canSeeAll) {
 
             $request = new Req(Servers::Inventory, InventoryEntity::Shelve, 'all');
             $response = $request->send();
@@ -53,6 +59,11 @@ class ShelveController extends AbstractController
 
             return $this->render('inventory/shelve/list.html.twig', [
                 'shelves' => $shelves,
+                'canSeeAll' => $canSeeAll,
+                'canCreate' => $canCreate,
+                'canRead' => $canRead,
+                'canEdit' => $canEdit,
+                'canChangeStatus' => $canChangeStatus,
             ]);
 
         } else {
@@ -69,7 +80,10 @@ class ShelveController extends AbstractController
     public function create(Request $request)
     {
 
-        if (AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_new)) {
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_new);
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_all);
+
+        if ($canCreate) {
 
             $inputs = $request->request->all();
             /**
@@ -107,6 +121,8 @@ class ShelveController extends AbstractController
             return $this->render('inventory/shelve/create.html.twig', [
                 'shelveModel' => $shelveModel,
                 'persons' => $persons,
+                'canCreate' => $canCreate,
+                'canSeeAll' => $canSeeAll,
             ]);
         } else {
             return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_list'));
@@ -123,7 +139,13 @@ class ShelveController extends AbstractController
      */
     public function edit($id, Request $request)
     {
-        if (AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_fetch)) {
+
+        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_update);
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_fetch);
+        $canAddPhone = AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_add_phone);
+        $canRemovePhone = AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_remove_phone);
+
+        if ($canEdit) {
 
 
             $inputs = $request->request->all();
@@ -170,10 +192,10 @@ class ShelveController extends AbstractController
 //            dd($response);
 
                     if ($response->getStatus() == ResponseStatus::successful) {
-                        $this->addFlash('s', '');
+                        $this->addFlash('s', $response->getMessage());
                         return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_edit', ['id' => $id]));
                     } else {
-                        $this->addFlash('f', '');
+                        $this->addFlash('f', $response->getMessage());
                     }
                 }
             }
@@ -221,6 +243,9 @@ class ShelveController extends AbstractController
                 'locations' => $locations,
                 'locationModel' => $locationModel,
                 'locationCount' => $locationCount,
+                'canUpdate' => $canUpdate,
+                'canAddPhone' => $canAddPhone,
+                'canRemovePhone' => $canRemovePhone,
 
             ]);
         } else {
@@ -237,7 +262,11 @@ class ShelveController extends AbstractController
      */
     public function read($id, Request $request)
     {
-        if (AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_fetch)) {
+        $canRead = AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_fetch);
+        $canSeeItemProducts = AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_get_shelve_item_products);
+
+
+        if ($canRead) {
 
 
             $inputs = $request->request->all();
@@ -291,6 +320,8 @@ class ShelveController extends AbstractController
                 'phones' => $phones,
                 'itemProducts' => $itemProducts,
                 'deeds' => $deeds,
+                'canRead' => $canRead,
+                'canSeeItemProducts' => $canSeeItemProducts,
             ]);
         } else {
             return $this->redirect($this->generateUrl('inventory_shelve_inventory_shelve_list'));
@@ -411,6 +442,12 @@ class ShelveController extends AbstractController
     function itemProducts($item_id, $shelve_id, Request $request)
     {
 
+        $canRead = AuthUser::if_is_allowed(ServerPermissions::inventory_shelve_get_shelve_item_products);
+
+        if (!$canRead) {
+            return $this->redirect($this->generateUrl('inventory_shelve_shelve_read', ['id' => $shelve_id]));
+        }
+
 
         $inputs = $request->request->all();
 
@@ -456,6 +493,7 @@ class ShelveController extends AbstractController
             'controller_name' => 'InventoryController',
             'itemModel' => $itemModel,
             'products' => $products,
+            'canRead' => $canRead,
 
         ]);
 

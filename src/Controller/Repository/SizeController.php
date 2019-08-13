@@ -68,7 +68,6 @@ class SizeController extends AbstractController
         }
 
 
-
         return $this->render('repository/size/create.html.twig', [
             'controller_name' => 'SizeController',
             'sizeModel' => $sizeModel,
@@ -108,9 +107,9 @@ class SizeController extends AbstractController
             $request->add_instance($sizeModel);
             $response = $request->send();
             if ($response->getStatus() == ResponseStatus::successful) {
-                $this->addFlash('s', '');
+                $this->addFlash('s', $response->getMessage());
             } else {
-                $this->addFlash('f', '');
+                $this->addFlash('f', $response->getMessage());
             }
         }
 

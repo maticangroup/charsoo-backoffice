@@ -30,6 +30,13 @@ class RoleController extends AbstractController
      */
     public function create(Request $request)
     {
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::authentication_role_new);
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::authentication_role_all);
+        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::authentication_role_update);
+
+        if (!$canCreate) {
+            return $this->redirect($this->generateUrl('default'));
+        }
 
         $inputs = $request->request->all();
         /**
@@ -69,6 +76,9 @@ class RoleController extends AbstractController
             'controller_name' => 'RoleController',
             'roleModel' => $roleModel,
             'roles' => $roles,
+            'canCreate' => $canCreate,
+            'canSeeAll' => $canSeeAll,
+            'canUpdate' => $canUpdate,
         ]);
     }
 
@@ -81,7 +91,12 @@ class RoleController extends AbstractController
      */
     public function edit($id, Request $request)
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::authentication_role_fetch)) {
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::authentication_role_fetch);
+        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::authentication_role_update);
+        $canAddPermission = AuthUser::if_is_allowed(ServerPermissions::authentication_role_grant_permission);
+        $canRemovePermission = AuthUser::if_is_allowed(ServerPermissions::authentication_role_deny_permission);
+
+        if (!$canEdit) {
             return $this->redirect($this->generateUrl('authentication_role_create'));
         }
         $inputs = $request->request->all();
@@ -149,7 +164,7 @@ class RoleController extends AbstractController
                 $this->addFlash('s', $response->getMessage());
                 return $this->redirect($this->generateUrl('authentication_role_edit', ['id' => $id]));
             } else {
-                $this->addFlash('s', $response->getMessage());
+                $this->addFlash('f', $response->getMessage());
             }
         }
 
@@ -159,6 +174,10 @@ class RoleController extends AbstractController
             'roleModel' => $roleModel,
             'serverPermissions' => $serverPermissions,
             'selectedPermissions' => $selectedPermissions,
+            'canEdit' => $canEdit,
+            'canUpdate' => $canUpdate,
+            'canAddPermission' => $canAddPermission,
+            'canRemovePermission' => $canRemovePermission,
         ]);
     }
 

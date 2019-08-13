@@ -67,15 +67,15 @@
 
                                         </td>
                                         <td>
-                                            {% if canChangeStatus %}
-                                                {% if inventory.inventoryMachineName != 'confirmed_orders_products' %}
 
+                                            {% if inventory.inventoryMachineName != 'confirmed_orders_products' %}
+                                                {% if canChangeStatus %}
                                                     <a href="{{ path('inventory_inventory_status' , {inventory_id:inventory.inventoryId , machine_name:inventory.inventoryStatus.inventoryStatusMachineName}) }}"
                                                        class="{{ (inventory.inventoryStatus.inventoryStatusMachineName == 'active')?'fa fa-ban text-red':'fa fa-play text-green' }}"></a>
-                                                    {% if canUpdate %}
-                                                        <a href="{{ path('inventory_inventory_edit' , {id:inventory.inventoryId}) }}"
-                                                           class="fa fa-edit"></a>
-                                                    {% endif %}
+                                                {% endif %}
+                                                {% if canUpdate %}
+                                                    <a href="{{ path('inventory_inventory_edit' , {id:inventory.inventoryId}) }}"
+                                                       class="fa fa-edit"></a>
                                                 {% endif %}
                                             {% endif %}
 

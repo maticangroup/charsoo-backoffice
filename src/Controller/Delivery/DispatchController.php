@@ -126,7 +126,7 @@ class DispatchController extends AbstractController
             $dispatchModel = ModelSerializer::parse($response->getContent(), DispatchModel::class);
             return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatchModel->getDispatchId()]));
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
             return $this->redirect($this->generateUrl('delivery_dispatch_create'));
         }
     }
@@ -353,7 +353,7 @@ class DispatchController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatch_id]));
     }
@@ -378,7 +378,7 @@ class DispatchController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatch_id]));
     }
@@ -405,7 +405,7 @@ class DispatchController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatch_id]));
     }
@@ -433,7 +433,7 @@ class DispatchController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatch_id]));
     }

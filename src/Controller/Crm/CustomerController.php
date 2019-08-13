@@ -660,7 +660,7 @@ class CustomerController extends AbstractController
             if ($response->getStatus() == ResponseStatus::successful) {
                 $this->addFlash('s', $response->getMessage());
             } else {
-                $this->addFlash('s', $response->getMessage());
+                $this->addFlash('f', $response->getMessage());
             }
             return $this->redirect($this->generateUrl('crm_customer_invitation', ['id' => $id]));
         }

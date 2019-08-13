@@ -178,7 +178,7 @@ class PricingDeedController extends AbstractController
                 $this->addFlash('s', $response->getMessage());
                 return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricingDeedModel->getPricingDeedId()]));
             } else {
-                $this->addFlash('s', $response->getMessage());
+                $this->addFlash('f', $response->getMessage());
             }
         }
 
@@ -254,27 +254,27 @@ class PricingDeedController extends AbstractController
         }
 
 
-        $years = [];
-        for ($i = 1950; $i <= 2019; $i++) {
-            $years[] = $i;
-        }
-
-        $months = [];
-        for ($j = 1; $j <= 12; $j++) {
-            $months[] = $j;
-        }
-
-        $days = [];
-        for ($k = 1; $k <= 31; $k++) {
-            $days[] = $k;
-        }
+//        $years = [];
+//        for ($i = 1950; $i <= 2019; $i++) {
+//            $years[] = $i;
+//        }
+//
+//        $months = [];
+//        for ($j = 1; $j <= 12; $j++) {
+//            $months[] = $j;
+//        }
+//
+//        $days = [];
+//        for ($k = 1; $k <= 31; $k++) {
+//            $days[] = $k;
+//        }
 
 
         return $this->render('sale/pricing_deed/edit.html.twig', [
             'controller_name' => 'PricingDeedController',
-            'years' => $years,
-            'months' => $months,
-            'days' => $days,
+//            'years' => $years,
+//            'months' => $months,
+//            'days' => $days,
             'pricingDeedModel' => $pricingDeedModel,
             'shelvesProducts' => $shelvesProducts,
             'offerGroups' => $offerGroups,
@@ -358,7 +358,7 @@ class PricingDeedController extends AbstractController
             $this->addFlash('s', $response->getMessage());
             return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_read', ['id' => $pricing_deed_id]));
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));
     }
@@ -586,7 +586,7 @@ class PricingDeedController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
 
         return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));

@@ -84,6 +84,9 @@ class InventoryController extends AbstractController
     public function create(Request $request)
     {
         $canCreate = AuthUser::if_is_allowed(ServerPermissions::inventory_inventory_new);
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::inventory_inventory_all);
+        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::inventory_inventory_update);
+
         if ($canCreate) {
             $inputs = $request->request->all();
 
@@ -101,7 +104,11 @@ class InventoryController extends AbstractController
                      */
                     $inventoryModel = ModelSerializer::parse($response->getContent(), InventoryModel::class);
                     $this->addFlash('s', $response->getMessage());
-                    return $this->redirect($this->generateUrl('inventory_inventory_edit', ['id' => $inventoryModel->getInventoryId()]));
+                    if ($canUpdate) {
+                        return $this->redirect($this->generateUrl('inventory_inventory_edit', ['id' => $inventoryModel->getInventoryId()]));
+                    } else {
+                        return $this->redirect($this->generateUrl('inventory_inventory_list'));
+                    }
                 }
                 $this->addFlash('f', $response->getMessage());
             }
@@ -122,6 +129,8 @@ class InventoryController extends AbstractController
                 'controller_name' => 'InventoryController',
                 'inventoryModel' => $inventoryModel,
                 'persons' => $persons,
+                'canCreate' => $canCreate,
+                'canSeeAll' => $canSeeAll,
             ]);
         } else {
             return $this->redirect($this->generateUrl('inventory_inventory_list'));
@@ -138,7 +147,12 @@ class InventoryController extends AbstractController
      */
     public function edit($id, Request $request)
     {
-        if (AuthUser::if_is_allowed(ServerPermissions::inventory_inventory_update)) {
+
+        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::inventory_inventory_update);
+        $canAddPhone = AuthUser::if_is_allowed(ServerPermissions::inventory_inventory_add_phone);
+        $canRemovePhone = AuthUser::if_is_allowed(ServerPermissions::inventory_inventory_remove_phone);
+
+        if ($canUpdate) {
 
             $inputs = $request->request->all();
 
@@ -234,6 +248,9 @@ class InventoryController extends AbstractController
                 'locations' => $locations,
                 'locationModel' => $locationModel,
                 'locationCount' => $locationCount,
+                'canUpdate' => $canUpdate,
+                'canAddPhone' => $canAddPhone,
+                'canRemovePhone' => $canRemovePhone,
 
             ]);
         } else {
@@ -250,7 +267,12 @@ class InventoryController extends AbstractController
      */
     public function read($id, Request $request)
     {
-        if (AuthUser::if_is_allowed(ServerPermissions::inventory_inventory_fetch)) {
+
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::inventory_inventory_new);
+        $canRead = AuthUser::if_is_allowed(ServerPermissions::inventory_inventory_fetch);
+        $canReadItemProducts = AuthUser::if_is_allowed(ServerPermissions::inventory_inventory_inventory_all_item_products);
+
+        if ($canRead) {
             $inputs = $request->request->all();
             /**
              * @var $inventoryModel InventoryModel
@@ -300,6 +322,9 @@ class InventoryController extends AbstractController
                 'phones' => $phones,
                 'itemProducts' => $itemProducts,
                 'deeds' => $deeds,
+                'canCreate' => $canCreate,
+                'canRead' => $canRead,
+                'canReadItemProducts' => $canReadItemProducts,
             ]);
         } else {
             return $this->redirect($this->generateUrl('inventory_inventory_list'));

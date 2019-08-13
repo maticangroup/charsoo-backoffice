@@ -24,4 +24,4 @@ authentication.user.list.main.title:
 authentication.user.list.main.description:
 authentication.user.last.login.date.title:
 authentication.user.is.login.title:
-authentication.user.save.role.title:
+authentication.user.save.role.title: 'ذخیره نقش'

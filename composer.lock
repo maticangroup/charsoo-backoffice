@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "49540cb2edde9d6c42ee87f5ba30a64f",
+    "content-hash": "1cdc51430ca7c8946b1ff07691fd6324",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1555,22 +1555,22 @@
         },
         {
             "name": "maticangroup/core_client_api",
-            "version": "v48",
+            "version": "v52",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maticangroup/core_client_api.git",
-                "reference": "2a8ba43a9f88a41b5aa3a74eda1bd96e1f7ca408"
+                "reference": "93ff119b5bf170afa2fc96e2cbe3d4af8cfd991f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maticangroup/core_client_api/zipball/2a8ba43a9f88a41b5aa3a74eda1bd96e1f7ca408",
-                "reference": "2a8ba43a9f88a41b5aa3a74eda1bd96e1f7ca408",
+                "url": "https://api.github.com/repos/maticangroup/core_client_api/zipball/93ff119b5bf170afa2fc96e2cbe3d4af8cfd991f",
+                "reference": "93ff119b5bf170afa2fc96e2cbe3d4af8cfd991f",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "guzzlehttp/guzzle": "^6.3",
-                "maticangroup/core_models": "v19",
+                "maticangroup/core_models": "v23",
                 "php": "^7.1.3"
             },
             "type": "library",
@@ -1589,26 +1589,26 @@
                     "email": "maticangroup@gmail.com"
                 }
             ],
-            "time": "2019-08-11T19:04:29+00:00"
+            "time": "2019-08-12T10:01:13+00:00"
         },
         {
             "name": "maticangroup/core_models",
-            "version": "v19",
+            "version": "v23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maticangroup/core_view_models.git",
-                "reference": "9850048818e1a97830629449104cc68040a76083"
+                "reference": "cd6bfd36d559697d596e3af5415d8983264a2236"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maticangroup/core_view_models/zipball/9850048818e1a97830629449104cc68040a76083",
-                "reference": "9850048818e1a97830629449104cc68040a76083",
+                "url": "https://api.github.com/repos/maticangroup/core_view_models/zipball/cd6bfd36d559697d596e3af5415d8983264a2236",
+                "reference": "cd6bfd36d559697d596e3af5415d8983264a2236",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "php": "^7.1.3",
-                "symfony/filesystem": "4.3.*"
+                "symfony/filesystem": "^4.2"
             },
             "type": "library",
             "autoload": {
@@ -1626,7 +1626,7 @@
                     "email": "maticangroup@gmail.com"
                 }
             ],
-            "time": "2019-08-11T18:50:58+00:00"
+            "time": "2019-08-12T09:52:50+00:00"
         },
         {
             "name": "monolog/monolog",

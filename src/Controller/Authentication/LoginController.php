@@ -2,11 +2,8 @@
 
 namespace App\Controller\Authentication;
 
-<<<<<<< HEAD
-use Matican\Core\Transaction\ResponseStatus;
-=======
+
 use Matican\Models\Authentication\ClientModel;
->>>>>>> 910386495feb33a54f21d8b43ddd8a10556eec05
 use Matican\Models\Authentication\UserModel;
 use Matican\Models\Repository\ItemModel;
 use Matican\ModelSerializer;
@@ -16,6 +13,7 @@ use Matican\Core\Entities\Authentication;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\Response;
 
+use Matican\ResponseStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;

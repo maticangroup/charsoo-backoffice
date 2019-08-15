@@ -2,6 +2,7 @@
 
 namespace App\Controller\Authentication;
 
+use Matican\Core\Transaction\ResponseStatus;
 use Matican\Models\Authentication\UserModel;
 use Matican\Models\Repository\ItemModel;
 use Matican\ModelSerializer;
@@ -10,7 +11,7 @@ use Grpc\Server;
 use Matican\Core\Entities\Authentication;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\Response;
-use Matican\ResponseStatus;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;

@@ -366,7 +366,18 @@
     }
 </script>
 
-
+<script>
+    let itemModel = new ItemModel();
+    itemModel.setItemID(5);
+    Request.send(
+        'Repository',
+        'Item',
+        'fetch',
+        function (response) {
+            console.log(response);
+        },
+        itemModel)
+</script>
 
 
 {#<script src="{{ asset('assets/search/js/search.js') }}"></script>#}

@@ -51,7 +51,8 @@
                 <div class="col-md-6">
                     <!-- Login Form Start -->
                     <div class="m-account--form-w bg-light">
-                        <form class="m-account--form" action="{{ path('authentication_login') }}"
+                        <form class="m-account--form"
+                              action="{{ path('authentication_login') }}{{ (reseller_token)? "?reseller_token=":"" }}{{ reseller_token }}"
                               method="post">
                             <!-- Logo Start -->
                             <div class="logo">

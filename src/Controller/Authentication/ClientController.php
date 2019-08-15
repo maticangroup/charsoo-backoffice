@@ -62,6 +62,7 @@ class ClientController extends AbstractController
         $clients = [];
         $allClientsRequest = new Req(Servers::Authentication, Authentication::Client, 'all');
         $allClientsResponse = $allClientsRequest->send();
+//        dd($allClientsResponse);
         if ($allClientsResponse->getContent()) {
             foreach ($allClientsResponse->getContent() as $client) {
                 $clients[] = ModelSerializer::parse($client, ClientModel::class);

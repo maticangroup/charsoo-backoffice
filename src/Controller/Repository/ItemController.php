@@ -3,6 +3,7 @@
 namespace App\Controller\Repository;
 
 use App\Cache;
+use Matican\Authentication\AuthUser;
 use Matican\Models\Media\ImageModel;
 use Matican\ModelSerializer;
 use Matican\Models\Repository\BarcodeModel;
@@ -18,7 +19,6 @@ use Matican\Models\Repository\ItemModel;
 use Matican\Models\Repository\ItemTypeModel;
 use Matican\Models\Repository\SpecKeyModel;
 use Matican\Models\Repository\SpecKeyValueModel;
-use App\General\AuthUser;
 use App\Params;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;

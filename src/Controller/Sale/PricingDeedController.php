@@ -9,7 +9,7 @@ use Matican\Models\Sale\OfferGroupModel;
 use Matican\Models\Sale\PricingDeedConfirmStatusModel;
 use Matican\Models\Sale\PricingDeedModel;
 use Matican\Models\Sale\PricingDeedStatusModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Inventory;
 use Matican\Core\Entities\Sale;

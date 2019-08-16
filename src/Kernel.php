@@ -2,7 +2,8 @@
 
 namespace App;
 
-use App\General\AuthUser;
+
+use Matican\Authentication\AuthUser;
 use Matican\Settings;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;

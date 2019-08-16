@@ -7,7 +7,7 @@ use Matican\ModelSerializer;
 use Matican\Models\Repository\BrandModel;
 use Matican\Models\Repository\BrandSupplierModel;
 use Matican\Models\Repository\CompanyModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Matican\ResponseStatus;

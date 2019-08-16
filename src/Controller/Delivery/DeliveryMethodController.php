@@ -13,7 +13,7 @@ use Matican\Models\Delivery\WeekDayModel;
 use Matican\ModelSerializer;
 use Matican\Models\Repository\PersonModel;
 use Matican\Models\Repository\SizeModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Delivery;

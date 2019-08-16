@@ -6,7 +6,7 @@ use Matican\ModelSerializer;
 use Matican\Models\Repository\ProductModel;
 use Matican\Models\Sale\OfferGroupModel;
 use Matican\Models\Sale\OfferGroupStatusModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Inventory;
 use Matican\Core\Entities\Sale;

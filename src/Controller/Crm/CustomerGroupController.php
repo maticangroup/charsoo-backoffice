@@ -6,7 +6,7 @@ use Matican\Models\CRM\CustomerGroupModel;
 use Matican\Models\CRM\CustomerGroupStatusModel;
 use Matican\ModelSerializer;
 use Matican\Models\Repository\PersonModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\CRM;
 use Matican\Core\Entities\Repository;

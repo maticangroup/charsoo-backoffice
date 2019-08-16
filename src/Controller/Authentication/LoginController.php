@@ -3,11 +3,12 @@
 namespace App\Controller\Authentication;
 
 
+use Matican\Authentication\AuthUser;
 use Matican\Models\Authentication\ClientModel;
 use Matican\Models\Authentication\UserModel;
 use Matican\Models\Repository\ItemModel;
 use Matican\ModelSerializer;
-use App\General\AuthUser;
+
 //use Grpc\Server;
 use Matican\Core\Entities\Authentication;
 use Matican\Core\Servers;

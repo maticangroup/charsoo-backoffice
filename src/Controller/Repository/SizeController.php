@@ -5,7 +5,7 @@ namespace App\Controller\Repository;
 use Matican\ModelSerializer;
 use Matican\Models\Repository\SizeModel;
 use Matican\Models\Repository\SizeStatusModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;

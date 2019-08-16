@@ -12,7 +12,7 @@ use Matican\ModelSerializer;
 use Matican\Models\Repository\ItemModel;
 use Matican\Models\Repository\ItemProductsModel;
 use Matican\Models\Repository\ProductModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Grpc\Server;
 use Matican\Core\Entities\Inventory;

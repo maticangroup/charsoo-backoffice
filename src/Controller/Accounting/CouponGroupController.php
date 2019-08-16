@@ -7,7 +7,7 @@ use Matican\Models\Accounting\CouponGroupStatusModel;
 use Matican\Models\Accounting\UsedCouponModel;
 use Matican\ModelSerializer;
 use Matican\Models\Repository\PersonModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Accounting;
 use Matican\Core\Entities\Repository;

@@ -5,7 +5,7 @@ namespace App\Controller\Authentication;
 use Matican\Models\Authentication\ClientModel;
 use Matican\Models\Authentication\RoleModel;
 use Matican\ModelSerializer;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Authentication;
 use Matican\Core\Servers;

@@ -7,7 +7,7 @@ use Matican\ModelSerializer;
 use Matican\Models\Repository\LocationModel;
 use Matican\Models\Repository\PersonModel;
 use Matican\Models\Repository\ProvinceModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Actions\Repository\PersonActions;
 use Matican\Core\Entities\Repository;

@@ -2,7 +2,8 @@
 
 namespace App\Controller\General;
 
-use App\General\AuthUser;
+
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;

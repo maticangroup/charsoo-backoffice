@@ -8,7 +8,7 @@ use Matican\Models\Repository\GuaranteeDurationModel;
 use Matican\Models\Repository\GuaranteeModel;
 use Matican\Models\Repository\GuaranteeProviderModel;
 use Matican\Models\Repository\GuaranteeStatusModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;

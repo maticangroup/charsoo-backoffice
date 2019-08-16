@@ -11,7 +11,7 @@ use Matican\Models\Delivery\DispatchPaymentStatusModel;
 use Matican\Models\Delivery\DistrictModel;
 use Matican\ModelSerializer;
 use Matican\Models\Repository\ProvinceModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Delivery;
 use Matican\Core\Entities\Repository;

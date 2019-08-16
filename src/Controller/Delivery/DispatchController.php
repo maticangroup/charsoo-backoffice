@@ -12,7 +12,7 @@ use Matican\ModelSerializer;
 use Matican\Models\Repository\LocationModel;
 use Matican\Models\Repository\PersonModel;
 use Matican\Models\Sale\OrderModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Delivery;
 use Matican\Core\Entities\Repository;

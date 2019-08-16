@@ -8,7 +8,7 @@ use Matican\Models\Accounting\GiftCardGroupStatusModel;
 use Matican\Models\Accounting\GiftCardModel;
 use Matican\Models\Accounting\GiftCardStatusModel;
 use Matican\ModelSerializer;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Accounting;
 use Matican\Core\Servers;

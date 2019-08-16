@@ -6,7 +6,7 @@ use Matican\ModelSerializer;
 use Matican\Models\Repository\PersonModel;
 use Matican\Models\Repository\ProductModel;
 use Matican\Models\Sale\OrderModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Inventory;
 use Matican\Core\Entities\Repository;

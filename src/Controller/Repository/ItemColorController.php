@@ -6,7 +6,7 @@ use App\Cache;
 use Matican\ModelSerializer;
 use Matican\Models\Repository\ItemColorModel;
 use Matican\Models\Repository\ItemColorStatusModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;

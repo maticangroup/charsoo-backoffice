@@ -13,7 +13,7 @@ use Matican\Models\Accounting\PaymentTypeModel;
 use Matican\ModelSerializer;
 use Matican\Models\Repository\CompanyModel;
 use Matican\Models\Repository\PersonModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Accounting;
 use Matican\Core\Entities\Repository;

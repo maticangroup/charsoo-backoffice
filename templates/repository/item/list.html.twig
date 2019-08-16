@@ -98,15 +98,9 @@
                                             </ul>
                                         </td>
                                         <td>
-                                            <ul>
-                                                {% for itemCategory in item.selectedItemCategories %}
-                                                    <li
-                                                            style="margin-left: {{ itemCategory.depth*20 }}px;">
-                                                        {{ itemCategory.category.0.itemCategoryName }}
-                                                    </li>
-                                                {% endfor %}
-                                            </ul>
-
+                                            {% for itemCategory in item.selectedItemCategories |reverse %}
+                                                <span class="label label-default small">{{ itemCategory.category.0.itemCategoryName }}</span>
+                                            {% endfor %}
                                         </td>
                                         <td>{{ item.itemCreatedDate }}</td>
                                         {% if canEdit %}

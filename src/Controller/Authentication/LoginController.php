@@ -52,7 +52,9 @@ class LoginController extends AbstractController
              * @var $clientModel ClientModel
              */
             $clientModel = ModelSerializer::parse($response->getContent(), ClientModel::class);
-
+            if (!isset($_SESSION['http_referrer'])) {
+                $_SESSION['http_referrer'] = $_SERVER['HTTP_REFERER'];
+            }
         } else {
             $clientModel = null;
         }
@@ -93,6 +95,11 @@ class LoginController extends AbstractController
                     $redirectURL = $clientModel->getClientDomain() .
                         $clientModel->getAuthenticationTerminalUrl() .
                         "&userName=" . $userModel->getUserName() . "&userPassword=" . $userModel->getUserPassword();
+                    if (isset($_SESSION['http_referrer'])) {
+                        $referrer = $_SESSION['http_referrer'];
+                        unset($_SESSION['http_referrer']);
+                        return $this->redirect($redirectURL . "&referrer=" . $referrer);
+                    }
                     return $this->redirect($redirectURL);
                 }
                 return $this->redirect($this->generateUrl("default"));

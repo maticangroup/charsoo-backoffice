@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f660d9c5c847dac2659e516574ea5a6",
+    "content-hash": "7f7915f1b223ea1a7a0c1cdcf271a940",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1555,16 +1555,16 @@
         },
         {
             "name": "maticangroup/core_client_api",
-            "version": "v64",
+            "version": "v65",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maticangroup/core_client_api.git",
-                "reference": "7a6331178f9342809cbae79c5317fe9a7307b961"
+                "reference": "a2bdec3c1972b52e09ffd1b4d2c5e5b9bfce2141"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maticangroup/core_client_api/zipball/7a6331178f9342809cbae79c5317fe9a7307b961",
-                "reference": "7a6331178f9342809cbae79c5317fe9a7307b961",
+                "url": "https://api.github.com/repos/maticangroup/core_client_api/zipball/a2bdec3c1972b52e09ffd1b4d2c5e5b9bfce2141",
+                "reference": "a2bdec3c1972b52e09ffd1b4d2c5e5b9bfce2141",
                 "shasum": ""
             },
             "require": {
@@ -1589,7 +1589,7 @@
                     "email": "maticangroup@gmail.com"
                 }
             ],
-            "time": "2019-08-17T08:28:25+00:00"
+            "time": "2019-08-17T08:53:48+00:00"
         },
         {
             "name": "maticangroup/core_models",

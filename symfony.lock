@@ -109,7 +109,7 @@
         "version": "v1.2.17"
     },
     "maticangroup/core_client_api": {
-        "version": "v65"
+        "version": "v66"
     },
     "maticangroup/core_models": {
         "version": "v28"

@@ -34,7 +34,7 @@ class LoginController extends AbstractController
      */
     public function read(Request $request)
     {
-//        dd($request);
+        AuthUser::logout();
 
         $inputs = $request->request->all();
         /**

@@ -94,7 +94,9 @@ class LoginController extends AbstractController
                 if ($clientModel) {
                     $redirectURL = $clientModel->getClientDomain() .
                         $clientModel->getAuthenticationTerminalUrl() .
-                        "&userName=" . $userModel->getUserName() . "&userPassword=" . $userModel->getUserPassword();
+                        "&userName=" .
+                        $userModel->getUserName() . "&userPassword=" .
+                        $userModel->getUserPassword() . "&personId=" . $userModel->getPersonId();
                     if (isset($_SESSION['http_referrer'])) {
                         $referrer = $_SESSION['http_referrer'];
                         unset($_SESSION['http_referrer']);

@@ -21,7 +21,7 @@ class DefaultController extends AbstractController
      */
     public function index()
     {
-
+//        dd(AuthUser::current_user());
 //        dd(AuthUser::class);
 
 //        $request = new Request("test", "test", "test");

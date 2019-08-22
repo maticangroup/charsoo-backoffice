@@ -157,7 +157,11 @@ class ItemController extends AbstractController
      */
     public function edit($id, Request $request)
     {
+        $referrer = null;
 //        Cache::cache_action(Servers::Repository, Repository::Brand, 'all');
+        if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] != "") {
+            $referrer = $_SERVER['HTTP_REFERER'];
+        }
 
         $canUpdate = AuthUser::if_is_allowed(ServerPermissions::repository_item_update);
 
@@ -371,6 +375,7 @@ class ItemController extends AbstractController
                 'specGroupKeys' => $specGroupsKeys,
                 'canUpdate' => $canUpdate,
                 'itemImages' => $itemImages,
+                'referrer' => $referrer,
             ]);
         } else {
             return $this->redirect($this->generateUrl('repository_item_repository_item_list'));

@@ -85,7 +85,7 @@ class InventoryDeedController extends AbstractController
 
                 $request = new Req(Servers::Inventory, Inventory::Deed, 'new');
 
-//dd($inputs['deedFrom']);
+
                 if ($inputs['deedFrom'] == 'none') {
                     $deedModel->setInventoryDeedFromId(0);
                 } elseif (strpos($inputs['deedFrom'], 'inventory') !== false) {
@@ -100,12 +100,10 @@ class InventoryDeedController extends AbstractController
                     $deedModel->setInventoryDeedToShelveId(explode('_', $inputs['deedTo'])[1]);
                 }
 
-//            dd($deedModel);
+//                dd($deedModel);
 
                 $request->add_instance($deedModel);
                 $response = $request->send();
-
-//            dd($response);
 
 
                 if ($deedModel->getInventoryDeedFromId() != 'none') {

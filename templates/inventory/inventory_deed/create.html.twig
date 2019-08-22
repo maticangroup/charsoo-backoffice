@@ -35,8 +35,7 @@
                                     <option disabled>Inventories</option>
 
                                     {% for inventory in inventories %}
-                                        <option value="inventory_{{ inventory.inventoryId }}"
-                                                {{ (inventory.inventoryMachineName == 'confirmed_orders_products') ? 'disabled' : '' }}>{{ inventory.inventoryName }}</option>
+                                        <option value="inventory_{{ inventory.inventoryId }}">{{ inventory.inventoryName }}</option>
                                     {% endfor %}
 
                                     <option disabled>Shelves</option>
@@ -53,8 +52,7 @@
                                     <option disabled>Inventories</option>
 
                                     {% for inventory in inventories %}
-                                        <option value="inventory_{{ inventory.inventoryId }}"
-                                                {{ (inventory.inventoryMachineName == 'confirmed_orders_products') ? 'disabled' : '' }}>{{ inventory.inventoryName }}</option>
+                                        <option value="inventory_{{ inventory.inventoryId }}">{{ inventory.inventoryName }}</option>
                                     {% endfor %}
 
                                     <option disabled>Shelves</option>

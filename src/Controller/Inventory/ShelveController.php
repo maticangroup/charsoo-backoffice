@@ -52,8 +52,10 @@ class ShelveController extends AbstractController
              * @var $shelves ShelveModel[]
              */
             $shelves = [];
-            foreach ($response->getContent() as $shelve) {
-                $shelves[] = ModelSerializer::parse($shelve, ShelveModel::class);
+            if ($response->getContent()) {
+                foreach ($response->getContent() as $shelve) {
+                    $shelves[] = ModelSerializer::parse($shelve, ShelveModel::class);
+                }
             }
 
 

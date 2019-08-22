@@ -47,10 +47,11 @@ class InventoryDeedController extends AbstractController
              * @var $deeds InventoryDeedModel[]
              */
             $deeds = [];
-            foreach ($response->getContent() as $deed) {
-                $deeds[] = ModelSerializer::parse($deed, InventoryDeedModel::class);
+            if ($response->getContent()) {
+                foreach ($response->getContent() as $deed) {
+                    $deeds[] = ModelSerializer::parse($deed, InventoryDeedModel::class);
+                }
             }
-
             return $this->render('inventory/inventory_deed/list.html.twig', [
                 'controller_name' => 'InventoryDeedController',
                 'deeds' => $deeds,

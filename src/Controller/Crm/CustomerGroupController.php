@@ -71,7 +71,7 @@ class CustomerGroupController extends AbstractController
         }
 
         /**
-         * @todo Authorization should be handled in twig
+         * @todo Authorization should be handled in twig (DONE)
          */
         return $this->render('crm/customer_group/create.html.twig', [
             'controller_name' => 'CustomerGroupController',

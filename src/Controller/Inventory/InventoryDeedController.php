@@ -87,24 +87,32 @@ class InventoryDeedController extends AbstractController
 
 
                 if ($inputs['deedFrom'] == 'none') {
-                    $deedModel->setInventoryDeedFromId(0);
+
+                    $deedModel->setInventoryDeedFromId('not_set');
+
                 } elseif (strpos($inputs['deedFrom'], 'inventory') !== false) {
+
                     $deedModel->setInventoryDeedFromInventoryId(explode('_', $inputs['deedFrom'])[1]);
+
                 } elseif (strpos($inputs['deedFrom'], 'shelve') !== false) {
+
                     $deedModel->setInventoryDeedFromShelveId(explode('_', $inputs['deedFrom'])[1]);
+
                 }
 
                 if (strpos($inputs['deedTo'], 'inventory') !== false) {
+
                     $deedModel->setInventoryDeedToInventoryId(explode('_', $inputs['deedTo'])[1]);
+
                 } elseif (strpos($inputs['deedTo'], 'shelve') !== false) {
+
                     $deedModel->setInventoryDeedToShelveId(explode('_', $inputs['deedTo'])[1]);
+
                 }
 
-//                dd($deedModel);
 
                 $request->add_instance($deedModel);
                 $response = $request->send();
-
 
                 if ($deedModel->getInventoryDeedFromId() != 'none') {
                     if ($response->getStatus() == ResponseStatus::successful) {

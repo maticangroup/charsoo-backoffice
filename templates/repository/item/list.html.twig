@@ -41,7 +41,6 @@
                             <table id="usersRoleList" class="js-table">
                                 <thead>
                                 <tr>
-                                    <th>{{ 'general.image.title' | trans }}</th>
                                     <th>{{ 'general.brand.title' | trans }}</th>
                                     <th>{{ 'general.name.title' | trans }}</th>
                                     <th>{{ 'general.color.title' | trans }}</th>
@@ -60,16 +59,6 @@
                                 <tbody>
                                 {% for item in items %}
                                     <tr>
-                                        <td>
-                                            {% if item.itemImages %}
-                                                <img src="{{ item.itemImages.0.url }}"
-                                                     alt="{{ item.itemImages.0.imageAlt }}">
-                                            {% else %}
-
-                                            {% endif %}
-
-                                            {#<img src="{{ firstItemImageUrl }}" alt="{{ firstItemImageAlt }}">#}
-                                        </td>
                                         <td>{{ item.itemBrandName }}</td>
                                         <td><strong>{{ item.itemName }}</strong></td>
                                         <td>

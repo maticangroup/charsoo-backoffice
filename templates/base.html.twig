@@ -127,6 +127,22 @@
             text-align: center;
         }
     </style>
+    <style>
+        @font-face {
+            font-family: 'AIranianSans';
+            src: url('{{ asset('assets/fonts/arad-font/BRoya.eot') }}?#iefix') format('embedded-opentype'),
+            url('{{ asset('assets/fonts/arad-font/BRoya.woff') }}') format('woff'),
+            url('{{ asset('assets/fonts/arad-font/BRoya.ttf') }}') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+
+        body, p, h1, h2, h3, h4, h5, h6, strong, td, tr, input {
+
+            font-family: 'AIranianSans', sans-serif !important;
+        }
+    </style>
     {% block stylesheets %}{% endblock %}
 
     <!-- Page Level Stylesheets -->

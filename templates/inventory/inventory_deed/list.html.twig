@@ -57,7 +57,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for deed in deeds %}
+                                {% for deed in deeds | reverse %}
                                     <tr>
                                         <td>{{ deed.inventoryDeedSerial }}</td>
                                         <td>{{ deed.inventoryDeedName }}</td>

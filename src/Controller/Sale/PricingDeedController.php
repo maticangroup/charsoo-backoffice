@@ -46,8 +46,10 @@ class PricingDeedController extends AbstractController
          * @var $pricingDeeds PricingDeedModel[]
          */
         $pricingDeeds = [];
-        foreach ($allPricingDeedsResponse->getContent() as $pricingDeed) {
-            $pricingDeeds[] = ModelSerializer::parse($pricingDeed, PricingDeedModel::class);
+        if ($allPricingDeedsResponse->getContent()) {
+            foreach ($allPricingDeedsResponse->getContent() as $pricingDeed) {
+                $pricingDeeds[] = ModelSerializer::parse($pricingDeed, PricingDeedModel::class);
+            }
         }
 
         return $this->render('sale/pricing_deed/list.html.twig', [

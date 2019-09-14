@@ -377,6 +377,10 @@
         <source>general.date.title</source>
         <target>تاریخ</target>
       </trans-unit>
+      <trans-unit id="VHHZgch" resname="general.duplicate.title">
+        <source>general.duplicate.title</source>
+        <target>ایجاد مجدد</target>
+      </trans-unit>
       <trans-unit id="TcqtBCf" resname="general.reason.title">
         <source>general.reason.title</source>
         <target>دلیل</target>
@@ -579,6 +583,10 @@
       </trans-unit>
       <trans-unit id="fm8dYtC" resname="general.products.title">
         <source>general.products.title</source>
+        <target>محصولات</target>
+      </trans-unit>
+      <trans-unit id="PqVtGco" resname="general.products.count.title">
+        <source>general.products.count.title</source>
         <target>محصولات</target>
       </trans-unit>
       <trans-unit id="83z1i0f" resname="general.item.products.title">
@@ -1571,7 +1579,7 @@
       </trans-unit>
       <trans-unit id="NZxFRuq" resname="inventory.create.tab.title">
         <source>inventory.create.tab.title</source>
-        <target>__inventory.create.tab.title</target>
+        <target>انبار | ساختن</target>
       </trans-unit>
       <trans-unit id="KYdoFib" resname="inventory.create.main.title">
         <source>inventory.create.main.title</source>
@@ -1583,7 +1591,7 @@
       </trans-unit>
       <trans-unit id=".7sg8pl" resname="inventory.edit.tab.title">
         <source>inventory.edit.tab.title</source>
-        <target>__inventory.edit.tab.title</target>
+        <target>انبار | ویرایش</target>
       </trans-unit>
       <trans-unit id="SheWhrq" resname="inventory.edit.main.title">
         <source>inventory.edit.main.title</source>
@@ -1595,11 +1603,11 @@
       </trans-unit>
       <trans-unit id="Mxfd7cE" resname="inventory.read.tab.title">
         <source>inventory.read.tab.title</source>
-        <target>__inventory.read.tab.title</target>
+        <target>انبار | مشاهده</target>
       </trans-unit>
       <trans-unit id="A7YCVUg" resname="inventory.list.tab.title">
         <source>inventory.list.tab.title</source>
-        <target>__inventory.list.tab.title</target>
+        <target>انبار | لیست</target>
       </trans-unit>
       <trans-unit id="xa3v.6o" resname="inventory.list.main.title">
         <source>inventory.list.main.title</source>
@@ -1611,11 +1619,11 @@
       </trans-unit>
       <trans-unit id="7uFzp9_" resname="inventory.item.products.read.tab.title">
         <source>inventory.item.products.read.tab.title</source>
-        <target>__inventory.item.products.read.tab.title</target>
+        <target>محصولات در انبار | مشاهده</target>
       </trans-unit>
       <trans-unit id="XJkR5T6" resname="inventory.stock.list.tab.title">
         <source>inventory.stock.list.tab.title</source>
-        <target>__inventory.stock.list.tab.title</target>
+        <target>موجودی انبار | لیست</target>
       </trans-unit>
       <trans-unit id="ij2fXH4" resname="inventory.stock.list.main.title">
         <source>inventory.stock.list.main.title</source>
@@ -1627,11 +1635,11 @@
       </trans-unit>
       <trans-unit id="7zI.xAP" resname="inventory.stock.read.tab.title">
         <source>inventory.stock.read.tab.title</source>
-        <target>__inventory.stock.read.tab.title</target>
+        <target>موجودی انبار | مشاهده</target>
       </trans-unit>
       <trans-unit id="xxWB87L" resname="inventory.shelve.create.tab.title">
         <source>inventory.shelve.create.tab.title</source>
-        <target>__inventory.shelve.create.tab.title</target>
+        <target>قفسه | ساختن</target>
       </trans-unit>
       <trans-unit id="nFRIcc6" resname="inventory.shelve.create.main.title">
         <source>inventory.shelve.create.main.title</source>
@@ -1643,7 +1651,7 @@
       </trans-unit>
       <trans-unit id="vMrNZO0" resname="inventory.shelve.edit.tab.title">
         <source>inventory.shelve.edit.tab.title</source>
-        <target>__inventory.shelve.edit.tab.title</target>
+        <target>قفسه | ویرایش</target>
       </trans-unit>
       <trans-unit id="f_XW10u" resname="inventory.shelve.edit.main.title">
         <source>inventory.shelve.edit.main.title</source>
@@ -1655,11 +1663,11 @@
       </trans-unit>
       <trans-unit id="Rw8DGgk" resname="inventory.shelve.read.tab.title">
         <source>inventory.shelve.read.tab.title</source>
-        <target>__inventory.shelve.read.tab.title</target>
+        <target>قفسه | مشاهده</target>
       </trans-unit>
       <trans-unit id="7mvmm6L" resname="inventory.shelve.list.tab.title">
         <source>inventory.shelve.list.tab.title</source>
-        <target>__inventory.shelve.list.tab.title</target>
+        <target>قفسه | لیست</target>
       </trans-unit>
       <trans-unit id="GrQuMKm" resname="inventory.shelve.list.main.title">
         <source>inventory.shelve.list.main.title</source>
@@ -1671,23 +1679,23 @@
       </trans-unit>
       <trans-unit id="09GYHM2" resname="inventory.shelve.item.products.read.tab.title">
         <source>inventory.shelve.item.products.read.tab.title</source>
-        <target>__inventory.shelve.item.products.read.tab.title</target>
+        <target>محصولات در قفسه | مشاهده</target>
       </trans-unit>
       <trans-unit id="x8yVFja" resname="inventory.deed.create.tab.title">
         <source>inventory.deed.create.tab.title</source>
-        <target>__inventory.deed.create.tab.title</target>
+        <target>سند انبار | ساختن</target>
       </trans-unit>
       <trans-unit id="h6.zc89" resname="inventory.deed.create.main.title">
         <source>inventory.deed.create.main.title</source>
-        <target>__inventory.deed.create.main.title</target>
+        <target>ساختن سند انبار</target>
       </trans-unit>
       <trans-unit id="En1JqWt" resname="inventory.deed.create.main.description">
         <source>inventory.deed.create.main.description</source>
-        <target>__inventory.deed.create.main.description</target>
+        <target><![CDATA[ ایجاد سند انبار به چند منظور انجام میشود :‌ <br> ۱. ورود به انبار : برای ایجاد این سند می بایست قسمت 'از' را به روی 'None' انتخاب کرده و در قسمت 'به' انبار مورد نظر را انتخاب کنید. <br> ۲.انتقال بین انبار ها و قفسه ها : برای ایجاد این سند کافی است انبار یا قفسه مبدا و مقصد را انتخاب کنید. ]]></target>
       </trans-unit>
       <trans-unit id="9KhyCSZ" resname="inventory.product.deed.create.tab.title">
         <source>inventory.product.deed.create.tab.title</source>
-        <target>__inventory.product.deed.create.tab.title</target>
+        <target>سند انتقال از انبار | ساختن</target>
       </trans-unit>
       <trans-unit id="oPRaZfZ" resname="inventory.product.deed.create.main.title">
         <source>inventory.product.deed.create.main.title</source>
@@ -1699,7 +1707,7 @@
       </trans-unit>
       <trans-unit id="tsyglu9" resname="inventory.import.deed.create.tab.title">
         <source>inventory.import.deed.create.tab.title</source>
-        <target>__inventory.import.deed.create.tab.title</target>
+        <target>سند انتقال به انبار | ساختن</target>
       </trans-unit>
       <trans-unit id="CNdYXqH" resname="inventory.import.deed.create.main.title">
         <source>inventory.import.deed.create.main.title</source>
@@ -1711,7 +1719,7 @@
       </trans-unit>
       <trans-unit id="oDez7cJ" resname="inventory.deed.read.tab.title">
         <source>inventory.deed.read.tab.title</source>
-        <target>__inventory.deed.read.tab.title</target>
+        <target>سند انبار | مشاهده</target>
       </trans-unit>
       <trans-unit id="yGXZ1bB" resname="inventory.deed.read.main.title">
         <source>inventory.deed.read.main.title</source>
@@ -1723,7 +1731,7 @@
       </trans-unit>
       <trans-unit id="SrJb.DE" resname="inventory.deed.list.tab.title">
         <source>inventory.deed.list.tab.title</source>
-        <target>__inventory.deed.list.tab.title</target>
+        <target>سند انبار | لیست</target>
       </trans-unit>
       <trans-unit id="ii8PPWf" resname="inventory.deed.list.main.title">
         <source>inventory.deed.list.main.title</source>
@@ -1769,17 +1777,29 @@
         <source>sale.offer.group.read.main.description</source>
         <target>__sale.offer.group.read.main.description</target>
       </trans-unit>
+      <trans-unit id="C.RduP8" resname="sale.offer.group.list.tab.title">
+        <source>sale.offer.group.list.tab.title</source>
+        <target>__sale.offer.group.list.tab.title</target>
+      </trans-unit>
+      <trans-unit id="8vWli1k" resname="sale.offer.group.list.main.title">
+        <source>sale.offer.group.list.main.title</source>
+        <target>__sale.offer.group.list.main.title</target>
+      </trans-unit>
+      <trans-unit id="t9gShIb" resname="sale.offer.group.list.main.description">
+        <source>sale.offer.group.list.main.description</source>
+        <target>__sale.offer.group.list.main.description</target>
+      </trans-unit>
       <trans-unit id="VQjwWHH" resname="sale.pricing.deed.create.tab.title">
         <source>sale.pricing.deed.create.tab.title</source>
-        <target>__sale.pricing.deed.create.tab.title</target>
+        <target>سند قیمت گذاری | ایجاد</target>
       </trans-unit>
       <trans-unit id="G8pQH7u" resname="sale.pricing.deed.create.main.title">
         <source>sale.pricing.deed.create.main.title</source>
-        <target>__sale.pricing.deed.create.main.title</target>
+        <target>ایجاد سند قیمت گذاری</target>
       </trans-unit>
       <trans-unit id="KE5zJ_g" resname="sale.pricing.deed.create.main.description">
         <source>sale.pricing.deed.create.main.description</source>
-        <target>__sale.pricing.deed.create.main.description</target>
+        <target><![CDATA[ سند قیمت گذاری سندی است که بر روی محصولات تخفیف اعمال میشود : <br> - نام و تاریخ انقضا را برای این سند مشخص کرده <br> - تاریخ انقضا به این معنی است که تخفیف های اعمال شده بر روی محصولات این سند تا تاریخ مشخص شده اعمال خواهد شد <br> - برای وجود داشتن علت یا هدف ایجاد این سند می توان از قسمت توضیحات استفاده کرد ]]></target>
       </trans-unit>
       <trans-unit id="AXefJre" resname="sale.pricing.deed.edit.tab.title">
         <source>sale.pricing.deed.edit.tab.title</source>
@@ -1983,7 +2003,7 @@
       </trans-unit>
       <trans-unit id="ArL7DH6" resname="authentication.user.save.role.title">
         <source>authentication.user.save.role.title</source>
-        <target>__authentication.user.save.role.title</target>
+        <target>ذخیره نقش</target>
       </trans-unit>
     </body>
   </file>

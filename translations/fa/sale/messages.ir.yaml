@@ -14,13 +14,12 @@ sale.offer.group.list.tab.title:
 sale.offer.group.list.main.title:
 sale.offer.group.list.main.description:
 
-sale.pricing.deed.create.tab.title:
-sale.pricing.deed.create.main.title:
-sale.pricing.deed.create.main.description:
-"
-سند قیمت گذاری سندی است که بر روی محصولات تخفیف اعمال میشود :
-- نام و تاریخ انقضا را برای این سند مشخص کرده
-- تاریخ انقضا به این معنی است که تخفیف های اعمال شده بر روی محصولات این سند تا تاریخ مشخص شده اعمال خواهد شد
+sale.pricing.deed.create.tab.title: "سند قیمت گذاری | ایجاد"
+sale.pricing.deed.create.main.title: "ایجاد سند قیمت گذاری"
+sale.pricing.deed.create.main.description: "
+سند قیمت گذاری سندی است که بر روی محصولات تخفیف اعمال میشود : <br>
+- نام و تاریخ انقضا را برای این سند مشخص کرده <br>
+- تاریخ انقضا به این معنی است که تخفیف های اعمال شده بر روی محصولات این سند تا تاریخ مشخص شده اعمال خواهد شد <br>
 - برای وجود داشتن علت یا هدف ایجاد این سند می توان از قسمت توضیحات استفاده کرد
 "
 

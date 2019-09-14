@@ -622,4 +622,3 @@ class PricingDeedController extends AbstractController
         return $this->redirect($this->generateUrl('sale_pricing_deed_sale_pricing_deed_edit', ['id' => $pricing_deed_id]));
     }
 }
-

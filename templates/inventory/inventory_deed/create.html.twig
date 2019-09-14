@@ -10,7 +10,7 @@
                     <div class="row">
                         <div class="col-10">
                             <h1>{{ 'inventory.deed.create.main.title' | trans }}</h1>
-                            <p>{{ 'inventory.deed.create.main.description' | trans }}</p>
+                            <p>{{ 'inventory.deed.create.main.description' | trans | raw }}</p>
                         </div>
                         {% if canSeeAll %}
                             <div class="col-2">

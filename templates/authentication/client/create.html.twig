@@ -25,7 +25,7 @@
                                        placeholder="{{ 'general.domain.title' | trans }}">
                                 <input type="text" name="authenticationTerminalUrl" class="form-control mb-3"
                                        value="{{ clientModel.authenticationTerminalUrl }}"
-                                       placeholder="Authentication terminal url">
+                                       placeholder="{{ 'authentication.client.create.terminal.url' | trans }}">
                                 {#<select name="clientRoleId" class="form-control mb-3">#}
                                 {#{% for role in roles %}#}
                                 {#<option value="{{ role.roleId }}" {{ (role.roleId == clientModel.clientRoleId) ? 'selected' : '' }}>#}
@@ -63,7 +63,7 @@
                                     <th>{{ 'general.secret.key.title' | trans }}</th>
                                     <th>{{ 'general.ip.title' | trans }}</th>
                                     <th>{{ 'general.domain.title' | trans }}</th>
-                                    <th>Authentication terminal URL</th>
+                                    <th>{{ 'authentication.client.create.terminal.url' | trans }}</th>
                                     <th>{{ 'general.status.title' | trans }}</th>
                                     {% if canUpdate %}
                                         <th>{{ 'general.action.title' | trans }}</th>

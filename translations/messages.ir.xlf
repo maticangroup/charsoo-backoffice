@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="kls4vCS" resname="accounting.coupon.group.create.form.input.title.minimum.invoice.price">
         <source>accounting.coupon.group.create.form.input.title.minimum.invoice.price</source>
-        <target>حداقل قیمت مجاز استفاده از کوپن</target>
+        <target>حداقل قیمت فاکتور مجاز استفاده از کوپن</target>
       </trans-unit>
       <trans-unit id="yFlN13t" resname="accounting.coupon.group.create.form.input.placeholder.minimum.invoice.price">
         <source>accounting.coupon.group.create.form.input.placeholder.minimum.invoice.price</source>
@@ -227,7 +227,7 @@
       </trans-unit>
       <trans-unit id="KEuPafa" resname="accounting.invoice.create.main.description">
         <source>accounting.invoice.create.main.description</source>
-        <target><![CDATA[ برای ساخت فاکتور به چندین قسمت باید توجه نمود :‌ <br> ۱. گروه های فاکتور :‌ فاکتور هایی که به یک دسته تعلق دارند. <br> ۲. از - به : فاکتور ها به دسته های 'فرد به فرد' یا 'شرکت به شرکت' یا 'فردی از شرکت به فردی از شرکت' و 'فرد یه شرکت - شرکت به فرد' تقسیم میشوند. <br> ۳. نوع فاکتور :‌ ورودی به فاکتور هایی گفته میشوند که پول ذا وارد می کند مانند فروش و خروجی به فاکتورهایی گفته می شود که پول را خارج می کند مانند خرید ]]></target>
+        <target><![CDATA[ برای ساخت فاکتور به چندین قسمت باید توجه نمود :‌ <br> ۱. گروه های فاکتور :‌ فاکتور هایی که به یک دسته تعلق دارند. <br> ۲. از - به : فاکتور ها به دسته های 'فرد به فرد' یا 'شرکت به شرکت' یا 'فردی از شرکت به فردی از شرکت' و 'فرد به شرکت - شرکت به فرد' تقسیم میشوند. <br> ۳. نوع فاکتور :‌ ورودی به فاکتور هایی گفته میشوند که پول را وارد می کند مانند فروش و خروجی به فاکتورهایی گفته می شود که پول را خارج می کند مانند خرید ]]></target>
       </trans-unit>
       <trans-unit id="uYwd.dC" resname="accounting.invoice.create.form.input.title.create.date">
         <source>accounting.invoice.create.form.input.title.create.date</source>
@@ -1072,6 +1072,26 @@
       <trans-unit id="7gA3LvS" resname="general.sms.descrption">
         <source>general.sms.descrption</source>
         <target>آیا مایلید برای فرد پیامک ارسال شود؟</target>
+      </trans-unit>
+      <trans-unit id="qrDUJeX" resname="general.income.title">
+        <source>general.income.title</source>
+        <target>ورودی</target>
+      </trans-unit>
+      <trans-unit id="ftsrLJX" resname="general.outgo.title">
+        <source>general.outgo.title</source>
+        <target>خروجی</target>
+      </trans-unit>
+      <trans-unit id="Uvg14z2" resname="general.private.title">
+        <source>general.private.title</source>
+        <target>خصوصی</target>
+      </trans-unit>
+      <trans-unit id="Y4jPUUd" resname="general.fixed.title">
+        <source>general.fixed.title</source>
+        <target>ثابت</target>
+      </trans-unit>
+      <trans-unit id="PCZXbfw" resname="general.percentage.title">
+        <source>general.percentage.title</source>
+        <target>درصد</target>
       </trans-unit>
       <trans-unit id="ljXyU6S" resname="repository.brand.create.tab.title">
         <source>repository.brand.create.tab.title</source>
@@ -1919,87 +1939,91 @@
       </trans-unit>
       <trans-unit id="XbAJMNG" resname="authentication.client.create.tab.title">
         <source>authentication.client.create.tab.title</source>
-        <target>__authentication.client.create.tab.title</target>
+        <target>کلاینت | ساختن</target>
       </trans-unit>
       <trans-unit id="vC.Ludt" resname="authentication.client.create.main.title">
         <source>authentication.client.create.main.title</source>
-        <target>__authentication.client.create.main.title</target>
+        <target>ساختن کلاینت</target>
       </trans-unit>
       <trans-unit id="GDJWBhw" resname="authentication.client.create.main.description">
         <source>authentication.client.create.main.description</source>
-        <target>__authentication.client.create.main.description</target>
+        <target> </target>
+      </trans-unit>
+      <trans-unit id="26SkHxw" resname="authentication.client.create.terminal.url">
+        <source>authentication.client.create.terminal.url</source>
+        <target>آدرس ترمینال</target>
       </trans-unit>
       <trans-unit id="UV_aFdj" resname="authentication.client.edit.tab.title">
         <source>authentication.client.edit.tab.title</source>
-        <target>__authentication.client.edit.tab.title</target>
+        <target>کلاینت | ویرایش</target>
       </trans-unit>
       <trans-unit id="Zg_BBxp" resname="authentication.client.edit.main.title">
         <source>authentication.client.edit.main.title</source>
-        <target>__authentication.client.edit.main.title</target>
+        <target>ویرایش کلاینت</target>
       </trans-unit>
       <trans-unit id="WdgSHHH" resname="authentication.client.edit.main.description">
         <source>authentication.client.edit.main.description</source>
-        <target>__authentication.client.edit.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="yB3Loe_" resname="authentication.login.tab.title">
         <source>authentication.login.tab.title</source>
-        <target>__authentication.login.tab.title</target>
+        <target>ورود</target>
       </trans-unit>
       <trans-unit id="Mt7LNqH" resname="authentication.login.main.title">
         <source>authentication.login.main.title</source>
-        <target>__authentication.login.main.title</target>
+        <target>ورود یه پنل کاربری آراد موبایل</target>
       </trans-unit>
       <trans-unit id="L71VkmC" resname="authentication.login.main.description">
         <source>authentication.login.main.description</source>
-        <target>__authentication.login.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="LlLKEF4" resname="authentication.login.main.footer.description">
         <source>authentication.login.main.footer.description</source>
-        <target>__authentication.login.main.footer.description</target>
+        <target>کلیه حقوق معنوی متعلق به آراد موبایل می باشد</target>
       </trans-unit>
       <trans-unit id="HyYB7fH" resname="authentication.role.create.tab.title">
         <source>authentication.role.create.tab.title</source>
-        <target>__authentication.role.create.tab.title</target>
+        <target>نقش | ساختن</target>
       </trans-unit>
       <trans-unit id="SQARhMD" resname="authentication.role.create.main.title">
         <source>authentication.role.create.main.title</source>
-        <target>__authentication.role.create.main.title</target>
+        <target>ساختن نقش</target>
       </trans-unit>
       <trans-unit id="IaberDc" resname="authentication.role.create.main.description">
         <source>authentication.role.create.main.description</source>
-        <target>__authentication.role.create.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="MllF9hK" resname="authentication.role.edit.tab.title">
         <source>authentication.role.edit.tab.title</source>
-        <target>__authentication.role.edit.tab.title</target>
+        <target>نقش | ویرایش</target>
       </trans-unit>
       <trans-unit id="jCcB3vb" resname="authentication.role.edit.main.title">
         <source>authentication.role.edit.main.title</source>
-        <target>__authentication.role.edit.main.title</target>
+        <target>ویرایش نقش</target>
       </trans-unit>
       <trans-unit id="skEfb26" resname="authentication.role.edit.main.description">
         <source>authentication.role.edit.main.description</source>
-        <target>__authentication.role.edit.main.description</target>
+        <target>در این قسمت فقط کافی است دسترسی های مورد نظر را از جدول بالا به نقش ساخته شده اضافه کنید.</target>
       </trans-unit>
       <trans-unit id="tCm34I5" resname="authentication.user.list.tab.title">
         <source>authentication.user.list.tab.title</source>
-        <target>__authentication.user.list.tab.title</target>
+        <target>کاربران | لیست</target>
       </trans-unit>
       <trans-unit id="Hufgxsf" resname="authentication.user.list.main.title">
         <source>authentication.user.list.main.title</source>
-        <target>__authentication.user.list.main.title</target>
+        <target>لیست کاربران</target>
       </trans-unit>
       <trans-unit id="JyrUtGQ" resname="authentication.user.list.main.description">
         <source>authentication.user.list.main.description</source>
-        <target>__authentication.user.list.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="OgKBjkN" resname="authentication.user.last.login.date.title">
         <source>authentication.user.last.login.date.title</source>
-        <target>__authentication.user.last.login.date.title</target>
+        <target>آخرین تاریخ ورود به پنل</target>
       </trans-unit>
       <trans-unit id="Av8nPZ2" resname="authentication.user.is.login.title">
         <source>authentication.user.is.login.title</source>
-        <target>__authentication.user.is.login.title</target>
+        <target>وضعیت کاربر در پنل</target>
       </trans-unit>
       <trans-unit id="ArL7DH6" resname="authentication.user.save.role.title">
         <source>authentication.user.save.role.title</source>

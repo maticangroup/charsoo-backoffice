@@ -1089,6 +1089,14 @@
         <source>general.fixed.title</source>
         <target>ثابت</target>
       </trans-unit>
+      <trans-unit id="gIKZgQ1" resname="general.free.title">
+        <source>general.free.title</source>
+        <target>بدون هزینه</target>
+      </trans-unit>
+      <trans-unit id="geHWf1J" resname="general.km.title">
+        <source>general.km.title</source>
+        <target>بر اساس کیلومتر</target>
+      </trans-unit>
       <trans-unit id="PCZXbfw" resname="general.percentage.title">
         <source>general.percentage.title</source>
         <target>درصد</target>
@@ -1475,127 +1483,127 @@
       </trans-unit>
       <trans-unit id="ScsuAGF" resname="delivery.method.create.tab.title">
         <source>delivery.method.create.tab.title</source>
-        <target>__delivery.method.create.tab.title</target>
+        <target>روش ارسال |‌ ساختن</target>
       </trans-unit>
       <trans-unit id="VLrqPOJ" resname="delivery.method.create.main.title">
         <source>delivery.method.create.main.title</source>
-        <target>__delivery.method.create.main.title</target>
+        <target>ساختن روش ارسال</target>
       </trans-unit>
       <trans-unit id="EQZEU0K" resname="delivery.method.create.main.description">
         <source>delivery.method.create.main.description</source>
-        <target>__delivery.method.create.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="iS_BeY6" resname="delivery.method.create.form.input.content.title">
         <source>delivery.method.create.form.input.content.title</source>
-        <target>__delivery.method.create.form.input.content.title</target>
+        <target>متن فرد تحویل گیرنده</target>
       </trans-unit>
       <trans-unit id="E7qF6EM" resname="delivery.method.edit.tab.title">
         <source>delivery.method.edit.tab.title</source>
-        <target>__delivery.method.edit.tab.title</target>
+        <target>روش ارسال |‌ ویرایش</target>
       </trans-unit>
       <trans-unit id="dUxVNeL" resname="delivery.method.edit.main.title">
         <source>delivery.method.edit.main.title</source>
-        <target>__delivery.method.edit.main.title</target>
+        <target>ویرایش روش ارسال</target>
       </trans-unit>
       <trans-unit id="jedm3mR" resname="delivery.method.edit.main.description">
         <source>delivery.method.edit.main.description</source>
-        <target>__delivery.method.edit.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="WbOnUdo" resname="delivery.method.read.tab.title">
         <source>delivery.method.read.tab.title</source>
-        <target>__delivery.method.read.tab.title</target>
+        <target>روش ارسال |‌ مشاهده</target>
       </trans-unit>
       <trans-unit id="bkkYqCO" resname="delivery.method.read.main.title">
         <source>delivery.method.read.main.title</source>
-        <target>__delivery.method.read.main.title</target>
+        <target>مشاهده روش ارسال</target>
       </trans-unit>
       <trans-unit id="t8OF8Pt" resname="delivery.method.read.main.description">
         <source>delivery.method.read.main.description</source>
-        <target>__delivery.method.read.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="f1EuLUD" resname="delivery.method.list.tab.title">
         <source>delivery.method.list.tab.title</source>
-        <target>__delivery.method.list.tab.title</target>
+        <target>روش ارسال |‌ لیست</target>
       </trans-unit>
       <trans-unit id=".jKVIrf" resname="delivery.method.list.main.title">
         <source>delivery.method.list.main.title</source>
-        <target>__delivery.method.list.main.title</target>
+        <target>لیست روش ارسال</target>
       </trans-unit>
       <trans-unit id="QQE_ncm" resname="delivery.method.list.main.description">
         <source>delivery.method.list.main.description</source>
-        <target>__delivery.method.list.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="YDIUDHA" resname="delivery.person.edit.tab.title">
         <source>delivery.person.edit.tab.title</source>
-        <target>__delivery.person.edit.tab.title</target>
+        <target>پیک |‌ ویرایش</target>
       </trans-unit>
       <trans-unit id="XW18Nza" resname="delivery.person.edit.main.title">
         <source>delivery.person.edit.main.title</source>
-        <target>__delivery.person.edit.main.title</target>
+        <target>ویرایش پیک</target>
       </trans-unit>
       <trans-unit id="GCwfNld" resname="delivery.person.edit.main.description">
         <source>delivery.person.edit.main.description</source>
-        <target>__delivery.person.edit.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="FdrrjVK" resname="delivery.person.read.tab.title">
         <source>delivery.person.read.tab.title</source>
-        <target>__delivery.person.read.tab.title</target>
+        <target>پیک |‌ مشاهده</target>
       </trans-unit>
       <trans-unit id="HjNShG0" resname="delivery.person.read.main.title">
         <source>delivery.person.read.main.title</source>
-        <target>__delivery.person.read.main.title</target>
+        <target>مشاهده پیک</target>
       </trans-unit>
       <trans-unit id="giBQYDW" resname="delivery.person.read.main.description">
         <source>delivery.person.read.main.description</source>
-        <target>__delivery.person.read.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="rg_dleE" resname="delivery.person.list.tab.title">
         <source>delivery.person.list.tab.title</source>
-        <target>__delivery.person.list.tab.title</target>
+        <target>پیک |‌ لیست</target>
       </trans-unit>
       <trans-unit id="IB3D9gc" resname="delivery.person.list.main.title">
         <source>delivery.person.list.main.title</source>
-        <target>__delivery.person.list.main.title</target>
+        <target>لیست پیک</target>
       </trans-unit>
       <trans-unit id="x0UGstr" resname="delivery.person.list.main.description">
         <source>delivery.person.list.main.description</source>
-        <target>__delivery.person.list.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="wtWocks" resname="delivery.dispatch.create.tab.title">
         <source>delivery.dispatch.create.tab.title</source>
-        <target>__delivery.dispatch.create.tab.title</target>
+        <target>مرسوله |‌ ساختن</target>
       </trans-unit>
       <trans-unit id="LztqF_5" resname="delivery.dispatch.create.main.title">
         <source>delivery.dispatch.create.main.title</source>
-        <target>__delivery.dispatch.create.main.title</target>
+        <target>ساختن مرسوله</target>
       </trans-unit>
       <trans-unit id="QYOFlGx" resname="delivery.dispatch.create.main.description">
         <source>delivery.dispatch.create.main.description</source>
-        <target>__delivery.dispatch.create.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="Ur9GCqM" resname="delivery.dispatch.edit.tab.title">
         <source>delivery.dispatch.edit.tab.title</source>
-        <target>__delivery.dispatch.edit.tab.title</target>
+        <target>مرسوله |‌ ویرایش</target>
       </trans-unit>
       <trans-unit id="hqJDxyJ" resname="delivery.dispatch.edit.main.title">
         <source>delivery.dispatch.edit.main.title</source>
-        <target></target>
+        <target>ویرایش مرسوله</target>
       </trans-unit>
       <trans-unit id="Iw34Qu6" resname="delivery.dispatch.edit.main.description">
         <source>delivery.dispatch.edit.main.description</source>
-        <target></target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="YXkS1CE" resname="delivery.dispatch.list.tab.title">
         <source>delivery.dispatch.list.tab.title</source>
-        <target>__delivery.dispatch.list.tab.title</target>
+        <target>مرسوله |‌ لیست</target>
       </trans-unit>
       <trans-unit id="Pa_7XfC" resname="delivery.dispatch.list.main.title">
         <source>delivery.dispatch.list.main.title</source>
-        <target>__delivery.dispatch.list.main.title</target>
+        <target>لیست مرسوله</target>
       </trans-unit>
       <trans-unit id="qnWFddz" resname="delivery.dispatch.list.main.description">
         <source>delivery.dispatch.list.main.description</source>
-        <target>__delivery.dispatch.list.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="NZxFRuq" resname="inventory.create.tab.title">
         <source>inventory.create.tab.title</source>

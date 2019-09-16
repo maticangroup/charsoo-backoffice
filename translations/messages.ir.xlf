@@ -11,327 +11,327 @@
       </trans-unit>
       <trans-unit id="HP6bqFf" resname="accounting.coupon.group.create.main.title">
         <source>accounting.coupon.group.create.main.title</source>
-        <target>__accounting.coupon.group.create.main.title</target>
+        <target>ساختن کوپن</target>
       </trans-unit>
       <trans-unit id="VZ_poBc" resname="accounting.coupon.group.create.main.description">
         <source>accounting.coupon.group.create.main.description</source>
-        <target>__accounting.coupon.group.create.main.description</target>
+        <target><![CDATA[ کوپن ها به دو دسته تقسیم می شوند : <br> ۱. خصوصی :‌ در این دسته پس از ایجاد کوپن افرادی که اجازه دارند از کوپن ها استفاده کنند باید اضافه شوند. <br> ۲. عمومی : در این دسته تعداد کوپن ها مشخص می شوند و هر فردی که به کد این کوپن دسترسی داشته باشد مجاز به استفاده می باشد. <br> نکته : هر فرد تنها یکبار مجاز به استفاده از کوپن در هر گروه کوپن می باشد ]]></target>
       </trans-unit>
       <trans-unit id="TDD8Nq1" resname="accounting.coupon.group.create.form.input.title.name">
         <source>accounting.coupon.group.create.form.input.title.name</source>
-        <target>__accounting.coupon.group.create.form.input.title.name</target>
+        <target>نام کوپن</target>
       </trans-unit>
       <trans-unit id="MZAjGE6" resname="accounting.coupon.group.create.form.input.placeholder.name">
         <source>accounting.coupon.group.create.form.input.placeholder.name</source>
-        <target>__accounting.coupon.group.create.form.input.placeholder.name</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="mjA80Y5" resname="accounting.coupon.group.create.form.input.title.prefix">
         <source>accounting.coupon.group.create.form.input.title.prefix</source>
-        <target>__accounting.coupon.group.create.form.input.title.prefix</target>
+        <target>کد ابتدایی</target>
       </trans-unit>
       <trans-unit id="YXbCKat" resname="accounting.coupon.group.create.form.input.placeholder.prefix">
         <source>accounting.coupon.group.create.form.input.placeholder.prefix</source>
-        <target>__accounting.coupon.group.create.form.input.placeholder.prefix</target>
+        <target>CPN_</target>
       </trans-unit>
       <trans-unit id="Z373NEJ" resname="accounting.coupon.group.create.form.input.title.expiry.date">
         <source>accounting.coupon.group.create.form.input.title.expiry.date</source>
-        <target>__accounting.coupon.group.create.form.input.title.expiry.date</target>
+        <target>تاریخ انقضا</target>
       </trans-unit>
       <trans-unit id="vfToqJt" resname="accounting.coupon.group.create.form.input.placeholder.expiry.date">
         <source>accounting.coupon.group.create.form.input.placeholder.expiry.date</source>
-        <target>__accounting.coupon.group.create.form.input.placeholder.expiry.date</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="Mo0x5gh" resname="accounting.coupon.group.create.form.input.title.discount.type">
         <source>accounting.coupon.group.create.form.input.title.discount.type</source>
-        <target>__accounting.coupon.group.create.form.input.title.discount.type</target>
+        <target>نوع تخفیف</target>
       </trans-unit>
       <trans-unit id="_K8VFYY" resname="accounting.coupon.group.create.form.input.title.effect">
         <source>accounting.coupon.group.create.form.input.title.effect</source>
-        <target>__accounting.coupon.group.create.form.input.title.effect</target>
+        <target>ارزش کوپن</target>
       </trans-unit>
       <trans-unit id="rX2GevJ" resname="accounting.coupon.group.create.form.input.placeholder.effect">
         <source>accounting.coupon.group.create.form.input.placeholder.effect</source>
-        <target>__accounting.coupon.group.create.form.input.placeholder.effect</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="kls4vCS" resname="accounting.coupon.group.create.form.input.title.minimum.invoice.price">
         <source>accounting.coupon.group.create.form.input.title.minimum.invoice.price</source>
-        <target>__accounting.coupon.group.create.form.input.title.minimum.invoice.price</target>
+        <target>حداقل قیمت مجاز استفاده از کوپن</target>
       </trans-unit>
       <trans-unit id="yFlN13t" resname="accounting.coupon.group.create.form.input.placeholder.minimum.invoice.price">
         <source>accounting.coupon.group.create.form.input.placeholder.minimum.invoice.price</source>
-        <target>__accounting.coupon.group.create.form.input.placeholder.minimum.invoice.price</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="RjmnIER" resname="accounting.coupon.group.create.form.input.title.type">
         <source>accounting.coupon.group.create.form.input.title.type</source>
-        <target>__accounting.coupon.group.create.form.input.title.type</target>
+        <target>خصوصی / عمومی</target>
       </trans-unit>
       <trans-unit id="KcB57wz" resname="accounting.coupon.group.create.form.input.title.usage.times">
         <source>accounting.coupon.group.create.form.input.title.usage.times</source>
-        <target>__accounting.coupon.group.create.form.input.title.usage.times</target>
+        <target>تعداد کوپن ها</target>
       </trans-unit>
       <trans-unit id="MbaJZ.M" resname="accounting.coupon.group.create.form.input.placeholder.usage.times">
         <source>accounting.coupon.group.create.form.input.placeholder.usage.times</source>
-        <target>__accounting.coupon.group.create.form.input.placeholder.usage.times</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="v.1g3zh" resname="accounting.coupon.group.create.form.input.title.description">
         <source>accounting.coupon.group.create.form.input.title.description</source>
-        <target>__accounting.coupon.group.create.form.input.title.description</target>
+        <target>توضیحات</target>
       </trans-unit>
       <trans-unit id="GsmrKWV" resname="accounting.coupon.group.create.form.input.placeholder.description">
         <source>accounting.coupon.group.create.form.input.placeholder.description</source>
-        <target>__accounting.coupon.group.create.form.input.placeholder.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="89NsRhf" resname="accounting.coupon.group.edit.tab.title">
         <source>accounting.coupon.group.edit.tab.title</source>
-        <target>کوپن | ساختن</target>
+        <target>کوپن | ویرایش</target>
       </trans-unit>
       <trans-unit id="twgrD4z" resname="accounting.coupon.group.edit.main.title">
         <source>accounting.coupon.group.edit.main.title</source>
-        <target>__accounting.coupon.group.edit.main.title</target>
+        <target>ویرایش کوپن</target>
       </trans-unit>
       <trans-unit id="yCg3RCr" resname="accounting.coupon.group.edit.main.description">
         <source>accounting.coupon.group.edit.main.description</source>
-        <target>__accounting.coupon.group.edit.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="t00I_ip" resname="accounting.coupon.group.edit.left.title">
         <source>accounting.coupon.group.edit.left.title</source>
-        <target>__accounting.coupon.group.edit.left.title</target>
+        <target>تعداد کوپن های استفاده نشده</target>
       </trans-unit>
       <trans-unit id="l0w5zdB" resname="accounting.coupon.group.list.tab.title">
         <source>accounting.coupon.group.list.tab.title</source>
-        <target>کوپن | ساختن</target>
+        <target>کوپن | لیست</target>
       </trans-unit>
       <trans-unit id="fpOO0ze" resname="accounting.coupon.group.list.main.title">
         <source>accounting.coupon.group.list.main.title</source>
-        <target>__accounting.coupon.group.list.main.title</target>
+        <target>لیست کوپن ها</target>
       </trans-unit>
       <trans-unit id="Gf66N2p" resname="accounting.coupon.group.list.main.description">
         <source>accounting.coupon.group.list.main.description</source>
-        <target>__accounting.coupon.group.list.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="BPCzklB" resname="accounting.coupon.group.read.tab.title">
         <source>accounting.coupon.group.read.tab.title</source>
-        <target>کوپن | ساختن</target>
+        <target>کوپن | مشاهده</target>
       </trans-unit>
       <trans-unit id="sXAjJjF" resname="accounting.coupon.group.read.main.title">
         <source>accounting.coupon.group.read.main.title</source>
-        <target>__accounting.coupon.group.read.main.title</target>
+        <target>مشاهده کوپن</target>
       </trans-unit>
       <trans-unit id="i39YhRB" resname="accounting.coupon.group.read.main.description">
         <source>accounting.coupon.group.read.main.description</source>
-        <target>__accounting.coupon.group.read.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="qy3osic" resname="accounting.gift.card.group.create.tab.title">
         <source>accounting.gift.card.group.create.tab.title</source>
-        <target>__accounting.gift.card.group.create.tab.title</target>
+        <target>کارت هدیه | ساختن</target>
       </trans-unit>
       <trans-unit id="nMmvUSt" resname="accounting.gift.card.group.create.main.title">
         <source>accounting.gift.card.group.create.main.title</source>
-        <target>__accounting.gift.card.group.create.main.title</target>
+        <target>ساختن کارت هدیه</target>
       </trans-unit>
       <trans-unit id="42I0.Qp" resname="accounting.gift.card.group.create.main.description">
         <source>accounting.gift.card.group.create.main.description</source>
-        <target>__accounting.gift.card.group.create.main.description</target>
+        <target> کارت هدیه پس از تکمیل اطلاعات اولیه بصورت پیش فرض ساخته شده اما تا زمانیکه به تایید نرسد کدهای هدیه ساخته نخواهند شد </target>
       </trans-unit>
       <trans-unit id="ERpralR" resname="accounting.gift.card.group.create.form.input.title.gift.card.name">
         <source>accounting.gift.card.group.create.form.input.title.gift.card.name</source>
-        <target>__accounting.gift.card.group.create.form.input.title.gift.card.name</target>
+        <target>نام گروه کارت هدیه</target>
       </trans-unit>
       <trans-unit id="5T4F5Kw" resname="accounting.gift.card.group.create.form.input.placeholder.gift.card.name">
         <source>accounting.gift.card.group.create.form.input.placeholder.gift.card.name</source>
-        <target>__accounting.gift.card.group.create.form.input.placeholder.gift.card.name</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="aFKua6c" resname="accounting.gift.card.group.create.form.input.title.prefix">
         <source>accounting.gift.card.group.create.form.input.title.prefix</source>
-        <target>__accounting.gift.card.group.create.form.input.title.prefix</target>
+        <target>کد ابتدایی</target>
       </trans-unit>
       <trans-unit id="KUnP6Zp" resname="accounting.gift.card.group.create.form.input.placeholder.prefix">
         <source>accounting.gift.card.group.create.form.input.placeholder.prefix</source>
-        <target>__accounting.gift.card.group.create.form.input.placeholder.prefix</target>
+        <target>GIFT_</target>
       </trans-unit>
       <trans-unit id="yUZ3_mX" resname="accounting.gift.card.group.create.form.input.title.expiry.date">
         <source>accounting.gift.card.group.create.form.input.title.expiry.date</source>
-        <target>__accounting.gift.card.group.create.form.input.title.expiry.date</target>
+        <target>تاریخ انقضا</target>
       </trans-unit>
       <trans-unit id="RVk54Cv" resname="accounting.gift.card.group.create.form.input.placeholder.expiry.date">
         <source>accounting.gift.card.group.create.form.input.placeholder.expiry.date</source>
-        <target>__accounting.gift.card.group.create.form.input.placeholder.expiry.date</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="AnGJwyC" resname="accounting.gift.card.group.create.form.input.title.gift.card.count">
         <source>accounting.gift.card.group.create.form.input.title.gift.card.count</source>
-        <target>__accounting.gift.card.group.create.form.input.title.gift.card.count</target>
+        <target>تعداد کارت های هدیه</target>
       </trans-unit>
       <trans-unit id="HFH5z_u" resname="accounting.gift.card.group.create.form.input.placeholder.gift.card.count">
         <source>accounting.gift.card.group.create.form.input.placeholder.gift.card.count</source>
-        <target>__accounting.gift.card.group.create.form.input.placeholder.gift.card.count</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="j4fZG2V" resname="accounting.gift.card.group.create.form.input.title.gift.card.amount">
         <source>accounting.gift.card.group.create.form.input.title.gift.card.amount</source>
-        <target>__accounting.gift.card.group.create.form.input.title.gift.card.amount</target>
+        <target>مبلغ کارت هدیه</target>
       </trans-unit>
       <trans-unit id="yhOos.J" resname="accounting.gift.card.group.create.form.input.placeholder.gift.card.amount">
         <source>accounting.gift.card.group.create.form.input.placeholder.gift.card.amount</source>
-        <target>__accounting.gift.card.group.create.form.input.placeholder.gift.card.amount</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="XAFOjTZ" resname="accounting.gift.card.group.edit.tab.title">
         <source>accounting.gift.card.group.edit.tab.title</source>
-        <target>__accounting.gift.card.group.edit.tab.title</target>
+        <target>کارت هدیه | ویرایش</target>
       </trans-unit>
       <trans-unit id="KyPlAM4" resname="accounting.gift.card.group.edit.main.title">
         <source>accounting.gift.card.group.edit.main.title</source>
-        <target>__accounting.gift.card.group.edit.main.title</target>
+        <target>ویرایش کارت هدیه</target>
       </trans-unit>
       <trans-unit id="5iqwapY" resname="accounting.gift.card.group.edit.main.description">
         <source>accounting.gift.card.group.edit.main.description</source>
-        <target>__accounting.gift.card.group.edit.main.description</target>
+        <target> کدهای هدیه پس از تایید به تعداد مشخصی که وارد شده ساختته خواهند شد. همچنین پس از ساخته و تایید شدن قادر به معلق ساختن گروه کد هدیه و کد هدیه بصورت تکی خواهید بود</target>
       </trans-unit>
       <trans-unit id="fWVNuqe" resname="accounting.gift.card.group.edit.gift.card.group.info.title">
         <source>accounting.gift.card.group.edit.gift.card.group.info.title</source>
-        <target>__accounting.gift.card.group.edit.gift.card.group.info.title</target>
+        <target>اطلاعات کارت هدیه</target>
       </trans-unit>
       <trans-unit id="YBSNJJF" resname="accounting.gift.card.group.edit.left.title">
         <source>accounting.gift.card.group.edit.left.title</source>
-        <target>__accounting.gift.card.group.edit.left.title</target>
+        <target>تعداد کارت های باقیمانده</target>
       </trans-unit>
       <trans-unit id=".Ab3ZDF" resname="accounting.gift.card.group.list.tab.title">
         <source>accounting.gift.card.group.list.tab.title</source>
-        <target>__accounting.gift.card.group.list.tab.title</target>
+        <target>کارت هدیه | لسیت</target>
       </trans-unit>
       <trans-unit id="ov9a7Qr" resname="accounting.gift.card.group.list.main.title">
         <source>accounting.gift.card.group.list.main.title</source>
-        <target>__accounting.gift.card.group.list.main.title</target>
+        <target>لسیت کارت هدیه</target>
       </trans-unit>
       <trans-unit id="o14QuoN" resname="accounting.gift.card.group.list.main.description">
         <source>accounting.gift.card.group.list.main.description</source>
-        <target>__accounting.gift.card.group.list.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="7_0P4Ed" resname="accounting.gift.card.group.read.tab.title">
         <source>accounting.gift.card.group.read.tab.title</source>
-        <target>__accounting.gift.card.group.read.tab.title</target>
+        <target>کارت هدیه | مشاهده</target>
       </trans-unit>
       <trans-unit id="sKbiqbE" resname="accounting.gift.card.group.read.main.title">
         <source>accounting.gift.card.group.read.main.title</source>
-        <target>__accounting.gift.card.group.read.main.title</target>
+        <target>مشاهده کارت هدیه</target>
       </trans-unit>
       <trans-unit id="S85Zo5Q" resname="accounting.gift.card.group.read.main.description">
         <source>accounting.gift.card.group.read.main.description</source>
-        <target>__accounting.gift.card.group.read.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="oD5M5dC" resname="accounting.invoice.create.tab.title">
         <source>accounting.invoice.create.tab.title</source>
-        <target>__accounting.invoice.create.tab.title</target>
+        <target>فاکتور | ساختن</target>
       </trans-unit>
       <trans-unit id="B.zI5LF" resname="accounting.invoice.create.main.title">
         <source>accounting.invoice.create.main.title</source>
-        <target>__accounting.invoice.create.main.title</target>
+        <target>ساختن فاکتور</target>
       </trans-unit>
       <trans-unit id="KEuPafa" resname="accounting.invoice.create.main.description">
         <source>accounting.invoice.create.main.description</source>
-        <target>__accounting.invoice.create.main.description</target>
+        <target><![CDATA[ برای ساخت فاکتور به چندین قسمت باید توجه نمود :‌ <br> ۱. گروه های فاکتور :‌ فاکتور هایی که به یک دسته تعلق دارند. <br> ۲. از - به : فاکتور ها به دسته های 'فرد به فرد' یا 'شرکت به شرکت' یا 'فردی از شرکت به فردی از شرکت' و 'فرد یه شرکت - شرکت به فرد' تقسیم میشوند. <br> ۳. نوع فاکتور :‌ ورودی به فاکتور هایی گفته میشوند که پول ذا وارد می کند مانند فروش و خروجی به فاکتورهایی گفته می شود که پول را خارج می کند مانند خرید ]]></target>
       </trans-unit>
       <trans-unit id="uYwd.dC" resname="accounting.invoice.create.form.input.title.create.date">
         <source>accounting.invoice.create.form.input.title.create.date</source>
-        <target>__accounting.invoice.create.form.input.title.create.date</target>
+        <target>تاریخ ساخت</target>
       </trans-unit>
       <trans-unit id="Yg5aaDB" resname="accounting.invoice.create.form.input.placeholder.create.date">
         <source>accounting.invoice.create.form.input.placeholder.create.date</source>
-        <target>__accounting.invoice.create.form.input.placeholder.create.date</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="QGYhfzg" resname="accounting.invoice.create.form.input.title.invoice.group">
         <source>accounting.invoice.create.form.input.title.invoice.group</source>
-        <target>__accounting.invoice.create.form.input.title.invoice.group</target>
+        <target>گروه فاکتور</target>
       </trans-unit>
       <trans-unit id="2ZWTG4W" resname="accounting.invoice.create.form.input.placeholder.invoice.group">
         <source>accounting.invoice.create.form.input.placeholder.invoice.group</source>
-        <target>__accounting.invoice.create.form.input.placeholder.invoice.group</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="_GgTXS1" resname="accounting.invoice.create.form.input.title.invoice.type">
         <source>accounting.invoice.create.form.input.title.invoice.type</source>
-        <target>__accounting.invoice.create.form.input.title.invoice.type</target>
+        <target>نوع فاکتور</target>
       </trans-unit>
       <trans-unit id="0Vv.yal" resname="accounting.invoice.create.form.input.title.from.person">
         <source>accounting.invoice.create.form.input.title.from.person</source>
-        <target>__accounting.invoice.create.form.input.title.from.person</target>
+        <target>از 'فرد'</target>
       </trans-unit>
       <trans-unit id="ljK_oD6" resname="accounting.invoice.create.form.input.title.to.person">
         <source>accounting.invoice.create.form.input.title.to.person</source>
-        <target>__accounting.invoice.create.form.input.title.to.person</target>
+        <target>به 'فرد'</target>
       </trans-unit>
       <trans-unit id="Jjrpyq8" resname="accounting.invoice.create.form.input.title.from.company">
         <source>accounting.invoice.create.form.input.title.from.company</source>
-        <target>__accounting.invoice.create.form.input.title.from.company</target>
+        <target>از 'شرکت'</target>
       </trans-unit>
       <trans-unit id="2KrgzWF" resname="accounting.invoice.create.form.input.title.to.company">
         <source>accounting.invoice.create.form.input.title.to.company</source>
-        <target>__accounting.invoice.create.form.input.title.to.company</target>
+        <target>به 'شرکت'</target>
       </trans-unit>
       <trans-unit id="Q2N4AI_" resname="accounting.invoice.create.form.input.title.description">
         <source>accounting.invoice.create.form.input.title.description</source>
-        <target>__accounting.invoice.create.form.input.title.description</target>
+        <target>توضیحات</target>
       </trans-unit>
       <trans-unit id="zh6MvwG" resname="accounting.invoice.edit.tab.title">
         <source>accounting.invoice.edit.tab.title</source>
-        <target>__accounting.invoice.edit.tab.title</target>
+        <target>فاکتور | ویرایش</target>
       </trans-unit>
       <trans-unit id="q0MMIF6" resname="accounting.invoice.edit.main.title">
         <source>accounting.invoice.edit.main.title</source>
-        <target></target>
+        <target>ویرایش فاکتور</target>
       </trans-unit>
       <trans-unit id="aWIBSs5" resname="accounting.invoice.edit.main.description">
         <source>accounting.invoice.edit.main.description</source>
-        <target></target>
+        <target> در این قسمت موارد فروخته شده یا خریده شده را به همراه تعداد و قیمت وارد کرده. در این مرحله فاکتور ساخته شده است اما نیاز به تایید دارد که پس از تایید به مرحله مالی وارد می شود </target>
       </trans-unit>
       <trans-unit id="xh7MX.7" resname="accounting.invoice.edit.serial.title">
         <source>accounting.invoice.edit.serial.title</source>
-        <target>__accounting.invoice.edit.serial.title</target>
+        <target>سریال</target>
       </trans-unit>
       <trans-unit id="lzZIGIy" resname="accounting.invoice.edit.input.placeholder.item">
         <source>accounting.invoice.edit.input.placeholder.item</source>
-        <target>__accounting.invoice.edit.input.placeholder.item</target>
+        <target>نام کالا</target>
       </trans-unit>
       <trans-unit id="8fSv47u" resname="accounting.invoice.edit.input.placeholder.quantity">
         <source>accounting.invoice.edit.input.placeholder.quantity</source>
-        <target>__accounting.invoice.edit.input.placeholder.quantity</target>
+        <target>تعداد کالا</target>
       </trans-unit>
       <trans-unit id="1Q9d0Uz" resname="accounting.invoice.edit.input.placeholder.current.price">
         <source>accounting.invoice.edit.input.placeholder.current.price</source>
-        <target>__accounting.invoice.edit.input.placeholder.current.price</target>
+        <target>قیمت</target>
       </trans-unit>
       <trans-unit id="0SBGzyD" resname="accounting.invoice.edit.input.placeholder.discount.price">
         <source>accounting.invoice.edit.input.placeholder.discount.price</source>
-        <target>__accounting.invoice.edit.input.placeholder.discount.price</target>
+        <target>قیمت با تخفیف</target>
       </trans-unit>
       <trans-unit id="ANeIdxz" resname="accounting.invoice.edit.payments.title">
         <source>accounting.invoice.edit.payments.title</source>
-        <target>__accounting.invoice.edit.payments.title</target>
+        <target>پرداخت ها</target>
       </trans-unit>
       <trans-unit id="dTrLfhA" resname="accounting.invoice.edit.payment.info.title">
         <source>accounting.invoice.edit.payment.info.title</source>
-        <target>__accounting.invoice.edit.payment.info.title</target>
+        <target>اطلاعات پرداخت</target>
       </trans-unit>
       <trans-unit id="Bn3eS_S" resname="accounting.invoice.edit.cleared.amount.title">
         <source>accounting.invoice.edit.cleared.amount.title</source>
-        <target>__accounting.invoice.edit.cleared.amount.title</target>
+        <target>مبلغ تسویه شده</target>
       </trans-unit>
       <trans-unit id="Fqd9Yb." resname="accounting.invoice.edit.paying.count.title">
         <source>accounting.invoice.edit.paying.count.title</source>
-        <target>__accounting.invoice.edit.paying.count.title</target>
+        <target>تعداد پرداخت ها</target>
       </trans-unit>
       <trans-unit id="36coQgE" resname="accounting.invoice.edit.left.amount.title">
         <source>accounting.invoice.edit.left.amount.title</source>
-        <target>__accounting.invoice.edit.left.amount.title</target>
+        <target>تعداد پرداخت های باقیمانده</target>
       </trans-unit>
       <trans-unit id="NR2Xk2L" resname="accounting.invoice.list.tab.title">
         <source>accounting.invoice.list.tab.title</source>
-        <target>__accounting.invoice.list.tab.title</target>
+        <target>فاکتور | لسیت</target>
       </trans-unit>
       <trans-unit id="nSkxIRI" resname="accounting.invoice.list.main.title">
         <source>accounting.invoice.list.main.title</source>
-        <target>__accounting.invoice.list.main.title</target>
+        <target>لسیت فاکتور</target>
       </trans-unit>
       <trans-unit id="3fvNDPe" resname="accounting.invoice.list.main.description">
         <source>accounting.invoice.list.main.description</source>
-        <target>__accounting.invoice.list.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="zFTGsB0" resname="general.confirm.title">
         <source>general.confirm.title</source>

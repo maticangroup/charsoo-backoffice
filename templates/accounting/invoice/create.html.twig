@@ -9,7 +9,7 @@
                     <div class="row">
                         <div class="col-12">
                             <h1>{{ 'accounting.invoice.create.main.title' | trans }}</h1>
-                            <p>{{ 'accounting.invoice.create.main.description' | trans }}</p>
+                            <p>{{ 'accounting.invoice.create.main.description' | trans | raw }}</p>
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                                                value="income"
                                                class="form-radio-input" {{ (invoiceModel.invoiceTypeMachineName == 'income') ? 'checked' : '' }} >
                                         <span class="form-radio-label"><span
-                                                    class="fa fa-arrow-left text-green"></span>Income
+                                                    class="fa fa-arrow-left text-green"></span>{{ 'general.income.title' | trans }}
                                                          </span>
 
                                     </label>
@@ -58,7 +58,7 @@
                                                value="outgo"
                                                class="form-radio-input" {{ (invoiceModel.invoiceTypeMachineName == 'outgo') ? 'checked' : '' }} >
                                         <span class="form-radio-label"><span
-                                                    class="fa fa-arrow-right text-red"></span> Outgo</span>
+                                                    class="fa fa-arrow-right text-red"></span> {{ 'general.outgo.title' | trans }}</span>
                                     </label>
                                 </div>
 
@@ -120,7 +120,7 @@
 
                                 <div class="col-md-12">
                                                     <textarea name="invoiceDescription" class="form-control"
-                                                              placeholder="Text input area">{{ invoiceModel.invoiceDescription }}</textarea>
+                                                              placeholder="">{{ invoiceModel.invoiceDescription }}</textarea>
                                 </div>
                             </div>
                         </div>

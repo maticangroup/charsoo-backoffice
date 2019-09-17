@@ -1111,7 +1111,7 @@
       </trans-unit>
       <trans-unit id="QSAMtqh" resname="repository.brand.create.main.description">
         <source>repository.brand.create.main.description</source>
-        <target>توضیحات ساختن برند جدید</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="IkOrqi6" resname="repository.brand.create.form.input.placeholder.name">
         <source>repository.brand.create.form.input.placeholder.name</source>
@@ -1127,7 +1127,7 @@
       </trans-unit>
       <trans-unit id="mCejbOE" resname="repository.brand.edit.main.description">
         <source>repository.brand.edit.main.description</source>
-        <target>توضیحات ویرایش برند</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="9oOPcv3" resname="repository.brand.edit.supplier.table.title">
         <source>repository.brand.edit.supplier.table.title</source>
@@ -1143,7 +1143,7 @@
       </trans-unit>
       <trans-unit id="L9KrSn7" resname="repository.company.create.main.description">
         <source>repository.company.create.main.description</source>
-        <target>توضیحات ساختن شرکت جدید</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="duBIKG_" resname="repository.company.create.form.input.placeholder.name">
         <source>repository.company.create.form.input.placeholder.name</source>
@@ -1175,7 +1175,7 @@
       </trans-unit>
       <trans-unit id="OFnZEO." resname="repository.company.list.main.description">
         <source>repository.company.list.main.description</source>
-        <target>توضیحات لیست شرکت ها</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="Mb6MjHc" resname="repository.company.edit.tab.title">
         <source>repository.company.edit.tab.title</source>
@@ -1187,7 +1187,7 @@
       </trans-unit>
       <trans-unit id="rBErDsc" resname="repository.company.edit.main.description">
         <source>repository.company.edit.main.description</source>
-        <target>توضیحات ویرایش شرکت</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="p6vwkDq" resname="repository.guarantee.create.tab.title">
         <source>repository.guarantee.create.tab.title</source>
@@ -1199,7 +1199,7 @@
       </trans-unit>
       <trans-unit id="aLdxBCv" resname="repository.guarantee.create.main.description">
         <source>repository.guarantee.create.main.description</source>
-        <target>توضیحات ساختن گارانتی جدید</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="x3LaCKw" resname="repository.guarantee.create.form.input.placeholder.guarantee.name">
         <source>repository.guarantee.create.form.input.placeholder.guarantee.name</source>
@@ -1219,7 +1219,7 @@
       </trans-unit>
       <trans-unit id="4bnIZU6" resname="repository.guarantee.edit.main.description">
         <source>repository.guarantee.edit.main.description</source>
-        <target>توضیحات ویرایش گارانتی</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="KeVHlVC" resname="repository.guarantee.duration.create.tab.title">
         <source>repository.guarantee.duration.create.tab.title</source>
@@ -1231,7 +1231,7 @@
       </trans-unit>
       <trans-unit id="g8jNeog" resname="repository.guarantee.duration.create.main.description">
         <source>repository.guarantee.duration.create.main.description</source>
-        <target>توضیحات ساختن مدت گارانتی جدید</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="qZxmSc_" resname="repository.guarantee.duration.create.form.input.placeholder.guarantee.duration">
         <source>repository.guarantee.duration.create.form.input.placeholder.guarantee.duration</source>
@@ -1247,7 +1247,7 @@
       </trans-unit>
       <trans-unit id="dwCqYE8" resname="repository.guarantee.duration.edit.main.description">
         <source>repository.guarantee.duration.edit.main.description</source>
-        <target>توضیحات ویرایش مدت گارانتی</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="icM3Q6c" resname="repository.guarantee.provider.create.tab.title">
         <source>repository.guarantee.provider.create.tab.title</source>
@@ -1259,7 +1259,7 @@
       </trans-unit>
       <trans-unit id="JEVpXqp" resname="repository.guarantee.provider.create.main.description">
         <source>repository.guarantee.provider.create.main.description</source>
-        <target>توضیحات ساختن تامین کننده گارانتی جدید</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="oAAIMoV" resname="repository.guarantee.provider.create.form.input.placeholder.guarantee.provider">
         <source>repository.guarantee.provider.create.form.input.placeholder.guarantee.provider</source>
@@ -1275,7 +1275,7 @@
       </trans-unit>
       <trans-unit id="bOFHsS1" resname="repository.guarantee.provider.edit.main.description">
         <source>repository.guarantee.provider.edit.main.description</source>
-        <target>توضیحات ویرایش تامین کننده گارانتی</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="sReeYSd" resname="repository.item.create.tab.title">
         <source>repository.item.create.tab.title</source>
@@ -1287,7 +1287,7 @@
       </trans-unit>
       <trans-unit id=".sQO5.W" resname="repository.item.create.main.description">
         <source>repository.item.create.main.description</source>
-        <target>توضیحات ساختن آیتم جدید</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="yyZO5MN" resname="repository.item.edit.tab.title">
         <source>repository.item.edit.tab.title</source>
@@ -1299,7 +1299,7 @@
       </trans-unit>
       <trans-unit id="usu_JOw" resname="repository.item.edit.main.description">
         <source>repository.item.edit.main.description</source>
-        <target>توضیحات ویرایش آیتم</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="IL.i1Wo" resname="repository.item.edit.empty.categories.description">
         <source>repository.item.edit.empty.categories.description</source>
@@ -1319,7 +1319,7 @@
       </trans-unit>
       <trans-unit id="yMTEAhW" resname="repository.item.list.main.description">
         <source>repository.item.list.main.description</source>
-        <target>توضیحات لیست آیتم ها</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="Cqnvzec" resname="repository.item.category.create.tab.title">
         <source>repository.item.category.create.tab.title</source>
@@ -1331,7 +1331,7 @@
       </trans-unit>
       <trans-unit id="ZEHDh5T" resname="repository.item.category.create.main.description">
         <source>repository.item.category.create.main.description</source>
-        <target>توضیحات ساختن دسته بندی</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="6kIl8o1" resname="repository.item.category.edit.tab.title">
         <source>repository.item.category.edit.tab.title</source>
@@ -1343,7 +1343,7 @@
       </trans-unit>
       <trans-unit id="JgnQSV." resname="repository.item.category.edit.main.description">
         <source>repository.item.category.edit.main.description</source>
-        <target>توضیحات ویرایش دسته بندی</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="f_dTcMq" resname="repository.spec.group.create.tab.title">
         <source>repository.spec.group.create.tab.title</source>
@@ -1355,7 +1355,7 @@
       </trans-unit>
       <trans-unit id="HTY_qP8" resname="repository.spec.group.create.main.description">
         <source>repository.spec.group.create.main.description</source>
-        <target>توضیحات ساختن گروه مشخصات</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="DUxBmzM" resname="repository.spec.group.create.form.input.placeholder.group.name">
         <source>repository.spec.group.create.form.input.placeholder.group.name</source>
@@ -1383,7 +1383,7 @@
       </trans-unit>
       <trans-unit id="JDIsvFj" resname="repository.color.create.main.description">
         <source>repository.color.create.main.description</source>
-        <target>توضیحات ساختن رنگ</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id=".luKMYA" resname="repository.color.edit.tab.title">
         <source>repository.color.edit.tab.title</source>
@@ -1395,7 +1395,7 @@
       </trans-unit>
       <trans-unit id="yTP4z_W" resname="repository.color.edit.main.description">
         <source>repository.color.edit.main.description</source>
-        <target>توضیحات ویرایش رنگ</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id=".STRp3i" resname="repository.size.create.tab.title">
         <source>repository.size.create.tab.title</source>
@@ -1407,7 +1407,7 @@
       </trans-unit>
       <trans-unit id="v3bu3E9" resname="repository.size.create.main.description">
         <source>repository.size.create.main.description</source>
-        <target>توضیحات ساختن سایز</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="o2xdAz2" resname="repository.size.edit.tab.title">
         <source>repository.size.edit.tab.title</source>
@@ -1419,7 +1419,7 @@
       </trans-unit>
       <trans-unit id="6nEZP__" resname="repository.size.edit.main.description">
         <source>repository.size.edit.main.description</source>
-        <target>توضیحات ویرایش سایز</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="9BJwF0v" resname="repository.off.day.create.tab.title">
         <source>repository.off.day.create.tab.title</source>
@@ -1431,7 +1431,7 @@
       </trans-unit>
       <trans-unit id="T0Ldnaw" resname="repository.off.day.create.main.description">
         <source>repository.off.day.create.main.description</source>
-        <target>توضیحات ساختن روزهای تعطیل</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="nRqgITe" resname="repository.forbidden.word.create.tab.title">
         <source>repository.forbidden.word.create.tab.title</source>
@@ -1443,7 +1443,7 @@
       </trans-unit>
       <trans-unit id="Zk5yq_N" resname="repository.forbidden.word.create.main.description">
         <source>repository.forbidden.word.create.main.description</source>
-        <target>توضیحات ساختن کلمات نامناسب</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="nXt2ZNF" resname="repository.person.create.tab.title">
         <source>repository.person.create.tab.title</source>
@@ -1455,7 +1455,7 @@
       </trans-unit>
       <trans-unit id="ncsJl5c" resname="repository.person.create.main.description">
         <source>repository.person.create.main.description</source>
-        <target>توضیحات ساختن فرد</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="qTKIDBi" resname="repository.person.edit.tab.title">
         <source>repository.person.edit.tab.title</source>
@@ -1467,7 +1467,7 @@
       </trans-unit>
       <trans-unit id="2peKBA6" resname="repository.person.edit.main.description">
         <source>repository.person.edit.main.description</source>
-        <target>توضیحات ساختن فرد</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="TsIC1Qv" resname="repository.person.list.tab.title">
         <source>repository.person.list.tab.title</source>
@@ -1479,7 +1479,7 @@
       </trans-unit>
       <trans-unit id="A6_xWDG" resname="repository.person.list.main.description">
         <source>repository.person.list.main.description</source>
-        <target>توضیحات لیست افراد</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="ScsuAGF" resname="delivery.method.create.tab.title">
         <source>delivery.method.create.tab.title</source>
@@ -1611,11 +1611,11 @@
       </trans-unit>
       <trans-unit id="KYdoFib" resname="inventory.create.main.title">
         <source>inventory.create.main.title</source>
-        <target>__inventory.create.main.title</target>
+        <target>ساختن انبار</target>
       </trans-unit>
       <trans-unit id="ujgepFT" resname="inventory.create.main.description">
         <source>inventory.create.main.description</source>
-        <target>__inventory.create.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id=".7sg8pl" resname="inventory.edit.tab.title">
         <source>inventory.edit.tab.title</source>
@@ -1623,11 +1623,11 @@
       </trans-unit>
       <trans-unit id="SheWhrq" resname="inventory.edit.main.title">
         <source>inventory.edit.main.title</source>
-        <target>__inventory.edit.main.title</target>
+        <target>ویرایش انبار</target>
       </trans-unit>
       <trans-unit id="VcT1fHF" resname="inventory.edit.main.description">
         <source>inventory.edit.main.description</source>
-        <target>__inventory.edit.main.description</target>
+        <target></target>
       </trans-unit>
       <trans-unit id="Mxfd7cE" resname="inventory.read.tab.title">
         <source>inventory.read.tab.title</source>
@@ -1639,11 +1639,11 @@
       </trans-unit>
       <trans-unit id="xa3v.6o" resname="inventory.list.main.title">
         <source>inventory.list.main.title</source>
-        <target>__inventory.list.main.title</target>
+        <target>لیست انبار</target>
       </trans-unit>
       <trans-unit id="_r22bf5" resname="inventory.list.main.description">
         <source>inventory.list.main.description</source>
-        <target>__inventory.list.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="7uFzp9_" resname="inventory.item.products.read.tab.title">
         <source>inventory.item.products.read.tab.title</source>
@@ -1655,11 +1655,11 @@
       </trans-unit>
       <trans-unit id="ij2fXH4" resname="inventory.stock.list.main.title">
         <source>inventory.stock.list.main.title</source>
-        <target>__inventory.stock.list.main.title</target>
+        <target>لیست موجودی انبار</target>
       </trans-unit>
       <trans-unit id="YHx_Y78" resname="inventory.stock.list.main.description">
         <source>inventory.stock.list.main.description</source>
-        <target>__inventory.stock.list.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="7zI.xAP" resname="inventory.stock.read.tab.title">
         <source>inventory.stock.read.tab.title</source>
@@ -1671,11 +1671,11 @@
       </trans-unit>
       <trans-unit id="nFRIcc6" resname="inventory.shelve.create.main.title">
         <source>inventory.shelve.create.main.title</source>
-        <target>__inventory.shelve.create.main.title</target>
+        <target>ساختن قفسه</target>
       </trans-unit>
       <trans-unit id="K.Fpn4K" resname="inventory.shelve.create.main.description">
         <source>inventory.shelve.create.main.description</source>
-        <target>__inventory.shelve.create.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="vMrNZO0" resname="inventory.shelve.edit.tab.title">
         <source>inventory.shelve.edit.tab.title</source>
@@ -1683,11 +1683,11 @@
       </trans-unit>
       <trans-unit id="f_XW10u" resname="inventory.shelve.edit.main.title">
         <source>inventory.shelve.edit.main.title</source>
-        <target>__inventory.shelve.edit.main.title</target>
+        <target>ویرایش قفسه</target>
       </trans-unit>
       <trans-unit id="AQcPfIh" resname="inventory.shelve.edit.main.description">
         <source>inventory.shelve.edit.main.description</source>
-        <target>__inventory.shelve.edit.main.description</target>
+        <target></target>
       </trans-unit>
       <trans-unit id="Rw8DGgk" resname="inventory.shelve.read.tab.title">
         <source>inventory.shelve.read.tab.title</source>
@@ -1699,11 +1699,11 @@
       </trans-unit>
       <trans-unit id="GrQuMKm" resname="inventory.shelve.list.main.title">
         <source>inventory.shelve.list.main.title</source>
-        <target>__inventory.shelve.list.main.title</target>
+        <target>لیست قفسه</target>
       </trans-unit>
       <trans-unit id="LnJ5ojj" resname="inventory.shelve.list.main.description">
         <source>inventory.shelve.list.main.description</source>
-        <target>__inventory.shelve.list.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="09GYHM2" resname="inventory.shelve.item.products.read.tab.title">
         <source>inventory.shelve.item.products.read.tab.title</source>
@@ -1727,11 +1727,11 @@
       </trans-unit>
       <trans-unit id="oPRaZfZ" resname="inventory.product.deed.create.main.title">
         <source>inventory.product.deed.create.main.title</source>
-        <target>__inventory.product.deed.create.main.title</target>
+        <target>ساختن سند انتقال از انبار</target>
       </trans-unit>
       <trans-unit id="XOQzh37" resname="inventory.product.deed.create.main.description">
         <source>inventory.product.deed.create.main.description</source>
-        <target>__inventory.product.deed.create.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="tsyglu9" resname="inventory.import.deed.create.tab.title">
         <source>inventory.import.deed.create.tab.title</source>
@@ -1739,11 +1739,11 @@
       </trans-unit>
       <trans-unit id="CNdYXqH" resname="inventory.import.deed.create.main.title">
         <source>inventory.import.deed.create.main.title</source>
-        <target>__inventory.import.deed.create.main.title</target>
+        <target>ساختن سند انتقال به انبار</target>
       </trans-unit>
       <trans-unit id="3pSVmGL" resname="inventory.import.deed.create.main.description">
         <source>inventory.import.deed.create.main.description</source>
-        <target>__inventory.import.deed.create.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="oDez7cJ" resname="inventory.deed.read.tab.title">
         <source>inventory.deed.read.tab.title</source>
@@ -1751,11 +1751,11 @@
       </trans-unit>
       <trans-unit id="yGXZ1bB" resname="inventory.deed.read.main.title">
         <source>inventory.deed.read.main.title</source>
-        <target>__inventory.deed.read.main.title</target>
+        <target>مشاهده سند انبار</target>
       </trans-unit>
       <trans-unit id="KtFM3dm" resname="inventory.deed.read.main.description">
         <source>inventory.deed.read.main.description</source>
-        <target>__inventory.deed.read.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="SrJb.DE" resname="inventory.deed.list.tab.title">
         <source>inventory.deed.list.tab.title</source>
@@ -1763,63 +1763,63 @@
       </trans-unit>
       <trans-unit id="ii8PPWf" resname="inventory.deed.list.main.title">
         <source>inventory.deed.list.main.title</source>
-        <target>__inventory.deed.list.main.title</target>
+        <target>لیست سند انبار</target>
       </trans-unit>
       <trans-unit id="OeCTcTx" resname="inventory.deed.list.main.description">
         <source>inventory.deed.list.main.description</source>
-        <target>__inventory.deed.list.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="sa3Bcbz" resname="sale.offer.group.create.tab.title">
         <source>sale.offer.group.create.tab.title</source>
-        <target>__sale.offer.group.create.tab.title</target>
+        <target>گروه پیشنهادی | ساختن</target>
       </trans-unit>
       <trans-unit id="bvBy7Ny" resname="sale.offer.group.create.main.title">
         <source>sale.offer.group.create.main.title</source>
-        <target>__sale.offer.group.create.main.title</target>
+        <target>ساختن گروه پیشنهادی</target>
       </trans-unit>
       <trans-unit id="TzHcNL2" resname="sale.offer.group.create.main.description">
         <source>sale.offer.group.create.main.description</source>
-        <target>__sale.offer.group.create.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="E3pjoNf" resname="sale.offer.group.edit.tab.title">
         <source>sale.offer.group.edit.tab.title</source>
-        <target>__sale.offer.group.edit.tab.title</target>
+        <target>گروه پیشنهادی | ویرایش</target>
       </trans-unit>
       <trans-unit id="MRpS_BI" resname="sale.offer.group.edit.main.title">
         <source>sale.offer.group.edit.main.title</source>
-        <target>__sale.offer.group.edit.main.title</target>
+        <target>ویرایش گروه پیشنهادی</target>
       </trans-unit>
       <trans-unit id="1nRsBDj" resname="sale.offer.group.edit.main.description">
         <source>sale.offer.group.edit.main.description</source>
-        <target>__sale.offer.group.edit.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="CShT0Qc" resname="sale.offer.group.read.tab.title">
         <source>sale.offer.group.read.tab.title</source>
-        <target>__sale.offer.group.read.tab.title</target>
+        <target>گروه پیشنهادی | مشاهده</target>
       </trans-unit>
       <trans-unit id="BEXOzmg" resname="sale.offer.group.read.main.title">
         <source>sale.offer.group.read.main.title</source>
-        <target>__sale.offer.group.read.main.title</target>
+        <target>مشاهده گروه پیشنهادی</target>
       </trans-unit>
       <trans-unit id=".2M32Kq" resname="sale.offer.group.read.main.description">
         <source>sale.offer.group.read.main.description</source>
-        <target>__sale.offer.group.read.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="C.RduP8" resname="sale.offer.group.list.tab.title">
         <source>sale.offer.group.list.tab.title</source>
-        <target>__sale.offer.group.list.tab.title</target>
+        <target>گروه پیشنهادی | لیست</target>
       </trans-unit>
       <trans-unit id="8vWli1k" resname="sale.offer.group.list.main.title">
         <source>sale.offer.group.list.main.title</source>
-        <target>__sale.offer.group.list.main.title</target>
+        <target>لیست گروه پیشنهادی</target>
       </trans-unit>
       <trans-unit id="t9gShIb" resname="sale.offer.group.list.main.description">
         <source>sale.offer.group.list.main.description</source>
-        <target>__sale.offer.group.list.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="VQjwWHH" resname="sale.pricing.deed.create.tab.title">
         <source>sale.pricing.deed.create.tab.title</source>
-        <target>سند قیمت گذاری | ایجاد</target>
+        <target>سند قیمت گذاری | ساختن</target>
       </trans-unit>
       <trans-unit id="G8pQH7u" resname="sale.pricing.deed.create.main.title">
         <source>sale.pricing.deed.create.main.title</source>
@@ -1831,95 +1831,95 @@
       </trans-unit>
       <trans-unit id="AXefJre" resname="sale.pricing.deed.edit.tab.title">
         <source>sale.pricing.deed.edit.tab.title</source>
-        <target>__sale.pricing.deed.edit.tab.title</target>
+        <target>سند قیمت گذاری | ویرایش</target>
       </trans-unit>
       <trans-unit id="jZtqoWl" resname="sale.pricing.deed.edit.main.title">
         <source>sale.pricing.deed.edit.main.title</source>
-        <target>__sale.pricing.deed.edit.main.title</target>
+        <target>ویرایش سند قیمت گذاری</target>
       </trans-unit>
       <trans-unit id="ZUqwvOl" resname="sale.pricing.deed.edit.main.description">
         <source>sale.pricing.deed.edit.main.description</source>
-        <target>__sale.pricing.deed.edit.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="EzazcAy" resname="sale.pricing.deed.read.tab.title">
         <source>sale.pricing.deed.read.tab.title</source>
-        <target>__sale.pricing.deed.read.tab.title</target>
+        <target>سند قیمت گذاری | مشاهده</target>
       </trans-unit>
       <trans-unit id="OP7GoxB" resname="sale.pricing.deed.read.main.title">
         <source>sale.pricing.deed.read.main.title</source>
-        <target>__sale.pricing.deed.read.main.title</target>
+        <target>مشاهده سند قیمت گذاری</target>
       </trans-unit>
       <trans-unit id="zrdUlu1" resname="sale.pricing.deed.read.main.description">
         <source>sale.pricing.deed.read.main.description</source>
-        <target>__sale.pricing.deed.read.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="eo1csYV" resname="sale.pricing.deed.list.tab.title">
         <source>sale.pricing.deed.list.tab.title</source>
-        <target>__sale.pricing.deed.list.tab.title</target>
+        <target>سند قیمت گذاری | لیست</target>
       </trans-unit>
       <trans-unit id=".FeNZ0A" resname="sale.pricing.deed.list.main.title">
         <source>sale.pricing.deed.list.main.title</source>
-        <target>__sale.pricing.deed.list.main.title</target>
+        <target>لیست سند قیمت گذاری</target>
       </trans-unit>
       <trans-unit id="e4F7TSO" resname="sale.pricing.deed.list.main.description">
         <source>sale.pricing.deed.list.main.description</source>
-        <target>__sale.pricing.deed.list.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="olSZ4ht" resname="sale.pricing.deed.accepted.pricing.list.tab.title">
         <source>sale.pricing.deed.accepted.pricing.list.tab.title</source>
-        <target>__sale.pricing.deed.accepted.pricing.list.tab.title</target>
+        <target>تایید سند قیمت گذاری | ساختن</target>
       </trans-unit>
       <trans-unit id="dbYWvSG" resname="sale.pricing.deed.accepted.pricing.list.main.title">
         <source>sale.pricing.deed.accepted.pricing.list.main.title</source>
-        <target>__sale.pricing.deed.accepted.pricing.list.main.title</target>
+        <target>تایید سند قیمت گذاری</target>
       </trans-unit>
       <trans-unit id="k_Lnn8i" resname="sale.pricing.deed.accepted.pricing.list.main.description">
         <source>sale.pricing.deed.accepted.pricing.list.main.description</source>
-        <target>__sale.pricing.deed.accepted.pricing.list.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="jG.Pn_C" resname="sale.order.create.tab.title">
         <source>sale.order.create.tab.title</source>
-        <target>__sale.order.create.tab.title</target>
+        <target>سفارش | ساختن</target>
       </trans-unit>
       <trans-unit id="c7_Kkv3" resname="sale.order.create.main.title">
         <source>sale.order.create.main.title</source>
-        <target>__sale.order.create.main.title</target>
+        <target>ساختن سفارش</target>
       </trans-unit>
       <trans-unit id="Dst0Xeg" resname="sale.order.create.main.description">
         <source>sale.order.create.main.description</source>
-        <target>__sale.order.create.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="H2du9Js" resname="sale.order.edit.tab.title">
         <source>sale.order.edit.tab.title</source>
-        <target>__sale.order.edit.tab.title</target>
+        <target>سفارش | ویرایش</target>
       </trans-unit>
       <trans-unit id="fFxA5Fi" resname="sale.order.edit.main.title">
         <source>sale.order.edit.main.title</source>
-        <target>__sale.order.edit.main.title</target>
+        <target>ویرایش سفارش</target>
       </trans-unit>
       <trans-unit id="ffzcMWv" resname="sale.order.edit.main.description">
         <source>sale.order.edit.main.description</source>
-        <target>__sale.order.edit.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="VQgrp3w" resname="sale.order.edit.reject.order.description">
         <source>sale.order.edit.reject.order.description</source>
-        <target>__sale.order.edit.reject.order.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="fI5fdbk" resname="sale.order.read.tab.title">
         <source>sale.order.read.tab.title</source>
-        <target>__sale.order.read.tab.title</target>
+        <target>سفارش | مشاهده</target>
       </trans-unit>
       <trans-unit id="7jC0c9U" resname="sale.order.list.tab.title">
         <source>sale.order.list.tab.title</source>
-        <target>__sale.order.list.tab.title</target>
+        <target>سفارش | لیست</target>
       </trans-unit>
       <trans-unit id=".aWnvXz" resname="sale.order.list.main.title">
         <source>sale.order.list.main.title</source>
-        <target>__sale.order.list.main.title</target>
+        <target>لیست سفارش</target>
       </trans-unit>
       <trans-unit id="8G7s5GC" resname="sale.order.list.main.description">
         <source>sale.order.list.main.description</source>
-        <target>__sale.order.list.main.description</target>
+        <target> </target>
       </trans-unit>
       <trans-unit id="I8xUM.F" resname="crm.customer.group.create.tab.title">
         <source>crm.customer.group.create.tab.title</source>

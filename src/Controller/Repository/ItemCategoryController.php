@@ -251,7 +251,7 @@ class ItemCategoryController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         Cache::cache_action(Servers::Repository, Repository::ItemCategory, 'all');
 

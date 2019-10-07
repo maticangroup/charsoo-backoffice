@@ -41,7 +41,6 @@
                             <table id="usersRoleList" class="js-table">
                                 <thead>
                                 <tr>
-                                    <th>{{ 'general.image.title' | trans }}</th>
                                     <th>{{ 'general.brand.title' | trans }}</th>
                                     <th>{{ 'general.name.title' | trans }}</th>
                                     <th>{{ 'general.color.title' | trans }}</th>
@@ -60,16 +59,6 @@
                                 <tbody>
                                 {% for item in items %}
                                     <tr>
-                                        <td>
-                                            {% if item.itemImages %}
-                                                <img src="{{ item.itemImages.0.url }}"
-                                                     alt="{{ item.itemImages.0.imageAlt }}">
-                                            {% else %}
-
-                                            {% endif %}
-
-                                            {#<img src="{{ firstItemImageUrl }}" alt="{{ firstItemImageAlt }}">#}
-                                        </td>
                                         <td>{{ item.itemBrandName }}</td>
                                         <td><strong>{{ item.itemName }}</strong></td>
                                         <td>
@@ -98,15 +87,9 @@
                                             </ul>
                                         </td>
                                         <td>
-                                            <ul>
-                                                {% for itemCategory in item.selectedItemCategories %}
-                                                    <li
-                                                            style="margin-left: {{ itemCategory.depth*20 }}px;">
-                                                        {{ itemCategory.category.0.itemCategoryName }}
-                                                    </li>
-                                                {% endfor %}
-                                            </ul>
-
+                                            {% for itemCategory in item.selectedItemCategories |reverse %}
+                                                <span class="label label-default small">{{ itemCategory.category.0.itemCategoryName }}</span>
+                                            {% endfor %}
                                         </td>
                                         <td>{{ item.itemCreatedDate }}</td>
                                         {% if canEdit %}

@@ -6,12 +6,12 @@ use Matican\Models\CRM\CustomerGroupModel;
 use Matican\Models\CRM\CustomerGroupStatusModel;
 use Matican\ModelSerializer;
 use Matican\Models\Repository\PersonModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\CRM;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
-use Matican\Core\Transaction\ResponseStatus;
+use Matican\ResponseStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,11 +43,11 @@ class CustomerGroupController extends AbstractController
         $customerGroupModel = ModelSerializer::parse($inputs, CustomerGroupModel::class);
         if ($canCreate) {
             if (!empty($inputs)) {
-//            dd($customerGroupModel);
+
                 $request = new Req(Servers::CRM, CRM::CustomerGroup, 'new');
                 $request->add_instance($customerGroupModel);
                 $response = $request->send();
-//            dd($response);
+
                 if ($response->getStatus() == ResponseStatus::successful) {
                     $this->addFlash('s', $response->getMessage());
                 } else {
@@ -55,7 +55,6 @@ class CustomerGroupController extends AbstractController
                 }
             }
         }
-
 
         /**
          * @var $customerGroups CustomerGroupModel[]
@@ -72,7 +71,7 @@ class CustomerGroupController extends AbstractController
         }
 
         /**
-         * @todo Authorization should be handled in twig
+         * @todo Authorization should be handled in twig (DONE)
          */
         return $this->render('crm/customer_group/create.html.twig', [
             'controller_name' => 'CustomerGroupController',
@@ -112,7 +111,7 @@ class CustomerGroupController extends AbstractController
         $request = new Req(Servers::CRM, CRM::CustomerGroup, 'fetch');
         $request->add_instance($customerGroupModel);
         $response = $request->send();
-//        dd($response);
+
         /**
          * @var $customerGroupModel CustomerGroupModel
          */
@@ -191,11 +190,11 @@ class CustomerGroupController extends AbstractController
          */
         $personModel = ModelSerializer::parse($inputs, PersonModel::class);
         $personModel->setCustomerGroupId($customer_group_id);
-//        dd($personModel);
+
         $request = new Req(Servers::CRM, CRM::CustomerGroup, 'add_person');
         $request->add_instance($personModel);
         $response = $request->send();
-//        dd($response);
+
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
@@ -251,7 +250,6 @@ class CustomerGroupController extends AbstractController
             $customerGroupStatusModel->setCustomerGroupStatusMachineName('active');
         }
 
-//        dd($customerGroupStatusModel);
         $request = new Req(Servers::CRM, CRM::CustomerGroup, 'set_status');
         $request->add_instance($customerGroupStatusModel);
         $response = $request->send();

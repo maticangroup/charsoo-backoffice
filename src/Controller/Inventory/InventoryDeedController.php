@@ -12,13 +12,13 @@ use Matican\ModelSerializer;
 use Matican\Models\Repository\ItemModel;
 use Matican\Models\Repository\ItemProductsModel;
 use Matican\Models\Repository\ProductModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Grpc\Server;
 use Matican\Core\Entities\Inventory;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
-use Matican\Core\Transaction\ResponseStatus;
+use Matican\ResponseStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,7 +35,11 @@ class InventoryDeedController extends AbstractController
      */
     public function fetchAll()
     {
-        if (AuthUser::if_is_allowed(ServerPermissions::inventory_transferdeed_all)) {
+
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::inventory_transferdeed_all);
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::inventory_transferdeed_new);
+
+        if ($canSeeAll) {
             $request = new Req(Servers::Inventory, Inventory::Deed, 'all');
             $response = $request->send();
 
@@ -43,13 +47,16 @@ class InventoryDeedController extends AbstractController
              * @var $deeds InventoryDeedModel[]
              */
             $deeds = [];
-            foreach ($response->getContent() as $deed) {
-                $deeds[] = ModelSerializer::parse($deed, InventoryDeedModel::class);
+            if ($response->getContent()) {
+                foreach ($response->getContent() as $deed) {
+                    $deeds[] = ModelSerializer::parse($deed, InventoryDeedModel::class);
+                }
             }
-
             return $this->render('inventory/inventory_deed/list.html.twig', [
                 'controller_name' => 'InventoryDeedController',
                 'deeds' => $deeds,
+                'canSeeAll' => $canSeeAll,
+                'canCreate' => $canCreate,
             ]);
         }
         return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create'));
@@ -63,7 +70,10 @@ class InventoryDeedController extends AbstractController
      */
     public function create(Request $request)
     {
-        if (AuthUser::if_is_allowed(ServerPermissions::inventory_transferdeed_new)) {
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::inventory_transferdeed_all);
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::inventory_transferdeed_new);
+
+        if ($canCreate) {
             $inputs = $request->request->all();
 
             /**
@@ -75,28 +85,34 @@ class InventoryDeedController extends AbstractController
 
                 $request = new Req(Servers::Inventory, Inventory::Deed, 'new');
 
-//dd($inputs['deedFrom']);
+
                 if ($inputs['deedFrom'] == 'none') {
-                    $deedModel->setInventoryDeedFromId(0);
+
+                    $deedModel->setInventoryDeedFromId('not_set');
+
                 } elseif (strpos($inputs['deedFrom'], 'inventory') !== false) {
+
                     $deedModel->setInventoryDeedFromInventoryId(explode('_', $inputs['deedFrom'])[1]);
+
                 } elseif (strpos($inputs['deedFrom'], 'shelve') !== false) {
+
                     $deedModel->setInventoryDeedFromShelveId(explode('_', $inputs['deedFrom'])[1]);
+
                 }
 
                 if (strpos($inputs['deedTo'], 'inventory') !== false) {
+
                     $deedModel->setInventoryDeedToInventoryId(explode('_', $inputs['deedTo'])[1]);
+
                 } elseif (strpos($inputs['deedTo'], 'shelve') !== false) {
+
                     $deedModel->setInventoryDeedToShelveId(explode('_', $inputs['deedTo'])[1]);
+
                 }
 
-//            dd($deedModel);
 
                 $request->add_instance($deedModel);
                 $response = $request->send();
-
-//            dd($response);
-
 
                 if ($deedModel->getInventoryDeedFromId() != 'none') {
                     if ($response->getStatus() == ResponseStatus::successful) {
@@ -104,7 +120,7 @@ class InventoryDeedController extends AbstractController
                         $deedModel = ModelSerializer::parse($response->getContent(), InventoryDeedModel::class);
                         return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create_product_deed', ['deed_id' => $deedModel->getInventoryDeedId()]));
                     } else {
-                        $this->addFlash('s', $response->getMessage());
+                        $this->addFlash('f', $response->getMessage());
                     }
 
                 } else {
@@ -113,7 +129,7 @@ class InventoryDeedController extends AbstractController
                         $deedModel = ModelSerializer::parse($response->getContent(), InventoryDeedModel::class);
                         return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_create_to_inventory_deed', ['deed_id' => $deedModel->getInventoryDeedId()]));
                     } else {
-                        $this->addFlash('s', $response->getMessage());
+                        $this->addFlash('f', $response->getMessage());
                     }
                 }
 
@@ -147,6 +163,8 @@ class InventoryDeedController extends AbstractController
                 'inventories' => $inventories,
                 'shelves' => $shelves,
                 'deedModel' => $deedModel,
+                'canSeeAll' => $canSeeAll,
+                'canCreate' => $canCreate,
             ]);
         } else {
             return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_list'));
@@ -392,6 +410,10 @@ class InventoryDeedController extends AbstractController
             }
         }
 
+        /**
+         * @var $products ProductModel[]
+         */
+        $products = [];
 
         if ($deedModel->getInventoryDeedFromShelveId()) {
             $shelveProductsModel = new ShelveProductsModel();
@@ -510,7 +532,9 @@ class InventoryDeedController extends AbstractController
      */
     public function read($deed_id, Request $request)
     {
-        if (AuthUser::if_is_allowed(ServerPermissions::inventory_transferdeed_fetch)) {
+        $canRead = AuthUser::if_is_allowed(ServerPermissions::inventory_transferdeed_fetch);
+
+        if ($canRead) {
 
 
             $inputs = $request->request->all();
@@ -545,6 +569,7 @@ class InventoryDeedController extends AbstractController
                 'deedModel' => $deedModel,
                 'products' => $products,
                 'deedStatusModel' => $deedStatusModel,
+                'canRead' => $canRead,
             ]);
         } else {
             return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_list'));
@@ -571,7 +596,7 @@ class InventoryDeedController extends AbstractController
             if ($response->getStatus() == ResponseStatus::successful) {
                 $this->addFlash('s', $response->getMessage());
             } else {
-                $this->addFlash('s', $response->getMessage());
+                $this->addFlash('f', $response->getMessage());
             }
 
             return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_read', ['deed_id' => $deed_id]));

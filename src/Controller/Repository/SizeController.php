@@ -5,11 +5,11 @@ namespace App\Controller\Repository;
 use Matican\ModelSerializer;
 use Matican\Models\Repository\SizeModel;
 use Matican\Models\Repository\SizeStatusModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
-use Matican\Core\Transaction\ResponseStatus;
+use Matican\ResponseStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -68,7 +68,6 @@ class SizeController extends AbstractController
         }
 
 
-
         return $this->render('repository/size/create.html.twig', [
             'controller_name' => 'SizeController',
             'sizeModel' => $sizeModel,
@@ -108,9 +107,9 @@ class SizeController extends AbstractController
             $request->add_instance($sizeModel);
             $response = $request->send();
             if ($response->getStatus() == ResponseStatus::successful) {
-                $this->addFlash('s', '');
+                $this->addFlash('s', $response->getMessage());
             } else {
-                $this->addFlash('f', '');
+                $this->addFlash('f', $response->getMessage());
             }
         }
 

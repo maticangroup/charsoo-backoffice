@@ -7,14 +7,14 @@ use Matican\ModelSerializer;
 use Matican\Models\Repository\LocationModel;
 use Matican\Models\Repository\PersonModel;
 use Matican\Models\Repository\ProvinceModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Actions\Repository\PersonActions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\Method;
 use Matican\Core\Transaction\Request as Req;
-use Matican\Core\Transaction\ResponseStatus;
+use Matican\ResponseStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -78,20 +78,20 @@ class PersonController extends AbstractController
             $person = ModelSerializer::parse($inputs, PersonModel::class);
 
 
-            $years = [];
-            for ($i = 1950; $i <= 2019; $i++) {
-                $years[] = $i;
-            }
-
-            $months = [];
-            for ($j = 1; $j <= 12; $j++) {
-                $months[] = $j;
-            }
-
-            $days = [];
-            for ($k = 1; $k <= 31; $k++) {
-                $days[] = $k;
-            }
+//            $years = [];
+//            for ($i = 1950; $i <= 2019; $i++) {
+//                $years[] = $i;
+//            }
+//
+//            $months = [];
+//            for ($j = 1; $j <= 12; $j++) {
+//                $months[] = $j;
+//            }
+//
+//            $days = [];
+//            for ($k = 1; $k <= 31; $k++) {
+//                $days[] = $k;
+//            }
 
             if (!empty($inputs)) {
                 /**
@@ -122,9 +122,9 @@ class PersonController extends AbstractController
 
             return $this->render('repository/person/create.html.twig', [
                 'controller_name' => 'PersonController',
-                'years' => $years,
-                'months' => $months,
-                'days' => $days,
+//                'years' => $years,
+//                'months' => $months,
+//                'days' => $days,
                 'person' => $person,
                 'canCreate' => $canCreate,
             ]);
@@ -324,9 +324,9 @@ class PersonController extends AbstractController
 
 
         if ($response->getStatus() == ResponseStatus::successful) {
-            $this->addFlash('add_address_success', $response->getMessage());
+            $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('add_address_failed', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
 
 

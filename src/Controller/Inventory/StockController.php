@@ -6,7 +6,7 @@ use Matican\ModelSerializer;
 use Matican\Models\Repository\ItemModel;
 use Matican\Models\Repository\ItemProductsModel;
 use Matican\Models\Repository\ProductModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
@@ -26,7 +26,10 @@ class StockController extends AbstractController
      */
     public function fetchAll()
     {
-        if (AuthUser::if_is_allowed(ServerPermissions::inventory_inventory_all_item_products)) {
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::inventory_inventory_all_item_products);
+        $canRead = AuthUser::if_is_allowed(ServerPermissions::inventory_inventory_get_item_products);
+
+        if ($canSeeAll) {
 
 
             $request = new Req(Servers::Inventory, InventoryEntity::Inventory, 'all_item_products');
@@ -46,6 +49,8 @@ class StockController extends AbstractController
             return $this->render('inventory/inventory_stock/list.html.twig', [
                 'controller_name' => 'StockController',
                 'itemProducts' => $itemProducts,
+                'canSeeAll' => $canSeeAll,
+                'canRead' => $canRead,
             ]);
         } else {
             return $this->render('inventory/inventory_stock/list.html.twig', [
@@ -64,8 +69,11 @@ class StockController extends AbstractController
      */
     public function read($item_id, Request $request)
     {
+
+        $canRead = AuthUser::if_is_allowed(ServerPermissions::inventory_inventory_get_item_products);
+
         if (AuthUser::if_is_allowed(ServerPermissions::repository_item_fetch)) {
-            if (AuthUser::if_is_allowed(ServerPermissions::inventory_inventory_get_item_products)) {
+            if ($canRead) {
 
 
                 $inputs = $request->request->all();
@@ -107,6 +115,7 @@ class StockController extends AbstractController
                     'controller_name' => 'StockController',
                     'itemModel' => $itemModel,
                     'products' => $products,
+                    'canRead' => $canRead,
                 ]);
 
             } else {

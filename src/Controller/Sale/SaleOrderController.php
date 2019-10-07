@@ -6,13 +6,13 @@ use Matican\ModelSerializer;
 use Matican\Models\Repository\PersonModel;
 use Matican\Models\Repository\ProductModel;
 use Matican\Models\Sale\OrderModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Inventory;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Entities\Sale;
 use Matican\Core\Servers;
-use Matican\Core\Transaction\ResponseStatus;
+use Matican\ResponseStatus;
 use Matican\Models\Repository\Person;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +29,12 @@ class SaleOrderController extends AbstractController
      */
     public function fetchAll()
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_all)) {
+
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::sale_order_all);
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::sale_order_new);
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::sale_order_fetch);
+
+        if (!$canSeeAll) {
             return $this->redirect($this->generateUrl('default'));
         }
         $allOrdersRequest = new Req(Servers::Sale, Sale::Order, 'all');
@@ -39,13 +44,19 @@ class SaleOrderController extends AbstractController
          * @var $orders OrderModel[]
          */
         $orders = [];
-        foreach ($allOrdersResponse->getContent() as $order) {
-            $orders[] = ModelSerializer::parse($order, OrderModel::class);
+        if ($allOrdersResponse->getContent()) {
+            foreach ($allOrdersResponse->getContent() as $order) {
+                $orders[] = ModelSerializer::parse($order, OrderModel::class);
+            }
         }
+
 
         return $this->render('sale/sale_order/list.html.twig', [
             'controller_name' => 'SaleOrderController',
             'orders' => $orders,
+            'canSeeAll' => $canSeeAll,
+            'canCreate' => $canCreate,
+            'canEdit' => $canEdit,
         ]);
     }
 
@@ -57,29 +68,44 @@ class SaleOrderController extends AbstractController
      */
     public function create(Request $request)
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_new)) {
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::sale_order_new);
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::sale_order_accept_order_list);
+        $canEdit = AuthUser::if_is_allowed(ServerPermissions::sale_order_update);
+
+        if (!$canCreate) {
             return $this->redirect($this->generateUrl('sale_order_list'));
         }
         $inputs = $request->request->all();
-
         /**
          * @var $orderModel OrderModel
          */
         $orderModel = ModelSerializer::parse($inputs, OrderModel::class);
-        $request = new Req(Servers::Sale, Sale::Order, 'new');
-        $request->add_instance($orderModel);
-        $response = $request->send();
 
-        if ($response->getStatus() == ResponseStatus::successful) {
+        if (!$inputs) {
             /**
              * @var $orderModel OrderModel
              */
-            $orderModel = ModelSerializer::parse($response->getContent(), OrderModel::class);
-            $this->addFlash('s', $response->getMessage());
-            return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $orderModel->getOrderId()]));
-        } else {
-            $this->addFlash('f', $response->getMessage());
+            $orderModel = ModelSerializer::parse($inputs, OrderModel::class);
+            $request = new Req(Servers::Sale, Sale::Order, 'new');
+            $request->add_instance($orderModel);
+            $response = $request->send();
+
+            if ($response->getStatus() == ResponseStatus::successful) {
+                /**
+                 * @var $orderModel OrderModel
+                 */
+                $orderModel = ModelSerializer::parse($response->getContent(), OrderModel::class);
+                $this->addFlash('s', $response->getMessage());
+                if ($canEdit) {
+                    return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $orderModel->getOrderId()]));
+                } else {
+                    return $this->redirect($this->generateUrl('sale_order_list'));
+                }
+            } else {
+                $this->addFlash('f', $response->getMessage());
+            }
         }
+
 
         $allPersonsRequest = new Req(Servers::Repository, Repository::Person, 'all');
         $allPersonsResponse = $allPersonsRequest->send();
@@ -98,6 +124,8 @@ class SaleOrderController extends AbstractController
             'controller_name' => 'SaleOrderController',
             'orderModel' => $orderModel,
             'persons' => $persons,
+            'canCreate' => $canCreate,
+            'canSeeAll' => $canSeeAll,
         ]);
     }
 
@@ -110,7 +138,18 @@ class SaleOrderController extends AbstractController
      */
     public function edit($id, Request $request)
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_fetch)) {
+
+        $canRead = AuthUser::if_is_allowed(ServerPermissions::sale_order_fetch);
+        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::sale_order_update);
+        $canAddProduct = AuthUser::if_is_allowed(ServerPermissions::sale_order_add_product);
+        $canRemoveProduct = AuthUser::if_is_allowed(ServerPermissions::sale_order_remove_product);
+        $canGoForFinal = AuthUser::if_is_allowed(ServerPermissions::sale_order_accept_order_list);
+        $canSaveSerial = AuthUser::if_is_allowed(ServerPermissions::sale_order_save_order);
+        $canBack = AuthUser::if_is_allowed(ServerPermissions::sale_order_ignore_order_list);
+        $canConfirm = AuthUser::if_is_allowed(ServerPermissions::sale_order_confirm_order);
+        $canReject = AuthUser::if_is_allowed('reject_order');
+
+        if (!$canRead) {
             return $this->redirect($this->generateUrl('sale_order_read', ['id' => $id]));
         }
         $inputs = $request->request->all();
@@ -202,6 +241,14 @@ class SaleOrderController extends AbstractController
             'persons' => $persons,
             'shelvesProducts' => $shelvesProducts,
             'selectedProducts' => $selectedProducts,
+            'canUpdate' => $canUpdate,
+            'canAddProduct' => $canAddProduct,
+            'canRemoveProduct' => $canRemoveProduct,
+            'canGoForFinal' => $canGoForFinal,
+            'canSaveSerial' => $canSaveSerial,
+            'canBack' => $canBack,
+            'canConfirm' => $canConfirm,
+            'canReject' => $canReject,
         ]);
     }
 
@@ -215,7 +262,8 @@ class SaleOrderController extends AbstractController
      */
     public function read($id, Request $request)
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::sale_order_fetch)) {
+        $canRead = AuthUser::if_is_allowed(ServerPermissions::sale_order_fetch);
+        if (!$canRead) {
             return $this->redirect($this->generateUrl('sale_order_list'));
         }
         $inputs = $request->request->all();
@@ -236,6 +284,7 @@ class SaleOrderController extends AbstractController
         return $this->render('sale/sale_order/read.html.twig', [
             'controller_name' => 'SaleOrderController',
             'orderModel' => $orderModel,
+            'canRead' => $canRead,
         ]);
     }
 
@@ -421,7 +470,7 @@ class SaleOrderController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $order_id]));
     }
@@ -446,7 +495,7 @@ class SaleOrderController extends AbstractController
             $this->addFlash('s', $response->getMessage());
             return $this->redirect($this->generateUrl('sale_order_read', ['id' => $order_id]));
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('sale_order_edit', ['id' => $order_id]));
     }

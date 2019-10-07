@@ -3,6 +3,7 @@
 namespace App\Controller\Repository;
 
 use App\Cache;
+use Matican\Authentication\AuthUser;
 use Matican\Models\Media\ImageModel;
 use Matican\ModelSerializer;
 use Matican\Models\Repository\BarcodeModel;
@@ -18,13 +19,12 @@ use Matican\Models\Repository\ItemModel;
 use Matican\Models\Repository\ItemTypeModel;
 use Matican\Models\Repository\SpecKeyModel;
 use Matican\Models\Repository\SpecKeyValueModel;
-use App\General\AuthUser;
 use App\Params;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\Response;
-use Matican\Core\Transaction\ResponseStatus;
+use Matican\ResponseStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -157,7 +157,11 @@ class ItemController extends AbstractController
      */
     public function edit($id, Request $request)
     {
+        $referrer = null;
 //        Cache::cache_action(Servers::Repository, Repository::Brand, 'all');
+        if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] != "") {
+            $referrer = $_SERVER['HTTP_REFERER'];
+        }
 
         $canUpdate = AuthUser::if_is_allowed(ServerPermissions::repository_item_update);
 
@@ -371,6 +375,7 @@ class ItemController extends AbstractController
                 'specGroupKeys' => $specGroupsKeys,
                 'canUpdate' => $canUpdate,
                 'itemImages' => $itemImages,
+                'referrer' => $referrer,
             ]);
         } else {
             return $this->redirect($this->generateUrl('repository_item_repository_item_list'));
@@ -815,7 +820,7 @@ class ItemController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         /*
          * Cache
@@ -854,7 +859,7 @@ class ItemController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         $item_id = $specKeyValueModel->getItemId();
         /*
@@ -896,7 +901,7 @@ class ItemController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         /*
          * Cache

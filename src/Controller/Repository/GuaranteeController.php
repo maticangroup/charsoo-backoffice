@@ -8,11 +8,11 @@ use Matican\Models\Repository\GuaranteeDurationModel;
 use Matican\Models\Repository\GuaranteeModel;
 use Matican\Models\Repository\GuaranteeProviderModel;
 use Matican\Models\Repository\GuaranteeStatusModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
-use Matican\Core\Transaction\ResponseStatus;
+use Matican\ResponseStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -142,10 +142,10 @@ class GuaranteeController extends AbstractController
                 $request->add_instance($guaranteeModel);
                 $response = $request->send();
                 if ($response->getStatus() == ResponseStatus::successful) {
-                    $this->addFlash('s', '');
+                    $this->addFlash('s', $response->getMessage());
                     return $this->redirect($this->generateUrl('repository_guarantee_repository_guarantee_create'));
                 } else {
-                    $this->addFlash('f', '');
+                    $this->addFlash('f', $response->getMessage());
                 }
             }
 

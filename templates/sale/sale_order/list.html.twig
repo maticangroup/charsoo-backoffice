@@ -7,8 +7,18 @@
         <div class="col-12">
             <div class="panel">
                 <div class="panel-content">
-                    <h1>{{ 'sale.order.list.main.title' | trans }}</h1>
-                    <p>{{ 'sale.order.list.main.description' | trans }}</p>
+                    <div class="row">
+                        <div class="col-10">
+                            <h1>{{ 'sale.order.list.main.title' | trans }}</h1>
+                            <p>{{ 'sale.order.list.main.description' | trans }}</p>
+                        </div>
+                        {% if canCreate %}
+                            <div class="col-2">
+                                <a href="{{ path('sale_order_create') }}"
+                                   class="btn btn-block btn-success rounded fa fa-plus"></a>
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -33,7 +43,9 @@
                                 <th>{{ 'general.invoice.serial.title' | trans }}</th>
                                 <th>{{ 'general.total.price.title' | trans }}</th>
                                 <th>{{ 'general.status.title' | trans }}</th>
-                                <th class="not-sortable">{{ 'general.action.title' | trans }}</th>
+                                {% if canEdit %}
+                                    <th class="not-sortable">{{ 'general.action.title' | trans }}</th>
+                                {% endif %}
                             </tr>
                             </thead>
                             <tbody>
@@ -49,10 +61,12 @@
                                             {{ order.orderStatus.orderStatusName }}
                                         </span>
                                     </td>
-                                    <td>
-                                        <a href="{{ path('sale_order_edit' , {id:order.orderId}) }}"
-                                           class="fa fa-edit"></a>
-                                    </td>
+                                    {% if canEdit %}
+                                        <td>
+                                            <a href="{{ path('sale_order_edit' , {id:order.orderId}) }}"
+                                               class="fa fa-edit"></a>
+                                        </td>
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                             </tbody>

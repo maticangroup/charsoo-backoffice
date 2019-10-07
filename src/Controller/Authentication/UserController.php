@@ -5,11 +5,12 @@ namespace App\Controller\Authentication;
 use Matican\Models\Authentication\RoleModel;
 use Matican\Models\Authentication\UserModel;
 use Matican\ModelSerializer;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Authentication;
 use Matican\Core\Servers;
-use Matican\Core\Transaction\ResponseStatus;
+
+use Matican\ResponseStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,6 +26,15 @@ class UserController extends AbstractController
      */
     public function fetchAll()
     {
+
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::authentication_user_all);
+        $canChangeRole = AuthUser::if_is_allowed(ServerPermissions::authentication_user_set_role);
+        $canSendPassword = AuthUser::if_is_allowed(ServerPermissions::authentication_user_send_password_to_user);
+
+        if (!$canSeeAll) {
+            return $this->redirect($this->generateUrl('default'));
+        }
+
         $request = new Req(Servers::Authentication, Authentication::User, 'all');
         $response = $request->send();
 
@@ -58,6 +68,9 @@ class UserController extends AbstractController
             'controller_name' => 'UserController',
             'users' => $users,
             'roles' => $roles,
+            'canSeeAll' => $canSeeAll,
+            'canChangeRole' => $canChangeRole,
+            'canSendPassword' => $canSendPassword,
         ]);
     }
 
@@ -88,7 +101,7 @@ class UserController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('authentication_user_list'));
     }
@@ -110,7 +123,7 @@ class UserController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('authentication_user_list'));
     }

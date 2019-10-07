@@ -54,32 +54,33 @@
             </div>
         </div>
 
-
-        <div class="col-3"></div>
-        <div class="col-6">
-            <div class="panel">
-                <div class="panel-heading"><strong>
-                        {{ 'general.add.item.title' | trans }}
-                    </strong></div>
-                <div class="panel-content">
-                    <form class="row"
-                          action="{{ path('inventory_deed_inventory_deed_create_to_inventory_deed' , {deed_id:deedModel.inventoryDeedId}) }}"
-                          method="post">
-                        <div class="col-10">
-                            <select name="itemID" class="form-control">
-                                {% for item in items %}
-                                    <option value="{{ item.itemID }}">{{ item.itemName }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="col-2">
-                            <button type="submit" class="btn btn-dark fa fa-save rounded btn-block"></button>
-                        </div>
-                    </form>
+        {% if selectedItemModel == false %}
+            <div class="col-3"></div>
+            <div class="col-6">
+                <div class="panel">
+                    <div class="panel-heading"><strong>
+                            {{ 'general.add.item.title' | trans }}
+                        </strong></div>
+                    <div class="panel-content">
+                        <form class="row"
+                              action="{{ path('inventory_deed_inventory_deed_create_to_inventory_deed' , {deed_id:deedModel.inventoryDeedId}) }}"
+                              method="post">
+                            <div class="col-10">
+                                <select name="itemID" class="form-control">
+                                    {% for item in items %}
+                                        <option value="{{ item.itemID }}">{{ item.itemName }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-dark fa fa-save rounded btn-block"></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-3"></div>
+            <div class="col-3"></div>
+        {% endif %}
 
         {% if selectedItemModel %}
             <form class="col-12"
@@ -153,6 +154,10 @@
                                 </td>
                                 <td>
                                     <button type="submit" class="btn btn-dark fa fa-save rounded"></button>
+                                    <a class="fa fa-edit"
+                                       href="{{ path('repository_item_repository_item_edit' , {id:selectedItemModel.itemID}) }}"></a>
+                                    <a href="{{ path('inventory_deed_inventory_deed_create_to_inventory_deed' , {deed_id:deedModel.inventoryDeedId}) }}"
+                                       class="fa fa-trash"></a>
                                 </td>
                             </tr>
                             </tbody>
@@ -235,35 +240,6 @@
                         </tr>
                         </tbody>
                     </table>
-                </div>
-
-                <div class="panel-content">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="form-group">
-                                        <span class="label-text col-form-label text-md-right">{{ 'general.description.title' | trans }}</span>
-                                        <textarea name="textarea" class="form-control"
-                                                  placeholder="Text input area"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="row">
-                                        <div class="col-3"></div>
-                                        <div class="col-3"></div>
-                                        <div class="col-3">
-                                            <button type="submit"
-                                                    class="btn btn-dark fa fa-save rounded btn-block mt-5"></button>
-                                        </div>
-                                        <div class="col-3"></div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

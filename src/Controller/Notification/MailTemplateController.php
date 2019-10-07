@@ -7,7 +7,7 @@ use Matican\Models\Notification\MailTemplateModel;
 use Matican\Models\Notification\TokenModel;
 use Matican\Core\Entities\Notifications;
 use Matican\Core\Servers;
-use Matican\Core\Transaction\ResponseStatus;
+use Matican\ResponseStatus;
 use function Sodium\add;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

@@ -2,15 +2,19 @@
 
 namespace App\Controller\Authentication;
 
+
+use Matican\Authentication\AuthUser;
+use Matican\Models\Authentication\ClientModel;
 use Matican\Models\Authentication\UserModel;
 use Matican\Models\Repository\ItemModel;
 use Matican\ModelSerializer;
-use App\General\AuthUser;
-use Grpc\Server;
+
+//use Grpc\Server;
 use Matican\Core\Entities\Authentication;
 use Matican\Core\Servers;
 use Matican\Core\Transaction\Response;
-use Matican\Core\Transaction\ResponseStatus;
+
+use Matican\ResponseStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -30,6 +34,7 @@ class LoginController extends AbstractController
      */
     public function read(Request $request)
     {
+        AuthUser::logout();
 
         $inputs = $request->request->all();
         /**
@@ -37,19 +42,34 @@ class LoginController extends AbstractController
          */
         $userModel = ModelSerializer::parse($inputs, UserModel::class);
 
+        if ($request->query->get('reseller_token')) {
+            $clientModel = new ClientModel();
+            $clientModel->setAccessToken($request->query->get('reseller_token'));
+            $clientRequest = new Req(Servers::Authentication, Authentication::Client, 'fetch_by_access_token');
+            $clientRequest->add_instance($clientModel);
+            $response = $clientRequest->send();
+            /**
+             * @var $clientModel ClientModel
+             */
+            $clientModel = ModelSerializer::parse($response->getContent(), ClientModel::class);
+            if (!isset($_SESSION['http_referrer'])) {
+                $_SESSION['http_referrer'] = $_SERVER['HTTP_REFERER'];
+            }
+        } else {
+            $clientModel = null;
+        }
         if (!empty($inputs['password_button'])) {
 //            dd('password_button');
             $userModel->setUserMobile($inputs['userMobile']);
-            $request = new Req(Servers::Authentication, Authentication::User, 'send_password');
-            $request->add_instance($userModel);
-            $response = $request->send();
+            $passwordRequest = new Req(Servers::Authentication, Authentication::User, 'send_password');
+            $passwordRequest->add_instance($userModel);
+            $response = $passwordRequest->send();
             if ($response->getStatus() == ResponseStatus::successful) {
                 $this->addFlash('s', $response->getMessage());
+
             } else {
                 $this->addFlash('f', $response->getMessage());
             }
-//            dd($userModel);
-//            return $this->redirect($this->generateUrl('authentication_login'));
         }
 
         if (!empty($inputs['login_button'])) {
@@ -57,9 +77,9 @@ class LoginController extends AbstractController
             $userModel->setUserMobile($inputs['userMobile']);
             $userModel->setUserPassword($inputs['userPassword']);
 //            dd($userModel);
-            $request = new Req(Servers::Authentication, Authentication::User, 'login');
-            $request->add_instance($userModel);
-            $response = $request->send();
+            $loginRequest = new Req(Servers::Authentication, Authentication::User, 'login');
+            $loginRequest->add_instance($userModel);
+            $response = $loginRequest->send();
 //            dd($response);
             if ($response->getStatus() == ResponseStatus::successful) {
 
@@ -71,18 +91,35 @@ class LoginController extends AbstractController
                 AuthUser::purge_role_permissions();
 
                 $this->addFlash('s', $response->getMessage());
-
+                if ($clientModel) {
+                    $redirectURL = $clientModel->getClientDomain() .
+                        $clientModel->getAuthenticationTerminalUrl() .
+                        "&userName=" .
+                        $userModel->getUserName() . "&userPassword=" .
+                        $userModel->getUserPassword() . "&personId=" . $userModel->getPersonId();
+                    if (isset($_SESSION['http_referrer'])) {
+                        $referrer = $_SESSION['http_referrer'];
+                        unset($_SESSION['http_referrer']);
+                        return $this->redirect($redirectURL . "&referrer=" . $referrer);
+                    }
+                    return $this->redirect($redirectURL);
+                }
                 return $this->redirect($this->generateUrl("default"));
             } else {
                 $this->addFlash('f', $response->getMessage());
 //                return $this->redirect($this->generateUrl('authentication_login'));
             }
         }
-
+        if ($request->query->get('reseller_token')) {
+            $reseller_token = $request->query->get('reseller_token');
+        } else {
+            $reseller_token = null;
+        }
 
         return $this->render('authentication/login/read.html.twig', [
             'controller_name' => 'LoginController',
             'userModel' => $userModel,
+            'reseller_token' => $reseller_token
         ]);
     }
 

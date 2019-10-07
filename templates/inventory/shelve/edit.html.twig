@@ -54,12 +54,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-3 mt-5">
-                            <div class="form-group row">
-                                <button type="submit" class="btn btn-block rounded btn-info fa fa-save"></button>
+                        {% if canUpdate %}
+                            <div class="col-3 mt-5">
+                                <div class="form-group row">
+                                    <button type="submit" class="btn btn-block rounded btn-info fa fa-save"></button>
+                                </div>
                             </div>
-                        </div>
+                        {% endif %}
                     </form>
+
                     <div class="row">
                         {% for phone in phones %}
                             <div class="col-3">
@@ -81,48 +84,53 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            {% if canRemovePhone %}
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <button type="submit"
+                                                                class="btn btn-block rounded btn-danger fa fa-trash"></button>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        {% if canAddPhone %}
+                            <div class="col-3">
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <strong>
+                                            {{ 'general.add.new.phone.title' | trans }}
+                                        </strong>
+                                    </div>
+                                    <div class="panel-content">
+                                        <form class="row"
+                                              action="{{ path('inventory_shelve_shelve_add_phone' , {shelve_id:shelveModel.shelveId}) }}"
+                                              method="post">
+                                            <div class="col-12">
+                                                <div class="form-group row">
+                                                    <span class="label-text col-md-12 col-form-label ">{{ 'general.phone.title' | trans }}</span>
+                                                    <div class="col-md-12">
+                                                        <input type="text" name="phone"
+                                                               value=""
+                                                               class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <button type="submit"
-                                                            class="btn btn-block rounded btn-danger fa fa-trash"></button>
+                                                            class="btn btn-block rounded btn-dark fa fa-save"></button>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                        {% endfor %}
-                        <div class="col-3">
-                            <div class="panel">
-                                <div class="panel-heading">
-                                    <strong>
-                                        {{ 'general.add.new.phone.title' | trans }}
-                                    </strong>
-                                </div>
-                                <div class="panel-content">
-                                    <form class="row"
-                                          action="{{ path('inventory_shelve_shelve_add_phone' , {shelve_id:shelveModel.shelveId}) }}"
-                                          method="post">
-                                        <div class="col-12">
-                                            <div class="form-group row">
-                                                <span class="label-text col-md-12 col-form-label ">{{ 'general.phone.title' | trans }}</span>
-                                                <div class="col-md-12">
-                                                    <input type="text" name="phone"
-                                                           value=""
-                                                           class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <button type="submit"
-                                                        class="btn btn-block rounded btn-dark fa fa-save"></button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

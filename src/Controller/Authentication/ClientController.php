@@ -5,11 +5,11 @@ namespace App\Controller\Authentication;
 use Matican\Models\Authentication\ClientModel;
 use Matican\Models\Authentication\RoleModel;
 use Matican\ModelSerializer;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Authentication;
 use Matican\Core\Servers;
-use Matican\Core\Transaction\ResponseStatus;
+use Matican\ResponseStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,6 +29,14 @@ class ClientController extends AbstractController
      */
     public function create(Request $request)
     {
+
+        $canCreate = AuthUser::if_is_allowed(ServerPermissions::authentication_client_new);
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::authentication_client_new);
+        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::authentication_client_update);
+
+        if (!$canCreate) {
+            return $this->redirect($this->generateUrl('default'));
+        }
 
         $inputs = $request->request->all();
         /**
@@ -54,6 +62,7 @@ class ClientController extends AbstractController
         $clients = [];
         $allClientsRequest = new Req(Servers::Authentication, Authentication::Client, 'all');
         $allClientsResponse = $allClientsRequest->send();
+//        dd($allClientsResponse);
         if ($allClientsResponse->getContent()) {
             foreach ($allClientsResponse->getContent() as $client) {
                 $clients[] = ModelSerializer::parse($client, ClientModel::class);
@@ -84,6 +93,9 @@ class ClientController extends AbstractController
             'clientModel' => $clientModel,
             'clients' => $clients,
 //            'roles' => $roles,
+            'canCreate' => $canCreate,
+            'canSeeAll' => $canSeeAll,
+            'canUpdate' => $canUpdate,
         ]);
     }
 
@@ -96,7 +108,10 @@ class ClientController extends AbstractController
      */
     public function edit($id, Request $request)
     {
-        if (!AuthUser::if_is_allowed(ServerPermissions::authentication_client_update)) {
+        $canSeeAll = AuthUser::if_is_allowed(ServerPermissions::authentication_client_new);
+        $canUpdate = AuthUser::if_is_allowed(ServerPermissions::authentication_client_update);
+
+        if (!$canUpdate) {
             return $this->redirect($this->generateUrl('authentication_client_create'));
         }
         $inputs = $request->request->all();
@@ -151,7 +166,7 @@ class ClientController extends AbstractController
                 $this->addFlash('s', $response->getMessage());
                 return $this->redirect($this->generateUrl('authentication_client_edit', ['id' => $id]));
             } else {
-                $this->addFlash('s', $response->getMessage());
+                $this->addFlash('f', $response->getMessage());
             }
         }
 
@@ -161,6 +176,8 @@ class ClientController extends AbstractController
             'clientModel' => $clientModel,
             'clients' => $clients,
             'roles' => [],
+            'canSeeAll' => $canSeeAll,
+            'canUpdate' => $canUpdate,
         ]);
     }
 }

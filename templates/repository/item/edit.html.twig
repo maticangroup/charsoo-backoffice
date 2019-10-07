@@ -8,13 +8,17 @@
             <div class="panel">
                 <div class="panel-content">
                     <div class="row">
-                        <div class="col-10">
+                        <div class="col-8">
                             <h1>{{ 'repository.item.edit.main.title' | trans }}</h1>
                             <p>{{ 'repository.item.edit.main.description' | trans }}</p>
                         </div>
                         <div class="col-2">
                             <a href="{{ path('repository_item_repository_item_list') }}"
                                class="btn btn-block btn-secondary rounded fa fa-list"></a>
+                        </div>
+                        <div class="col-2">
+                            <a href="{{ referrer }}"
+                               class="btn btn-block btn-secondary rounded fa fa-backward"></a>
                         </div>
                     </div>
 
@@ -340,6 +344,14 @@
                                 <span class="label-text col-md-2 col-form-label text-md-right">{{ 'general.type.title' | trans }}</span>
                                 <div class="col-md-10">
                                     <h4 class="mt-1">{{ itemModel.itemTypeName }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-content">
+                            <div class="form-group row">
+                                <span class="label-text col-md-2 col-form-label text-md-right">{{ 'general.size.title' | trans }}</span>
+                                <div class="col-md-10">
+                                    <h4 class="mt-1">{{ itemModel.sizeName }}</h4>
                                 </div>
                             </div>
                         </div>

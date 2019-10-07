@@ -13,13 +13,13 @@ use Matican\Models\Delivery\WeekDayModel;
 use Matican\ModelSerializer;
 use Matican\Models\Repository\PersonModel;
 use Matican\Models\Repository\SizeModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Delivery;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
-use Matican\Core\Transaction\ResponseStatus;
+use Matican\ResponseStatus;
 use Matican\Models\Media\Image;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -148,6 +148,7 @@ class DeliveryMethodController extends AbstractController
      */
     public function edit($id, Request $request)
     {
+
         $canEdit = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_update);
         $canAddSize = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_add_allowed_size);
         $canRemoveSize = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_remove_allowed_size);
@@ -158,6 +159,8 @@ class DeliveryMethodController extends AbstractController
         $canChangeQueueStatus = AuthUser::if_is_allowed(ServerPermissions::delivery_deliverymethod_change_queue_status);
         $canReadDeliveryPerson = AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_fetch);
         $canEditDeliveryPerson = AuthUser::if_is_allowed(ServerPermissions::delivery_deliveryperson_update);
+
+        $file = $request->files->get('deliveryMethodLogoUrl');
 
         if (!$canEdit) {
             return $this->redirect($this->generateUrl('delivery_method_list'));
@@ -258,8 +261,13 @@ class DeliveryMethodController extends AbstractController
             $deliveryMethodModel = ModelSerializer::parse($inputs, DeliveryMethodModel::class);
             $deliveryMethodModel->setDeliveryMethodId($id);
             $request = new Req(Servers::Delivery, Delivery::DeliveryMethod, 'update');
-            $request->add_instance($deliveryMethodModel);
-            $response = $request->send();
+            if ($file) {
+                $response = $request->uploadImage($file, $deliveryMethodModel);
+            } else {
+                $response = $request->uploadImage(null, $deliveryMethodModel);
+            }
+//            $request->add_instance($deliveryMethodModel);
+//            $response = $request->send();
 //            dd($response);
             if ($response->getStatus() == ResponseStatus::successful) {
                 /**

@@ -13,12 +13,12 @@ use Matican\Models\Accounting\PaymentTypeModel;
 use Matican\ModelSerializer;
 use Matican\Models\Repository\CompanyModel;
 use Matican\Models\Repository\PersonModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Accounting;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
-use Matican\Core\Transaction\ResponseStatus;
+use Matican\ResponseStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -266,7 +266,7 @@ class InvoiceController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('accounting_invoice_edit', ['id' => $invoice_id]));
     }
@@ -342,7 +342,7 @@ class InvoiceController extends AbstractController
             if ($response->getStatus() == ResponseStatus::successful) {
                 $this->addFlash('s', $response->getMessage());
             } else {
-                $this->addFlash('s', $response->getMessage());
+                $this->addFlash('f', $response->getMessage());
             }
         }
         return $this->redirect($this->generateUrl('accounting_invoice_edit', ['id' => $invoice_id]));
@@ -370,7 +370,7 @@ class InvoiceController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('accounting_invoice_edit', ['id' => $invoice_id]));
     }

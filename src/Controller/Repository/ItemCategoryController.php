@@ -9,11 +9,11 @@ use Matican\Models\Repository\ItemCategorySpecKeyModel;
 use Matican\Models\Repository\SizeModel;
 use Matican\Models\Repository\SpecGroupModel;
 use Matican\Models\Repository\SpecKeyModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Servers;
-use Matican\Core\Transaction\ResponseStatus;
+use Matican\ResponseStatus;
 use Matican\Models\Repository\ItemCategory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -251,7 +251,7 @@ class ItemCategoryController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         Cache::cache_action(Servers::Repository, Repository::ItemCategory, 'all');
 

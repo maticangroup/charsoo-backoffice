@@ -32,56 +32,36 @@
                                                 <table id="countriesList">
                                                     <thead>
                                                     <tr role="row">
-                                                        <th>Barcode</th>
-                                                        <th>Name</th>
-                                                        <th>Category</th>
-                                                        <th>Brand</th>
-                                                        <th>Color</th>
-                                                        <th>Guarantee</th>
-                                                        <th>Supplier</th>
-                                                        <th class="not-sortable">Actions</th>
+                                                        <th>{{ 'general.image.title' | trans }}</th>
+                                                        <th>{{ 'general.brand.title' | trans }}</th>
+                                                        <th>{{ 'general.name.title' | trans }}</th>
+                                                        <th>{{ 'general.color.title' | trans }}</th>
+                                                        <th>{{ 'general.guarantee.title' | trans }}</th>
+                                                        <th>{{ 'general.supplier.title' | trans }}</th>
+                                                        <th>{{ 'general.category.title' | trans }}</th>
+                                                        <th class="not-sortable">{{ 'general.action.title' | trans }}</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
                                                     {% for item in favoriteItems %}
                                                         <tr>
                                                             <td>
-                                                                {% for barcode in item.itemBarcodes %}
-                                                                    {{ barcode.barcodeName }},
-                                                                {% endfor %}
+                                                                {% if item.itemImages %}
+                                                                    <img src="{{ item.itemImages.0.url }}"
+                                                                         alt="{{ item.itemImages.0.imageAlt }}">
+                                                                {% else %}
+
+                                                                {% endif %}
                                                             </td>
+                                                            <td>{{ item.itemBrandName }}</td>
                                                             <td>
                                                                 {{ item.itemName }}
                                                             </td>
                                                             <td>
-                                                                <ul class="">
-                                                                    <li><a href="#" class="btn-link">Category</a></li>
-                                                                    <li><a href="#" class="btn-link">Category</a></li>
-                                                                    <li>
-                                                                        <a href="#" class="btn-link">Category</a>
-                                                                        <ul>
-                                                                            <li><a href="#" class="btn-link">Category</a></li>
-                                                                            <li>
-                                                                                <a href="#" class="btn-link">Category</a>
-                                                                            <li><a href="#" class="btn-link">Category</a>
-                                                                                <ul>
-                                                                                    <li><a href="#" class="btn-link">Category</a></li>
-                                                                                    <li>
-                                                                                        <a href="#" class="btn-link">Category</a>
-                                                                                    <li><a href="#" class="btn-link">Category</a></li>
-
-
-                                                                                </ul>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </li>
-                                                                </ul>
-                                                            </td>
-
-                                                            <td>{{ item.itemBrandName }}</td>
-                                                            <td>
                                                                 {% for color in item.itemColors %}
-                                                                    {{ color.itemColorName }},
+                                                                    <span class="label rounded shadow-sm"
+                                                                          style="background-color: {{ color.itemColorHex }}">
+                                                                    </span>
                                                                 {% endfor %}
                                                             </td>
                                                             <td>
@@ -95,8 +75,13 @@
                                                                 {% endfor %}
                                                             </td>
                                                             <td>
-                                                                <a href="{{ path('repository_item_repository_item_edit' , {id:item.itemID}) }}"
-                                                                   class="fa fa-edit"></a>
+                                                                {% for category in item.selectedItemCategories | reverse %}
+                                                                    <span class="label label-default small">{{ category.category.0.itemCategoryName }}</span>
+                                                                {% endfor %}
+                                                            </td>
+                                                            <td>
+                                                                <a href="{{ path('crm_customer_favorite_remove' , {customer_id:personModel.id , item_id:item.itemID}) }}"
+                                                                   class="fa fa-trash"></a>
                                                             </td>
                                                         </tr>
                                                     {% endfor %}

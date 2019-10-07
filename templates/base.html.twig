@@ -127,6 +127,26 @@
             text-align: center;
         }
     </style>
+    <style>
+        @font-face {
+            font-family: 'AIranianSans';
+            src: url('{{ asset('assets/fonts/arad-font/BRoya.eot') }}?#iefix') format('embedded-opentype'),
+            url('{{ asset('assets/fonts/arad-font/BRoya.woff') }}') format('woff'),
+            url('{{ asset('assets/fonts/arad-font/BRoya.ttf') }}') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body, p, h1, h2, h3, h4, h5, h6, strong, td, tr, input {
+
+            font-family: 'AIranianSans', sans-serif !important;
+        }
+
+        p {
+            font-size: 18px !important;
+            line-height: 32px !important;
+        }
+    </style>
     {% block stylesheets %}{% endblock %}
 
     <!-- Page Level Stylesheets -->
@@ -267,6 +287,7 @@
 
 <!-- Scripts -->
 <script src="{{ asset('assets/script/all.js') }}"></script>
+<script src="{{ asset('assets/script/js_core_api.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/date-picker/js/persianDatepicker.min.js') }}"></script>
 
 <script type="text/javascript">
@@ -364,6 +385,21 @@
         // No Web Storage Support.
     }
 </script>
+
+<script>
+    let itemModel = new ItemModel();
+    itemModel.setItemID(5);
+    Request.send(
+        'Repository',
+        'Item',
+        'fetch',
+        function (response) {
+            console.log(response);
+        },
+        itemModel)
+</script>
+
+
 {#<script src="{{ asset('assets/search/js/search.js') }}"></script>#}
 {% block javascripts %}
 {% endblock %}

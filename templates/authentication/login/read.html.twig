@@ -51,7 +51,8 @@
                 <div class="col-md-6">
                     <!-- Login Form Start -->
                     <div class="m-account--form-w bg-light">
-                        <form class="m-account--form" action="{{ path('authentication_login') }}"
+                        <form class="m-account--form"
+                              action="{{ path('authentication_login') }}{{ (reseller_token)? "?reseller_token=":"" }}{{ reseller_token }}"
                               method="post">
                             <!-- Logo Start -->
                             <div class="logo">
@@ -71,7 +72,7 @@
                             </div>
                             <div class="m-account--actions">
                                 <input type="submit"
-                                       class="btn btn-rounded btn-info" value="Send Password" name="password_button">
+                                       class="btn btn-rounded btn-info" value="{{ 'general.send.password.title' | trans }}" name="password_button">
                             </div>
 
                             <hr class="bg-white">

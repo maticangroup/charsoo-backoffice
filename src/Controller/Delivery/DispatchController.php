@@ -12,13 +12,13 @@ use Matican\ModelSerializer;
 use Matican\Models\Repository\LocationModel;
 use Matican\Models\Repository\PersonModel;
 use Matican\Models\Sale\OrderModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Delivery;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Entities\Sale;
 use Matican\Core\Servers;
-use Matican\Core\Transaction\ResponseStatus;
+use Matican\ResponseStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -126,7 +126,7 @@ class DispatchController extends AbstractController
             $dispatchModel = ModelSerializer::parse($response->getContent(), DispatchModel::class);
             return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatchModel->getDispatchId()]));
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
             return $this->redirect($this->generateUrl('delivery_dispatch_create'));
         }
     }
@@ -159,20 +159,15 @@ class DispatchController extends AbstractController
         $request = new Req(Servers::Delivery, Delivery::Dispatch, 'fetch');
         $request->add_instance($dispatchModel);
         $response = $request->send();
-//        dd($response);
         $dispatchModel = ModelSerializer::parse($response->getContent(), DispatchModel::class);
-//        dd($dispatchModel);
         /**
          * @var $dispatchModel DispatchModel
          */
         $tempDispatchModel = new DispatchModel();
         $tempDispatchModel->setDispatchOrderId($dispatchModel->getDispatchOrderId());
-//       dd($tempDispatchModel);
         $deliveryMethodsRequest = new Req(Servers::Delivery, Delivery::DeliveryMethod, 'get_allowed_delivery_methods');
         $deliveryMethodsRequest->add_instance($tempDispatchModel);
         $deliveryMethodsResponse = $deliveryMethodsRequest->send();
-
-//        dd($deliveryMethodsResponse);
 
         /**
          * @var $deliveryMethods DeliveryMethodModel[]
@@ -184,14 +179,11 @@ class DispatchController extends AbstractController
             }
         }
 
-//        dd($deliveryMethods);
-
         $availableQueuesModel = new AvailableQueuesModel();
         $availableQueuesModel->setTodayDateTime();
         $availableQueuesModel->setDeliveryMethodId($dispatchModel->getDispatchDeliveryMethodId());
         $availableQueuesModel->setDispatchId($dispatchModel->getDispatchId());
         $availableQueuesModel->setDaysRange(7);
-//        dd($availableQueuesModel);
         /**
          * @var $availableQueues WeekDayModel[]
          */
@@ -200,17 +192,15 @@ class DispatchController extends AbstractController
             $availableQueuesRequest = new Req(Servers::Delivery, Delivery::DeliveryMethod, 'get_available_queues');
             $availableQueuesRequest->add_instance($availableQueuesModel);
             $availableQueuesResponse = $availableQueuesRequest->send();
-
-//            dd($availableQueuesResponse);
             if ($availableQueuesResponse->getContent()) {
-
                 /**
                  * @var $availableQueuesModel AvailableQueuesModel
                  */
                 $availableQueuesModel = ModelSerializer::parse($availableQueuesResponse->getContent(), AvailableQueuesModel::class);
-//dd($availableQueuesModel->getWeekDays());
-                foreach ($availableQueuesModel->getWeekDays() as $day) {
-                    $availableQueues[] = ModelSerializer::parse($day, WeekDayModel::class);
+                if ($availableQueuesModel->getWeekDays()) {
+                    foreach ($availableQueuesModel->getWeekDays() as $day) {
+                        $availableQueues[] = ModelSerializer::parse($day, WeekDayModel::class);
+                    }
                 }
             }
         }
@@ -224,12 +214,10 @@ class DispatchController extends AbstractController
          */
         $orderModel = ModelSerializer::parse($dispatchModel->getDispatchOrder(), OrderModel::class);
         $personModel = new PersonModel();
-//        dd('here');
         $personModel->setId($orderModel->getOrderOwnerId());
         $ownerLocationsRequest = new Req(Servers::Repository, Repository::Person, 'get_all_addresses');
         $ownerLocationsRequest->add_instance($personModel);
         $ownerLocationsResponse = $ownerLocationsRequest->send();
-//        dd($ownerLocationsResponse);
         if ($ownerLocationsResponse->getContent()) {
             foreach ($ownerLocationsResponse->getContent() as $location) {
                 $ownerLocations[] = ModelSerializer::parse($location, LocationModel::class);
@@ -244,7 +232,6 @@ class DispatchController extends AbstractController
             $deliveryMethodModel = new DeliveryMethodModel();
             $deliveryMethodModel->setDeliveryMethodId($dispatchModel->getDispatchDeliveryMethodId());
             $deliveryMethodModel->setDispatchId($dispatchModel->getDispatchId());
-//            dd($deliveryMethodModel);
             $deliveryPersonsRequest = new Req(Servers::Delivery, Delivery::DeliveryPerson, 'get_delivery_method_people');
             $deliveryPersonsRequest->add_instance($deliveryMethodModel);
             $deliveryPersonsResponse = $deliveryPersonsRequest->send();
@@ -349,11 +336,10 @@ class DispatchController extends AbstractController
         $request = new Req(Servers::Delivery, Delivery::Dispatch, 'finalize_dispatch');
         $request->add_instance($dispatchModel);
         $response = $request->send();
-//        dd($response);
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatch_id]));
     }
@@ -378,7 +364,7 @@ class DispatchController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatch_id]));
     }
@@ -405,7 +391,7 @@ class DispatchController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatch_id]));
     }
@@ -433,7 +419,7 @@ class DispatchController extends AbstractController
         if ($response->getStatus() == ResponseStatus::successful) {
             $this->addFlash('s', $response->getMessage());
         } else {
-            $this->addFlash('s', $response->getMessage());
+            $this->addFlash('f', $response->getMessage());
         }
         return $this->redirect($this->generateUrl('delivery_dispatch_edit', ['id' => $dispatch_id]));
     }

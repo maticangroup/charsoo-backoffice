@@ -20,7 +20,7 @@ use Matican\Models\Repository\PersonModel;
 use Matican\Models\Repository\ProvinceModel;
 use Matican\Models\Sale\OrderModel;
 use Matican\Models\Ticketing\CommentModel;
-use App\General\AuthUser;
+use Matican\Authentication\AuthUser;
 use Matican\Permissions\ServerPermissions;
 use Matican\Core\Entities\Accounting;
 use Matican\Core\Entities\Authentication;
@@ -29,7 +29,7 @@ use Matican\Core\Entities\Notifications;
 use Matican\Core\Entities\Repository;
 use Matican\Core\Entities\Sale;
 use Matican\Core\Servers;
-use Matican\Core\Transaction\ResponseStatus;
+use Matican\ResponseStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -316,7 +316,7 @@ class CustomerController extends AbstractController
     public function customerFavorite($id, Request $request)
     {
         if (!AuthUser::if_is_allowed(ServerPermissions::repository_person_fetch)) {
-            return $this->redirect($this->generateUrl('crm_customer_list'));
+            return $this->redirect($this->generateUrl('crm_customer_info'));
         }
         $inputs = $request->request->all();
         /**
@@ -324,7 +324,7 @@ class CustomerController extends AbstractController
          */
         $personModel = ModelSerializer::parse($inputs, PersonModel::class);
         $personModel->setId($id);
-        $request = new Req(Servers::Repository, Repository::Person, 'fetch');
+        $request = new Req(Servers::Repository, Repository::Person, 'get_favorite_items');
         $request->add_instance($personModel);
         $response = $request->send();
         /**
@@ -342,6 +342,8 @@ class CustomerController extends AbstractController
             }
         }
 
+//        dd($favoriteItems);
+
 
         $url = $_SERVER['PHP_SELF'];
         $url = explode('index.php', $url)[1];
@@ -355,6 +357,34 @@ class CustomerController extends AbstractController
             'favoriteItems' => $favoriteItems,
             'canSeeCompanyGroup' => $canSeeCompanyGroup,
         ]);
+    }
+
+    /**
+     * @Route("/favorite-remove/{customer_id}/{item_id}", name="_favorite_remove")
+     * @param $customer_id
+     * @param $item_id
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \ReflectionException
+     */
+    public function customerFavoriteRemove($customer_id, $item_id)
+    {
+        if (!AuthUser::if_is_allowed(ServerPermissions::repository_person_fetch)) {
+            return $this->redirect($this->generateUrl('crm_customer_info'));
+        }
+
+        $itemModel = new ItemModel();
+        $itemModel->setItemID($item_id);
+        $itemModel->setPersonId($customer_id);
+        $request = new Req(Servers::Repository, Repository::Person, 'remove_favorite_item');
+        $request->add_instance($itemModel);
+        $response = $request->send();
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('f', $response->getMessage());
+        }
+
+        return $this->redirect($this->generateUrl('crm_customer_favorite', ['id' => $customer_id]));
     }
 
     /**
@@ -660,7 +690,7 @@ class CustomerController extends AbstractController
             if ($response->getStatus() == ResponseStatus::successful) {
                 $this->addFlash('s', $response->getMessage());
             } else {
-                $this->addFlash('s', $response->getMessage());
+                $this->addFlash('f', $response->getMessage());
             }
             return $this->redirect($this->generateUrl('crm_customer_invitation', ['id' => $id]));
         }

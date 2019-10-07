@@ -10,7 +10,7 @@
                     <div class="row">
                         <div class="col-12">
                             <h1>{{ 'accounting.coupon.group.create.main.title' | trans }}</h1>
-                            <p>{{ 'accounting.coupon.group.create.main.description' | trans }}</p>
+                            <p>{{ 'accounting.coupon.group.create.main.description' | trans | raw }}</p>
                         </div>
                     </div>
                 </div>
@@ -60,8 +60,8 @@
                                 <div class="form-group row">
                                     <span class="label-text col-md-12 col-form-label ">{{ 'accounting.coupon.group.create.form.input.title.discount.type' | trans }}</span>
                                     <select name="couponGroupDiscountType" class="form-control">
-                                        <option value="fixed">Fixed</option>
-                                        <option value="percentage">Percentage</option>
+                                        <option value="fixed">{{ 'general.fixed.title' | trans }}</option>
+                                        <option value="percentage">{{ 'general.percentage.title' | trans }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                                                class="form-check-input"
                                                onclick="toggle('.myClass', this)"
                                                 {{ (couponGroupModel.couponGroupIsPrivate == 'true') ? 'checked' : '' }}>
-                                        <span class="form-check-label">Private</span>
+                                        <span class="form-check-label">{{ 'general.private.title' | trans }}</span>
                                     </label>
                                 </div>
                             </div>

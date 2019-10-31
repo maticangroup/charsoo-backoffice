@@ -36,6 +36,7 @@
                                 <tr>
                                     <th>{{ 'general.id.title' | trans }}</th>
                                     <th>{{ 'general.username.title' | trans }}</th>
+                                    <th>{{ 'general.mobile.title' | trans }}</th>
                                     <th>{{ 'authentication.user.last.login.date.title' | trans }}</th>
                                     <th>{{ 'authentication.user.is.login.title' | trans }}</th>
                                     <th>{{ 'general.role.title' | trans }}</th>
@@ -57,6 +58,7 @@
                                                 method="post">
                                             <td>{{ user.userId }}</td>
                                             <td>{{ user.userName }} {{ user.userFamily }}</td>
+                                            <td>{{ user.userMobile }}</td>
                                             <td>{{ user.userLoginDate }}</td>
                                             <td>
 

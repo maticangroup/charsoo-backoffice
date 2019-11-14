@@ -171,6 +171,7 @@ class ItemController extends AbstractController
 
             if (Cache::is_record_cached(Servers::Repository, Repository::Item, 'fetch', $id)) {
                 $responseContent = Cache::get_cached_record(Servers::Repository, Repository::Item, 'fetch', $id);
+//                dd($responseContent);
             } else {
                 /**
                  * @var $itemModel ItemModel
@@ -181,6 +182,9 @@ class ItemController extends AbstractController
                 $request->add_instance($itemModel);
                 $response = $request->send();
                 $responseContent = $response->getContent();
+
+//                dd($responseContent);
+
                 Cache::cache_record(Servers::Repository, Repository::Item, 'fetch', $id, $responseContent);
             }
 

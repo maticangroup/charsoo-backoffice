@@ -756,4 +756,13 @@ class CustomerController extends AbstractController
             'canSeeCompanyGroup' => $canSeeCompanyGroup,
         ]);
     }
+
+
+    /**
+     * @Route("/redirect-customer", name="_redirect_customer")
+     */
+    public function redirectCustomer()
+    {
+        die("sss");
+    }
 }

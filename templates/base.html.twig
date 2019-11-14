@@ -153,8 +153,11 @@
 </head>
 
 <body>
+<script>
+    let applicationDomain = "{{ application_domain }}";
+</script>
 {#<div class="loader">#}
-    {#<img src="{{ asset('assets/images/loading.gif') }}" alt="">#}
+{#<img src="{{ asset('assets/images/loading.gif') }}" alt="">#}
 {#</div>#}
 <script>
     function separated(element) {
@@ -288,6 +291,7 @@
 <!-- Scripts -->
 <script src="{{ asset('assets/script/all.js') }}"></script>
 <script src="{{ asset('assets/script/js_core_api.js') }}"></script>
+<script src="{{ asset('assets/script/location_script.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/date-picker/js/persianDatepicker.min.js') }}"></script>
 
 <script type="text/javascript">

@@ -5,3 +5,8 @@ crm.customer.group.create.main.description:
 crm.customer.group.edit.tab.title:
 crm.customer.group.edit.main.title:
 crm.customer.group.edit.main.description:
+
+crm.customer.customer.company.read.tab.title: ""
+
+crm.customer.invitaion.date.title: "تاریخ دعوت"
+crm.customer.invitaion.discount.code.title: "کد تخفیف"

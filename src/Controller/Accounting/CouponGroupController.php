@@ -48,7 +48,11 @@ class CouponGroupController extends AbstractController
                     $couponGroups[] = ModelSerializer::parse($item, CouponGroupModel::class);
                 }
             }
-//        $couponGroups = $response->getContent();
+
+            /*
+             * TODO coupon info does not send null from core server completely
+             */
+
             return $this->render('accounting/coupon_group/list.html.twig', [
                 'controller_name' => 'CouponGroupController',
                 'couponGroups' => $couponGroups,
@@ -415,30 +419,28 @@ class CouponGroupController extends AbstractController
     public
     function changeAvailability($coupon_group_id, $machine_name)
     {
-        if (false) {
 
-
-            $couponGroupStatusModel = new CouponGroupStatusModel();
-            if ($machine_name == 'active') {
-                $couponGroupStatusModel->setCouponGroupId($coupon_group_id);
-                $couponGroupStatusModel->setCouponGroupStatusMachineName('deactive');
-            } else {
-                $couponGroupStatusModel->setCouponGroupId($coupon_group_id);
-                $couponGroupStatusModel->setCouponGroupStatusMachineName('active');
-            }
-            $request = new Req(Servers::Accounting, Accounting::CouponGroup, 'change_status');
-            $request->add_instance($couponGroupStatusModel);
-            $response = $request->send();
-//        dd($response);
-            if ($response->getStatus() == ResponseStatus::successful) {
-                $this->addFlash('s', $response->getMessage());
-            } else {
-                $this->addFlash('f', $response->getMessage());
-            }
-            return $this->redirect($this->generateUrl('accounting_coupon_group_list'));
+        $couponGroupStatusModel = new CouponGroupStatusModel();
+        if ($machine_name == 'active') {
+            $couponGroupStatusModel->setCouponGroupId($coupon_group_id);
+            $couponGroupStatusModel->setCouponGroupStatusMachineName('deactive');
         } else {
-            return $this->redirect($this->generateUrl('inventory_deed_inventory_deed_list'));
+            $couponGroupStatusModel->setCouponGroupId($coupon_group_id);
+            $couponGroupStatusModel->setCouponGroupStatusMachineName('active');
         }
+        $request = new Req(Servers::Accounting, Accounting::CouponGroup, 'change_status');
+        $request->add_instance($couponGroupStatusModel);
+        $response = $request->send();
+//        dd($response);
+        /*
+         * TODO change status does not work from core response
+         */
+        if ($response->getStatus() == ResponseStatus::successful) {
+            $this->addFlash('s', $response->getMessage());
+        } else {
+            $this->addFlash('f', $response->getMessage());
+        }
+        return $this->redirect($this->generateUrl('accounting_coupon_group_list'));
     }
 
 }

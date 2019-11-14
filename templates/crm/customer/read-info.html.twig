@@ -26,7 +26,7 @@
                                   method="post">
                                 <div class="col-3">
                                     <div class="form-group row">
-                                        <span class="label-text col-md-12 col-form-label ">Name</span>
+                                        <span class="label-text col-md-12 col-form-label ">{{ 'general.first.name.title' | trans }}</span>
 
                                         <div class="col-md-12">
                                             <input type="text" name="humanName"
@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="col-3">
                                     <div class="form-group row">
-                                        <span class="label-text col-md-12 col-form-label ">Family</span>
+                                        <span class="label-text col-md-12 col-form-label ">{{ 'general.last.name.title' | trans }}</span>
                                         <div class="col-md-12">
                                             <input type="text" name="humanFamily"
                                                    value="{{ personModel.humanFamily }}"
@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="col-3">
                                     <div class="form-group row">
-                                        <span class="label-text col-md-12 col-form-label ">Email</span>
+                                        <span class="label-text col-md-12 col-form-label ">{{ 'general.email.title' | trans }}</span>
 
                                         <div class="col-md-12">
                                             <input type="text" name="email"
@@ -58,7 +58,7 @@
                                 </div>
                                 <div class="col-3">
                                     <div class="form-group row">
-                                        <span class="label-text col-md-12 col-form-label ">BirthDate</span>
+                                        <span class="label-text col-md-12 col-form-label ">{{ 'general.birth.date.title' | trans }}</span>
                                         <input type="text" id="date-picker" name="birthDate"
                                                class="form-control" value="{{ personModel.birthDate }}"/>
                                         <span id="span-date-picker"></span>
@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="col-3">
                                     <div class="form-group row">
-                                        <span class="label-text col-md-12 col-form-label ">National Code</span>
+                                        <span class="label-text col-md-12 col-form-label ">{{ 'general.national.code.title' | trans }}</span>
 
                                         <div class="col-md-12">
                                             <input type="text" name="nationalCode"
@@ -98,7 +98,7 @@
                                 </div>
                                 <div class="col-3">
                                     <div class="form-group row">
-                                        <span class="label-text col-md-12 col-form-label ">Mobile</span>
+                                        <span class="label-text col-md-12 col-form-label ">{{ 'general.mobile.title' | trans }}</span>
 
                                         <div class="col-md-12">
                                             <input type="text" name="mobile"

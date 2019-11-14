@@ -763,6 +763,10 @@ class CustomerController extends AbstractController
      */
     public function redirectCustomer()
     {
-        die("sss");
+        /**
+         * @var $currentUser UserModel
+         */
+        $currentUser = AuthUser::current_user();
+        return $this->redirect($this->generateUrl('crm_customer_info', ['id' => $currentUser->getPersonId()]));
     }
 }

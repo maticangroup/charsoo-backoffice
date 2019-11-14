@@ -27,26 +27,26 @@ class LocationViewController extends AbstractController
     {
 
         $locations = $addedLocations;
-
-        $provincesRequest = new Req(Servers::Repository, Repository::Location, 'get_provinces');
-        $provincesResponse = $provincesRequest->send();
-
-        /**
-         * @var $provinces ProvinceModel[]
-         */
-        $provinces = [];
-        if ($provincesResponse->getContent()) {
-            foreach ($provincesResponse->getContent() as $province) {
-                $provinces[] = ModelSerializer::parse($province, ProvinceModel::class);
-            }
-        }
+//
+//        $provincesRequest = new Req(Servers::Repository, Repository::Location, 'get_provinces');
+//        $provincesResponse = $provincesRequest->send();
+//
+//        /**
+//         * @var $provinces ProvinceModel[]
+//         */
+//        $provinces = [];
+//        if ($provincesResponse->getContent()) {
+//            foreach ($provincesResponse->getContent() as $province) {
+//                $provinces[] = ModelSerializer::parse($province, ProvinceModel::class);
+//            }
+//        }
 
         return $this->render('general/location_view/index.html.twig', [
             'controller_name' => 'LocationViewController',
             'locations' => $locations,
             'locationModel' => $locationModel,
             'submitUrl' => $submitUrl,
-            'provinces' => $provinces,
+//            'provinces' => $provinces,
         ]);
     }
 

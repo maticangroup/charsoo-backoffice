@@ -23,35 +23,35 @@
                                                   method="post" class="row">
                                                 <div class="col-3 ">
                                                     <div class="form-group row">
-                                                        <span class="label-text col-md-12 col-form-label ">Name</span>
+                                                        <span class="label-text col-md-12 col-form-label ">{{ 'general.first.name.title' | trans }}</span>
 
                                                         <div class="col-md-12">
                                                             <input type="text"
                                                                    value="{{ invitationModel.invitedPersonFirstName }}"
-                                                                   placeholder="Name"
+                                                                   placeholder="{{ 'general.first.name.title' | trans }}"
                                                                    class="form-control" name="invitedPersonFirstName">
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-3 ">
                                                     <div class="form-group row">
-                                                        <span class="label-text col-md-12 col-form-label ">Family</span>
+                                                        <span class="label-text col-md-12 col-form-label ">{{ 'general.last.name.title' | trans }}</span>
 
                                                         <div class="col-md-12">
                                                             <input type="text"
                                                                    value="{{ invitationModel.invitedPersonLastName }}"
-                                                                   placeholder="Family"
+                                                                   placeholder="{{ 'general.last.name.title' | trans }}"
                                                                    class="form-control" name="invitedPersonLastName">
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-3 ">
                                                     <div class="form-group row">
-                                                        <span class="label-text col-md-12 col-form-label ">Mobile</span>
+                                                        <span class="label-text col-md-12 col-form-label ">{{ 'general.mobile.title' | trans }}</span>
                                                         <div class="col-md-12">
                                                             <input type="tel"
                                                                    value="{{ invitationModel.invitedPersonMobile }}"
-                                                                   placeholder="Mobile"
+                                                                   placeholder="{{ 'general.mobile.title' | trans }}"
                                                                    class="form-control" name="invitedPersonMobile">
                                                         </div>
                                                     </div>
@@ -71,7 +71,9 @@
                                             <div class="form-group row">
                                                 <div class="col-4"></div>
                                                 <div class="col-md-4">
-                                                    <input type="text" placeholder="Search" name="text"
+                                                    <input type="text"
+                                                           placeholder="{{ 'general.search.title' | trans }}"
+                                                           name="text"
                                                            class="form-control">
                                                 </div>
                                                 <div class="col-4"></div>
@@ -81,12 +83,12 @@
                                                 <table id="usersRoleList">
                                                     <thead>
                                                     <tr role="row">
-                                                        <th>User Global Token</th>
-                                                        <th>User Name</th>
-                                                        <th>Invitation Date</th>
-                                                        <th>Invitation Discount Code</th>
-                                                        <th>Expiry Code Date</th>
-                                                        <th>Status</th>
+                                                        <th>{{ 'general.id.title' | trans }}</th>
+                                                        <th>{{ 'general.username.title' | trans }}</th>
+                                                        <th>{{ 'crm.customer.invitaion.date.title' | trans }}</th>
+                                                        <th>{{ 'crm.customer.invitaion.discount.code.title' | trans }}</th>
+                                                        <th>{{ 'general.expiry.date.title' | trans }}</th>
+                                                        <th>{{ 'general.status.title' | trans }}</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>

@@ -45,6 +45,10 @@ class GiftCardGroupController extends AbstractController
                 }
             }
 
+            /*
+             * TODO all data response are same from core server
+             */
+
             return $this->render('accounting/gift_card_group/list.html.twig', [
                 'controller_name' => 'GiftCardGroupController',
                 'giftCardGroups' => $giftCardGroups,

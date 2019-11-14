@@ -20,13 +20,15 @@
                                 <div class="col-12">
                                     <div class="panel">
                                         <div class="panel-heading">
-                                            <strong>SMS Log</strong>
+                                            <strong>{{ 'general.sms.log.title' | trans }}</strong>
                                         </div>
                                         <div class="panel-content">
                                             <div class="form-group row">
                                                 <div class="col-4"></div>
                                                 <div class="col-md-4">
-                                                    <input type="text" placeholder="Search" name="text"
+                                                    <input type="text"
+                                                           placeholder="{{ 'general.search.title' | trans }}"
+                                                           name="text"
                                                            class="form-control">
                                                 </div>
                                                 <div class="col-4"></div>
@@ -36,12 +38,12 @@
                                                 <table id="table6">
                                                     <thead>
                                                     <tr>
-                                                        <th>Date</th>
-                                                        <th>Description</th>
-                                                        <th>From</th>
-                                                        <th>Length</th>
-                                                        <th>Mobile</th>
-                                                        <th>To</th>
+                                                        <th>{{ 'general.date.title' | trans }}</th>
+                                                        <th>{{ 'general.description.title' | trans }}</th>
+                                                        <th>{{ 'general.from.title' | trans }}</th>
+                                                        <th>{{ 'general.length.title' | trans }}</th>
+                                                        <th>{{ 'general.mobile.title' | trans }}</th>
+                                                        <th>{{ 'general.to.title' | trans }}</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>

@@ -12,6 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
+
 class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
@@ -26,11 +27,14 @@ class Kernel extends BaseKernel
         Settings::set('LOGIN_PAGE_URL', '/login');
         Settings::set('CLIENT_IP', '');
         Settings::set('CLIENT_ACCESS_TOKEN', '');
+
         Settings::set('APPLICATION_DOMAIN', 'http://backoffice.aradmag.com:80');
+
         Settings::set('SERVER_DOMAIN', 'http://core.aradmag.com');
+
         AuthUser::check_if_user_is_logged_in();
         /*### MATICAN ###*/
-
+//        die("here");
         $contents = require $this->getProjectDir() . '/config/bundles.php';
         foreach ($contents as $class => $envs) {
             if ($envs[$this->environment] ?? $envs['all'] ?? false) {

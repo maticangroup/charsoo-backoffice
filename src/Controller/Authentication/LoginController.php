@@ -48,6 +48,11 @@ class LoginController extends AbstractController
             $clientRequest = new Req(Servers::Authentication, Authentication::Client, 'fetch_by_access_token');
             $clientRequest->add_instance($clientModel);
             $response = $clientRequest->send();
+
+            AuthUser::login($userModel);
+
+            AuthUser::purge_role_permissions();
+
             /**
              * @var $clientModel ClientModel
              */

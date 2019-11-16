@@ -7,6 +7,7 @@ use Matican\Models\Accounting\CouponGroupModel;
 use Matican\Models\Accounting\GiftCardModel;
 use Matican\Models\Accounting\InvoiceModel;
 use Matican\Models\Accounting\PaymentModel;
+use Matican\Models\Authentication\ClientModel;
 use Matican\Models\Authentication\UserModel;
 use Matican\Models\CRM\CustomerCouponModel;
 use Matican\Models\CRM\CustomerGroupModel;
@@ -97,9 +98,9 @@ class CustomerController extends AbstractController
          */
         $personModel = ModelSerializer::parse($inputs, PersonModel::class);
         $personModel->setId($id);
-        $request = new Req(Servers::Repository, Repository::Person, 'fetch');
-        $request->add_instance($personModel);
-        $response = $request->send();
+        $coreRequest = new Req(Servers::Repository, Repository::Person, 'fetch');
+        $coreRequest->add_instance($personModel);
+        $response = $coreRequest->send();
         /**
          * @var $personModel PersonModel
          */
@@ -115,6 +116,8 @@ class CustomerController extends AbstractController
                  */
                 $locationModel = ModelSerializer::parse($inputs, LocationModel::class);
                 $locationModel->setPersonId($id);
+
+
                 return $this->forward(LocationViewController::class . '::addLocation', [
                     'locationModel' => $locationModel,
                     'redirectCallBack' =>
@@ -128,10 +131,12 @@ class CustomerController extends AbstractController
             } else {
                 $personModel = ModelSerializer::parse($inputs, PersonModel::class);
                 $personModel->setId($id);
-                $request = new Req(Servers::Repository, Repository::Person, 'update');
-                $request->add_instance($personModel);
-                $response = $request->send();
+                $coreRequest = new Req(Servers::Repository, Repository::Person, 'update');
+                $coreRequest->add_instance($personModel);
+                $response = $coreRequest->send();
                 if ($response->getContent() == ResponseStatus::successful) {
+
+
                     $this->addFlash('s', $response->getMessage());
                     /**
                      * @var $personModel PersonModel
@@ -161,17 +166,25 @@ class CustomerController extends AbstractController
         $locationModel->setPersonId($personModel->getId());
         $canSeeCompanyGroup = AuthUser::if_is_allowed('crm_customer_company_group');
 
+        $locationRedirectModel = $this->generateUrl('crm_customer_info', ['id' => $personModel->getId()]);
+
+
+        if (isset($_REQUEST['resellerToken'])) {
+            $locationRedirectModel .= "?resellerToken=" . $_REQUEST['resellerToken'];
+        }
 
         return $this->render('crm/customer/read-info.html.twig', [
             'controller_name' => 'CustomerController',
             'personModel' => $personModel,
             'locationModel' => $locationModel,
             'locations' => $locations,
+            'locationSubmitUrl' => $locationRedirectModel,
 //            'years' => $years,
 //            'months' => $months,
 //            'days' => $days,
             'url' => $url,
             'canSeeCompanyGroup' => $canSeeCompanyGroup,
+//            'resellerToken' => $inputs['resellerToken']
 
         ]);
     }
@@ -763,10 +776,16 @@ class CustomerController extends AbstractController
      */
     public function redirectCustomer()
     {
+
+
+        $resellerToken = $_GET['resellerToken'];
+
         /**
          * @var $currentUser UserModel
          */
         $currentUser = AuthUser::current_user();
-        return $this->redirect($this->generateUrl('crm_customer_info', ['id' => $currentUser->getPersonId()]));
+
+
+        return $this->redirect($this->generateUrl('crm_customer_info', ['id' => $currentUser->getPersonId()]) . '?resellerToken=' . $resellerToken);
     }
 }

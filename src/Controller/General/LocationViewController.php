@@ -2,6 +2,8 @@
 
 namespace App\Controller\General;
 
+use Matican\Core\Entities\Authentication;
+use Matican\Models\Authentication\ClientModel;
 use Matican\ModelSerializer;
 use Matican\Models\Repository\LocationModel;
 use Matican\Models\Repository\ProvinceModel;
@@ -41,6 +43,7 @@ class LocationViewController extends AbstractController
 //            }
 //        }
 
+
         return $this->render('general/location_view/index.html.twig', [
             'controller_name' => 'LocationViewController',
             'locations' => $locations,
@@ -59,11 +62,15 @@ class LocationViewController extends AbstractController
      */
     public function addLocation($locationModel, $redirectCallBack)
     {
+
         if ($locationModel->getProvinceName()) {
             $latLang = str_replace(' ', '', $locationModel->getLocationGeoPoints());
             $latLang = explode(',', $latLang);
             if (count($latLang) != 2) {
                 $this->addFlash('f', 'geo points are not formatted correctly');
+                if (isset($_REQUEST['resellerToken'])) {
+                    return $this->redirect($redirectCallBack . "?resellerToken=" . $_REQUEST['resellerToken']);
+                }
                 return $this->redirect($redirectCallBack);
             }
             $locationModel->setLocationLat($latLang[0]);
@@ -74,11 +81,33 @@ class LocationViewController extends AbstractController
             $response = $request->send();
             if ($response->getStatus() == ResponseStatus::successful) {
                 $this->addFlash('s', $response->getMessage());
+                if (isset($_REQUEST['resellerToken'])) {
+                    $clientModel = new ClientModel();
+                    $clientModel->setAccessToken($_REQUEST['resellerToken']);
+                    $clientRequest = new Req(Servers::Authentication, Authentication::Client, 'fetch_by_access_token');
+                    $clientRequest->add_instance($clientModel);
+                    $response = $clientRequest->send();
+                    /**
+                     * @var $clientModel ClientModel
+                     */
+                    $clientModel = ModelSerializer::parse($response->getContent(), ClientModel::class);
+
+                    $clientDomain = $clientModel->getClientDomain() . '/redirectFromCrmInfo';
+                    header('Location: ' . $clientDomain);
+                    die;
+                }
+
             } else {
+
                 $this->addFlash('f', $response->getMessage());
             }
         }
+        if (isset($_REQUEST['resellerToken'])) {
+            return $this->redirect($redirectCallBack . "?resellerToken=" . $_REQUEST['resellerToken']);
+        }
         return $this->redirect($redirectCallBack);
+
+
     }
 
 
